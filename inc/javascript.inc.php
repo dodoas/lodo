@@ -26,7 +26,7 @@ function toAmountString(num, decimal_places) {
     var n = this;
     var c = isNaN(c = Math.abs(c)) ? 2 : c; // no need to pass c param, 2 is default
     var d = d == undefined ? "," : d; // no need to pass d param, the ',' is default
-    var t = t == undefined ? " " : t; // no need to pass t param, the ' ' is default 
+    var t = t == undefined ? " " : t; // no need to pass t param, the ' ' is default
     var s = n < 0 ? "-" : "";
     var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
     var j = (j = i.length) > 3 ? j % 3 : 0;

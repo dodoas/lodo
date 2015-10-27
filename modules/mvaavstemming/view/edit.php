@@ -73,7 +73,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                 $Period = $avst->year."-".sprintf("%02d",$monthly);
                 ?>
                 <tr class="<? print $class ?>">
-                    <td><input id="sum_checkbox_<? print $monthly; ?>" type="checkbox" onclick="calculateCheckedSum();"><? print $_lib['format']->MonthToText($monthly) ?></td>
+                    <td><input class="no_margin" id="sum_checkbox_<? print $monthly; ?>" type="checkbox" onclick="calculateCheckedSum();"><? print $_lib['format']->MonthToText($monthly) ?></td>
                     <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['NoVatOmsettning'])?></td>
 
                     <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['TotalOmsettning']) ?></td>
@@ -151,7 +151,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             <td colspan="4"></td>
         </tr>
         <tr>
-            <td>Selected sum</td>
+            <td>Sum for valgte perioder</td>
             <?
               for($i = 1; $i < 6+$extra_columns_count; $i++) {
              ?>
@@ -542,14 +542,13 @@ function calculateCheckedSum() {
   for(i = 1; i <= 12; i++) {
     var current_checkbox = document.getElementById('sum_checkbox_' + i);
     if (current_checkbox.checked) {
-      var amounts = Array();
       var amount_tds = current_checkbox.parentElement.parentElement.children;
       for(var j = 1; j < amount_tds.length; j++) {
         var html = '0';
+        // If it's the last td get its first child (<b> tag) and then the inner html
         if (j == amount_tds.length-1) html = amount_tds[j].children[0].innerHTML;
         else html = amount_tds[j].innerHTML;
-        amounts[j] = toNumber(html);
-        sum[j] += amounts[j];
+        sum[j] += toNumber(html);
       }
     }
   }
