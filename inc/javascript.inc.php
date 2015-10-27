@@ -19,27 +19,20 @@ else {
  * // variable amount is now '123 456,4500'
  */
 function toAmountString(num, decimal_places) {
-  // if not defined, set number of decimal places to default value
-  decimal_places = (typeof decimal_places !== 'undefined')? decimal_places : 2;
-  var precision = Math.pow(10, decimal_places);
-  var decimal = String(Math.floor(Math.round(num * precision) - Math.floor(num) * precision));
-  while (decimal.length < decimal_places) decimal = "0" + decimal;
-  num = Math.floor(num);
-  var s = "," + decimal;
-  var i = 0;
-  if (num < 1000) {
-    s = String(num) + s;
-    num = Math.floor(num / 1000);
-  }
-  while (num >= 1) {
-    var moduo = String(Math.floor(num % 1000));
-    while (!(num < 1000) && moduo.length < 3) moduo = "0" + moduo;
-    if ((i != 0) && (num >= 1000)) s = moduo + s;
-    else s = " " + moduo + s;
-    num = Math.floor(num / 1000);
-    i++;
-  }
-  return s;
+  // c = number of decimal places
+  // d = decimal separator character
+  // t = thousand separator character
+  Number.prototype.formatMoney = function(c, d, t){
+    var n = this;
+    var c = isNaN(c = Math.abs(c)) ? 2 : c; // no need to pass c param, 2 is default
+    var d = d == undefined ? "," : d; // no need to pass d param, the ',' is default
+    var t = t == undefined ? " " : t; // no need to pass t param, the ' ' is default
+    var s = n < 0 ? "-" : "";
+    var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
+    var j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+  };
+  return num.formatMoney();
 }
 
 /*
@@ -66,7 +59,7 @@ function update_reference(element, formname, fromfieldname, tofieldname){
     var journalID = element.value;
     if(!journalID)
     {
-        alert("Du mÂ taste inn Bilagsnr");
+        alert("Du m√• taste inn Bilagsnr");
     }
     //alert(journalID);
     //alert(formname +" "+ fromfieldname +" "+ tofieldname);
@@ -78,7 +71,7 @@ function update_period(element, formname, fromfieldname, tofieldname){
    var date = element.value;
    if(!date)
    {
-     alert("Du mÂ taste inn bilagsdato");
+     alert("Du m√• taste inn bilagsdato");
    }
    /* var pattern = new RegExp("/(\\d+)-(\\d+)-(\\d+)/"); */
    var pattern = /(\d{4})-(\d{2})-(\d{2})/; /* YYYY-MM-DD */
@@ -114,13 +107,13 @@ function update_period(element, formname, fromfieldname, tofieldname){
          }
          else
          {
-           alert('Dato er feilformatert, eksempel pÂ riktig dato er: YYYY-MM-DD (ISO) - 2004-12-04, DD-MM - 04-12 , DD - 04');
+           alert('Dato er feilformatert, eksempel p√• riktig dato er: YYYY-MM-DD (ISO) - 2004-12-04, DD-MM - 04-12 , DD - 04');
          }
        }
 
       /*
       We convert the date, so we can not update this automatically
-      alert('Dato er feilformatert, eksempel på riktig dato er: YYYY-MM-DD, 2004-04-04'); */
+      alert('Dato er feilformatert, eksempel p√• riktig dato er: YYYY-MM-DD, 2004-04-04'); */
     }
 }
 
@@ -132,7 +125,7 @@ function place_period(period, date, formname, fromfieldname, tofieldname)
       if(result != null)
       {
         if(result[2] <= 0 || result[2] > 12) {
-          alert("MÂned er ikke gyldig: " + result[2]);
+          alert("M√•ned er ikke gyldig: " + result[2]);
           date = '';
         }
         if(result[3] <= 0 || result[3] > 31) {
