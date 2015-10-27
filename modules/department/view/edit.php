@@ -16,22 +16,6 @@ $query   = "select * from $db_table where CompanyDepartmentID = $CompanyDepartme
 #print "$query<br>\n";
 $companydepartment = $_lib['storage']->get_row(array('query' => $query));
 
-#Do car calculations
-if($companydepartment->km0101) {
-    //$query_car          = "select sum(Quantity) as sum_quantity, sum(AmountIn) as sumin, sum(AmountOut) as sumout from journal where DepartmentID = $CompanyDepartmentID";
-    $query_car          = "select sum(Quantity) as sum_quantity, sum(AmountIn) as sumin, sum(AmountOut) as sumout from voucher where DepartmentID = $CompanyDepartmentID and AccountPlanID=7000 and VoucherPeriod >= '$_year-01' and VoucherDate <= '$_this_date'";
-    #print $query_car;
-    #quantity = antall liter
-    $car            = $_lib['storage']->get_row(array('query' => $query_car));
-    $distance       = $companydepartment->km3112 - $companydepartment->km0101;
-    if($car->sum_quantity > 0) {
-    $krprliter        = ($car->sumin - $car->sumout) / $car->sum_quantity;
-    } else {
-    $krprliter = 0;
-    }
-
-    $literprmil = $car->sum_quantity / $distance;
-}
 ?>
 
 <? print $_lib['sess']->doctype ?>
@@ -74,34 +58,8 @@ if($companydepartment->km0101) {
     
     
 <tr>
-    <td class="menu">Avsluttes pr 31/12</td>
-    <td colspan="3"><? $_lib['form2']->checkbox2($db_table, "EnableZeroYearEnd", $companydepartment->EnableZeroYearEnd,''); ?></td>
-<tr>
     <td class="menu">Annen informasjon</td>
     <td colspan="3"><input type="text" name="companydepartment.Description" value="<? print "$companydepartment->Description";  ?>" size="60"></td>
-<tr>
-    <th colspan="4">Gjelder ved bil definert som avdeling (oppgi km 1/1 for &aring; aktivisere bil beregninger)</td>
-<tr>
-    <td class="menu">Km 1/1</td>
-    <td colspan="3"><input type="text" name="companydepartment.km0101" value="<? print $companydepartment->km0101  ?>" size="60"></td>
-
-<? if($companydepartment->km0101) { ?>
-<tr>
-    <td class="menu">Km 31/12</td>
-    <td colspan="3"><input type="text" name="companydepartment.km3112" value="<? print $companydepartment->km3112  ?>" size="60"></td>
-
-<tr>
-    <td class="menu">Distanse</td>
-    <td colspan="3"><? print $distance ?></td>
-
-<tr>
-    <td class="menu">Kr pr liter</td>
-    <td colspan="3"><? print $krprliter ?></td>
-
-<tr>
-    <td class="menu">Liter pr mil</td>
-    <td colspan="3"><? print $literprmil ?></td>
-<? } ?>
 
 <tr>
     <td colspan="4" align="right">
