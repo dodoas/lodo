@@ -130,8 +130,8 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
+                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
+                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
                 </form>
             </tr>
@@ -194,8 +194,8 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
+                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
+                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
                 </form>
             </tr>
