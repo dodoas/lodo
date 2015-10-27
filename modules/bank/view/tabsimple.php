@@ -147,6 +147,7 @@ if(is_array($bank->bankaccount)) {
         <?
             $reskontroconf['field']         = 'ReskontroAccountPlanID';
             $reskontroconf['value']         = $row->ReskontroAccountPlanID;
+            $reskontroconf['type'][]        = 'reskontro';
             print $_lib['form3']->accountplan_number_menu($reskontroconf);    
         ?>
         </td>

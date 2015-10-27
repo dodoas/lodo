@@ -337,7 +337,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
           </b>
         <? } ?>
         </td>
-    <td colspan="6" class="sub"><b>Hovedbokskonto: <? print $bank->AccountPlanID ?>  - <?= $bankname ?></b></td>
+    <td colspan="7" class="sub"><b>Hovedbokskonto: <? print $bank->AccountPlanID ?>  - <?= $bankname ?></b></td>
 </tr>
   <tr>
     <td class="menu">Pri</td>
@@ -355,6 +355,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Hovedbokskonto</td>
     <td class="menu">MVA</td>
     <td class="menu">Mengde</td>
+    <td class="menu">Bil</td>
     <td class="menu">Avdeling</td>
     <td class="menu">Prosjekt</td>
     <td class="menu">KID match</td>
@@ -569,6 +570,7 @@ if(is_array($bank->bankaccount)) {
             }
             ?>
         </td>
+        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID', 'pk' => $row->AccountLineID, 'value' => $row->CarID)); } ?></td>
         <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
         <td>
