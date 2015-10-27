@@ -120,7 +120,7 @@ if(isset($limitSet))
 <table class="lodo_data">
 <thead>
   <tr>
-    <th colspan="14">Kontoer - <?= $account_name ?></th>
+    <th colspan="15">Kontoer - <?= $account_name ?></th>
   <tr>
     <th class="menu">Aktiv</th>
     <th class="menu">Konto</th>
@@ -131,6 +131,7 @@ if(isset($limitSet))
     <th class="menu">Debet tekst</th>
     <th class="menu">Kredit tekst</th>
     <th class="menu">MVA kode</th>
+    <th class="menu">Bil</th>
     <th class="menu">Avdeling</th>
     <th class="menu">Prosjekt</th>
     <th class="menu">Motkontobalanse</th>
@@ -175,6 +176,16 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           <td><? print $row->debittext ?></td>
           <td><? print $row->credittext ?></td>
           <td align="right"><? if($row->EnableVAT)    { print $row->VatID; } ?></td>
+
+          <td align="right">
+          <?
+            if ($row->CarID) {
+              $query = "select * from companycar where CompanyCarID = $row->CarID";
+              $car   = $_lib['storage']->get_row(array('query' => $query));
+              if($row->EnableCar) print $car->CarName;
+            }
+          ?>
+          </td>
 
           <? // forandret fra DepartmentID til EnableDepartment 6/1-2005 ?>
           <td align="right"><? if($row->EnableDepartment) { print $row->DepartmentID; } ?></td>
