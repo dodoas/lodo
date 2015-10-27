@@ -14,6 +14,11 @@ if($_REQUEST['action_postmotpost_open']) {
 if($_REQUEST['report_selectedAccount'])
     $selectedAccount = $accounting->get_accountplan_object($_REQUEST['report_selectedAccount']);
 
+if ($selectedAccount->AccountPlanID == 1500) $_type = 'customer';
+elseif ($selectedAccount->AccountPlanID == 2400) $_type = 'supplier';
+elseif ($selectedAccount->AccountPlanID == 2930) $_type = 'employee';
+else $_type = 'none';
+
 if($selectedAccount->AccountPlanType == 'balance')
 {
     $_fromperiod 	= '';
@@ -36,11 +41,14 @@ $select = "select v.* from voucher as v, accountplan as a where v.Active=1 and v
 
 $whereouter .= " v.VoucherPeriod >= '" . $_REQUEST['report_FromPeriod'] . "' and v.VoucherPeriod <= '" . $_REQUEST['report_ToPeriod'] . "' and ";
 $whereouter .= " (a.AccountPlanType != 'balance' and a.AccountPlanType != 'result') and ";
-if($_reskontroFrom)
+if($_reskontroFrom) {
     $whereouter .= " a.AccountPlanID >= '$_reskontroFrom' and ";
-if($_reskontroTo)
+    var_dump($_reskontroFrom);
+}
+if($_reskontroTo) {
     $whereouter .= " a.AccountPlanID <= '$_reskontroTo' and ";
-
+    var_dump($_reskontroTo);
+}
 if(strlen($_REQUEST['report_ProjectID']) > 0)
 {
     $whereouter .= " v.ProjectID = " . $_REQUEST['report_ProjectID'] . " and ";
@@ -49,6 +57,11 @@ if(strlen($_REQUEST['report_ProjectID']) > 0)
 if(strlen($_REQUEST['report_DepartmentID']) > 0)
 {
     $whereouter .= " v.DepartmentID = " . $_REQUEST['report_DepartmentID'] . " and ";
+}
+
+if(strlen($_REQUEST['report_CarID']) > 0)
+{
+    $whereouter .= " v.CarID = " . $_REQUEST['report_CarID'] . " and ";
 }
 
 if($_REQUEST['report_VoucherType'])
@@ -193,6 +206,13 @@ print $_lib['sess']->doctype ?>
 
             // go trough account plans that are not in vouchers for the selected period
             // but still have some leftover amount from the time before starting peroid
+
+            // get first and last account id if they are not selected
+            if (!$_reskontroFrom && !$_reskontroTo) {
+              $acc_start_end  = $_lib['db']->get_row(array("query" => "SELECT MIN(AccountPlanID) AS MinAccPlanID, MAX(AccountPlanID) AS MaxAccPlanID FROM accountplan WHERE AccountPlanType = '$_type'"));
+              $_reskontroFrom = $acc_start_end->MinAccPlanID;
+              $_reskontroTo   = $acc_start_end->MinAccPlanID;
+            }
             $acc_result   = $_lib['db']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "SELECT AccountPlanID from accountplan WHERE AccountPlanID>=". $_reskontroFrom ." AND AccountPlanID<=". $_reskontroTo));
             foreach($acc_result as $key => $value) {
               if ($key > $prev_acc_id && $key < $voucher->AccountPlanID) {

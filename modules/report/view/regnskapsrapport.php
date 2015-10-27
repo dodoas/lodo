@@ -7,6 +7,7 @@ $Period         = $_REQUEST['Period'];
 $StartPeriod    = $_REQUEST['StartPeriod'];
 $detail         = $_REQUEST['detail'];
 $DepartmentID   = $_REQUEST['report_DepartmentID'];
+$CarID          = $_REQUEST['report_CarID'];
 $ProjectID      = $_REQUEST['report_ProjectID'];
 
 $thisDate             = $_lib['sess']->get_session('LoginFormDate');
@@ -18,7 +19,7 @@ require_once "record.inc";
 includelogic('linetextmap/linetextmap');
 includelogic('report/regnskapsrapport');
 
-$rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'StartPeriod' => $StartPeriod, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $DepartmentID, 'ProjectID'=> $ProjectID));
+$rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'StartPeriod' => $StartPeriod, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $DepartmentID, 'CarID' => $CarID, 'ProjectID'=> $ProjectID));
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -37,6 +38,7 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
             <tr>
                 <th>Fra Periode</th>
                 <th>Til Periode</th>
+                <th>Bil</th>
                 <th>Avdeling</th>
                 <th>Prosjekt</th>
                 <th>Detaljer</th>
@@ -45,6 +47,14 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
             <tr>
                 <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'StartPeriod', 'value' => $rapport->thisStartPeriod, 'noaccess' => '1')) ?></th>
                 <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 'value' => $rapport->Period, 'noaccess' => '1')) ?></th>
+                <th><?
+                    $aconf = array();
+                    $aconf['table']         = 'report';
+                    $aconf['field']         = 'CarID';
+                    $aconf['value']         = $CarID;
+                    $_lib['form2']->car_menu2($aconf);
+                    ?>
+                </th>
                 <th><?
                     $aconf = array();
                     $aconf['table']         = 'report';

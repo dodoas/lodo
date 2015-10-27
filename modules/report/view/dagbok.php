@@ -70,6 +70,9 @@ if($_REQUEST['report_ProjectID']) {
 if($_REQUEST['report_DepartmentID']) {
     $where .= " v.DepartmentID = " . (int) $_REQUEST['report_DepartmentID'] . " and ";
 }
+if($_REQUEST['report_CarID']) {
+    $where .= " v.CarID = " . (int) $_REQUEST['report_CarID'] . " and ";
+}
 
 #$where  = substr($where, 0, strlen($where) - 4);
 $where .= " v.AccountPlanID=a.AccountPlanID";

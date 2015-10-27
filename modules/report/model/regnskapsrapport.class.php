@@ -75,6 +75,9 @@ class framework_logic_regnskapsrapport {
         if(strlen($this->DepartmentID) > 0) {
             $where = ' V.DepartmentID=' . $this->DepartmentID . ' and ';
         }
+        if(strlen($this->CarID) > 0) {
+            $where = ' V.CarID=' . $this->CarID . ' and ';
+        }
         if(strlen($this->ProjectID) > 0) {
             $where .= ' V.ProjectID=' . (int) $this->ProjectID . ' and ';
         }
