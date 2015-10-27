@@ -3,7 +3,7 @@
 
 $primarykey['ID'] = $ID = (int) $_REQUEST['ID'];
 
-if($_REQUEST['action_vat_update'] && if($_lib['sess']->get_person('AccessLevel') >= 3))
+if($_REQUEST['action_vat_update'] && ($_lib['sess']->get_person('AccessLevel') >= 3))
 {
     #Possible to extend or alter parameters here
     unset($_POST['action_vat_update']);
@@ -51,7 +51,7 @@ if($_REQUEST['action_vat_update'] && if($_lib['sess']->get_person('AccessLevel')
         }
     }
 }
-elseif($_REQUEST['action_vat_new'] && if($_lib['sess']->get_person('AccessLevel') >= 3))
+elseif($_REQUEST['action_vat_new'] && ($_lib['sess']->get_person('AccessLevel') >= 3))
 {
     #Possible to extend or alter parameters here
     $_REQUEST['vat_Type']   = 'sale';
