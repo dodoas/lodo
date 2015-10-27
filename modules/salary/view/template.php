@@ -60,7 +60,7 @@ print $_lib['sess']->doctype ?>
   }
   ?>
       </th>
-      <th colspan="9"></th>
+      <th colspan="10"></th>
   <tr>
     <th class="sub">Aktiv</th>
     <th class="sub">Linje</th>
@@ -69,6 +69,7 @@ print $_lib['sess']->doctype ?>
     <th class="sub">Sats</th>
     <th class="sub">Bel&oslash;p denne periode</th>
     <th class="sub">Konto</th>
+    <th class="sub">Bil</th>
     <th class="sub">Avdeling</th>
     <th class="sub">Prosjekt</th>
     <th class="sub">Arb. giv. avg.</th>
@@ -174,6 +175,18 @@ print $_lib['sess']->doctype ?>
         }
         $accountplan = $accounting->get_accountplan_object($line->AccountPlanID);
     ?>
+    </td>
+    <?
+        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and ($ishovedmal != 1))
+            print "<td class=\"debitred\">";
+        else
+            print "<td>";
+        if($accountplan->EnableCar == 1)
+        {
+            print $_lib['form3']->Car_menu3(array('table'=>$db_table2, 'field'=>'CarID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->CarID));
+        }
+    ?>
+    </td>
     </td>
     <?
         if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and ($ishovedmal != 1))
