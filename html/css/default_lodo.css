@@ -483,63 +483,11 @@ table.tab a:hover{
 
 .salary_table {
   table-layout: fixed;
-  width: 930px;
+  width: auto;
 }
 
-.salary_table tr .column1 {
+.salary_table .line_number {
   width: 30px;
-}
-
-.salary_table tr .column2 {
-  width: 170px;
-}
-
-.salary_table tr .column3 {
-  width: 70px;
-}
-
-.salary_table tr .column4 {
-  width: 50px;
-}
-
-.salary_table tr .column5 {
-  width: 70px;
-}
-
-.salary_table tr .column6 {
-  width: 80px;
-}
-
-.salary_table tr .column7 {
-  width: 35px;
-}
-
-.salary_table tr .column8 {
-  width: 85px;
-}
-
-.salary_table tr .column9 {
-  width: 85px;
-}
-
-.salary_table tr .column10 {
-  width: 25px;
-}
-
-.salary_table tr .column11 {
-  width: 70px;
-}
-
-.salary_table tr .column12 {
-  width: 80px;
-}
-
-.salary_table tr .column13 {
-  width: 80px;
-}
-
-.salary_table tr .column12_13 {
-  width: 160px;
 }
 
 .align-right, th.align-right {
@@ -550,3 +498,13 @@ table.tab a:hover{
   text-align: left;
 }
 
+.no_margin {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+  position: relative;
+  top: 0;
+  overflow: hidden;
+}
