@@ -13,7 +13,7 @@ if($_lib['input']->getProperty('action_car_update')) {
 }
 elseif($_lib['input']->getProperty('action_car_new'))
 {
-	
+
 	if($_lib['input']->getProperty('companycar_CompanyCarID') > 0) {
 
 		$query  = "select CompanyCarID from $db_table where CompanyCarID=" . (int) $_lib['input']->getProperty('companycar_CompanyCarID') . "";
@@ -23,7 +23,7 @@ elseif($_lib['input']->getProperty('action_car_new'))
 			$post = $_POST;
 			$post['companycar_ValidFrom'] = "NOW()";
 			$post['companycar_Active']  = 1;
-	
+
 			$query  = "select CompanyCarID from $db_table where CompanyCarID=" . (int) $_lib['input']->getProperty('companycar_CompanyCarID') . "";
 			$_lib['db']->db_insert2(array('query'=>"insert into companycar (CompanyCarID, ValidFrom, Active) values (". (int) $post['companycar_CompanyCarID'].", ". $post['companycar_ValidFrom'] .", '". (int) $post['companycar_Active']."')"));
 			$CompanyCarID = $_POST['companycar_CompanyCarID'];
