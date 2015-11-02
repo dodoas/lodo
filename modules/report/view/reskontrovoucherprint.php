@@ -43,11 +43,9 @@ $whereouter .= " v.VoucherPeriod >= '" . $_REQUEST['report_FromPeriod'] . "' and
 $whereouter .= " (a.AccountPlanType != 'balance' and a.AccountPlanType != 'result') and ";
 if($_reskontroFrom) {
     $whereouter .= " a.AccountPlanID >= '$_reskontroFrom' and ";
-    var_dump($_reskontroFrom);
 }
 if($_reskontroTo) {
     $whereouter .= " a.AccountPlanID <= '$_reskontroTo' and ";
-    var_dump($_reskontroTo);
 }
 if(strlen($_REQUEST['report_ProjectID']) > 0)
 {
@@ -211,7 +209,7 @@ print $_lib['sess']->doctype ?>
             if (!$_reskontroFrom && !$_reskontroTo) {
               $acc_start_end  = $_lib['db']->get_row(array("query" => "SELECT MIN(AccountPlanID) AS MinAccPlanID, MAX(AccountPlanID) AS MaxAccPlanID FROM accountplan WHERE AccountPlanType = '$_type'"));
               $_reskontroFrom = $acc_start_end->MinAccPlanID;
-              $_reskontroTo   = $acc_start_end->MinAccPlanID;
+              $_reskontroTo   = $acc_start_end->MaxAccPlanID;
             }
             $acc_result   = $_lib['db']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "SELECT AccountPlanID from accountplan WHERE AccountPlanID>=". $_reskontroFrom ." AND AccountPlanID<=". $_reskontroTo));
             foreach($acc_result as $key => $value) {

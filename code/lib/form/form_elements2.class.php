@@ -570,7 +570,7 @@ class form2 {
   function car_menu2($args) {
       global $_lib;
 
-      $query = "select CompanyCarID, CarName from companycar where Active='1' order by CompanyCarID";
+      $query = "select CarID, CarName from car where Active='1' order by CarID";
       $result = $_lib['db']->db_query($query);
       if($args['num_letters']) {
         $num_letters = $args['num_letters'];
@@ -598,10 +598,10 @@ class form2 {
         print "<option value=\"\">" . substr('Velg bil',0, $num_letters);
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
-          if($_row->CompanyCarID == $args[value])
-              print "<option value=\"$_row->CompanyCarID\" selected>" . substr($_row->CompanyCarID." - ".$_row->CarName, 0, $num_letters) . "\n";
+          if($_row->CarID == $args[value])
+              print "<option value=\"$_row->CarID\" selected>" . substr($_row->CarID." - ".$_row->CarName, 0, $num_letters) . "\n";
           else
-              print "<option value=\"$_row->CompanyCarID\">" . substr($_row->CompanyCarID." - ".$_row->CarName, 0, $num_letters) . "\n";
+              print "<option value=\"$_row->CarID\">" . substr($_row->CarID." - ".$_row->CarName, 0, $num_letters) . "\n";
       }
 
       print "</select>\n";

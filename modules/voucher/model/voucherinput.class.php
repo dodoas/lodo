@@ -29,6 +29,7 @@ class framework_logic_voucherinput
     public $AutomaticVatVoucherID   = 0;
     public $AutomaticBalanceID      = 0;
     public $ProjectID               = 0;
+    public $CarID                   = 0;
     public $DepartmentID            = 0;
     public $Description             = '';
     public $Quantity                = 0;
@@ -82,6 +83,7 @@ class framework_logic_voucherinput
         $this->VatIDOld           = $args['voucher_VatIDOld'];
         $this->UpdatedByPersonID  = $_lib['sess']->login_id;
         $this->ProjectID          = $args['voucher_ProjectID'];
+        $this->CarID              = $args['voucher_CarID'];
         $this->DepartmentID       = $args['voucher_DepartmentID'];
         $this->Description        = strip_tags($args['voucher_Description']);
         $this->AccountLineID      = $args['AccountLineID'];
@@ -697,6 +699,7 @@ class framework_logic_voucherinput
         $request['voucher_InvoiceID']           = $this->InvoiceID;
         $request['voucher_DueDate']             = $this->DueDate;
         $request['voucher_Quantity']            = $this->Quantity;
+        $request['voucher_CarID']               = $this->CarID;
 
         #Myst always be present. Both cannot contain a value
         if($this->AmountIn > 0) {

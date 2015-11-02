@@ -188,7 +188,7 @@ if(is_array($bank->bankaccount)) {
 
 <table class="lodo_data">
     <tr class="result">
-        <th colspan="18">
+        <th colspan="19">
         Velg periode
 
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_prev_period($bank->ThisPeriod), 'description' => '<<', 'title' => 'Prev')) ?>
@@ -258,7 +258,7 @@ if(is_array($bank->bankaccount)) {
 </tr>
   <tr>
     <th class="menu" colspan="6">Tilbakef&oslash;re - f&oslash;rt bank ikke regnskap</th>
-    <td class="menu" colspan="12"></td>
+    <td class="menu" colspan="13"></td>
   </tr>
 <?
 if(is_array($bank->unvotedaccount)) {
@@ -468,7 +468,7 @@ if(is_array($bank->unvotedaccount)) {
 ?>
   <tr>
     <th class="menu" colspan="6">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank</th>
-    <td class="menu" colspan="12"></td>
+    <td class="menu" colspan="13"></td>
   </tr>
 <?
 if(is_array($bank->unvotedvoucher)) {
@@ -528,7 +528,7 @@ if(is_array($bank->unvotedvoucher)) {
 </tr>
 <tr>
     <td class="menu" colspan="8"></td>
-    <td class="menu" colspan="2">
+    <td class="menu" colspan="11">
     <? if($accounting->is_valid_accountperiod($bank->ThisPeriod, $_lib['sess']->get_person('AccessLevel'))) { ?>
     <input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S">
     <input type="submit" name="action_bank_journal" value="Bilagsf&oslash;r (B)" accesskey="B">

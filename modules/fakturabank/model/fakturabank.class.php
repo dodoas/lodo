@@ -948,10 +948,10 @@ class lodo_fakturabank_fakturabank {
                 # validate invoice lines
                 foreach($InvoiceO->InvoiceLine as &$line) {
                   if ($line->Item->AdditionalItemProperty->Name == 'Car') {
-                    $query = "select * from companycar where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and Active=1";
+                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and Active=1";
                     $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                     if($carexists) {
-                      $line->Item->CarID   = $carexists->CompanyCarID;
+                      $line->Item->CarID   = $carexists->CarID;
                       $line->Item->CarCode = $carexists->CarCode;
                     }
                     else {

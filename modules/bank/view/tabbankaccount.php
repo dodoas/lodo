@@ -684,7 +684,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
         print $_lib['form3']->submit(array('name' => 'action_bank_periodlock',   'value' => 'L&aring;s',            'accesskey' => 'L', 'confirm' => "Vil du virkelig l&aring;se perioden " . $bank->ThisPeriod));
     } ?>
     </td>
-    <td class="menu" colspan="13"></td>
+    <td class="menu" colspan="14"></td>
 </tr>
 </table>
 </form>
