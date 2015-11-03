@@ -481,11 +481,42 @@ table.tab a:hover{
   color: red;
 }
 
-.salary_table {
+.regnskapsrapport_table, .salary_table {
   table-layout: fixed;
   width: auto;
 }
 
+.regnskapsrapport_table tr .column_konto_percent {
+  min-width: 80px;
+}
+
+.regnskapsrapport_table tr .column_amount {
+  min-width: 140px;
+}
+
+.regnskapsrapport_table tr .column_konto_name {
+  min-width: 270px;
+}
+
+.regnskapsrapport_table tr .column_checkbox {
+  min-width: 100px;
+}
+
+.regnskapsrapport_table tr th, .regnskapsrapport_table tr td {
+  min-width: unset;
+}
+
+tr.sub {
+	font-size: x-small;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #95979B;
+	background-image: none;
+}
+
+tr.sub.red {
+	background-color: red;
+}
 .salary_table .line_number {
   width: 30px;
 }
