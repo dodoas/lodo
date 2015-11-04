@@ -31,7 +31,7 @@ print $_lib['sess']->doctype; ?>
 
 
 <h2>
-<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Importer fakturaer med status approved fra Fakturabank</a><br> <? } ?>
+<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Importer fakturaer med status regnskapbilag fra Fakturabank</a><br> <? } ?>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
 </h2>
 
