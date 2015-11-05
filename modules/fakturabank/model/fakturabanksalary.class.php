@@ -304,7 +304,7 @@ class lodo_fakturabank_fakturabanksalary {
         $dataH['SalaryID']             = $SalaryID;
         $dataH['FakturabankID']   = $fakturabank_salary_id;
         $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-        $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
+        $dataH['FakturabankDateTime']   = strftime("%F %T");
         
         $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
         return true;
