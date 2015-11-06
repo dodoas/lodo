@@ -2,6 +2,11 @@
 $primarykey['CarID'] = $CarID;
 $car_CarID = $_lib['input']->getProperty('car_CarID');
 
+if (isset($_POST['car_ValidFrom']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidFrom']))
+  unset($_POST['car_ValidFrom']);
+if (isset($_POST['car_ValidTo']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidTo']))
+  unset($_POST['car_ValidTo']);
+
 if($_lib['input']->getProperty('action_car_update')) {
   #Possible to extend or alter parameters here
   #print_r($_POST);

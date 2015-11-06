@@ -66,12 +66,20 @@ foreach($car_milage as $milage_year => $milage) {
     <td><input type="text" name="car.CarName" value="<? print $car->CarName ?>" size="60"></td>
 </tr>
 <tr>
-    <td class="menu">Registreringsnr</td>
+    <td class="menu">Registreringsnummer</td>
     <td><input type="text" name="car.CarCode" value="<? print $car->CarCode ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Aktiv</td>
     <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>$car->Active)) ?></td>
+</tr>
+<tr>
+    <td class="menu">Merke og modell</td>
+    <td><input type="text" name="car.BrandAndModel" value="<? print $car->BrandAndModel ?>" size="60"></td>
+</tr>
+<tr>
+    <td class="menu">Antall seter</td>
+    <td><input type="text" name="car.NumberOfSeats" value="<? print $car->NumberOfSeats ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Kj&oslash;psdato</td>
@@ -91,16 +99,38 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Typen</td>
-    <td><input type="text" name="car.VehicleType" value="<? print $car->VehicleType ?>" size="60"></td>
+    <?
+      $VehicleTypes = array(
+        'Varebil(klasse 2)' => 'Varebil(klasse 2)',
+        'Personbil'         => 'Personbil',
+        'Lastebil(tankbil)' => 'Lastebil(tankbil)',
+        'Slepvogn'          => 'Slepvogn'
+      );
+    ?>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $VehicleTypes, 'table'=> 'car', 'field'=>'VehicleType', 'value'=>$car->VehicleType, 'notChoosenText' => ' ')); ?></td>
 </tr>
 <tr>
     <td class="menu">Aktiver MVA</td>
-    <td colspan="3"><? $_lib['form2']->checkbox2($db_table, "EnableVAT", $car->EnableVAT,''); ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => array('nei', 'ja'), 'table'=> 'car', 'field'=>'EnableVAT', 'value'=>$car->EnableVAT, 'required' => true)); ?></td>
+</tr>
+<tr>
+    <td class="menu">Registrerings&aring;r</td>
+    <td colspan="3"><input type="text" name="car.RegistrationYear" value="<? print "$car->RegistrationYear";  ?>" size="60"></td>
+</tr>
+<tr>
+    <td class="menu">Drivstoff</td>
+    <td colspan="3"><input type="text" name="car.Fuel" value="<? print "$car->Fuel";  ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Annen informasjon</td>
     <td colspan="3"><input type="text" name="car.Description" value="<? print "$car->Description";  ?>" size="60"></td>
 </tr>
+<?
+$_years = array_keys($car_calculations);
+rsort($_years);
+$years_per_line = 10;
+for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line) {
+?>
 <tr>
   <td class="menu">
     <table class="lodo_data">
@@ -116,52 +146,69 @@ foreach($car_milage as $milage_year => $milage) {
     <table class="lodo_data">
       <tr class="height22">
         <?
-          $_years = array_keys($car_calculations);
-          rsort($_years);
-          foreach($_years as $year) { ?>
+          for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
+            $year = $_years[$i];
+        ?>
           <th class="align-right"><? print $year; ?></th>
         <? } ?>
       </tr>
       <tr class="height22">
-        <? foreach($_years as $year) { ?>
+        <?
+          for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
+            $year = $_years[$i];
+        ?>
           <td><input class="align-right" type="text" name="carmilage.StartMilage.<? print $year; ?>" value="<? print $car_calculations[$year]['StartMilage']; ?>" size="15"></td>
         <? } ?>
       </tr>
       <tr class="height22">
-        <? foreach($_years as $year) { ?>
+        <?
+          for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
+            $year = $_years[$i];
+        ?>
           <td><input class="align-right" type="text" name="carmilage.EndMilage.<? print $year; ?>" value="<? print $car_calculations[$year]['EndMilage']; ?>" size="15"></td>
         <? } ?>
       </tr>
       <tr class="height22">
-        <? foreach($_years as $year) { ?>
+        <?
+          for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
+            $year = $_years[$i];
+        ?>
           <td class="align-right"><? print $car_calculations[$year]['distance']; ?></td>
         <? } ?>
       </tr>
       <tr class="height22">
-        <? foreach($_years as $year) { ?>
+        <?
+          for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
+            $year = $_years[$i];
+        ?>
           <td class="align-right"><? print $car_calculations[$year]['money_spent_on_fuel']; ?></td>
         <? } ?>
       </tr>
       <tr class="height22">
-        <? foreach($_years as $year) { ?>
+        <?
+          for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
+            $year = $_years[$i];
+        ?>
           <td class="align-right"><? print $car_calculations[$year]['money_spent_per_mile']; ?></td>
         <? } ?>
       </tr>
     </table>
   </td>
 </tr>
+<?
+}
+?>
 
 <tr>
-    <td colspan="4" align="right">
+    <td></td>
+    <td align="left">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
     <input type="submit" name="action_car_update" value="Lagre bil" />
     <? } ?></td>
-</tr>
 </form>
 <form name="delete" action="<? print $_lib['sess']->dispatch ?>t=car.list" method="post">
-<tr>
     <? print $_lib['form3']->hidden(array('name'=>'CarID', 'value'=>$CarID)) ?>
-    <td colspan="4" align="right">
+    <td align="right">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
     <input type="submit" name="action_car_delete" value="Slett bil" onclick='return confirm("Er du sikker?")' />
     <? } ?>

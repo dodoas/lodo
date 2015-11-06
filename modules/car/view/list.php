@@ -42,7 +42,7 @@ print $_lib['sess']->doctype ?>
   <tr>
     <td class="menu">Bil</td>
     <td class="menu">Bil navn</td>
-    <td class="menu">Registreringsnr</td>
+    <td class="menu">Registreringsnummer</td>
     <td class="menu">Kj&oslash;psdato</td>
     <td class="menu">Salgsdato</td>
     <td class="menu">Aktiv</td>
@@ -60,7 +60,8 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
       <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarName; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarCode; ?></a></td>
       <td><? print strftime("%F", strtotime($row->ValidFrom)); ?></td>
-      <td><? if ((int)($car->ValidTo) != 0) print strftime("%F", strtotime($row->ValidTo)); ?></td>
+      <td><? if ((int)($car->ValidTo) != 0) print strftime("%F", strtotime($row->ValidTo));
+             else print "0000-00-00"; ?></td>
       <td><? print $_lib['form3']->checkbox(array('table'=>'project', 'value'=>$row->Active, 'disabled'=>'1')) ?></td>
   </tr>
 <? } ?>

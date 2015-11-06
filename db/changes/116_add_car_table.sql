@@ -12,6 +12,10 @@ PurchasePrice decimal(16, 2) DEFAULT '0',
 SalePrice decimal(16, 2) DEFAULT '0',
 EnableVAT smallint(6) DEFAULT NULL,
 VehicleType varchar(50) DEFAULT '',
+BrandAndModel varchar(100) DEFAULT NULL,
+NumberOfSeats int(3),
+RegistrationYear smallint(6) DEFAULT '0',
+Fuel decimal(16,2) DEFAULT '0',
 PRIMARY KEY (CarID)
 );
 
