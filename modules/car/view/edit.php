@@ -134,12 +134,12 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
 <tr>
   <td class="menu">
     <table class="lodo_data">
-      <tr class="height22"><td class="menu">Calcualtions</td></tr>
-      <tr class="height22"><td class="menu">Start milage</td></tr>
-      <tr class="height22"><td class="menu">End milage</td></tr>
-      <tr class="height22"><td class="menu">Distance</td></tr>
-      <tr class="height22"><td class="menu">Money spent on fuel</td></tr>
-      <tr class="height22"><td class="menu">Money spent per mile</td></tr>
+      <tr class="height22"><td class="menu">Kalkulasjon</td></tr>
+      <tr class="height22"><td class="menu">Start km.stand</td></tr>
+      <tr class="height22"><td class="menu">Slutt milage</td></tr>
+      <tr class="height22"><td class="menu">Avstand</td></tr>
+      <tr class="height22"><td class="menu">Kr brukt p&aring; drivstoff</td></tr>
+      <tr class="height22"><td class="menu">Kr per kilometer</td></tr>
     </table>
   </td>
   <td colspan="3">
