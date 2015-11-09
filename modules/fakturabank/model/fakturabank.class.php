@@ -397,7 +397,7 @@ class lodo_fakturabank_fakturabank {
             }
 
             foreach ($reason_array as $dataRR) {
-                $ret = $_lib['storage']->store_record(array('data' => $dataRR, 'table' => 'fbdownloadedinvoicereasons', 'action' => "insert", 'debug' => false));
+                $_lib['storage']->store_record(array('data' => $dataRR, 'table' => 'fbdownloadedinvoicereasons', 'action' => "insert", 'debug' => false));
             }
 
 			if ($action == "insert") {
@@ -1526,8 +1526,6 @@ class lodo_fakturabank_fakturabank {
                     $dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
                     $dataH['InsertedByPersonID']    = $_lib['sess']->get_person('PersonID');
                     $dataH['InsertedDateTime']      = $_lib['sess']->get_session('Datetime');
-                    $dataH['UpdatedByPersonID']     = $_lib['sess']->get_person('PersonID');
-                    $dataH['UpdatedAt']             = strftime("%F %T");
                     $dataH['Active']                = 1;
                     $dataH['FromCompanyID']         = 1;
                     $dataH['SupplierAccountPlanID'] = 1;
@@ -1536,6 +1534,30 @@ class lodo_fakturabank_fakturabank {
                     $dataH['DepartmentCustomer'] = $InvoiceO->DepartmentCustomer;
                     $dataH['ProjectNameInternal'] = $InvoiceO->ProjectNameInternal;
                     $dataH['ProjectNameCustomer'] = $InvoiceO->ProjectNameCustomer;
+
+                    # Sender info
+                    $query                  = "select * from company where CompanyID='" . $dataH['FromCompanyID'] . "'";
+                    $company                = $_lib['storage']->get_row(array('query' => $query));
+
+                    $dataH['SName']         = empty($InvoiceO->AccountingSupplierParty->Party->PartyName->Name)                            ? $company->VName        : $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+                    $dataH['SAddress']      = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName)                  ? $company->VAddress     : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                    $dataH['SZipCode']      = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone)                  ? $company->VZipCode     : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+                    $dataH['SCountryCode']  = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode) ? $company->VCountryCode : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode;
+                    $dataH['SPhone']        = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone)                         ? $company->Phone        : $InvoiceO->AccountingSupplierParty->Party->Contact->Telephone;
+                    $dataH['SMobile']       = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)                            ? $company->Mobile       : $InvoiceO->AccountingSupplierParty->Party->Contact->Mobile; // ?? check on fb?
+                    $dataH['SEmail']        = empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)                    ? $company->Email        : $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail;
+                    $dataH['SWeb']          = empty($InvoiceO->AccountingSupplierParty->Party->WebsiteURI)                                 ? $company->WWW          : $InvoiceO->AccountingSupplierParty->Party->WebsiteURI;
+
+                    # Save from imported data only if correct type is sent
+                    $dataH['SBankAccount']        = (!empty($InvoiceO->PaymentMeans->PayeeFinancialAccount->ID) && ($InvoiceO->PaymentMeans->PayeeFinancialAccount->Name == "Bank")) ? $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID : $company->BankAccount;
+                    if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:ORGNR") {
+                      $dataH['SOrgNo'] = empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID) ? $company->OrgNumber : $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                      $dataH['SVatNo'] = $company->VatNumber;
+                    }
+                    else if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:VAT") {
+                      $dataH['SOrgNo'] = $company->OrgNumber;
+                      $dataH['SVatNo'] = empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID) ? $company->VatNumber : $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                    }
 
                     $dataH['IName']                  = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
                     $dataH['IAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
@@ -1595,7 +1617,6 @@ class lodo_fakturabank_fakturabank {
 
                             $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                             $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
-                            $datalineH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
 
                             $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceoutline', 'debug' => false));
                         }
@@ -1605,10 +1626,6 @@ class lodo_fakturabank_fakturabank {
                     #given bank transaction information, when importing transactions from bank
                     $fbvoting = new lodo_fakturabank_fakturabankvoting();
                     $fbvoting->update_fakturabank_outgoing_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
-
-                    # blank update to set invoice sender data
-                    $tmp_invoice = new invoice(array('CustomerAccountPlanID' => $InvoiceO->AccountPlanID, 'VoucherType' => 'S', 'InvoiceID' => $ID));
-                    $tmp_invoice->update(array('InvoiceID' => $ID, 'invoiceout_DueDate_'.$ID => $InvoiceO->PaymentMeans->PaymentDueDate, 'invoiceout_CustomerAccountPlanID_'.$ID => $InvoiceO->AccountPlanID));
 
                     #Set status in fakturabank
                     $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " accounted " . $_lib['sess']->get_session('Datetime');
