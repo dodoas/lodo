@@ -1199,7 +1199,7 @@ class invoice {
 
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->Name                             = $line->ProductName;
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->Description                      = $line->Comment;
-            $this->invoiceO->InvoiceLine[$line->LineID]->Item->SellersItemIdentification->ID    = $line->ProductID;
+            $this->invoiceO->InvoiceLine[$line->LineID]->Item->SellersItemIdentification->ID    = $line->ProductNumber;
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->CommodityClassification->UNSPSC->ItemClassificationCode = $line->UNSPSC;
 
             $this->invoiceO->InvoiceLine[$line->LineID]->Price->PriceAmount                     = $line->UnitCustPrice;
