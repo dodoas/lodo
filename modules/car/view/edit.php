@@ -119,7 +119,14 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Drivstoff</td>
-    <td colspan="3"><input type="text" name="car.Fuel" value="<? print "$car->Fuel";  ?>" size="60"></td>
+    <?
+      $FuelTypes = array(
+        'Diesel' => 'Diesel',
+        'Bensin' => 'Bensin',
+        'Elektrisk' => 'Elektrisk'
+      );
+    ?>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $FuelTypes, 'table'=> 'car', 'field'=>'Fuel', 'value'=>$car->Fuel, 'notChoosenText' => ' ')); ?></td>
 </tr>
 <tr>
     <td class="menu">Annen informasjon</td>
@@ -136,7 +143,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
     <table class="lodo_data">
       <tr class="height22"><td class="menu">Kalkulasjon</td></tr>
       <tr class="height22"><td class="menu">Start km.stand</td></tr>
-      <tr class="height22"><td class="menu">Slutt milage</td></tr>
+      <tr class="height22"><td class="menu">Slutt km.stand</td></tr>
       <tr class="height22"><td class="menu">Avstand</td></tr>
       <tr class="height22"><td class="menu">Kr brukt p&aring; drivstoff</td></tr>
       <tr class="height22"><td class="menu">Kr per kilometer</td></tr>

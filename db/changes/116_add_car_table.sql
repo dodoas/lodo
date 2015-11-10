@@ -15,7 +15,7 @@ VehicleType varchar(50) DEFAULT '',
 BrandAndModel varchar(100) DEFAULT NULL,
 NumberOfSeats int(3),
 RegistrationYear smallint(6) DEFAULT '0',
-Fuel decimal(16,2) DEFAULT '0',
+Fuel varchar(50) DEFAULT '',
 PRIMARY KEY (CarID)
 );
 
