@@ -185,7 +185,7 @@ foreach($invoicein as $InvoiceO) {
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>
-      <td class="number"><? if($InvoiceO->ExternalID) { ?><a href="<?php echo $_SETUP['FB_URL'] ?>invoices/<? print $InvoiceO->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
+      <td class="number"><? if($InvoiceO->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $InvoiceO->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
       <td class="number"><? print $InvoiceO->RemittanceStatus ?></td>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>

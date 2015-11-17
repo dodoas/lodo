@@ -364,7 +364,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
 	    &nbsp;&nbsp;
         <?
 	    if($voucherHead->ExternalID) {
-	    	print $_lib['form3']->button(array('name' => 'Vis i fakturabank', 'url' => 'https://fakturabank.no/invoices/' . $voucherHead->ExternalID, 'target' => '_new'));
+        print $_lib['form3']->button(array('name' => 'Vis i fakturabank', 'url' => $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER'] . '/invoices/' . $voucherHead->ExternalID, 'target' => '_new'));
 	    }
         ?>
         <?
