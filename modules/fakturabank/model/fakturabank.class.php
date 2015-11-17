@@ -91,7 +91,7 @@ class lodo_fakturabank_fakturabank {
 
         $page       = "rest/invoices.xml";
         $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc'; // add top limit rows=1000, otherwise we only get one record
-        $params    .= '&customer_status=' . $_SETUP['FB_INVOICE_UPDATE_STATUS'];
+        $params    .= '&customer_status=' . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
 
