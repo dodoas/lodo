@@ -62,7 +62,7 @@ foreach($car_milage as $milage_year => $milage) {
     <td><? print $car->CarID  ?></td>
 </tr>
 <tr>
-    <td class="menu">Bil navn</td>
+    <td class="menu">Bilnavn</td>
     <td><input type="text" name="car.CarName" value="<? print $car->CarName ?>" size="60"></td>
 </tr>
 <tr>
@@ -98,7 +98,7 @@ foreach($car_milage as $milage_year => $milage) {
     <td><input type="text" name="car.SalePrice" value="<? if ($car->SalePrice > 0) print $_lib['format']->Amount($car->SalePrice) ?>" size="60"></td>
 </tr>
 <tr>
-    <td class="menu">Typen</td>
+    <td class="menu">Type</td>
     <?
       $VehicleTypes = array(
         'Varebil(klasse 2)' => 'Varebil(klasse 2)',
@@ -164,7 +164,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
           for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
             $year = $_years[$i];
         ?>
-          <td><input class="align-right" type="text" name="carmilage.StartMilage.<? print $year; ?>" value="<? print $car_calculations[$year]['StartMilage']; ?>" size="15"></td>
+          <td><input class="align-right" type="text" name="carmilage.StartMilage.<? print $year; ?>" value="<? print $_lib['format']->Amount($car_calculations[$year]['StartMilage']); ?>" size="15"></td>
         <? } ?>
       </tr>
       <tr class="height22">
@@ -172,7 +172,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
           for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
             $year = $_years[$i];
         ?>
-          <td><input class="align-right" type="text" name="carmilage.EndMilage.<? print $year; ?>" value="<? print $car_calculations[$year]['EndMilage']; ?>" size="15"></td>
+          <td><input class="align-right" type="text" name="carmilage.EndMilage.<? print $year; ?>" value="<? print $_lib['format']->Amount($car_calculations[$year]['EndMilage']); ?>" size="15"></td>
         <? } ?>
       </tr>
       <tr class="height22">
@@ -180,7 +180,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
           for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
             $year = $_years[$i];
         ?>
-          <td class="align-right"><? print $car_calculations[$year]['distance']; ?></td>
+          <td class="align-right"><? print $_lib['format']->Amount($car_calculations[$year]['distance']); ?></td>
         <? } ?>
       </tr>
       <tr class="height22">
@@ -188,7 +188,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
           for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
             $year = $_years[$i];
         ?>
-          <td class="align-right"><? print $car_calculations[$year]['money_spent_on_fuel']; ?></td>
+          <td class="align-right"><? print $_lib['format']->Amount($car_calculations[$year]['money_spent_on_fuel']); ?></td>
         <? } ?>
       </tr>
       <tr class="height22">
@@ -196,7 +196,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
           for($i = $skip_years; ($i < count($_years)) && ($i < $skip_years + $years_per_line); $i++) {
             $year = $_years[$i];
         ?>
-          <td class="align-right"><? print $car_calculations[$year]['money_spent_per_mile']; ?></td>
+          <td class="align-right"><? print $_lib['format']->Amount($car_calculations[$year]['money_spent_per_mile']); ?></td>
         <? } ?>
       </tr>
     </table>

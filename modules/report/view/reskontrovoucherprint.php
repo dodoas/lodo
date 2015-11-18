@@ -57,11 +57,6 @@ if(strlen($_REQUEST['report_DepartmentID']) > 0)
     $whereouter .= " v.DepartmentID = " . $_REQUEST['report_DepartmentID'] . " and ";
 }
 
-if(strlen($_REQUEST['report_CarID']) > 0)
-{
-    $whereouter .= " v.CarID = " . $_REQUEST['report_CarID'] . " and ";
-}
-
 if($_REQUEST['report_VoucherType'])
 {
     $whereouter .= " v.VoucherType = '" . $_REQUEST['report_VoucherType'] . "' and ";

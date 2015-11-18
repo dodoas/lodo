@@ -231,14 +231,7 @@ print $_lib['sess']->doctype ?>
     </td>
     </tr>
     <tr>
-        <td>Bil</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'CarID';
-            $_lib['form2']->car_menu2($aconf);
-            ?>
-        </td>
+        <td colspan='2'></td>
         <td>Avdeling</td>
         <td><?
             $aconf = array();
@@ -313,14 +306,7 @@ print $_lib['sess']->doctype ?>
 	<td colspan="6">Hvis du &oslash;nsker at rapporten skal stemme med hovedbok m&aring; du kj&oslash;re ut fra du startet regnskapet</td>
 </tr>
 <tr class="r0">
-    <td>Bil</td>
-    <td><?
-      $aconf = array();
-      $aconf['table']         = 'report';
-      $aconf['field']         = 'CarID';
-      $_lib['form2']->car_menu2($aconf);
-        ?>
-    </td>
+    <td colspan='2'></td>
     <td>Avdeling</td>
     <td><?
         $aconf = array();
@@ -371,14 +357,7 @@ print $_lib['sess']->doctype ?>
         </td>
         </tr>
         <tr>
-        <td>Bil</td>
-        <td><?
-          $aconf = array();
-          $aconf['table']         = 'report';
-          $aconf['field']         = 'CarID';
-          $_lib['form2']->car_menu2($aconf);
-            ?>
-        </td>
+          <td colspan='2'></td>
         <td>Avdeling</td>
         <td><?
             $aconf = array();

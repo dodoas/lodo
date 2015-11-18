@@ -41,7 +41,7 @@ print $_lib['sess']->doctype ?>
   </tr>
   <tr>
     <td class="menu">Bil</td>
-    <td class="menu">Bil navn</td>
+    <td class="menu">Bilnavn</td>
     <td class="menu">Registreringsnummer</td>
     <td class="menu">Kj&oslash;psdato</td>
     <td class="menu">Salgsdato</td>

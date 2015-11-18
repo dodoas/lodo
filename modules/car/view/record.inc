@@ -2,10 +2,14 @@
 $primarykey['CarID'] = $CarID;
 $car_CarID = $_lib['input']->getProperty('car_CarID');
 
+// regex validation for buy/sell date
 if (isset($_POST['car_ValidFrom']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidFrom']))
   unset($_POST['car_ValidFrom']);
 if (isset($_POST['car_ValidTo']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidTo']))
   unset($_POST['car_ValidTo']);
+// regex for year (4 digits)
+if (isset($_POST['car_RegistrationYear']) && !preg_match('/^([0-9]{4})$/', $_POST['car_RegistrationYear']))
+  unset($_POST['car_RegistrationYear']);
 
 if($_lib['input']->getProperty('action_car_update')) {
   #Possible to extend or alter parameters here

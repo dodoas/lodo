@@ -22,8 +22,8 @@ PRIMARY KEY (CarID)
 CREATE TABLE IF NOT EXISTS carmilage (
 CarID int(11) NOT NULL,
 MilageYear smallint(6) NOT NULL DEFAULT '0',
-StartMilage int(11) DEFAULT '0',
-EndMilage int(11) DEFAULT '0',
+StartMilage decimal(16, 2) DEFAULT '0',
+EndMilage decimal(16, 2) DEFAULT '0',
 PRIMARY KEY (CarID, MilageYear)
 );
 
@@ -33,17 +33,24 @@ ADD EnableCar smallint(6) DEFAULT NULL,
 ADD CarID bigint(20) DEFAULT 0;
 
 ALTER TABLE voucher
-ADD CarID bigint(20) DEFAULT NULL;
+ADD CarID bigint(20) DEFAULT 0;
 
 ALTER TABLE salaryconfline
-ADD CarID bigint(20) DEFAULT NULL;
+ADD CarID bigint(20) DEFAULT 0;
 
 ALTER TABLE salaryline
-ADD CarID bigint(20) DEFAULT NULL;
+ADD CarID bigint(20) DEFAULT 0;
 
 ALTER TABLE accountline
-ADD CarID bigint(20) DEFAULT NULL;
+ADD CarID bigint(20) DEFAULT 0;
 
 ALTER TABLE invoiceinline
-ADD CarID bigint(20) DEFAULT NULL;
+ADD CarID bigint(20) DEFAULT 0;
+
+-- Add Diverse car
+-- disable autoincrement id when id is set to 0
+-- for this query since we want the id to be 0
+SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO';
+INSERT INTO car(CarID, CarName, Active, ValidFrom)
+VALUES(0, 'Diverse', 1, '2000-01-01');
 

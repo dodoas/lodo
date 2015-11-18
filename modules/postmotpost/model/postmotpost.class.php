@@ -33,7 +33,6 @@ class postmotpost {
     public $ReskontroFromAccount   = 0;
     public $ReskontroToAccount     = 0;
     public $DepartmentID           = 0;
-    public $CarID                  = 0;
     public $ProjectID              = 0;
 
     function __construct($args)
@@ -175,9 +174,6 @@ class postmotpost {
             $where = '';
             if($this->DepartmentID > 0) {
                 $whereextra = ' V.DepartmentID=' . (int) $this->DepartmentID . ' and ';
-            }
-            if($this->CarID > 0) {
-                $whereextra = ' V.CarID=' . (int) $this->CarID . ' and ';
             }
             if($this->ProjectID > 0) {
                 $whereextra .= ' V.ProjectID=' . (int) $this->ProjectID . ' and ';
