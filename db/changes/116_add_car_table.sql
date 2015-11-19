@@ -51,6 +51,11 @@ ADD CarID bigint(20) DEFAULT 0;
 -- disable autoincrement id when id is set to 0
 -- for this query since we want the id to be 0
 SET SESSION sql_mode='NO_AUTO_VALUE_ON_ZERO';
-INSERT INTO car(CarID, CarName, Active, ValidFrom)
-VALUES(0, 'Diverse', 1, '2000-01-01');
+INSERT INTO car(CarID, CarName, CarCode, Active, ValidFrom)
+VALUES(0, 'Diverse', '0', 1, '2000-01-01');
+
+-- Enable car on all car related accounts
+UPDATE accountplan
+SET EnableCar = 1
+WHERE AccountPlanID BETWEEN 7000 AND 7099;
 

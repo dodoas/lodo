@@ -570,7 +570,9 @@ class form2 {
   function car_menu2($args) {
       global $_lib;
 
-      $query = "select CarID, CarName, Active from car order by CarID";
+      $restrict_car = "";
+      if ($args['value']) $restrict_car = " OR CarID = ". $args['value'];
+      $query = "SELECT CarID, CarName, CarCode, Active FROM car WHERE Active = 1 " . $restrict_car . " ORDER BY CarID";
       $result = $_lib['db']->db_query($query);
       if($args['num_letters']) {
         $num_letters = $args['num_letters'];
@@ -599,10 +601,11 @@ class form2 {
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
           $inaktive = ($_row->Active) ? '' : 'INAKTIV ';
+          $name     = ($_row->CarID) ? $_row->CarCode : $_row->CarName;
           if($_row->CarID == $args[value])
-              print "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$_row->CarName, 0, $num_letters) . "\n";
+              print "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
           else
-              print "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$_row->CarName, 0, $num_letters) . "\n";
+              print "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
       }
 
       print "</select>\n";

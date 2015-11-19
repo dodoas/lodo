@@ -10,6 +10,8 @@ if (isset($_POST['car_ValidTo']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3
 // regex for year (4 digits)
 if (isset($_POST['car_RegistrationYear']) && !preg_match('/^([0-9]{4})$/', $_POST['car_RegistrationYear']))
   unset($_POST['car_RegistrationYear']);
+// trim car code (registration number)
+$_POST['car_CarCode'] = preg_replace('/\s+/', '', $_POST['car_CarCode']);
 
 if($_lib['input']->getProperty('action_car_update')) {
   #Possible to extend or alter parameters here
@@ -48,6 +50,12 @@ elseif($_lib['input']->getProperty('action_car_delete')) {
   # delete all milage for the car
   $query  = "DELETE FROM carmilage WHERE CarID=" . (int) $CarID . "";
   $_lib['db']->db_query($query);
+}
+elseif($_lib['input']->getProperty('action_car_update_from_fakturabank')) {
+  includelogic("fakturabank/fakturabank");
+  $fakturabank = new lodo_fakturabank_fakturabank();
+  $fakturabank->updateCarFromFakturabank($_POST['car_CarCode'], $CarID);
+
 }
 
 // if the action being performed is not delete then update milage table 

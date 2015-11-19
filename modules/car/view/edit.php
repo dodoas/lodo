@@ -58,20 +58,16 @@ foreach($car_milage as $milage_year => $milage) {
     <th colspan="4">Bil</th>
 </tr>
 <tr>
-    <td class="menu">Bil</td>
+    <td class="menu">ID</td>
     <td><? print $car->CarID  ?></td>
-</tr>
-<tr>
-    <td class="menu">Bilnavn</td>
-    <td><input type="text" name="car.CarName" value="<? print $car->CarName ?>" size="60"></td>
-</tr>
-<tr>
-    <td class="menu">Registreringsnummer</td>
-    <td><input type="text" name="car.CarCode" value="<? print $car->CarCode ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Aktiv</td>
     <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>$car->Active)) ?></td>
+</tr>
+<tr>
+    <td class="menu">Registreringsnummer</td>
+    <td><input type="text" name="car.CarCode" value="<? print $car->CarCode ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Merke og modell</td>
@@ -80,6 +76,10 @@ foreach($car_milage as $milage_year => $milage) {
 <tr>
     <td class="menu">Antall seter</td>
     <td><input type="text" name="car.NumberOfSeats" value="<? print $car->NumberOfSeats ?>" size="60"></td>
+</tr>
+<tr>
+    <td class="menu">Bilnavn</td>
+    <td><input type="text" name="car.CarName" value="<? print $car->CarName ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Kj&oslash;psdato</td>
@@ -211,6 +211,7 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
     <td align="left">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
     <input type="submit" name="action_car_update" value="Lagre bil" />
+    <input type="submit" name="action_car_update_from_fakturabank" value="Oppdater fra Fakturabank" />
     <? } ?></td>
 </form>
 <form name="delete" action="<? print $_lib['sess']->dispatch ?>t=car.list" method="post">

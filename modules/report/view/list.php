@@ -186,10 +186,10 @@ print $_lib['sess']->doctype ?>
   <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.hovedboksaldoliste" method="post" target="_blank">
   <? print $_lib['form3']->hidden(array('table'=>'report', 'field'=>'type', 'value'=>'reskontro')) ?>
   <tr>
-    <th rowspan="13">
+    <th rowspan="12">
   	R<br />E<br />S<br />K<br />O<br />N<br />T<br />R<br />O<br />
   	</th>
-  <td rowspan="5">Saldobalanse</td>
+  <td rowspan="4">Saldobalanse</td>
     <td>Reskontro fra hovedbok kontonummer</td>
     <td><?
         $aconf = array();
@@ -231,7 +231,6 @@ print $_lib['sess']->doctype ?>
     </td>
     </tr>
     <tr>
-        <td colspan='2'></td>
         <td>Avdeling</td>
         <td><?
             $aconf = array();
@@ -250,9 +249,6 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->project_menu2($aconf);
             ?>
         </td>
-    </tr>
-    <tr>
-        <td colspan="4"></td>
         <td>Art</td>
         <td><? $_lib['form2']->Type_menu2(array('field' => 'VoucherType', 'type' => 'VoucherType', 'table' => 'report')) ?></td>
     </tr>

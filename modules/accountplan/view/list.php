@@ -179,10 +179,10 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
 
           <td align="right">
           <?
-            if ($row->CarID) {
+            if ($row->EnableCar) {
               $query = "select * from car where CarID = $row->CarID";
               $car   = $_lib['storage']->get_row(array('query' => $query));
-              if($row->EnableCar) print $car->CarName;
+              print $car->CarCode;
             }
           ?>
           </td>
