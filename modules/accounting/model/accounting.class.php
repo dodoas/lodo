@@ -460,6 +460,11 @@ class accounting {
         } else {
             $fields['voucher_DepartmentID']     = $accountplan->DepartmentID; #Default department
         }
+        if(isset($post['voucher_CarID'])) {
+            $fields['voucher_CarID']     = $post['voucher_CarID'];
+        } else {
+            $fields['voucher_CarID']     = $accountplan->CarID; #Default car
+        }
 
         ############################################################################################
         #Deault values
@@ -893,6 +898,7 @@ class accounting {
 
                 $fields['voucher_ProjectID']        = $args['voucher']->ProjectID;
                 $fields['voucher_DepartmentID']     = $args['voucher']->DepartmentID;
+                $fields['voucher_CarID']            = $args['voucher']->CarID;
 
                 $fields['voucher_AutomaticReason'] = "Automatisk opprettet MVA postering $fields[voucher_Vat]";
                 $fields['voucher_DisableAutoVat'] = 1; #setter disable autovat til true, fordi dette er en autovat linje
@@ -938,6 +944,7 @@ class accounting {
 
                 $fields['voucher_ProjectID']        = $args['voucher']->ProjectID;
                 $fields['voucher_DepartmentID']     = $args['voucher']->DepartmentID;
+                $fields['voucher_CarID']            = $args['voucher']->CarID;
                 $fields['voucher_VoucherPeriod']     = $args['voucher']->VoucherPeriod;
 
                 #print "Oppdater MVA postering pk VoucherID: " . $args['voucherAV']->VoucherID; print_r($fields) ; print "<br>\n";
@@ -981,6 +988,7 @@ class accounting {
                     $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
                     $fields['voucher_ProjectID']          = $args['voucher']->ProjectID;
                     $fields['voucher_DepartmentID']       = $args['voucher']->DepartmentID;
+                    $fields['voucher_CarID']              = $args['voucher']->CarID;
 
                     print "Opprett ny MVA motpostering<br>";
                     #print_r($fields);

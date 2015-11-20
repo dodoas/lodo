@@ -184,6 +184,7 @@ print $_lib['sess']->doctype ?>
     <td>Konto</td>
     <td>ProduktNr</td>
     <td>Produkt navn</td>
+    <td>Bil</td>
     <td>Antall</td>
     <td>Enhetspris</td>
     <td>MVA</td>
@@ -219,11 +220,13 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         $aconf['width']         = '20';
         $aconf['type'][]        = 'result';
         $aconf['type'][]        = 'balance';
+        $accountplan            = $accounting->get_accountplan_object($row2->AccountPlanID);
         print $_lib['form3']->accountplan_number_menu($aconf);
         ?>
         </td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductNumber', 'pk'=>$LineID, 'value'=>$row2->ProductNumber, 'width' => 20, 'maxlength' => 20, 'tabindex'=>$tabindex++)) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductName'  , 'pk'=>$LineID, 'value'=>$row2->ProductName,   'width' => 20, 'maxlength' => 80, 'tabindex'=>$tabindex++)) ?></td>
+        <td><? if($accountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => $db_table2, 'field' => 'CarID', 'pk'=>$LineID, 'value' => $row2->CarID, 'tabindex' => $tabindex++)); } ?></td>
         <td align="center"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'width' => 5, 'maxlength' => 5, 'tabindex'=>$tabindex++)) ?></td>

@@ -188,7 +188,7 @@ if(is_array($bank->bankaccount)) {
 
 <table class="lodo_data">
     <tr class="result">
-        <th colspan="18">
+        <th colspan="19">
         Velg periode
 
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_prev_period($bank->ThisPeriod), 'description' => '<<', 'title' => 'Prev')) ?>
@@ -210,7 +210,7 @@ if(is_array($bank->bankaccount)) {
 <? print $_lib['form3']->hidden(array('name' => 'AccountID',        'value' => $bank->AccountID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'Period',    'value' => $bank->ThisPeriod)) ?>
 
-  <tr><th colspan="18">Avstemming i slutten av m&aring;neden</th></tr>
+  <tr><th colspan="19">Avstemming i slutten av m&aring;neden</th></tr>
   <tr>
     <td class="menu">Pri</td>
     <td class="menu">Bilagsnr</td>
@@ -231,6 +231,7 @@ if(is_array($bank->bankaccount)) {
     <td class="menu">Hovedbokskonto</td>
     <td class="menu">MVA</td>
     <td class="menu">Mengde</td>
+    <td class="menu">Bil</td>
     <td class="menu">Avdeling</td>
     <td class="menu">Prosjekt</td>
     <td class="menu"></td>
@@ -257,7 +258,7 @@ if(is_array($bank->bankaccount)) {
 </tr>
   <tr>
     <th class="menu" colspan="6">Tilbakef&oslash;re - f&oslash;rt bank ikke regnskap</th>
-    <td class="menu" colspan="12"></td>
+    <td class="menu" colspan="13"></td>
   </tr>
 <?
 if(is_array($bank->unvotedaccount)) {
@@ -455,6 +456,7 @@ if(is_array($bank->unvotedaccount)) {
             }
             ?>
         </td>
+        <td><? if($resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID',  'pk' => $row->AccountLineID, 'value' => $row->CarID)); } ?></td>
         <td><? if($resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? if($resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
         <td class="<? print $classWarning ?>">
@@ -466,7 +468,7 @@ if(is_array($bank->unvotedaccount)) {
 ?>
   <tr>
     <th class="menu" colspan="6">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank</th>
-    <td class="menu" colspan="12"></td>
+    <td class="menu" colspan="13"></td>
   </tr>
 <?
 if(is_array($bank->unvotedvoucher)) {
@@ -526,7 +528,7 @@ if(is_array($bank->unvotedvoucher)) {
 </tr>
 <tr>
     <td class="menu" colspan="8"></td>
-    <td class="menu" colspan="2">
+    <td class="menu" colspan="11">
     <? if($accounting->is_valid_accountperiod($bank->ThisPeriod, $_lib['sess']->get_person('AccessLevel'))) { ?>
     <input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S">
     <input type="submit" name="action_bank_journal" value="Bilagsf&oslash;r (B)" accesskey="B">

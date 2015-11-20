@@ -77,8 +77,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Inn p&aring; konto</td>
     <td class="menu">KID</td>
     <td class="menu">Tekst</td>
-    <td class="menu">Orgnummer</td>
     <td class="menu">Mengde</td>
+    <td class="menu">Orgnummer</td>
+    <td class="menu">Reskontro</td>
     <td class="menu">Reskontronavn</td>
   </tr>
   <tr>
@@ -142,20 +143,21 @@ if(is_array($bank->bankaccount)) {
             ?>
         </td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',        'pk' => $row->AccountLineID, 'value' => $row->Description,        'width' => 12, 'maxlength' => 255)) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ReskontroOrgNumber', 'pk' => $row->AccountLineID, 'value' => $row->ReskontroOrgNumber, 'width' => 12, 'maxlength' => 255)) ?></td>
-        <td>
-        <?
-            $reskontroconf['field']         = 'ReskontroAccountPlanID';
-            $reskontroconf['value']         = $row->ReskontroAccountPlanID;
-            print $_lib['form3']->accountplan_number_menu($reskontroconf);    
-        ?>
-        </td>
         <td>
             <? 
             #if($resultaccountplan->EnableQuantity) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ResultQuantity',        'pk' => $row->AccountLineID, 'value' => $row->ResultQuantity,         'width' => 5, 'maxlength' => 255));
             #}
             ?>
+        </td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ReskontroOrgNumber', 'pk' => $row->AccountLineID, 'value' => $row->ReskontroOrgNumber, 'width' => 12, 'maxlength' => 255)) ?></td>
+        <td>
+        <?
+            $reskontroconf['field']         = 'ReskontroAccountPlanID';
+            $reskontroconf['value']         = $row->ReskontroAccountPlanID;
+            $reskontroconf['type'][]        = 'reskontro';
+            print $_lib['form3']->accountplan_number_menu($reskontroconf);    
+        ?>
         </td>
     
         <td class="<? print $reskontroclass ?>"><? print $reskontroaccountplan->AccountName ?></td>
@@ -174,7 +176,7 @@ if(is_array($bank->bankaccount)) {
     <td colspan="5"></td>
 </tr>
 <tr>
-    <td class="menu" colspan="7"></td>
+    <td class="menu" colspan="8"></td>
     <td class="menu">
         <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
         <input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S">

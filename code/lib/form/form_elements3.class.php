@@ -81,6 +81,14 @@ class form3
 
 ###########################################################
 
+    # args['data'] should be an array of options
+    function Generic_menu3($args)
+    {
+        return $this->_MakeSelect($args);
+    }
+
+###########################################################
+
     function CompanyContactMenu3($args) {
       $args['query'] = $this->_QUERY['form']['companycontact'];
       return $this->_MakeSelect($args);
@@ -95,6 +103,12 @@ class form3
     }
 
 ###########################################################
+
+    function Car_menu3($args)
+    {
+        $args['query'] = $this->_QUERY['form']['carmenu'];
+        return $this->_MakeSelect($args);
+    }
 
     function Avd_menu3($args)
     {
