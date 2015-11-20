@@ -61,6 +61,11 @@ if(strlen($_REQUEST['report_DepartmentID']) > 0)
     $whereouter .= " v.DepartmentID = " . $_REQUEST['report_DepartmentID'] . " and ";
 }
 
+if(strlen($_REQUEST['report_CarID']) > 0)
+{
+    $whereouter .= " v.CarID = " . $_REQUEST['report_CarID'] . " and ";
+}
+
 if($_REQUEST['report_VoucherType'])
 {
     $whereouter .= " v.VoucherType = '" . $_REQUEST['report_VoucherType'] . "' and ";
@@ -142,6 +147,7 @@ print $_lib['sess']->doctype ?>
   <tr class="voucher">
     <th width="50">Dato</th>
     <th>Bilag</th>
+    <th>Bil</th>
     <th>Prosj</th>
     <th>Avd</th>
     <th class="align-right">Mengde</th>
@@ -170,6 +176,7 @@ print $_lib['sess']->doctype ?>
 			<tr>
 				<td colspan="4">Periode sum</td>
         <td class="number"></td>
+        <td class="number"></td>
 				<td class="number"></td>
 				<td class="number"></td>
 				<td colspan="2"></td>
@@ -186,7 +193,7 @@ print $_lib['sess']->doctype ?>
             ?>
 
             <tr>
-                <th colspan = "9"><? print "$voucher->AccountPlanID - ".$_lib['format']->AccountPlanIDToName($voucher->AccountPlanID) ?></th>
+                <th colspan = "10"><? print "$voucher->AccountPlanID - ".$_lib['format']->AccountPlanIDToName($voucher->AccountPlanID) ?></th>
                 <th></th>
                 <th colspan="5"></th>
             </tr>
@@ -230,7 +237,7 @@ print $_lib['sess']->doctype ?>
             #Grey - top line
             ?>
                 <tr>
-                    <th class="sub" colspan="4"><? print "Periode: $period" ?></th>
+                    <th class="sub" colspan="5"><? print "Periode: $period" ?></th>
                     <th class="sub number align-right"><? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $quantityAccountH[$account], 'return' => 'value')); ?></th>
                     <th class="sub number align-right"><? print $accountplan->debittext ?></th>
                     <th class="sub number align-right"><? print $accountplan->credittext ?></th>
@@ -251,6 +258,7 @@ print $_lib['sess']->doctype ?>
             <tr class="voucher">
                 <td><nobr><? print $voucher->VoucherDate    ?></nobr></td>
                 <td class="number"><? print $voucher->VoucherType    ?><a href="<? print $_SETUP[DISPATCH] . "t=journal.edit&amp;voucher_VoucherType=$voucher->VoucherType&amp;voucher_JournalID=$voucher->JournalID" ?>&amp;action_journalid_search=1"><? print $voucher->JournalID ?></a></td>
+                <td><? if($voucher->CarID > 0)    { print $voucher->CarID;  }  ?></td>
                 <td><? if($voucher->ProjectID > 0)    { print $voucher->ProjectID;  }  ?></td>
                 <td><? if($voucher->DepartmentID > 0) { print $voucher->DepartmentID; } ?></td>
                 <td class="number align-right"><? if($signed_quantity != 0)       { print $_lib['format']->Amount(array('decimals' => 3, 'value' => $signed_quantity, 'return' => 'value')); } ?></td>
@@ -277,7 +285,7 @@ print $_lib['sess']->doctype ?>
     ?>
 
     <tr>
-        <th colspan="9"><? print "$reptype " ?></th>
+        <th colspan="10"><? print "$reptype " ?></th>
         <th class="number"><nobr><? print $_lib['format']->Amount($sumSaldoAll) ?></nobr></th>
         <th colspan="5"></th>
     </tr>

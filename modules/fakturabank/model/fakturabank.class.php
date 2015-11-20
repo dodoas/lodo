@@ -945,6 +945,22 @@ class lodo_fakturabank_fakturabank {
                     $JournalID++;
                 }
 
+                # validate invoice lines
+                foreach($InvoiceO->InvoiceLine as &$line) {
+                  if ($line->Item->AdditionalItemProperty->Name == 'Car') {
+                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and Active=1";
+                    $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                    if($carexists) {
+                      $line->Item->CarID   = $carexists->CarID;
+                      $line->Item->CarCode = $carexists->CarCode;
+                    }
+                    else {
+                      $InvoiceO->Status .= "Bil: " . $line->Item->AdditionalItemProperty->Value . " eksisterer ikke. ";
+                      $InvoiceO->Journal = false;
+                      $InvoiceO->Class   = 'red';
+                    }
+                  }
+                }
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
                 }
@@ -1453,6 +1469,7 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['LineNum']           = $LineNum;
                         $datalineH['ProductName']       = $line->Item->Name;
                         $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
+                        $datalineH['CarID']             = $line->Item->CarID;
                         $datalineH['Comment']           = $line->Item->Description;
                         $datalineH['QuantityOrdered']   = $Quantity;
                         $datalineH['QuantityDelivered'] = $Quantity;
@@ -2270,6 +2287,55 @@ class lodo_fakturabank_fakturabank {
 
         curl_close($ch);
         return $this->success;
+    }
+
+    public function updateCarFromFakturabank($CarCode, $CarID) {
+      global $_lib;
+
+      if(!$this->login) return false;
+
+      $page = "rest/cars.xml?orgno=". $this->OrgNumber ."&code=". $CarCode;
+      $url = $this->construct_fakturabank_url($page);
+
+      $headers = array(
+          "GET ".$page." HTTP/1.0",
+          "Content-type: text/xml;charset=\"utf-8\"",
+          "Accept: application/xml",
+          "Cache-Control: no-cache",
+          "Pragma: no-cache",
+          "SOAPAction: \"run\"",
+          "Authorization: Basic " . base64_encode($this->credentials)
+      );
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_HEADER, 0);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+      curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
+
+      $result = curl_exec($ch);
+      includelogic('xmldomtoobject/xmldomtoobject');
+      $domtoobject = new empatix_framework_logic_xmldomtoobject(array());
+      $car = $domtoobject->convert($result);
+
+      $xml_key_to_db_fieled_name = array(
+        "name" => "CarName",
+        "modelyear" => "RegistrationYear",
+        "purchased-date" => "ValidFrom",
+        "sold-date" => "ValidTo"
+      );
+      if (!$car->error) {
+        $car_update_query = "UPDATE car SET CarCode = '". $car->code ."'";
+        foreach($xml_key_to_db_fieled_name as $xml_key => $db_filed_name) {
+          if ($car->{$xml_key}) $car_update_query .= ", ". $db_filed_name ." = '". $car->{$xml_key} ."'";
+        }
+        $car_update_query .= " WHERE CarID = ". $CarID;
+        $_lib['db']->db_query($car_update_query);
+      }
+      else $_lib['message']->add("ERROR: ". $car->error);
     }
 
     public function construct_fakturabank_url($page=''){

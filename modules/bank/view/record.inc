@@ -45,7 +45,7 @@ elseif($_lib['input']->getProperty('action_bank_votinglinenewtilbake')) {
 elseif($_lib['input']->getProperty('action_bank_accountlinedelete')) {
 
     $sql_delete  = "update accountline set Active=0 where AccountLineID=" . (int) $_lib['input']->getProperty('AccountLineID');
-    print "$sql_delete<br>\n";
+    # print "$sql_delete<br>\n";
     $_lib['db']->db_delete($sql_delete);
 }
 elseif($_lib['input']->getProperty('action_bank_accountlinenew')) {
