@@ -567,6 +567,52 @@ class form2 {
       ?>
   <? }
 
+  function car_menu2($args) {
+      global $_lib;
+
+      $restrict_car = "";
+      if ($args['value']) $restrict_car = " OR CarID = ". $args['value'];
+      $query = "SELECT CarID, CarName, CarCode, Active FROM car WHERE Active = 1 " . $restrict_car . " ORDER BY CarID";
+      $result = $_lib['db']->db_query($query);
+      if($args['num_letters']) {
+        $num_letters = $args['num_letters'];
+      } else {
+        $num_letters = 15;
+      }
+
+      if($args[table]){
+        if($args[pk]) {
+          print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+        } else {
+          print "<select name=\"$args[table].$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+        }
+      } else {
+        if($args[pk]) {
+          print "<select name=\"$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+        } else {
+          print "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+        }
+      }
+      print "Greit<br>";
+      if($conf['value']) {
+        print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
+      } else {
+        print "<option value=\"\">" . substr('Velg bil',0, $num_letters);
+      }
+      while($_row = $_lib['db']->db_fetch_object($result)) {
+          $inaktive = ($_row->Active) ? '' : 'INAKTIV ';
+          $name     = ($_row->CarID) ? $_row->CarCode : $_row->CarName;
+          if($_row->CarID == $args[value])
+              print "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+          else
+              print "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+      }
+
+      print "</select>\n";
+      #$_lib['db']->db_free_result($result);
+      ?>
+  <? }
+
   function ExpenceHead_menu2($name, $value, $form_name, $where, $db_table) {
       global $_lib;
 

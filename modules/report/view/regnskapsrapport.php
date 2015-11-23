@@ -7,6 +7,7 @@ $Period         = $_REQUEST['Period'];
 $StartPeriod    = $_REQUEST['StartPeriod'];
 $detail         = $_REQUEST['detail'];
 $DepartmentID   = $_REQUEST['report_DepartmentID'];
+$CarID          = $_REQUEST['report_CarID'];
 $ProjectID      = $_REQUEST['report_ProjectID'];
 
 $thisDate             = $_lib['sess']->get_session('LoginFormDate');
@@ -18,7 +19,7 @@ require_once "record.inc";
 includelogic('linetextmap/linetextmap');
 includelogic('report/regnskapsrapport');
 
-$rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'StartPeriod' => $StartPeriod, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $DepartmentID, 'ProjectID'=> $ProjectID));
+$rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'StartPeriod' => $StartPeriod, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $DepartmentID, 'CarID' => $CarID, 'ProjectID'=> $ProjectID));
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -37,6 +38,7 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
             <tr>
                 <th>Fra Periode</th>
                 <th>Til Periode</th>
+                <th>Bil</th>
                 <th>Avdeling</th>
                 <th>Prosjekt</th>
                 <th>Detaljer</th>
@@ -45,6 +47,14 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
             <tr>
                 <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'StartPeriod', 'value' => $rapport->thisStartPeriod, 'noaccess' => '1')) ?></th>
                 <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 'value' => $rapport->Period, 'noaccess' => '1')) ?></th>
+                <th><?
+                    $aconf = array();
+                    $aconf['table']         = 'report';
+                    $aconf['field']         = 'CarID';
+                    $aconf['value']         = $CarID;
+                    $_lib['form2']->car_menu2($aconf);
+                    ?>
+                </th>
                 <th><?
                     $aconf = array();
                     $aconf['table']         = 'report';
@@ -75,20 +85,23 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
 <? print $_lib['form3']->hidden(array('name' => 'StartPeriod',          'value' => $StartPeriod)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'report_DepartmentID',  'value' => $DepartmentID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'report_ProjectID',     'value' => $ProjectID)) ?>
-<table border="0" cellspacing="0" class="bordered">
+<table border="0" cellspacing="0" class="bordered regnskapsrapport_table">
     <thead>
         <tr>
-            <th>Konto</th>
-            <th>Kontonavn</th>
-            <th>Fra <? print $rapport->thisStartPeriod ?> til <? print $rapport->thisEndPeriod ?></th>
-            <th>Prosent</th>
-            <th>Fra <? print $rapport->prevStartPeriod ?> til <? print $rapport->prevEndPeriod ?></th>
-            <th>Prosent</th>
-            <th>&Aring;ret <? print $rapport->prevYear ?></th>
-            <th>Prosent</th>
-            <th>Beregn prosent fra</th>
+            <th class="column_konto_percent">Konto</th>
+            <th class="column_konto_name">Kontonavn</th>
+            <th class="column_amount">Fra <? print $rapport->thisStartPeriod ?> til <? print $rapport->thisEndPeriod ?></th>
+            <th class="column_konto_percent">Prosent</th>
+            <th class="column_amount">Fra <? print $rapport->prevStartPeriod ?> til <? print $rapport->prevEndPeriod ?></th>
+            <th class="column_konto_percent">Prosent</th>
+            <th class="column_amount">&Aring;ret <? print $rapport->prevYear ?></th>
+            <th class="column_konto_percent">Prosent</th>
+            <th class="column_checkbox">Beregn prosent fra</th>
     <tbody>
         <?
+        $sumThisYear = 0;
+        $sumLastYear = 0;
+        $sumYear = 0;
         foreach($rapport->lineSumH as $lineH) { ?>
                 <tr>
                     <th class="sub"><? print $lineH['LineID'] ?></td>
@@ -103,6 +116,9 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
                 </tr>
 
             <?
+            $sumThisYear += $lineH['ThisYearAmount'];
+            $sumLastYear += $lineH['LastYearAmount'];
+            $sumYear += $lineH['Year'];
             if($detail) {
                 foreach($rapport->lineH[$lineH['LineID']] as $AccountH)
                 {
@@ -123,7 +139,31 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
             }
             }
         }
+        $sumThisYear = round($sumThisYear, 3);
+        $sumLastYear = round($sumLastYear, 3);
+        $sumYear = round($sumYear, 3);
+        if ($sumThisYear != 0 || $sumLastYear != 0 || $sumYear != 0) {
+          $link = $_lib['sess']->dispatch . "t=report.regnskapsrapportmissing&ThisYearAmount=".$sumThisYear."&LastYearAmount=".$sumLastYear."&YearAmount=".$sumYear."&StartPeriod=".$rapport->thisStartPeriod."&EndPeriod=".$rapport->thisEndPeriod;
+          $link_to_missing = "<a href='$link'>";
+          $link_to_missing_close = "</a>";
+          $warn_diff_class = "red";
+        }
+        else {
+          $link_to_missing = "";
+          $link_to_missing_close = "";
+          $warn_diff_class = "";
+        }
         ?>
+      <tr class="sub <? print $warn_diff_class; ?>">
+        <td>Sum</td>
+        <td></td>
+        <td class="number"><? print $link_to_missing . $_lib['format']->Amount($sumThisYear) . $link_to_missing_close; ?></td>
+        <td></td>
+        <td class="number"><? print $link_to_missing . $_lib['format']->Amount($sumLastYear) . $link_to_missing_close; ?></td>
+        <td></td>
+        <td class="number"><? print $link_to_missing . $_lib['format']->Amount($sumYear) . $link_to_missing_close; ?></td>
+        <td colspan="2"></td>
+    </tr>
     <tr>
         <td colspan="8"></td>
         <td colspan="3" align="right"><? print $_lib['form3']->submit(array('name'=>'show_percentcalculation', 'value'=>'Kalkuler (K)', 'accesskey'=>'K')) ?></td>

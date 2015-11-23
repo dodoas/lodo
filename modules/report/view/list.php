@@ -40,10 +40,10 @@ print $_lib['sess']->doctype ?>
     <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.hovedboksaldoliste" method="post" target="_blank">
     <? print $_lib['form3']->hidden(array('table'=>'report', 'field'=>'type', 'value'=>'hovedbok')) ?>
     <tr>
-    	<th rowspan="7">
+      <th rowspan="8">
     	<b>H<br />O<br />V<br />E<br />D<br />B<br />O<br />K<br /></b>
     	</th>
-    	<td rowspan="3">Saldobalanse</td>
+      <td rowspan="4">Saldobalanse</td>
         <td>Fra periode</td>
         <td>
             <?
@@ -62,6 +62,14 @@ print $_lib['sess']->doctype ?>
         </td>
     </tr>
     <tr>
+        <td>Bil</td>
+        <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'CarID';
+            $_lib['form2']->car_menu2($aconf);
+            ?>
+        </td>
         <td>Avdeling</td>
         <td><?
             $aconf = array();
@@ -80,6 +88,9 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->project_menu2($aconf);
             ?>
         </td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
         <td>Art</td>
         <td><? $_lib['form2']->Type_menu2(array('field' => 'VoucherType', 'type' => 'VoucherType', 'table' => 'report')) ?></td>
     </tr>
@@ -135,6 +146,14 @@ print $_lib['sess']->doctype ?>
         </td>
     </tr>
     <tr class="r0">
+        <td>Bil</td>
+        <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'CarID';
+            $_lib['form2']->car_menu2($aconf);
+            ?>
+        </td>
         <td>Avdeling</td>
         <td><?
             $aconf = array();
@@ -153,8 +172,10 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->project_menu2($aconf);
             ?>
         </td>
-	    <td></td>
-    	<td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+    </tr>
+    <tr class="r0">
+        <td colspan="5"></td>
+        <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
     </tr>
     </form>
 </table>
@@ -165,10 +186,10 @@ print $_lib['sess']->doctype ?>
   <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.hovedboksaldoliste" method="post" target="_blank">
   <? print $_lib['form3']->hidden(array('table'=>'report', 'field'=>'type', 'value'=>'reskontro')) ?>
   <tr>
-  	<th rowspan="11">
+    <th rowspan="12">
   	R<br />E<br />S<br />K<br />O<br />N<br />T<br />R<br />O<br />
   	</th>
-	<td rowspan="4">Saldobalanse</td>
+  <td rowspan="4">Saldobalanse</td>
     <td>Reskontro fra hovedbok kontonummer</td>
     <td><?
         $aconf = array();
@@ -243,7 +264,7 @@ print $_lib['sess']->doctype ?>
 <input type="hidden" name="report.Type" value="reskontro">
 <input type="hidden" name="report.Sort" value="VoucherDate">
   <tr class="r0">
-	<td rowspan="4">bilagsutskrift</td>
+	<td rowspan="5">bilagsutskrift</td>
     <td>Reskontro fra hovedbok kontonummer</td>
     <td><?
         $aconf = array();
@@ -281,6 +302,7 @@ print $_lib['sess']->doctype ?>
 	<td colspan="6">Hvis du &oslash;nsker at rapporten skal stemme med hovedbok m&aring; du kj&oslash;re ut fra du startet regnskapet</td>
 </tr>
 <tr class="r0">
+    <td colspan='2'></td>
     <td>Avdeling</td>
     <td><?
         $aconf = array();
@@ -299,12 +321,14 @@ print $_lib['sess']->doctype ?>
         $_lib['form2']->project_menu2($aconf);
         ?>
     </td>
-    <td></td>
+  </tr>
+  <tr class="r0">
+    <td colspan="5"></td>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
   </tr>
 </form>
     <tr>
-    <td rowspan="2">&aring;pne poster</td>
+    <td rowspan="3">&aring;pne poster</td>
     <form class="voucher" name="<? print $form_name ?>" action="<? print $_SETUP['DISPATCH'] ?>" method="get" target="_blank">
     <input type="hidden" name="t"           value="postmotpost.list">
     <input type="hidden" name="report_Sort" value="JournalID">
@@ -329,6 +353,7 @@ print $_lib['sess']->doctype ?>
         </td>
         </tr>
         <tr>
+          <td colspan='2'></td>
         <td>Avdeling</td>
         <td><?
             $aconf = array();
@@ -347,8 +372,10 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->project_menu2($aconf);
             ?>
         </td>
-        <td></td>
-        <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+    </tr>
+    <tr>
+      <td colspan="5"></td>
+      <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
     </tr>
     </form>
 </table>
@@ -518,7 +545,7 @@ print $_lib['sess']->doctype ?>
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.dagbok" method="post" target="_blank">
 <input type="hidden" name="report.Type" value="dagbok">
 <tr>
-	<th rowspan="10">D<br />A<br />G<br />B<br />O<br />K<br /></th>
+	<th rowspan="11">D<br />A<br />G<br />B<br />O<br />K<br /></th>
     <td>Fra dato (YYYY-MM-DD)</td>
     <td><? print $_lib['form3']->text(array('table' => 'report', 'field' => 'FromDate', 'width' => 10)) ?></td>
     <td>Til dato (YYYY-MM-DD)</td>
@@ -572,6 +599,14 @@ print $_lib['sess']->doctype ?>
     </td>
 </tr>
 <tr>
+    <td>Bil</td>
+    <td><?
+      $aconf = array();
+      $aconf['table']         = 'report';
+      $aconf['field']         = 'CarID';
+      $_lib['form2']->car_menu2($aconf);
+        ?>
+    </td>
     <td>Avdeling
     <td><?
         $aconf = array();
@@ -581,6 +616,8 @@ print $_lib['sess']->doctype ?>
         $_lib['form2']->department_menu2($aconf);
         ?>
      </td>
+</tr>
+<tr>
      <td>Prosjekt</td>
      <td><?
          $aconf = array();

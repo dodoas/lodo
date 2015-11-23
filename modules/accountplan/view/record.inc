@@ -66,7 +66,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
     
     if((!$accountexist || $_lib['input']->getProperty('action_accountplan_updateautomatic'))) {
       $fb = new lodo_fakturabank_fakturabank();
-      $fb->update_accountplan_from_fakturabank($AccountPlanID);
+      if (in_array($AccountPlanType, array('supplier', 'customer'))) $fb->update_accountplan_from_fakturabank($AccountPlanID);
     }
     
     if(!$accountexist) {

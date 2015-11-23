@@ -849,6 +849,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             $fields['salaryconfline_EnableEmployeeTax']     = $row['EnableEmployeeTax'];
             $fields['salaryconfline_ProjectID']             = $row['Project ID'];
             $fields['salaryconfline_DepartmentID']          = $row['DepartmentID'];
+            $fields['salaryconfline_CarID']                 = $row['CarID'];
             $fields['salaryconfline_SalaryCode']            = $row['SalaryCode'];
             $fields['salaryconfline_EnableVacationPayment'] = $row['EnableVacationPayment'];
             //print_r($fields);

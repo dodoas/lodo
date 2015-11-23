@@ -399,7 +399,7 @@ class lodo_fakturabank_fakturabank {
             }
 
             foreach ($reason_array as $dataRR) {
-                $ret = $_lib['storage']->store_record(array('data' => $dataRR, 'table' => 'fbdownloadedinvoicereasons', 'action' => "insert", 'debug' => false));
+                $_lib['storage']->store_record(array('data' => $dataRR, 'table' => 'fbdownloadedinvoicereasons', 'action' => "insert", 'debug' => false));
             }
 
 			if ($action == "insert") {
@@ -890,6 +890,22 @@ class lodo_fakturabank_fakturabank {
                     $JournalID++;
                 }
 
+                # validate invoice lines
+                foreach($InvoiceO->InvoiceLine as &$line) {
+                  if ($line->Item->AdditionalItemProperty->Name == 'Car') {
+                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and Active=1";
+                    $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                    if($carexists) {
+                      $line->Item->CarID   = $carexists->CarID;
+                      $line->Item->CarCode = $carexists->CarCode;
+                    }
+                    else {
+                      $InvoiceO->Status .= "Bil: " . $line->Item->AdditionalItemProperty->Value . " eksisterer ikke. ";
+                      $InvoiceO->Journal = false;
+                      $InvoiceO->Class   = 'red';
+                    }
+                  }
+                }
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
                 }
@@ -1401,6 +1417,7 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['LineNum']           = $LineNum;
                         $datalineH['ProductName']       = $line->Item->Name;
                         $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
+                        $datalineH['CarID']             = $line->Item->CarID;
                         $datalineH['Comment']           = $line->Item->Description;
                         $datalineH['QuantityOrdered']   = $Quantity;
                         $datalineH['QuantityDelivered'] = $Quantity;
@@ -1478,7 +1495,6 @@ class lodo_fakturabank_fakturabank {
                     $dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
                     $dataH['InsertedByPersonID']    = $_lib['sess']->get_person('PersonID');
                     $dataH['InsertedDateTime']      = $_lib['sess']->get_session('Datetime');
-                    $dataH['UpdatedByPersonID']     = $_lib['sess']->get_person('PersonID');
                     $dataH['Active']                = 1;
                     $dataH['FromCompanyID']         = 1;
                     $dataH['SupplierAccountPlanID'] = 1;
@@ -1487,6 +1503,30 @@ class lodo_fakturabank_fakturabank {
                     $dataH['DepartmentCustomer'] = $InvoiceO->DepartmentCustomer;
                     $dataH['ProjectNameInternal'] = $InvoiceO->ProjectNameInternal;
                     $dataH['ProjectNameCustomer'] = $InvoiceO->ProjectNameCustomer;
+
+                    # Sender info
+                    $query                  = "select * from company where CompanyID='" . $dataH['FromCompanyID'] . "'";
+                    $company                = $_lib['storage']->get_row(array('query' => $query));
+
+                    $dataH['SName']         = empty($InvoiceO->AccountingSupplierParty->Party->PartyName->Name)                            ? $company->VName        : $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+                    $dataH['SAddress']      = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName)                  ? $company->VAddress     : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                    $dataH['SZipCode']      = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone)                  ? $company->VZipCode     : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+                    $dataH['SCountryCode']  = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode) ? $company->VCountryCode : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode;
+                    $dataH['SPhone']        = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone)                         ? $company->Phone        : $InvoiceO->AccountingSupplierParty->Party->Contact->Telephone;
+                    $dataH['SMobile']       = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)                            ? $company->Mobile       : $InvoiceO->AccountingSupplierParty->Party->Contact->Mobile; // ?? check on fb?
+                    $dataH['SEmail']        = empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)                    ? $company->Email        : $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail;
+                    $dataH['SWeb']          = empty($InvoiceO->AccountingSupplierParty->Party->WebsiteURI)                                 ? $company->WWW          : $InvoiceO->AccountingSupplierParty->Party->WebsiteURI;
+
+                    # Save from imported data only if correct type is sent
+                    $dataH['SBankAccount']        = (!empty($InvoiceO->PaymentMeans->PayeeFinancialAccount->ID) && ($InvoiceO->PaymentMeans->PayeeFinancialAccount->Name == "Bank")) ? $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID : $company->BankAccount;
+                    if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:ORGNR") {
+                      $dataH['SOrgNo'] = empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID) ? $company->OrgNumber : $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                      $dataH['SVatNo'] = $company->VatNumber;
+                    }
+                    else if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:VAT") {
+                      $dataH['SOrgNo'] = $company->OrgNumber;
+                      $dataH['SVatNo'] = empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID) ? $company->VatNumber : $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                    }
 
                     $dataH['IName']                  = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
                     $dataH['IAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
@@ -1546,7 +1586,6 @@ class lodo_fakturabank_fakturabank {
 
                             $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                             $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
-                            $datalineH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
 
                             $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceoutline', 'debug' => false));
                         }
@@ -2186,6 +2225,55 @@ class lodo_fakturabank_fakturabank {
         $_SESSION['oauth_invoice_error'] = "Success";
         $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
       }
+    }
+
+    public function updateCarFromFakturabank($CarCode, $CarID) {
+      global $_lib;
+
+      if(!$this->login) return false;
+
+      $page = "rest/cars.xml?orgno=". $this->OrgNumber ."&code=". $CarCode;
+      $url = $this->construct_fakturabank_url($page);
+
+      $headers = array(
+          "GET ".$page." HTTP/1.0",
+          "Content-type: text/xml;charset=\"utf-8\"",
+          "Accept: application/xml",
+          "Cache-Control: no-cache",
+          "Pragma: no-cache",
+          "SOAPAction: \"run\"",
+          "Authorization: Basic " . base64_encode($this->credentials)
+      );
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_HEADER, 0);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+      curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
+
+      $result = curl_exec($ch);
+      includelogic('xmldomtoobject/xmldomtoobject');
+      $domtoobject = new empatix_framework_logic_xmldomtoobject(array());
+      $car = $domtoobject->convert($result);
+
+      $xml_key_to_db_fieled_name = array(
+        "name" => "CarName",
+        "modelyear" => "RegistrationYear",
+        "purchased-date" => "ValidFrom",
+        "sold-date" => "ValidTo"
+      );
+      if (!$car->error) {
+        $car_update_query = "UPDATE car SET CarCode = '". $car->code ."'";
+        foreach($xml_key_to_db_fieled_name as $xml_key => $db_filed_name) {
+          if ($car->{$xml_key}) $car_update_query .= ", ". $db_filed_name ." = '". $car->{$xml_key} ."'";
+        }
+        $car_update_query .= " WHERE CarID = ". $CarID;
+        $_lib['db']->db_query($car_update_query);
+      }
+      else $_lib['message']->add("ERROR: ". $car->error);
     }
 
     public function construct_fakturabank_url($page=''){

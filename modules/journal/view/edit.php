@@ -364,7 +364,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
 	    &nbsp;&nbsp;
         <?
 	    if($voucherHead->ExternalID) {
-	    	print $_lib['form3']->button(array('name' => 'Vis i fakturabank', 'url' => 'https://fakturabank.no/invoices/' . $voucherHead->ExternalID, 'target' => '_new'));
+        print $_lib['form3']->button(array('name' => 'Vis i fakturabank', 'url' => $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER'] . '/invoices/' . $voucherHead->ExternalID, 'target' => '_new'));
 	    }
         ?>
         <?
@@ -391,6 +391,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>U<u>t</u></th>
     <th><u>M</u>VA</th>
     <th>M<u>e</u>ngde</th>
+    <th>Bil</th>
     <th>A<u>v</u>d.</th>
     <th><u>P</u>rosjekt</th>
     <th><u>F</u>orfallsdato</th>
@@ -411,6 +412,19 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
 <? print $voucher_gui->currency2($voucherHead) ?>
 <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent, !$period_open) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucherHead->Quantity, 'return' => 'value')) ?>"><? } ?></td>
+    <td>
+      <?
+if($rowCount>1) {
+    $tmp = '';
+}
+else {
+    $tmp = $tabindex++;
+}
+
+if($accountplan->EnableCar) {
+    $_lib['form2']->car_menu2(
+        array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled));
+} ?></td>
     <td>
       <?
 if($rowCount>1) {
@@ -512,6 +526,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     $numfields = 0;
     if(!$accountplan->EnableCurrency)   { $numfields += 2; };
     if(!$accountplan->EnableQuantity)   { $numfields++; };
+    if(!$accountplan->EnableCar)        { $numfields++; };
     if(!$accountplan->EnableDepartment) { $numfields++; };
     if(!$accountplan->EnableProject)    { $numfields++; };
 
@@ -610,6 +625,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <?  print $voucher_gui->currency2($voucher) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, !$period_open) ?></td>
       <td><? if($accountplan->EnableQuantity) { if ($voucher->DisableAutoVat != 1) { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucher->Quantity, 'return' => 'value')); ?>"><? } } ?></td>
+      <td><? if($accountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher->CarID, 'tabindex' => $tabindex)); } ?></td>
       <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
       <td><? if($accountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' => 'ProjectID', 'value' => $voucher->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')); } ?></td>
       <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>

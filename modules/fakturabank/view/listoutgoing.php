@@ -93,7 +93,7 @@ if(is_array($InvoicesO->Invoice))
         <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
         <td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>
         <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
-        <td><a href="<?php echo $_SETUP['FB_URL'] ?>invoices/<? str_replace(".", "%2E", rawurlencode(print $InvoiceO->FakturabankID)) ?>" title="Vis/SkrivUt faktura for produkt" target="_new">Vis</a>
+        <td><a href="<? print $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? str_replace(".", "%2E", rawurlencode(print $InvoiceO->FakturabankID)) ?>" title="Vis/SkrivUt faktura for produkt" target="_new">Vis</a>
         <td><? print $InvoiceO->Status ?></td>
     </tr>
 <? 

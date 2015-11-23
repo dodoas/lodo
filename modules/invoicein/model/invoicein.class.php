@@ -315,6 +315,8 @@ class logic_invoicein_invoicein implements Iterator {
                     list($InvoiceO->JournalID) = $this->accounting->get_next_available_journalid(array('available' => true, 'update' => true, 'type' => $InvoiceO->VoucherType, 'reuse' => false, 'from' => 'Invoicein voucher'));
 
                     $VoucherH['voucher_JournalID']          = $InvoiceO->JournalID;
+                    // if amount is 0 then the journal is not created and should be null
+                    if ($InvoiceO->TotalCustPrice == 0) unset($VoucherH['voucher_JournalID']);
                     //#$VoucherH['voucher_JournalID']          = $InvoiceO->JournalID;
 
                     //#Update the voucherID back to the incoming invoice
@@ -406,6 +408,10 @@ class logic_invoicein_invoicein implements Iterator {
 
                         if($line->ProductName) {
                             $VoucherH['voucher_Description']    .= $line->ProductName;
+                        }
+
+                        if($line->CarID) {
+                            $VoucherH['voucher_CarID'] = $line->CarID;
                         }
 
                         //#Motkonto resultat.
