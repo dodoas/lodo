@@ -69,8 +69,7 @@ class lodo_fakturabank_fakturabankvoting {
 		$this->setup_connection_values();
 
         $page       = "rest/balance_report.xml";
-        // http://fakturabank.no/rest/balance_report.xml?identifier=
-        // TODO: limit on account
+        // http://fakturabank.no/rest/balance_report.xml?identifier=&identifier_type=&start_date=&end_date=&country_code=&account_number=
         # If no country_code is set, send Norway's country code
         $country_code = ($country_code == '')?'NO':$country_code;
         $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR';
@@ -84,14 +83,23 @@ class lodo_fakturabank_fakturabankvoting {
         $url    = "$this->protocol://$this->host/$page$params";
 
         if (isset($_SESSION['oauth_balance_report_fetched'])) {
+          unset($_SESSION['oauth_balance_report_fetched']);
           $data = $_SESSION['oauth_resource']['result'];
         }
         else {
           $_SESSION['oauth_action'] = 'get_balance_report';
           $oauth_client = new lodo_oauth();
           $_SESSION['oauth_balance_report_messages'][] = $url;
-          $oauth_client->get_resources($url);
+          $_SESSION['oauth_balance_report_fetched'] = true;
+          $data = $oauth_client->get_resources($url);
         }
+
+        $report_xml = $_SESSION['oauth_resource']['result'];
+        if ($_SESSION['oauth_resource']['code'] != 200) {
+          $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . $report_xml . "</span>";
+          if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . "Utilstrekkelige rettigheter i fakturabank!" . "</span>";
+        }
+
         $voting = $this->retrieve_voting($data);
 
         $bank_statement = $voting->{"bank-statement"};
@@ -502,7 +510,7 @@ class lodo_fakturabank_fakturabankvoting {
             $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline'));
         }
 
-        $_lib['message']->add("Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>");
+        $_SESSION['oauth_balance_report_messages'][] = "Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>";
     }
 
     public function lookup_invoice($FakturabankInvoiceID) {

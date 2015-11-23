@@ -58,13 +58,13 @@ class lodo_fakturabank_fakturabank {
     #Get a list of all outgoing invoices from fakturabank
     public function outgoing() {
         global $_lib, $_SETUP;
-        #https://fakturabank.no/invoices/outgoing.xml?orgnr=981951271
+        #https://fakturabank.no/invoices.xml?orgnr=981951271
 
-        $page       = "rest/invoices/outgoing.xml";
+        $page       = "rest/invoices.xml";
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
         $params     .= "&supplier_status=" . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
-        $params     .= "&order=invoiceno&sord=asc";
+        $params     .= "&order=invoiceno&sord=asc&type=outgoing";
 
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
@@ -90,7 +90,7 @@ class lodo_fakturabank_fakturabank {
         #https://fakturabank.no/invoices?orgnr=981951271
 
         $page       = "rest/invoices.xml";
-        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc'; // add top limit rows=1000, otherwise we only get one record
+        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc&type=incoming'; // add top limit rows=1000, otherwise we only get one record
         $params    .= '&customer_status=' . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
@@ -2155,13 +2155,37 @@ class lodo_fakturabank_fakturabank {
 
         #print "<br>\n<br>\n$xml\n<br>\n<br>";
 
-        $page = "/rest/invoices";
+        $page = "/rest/invoices.xml";
         $url  = "$this->protocol://$this->host$page";
 
         includelogic('oauth/oauth');
         $oauth_client = new lodo_oauth();
-        $oauth_client->post_resources($url, $xml);
+        $oauth_client->post_resources($url, array("xml" => $xml));
+        $this->save_invoice_export_data();
         return true;
+    }
+
+    public function save_invoice_export_data() {
+      global $_lib;
+      if ($_SESSION['oauth_resource']['code'] != 201) { // not created
+        $_SESSION['oauth_invoice_error'] = "Error: " . $_SESSION['oauth_resource']['result'];
+        if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+      }
+      else {
+        $dataH = array();
+        $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
+        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+        $dataH['FakturabankDateTime']   = strftime("%F %T");
+        $result_invoice = $_lib['db']->db_query("select * from invoiceout where InvoiceID=" . (int) $dataH['InvoiceID']);
+        $invoice = $_lib['db']->db_fetch_object($result_invoice);
+        if (!$invoice->Locked) {
+          $dataH['Locked']   = 1;
+          $dataH['LockedAt'] = strftime("%F %T");
+          $dataH['LockedBy'] = $_lib['sess']->get_person('PersonID');
+        }
+        $_SESSION['oauth_invoice_error'] = "Success";
+        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+      }
     }
 
     public function construct_fakturabank_url($page=''){

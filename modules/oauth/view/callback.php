@@ -16,8 +16,10 @@ includelogic('orgnumberlookup/orgnumberlookup');
 includelogic('fakturabank/invoicereconciliationreason');
 includelogic('fakturabank/bankreconciliationreason');
 includelogic('fakturabank/fakturabankvoting');
-includelogic('fakturabank/fakturabanksalary');
 includelogic("accountplan/scheme");
+
+includelogic('fakturabank/fakturabanksalary');
+includelogic('fakturabank/fakturabank');
 
 // create client
 $oauth_client = new lodo_oauth();
@@ -46,12 +48,6 @@ if (!isset($_GET['code'])) {
 // depending on the action, do stuff
 switch ($_SESSION['oauth_action']) {
 case 'get_balance_report': // fetch balance report from FB
-  $report_xml = $_SESSION['oauth_resource']['result'];
-  if ($_SESSION['oauth_resource']['code'] != 200) {
-    $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . $report_xml . "</span>";
-    if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . "Utilstrekkelige rettigheter i fakturabank!" . "</span>";
-  }
-  $_SESSION['oauth_balance_report_fetched'] = true;
   $fbvoting = new lodo_fakturabank_fakturabankvoting();
   $AccountID = $_SESSION['oauth_balance_account_id'];
   $Period    = $_SESSION['oauth_balance_period'];
@@ -68,44 +64,13 @@ case 'send_paycheck': // sending a paycheck to FB
   unset($_SESSION['oauth_salary_id']);
   unset($_SESSION['oauth_salary_conf_id']);
   $fb_salary = new lodo_fakturabank_fakturabanksalary();
-  $_SESSION['oauth_paycheck_sent'] = true;
+  var_dump($_SESSION);
   $fb_salary->sendsalary($SalaryID, $SalaryConfID);
-  if ($_SESSION['oauth_resource']['code'] != 201) {
-    $_SESSION['oauth_paycheck_messages'][] = $_SESSION['oauth_resource']['result'];
-    if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Utilstrekkelige rettigheter i fakturabank!";
-  }
-  else {
-    # TODO(mladjo2505): Update for new saved_by, ... 
-    $dataH = array();
-    $dataH['SalaryID']              = $SalaryID;
-    $dataH['FakturabankID']         = $_SESSION['oauth_fakturabank_salary_id'];
-    $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-    $dataH['FakturabankDateTime']   = strftime("%F %T");
-
-    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
-
-    # TODO(mladjo2505): make suyre we have this for invoice as well
-    $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", $_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
-    $_lib['db']->db_query($query);
-    $_SESSION['oauth_paycheck_messages'][] = "Sendt til Fakturabank.";
-  }
   redirect();
   break;
 case 'send_invoice': // sending an invoice to FB
-  # TODO(mladjo2505): check out both response codes
-  if ($_SESSION['oauth_resource']['code'] != 302 || $_SESSION['oauth_resource']['code'] != 201) { // not created or found
-    $_SESSION['oauth_invoice_error'] = "Error: opprette faktura: " . $_SESSION['oauth_resource']['result'];
-    if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_invoice_error'] .= "Utilstrekkelige rettigheter i fakturabank!";
-  }
-  else {
-    # TODO(mladjo2505): Update for new saved_by, ... 
-    $dataH = array();
-    $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
-    $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-    $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
-    $dataH['Locked']                = 1;
-    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
-  }
+  $fb = new lodo_fakturabank_fakturabank();
+  $fb->save_invoice_export_data();
   redirect();
   break;
 case 'set_invoice_statuses': // set status to registered for all invoices downloaded from FB

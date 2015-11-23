@@ -20,13 +20,13 @@ if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redire
 // and if missing in url, add SalaryID
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
 
-// get all saved messages and remove them
-if (isset($_SESSION['oauth_paycheck_messages']) && is_array($_SESSION['oauth_paycheck_messages'])) foreach ($_SESSION['oauth_paycheck_messages'] as $message) $_lib['message']->add($message);
-unset($_SESSION['oauth_paycheck_messages']);
-
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
+
+// get all saved messages and remove them
+if (isset($_SESSION['oauth_paycheck_messages']) && is_array($_SESSION['oauth_paycheck_messages'])) foreach ($_SESSION['oauth_paycheck_messages'] as $message) $_lib['message']->add($message);
+unset($_SESSION['oauth_paycheck_messages']);
 
 $query_head = sprintf("
 select
@@ -559,7 +559,6 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
 <? } ?>
 
-<? print $message ?>
 </tr>
 </td>
 
@@ -618,6 +617,3 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? includeinc('bottom') ?>
 </body>
 </html>
-<?php
-unset($_SESSION['oauth_paycheck_sent']);
-?>

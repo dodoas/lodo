@@ -68,8 +68,12 @@ $tabindex = 1;
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<? if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
-
+<?
+$message = $_lib['message']->get();
+if(strstr($message, "Success")) $class = 'user';
+else $class = 'warning';
+if($message) { print "<div class='$class'>$message</div><br>"; }
+?>
 <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="InvoiceID" value="<? print $InvoiceID ?>">
 <input type="hidden" name="inline" value="edit">
@@ -472,3 +476,4 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 </table>
 </body>
 </html>
+<? unset($_SESSION['saved_invoice_export_data']); ?>

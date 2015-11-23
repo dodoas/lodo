@@ -15,10 +15,6 @@ if (strpos($tmp_redirect_url, 'AccountID') !== false) $_SESSION['oauth_tmp_redir
 // and if missing in url, add AccountPlanID
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&AccountID=" . $AccountID;
 
-// get all saved messages and remove them
-if (isset($_SESSION['oauth_balance_report_messages']) && is_array($_SESSION['oauth_balance_report_messages'])) foreach ($_SESSION['oauth_balance_report_messages'] as $message) $_lib['message']->add($message);
-unset($_SESSION['oauth_balance_report_messages']);
-
 if($_REQUEST['Period']) {
 	$Period     = $_REQUEST['Period'];
     $PeriodSelection = $Period;
@@ -51,6 +47,10 @@ if (isset($_POST['Period'])) {
     $_SESSION['oauth_balance_country'] = $account->CountryCode;
     $fbvoting->import_transactions($AccountID, $Period, $account->CountryCode);
 }
+
+// get all saved messages and remove them
+if (isset($_SESSION['oauth_balance_report_messages']) && is_array($_SESSION['oauth_balance_report_messages'])) foreach ($_SESSION['oauth_balance_report_messages'] as $message) $_lib['message']->add($message);
+unset($_SESSION['oauth_balance_report_messages']);
 
 ?>
 
@@ -95,10 +95,6 @@ Periode: <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 
 <br>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
 </p>
-<? }
-// unset so next time we load this page it will fetch new data
-unset($_SESSION['oauth_balance_report_fetched']);
-?>
+<? } ?>
 </body>
 </html>
-<pre>
