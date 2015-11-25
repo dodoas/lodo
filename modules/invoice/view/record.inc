@@ -20,7 +20,15 @@ if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getPr
     // Make sure company info is updated
     $get_invoice = "SELECT * FROM $db_table WHERE InvoiceID='$InvoiceID'";
     $row = $_lib['storage']->get_row(array('query' => $get_invoice));
-    $invoice->update(array('InvoiceID' => $InvoiceID, 'invoiceout_DueDate_' . $InvoiceID => $row->DueDate, 'invoiceout_CustomerAccountPlanID_' . $InvoiceID => $row->CustomerAccountPlanID));
+    $invoice_info_for_update = array('InvoiceID'                                      => $InvoiceID,
+                                     'invoiceout_DueDate_' . $InvoiceID               => $row->DueDate,
+                                     'invoiceout_CustomerAccountPlanID_' . $InvoiceID => $row->CustomerAccountPlanID,
+                                     '_DAddress'                                      => $_POST['_DAddress'],
+                                     '_DZipCode'                                      => $_POST['_DZipCode'],
+                                     '_DCity'                                         => $_POST['_DCity'],
+                                     '_DCountryCode'                                  => $_POST['_DCountryCode']
+                                    );
+    $invoice->update($invoice_info_for_update);
 }
 
 elseif($_lib['input']->getProperty('action_invoice_new')) {
