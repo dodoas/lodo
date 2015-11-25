@@ -61,6 +61,14 @@ case 'get_balance_report': // fetch balance report from FB
   $fbvoting->import_transactions($AccountID, $Period, $Country);
   redirect();
   break;
+case 'get_car_info': // fetch car info from FB
+  $CarCode = $_SESSION['oauth_car_code'];
+  $CarID   = $_SESSION['oauth_car_id'];
+  unset($_SESSION['oauth_car_code']);
+  unset($_SESSION['oauth_car_id']);
+  $_SESSION['oauth_tmp_redirect_back_url'] = $_SETUP['DISPATCH'] . "?t=car.edit&car.CarID=". $CarID ."&car.CarCode=". $CarCode ."&submit=action_car_update_from_fakturabank";
+  redirect();
+  break;
 case 'send_paycheck': // sending a paycheck to FB
   $SalaryID     = $_SESSION['oauth_salary_id'];
   $SalaryConfID = $_SESSION['oauth_salary_conf_id'];

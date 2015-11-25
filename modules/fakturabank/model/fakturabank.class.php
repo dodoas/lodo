@@ -2197,7 +2197,6 @@ class lodo_fakturabank_fakturabank {
         $page = "/rest/invoices.xml";
         $url  = "$this->protocol://$this->host$page";
 
-        includelogic('oauth/oauth');
         $oauth_client = new lodo_oauth();
         $oauth_client->post_resources($url, array("xml" => $xml));
         $this->save_invoice_export_data();
@@ -2230,31 +2229,24 @@ class lodo_fakturabank_fakturabank {
     public function updateCarFromFakturabank($CarCode, $CarID) {
       global $_lib;
 
-      if(!$this->login) return false;
-
       $page = "rest/cars.xml?orgno=". $this->OrgNumber ."&code=". $CarCode;
       $url = $this->construct_fakturabank_url($page);
 
-      $headers = array(
-          "GET ".$page." HTTP/1.0",
-          "Content-type: text/xml;charset=\"utf-8\"",
-          "Accept: application/xml",
-          "Cache-Control: no-cache",
-          "Pragma: no-cache",
-          "SOAPAction: \"run\"",
-          "Authorization: Basic " . base64_encode($this->credentials)
-      );
+      $_SESSION['oauth_car_code'] = $CarCode;
+      $_SESSION['oauth_car_id']   = $CarID;
 
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $url);
-      curl_setopt($ch, CURLOPT_HEADER, 0);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      if (isset($_SESSION['oauth_car_info_fetched'])) {
+        unset($_SESSION['oauth_car_info_fetched']);
+        $data = $_SESSION['oauth_resource']['result'];
+      }
+      else {
+        $_SESSION['oauth_action'] = 'get_car_info';
+        $oauth_client = new lodo_oauth();
+        $_SESSION['oauth_car_info_fetched'] = true;
+        $data = $oauth_client->get_resources($url);
+      }
 
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-      curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
-
-      $result = curl_exec($ch);
+      $result = $data;
       includelogic('xmldomtoobject/xmldomtoobject');
       $domtoobject = new empatix_framework_logic_xmldomtoobject(array());
       $car = $domtoobject->convert($result);

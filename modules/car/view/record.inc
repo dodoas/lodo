@@ -54,7 +54,7 @@ elseif($_lib['input']->getProperty('action_car_delete')) {
 elseif($_lib['input']->getProperty('action_car_update_from_fakturabank')) {
   includelogic("fakturabank/fakturabank");
   $fakturabank = new lodo_fakturabank_fakturabank();
-  $fakturabank->updateCarFromFakturabank($_POST['car_CarCode'], $CarID);
+  $fakturabank->updateCarFromFakturabank($_REQUEST['car_CarCode'], $CarID);
 
 }
 
