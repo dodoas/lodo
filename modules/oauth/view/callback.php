@@ -5,6 +5,7 @@
 function redirect() {
     $redirect_url = $_SESSION['oauth_tmp_redirect_back_url'];
     unset($_SESSION['oauth_tmp_redirect_back_url']);
+    unset($_SESSION['oauth_action']);
     if (empty($redirect_url)) $redirect_url = "http://$_SERVER[HTTP_HOST]/lodo.php?t=lodo.main";
     header('Location: ' . $redirect_url); 
 }
@@ -29,19 +30,21 @@ $params = (isset($_SESSION['oauth_resource_params'])) ? $_SESSION['oauth_resourc
 $resource_url = $_SESSION['oauth_resource_url'];
 $http_verb = $_SESSION['oauth_http_verb'];
 
-if (!isset($_GET['code'])) {
-  if ($http_verb == "POST") {
-    $resource = $oauth_client->post_resources($resource_url, $params);
-  }
-  else {
-    $resource = $oauth_client->get_resources($resource_url, $params);
-  }
-} else {
-  if ($http_verb == "POST") {
-    $resource = $oauth_client->post_resources($resource_url, $params, $_GET['code']);
-  }
-  else {
-    $resource = $oauth_client->get_resources($resource_url, $params, $_GET['code']);
+if ($resource_url) {
+  if (!isset($_GET['code'])) {
+    if ($http_verb == "POST") {
+      $resource = $oauth_client->post_resources($resource_url, $params);
+    }
+    else {
+      $resource = $oauth_client->get_resources($resource_url, $params);
+    }
+  } else {
+    if ($http_verb == "POST") {
+      $resource = $oauth_client->post_resources($resource_url, $params, $_GET['code']);
+    }
+    else {
+      $resource = $oauth_client->get_resources($resource_url, $params, $_GET['code']);
+    }
   }
 }
 
