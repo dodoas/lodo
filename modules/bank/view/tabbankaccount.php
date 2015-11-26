@@ -314,6 +314,14 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 </tr>
 
 </table>
+</form>
+<form name="template_update" name="period_choice" action="<? print $MY_SELF ?>" method="post">
+<? print $_lib['form3']->hidden(array('name' => 'AccountID', 'value' => $bank->AccountID)) ?>
+<? print $_lib['form3']->hidden(array('name' => 'Period',    'value' => $bank->ThisPeriod)) ?>
+<?
+  // added so the default submit action is sent on Enter
+  print $_lib['form3']->hidden(array('name' => 'action_bank_update', 'value' => "1"))
+?>
 <table class="lodo_data">
 
 <tr>

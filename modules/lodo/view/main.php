@@ -24,9 +24,12 @@ print $_lib['sess']->doctype ?>
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
+<? $send_scan_to_email = str_replace(" MVA","",$_lib['sess']->get_companydef('OrgNumber')) . "@scanning.fakturabank.no"; ?>
 
-  <h2 class="groupheader">Send dine innscannede innkommende pdf bilag til: <a href="mailto:<? print str_replace(" MVA","",$_lib['sess']->get_companydef('OrgNumber')) ?>@scanning.fakturabank.no"><? print str_replace(" MVA","",$_lib['sess']->get_companydef('OrgNumber')) ?>@scanning.fakturabank.no</a> s&aring; vil de bli punchet og lagt klar for automatisk bilagsf&oslash;ring i fakturabank</h2>
-<h2 class="groupheader">Forside</h2>
+  <h2 class="groupheader">Vil du bruke fakturaBank? Elektronisk oppbevaring av dine dokumenter.</h2>
+  <h2 class="groupheader">Skann og send til: <a href="mailto:<? print $send_scan_to_email; ?>"><? print $send_scan_to_email; ?></a></h2>
+
+  <h2 class="groupheader">Forside</h2>
 
 <h3><a href="http://sourceforge.net/tracker2/?func=add&group_id=167033&atid=841330">Rapporter feil</a></h3>
 

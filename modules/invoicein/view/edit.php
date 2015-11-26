@@ -262,7 +262,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         </td>
 
         <td colspan="6" align="right">
-        <? if($invoicein->ExternalID) { ?><a href="<?php echo $_SETUP['FB_URL'] ?>invoices/<? print $invoicein->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?>
+        <? if($invoicein->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $invoicein->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?>
 
         <?
         if(!$invoicein->Locked) {
