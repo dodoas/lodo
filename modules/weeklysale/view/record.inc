@@ -203,11 +203,13 @@ elseif($_REQUEST['action_weeklysale_journal']) {
 
     for($i = 1; $i <= 20; $i++) {
         $accountfield       = "Group" . $i . "Account";
+        $carfield           = "Group" . $i . "CarID";
         $departmentfield    = "Group" . $i . "DepartmentID";
         $projectfield       = "Group" . $i . "ProjectID";
         $namefield          = "Group" . $i . "Name";
         
         if($sale_conf->{$accountfield}) {
+            $sum_sale[$i]->car          = $sale_conf->{$carfield};
             $sum_sale[$i]->department   = $sale_conf->{$departmentfield};
             $sum_sale[$i]->project      = $sale_conf->{$projectfield};
             $sum_sale[$i]->account      = $sale_conf->{$accountfield};
@@ -341,6 +343,9 @@ elseif($_REQUEST['action_weeklysale_journal']) {
         unset($fields['voucher_AmountOut']);
     $i++;
     if($line->account > 0) {
+		if($line->car > 0) {
+		  $fields['voucher_CarID'] = $line->car;
+		}
 		if($line->department > 0) {
 		  $fields['voucher_DepartmentID'] = $line->department;
 		}
