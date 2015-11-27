@@ -437,6 +437,7 @@ if(is_array($bank->bankaccount)) {
         if (!empty($row->ResultAccountPlanID)) {
             $resultaccountplan      = $accounting->get_accountplan_object($row->ResultAccountPlanID);
         }
+        else $resultaccountplan = null;
 
         $aconf = array();
         $aconf['table']         = 'accountline';
