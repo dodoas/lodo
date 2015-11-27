@@ -8,7 +8,13 @@ includelogic('fakturabank/bankreconciliationreason');
 #$bank2           = new framework_logic_bank($_lib['input']->request);
 #$bank2->init();
 
-if($_lib['input']->getProperty('action_bank_new')) {
+if($_lib['input']->getProperty('action_bank_periodremove')) {
+    $bankaccount->periodremove();
+}
+elseif($_lib['input']->getProperty('action_bank_zerojournalid')) {
+    $bank->ZeroAccountLineJournalID();
+}
+elseif($_lib['input']->getProperty('action_bank_new')) {
   $postmain['account_ValidFrom']   = $_lib['sess']->get_session('Date');
   $postmain['account_Active']      = 1;
   $postmain['account_VoucherType'] = 'B';
@@ -52,9 +58,6 @@ elseif($_lib['input']->getProperty('action_bank_accountlinenew')) {
     $startat = $_lib['input']->getProperty('action_bank_accountlinenew_startat');
     $bank->AddAccountLinesWithJournalID($_lib['input']->getProperty('numnewlines'), $startat);
 }
-elseif($_lib['input']->getProperty('action_bank_zerojournalid')) {
-    $bank->ZeroAccountLineJournalID();
-}
 elseif($_lib['input']->getProperty('action_bank_journal')) {
     $bank->init();
     $bank->journal();
@@ -64,9 +67,6 @@ elseif($_lib['input']->getProperty('action_bank_cardadd')) {
 }
 elseif($_lib['input']->getProperty('action_bank_cardremove')) {
     $bankaccount->cardremove($_lib['input']->getProperty('BankAccountCardID'));
-}
-elseif($_lib['input']->getProperty('action_bank_periodremove')) {
-    $bankaccount->periodremove();
 }
 elseif($_lib['input']->getProperty('action_bank_periodlock')) {
     $bankaccount->periodlock();
