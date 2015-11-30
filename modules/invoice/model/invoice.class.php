@@ -1276,8 +1276,7 @@ class invoice {
           $Value = $ValueHash['value'];
         }
         else $Value = $args[$ArgName];
-        if ($Value == $Invoice->{$FieldName}) unset($args[$ArgName]);
-        else {
+        if ($Value != $Invoice->{$FieldName}) {
           $Changed = true;
           return $Changed;
         }
@@ -1293,8 +1292,7 @@ class invoice {
             $Value = $ValueHash['value'];
           }
           else $Value = $args[$ArgName];
-          if ($Value == $InvoiceLine->{$FieldName}) unset($args[$ArgName]);
-          else {
+          if ($Value != $InvoiceLine->{$FieldName}) {
             $Changed = true;
             return $Changed;
           }
