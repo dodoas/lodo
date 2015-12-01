@@ -9,6 +9,7 @@ $invoice = new invoice(array('CustomerAccountPlanID' => $CustomerAccountPlanID, 
 
 if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
     #print "Oppdaterer faktura";
+    $updated = false;
     $InvoiceLineIDs = array();
     for ($i = 1; $i <= $_POST['field_count']; $i++) $InvoiceLineIDs[] = $_POST[$i];
     if ($invoice->CheckIfAnythingChanged($InvoiceID, $InvoiceLineIDs, $_POST)) {
@@ -16,11 +17,22 @@ if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getPr
       $_POST['invoiceout_UpdatedByPersonID_' . $InvoiceID] = $_lib['sess']->get_person('PersonID');
       $_POST['invoiceout_UpdatedAt_' . $InvoiceID] = strftime("%F %T");
       $invoice->update($_POST);
+      $updated = true;
     }
-    // Make sure company info is updated
-    $get_invoice = "SELECT * FROM $db_table WHERE InvoiceID='$InvoiceID'";
-    $row = $_lib['storage']->get_row(array('query' => $get_invoice));
-    $invoice->update(array('InvoiceID' => $InvoiceID, 'invoiceout_DueDate_' . $InvoiceID => $row->DueDate, 'invoiceout_CustomerAccountPlanID_' . $InvoiceID => $row->CustomerAccountPlanID));
+    // Make sure company info is updated even if nothing has been changed in the invoice data
+    if (!$updated) {
+      $get_invoice = "SELECT * FROM $db_table WHERE InvoiceID='$InvoiceID'";
+      $row = $_lib['storage']->get_row(array('query' => $get_invoice));
+      $invoice_info_for_update = array('InvoiceID'                                      => $InvoiceID,
+                                       'invoiceout_DueDate_' . $InvoiceID               => $row->DueDate,
+                                       'invoiceout_CustomerAccountPlanID_' . $InvoiceID => $row->CustomerAccountPlanID,
+                                       '_DAddress'                                      => $_POST['_DAddress'],
+                                       '_DZipCode'                                      => $_POST['_DZipCode'],
+                                       '_DCity'                                         => $_POST['_DCity'],
+                                       '_DCountryCode'                                  => $_POST['_DCountryCode']
+                                      );
+      $invoice->update($invoice_info_for_update);
+    }
 }
 
 elseif($_lib['input']->getProperty('action_invoice_new')) {
