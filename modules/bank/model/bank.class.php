@@ -1106,6 +1106,7 @@ class framework_logic_bank {
                         );
 
                     $FBVoucherH['voucher_ProjectID']     = $unvoted->ProjectID;
+                    $FBVoucherH['voucher_CarID']         = $unvoted->CarID;
                     $FBVoucherH['voucher_DepartmentID']  = $unvoted->DepartmentID;
                     $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
                     $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
@@ -1235,6 +1236,7 @@ class framework_logic_bank {
                     ############
                     #4th line
                     $VoucherH['voucher_AccountPlanID']      = $unvoted->ResultAccountPlanID;
+                    $VoucherH['voucher_CarID']              = $unvoted->CarID;
                     $VoucherH['voucher_ProjectID']          = $unvoted->ProjectID;
                     $VoucherH['voucher_DepartmentID']       = $unvoted->DepartmentID;
                     $VoucherH['voucher_Quantity']           = $unvoted->ResultQuantity;
@@ -1270,6 +1272,7 @@ class framework_logic_bank {
                     ############
                     #2d line
                     $VoucherH['voucher_AccountPlanID']      = $unvoted->ResultAccountPlanID;
+                    $VoucherH['voucher_CarID']              = $unvoted->CarID;
                     $VoucherH['voucher_ProjectID']          = $unvoted->ProjectID;
                     $VoucherH['voucher_DepartmentID']       = $unvoted->DepartmentID;
                     $VoucherH['voucher_Quantity']           = $unvoted->ResultQuantity;
