@@ -116,6 +116,10 @@ elseif($_REQUEST['action_install_db'])
 
     #Do not insert user information if we have chosen to copy company tables
 
+    # reset auto increment value for person and salaryconf tables
+    $install->reset_auto_increment('person');
+    $install->reset_auto_increment('salaryconf');
+
     # Install Admin user
     $args_admin['Email']              = $_REQUEST['Email'];
     $args_admin['Password']           = $_REQUEST['Password'];
