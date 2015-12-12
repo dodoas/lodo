@@ -198,6 +198,14 @@ class Install
         return $PersonID;
     }
 
+    function reset_auto_increment($table)
+    {
+        $query = "alter table $table AUTO_INCREMENT=1";
+        if($this->debug) print "$query<br>\n";
+        $this->_dbh[$this->dsn_remote]->db_insert2(array('query' => $query));
+        return true;
+    }
+
     function insert_company($args) {
         global $_lib;
 
