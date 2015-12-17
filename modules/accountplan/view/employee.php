@@ -71,6 +71,70 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
 <input type="hidden" name="accountplan_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="fakturabankemail_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="JournalID" value="<? print $JournalID ?>">
+
+  <tr class="result">
+    <th colspan="5">Altinn felt</th>
+  </tr>
+  <tr>
+    <td class="menu">Shift type:</td>
+    <td></td>
+    <td>
+      <? $ShiftTypes = array(
+        'ikkeShift'=>'ikkeShift',
+        'Shift'=>'Shift'
+      ); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $ShiftTypes, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType)); ?>
+    </td>
+    <td>Timer hver uke:</td>
+    <td>
+      <input type="text" name="accountplan.Workmeasurement" value="<?= $account->Workmeasurement ?>" />
+    </td>
+  </tr>
+  <tr>
+    <td class='menu'>Arbeidstid:</td>
+    <td></td>
+    <td>
+      <?
+        $WorkTimeSchemeTypes = array(
+          'Fastloeann'=>'Fastloeann',
+          'TimeLoenn'=>'TimeLoenn',
+          'Akkord'=>'Akkord',
+          'Provisjon'=>'Provisjon',
+          'Honorar'=>'Honorar'
+        );
+      ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $WorkTimeSchemeTypes, 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme)); ?>
+    </td>
+
+    <td>Type ansettelse:</td>
+    <td>
+      <?
+        $TypeOfEmploymentTypes = array(
+          'ordinaert'=>'Ordinaert',
+          'maritimt'=>'Maritimt',
+          'frilanser'=>'Frilanser',
+          'pensjon'=>'Pensjon',
+          'uten'=>'Uten'
+        );
+      ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $TypeOfEmploymentTypes, 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment)); ?>
+    </td>
+  </tr>
+  <tr>
+    <td class='menu'>OccupationCode ID</td>
+    <td></td>
+    <td>
+      <input type="text" name="accountplan.OccupationCodeID" value="<?= $account->OccupationCodeID ?>" />
+    </td>
+    <td>Samme posisjon siden:</td>
+    <td>
+      <? print $_lib['form3']->date(array('table'=>'accountplan', 'field'=>'inCurrentPositionSince', 'value'=>$account->inCurrentPositionSince)) ?>
+    </td>
+  </tr>
+
+
+
+
   <tr class="result">
     <th colspan="5">Ansatt <? print $AccountPlanID ?> (underkonto til hovedbok)</th>
   </tr>

@@ -46,6 +46,7 @@ print $_lib['sess']->doctype ?>
             <td>
                 <a href="<? print $_lib['sess']->dispatch ?>t=company.edit&CompanyID=<? print $_SETUP[COMPANY_ID]; ?>">Firmaopplysning</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=employee">Ansatte</a>
+                <a href="<? print $_lib['sess']->dispatch ?>t=occupation.list">Yrke</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=company.employees&CompanyID=<? print $_SETUP[COMPANY_ID] ?>">Systembrukere</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=car.list">Bil</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=department.list">Avdeling</a>
