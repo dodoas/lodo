@@ -8,7 +8,7 @@ $db_table = "occupation";
 require_once "record.inc";
 
 $query_car  = "select * from $db_table order by YNr, LNr";
-$result_car = $_lib['db']->db_query($query_car);
+$result_occupation = $_lib['db']->db_query($query_car);
 
 print $_lib['sess']->doctype ?>
 
@@ -27,11 +27,11 @@ print $_lib['sess']->doctype ?>
 <thead>
   <tr>
     <th>Yrker:</th>
-    <th colspan="6"></th>
+    <th colspan="7"></th>
   </tr>
   <tr>
     <th colspan="3"></th>
-    <th align="right" colspan="3">
+    <th align="right" colspan="4">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       <form name="occupation_search" action="<? print $_lib['sess']->dispatch ?>t=occupation.edit" method="post">
         Nytt nr:
@@ -53,7 +53,7 @@ print $_lib['sess']->doctype ?>
 
 <tbody>
 <?
-while($row = $_lib['db']->db_fetch_object($result_car)) {
+while($row = $_lib['db']->db_fetch_object($result_occupation)) {
 $i++;
 if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 ?>
