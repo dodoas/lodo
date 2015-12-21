@@ -177,7 +177,7 @@ $db_sum   = $row->sum;
             {?> &lt;&lt; <?}
         ?>
     <th colspan="2">Fant:<? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til ".$db_stop; ?></th>
-    <th colspan="12">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
+    <th colspan="13">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
     <th align="right">
         <?
         if($db_total > $db_stop)
@@ -204,6 +204,7 @@ $db_sum   = $row->sum;
     <th align="right">Endre</th>
     <th align="right"></th>
     <th align="right"></th>
+    <th align="right">Linjekontroll</th>
     <th align="right"></th>
 </tr>
 </thead>
@@ -259,6 +260,72 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       </td>
       <td class="number"><? if($row->Locked) { ?>L&aring;st<? } else { ?>&Aring;pen<? } ?></td>
       <td class="number"><? if($row->ExternalID > 0) { ?><a href="<? print $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $row->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
+<?
+  $InvoiceID = $row->InvoiceID;
+  // The query below creates from the invoice lines that should exist in the voucher
+  // table and counts them then we count all the lines for the corresponding
+  // voucher and if they are the same the row count for this query should be 1
+  // if it is not, then we possibly have an error
+  $query_count_probable_voucher_lines = "SELECT count(*) AS CountOfProbableVoucherLines
+                                         FROM (
+                                           -- Create voucher lines for invoice lines in invoiceoutline table
+
+                                           SELECT il.InvoiceID, il.LineID, 0 AS AmountIn,
+                                           -- Calculate TotalAmount for each line of the invoice
+                                           (il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100) AS AmountOut
+                                           FROM invoiceoutline il
+                                           WHERE il.Active = 1 AND il.InvoiceID = $InvoiceID
+
+                                           UNION
+
+                                           -- Create Vat vaoucher lines for invoice lines from invoiceoutline table
+                                           -- once for the vat line and once more for the counterpart line
+
+                                           SELECT il.InvoiceID, il.LineID, 0 AS AmountIn,
+                                           -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table
+                                           (il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100) AS AmountOut
+                                           FROM invoiceoutline il
+                                           WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+
+                                           UNION
+
+                                           SELECT il.InvoiceID, il.LineID,
+                                           -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table
+                                           (il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100) AS AmountIn,
+                                           0 AS AmountOut
+                                           FROM invoiceoutline il
+                                           WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+
+                                           UNION
+
+                                           -- Total amount line for invoice
+
+                                           SELECT i.InvoiceID, 0 AS LineID, i.TotalCustPrice AS AmountIn, 0 AS AmountOut
+                                           FROM invoiceout i
+                                           WHERE i.InvoiceID = $InvoiceID
+                                         ) t1
+                                         JOIN
+                                         voucher v
+                                         -- Make sure the lines that we count have the same amounts
+                                         ON t1.InvoiceID = v.JournalID AND t1.AmountIn = v.AmountIn AND t1.AmountOut = v.AmountOut
+                                         JOIN
+                                         accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+                                         WHERE v.Active = 1 AND
+                                         -- Exclude the hovedbok lines
+                                         ap.EnableReskontro = 0
+
+                                         UNION
+
+                                         -- Make a count of all the active voucher lines for that invoice (also excluding the hovedbok lines)
+                                         SELECT count(*) AS CountOfProbableVoucherLines
+                                         FROM voucher v JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+                                         WHERE v.Active = 1 AND ap.Enablereskontro = 0 AND
+                                         -- Reestrict to current invoice and make sure it is outgoing
+                                         v.JournalID = $InvoiceID AND v.VoucherType = 'S'";
+  $result_count_probable_voucher_lines = $_lib['db']->db_query($query_count_probable_voucher_lines);
+  $has_possible_errors = $_lib['db']->db_numrows($result_count_probable_voucher_lines) != 1;
+?>
+      <td><? if ($has_possible_errors) print "Linjekontroll"; ?></td>
       <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">feil periode</span><? } ?></td>
   </form>
   </tr>
