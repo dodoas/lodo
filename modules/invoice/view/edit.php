@@ -226,10 +226,12 @@ foreach ($currencies as $currency) {
         <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($row_print->InvoicePrintDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
         <? } ?>
     </tr>
+    <? if($row->Note){ ?>
     <tr>
       <td>Merk</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$InvoiceID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
+    <? } ?>
     <tr>
       <td>TotalCustPrice</td>
       <td><? print $row->TotalCustPrice ?></td>
@@ -256,8 +258,13 @@ foreach ($currencies as $currency) {
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$InvoiceID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Leverings betingelse</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$InvoiceID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
+      <? if($row->DeliveryCondition){ ?>
+        <td>Leverings betingelse</td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$InvoiceID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
+      <? } else{ ?>
+        <td></td>
+        <td></td>
+      <? } ?>
       <td>Betalings betingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'PaymentCondition', 'pk'=>$InvoiceID, 'value'=>$row->PaymentCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>

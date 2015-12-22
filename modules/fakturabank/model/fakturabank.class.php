@@ -2061,6 +2061,14 @@ class lodo_fakturabank_fakturabank {
         $invoice->appendChild($paymentmeans);
 
         ############################################################################################
+        $paymentterms = $doc->createElement('cac:PaymentTerms');
+
+        $cbc = $doc->createElement('cbc:Note', utf8_encode($InvoiceO->PaymentTerms->Note));
+            $paymentterms->appendChild($cbc);
+
+        $invoice->appendChild($paymentterms);
+
+        ############################################################################################
         #TaxTotal
         $tax = $doc->createElement('cac:TaxTotal');
 
