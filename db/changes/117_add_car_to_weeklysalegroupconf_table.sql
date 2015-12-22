@@ -1,0 +1,23 @@
+-- Add CarID for each group in weeklysalegroupconf table
+ALTER TABLE weeklysalegroupconf
+ADD Group1CarID int(11) DEFAULT NULL,
+ADD Group2CarID int(11) DEFAULT NULL,
+ADD Group3CarID int(11) DEFAULT NULL,
+ADD Group4CarID int(11) DEFAULT NULL,
+ADD Group5CarID int(11) DEFAULT NULL,
+ADD Group6CarID int(11) DEFAULT NULL,
+ADD Group7CarID int(11) DEFAULT NULL,
+ADD Group8CarID int(11) DEFAULT NULL,
+ADD Group9CarID int(11) DEFAULT NULL,
+ADD Group10CarID int(11) DEFAULT NULL,
+ADD Group11CarID int(11) DEFAULT NULL,
+ADD Group12CarID int(11) DEFAULT NULL,
+ADD Group13CarID int(11) DEFAULT NULL,
+ADD Group14CarID int(11) DEFAULT NULL,
+ADD Group15CarID int(11) DEFAULT NULL,
+ADD Group16CarID int(11) DEFAULT NULL,
+ADD Group17CarID int(11) DEFAULT NULL,
+ADD Group18CarID int(11) DEFAULT NULL,
+ADD Group19CarID int(11) DEFAULT NULL,
+ADD Group20CarID int(11) DEFAULT NULL;
+

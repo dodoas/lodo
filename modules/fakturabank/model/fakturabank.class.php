@@ -281,6 +281,7 @@ class lodo_fakturabank_fakturabank {
                      $dataRR['ClosingReasonId'] = $reason[0];
                      $dataRR['Amount'] = $reason[1];
                      $dataRR['IsCustomerClosingReason'] = (int)$reason[2];
+                     // InvoiceOut is automatically set to false since it is its default value
                      $reason_array[] = $dataRR;
                 }
             }
@@ -385,6 +386,8 @@ class lodo_fakturabank_fakturabank {
                      $dataRR['ClosingReasonId'] = $reason[0];
                      $dataRR['Amount'] = $reason[1];
                      $dataRR['IsCustomerClosingReason'] = (int)$reason[2];
+                     // InvoiceOut is set to true to note that this reason is for an outgoing invoice
+                     $dataRR['InvoiceOut'] = true;
                      $reason_array[] = $dataRR;
                 }
             }

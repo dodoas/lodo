@@ -133,24 +133,24 @@ if($JournalID) {
   <tr>
     <td class="menu">Navn</td>
     <td></td>
-    <td><input type="text" name="accountplan.AccountName" value="<? print $account->AccountName  ?>" size="30"><? if($account->AccountName) { ?><a href="http://w2.brreg.no/enhet/sok/treffliste.jsp?navn=<? print urlencode($account->AccountName) ?>" target="top">brreg</a><? } ?></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.AccountName" value="<? print $account->AccountName  ?>" size="30"><? if($account->AccountName) { ?><a href="http://w2.brreg.no/enhet/sok/treffliste.jsp?navn=<? print urlencode($account->AccountName) ?>" target="top">brreg</a><? } ?></td>
     <td style="text-align:right">Organisasjonsnummer (opplysninger hentes automatisk basert p&aring; orgnummer)</td>
-    <td><input type="text" name="accountplan.OrgNumber" value="<? print $account->OrgNumber  ?>" size="30"><? if($account->OrgNumber) { ?><a href="http://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=<? print $account->OrgNumber ?>" target="top">brreg</a><? } ?></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.OrgNumber" value="<? print $account->OrgNumber  ?>" size="30"><? if($account->OrgNumber) { ?><a href="http://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=<? print $account->OrgNumber ?>" target="top">brreg</a><? } ?></td>
   </tr>
   </tr>
   <tr>
     <td class="menu">Adresse</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableInvoiceAddress", $account->EnableInvoiceAddress,'') ?></td>
-    <td><input type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="40"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="40"></td>
     <td style="text-align:right">MVA-nummer</td>
     <td><input type="text" name="accountplan.VatNumber" value="<? print $account->VatNumber  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Postnummer</td>
     <td></td>
-    <td><input type="text" name="accountplan.ZipCode" value="<? print $account->ZipCode  ?>" size="6"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.ZipCode" value="<? print $account->ZipCode  ?>" size="6"></td>
     <td style="text-align:right">Poststed</td>
-    <td><input type="text" name="accountplan.City" value="<? print $account->City  ?>" size="30"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.City" value="<? print $account->City  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Postboks</td>
@@ -169,7 +169,7 @@ if($JournalID) {
   <tr>
     <td class="menu">Land</td>
     <td></td>
-    <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplan', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'required'=>false)); ?></td>
+    <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplan', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'required'=>true, 'class'=>'lodoreqfelt')); ?></td>
 
     <td style="text-align:right">GLN</td>
     <td><input type="text" name="accountplangln.GLN" value="<? print $gln_number ?>" size="30" /></td>
@@ -177,14 +177,14 @@ if($JournalID) {
   <tr>
     <td class="menu">Telefon</td>
     <td></td>
-    <td><input type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="40"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="40"></td>
     <td style="text-align:right">Mobil</td>
     <td><input type="text" name="accountplan.Mobile" value="<? print $account->Mobile  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">E-Post</td>
     <td></td>
-    <td><input type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="40"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="40"></td>
     <td></td>
     <td></td>
   </tr>
@@ -308,7 +308,7 @@ if($JournalID) {
     <td class="menu">Kreditt tid</td>
     <td><input type="hidden" name="<?= $db_table ?>.EnableCredit" value="1" /></td>
 
-    <td><input type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableAutogiro", $account->EnableAutogiro,''); ?> Autogiro</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableNettbank", $account->EnableNettbank,''); ?> Nettbank</td>
   </tr>
