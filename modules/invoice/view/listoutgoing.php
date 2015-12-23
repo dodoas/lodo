@@ -262,73 +262,84 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       <td class="number"><? if($row->ExternalID > 0) { ?><a href="<? print $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $row->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
 <?
   $InvoiceID = $row->InvoiceID;
-  // The query below creates from the invoice lines that should exist in the voucher
-  // table and counts them then we count all the lines for the corresponding
-  // voucher and if they are the same the row count for this query should be 1
-  // if it is not, then we possibly have an error
-  $query_count_probable_voucher_lines = "SELECT count(*) AS CountOfProbableVoucherLines
+  // The query below creates the voucher lines that should exist based on the invoice lines.
+  // Then we do the same thing from the voucher lines and concatenate the two results.
+  // Group them and count the duplicates.
+  // If the count is an odd number then we either have some extra lines or some of the lines are missing.
+  // That is why we restrict the result to the lines having an odd count, so we get left with the ones that are wrong.
+  // If everything is correct, this query should return an empty result, if not - we have an error.
+  $query_count_probable_voucher_lines = "SELECT *, COUNT(*) AS count
                                          FROM (
-                                           -- Create voucher lines for invoice lines in invoiceoutline table
+                                           SELECT *
+                                           FROM (
+                                             -- Create voucher lines for invoice lines in invoiceoutline table
+                                             SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
+                                             -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
+                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100 * -1) AS AmountIn,
+                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100, 0) AS AmountOut
+                                             FROM invoiceoutline il
+                                             WHERE il.Active = 1 AND il.InvoiceID = $InvoiceID
 
-                                           SELECT il.InvoiceID, il.LineID,
-                                           -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
-                                           IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100 * -1) AS AmountIn,
-                                           IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100, 0) AS AmountOut
-                                           FROM invoiceoutline il
-                                           WHERE il.Active = 1 AND il.InvoiceID = $InvoiceID
+                                             UNION
 
-                                           UNION
+                                             -- Create Vat voucher lines for invoice lines from invoiceoutline table once for the vat line and once more for the counterpart line
+                                             SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
+                                             -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
+                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1) AS AmountIn,
+                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0) AS AmountOut
+                                             FROM invoiceoutline il
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
 
-                                           -- Create Vat vaoucher lines for invoice lines from invoiceoutline table
-                                           -- once for the vat line and once more for the counterpart line
+                                             UNION
 
-                                           SELECT il.InvoiceID, il.LineID,
-                                           -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
-                                           IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1) AS AmountIn,
-                                           IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0) AS AmountOut
-                                           FROM invoiceoutline il
-                                           WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+                                             SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
+                                             -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
+                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0) AS AmountIn,
+                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1) AS AmountOut
+                                             FROM invoiceoutline il
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
 
-                                           UNION
+                                             UNION
 
-                                           SELECT il.InvoiceID, il.LineID,
-                                           -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
-                                           IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0) AS AmountIn,
-                                           IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1) AS AmountOut
-                                           FROM invoiceoutline il
-                                           WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+                                             -- Total amount line for invoice
+                                             SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
+                                             -- Take in account amount for credit note
+                                             IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
+                                             IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut
+                                             FROM invoiceout i
+                                             WHERE i.InvoiceID = $InvoiceID
+                                           ) li
 
-                                           UNION
+                                           UNION ALL
 
-                                           -- Total amount line for invoice
-
-                                           SELECT i.InvoiceID, 0 AS LineID,
-                                           -- Take in account amount for credit note
-                                           IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
-                                           IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut
-                                           FROM invoiceout i
-                                           WHERE i.InvoiceID = $InvoiceID
-                                         ) t1
-                                         JOIN
-                                         voucher v
-                                         -- Make sure the lines that we count have the same amounts
-                                         ON t1.InvoiceID = v.JournalID AND t1.AmountIn = v.AmountIn AND t1.AmountOut = v.AmountOut
-                                         JOIN
-                                         accountplan ap ON v.AccountPlanID = ap.AccountPlanID
-                                         WHERE v.Active = 1 AND
-                                         -- Exclude the hovedbok lines
-                                         ap.EnableReskontro = 0
-
-                                         UNION
-
-                                         -- Make a count of all the active voucher lines for that invoice (also excluding the hovedbok lines)
-                                         SELECT count(*) AS CountOfProbableVoucherLines
-                                         FROM voucher v JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
-                                         WHERE v.Active = 1 AND ap.Enablereskontro = 0 AND
-                                         -- Reestrict to current invoice and make sure it is outgoing
-                                         v.JournalID = $InvoiceID AND v.VoucherType = 'S'";
+                                           -- Create the same as above only from lines in the voucher table
+                                           SELECT
+                                           -- Determine type from the voucher line data
+                                           CASE
+                                             WHEN ta.AutomaticReason LIKE 'Automatisk % MVA%' THEN 'VAT'
+                                             WHEN ta.AccountPlanType = 'customer' THEN 'Total'
+                                             WHEN ta.AutomaticReason LIKE 'Faktura%' AND ta.AccountPlanID >= 3000 && ta.AccountPlanID <= 3999 THEN 'Regular'
+                                             ELSE 'SOMETHING_IS_WRONG'
+                                           END AS Type,
+                                           '' AS LineID,
+                                           ta.vat AS tmpVat,
+                                           ta.AmountIn AS AmountIn,
+                                           ta.AmountOut AS AmountOut
+                                           FROM (
+                                             SELECT v.VoucherID, v.JournalID, v.VoucherType, v.AmountIn, v.AmountOut, v.AccountPlanID, v.Vat, v.Description, v.Active, v.AutomaticFromVoucherID, v.AutomaticReason, v.AutomaticVatVoucherID, v.InvoiceID, ap.AccountPlanType
+                                             FROM voucher v
+                                             JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+                                             WHERE
+                                             -- Exclude the hovedbok lines
+                                             ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID = $InvoiceID
+                                           ) ta
+                                         ) taa
+                                         -- Group the same so we can count the duplicates
+                                         GROUP BY Type, tmpVat, AmountIn, AmountOut
+                                         -- Leave only the ones that were oddly paired
+                                         HAVING (count % 2) = 1";
   $result_count_probable_voucher_lines = $_lib['db']->db_query($query_count_probable_voucher_lines);
-  $has_possible_errors = $_lib['db']->db_numrows($result_count_probable_voucher_lines) != 1;
+  $has_possible_errors = $_lib['db']->db_numrows($result_count_probable_voucher_lines) > 0;
 ?>
       <td><? if ($has_possible_errors) print "Linjekontroll"; ?></td>
       <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">feil periode</span><? } ?></td>
