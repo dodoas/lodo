@@ -275,8 +275,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              -- Create voucher lines for invoice lines in invoiceoutline table
                                              SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
                                              -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
-                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100 * -1) AS AmountIn,
-                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100, 0) AS AmountOut
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100 * -1), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100, 0), 2) AS AmountOut
                                              FROM invoiceoutline il
                                              WHERE il.Active = 1 AND il.InvoiceID = $InvoiceID
 
@@ -285,8 +285,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              -- Create Vat voucher lines for invoice lines from invoiceoutline table once for the vat line and once more for the counterpart line
                                              SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
                                              -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
-                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1) AS AmountIn,
-                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0) AS AmountOut
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountOut
                                              FROM invoiceoutline il
                                              WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
 
@@ -294,8 +294,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
 
                                              SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
                                              -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
-                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0) AS AmountIn,
-                                             IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1) AS AmountOut
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountOut
                                              FROM invoiceoutline il
                                              WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
 
@@ -304,8 +304,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              -- Total amount line for invoice
                                              SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
                                              -- Take in account amount for credit note
-                                             IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
-                                             IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut
+                                             ROUND(IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0), 2) AS AmountIn,
+                                             ROUND(IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1), 2) AS AmountOut
                                              FROM invoiceout i
                                              WHERE i.InvoiceID = $InvoiceID
                                            ) li
