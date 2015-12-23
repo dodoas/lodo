@@ -893,7 +893,8 @@ class invoice {
 
         // Generate vouchers for reconciliation reasons
         $VoucherH = array();
-        $fb_query = sprintf("SELECT * FROM fbdownloadedinvoicereasons WHERE LodoID = %d", $this->InvoiceID);
+        // Only get those reasons for outgoing invoices(with InvoiceOut set as true)
+        $fb_query = sprintf("SELECT * FROM fbdownloadedinvoicereasons WHERE LodoID = %d AND InvoiceOut = 1", $this->InvoiceID);
 
         $fb_rows = $_lib['db']->db_query($fb_query);
         $original_accountplanid = $this->headH['CustomerAccountPlanID'];
