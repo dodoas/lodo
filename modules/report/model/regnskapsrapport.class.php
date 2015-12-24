@@ -118,7 +118,7 @@ class framework_logic_regnskapsrapport {
             # Line
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['AccountPlanID']    = $row->AccountPlanID;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['AccountName']      = $row->AccountName;
-            $this->lineH[$row->ReportShort][$row->AccountPlanID]['ProjectID']        = $row->ProjectID;
+            $this->lineH[$row->ReportShort][$row->AccountPlanID]['ProjectID']        = $this->ProjectID;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['ThisYearAmount']   = $rowThisYear->sumin - $rowThisYear->sumout;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['ThisYearPercent']  = '';
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['LastYearAmount']   = $rowLastYear->sumin - $rowLastYear->sumout;
