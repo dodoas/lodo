@@ -1845,12 +1845,12 @@ class accounting {
     * @param
     * @return
     */
-    function get_last_accountperiod_this_year($date)
+    function get_last_accountperiod_this_year($date = false)
     {
         global $_lib;
-        $year = $_lib['date']->get_this_year($_lib['sess']->get_session('Date'));
-        $access = $_lib['sess']->get_person('AccessLevel');
-        $query = "select Period from accountperiod where substring(Period,1,4)='$year' and (Status=2 or (Status=3 and '$access'>=3)) order by Period desc limit 1";
+        if (!$date) $date = $_lib['sess']->get_session('Date');
+        $year = $_lib['date']->get_this_year($date);
+        $query = "select Period from accountperiod where substring(Period,1,4)='$year' order by Period desc limit 1";
         $row = $_lib['storage']->get_row(array('query' => $query));
         return $row->Period;
     }

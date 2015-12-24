@@ -28,7 +28,7 @@ class logic_invoicein_invoicein implements Iterator {
         if (!$this->ToDate && array_key_exists('invin', $_COOKIE) && array_key_exists('td', $_COOKIE['invin'])) {
 			$this->ToDate =  $_COOKIE['invin']['td'];
 		} elseif(!$this->ToDate) {
-            $this->ToDate = $_lib['sess']->get_session('DateStartYear');
+            $this->ToDate = $_lib['sess']->get_session('DateEndYear');
 		}
 		setcookie("invin[td]", $this->ToDate, time()+3600);
 
