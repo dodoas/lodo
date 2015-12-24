@@ -275,10 +275,10 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              -- Create voucher lines for invoice lines in invoiceoutline table
                                              SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
                                              -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
-                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100 * -1), 2) AS AmountIn,
-                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100, 0), 2) AS AmountOut
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)) * -1), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut
                                              FROM invoiceoutline il
-                                             WHERE il.Active = 1 AND il.InvoiceID = $InvoiceID
+                                             WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
 
                                              UNION
 
@@ -288,7 +288,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountIn,
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountOut
                                              FROM invoiceoutline il
-                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
 
                                              UNION
 
@@ -297,17 +297,17 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountIn,
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountOut
                                              FROM invoiceoutline il
-                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
 
                                              UNION
 
                                              -- Total amount line for invoice
                                              SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
                                              -- Take in account amount for credit note
-                                             ROUND(IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0), 2) AS AmountIn,
-                                             ROUND(IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1), 2) AS AmountOut
+                                             IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
+                                             IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut
                                              FROM invoiceout i
-                                             WHERE i.InvoiceID = $InvoiceID
+                                             WHERE i.TotalCustPrice <> 0 AND i.InvoiceID = $InvoiceID
                                            ) li
 
                                            UNION ALL
