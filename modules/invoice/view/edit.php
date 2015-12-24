@@ -205,13 +205,13 @@ foreach ($currencies as $currency) {
       <td></td>
     </tr>
     <tr>
-      <td>Faktura dato</td>
+      <td>Fakturadato</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$InvoiceID, 'value'=>substr($row->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
-      <td>Forfalls dato</td>
+      <td>Forfallsdato</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$InvoiceID, 'value'=>substr($row->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
     </tr>
     <tr>
-        <td>Faktura periode</td>
+        <td>Fakturaperiode</td>
         <td>
         <?
         if($accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) {
@@ -231,9 +231,9 @@ foreach ($currencies as $currency) {
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$InvoiceID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>TotalCustPrice</td>
+      <td>Total bel&oslash;p</td>
       <td><? print $row->TotalCustPrice ?></td>
-      <td>TotalVat</td>
+      <td>MVA</td>
       <td><? print $row->TotalVat ?></td>
     </tr>
 
@@ -256,9 +256,9 @@ foreach ($currencies as $currency) {
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$InvoiceID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Leverings betingelse</td>
+      <td>Leveringsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$InvoiceID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
-      <td>Betalings betingelse</td>
+      <td>Betalingsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'PaymentCondition', 'pk'=>$InvoiceID, 'value'=>$row->PaymentCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
