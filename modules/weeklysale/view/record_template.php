@@ -57,16 +57,19 @@ else if(isset($_POST['template_add_defaults'])) {
         else
             $tmp_d = $d;
 
-        $template->addEntry(
-            $selected_year, 
-            '1', 
-            date("Y-m-d", $d),
-            date("Y-m-d", $tmp_d),
-            date("Y-m", $d), 
-            $sale_conf->VoucherType
-            );
+        // add 0 week from last year only if it starts on an thu, fri, sat or sun
+        if (date('N', $d) > 4) {
+          $template->addEntry(
+              $selected_year,
+              '0',
+              date("Y-m-d", $d),
+              date("Y-m-d", $tmp_d),
+              date("Y-m", $d),
+              $sale_conf->VoucherType
+              );
 
-        $d = $tmp_d;
+          $d = $tmp_d;
+        }
     }
 
     $last_month = date("M", $d);

@@ -212,7 +212,7 @@ class WeeklysaleTemplate {
         if(!$e["WeeklySaleID"])
             return false;
 
-        $q = sprintf("DELETE FROM voucher WHERE JournalID = %d AND VoucherType = '%c'", 
+        $q = sprintf("DELETE FROM voucher WHERE JournalID = %d AND VoucherType = '%s'",
                      $e["JournalID"], $e["VoucherType"]);
         $_lib['db']->db_query($q);
 
