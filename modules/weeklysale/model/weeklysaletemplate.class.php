@@ -320,7 +320,7 @@ class WeeklysaleTemplate {
                 $postsub['weeklysaleday_Type']                  = 2;
                 $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');           
 
-                $tmp_d += 60 * 60 * 24;
+                $tmp_d = strtotime('+1 day', $tmp_d);
             } while($tmp_d < $d);
         }
                                
@@ -338,7 +338,7 @@ class WeeklysaleTemplate {
             $postsub['weeklysaleday_Type']                  = 2;
             $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');           
 
-            $d += 60 * 60 * 24;
+            $d = strtotime('+1 day', $d);
         } while($d <= $last_d);
 
         // add dummy days after
@@ -356,7 +356,7 @@ class WeeklysaleTemplate {
             $postsub['weeklysaleday_Type']                  = 2;
             $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');           
 
-            $d += 60 * 60 * 24;
+            $d = strtotime('+1 day', $d);
         }
 
     }
