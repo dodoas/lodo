@@ -266,7 +266,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
   // Then we do the same thing from the voucher lines and concatenate the two results.
   // Group them and count the duplicates.
   // If the count is an odd number then we either have some extra lines or some of the lines are missing.
-  // That is why we restrict the result to the lines having an odd count, so we get left with the ones that are wrong.
+  // That is why we restrict the result to the lines having an odd count(or
+  // other than 2 for the total line), so we get left with the ones that are wrong.
   // If everything is correct, this query should return an empty result, if not - we have an error.
   $query_count_probable_voucher_lines = "SELECT *, COUNT(*) AS count
                                          FROM (
@@ -336,8 +337,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                          ) taa
                                          -- Group the same so we can count the duplicates
                                          GROUP BY Type, tmpVat, AmountIn, AmountOut
-                                         -- Leave only the ones that were oddly paired
-                                         HAVING (count % 2) = 1";
+                                         -- Leave only the ones that were oddly paired, and the total line that has other than count of 2
+                                         HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')";
   $result_count_probable_voucher_lines = $_lib['db']->db_query($query_count_probable_voucher_lines);
   $has_possible_errors = $_lib['db']->db_numrows($result_count_probable_voucher_lines) > 0;
 ?>
