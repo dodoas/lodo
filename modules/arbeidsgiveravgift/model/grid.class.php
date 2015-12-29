@@ -30,6 +30,8 @@ class arbeidsgiveravgift_grid
 		foreach ($myFieldList as $field)
 		{
 			$fieldname = $field["name"];
+      // skip if timestamp so it wont be set to null
+      if ($fieldname == "TS") continue;
 			if (substr($field["type"], 0,3) == "dec")
 			{
 				$params[$tableName . "_" . $midparams . $fieldname] = $_lib['convert']->Amount($params[$tableName . "_" . $midparams . $fieldname]);
