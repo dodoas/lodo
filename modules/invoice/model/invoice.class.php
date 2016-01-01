@@ -1230,8 +1230,9 @@ class invoice {
             $dataH = array();
             $dataH['InvoiceID']             = $this->InvoiceID;
             $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-            $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
-            $dataH['Locked']                = 1;
+            $dataH['FakturabankDateTime']   = strftime("%F %T");
+            // If the invoice is not locked, lock it.
+            if ($this->headH['Locked'] == '0') $this->lock();
 
             $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
         }
