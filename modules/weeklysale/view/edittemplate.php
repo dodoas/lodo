@@ -62,10 +62,8 @@
    $control_row = <<<EOT
     <tr>
       <td colspan="4"></td>
-      <td>
+      <td colspan="3">
         <input type="submit" value="Lagre alle" name="template_save" />
-      </td>
-      <td colspan="5">
         <input type="submit" value="Opprett markerte" name="template_create_weeklysales" onclick="return confirm('Opprett?')" />
       </td>
     </tr>
@@ -74,11 +72,11 @@ EOT;
    if($_lib['sess']->get_person('AccessLevel') >= 4) {
      $control_row_full = <<<EOT
       <tr>
-        <td colspan="3">
-          <input type="submit" value="Lagre alle" name="template_save" />
+        <td colspan="4">
           <input type="submit" value="+" name="template_add_blank_entry" />
         </td>
-        <td colspan="6">
+        <td colspan="3">
+          <input type="submit" value="Lagre alle" name="template_save" />
           <input type="submit" value="Opprett markerte" name="template_create_weeklysales" onclick="return confirm('Opprett?')" />
         </td>
       </tr>

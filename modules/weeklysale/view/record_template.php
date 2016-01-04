@@ -124,12 +124,19 @@ else if(isset($_POST['template_add_defaults'])) {
         $last_month = $this_month;
     }
 
-    // add last week 53
-    if(date('d', $d) != '31') {
-        $d = strtotime("last monday", strtotime($selected_year . "-12-31"));
+    // add week 53 if  next sunday is in next year, and not day no 7
+    // if it is day no 07 , that means last week ended the 31st of dec
+    if(date("Y", $d) != $selected_year && date('d', $d) != '07') {
+        $last_day = strtotime($selected_year . "-12-31");
+        if (date('N',$last_day) == '1') {
+            $d = $last_day;
+        } else {
+           $d = strtotime("last monday", $last_day);
+        }
+
         $template->addEntry(
             $selected_year,
-            '53',
+            (date('W', $d) == '01' ? '53' : date('W', $d)),
             date('Y-m-d', $d),
             $selected_year . '-12-31',
             date('Y-m', $d),
