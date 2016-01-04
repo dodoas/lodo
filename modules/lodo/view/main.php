@@ -104,11 +104,13 @@ print $_lib['sess']->doctype ?>
 			  <? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=aarsoppgjoer.index" target="_new">&Aring;rsoppgj&oslash;r</a>
 			  <? } ?>
-				<a href="<? print $_lib['sess']->dispatch ?>t=documentation.list">Brukerveiledning</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=documentation.list">Brukerveiledning</a>
             </td>
 			<td>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=report.list">Rapporter</a>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=altinn.index">AltInn</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list">Altinn L&oslash;nnslipper</a>
+
 			  <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=install.list">Installer</a>
 			  <? } ?>

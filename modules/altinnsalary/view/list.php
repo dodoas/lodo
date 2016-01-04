@@ -13,17 +13,11 @@ print $_lib['sess']->doctype
 <? includeinc('left') ?>
 <? print $_lib['message']->get() ?>
 
-<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
-  <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Test Soap1')) ?>
-  <? print $_lib['form3']->submit(array('name'=>'action_soap2', 'value'=>'Test Soap2')) ?>
-  <? print $_lib['form3']->submit(array('name'=>'action_soap3', 'value'=>'Test Soap3')) ?>
-  <? print $_lib['form3']->submit(array('name'=>'action_soap4', 'value'=>'Test Soap4')) ?>
-  <? print $_lib['form3']->submit(array('name'=>'action_soap5', 'value'=>'Test Soap5')) ?>
-</form>
-
-<pre>
-  <? var_dump($result) ?>
-</pre>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list">Soap 1 LIST</a>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn2list">Soap 2 LIST</a>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn3list">Soap 3 LIST</a>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn4list">Soap 4 LIST</a>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn5list">Soap 5 LIST</a>
 
 </body>
 </html>
