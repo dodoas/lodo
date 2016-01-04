@@ -317,7 +317,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
                    $_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))
                ||
                 ($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))) { ?>
-        <a href="<? print $_SETUP[DISPATCH]."t=invoice.edit&InvoiceID=$InvoiceID&action_invoice_outlinedelete=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Slett</a>
+        <a href="<? print $_SETUP[DISPATCH]."t=invoice.edit&InvoiceID=$InvoiceID&action_invoice_outlinedelete=1&amp;LineID=$LineID&amp;inline=edit#bottomPage" ?>" class="button">Slett</a>
         <? } ?>
     <tr>
         <td colspan="8"><? print $_lib['form3']->textarea(array('table'=>$db_table2, 'field'=>'Comment', 'pk'=>$LineID, 'value'=>$row2->Comment, 'tabindex'=>$tabindex++, 'min_height'=>'1', 'height'=>'1', 'width'=>'80')) ?>
@@ -356,8 +356,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
             {
                 if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"this.form.action += '#bottomPage'"));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'OnClick'=>"this.form.action += '#bottomPage'"));
                 }
                 else {
                     print "Periode stengt";
@@ -457,5 +457,6 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
    <? } ?>
 </tfoot>
 </table>
+<a name="bottomPage"></a>
 </body>
 </html>
