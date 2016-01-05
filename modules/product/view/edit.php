@@ -105,7 +105,7 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Unitsize', 'pk'=>$row->ProductID, 'value'=>$row->Unitsize)) ?>
     </tr>
     <tr>
-        <td>Antall enheter i pris</td>
+        <td>Antall enheter i esken</td>
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Bulksize', 'pk'=>$row->ProductID, 'value'=>$row->Bulksize)) ?>
     </tr>
 
