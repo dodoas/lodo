@@ -357,8 +357,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
             {
                 if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"this.form.action += '#bottomPage'"));
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'OnClick'=>"this.form.action += '#bottomPage'"));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'tabindex' => $tabindex++, 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"this.form.action += '#bottomPage'"));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'tabindex' => $tabindex++, 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'OnClick'=>"this.form.action += '#bottomPage'"));
                 }
                 else {
                     print "Periode stengt";
@@ -375,12 +375,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     </tr>
     <tr>
         <td>
-        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'value'=>'Lagre internkommentar')) ?>
+        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'tabindex' => $tabindex++, 'value'=>'Lagre internkommentar')) ?>
 
         <?
         if($_lib['sess']->get_person('AccessLevel') >= 2)
         {
-            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'value'=>'Ny faktura ut i fra denne', 'confirm' => 'Er du sikker p&aring; at du vil lage ny ut i fra denne?'));
+            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'tabindex' => $tabindex++, 'value'=>'Ny faktura ut i fra denne', 'confirm' => 'Er du sikker p&aring; at du vil lage ny ut i fra denne?'));
         }
         ?>
         </td>
@@ -389,7 +389,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td>
         <?
 	if(!$row->Locked) {
-		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?'));
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'tabindex' => $tabindex++, 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?'));
 	};
 
         ?>
@@ -403,7 +403,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             echo "Orgnummer: ".  $row->IOrgNo . "<br />";
 
             if($row->IOrgNo)
-                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 'tabindex' => $tabindex++,'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
             else
                 print "Mangler orgnummer ";
         }
@@ -411,7 +411,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
             if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit') {
                 if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'tabindex' => $tabindex++, 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
             }
         }
         else {
@@ -434,10 +434,10 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         ?>
         <td colspan="7" align="right">
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift')) ?>
         </form>
         <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift PDF')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift PDF')) ?>
         </form>
      </tr>
      <tr>
@@ -450,7 +450,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             <input type="text" value="<? print $row->IEmail; ?>" name="email_recipient" />
             <input type="hidden" value="<?=  $rowcomapny->CopyFakturaMail ?>" name="send_mail_copy_mail" />
             <input name="send_mail_copy" type="checkbox" checked /> kopi til firma
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'tabindex' => $tabindex++, 'value'=>'Send email')) ?>
         </form>
      </tr>
    <? if(!$row->Locked) { ?>

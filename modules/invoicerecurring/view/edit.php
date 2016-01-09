@@ -163,13 +163,13 @@ print $_lib['sess']->doctype ?>
         <td colspan="4"></td>
     </tr>
 
-<?php
-
-?>
+    <?php
+      $tabindex=1;
+    ?>
     <tr>
       <td>Startdato</td>
       <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'StartDate', 'pk'=>$RecurringID, 'value'=>$recurring_row->StartDate, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
-      <td>Interval</td>
+      <td>Intervall</td>
       <td><? interval_menu($recurring_row->TimeInterval, $RecurringID) ?></td>
     </tr>
     <tr>
@@ -205,9 +205,9 @@ print $_lib['sess']->doctype ?>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$RecurringID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Leverings betingelse</td>
+      <td>Leveringsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$RecurringID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
-      <td>Betalings betingelse</td>
+      <td>Betalingsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'PaymentCondition', 'pk'=>$RecurringID, 'value'=>$row->PaymentCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
@@ -327,19 +327,21 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
-	print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
+	print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_linenew', 'tabindex' => $tabindex++, 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
         ?>
         <td colspan="6" align="right">
 	<?
 	if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')
 	{
                	print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_delete', 
+        'tabindex' => $tabindex++,
 				'value'=>'Slett faktura (D)', 'accesskey'=>'D', 
 				'confirm' => 'Er du sikker p&aring; at du vil slette denne malen?'));
 	}
 	
 	print $_lib['form3']->Input(array('type'=>'submit', 
 						'name'=>'action_invoicerecurring_update', 
+            'tabindex' => $tabindex++,
 						'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
 
 	?>
