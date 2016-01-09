@@ -180,10 +180,10 @@ print $_lib['sess']->doctype ?>
       <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'EndDate', 'pk'=>$RecurringID, 'value'=>$recurring_row->EndDate, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
     </tr>
     <tr>
-      <td>TotalCustPrice</td>
-      <td><? print $row->TotalCustPrice ?></td>
-      <td>TotalVat</td>
-      <td><? print $row->TotalVat ?></td>
+      <td>Totalpris</td>
+      <td><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
+      <td>MVA</td>
+      <td><? print $_lib['format']->Amount($row->TotalVat) ?></td>
     </tr>
 
     <tr>

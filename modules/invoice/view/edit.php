@@ -233,9 +233,9 @@ foreach ($currencies as $currency) {
     </tr>
     <tr>
       <td>Total bel&oslash;p</td>
-      <td><? print $row->TotalCustPrice ?></td>
+      <td><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
       <td>MVA</td>
-      <td><? print $row->TotalVat ?></td>
+      <td><? print $_lib['format']->Amount($row->TotalVat) ?></td>
     </tr>
 
     <tr>
