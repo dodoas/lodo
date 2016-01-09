@@ -49,6 +49,7 @@ $tabindex = 1;
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Faktura <? print $InvoiceID ?></title>
     <meta name="cvs"                content="$Id: edit.php,v 1.78 2005/11/03 15:57:27 thomasek Exp $" />
     <? includeinc('head') ?>
+    <? includeinc('combobox') ?>
 </head>
 
 <body>
@@ -232,9 +233,9 @@ foreach ($currencies as $currency) {
     </tr>
     <tr>
       <td>Total bel&oslash;p</td>
-      <td><? print $row->TotalCustPrice ?></td>
+      <td><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
       <td>MVA</td>
-      <td><? print $row->TotalVat ?></td>
+      <td><? print $_lib['format']->Amount($row->TotalVat) ?></td>
     </tr>
 
     <tr>
@@ -304,7 +305,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $vatlines += $vatline;
     ?>
     <tr>
-        <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'35', 'tabindex'=>$tabindex++, 'required' => 1)) ?></td>
+        <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'35', 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg produkt')) ?></td>
         <td style='<? if (empty($row2->ProductName)) echo "background-color: red;"; ?>'><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductName', 'pk'=>$LineID, 'value'=>$row2->ProductName, 'width'=>'20', 'maxlength' => 80, 'tabindex'=>$tabindex++)) ?></td>
         <td align="center" style='<? if ($row2->QuantityDelivered == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td style='<? if ($row2->UnitCustPrice == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
@@ -356,8 +357,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
             {
                 if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"this.form.action += '#bottomPage'"));
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'OnClick'=>"this.form.action += '#bottomPage'"));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'tabindex' => $tabindex++, 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"this.form.action += '#bottomPage'"));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'tabindex' => $tabindex++, 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'OnClick'=>"this.form.action += '#bottomPage'"));
                 }
                 else {
                     print "Periode stengt";
@@ -374,12 +375,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     </tr>
     <tr>
         <td>
-        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'value'=>'Lagre internkommentar')) ?>
+        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'tabindex' => $tabindex++, 'value'=>'Lagre internkommentar')) ?>
 
         <?
         if($_lib['sess']->get_person('AccessLevel') >= 2)
         {
-            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'value'=>'Ny faktura ut i fra denne', 'confirm' => 'Er du sikker p&aring; at du vil lage ny ut i fra denne?'));
+            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'tabindex' => $tabindex++, 'value'=>'Ny faktura ut i fra denne', 'confirm' => 'Er du sikker p&aring; at du vil lage ny ut i fra denne?'));
         }
         ?>
         </td>
@@ -388,7 +389,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td>
         <?
 	if(!$row->Locked) {
-		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?'));
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'tabindex' => $tabindex++, 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?'));
 	};
 
         ?>
@@ -402,7 +403,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             echo "Orgnummer: ".  $row->IOrgNo . "<br />";
 
             if($row->IOrgNo)
-                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 'tabindex' => $tabindex++,'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
             else
                 print "Mangler orgnummer ";
         }
@@ -410,7 +411,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
             if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit') {
                 if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'tabindex' => $tabindex++, 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
             }
         }
         else {
@@ -433,10 +434,10 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         ?>
         <td colspan="7" align="right">
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift')) ?>
         </form>
         <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift PDF')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift PDF')) ?>
         </form>
      </tr>
      <tr>
@@ -449,7 +450,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             <input type="text" value="<? print $row->IEmail; ?>" name="email_recipient" />
             <input type="hidden" value="<?=  $rowcomapny->CopyFakturaMail ?>" name="send_mail_copy_mail" />
             <input name="send_mail_copy" type="checkbox" checked /> kopi til firma
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'tabindex' => $tabindex++, 'value'=>'Send email')) ?>
         </form>
      </tr>
    <? if(!$row->Locked) { ?>
