@@ -32,7 +32,9 @@ $result_period = $_lib['db']->db_query($sql_period);
         {
             print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_accountperiod_newAfter', 'value'=>"Legg til perioden: $nextperiod"));
             print "<br>";
+            if($_lib['sess']->get_person('AccessLevel') >= 3) {
             print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_accountperiod_newBefore', 'value'=>"Legg til perioden: $prevperiod"));
+            }
         }
         ?>
     </td>
@@ -57,7 +59,7 @@ $result_period = $_lib['db']->db_query($sql_period);
         <td><? if(($row->Status <= 1 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'1')); } elseif($row->Status == 1) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
         <td><? if(($row->Status <= 2 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'2')); } elseif($row->Status == 2) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
         <td><? if(($row->Status <= 3 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'3')); } elseif($row->Status == 3) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
-        <td><? if(($row->Status <= 4 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'4')); } elseif($row->Status == 4) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
+        <td><? if(($row->Status <= 4 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'4', 'disabled'=>($_lib['sess']->get_person('AccessLevel') <= 2))); } elseif($row->Status == 4) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
       </tr>
     <? }
     if($_lib['sess']->get_person('AccessLevel') > 1)

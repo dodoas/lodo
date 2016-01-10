@@ -48,6 +48,8 @@ class form3
 
         # Radiobuttons has always 1/0 result
         $element = "<input type=\"radio\" name=\"$name\" id=\"$name\" value=\"".$args['value']."\"";
+        if($args['disabled'])
+            $element = " $element disabled";
         if($args['choice'] == $args['value'])
             $element = " $element checked=\"checked\" ";
         $element = " $element />";
