@@ -760,7 +760,8 @@ class form3
     function Product_menu3($args)
     {
         $args['query']          = $this->_QUERY['form']['productmenu'];
-        $args['combinedmenu'] = true;
+        // Drop cominedmenu since we can search for product with combobox
+        // $args['combinedmenu'] = true;
         return $this->_MakeSelect($args);
     }
 
