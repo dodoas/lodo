@@ -55,6 +55,10 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
         <td colspan="2"><? print $row->ProductID ?></td>
     </tr>
     <tr>
+        <td>Aktiv</td>
+        <td colspan="2"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'pk'=>$row->ProductID, 'value'=>$row->Active)) ?></td>
+    </tr>
+    <tr>
         <td>Produktnummer</td>
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'ProductNumber', 'pk'=>$row->ProductID, 'value'=>$row->ProductNumber, 'tabindex'=>'1')) ?></td>
     </tr>
@@ -122,7 +126,7 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
         <td></td>
         <td width="70"></td>
         <td align="right" colspan="1">
-            <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+            <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
             <!-- <? print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_product_delete', 'accesskey'=>'D', 'tabindex'=>'7')) ?> -->
             <a href="<? print $_lib['sess']->dispatch."t=product.list&amp;ProductID=$row->ProductID&amp;action_product_delete=1" ?>" accesskey="D" class="button" 
                  onclick='return confirm("Er du sikker?")'>Slett (D)</a>
