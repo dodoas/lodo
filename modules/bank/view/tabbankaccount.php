@@ -136,7 +136,6 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
                 targ.appendChild(option);
               }
             }
-            document.getElementById('list_form').normalize();
           }
 
           ";

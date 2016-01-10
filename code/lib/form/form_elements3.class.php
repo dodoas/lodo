@@ -48,6 +48,8 @@ class form3
 
         # Radiobuttons has always 1/0 result
         $element = "<input type=\"radio\" name=\"$name\" id=\"$name\" value=\"".$args['value']."\"";
+        if($args['disabled'])
+            $element = " $element disabled";
         if($args['choice'] == $args['value'])
             $element = " $element checked=\"checked\" ";
         $element = " $element />";
@@ -760,7 +762,8 @@ class form3
     function Product_menu3($args)
     {
         $args['query']          = $this->_QUERY['form']['productmenu'];
-        $args['combinedmenu'] = true;
+        // Drop cominedmenu since we can search for product with combobox
+        // $args['combinedmenu'] = true;
         return $this->_MakeSelect($args);
     }
 
