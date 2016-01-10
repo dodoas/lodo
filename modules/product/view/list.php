@@ -7,11 +7,11 @@ $db_table = "product";
 
 require_once "record.inc";
 
-$query = "select * from $db_table where Active <> 0";
+$query = "select * from $db_table";
 $result2 = $_lib['db']->db_query($query);
 $db_total = $_lib['db']->db_numrows($result2);
 
-$query = "select * from $db_table where Active <> 0 order by CAST(ProductNumber as SIGNED), ProductNumber asc"; 
+$query = "select * from $db_table order by CAST(ProductNumber as SIGNED), ProductNumber asc";
 $result2 = $_lib['db']->db_query($query);
 
 ?>
@@ -51,6 +51,7 @@ $result2 = $_lib['db']->db_query($query);
             <tr>
               <th class="sub">Produkt ID</th>
               <th class="sub">Produktnummer</th>
+              <th class="sub">Aktiv</th>
               <th class="sub">Produktnavn</th>
               <th class="sub" align="right">MVA</th>
               <th class="sub" align="right">Kostpris</th>
@@ -72,6 +73,7 @@ $result2 = $_lib['db']->db_query($query);
                     <tr>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductID ?></a></td>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductNumber ?></a></td>
+                        <td> <? print $_lib['form3']->checkbox(array('table'=>'product', 'value'=>$row->Active, 'disabled'=>'1')) ?> </td>
                         <td><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductName ?></a></td>
                         <td align="right"><? print $_lib['format']->Percent(array('value'=>$vatRow->Percent*1, 'return'=>'value')) ?></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCostPrice, 'return'=>'value')) ?></td>
