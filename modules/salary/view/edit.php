@@ -189,6 +189,7 @@ $formname = "salaryUpdate";
     <th>Utbetalt dato
     <th>Konto for utbetaling
     <th>Skattekommune
+    <th>Altinndato
   </tr>
   <tr>
     <th class="sub">L <a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$head->JournalID"; ?>&type=salary&view=1"><? print $head->JournalID ?></a>
@@ -219,6 +220,7 @@ $formname = "salaryUpdate";
             }
     ?>
   </th>
+    <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number">
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>

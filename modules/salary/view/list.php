@@ -121,6 +121,7 @@ print $_lib['sess']->doctype;
   <input type="submit" value="Velg periode" />
   </form>
   <a href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a>
+  <a href="<?= $_lib['sess']->dispatch ?>t=salary.listunpaid">Ubetalte l&oslash;nninger</a>
 </div>
 
 <? 

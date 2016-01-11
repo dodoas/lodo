@@ -13,6 +13,11 @@ ADD WorkPercentUpdatedAt timestamp,
 ADD inCurrentPositionSince date
 ;
 
+-- Add missing altinn field in salary
+ALTER TABLE salary
+ADD ActualPayDate date DEFAULT NULL
+;
+
 
 DROP TABLE IF EXISTS occupation;
 -- Create new tables for Occupation, we will fetch data from ssb.no/a/yrke
@@ -192,5 +197,9 @@ PRIMARY KEY (AltinnReport5ID)
 -- -- DROP CreditDaysUpdatedAt,
 -- -- DROP WorkPercentUpdatedAt
 -- -- DROP inCurentPositionSince
+-- -- ;
+-- --
+-- -- ALTER TABLE salary
+-- -- DROP ActualPayDate
 -- -- ;
 
