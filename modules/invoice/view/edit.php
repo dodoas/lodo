@@ -222,10 +222,9 @@ foreach ($currencies as $currency) {
         }
         ?>
         </td>
-        <? if($row_print) { ?>
+        <? $print_date_value = ($row_print) ? $row_print->InvoicePrintDate : "0000-00-00"; ?>
         <td>Utskriftsdato</td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($row_print->InvoicePrintDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
-        <? } ?>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($print_date_value, 0, 10), 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
       <td>Merk</td>
