@@ -5,7 +5,7 @@ ADD Workmeasurement decimal(4,2)  DEFAULT 0,
 ADD WorkTimeScheme varchar(50) DEFAULT '',
 ADD TypeOfEmployment varchar(50) DEFAULT 'Ordinaer',
 
-ADD OccupationCodeID bigint(20) DEFAULT 0,
+ADD OccupationID bigint(20) DEFAULT 0,
 ADD CreditDaysUpdatedAt timestamp,
 -- TS timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -198,7 +198,7 @@ PRIMARY KEY (AltinnReport5ID)
 -- -- DROP ShiftType,
 -- -- DROP Workmeasurement,
 -- -- DROP WorkTimeScheme,
--- -- DROP OccupationCodeID,
+-- -- DROP OccupationID,
 -- -- DROP CreditDaysUpdatedAt,
 -- -- DROP WorkPercentUpdatedAt
 -- -- DROP inCurrentPositionSince
@@ -207,4 +207,3 @@ PRIMARY KEY (AltinnReport5ID)
 -- -- ALTER TABLE salary
 -- -- DROP ActualPayDate
 -- -- ;
-
