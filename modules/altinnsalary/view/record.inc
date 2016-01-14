@@ -1,5 +1,5 @@
 <?
-includelogic('altinnsalary/savefiles');
+includelogic('altinnsalary/files');
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -258,10 +258,11 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ReporteeElementID']        = $correspondenceAttachments->AttachmentBEV2->ReporteeElementID;
   $values['res_SendersReference']         = $correspondenceAttachments->AttachmentBEV2->SendersReference;
 
+  $values['Folder'] = (string) time();;
+  $zipContent = $correspondenceAttachments->AttachmentBEV2->AttachmentData;
 
-  $foo = $correspondenceAttachments->AttachmentBEV2->AttachmentData;
-  $bar = new altinn_file($foo);
-  $bar->extract();
+  $altinnFile = new altinn_file($values['Folder']);
+  $altinnFile->extract($zipContent);
 
   $_lib['storage']->store_record(array('table' => 'altinnReport4', 'data' => $values, 'debug' => false));
 
