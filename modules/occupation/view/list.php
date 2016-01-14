@@ -15,6 +15,7 @@ print $_lib['sess']->doctype ?>
 <head>
     <title>Empatix - Yrke liste</title>
     <? includeinc('head') ?>
+    <? includeinc('combobox') ?>
 </head>
 
 <body>
@@ -68,7 +69,16 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
 <? } ?>
 </tbody>
 </table>
+<?
+$csvFile = file($_SETUP['HOME_DIR'] . $_SETUP['YRKE_CSV']);
+$data = array();
+foreach ($csvFile as $line) {
+    $data[] = str_replace(";", " ", $line);
+}
+?>
+<form name="occupation_import" action="<? print $_lib['sess']->dispatch ?>t=occupation.list" method="post">
+    <? print $_lib['form3']->Occupation_menu3(array('name'=>'occupation.Import', 'width'=>75, 'data'=>$data, 'same_key_value'=>true, 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg yrke')) ?>
+    <? print $_lib['form3']->submit(array('name'=>'action_occupation_import', 'value'=>'Import', 'style'=>'margin-left:70px')) ?>
+</form>
 </body>
 </html>
-
-

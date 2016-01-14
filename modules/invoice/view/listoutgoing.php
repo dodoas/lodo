@@ -266,7 +266,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
   // Then we do the same thing from the voucher lines and concatenate the two results.
   // Group them and count the duplicates.
   // If the count is an odd number then we either have some extra lines or some of the lines are missing.
-  // That is why we restrict the result to the lines having an odd count, so we get left with the ones that are wrong.
+  // That is why we restrict the result to the lines having an odd count(or
+  // other than 2 for the total line), so we get left with the ones that are wrong.
   // If everything is correct, this query should return an empty result, if not - we have an error.
   $query_count_probable_voucher_lines = "SELECT *, COUNT(*) AS count
                                          FROM (
@@ -275,10 +276,10 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              -- Create voucher lines for invoice lines in invoiceoutline table
                                              SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
                                              -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
-                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100 * -1), 2) AS AmountIn,
-                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * (100 + il.Vat) / 100, 0), 2) AS AmountOut
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)) * -1), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut
                                              FROM invoiceoutline il
-                                             WHERE il.Active = 1 AND il.InvoiceID = $InvoiceID
+                                             WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
 
                                              UNION
 
@@ -288,7 +289,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountIn,
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountOut
                                              FROM invoiceoutline il
-                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
 
                                              UNION
 
@@ -297,17 +298,17 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountIn,
                                              ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountOut
                                              FROM invoiceoutline il
-                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.InvoiceID = $InvoiceID
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
 
                                              UNION
 
                                              -- Total amount line for invoice
                                              SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
                                              -- Take in account amount for credit note
-                                             ROUND(IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0), 2) AS AmountIn,
-                                             ROUND(IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1), 2) AS AmountOut
+                                             IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
+                                             IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut
                                              FROM invoiceout i
-                                             WHERE i.InvoiceID = $InvoiceID
+                                             WHERE i.TotalCustPrice <> 0 AND i.InvoiceID = $InvoiceID
                                            ) li
 
                                            UNION ALL
@@ -336,8 +337,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
                                          ) taa
                                          -- Group the same so we can count the duplicates
                                          GROUP BY Type, tmpVat, AmountIn, AmountOut
-                                         -- Leave only the ones that were oddly paired
-                                         HAVING (count % 2) = 1";
+                                         -- Leave only the ones that were oddly paired, and the total line that has other than count of 2
+                                         HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')";
   $result_count_probable_voucher_lines = $_lib['db']->db_query($query_count_probable_voucher_lines);
   $has_possible_errors = $_lib['db']->db_numrows($result_count_probable_voucher_lines) > 0;
 ?>

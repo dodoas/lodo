@@ -48,6 +48,8 @@ class form3
 
         # Radiobuttons has always 1/0 result
         $element = "<input type=\"radio\" name=\"$name\" id=\"$name\" value=\"".$args['value']."\"";
+        if($args['disabled'])
+            $element = " $element disabled";
         if($args['choice'] == $args['value'])
             $element = " $element checked=\"checked\" ";
         $element = " $element />";
@@ -390,6 +392,10 @@ class form3
         {
             $element .= " class=\"".$args['class']."\" ";
         }
+        if($args['style'])
+        {
+          $element .= " style=\"".$args['style']."\" ";
+        }
         if(isset($args['title']))
         {
             $element .= " title=\"".$args['title']."\" ";
@@ -674,6 +680,9 @@ class form3
                   $element .= '<option value="' . $key. '" selected="selected">';
                   $found = true;
                 }
+                elseif($args['same_key_value'] == true){
+                  $element .= '<option value="' . $value . '">';
+                }
                 else
                 {
                   $element .= '<option value="' . $key . '">';
@@ -760,7 +769,15 @@ class form3
     function Product_menu3($args)
     {
         $args['query']          = $this->_QUERY['form']['productmenu'];
-        $args['combinedmenu'] = true;
+
+        // Drop cominedmenu since we can search for product with combobox
+        // $args['combinedmenu'] = true;
+        return $this->_MakeSelect($args);
+    }
+###########################################################
+
+    function Occupation_menu3($args)
+    {
         return $this->_MakeSelect($args);
     }
 
