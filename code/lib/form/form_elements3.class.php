@@ -778,6 +778,8 @@ class form3
 
     function Occupation_menu3($args)
     {
+        $args['query']          = $this->_QUERY['form']['occupationmenu'];
+
         return $this->_MakeSelect($args);
     }
 

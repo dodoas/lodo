@@ -124,7 +124,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class='menu'>OccupationCode ID</td>
     <td></td>
     <td>
-      <input type="text" name="accountplan.OccupationCodeID" value="<?= $account->OccupationCodeID ?>" />
+      <? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table, 'field'=>'OccupationID', 'value'=>$account->OccupationID)); ?>
     </td>
     <td>Samme posisjon siden:</td>
     <td>
