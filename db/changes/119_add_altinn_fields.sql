@@ -39,6 +39,8 @@ DROP TABLE IF EXISTS altinnReport1;
 -- Create new tables for AltinnReport1
 CREATE TABLE IF NOT EXISTS altinnReport1 (
 AltinnReport1ID int(11) NOT NULL AUTO_INCREMENT,
+Folder varchar(50) DEFAULT NULL,
+Period varchar(7) DEFAULT NULL,
 ReceiptId int(16) NOT NULL,
 ParentReceiptId int(16) DEFAULT NULL,
 ReceiptText text NOT NULL,
@@ -120,7 +122,8 @@ DROP TABLE IF EXISTS altinnReport4;
 -- Create new tables for altinnReport4
 CREATE TABLE IF NOT EXISTS altinnReport4 (
 AltinnReport4ID int(11) NOT NULL AUTO_INCREMENT,
-req_correspondenceID varchar(50) DEFAULT NULL,
+Folder varchar(50) DEFAULT NULL,
+req_CorrespondenceID varchar(50) DEFAULT NULL,
 
 res_AllowForwarding tinyint(4) NOT NULL DEFAULT '0',
 res_ArchiveReference varchar(50) DEFAULT NULL,
@@ -171,7 +174,7 @@ DROP TABLE IF EXISTS altinnReport5;
 -- Create new tables for altinnReport5
 CREATE TABLE IF NOT EXISTS altinnReport5 (
 AltinnReport5ID int(11) NOT NULL AUTO_INCREMENT,
-req_correspondenceID varchar(50) DEFAULT NULL,
+req_CorrespondenceID varchar(50) DEFAULT NULL,
 
 res_LastChanged datetime DEFAULT NULL,
 res_ParentReceiptId int(16) DEFAULT NULL,

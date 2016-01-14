@@ -35,10 +35,11 @@ print $_lib['sess']->doctype ?>
   <thead>
     <tr>
       <th>Soap 4:</th>
-      <th colspan="2"></th>
+      <th colspan="18"></th>
     </tr>
     <tr>
       <td class="menu">AltinnReport5ID</td>
+      <td class="menu">req_CorrespondenceID</td>
       <td class="menu">LastChanged</td>
       <td class="menu">ParentReceiptId</td>
       <td class="menu">ReceiptHistory</td>
@@ -57,16 +58,17 @@ print $_lib['sess']->doctype ?>
   ?>
     <tr>
       <td><? print $row->AltinnReport5ID; ?></td>
-      <td><? print $row->req_LastChanged; ?></td>
-      <td><? print $row->req_ParentReceiptId; ?></td>
-      <td><? print $row->req_ReceiptHistory; ?></td>
-      <td><? print $row->req_ReceiptId; ?></td>
-      <td><? print $row->req_ReceiptStatusCode; ?></td>
-      <td><? print $row->req_ReceiptTemplate; ?></td>
-      <td><? print $row->req_ReceiptText; ?></td>
-      <td><? print $row->req_ReceiptTypeName; ?></td>
-      <td><? print $row->req_ExternalShipmentReference; ?></td>
-      <td><? print $row->req_OwnerPartyReference; ?></td>
+      <td><? print $row->req_CorrespondenceID; ?></td>
+      <td><? print $row->res_LastChanged; ?></td>
+      <td><? print $row->res_ParentReceiptId; ?></td>
+      <td><? print $row->res_ReceiptHistory; ?></td>
+      <td><? print $row->res_ReceiptId; ?></td>
+      <td><? print $row->res_ReceiptStatusCode; ?></td>
+      <td><? print $row->res_ReceiptTemplate; ?></td>
+      <td><? print $row->res_ReceiptText; ?></td>
+      <td><? print $row->res_ReceiptTypeName; ?></td>
+      <td><? print $row->res_ExternalShipmentReference; ?></td>
+      <td><? print $row->res_OwnerPartyReference; ?></td>
   <? } ?>
   </tbody>
 </table>

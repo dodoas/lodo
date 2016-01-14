@@ -141,10 +141,12 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 
         while($_row = $_lib['db']->db_fetch_object($result_salary)){
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>"><? print $_row->SalaryId ?></a>
+          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>"><? print $_row->JournalID ?></a>
         <? } ?>
       </td>
     </tr>
+
+
   <? } ?>
   </tbody>
 </table>

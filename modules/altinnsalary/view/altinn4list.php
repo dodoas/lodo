@@ -39,7 +39,7 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
       <td class="menu">AltinnReport4ID</td>
-      <td class="menu">req_correspondenceID</td>
+      <td class="menu">req_CorrespondenceID</td>
       <td class="menu">res_AllowForwarding</td>
       <td class="menu">res_ArchiveReference</td>
       <td class="menu">res_AuthenticatedUser</td>
@@ -87,7 +87,7 @@ print $_lib['sess']->doctype ?>
   ?>
     <tr>
       <td><? print $row->AltinnReport4ID; ?></td>
-      <td><? print $row->req_correspondenceID; ?></td>
+      <td><? print $row->req_CorrespondenceID; ?></td>
       <td><? print $row->res_AllowForwarding; ?></td>
       <td><? print $row->res_ArchiveReference; ?></td>
       <td><? print $row->res_AuthenticatedUser; ?></td>

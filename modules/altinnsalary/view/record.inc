@@ -35,6 +35,68 @@ if ($_lib['input']->getProperty('action_soap1')) {
   if (empty($_POST['altinnReport1_periode'])){
     $_lib['message']->add('Legg inn: periode');
   } else {
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>
+<melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0">
+  <Leveranse>
+    <leveringstidspunkt>2015-12-11T00:00:00Z</leveringstidspunkt>
+    <kalendermaaned>2015-12</kalendermaaned>
+    <kildesystem>LODO</kildesystem>
+    <meldingsId>108</meldingsId>
+    <opplysningspliktig>
+      <norskIdentifikator>910748645</norskIdentifikator>
+    </opplysningspliktig>
+    <oppgave>
+      <betalingsinformasjon>
+        <sumForskuddstrekk>3000</sumForskuddstrekk>
+        <sumArbeidsgiveravgift>1410</sumArbeidsgiveravgift>
+      </betalingsinformasjon>
+      <virksomhet>
+        <norskIdentifikator>910748645</norskIdentifikator>
+        <inntektsmottaker>
+          <norskIdentifikator>24040100918</norskIdentifikator>
+          <identifiserendeInformasjon>
+            <navn>MARTIN EIDEM</navn>
+            <foedselsdato>2001-04-24</foedselsdato>
+          </identifiserendeInformasjon>
+          <arbeidsforhold>
+            <typeArbeidsforhold>ordinaertArbeidsforhold</typeArbeidsforhold>
+            <startdato>2013-11-01</startdato>
+            <antallTimerPerUkeSomEnFullStillingTilsvarer>37.5</antallTimerPerUkeSomEnFullStillingTilsvarer>
+            <avloenningstype>fast</avloenningstype>
+            <yrke>2130109</yrke>
+            <arbeidstidsordning>ikkeSkift</arbeidstidsordning>
+            <stillingsprosent>100</stillingsprosent>
+            <sisteLoennsendringsdato>2013-11-01</sisteLoennsendringsdato>
+            <loennsansiennitet>2013-11-01</loennsansiennitet>
+            <sisteDatoForStillingsprosentendring>2013-11-01</sisteDatoForStillingsprosentendring>
+          </arbeidsforhold>
+          <forskuddstrekk>
+            <beloep>-3000</beloep>
+          </forskuddstrekk>
+          <inntekt>
+            <fordel>kontantytelse</fordel>
+            <utloeserArbeidsgiveravgift>true</utloeserArbeidsgiveravgift>
+            <inngaarIGrunnlagForTrekk>true</inngaarIGrunnlagForTrekk>
+            <beloep>10000</beloep>
+            <loennsinntekt>
+              <beskrivelse>fastloenn</beskrivelse>
+            </loennsinntekt>
+          </inntekt>
+        </inntektsmottaker>
+        <arbeidsgiveravgift>
+          <loennOgGodtgjoerelse>
+            <beregningskodeForArbeidsgiveravgift>generelleNaeringer</beregningskodeForArbeidsgiveravgift>
+            <sone>1</sone>
+            <avgiftsgrunnlagBeloep>10000</avgiftsgrunnlagBeloep>
+            <prosentsatsForAvgiftsberegning>14.1</prosentsatsForAvgiftsberegning>
+          </loennOgGodtgjoerelse>
+        </arbeidsgiveravgift>
+      </virksomhet>
+    </oppgave>
+  </Leveranse>
+</melding>
+';
+
     $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
     $params = array(
       'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -78,7 +140,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
           'Attachment' => array(
             'Name' => 'A-melding',
             'FileName' => 'amelding.xml',
-            'AttachementData' => 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPG1lbGRpbmcgeG1sbnM9InVybjpza2U6ZmFzdHNldHRpbmc6aW5uc2FtbGluZzphLW1lbGRpbmdlbjp2Ml8wIj4KICA8TGV2ZXJhbnNlPgogICAgPGxldmVyaW5nc3RpZHNwdW5rdD4yMDE1LTEyLTExVDAwOjAwOjAwWjwvbGV2ZXJpbmdzdGlkc3B1bmt0PgogICAgPGthbGVuZGVybWFhbmVkPjIwMTUtMTI8L2thbGVuZGVybWFhbmVkPgogICAgPGtpbGRlc3lzdGVtPkxPRE88L2tpbGRlc3lzdGVtPgogICAgPG1lbGRpbmdzSWQ+MTA4PC9tZWxkaW5nc0lkPgogICAgPG9wcGx5c25pbmdzcGxpa3RpZz4KICAgICAgPG5vcnNrSWRlbnRpZmlrYXRvcj45MTA3NDg2NDU8L25vcnNrSWRlbnRpZmlrYXRvcj4KICAgIDwvb3BwbHlzbmluZ3NwbGlrdGlnPgogICAgPG9wcGdhdmU+CiAgICAgIDxiZXRhbGluZ3NpbmZvcm1hc2pvbj4KICAgICAgICA8c3VtRm9yc2t1ZGRzdHJla2s+MzAwMDwvc3VtRm9yc2t1ZGRzdHJla2s+CiAgICAgICAgPHN1bUFyYmVpZHNnaXZlcmF2Z2lmdD4xNDEwPC9zdW1BcmJlaWRzZ2l2ZXJhdmdpZnQ+CiAgICAgIDwvYmV0YWxpbmdzaW5mb3JtYXNqb24+CiAgICAgIDx2aXJrc29taGV0PgogICAgICAgIDxub3Jza0lkZW50aWZpa2F0b3I+OTEwNzQ4NjQ1PC9ub3Jza0lkZW50aWZpa2F0b3I+CiAgICAgICAgPGlubnRla3RzbW90dGFrZXI+CiAgICAgICAgICA8bm9yc2tJZGVudGlmaWthdG9yPjI0MDQwMTAwOTE4PC9ub3Jza0lkZW50aWZpa2F0b3I+CiAgICAgICAgICA8aWRlbnRpZmlzZXJlbmRlSW5mb3JtYXNqb24+CiAgICAgICAgICAgIDxuYXZuPk1BUlRJTiBFSURFTTwvbmF2bj4KICAgICAgICAgICAgPGZvZWRzZWxzZGF0bz4yMDAxLTA0LTI0PC9mb2Vkc2Vsc2RhdG8+CiAgICAgICAgICA8L2lkZW50aWZpc2VyZW5kZUluZm9ybWFzam9uPgogICAgICAgICAgPGFyYmVpZHNmb3Job2xkPgogICAgICAgICAgICA8dHlwZUFyYmVpZHNmb3Job2xkPm9yZGluYWVydEFyYmVpZHNmb3Job2xkPC90eXBlQXJiZWlkc2ZvcmhvbGQ+CiAgICAgICAgICAgIDxzdGFydGRhdG8+MjAxMy0xMS0wMTwvc3RhcnRkYXRvPgogICAgICAgICAgICA8YW50YWxsVGltZXJQZXJVa2VTb21FbkZ1bGxTdGlsbGluZ1RpbHN2YXJlcj4zNy41PC9hbnRhbGxUaW1lclBlclVrZVNvbUVuRnVsbFN0aWxsaW5nVGlsc3ZhcmVyPgogICAgICAgICAgICA8YXZsb2VubmluZ3N0eXBlPmZhc3Q8L2F2bG9lbm5pbmdzdHlwZT4KICAgICAgICAgICAgPHlya2U+MjEzMDEwOTwveXJrZT4KICAgICAgICAgICAgPGFyYmVpZHN0aWRzb3JkbmluZz5pa2tlU2tpZnQ8L2FyYmVpZHN0aWRzb3JkbmluZz4KICAgICAgICAgICAgPHN0aWxsaW5nc3Byb3NlbnQ+MTAwPC9zdGlsbGluZ3Nwcm9zZW50PgogICAgICAgICAgICA8c2lzdGVMb2VubnNlbmRyaW5nc2RhdG8+MjAxMy0xMS0wMTwvc2lzdGVMb2VubnNlbmRyaW5nc2RhdG8+CiAgICAgICAgICAgIDxsb2VubnNhbnNpZW5uaXRldD4yMDEzLTExLTAxPC9sb2VubnNhbnNpZW5uaXRldD4KICAgICAgICAgICAgPHNpc3RlRGF0b0ZvclN0aWxsaW5nc3Byb3NlbnRlbmRyaW5nPjIwMTMtMTEtMDE8L3Npc3RlRGF0b0ZvclN0aWxsaW5nc3Byb3NlbnRlbmRyaW5nPgogICAgICAgICAgPC9hcmJlaWRzZm9yaG9sZD4KICAgICAgICAgIDxmb3Jza3VkZHN0cmVraz4KICAgICAgICAgICAgPGJlbG9lcD4tMzAwMDwvYmVsb2VwPgogICAgICAgICAgPC9mb3Jza3VkZHN0cmVraz4KICAgICAgICAgIDxpbm50ZWt0PgogICAgICAgICAgICA8Zm9yZGVsPmtvbnRhbnR5dGVsc2U8L2ZvcmRlbD4KICAgICAgICAgICAgPHV0bG9lc2VyQXJiZWlkc2dpdmVyYXZnaWZ0PnRydWU8L3V0bG9lc2VyQXJiZWlkc2dpdmVyYXZnaWZ0PgogICAgICAgICAgICA8aW5uZ2FhcklHcnVubmxhZ0ZvclRyZWtrPnRydWU8L2lubmdhYXJJR3J1bm5sYWdGb3JUcmVraz4KICAgICAgICAgICAgPGJlbG9lcD4xMDAwMDwvYmVsb2VwPgogICAgICAgICAgICA8bG9lbm5zaW5udGVrdD4KICAgICAgICAgICAgICA8YmVza3JpdmVsc2U+ZmFzdGxvZW5uPC9iZXNrcml2ZWxzZT4KICAgICAgICAgICAgPC9sb2VubnNpbm50ZWt0PgogICAgICAgICAgPC9pbm50ZWt0PgogICAgICAgIDwvaW5udGVrdHNtb3R0YWtlcj4KICAgICAgICA8YXJiZWlkc2dpdmVyYXZnaWZ0PgogICAgICAgICAgPGxvZW5uT2dHb2R0Z2pvZXJlbHNlPgogICAgICAgICAgICA8YmVyZWduaW5nc2tvZGVGb3JBcmJlaWRzZ2l2ZXJhdmdpZnQ+Z2VuZXJlbGxlTmFlcmluZ2VyPC9iZXJlZ25pbmdza29kZUZvckFyYmVpZHNnaXZlcmF2Z2lmdD4KICAgICAgICAgICAgPHNvbmU+MTwvc29uZT4KICAgICAgICAgICAgPGF2Z2lmdHNncnVubmxhZ0JlbG9lcD4xMDAwMDwvYXZnaWZ0c2dydW5ubGFnQmVsb2VwPgogICAgICAgICAgICA8cHJvc2VudHNhdHNGb3JBdmdpZnRzYmVyZWduaW5nPjE0LjE8L3Byb3NlbnRzYXRzRm9yQXZnaWZ0c2JlcmVnbmluZz4KICAgICAgICAgIDwvbG9lbm5PZ0dvZHRnam9lcmVsc2U+CiAgICAgICAgPC9hcmJlaWRzZ2l2ZXJhdmdpZnQ+CiAgICAgIDwvdmlya3NvbWhldD4KICAgIDwvb3BwZ2F2ZT4KICA8L0xldmVyYW5zZT4KPC9tZWxkaW5nPgo='
+            'AttachementData' => base64_encode($xml)
           )
         )
       )
@@ -87,6 +149,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
 
     $values = array();
+    $values['Periode']  = $_POST['altinnReport1_periode'];
     $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
     $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
     $values['ReceiptHistory']  = $result->SubmitFormTaskBasicResult->ReceiptHistory;
@@ -100,6 +163,11 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $values[$element->ReferenceTypeName] = $element->ReferenceValue;
     }
 
+    $values['Folder'] = (string) time();;
+    $altinnFile = new altinn_file($values['Folder']);
+    $altinnFile->save($xml);
+
+
     $_lib['storage']->store_record(array('table' => 'altinnReport1', 'data' => $values, 'debug' => false));
 
     // to fetch the AltinnReport1ID to the one I just saved
@@ -109,9 +177,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     $query_salary  = "SELECT SalaryID FROM salary WHERE PayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
     $result_salary = $_lib['db']->db_query($query_salary);
-    $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId) VALUES ';
+    $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
     while($_row = $_lib['db']->db_fetch_object($result_salary)){
-      $insert_query .= "('".$row->AltinnReport1ID."', '".$_row->SalaryID."'),";
+      $insert_query .= "('".$row->AltinnReport1ID."', '".$_row->SalaryID."', '".$_row->JournalID."'),";
     }
     if (isset($result_salary->num_rows)) {
       $insert_query = substr($insert_query, 0, -1);
@@ -148,7 +216,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   for ($i=0; $i < count($result->GetReceiptBasicV2Result->References->Reference); $i++) {
     $element = $result->GetReceiptBasicV2Result->References->Reference[$i];
     if ($element->ReferenceType == "PartyReference") {
-      if (!isset($values[$element->ReferenceType.'A'])) {
+      if (!isset($values['res_'.$element->ReferenceType.'A'])) {
         $values['res_'.$element->ReferenceType.'A'] = $element->ReferenceValue;
       } else {
         $values['res_'.$element->ReferenceType.'B'] = $element->ReferenceValue;
@@ -202,7 +270,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
 
   $values = array();
-  $values["req_correspondenceID"] = $_rowB->ReceiversReference;
+  $values["req_CorrespondenceID"] = $_rowB->res_ReceiversReference;
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
   $params = array(
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -212,7 +280,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     'userPinCode'    => $pins[$_rowC->res_KodeNr],
     'authMethod'     => 'AltinnPin',
-    'correspondenceID' => $_rowB->res_ReceiversReference,
+    'CorrespondenceID' => $_rowB->res_ReceiversReference,
     'languageID'     => '1'
   );
 
@@ -274,7 +342,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $_rowC = $_lib['db']->get_row(array('query' => $query));
 
   $values = array();
-  $values["req_correspondenceID"] = $_rowB->ReceiversReference;
+  $values['req_CorrespondenceID'] = $_rowB->res_ReceiversReference;
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl");
   $params = array(
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
