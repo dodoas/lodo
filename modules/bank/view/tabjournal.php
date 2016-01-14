@@ -120,7 +120,6 @@ $warningH = array();
                 targ.appendChild(option);
               }
             }
-            document.getElementById('list_form').normalize();
           }
 
           ";
@@ -253,7 +252,7 @@ if(is_array($bank->bankaccount)) {
     }
 ?>
     <td colspan="4"></td>
-    <td><input type="button" onclick="$('input[name*=accountline.Approved]').attr('checked', true)" value="OK" /></td>
+    <td><input type="button" onclick="$('input[name*=\'accountline.Approved\']').attr('checked', true)" value="OK" /></td>
     <td colspan="2"></td>
 </tr>
   <tr>

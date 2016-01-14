@@ -202,6 +202,7 @@ class invoice {
             $_lib['message']->add(array('message' => "Du m&aring; velge kunden som skal motta fakturaen"));
 
         unset($headH['TotalCustPrice']);
+        unset($headH['TotalVat']);
 
         if($_lib['setup']->get_value('kid.accountplanid') || $_lib['setup']->get_value('kid.invoiceid')) {
             $kidO         = new lodo_logic_kid();
@@ -656,7 +657,7 @@ class invoice {
         $this->lineH            = array();
         $this->TotalCustPrice   = 0;
         $this->totalSum         = 0;
-        $this->totalMva         = 0;
+        $this->totalVat         = 0;
         $this->set_head(array('TotalCustPrice' => 0));
         $this->set_head(array('TotalVat' => 0));
         $this->set_head(array('TotalCostPrice' => 0));
@@ -716,14 +717,15 @@ class invoice {
         $custprice  = $_lib['convert']->Amount($lineH['UnitCustPrice']);
 
         $this->totalSum += round($tmpquant * $custprice, 2);
-        $this->totalMva += round($tmpquant * $custprice * ($lineH['Vat']/100), 2);
+        $this->totalVat += round($tmpquant * $custprice * ($lineH['Vat']/100), 2);
 
         $this->lineH[] = $lineH;
 
-        $this->TotalCustPrice = $this->totalSum + $this->totalMva;
+        $this->TotalCustPrice = $this->totalSum + $this->totalVat;
         #print "<b>TotalCustPrice: $this->TotalCustPrice</b><br>";
         #$this->headH[] = 199; #$this->TotalCustPrice;
         $this->set_head(array('TotalCustPrice' => $this->TotalCustPrice));
+        $this->set_head(array('TotalVat' => $this->totalVat));
     }
 
     /*******************************************************************************
@@ -1230,8 +1232,9 @@ class invoice {
             $dataH = array();
             $dataH['InvoiceID']             = $this->InvoiceID;
             $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-            $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
-            $dataH['Locked']                = 1;
+            $dataH['FakturabankDateTime']   = strftime("%F %T");
+            // If the invoice is not locked, lock it.
+            if ($this->headH['Locked'] == '0') $this->lock();
 
             $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
         }

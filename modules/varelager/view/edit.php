@@ -42,7 +42,7 @@ print $_lib['sess']->doctype
                 <th>Produktnr</th>
                 <th>Produktnavn</th>
                 <th style="text-align: right">Enhetsst&oslash;relse</th>
-                <th style="text-align: right">Antall enheter i pris</th>
+                <th style="text-align: right">Antall enheter i esken</th>
                 <th style="text-align: right">Kostpris</th>
                 <th style="text-align: right">Antall</th>
                 <th style="text-align: right">Sum</th>
