@@ -349,7 +349,7 @@ class convert {
   {
     $datetime = $args['value'];
     #print "Datetime input: $datetime<br>";
-    if(preg_match('{(.*) (\d\d:\d\d:\d\d)?$}', $datetime, $m))
+    if(preg_match('{(.*)[ T](\d\d:\d\d:\d\d)(\.\d\d\d)?$}', $datetime, $m))
     {
       #Find the pk value  (text or int)
       $date  = $this->Date(array('value' => $m[1]));
