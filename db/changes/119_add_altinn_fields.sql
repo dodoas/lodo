@@ -54,6 +54,17 @@ PartyReference varchar(50) DEFAULT NULL,
 PRIMARY KEY (AltinnReport1ID)
 );
 
+-- Add table to store info from first report
+DROP TABLE IF EXISTS altinnReport1salary;
+-- Create new tables for altinnReport1salary
+
+CREATE TABLE IF NOT EXISTS altinnReport1salary (
+AltinnReport1ID int(11) NOT NULL,
+SalaryId int(11) NOT NULL,
+SalaryId int(11) NOT NULL,
+JournalID int(11) NOT NULL,
+PRIMARY KEY (AltinnReport1ID, SalaryId)
+);
 
 -- Add table to store info from second report
 DROP TABLE IF EXISTS altinnReport2;
@@ -106,15 +117,6 @@ PRIMARY KEY (AltinnReport3ID)
 );
 
 
--- Add table to store info from first report
-DROP TABLE IF EXISTS altinnReport1salary;
--- Create new tables for altinnReport1salary
-
-CREATE TABLE IF NOT EXISTS altinnReport1salary (
-AltinnReport1ID int(11) NOT NULL,
-SalaryId int(11) NOT NULL,
-PRIMARY KEY (AltinnReport1ID, SalaryId)
-);
 
 
 -- Add table to store info from second report
@@ -199,7 +201,7 @@ PRIMARY KEY (AltinnReport5ID)
 -- -- DROP OccupationCodeID,
 -- -- DROP CreditDaysUpdatedAt,
 -- -- DROP WorkPercentUpdatedAt
--- -- DROP inCurentPositionSince
+-- -- DROP inCurrentPositionSince
 -- -- ;
 -- --
 -- -- ALTER TABLE salary

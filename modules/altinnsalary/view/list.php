@@ -62,7 +62,7 @@ print $_lib['sess']->doctype
 
         while($_row = $_lib['db']->db_fetch_object($result_salary)){
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>"><? print $_row->JournalID ?></a>
+          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? print $_row->JournalID ?></a>
         <? } ?>
       </td>
     </tr>
@@ -99,11 +99,7 @@ print $_lib['sess']->doctype
     <? } ?>
     <?
     if (!$so2_last) {
-      print ('<tr style="border-top: 5px solid black">
-              <td style="border-top: 5px solid black" colspan="200">');
-              print ('Simon! I quit!
-              </td>
-            </tr>');
+      print ('<tr><td style="border-top:5px solid black" colspan="30"></td></tr>');
       continue;
     }
     ?>

@@ -149,7 +149,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
 
     $values = array();
-    $values['Periode']  = $_POST['altinnReport1_periode'];
+    $values['Period']  = $_POST['altinnReport1_periode'];
     $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
     $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
     $values['ReceiptHistory']  = $result->SubmitFormTaskBasicResult->ReceiptHistory;
@@ -175,7 +175,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $res = $_lib['db']->db_query($query);
     $row = $_lib['db']->db_fetch_object($res);
 
-    $query_salary  = "SELECT SalaryID FROM salary WHERE PayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
+    $query_salary  = "SELECT SalaryID, JournalID FROM salary WHERE PayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
     $result_salary = $_lib['db']->db_query($query_salary);
     $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
     while($_row = $_lib['db']->db_fetch_object($result_salary)){
