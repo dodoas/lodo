@@ -778,7 +778,11 @@ class form3
 
     function Occupation_menu3($args)
     {
-        $args['query']          = $this->_QUERY['form']['occupationmenu'];
+        // if $args['show_all'] is NOT set then we want to set $args['query']
+        // and this function will return occupations stored in database
+        if(!isset($args['show_all'])){
+          $args['query']          = $this->_QUERY['form']['occupationmenu'];
+        }
 
         return $this->_MakeSelect($args);
     }
