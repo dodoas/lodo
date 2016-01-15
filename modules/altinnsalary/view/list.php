@@ -57,12 +57,15 @@ print $_lib['sess']->doctype
       <td><?print $so1row->ReceiptStatusCode; ?></td>
       <td>
         <?
-        $query_salary = "SELECT * FROM altinnReport1salary WHERE AltinnReport1ID = ".$so1row->AltinnReport1ID." ORDER BY SalaryId ASC";
-        $result_salary  = $_lib['db']->db_query($query_salary);
+        $query_altin_salary = "SELECT * FROM altinnReport1salary WHERE AltinnReport1ID = ".$so1row->AltinnReport1ID." ORDER BY SalaryId ASC";
+        $result_altin_salary  = $_lib['db']->db_query($query_altin_salary);
 
-        while($_row = $_lib['db']->db_fetch_object($result_salary)){
+        while($_row = $_lib['db']->db_fetch_object($result_altin_salary)){
+          $query_salary = "SELECT * FROM salary WHERE JournalID = ".$_row->JournalID;
+          $result_salary  = $_lib['db']->db_query($query_salary);
+          $_salary = $_lib['db']->db_fetch_object($result_salary);
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? print $_row->JournalID ?></a>
+          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? ($_salary->UpdatedAt > $_row->UpdatedAt) ? print $_row->JournalID." (endrett)" : print $_row->JournalID ?></a>
         <? } ?>
       </td>
     </tr>
@@ -177,5 +180,3 @@ print $_lib['sess']->doctype
 
 </body>
 </html>
-
-

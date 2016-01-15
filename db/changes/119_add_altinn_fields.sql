@@ -61,8 +61,8 @@ DROP TABLE IF EXISTS altinnReport1salary;
 CREATE TABLE IF NOT EXISTS altinnReport1salary (
 AltinnReport1ID int(11) NOT NULL,
 SalaryId int(11) NOT NULL,
-SalaryId int(11) NOT NULL,
 JournalID int(11) NOT NULL,
+UpdatedAt timestamp NOT NULL,
 PRIMARY KEY (AltinnReport1ID, SalaryId)
 );
 
