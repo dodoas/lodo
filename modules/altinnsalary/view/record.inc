@@ -1,5 +1,6 @@
 <?
 includelogic('altinnsalary/files');
+includelogic('altinnsalary/altinnreport');
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -374,6 +375,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
 
+} elseif($_lib['input']->getProperty('action_generate_xml_report')) {
+  $period = $_REQUEST['altinnReport1_periode'];
+  // generate the altinn report object for the selected period
+  $report = new altinn_report($period);
 }
 
 ?>
