@@ -51,6 +51,8 @@ ReceiptStatusCode varchar(50) DEFAULT NULL,
 ExternalShipmentReference varchar(50) DEFAULT NULL,
 OwnerPartyReference varchar(50) DEFAULT NULL,
 PartyReference varchar(50) DEFAULT NULL,
+MeldingsId varchar(100) DEFAULT NULL,
+ErstatterMeldingsId varchar(100) DEFAULT NULL,
 PRIMARY KEY (AltinnReport1ID)
 );
 

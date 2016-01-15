@@ -42,7 +42,10 @@ print $_lib['sess']->doctype
       <td class="menu">LastChanged</td>
       <td class="menu">ReceiptTypeName</td>
       <td class="menu">ReceiptStatusCode</td>
+      <td class="menu">MeldingsId</td>
+      <td class="menu">ErstatterMeldingsId</td>
       <td class="menu">Salaryes</td>
+      <td class="menu">Resend</td>
     </tr>
 
 
@@ -55,6 +58,8 @@ print $_lib['sess']->doctype
       <td><?print $so1row->LastChanged; ?></td>
       <td><?print $so1row->ReceiptTypeName; ?></td>
       <td><?print $so1row->ReceiptStatusCode; ?></td>
+      <td><?print $so1row->MeldingsId; ?></td>
+      <td><?print $so1row->ErstatterMeldingsId; ?></td>
       <td>
         <?
         $query_altin_salary = "SELECT * FROM altinnReport1salary WHERE AltinnReport1ID = ".$so1row->AltinnReport1ID." ORDER BY SalaryId ASC";
@@ -67,6 +72,14 @@ print $_lib['sess']->doctype
         ?>
           <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? ($_salary->UpdatedAt > $_row->UpdatedAt) ? print $_row->JournalID." (endrett)" : print $_row->JournalID ?></a>
         <? } ?>
+      </td>
+      <td>
+        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
+        <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
+        <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
+        <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print date(DATE_RFC2822); ?>'>
+        <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Resend')) ?>
+        </form>
       </td>
     </tr>
     <tr>

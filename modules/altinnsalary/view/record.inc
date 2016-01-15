@@ -97,7 +97,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
   </Leveranse>
 </melding>
 ';
-
+    // generate new MeldingsId
+    $use_some_variable = 'TODO CHANGE THIS VARIABLE';
+    // here logic should be use old MeldingsID as new erstatterMeldingsID
+    $use_erstatterMeldingsId = $_POST['altinnReport1_MeldingsId'] ? '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>' : '';
     $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
     $params = array(
       'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -127,7 +130,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
                   </InformasjonOmInnsender>
                   <InnsendtInformasjon>
                     <innsending>
-                      <meldingsId>108</meldingsId>
+                      <meldingsId>'.$use_some_variable.'</meldingsId>
+                      '.$use_erstatterMeldingsId.'
                       <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
                     </innsending>
                   </InnsendtInformasjon>
@@ -151,6 +155,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     $values = array();
     $values['Period']  = $_POST['altinnReport1_periode'];
+    $values['MeldingsId']  = $use_some_variable;
+    $values['ErstatterMeldingsId']  = $_POST['altinnReport1_MeldingsId'];
     $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
     $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
     $values['ReceiptHistory']  = $result->SubmitFormTaskBasicResult->ReceiptHistory;
