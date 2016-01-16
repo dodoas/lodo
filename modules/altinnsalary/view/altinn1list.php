@@ -113,7 +113,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       <td class="menu">ExternalShipmentReference</td>
       <td class="menu">OwnerPartyReference</td>
       <td class="menu">PartyReference</td>
-      <td class="menu">Salaryes</td>
+      <td class="menu">Salaries</td>
     </tr>
   </thead>
 

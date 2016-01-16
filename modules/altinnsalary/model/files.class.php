@@ -15,7 +15,7 @@ class altinn_file {
     self::makeFolder($this->folderPath);
 
     // write file to disk
-    return self::writeFile($this->folderPath . "/A-melding.xml", $content);
+    return self::writeFile("/A-melding.xml", $content);
   }
 
   function extract($zipContent) {
@@ -24,31 +24,30 @@ class altinn_file {
     self::makeFolder($this->folderPath);
 
     // Save the ziped file to disk
-    $file = self::writeFile($this->folderPath . "/tilbakemelding.zip", $zipContent);
+    $file = self::writeFile("/tilbakemelding.zip", $zipContent);
 
     // unzip the file. Need -d(esitination folder) otherwise it will
     // will create them in in current folder. I this case '~/'.
     exec("unzip ".$this->folderPath. "/tilbakemelding.zip -d ".$this->folderPath);
 
     // Read the xml from file
-    $xmlContent = self::readFile($this->folderPath . "/tilbakemelding.xml");
+    $xmlContent = self::readFile("/tilbakemelding.xml");
     return $xmlContent;
   }
 
   function makeFolder($name){
-    var_dump("mkdir -p ".$name." <br/>");
     exec("mkdir -p ".$name);
   }
 
   function readFile($file_name){
-    $file = fopen($file_name, "r");
-    $content = fread($file,filesize($file_name));
+    $file = fopen($this->folderPath . $file_name, "r");
+    $content = fread($file,filesize($this->folderPath.$file_name));
     fclose($file);
     return $content;
   }
 
   function writeFile($file_name, $content){
-    $file = fopen($file_name, "w");
+    $file = fopen($this->folderPath . $file_name, "w");
     fwrite($file, $content);
     fclose($file);
     return true;

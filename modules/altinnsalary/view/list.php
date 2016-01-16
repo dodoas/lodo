@@ -42,12 +42,16 @@ print $_lib['sess']->doctype
       <td class="menu">LastChanged</td>
       <td class="menu">ReceiptTypeName</td>
       <td class="menu">ReceiptStatusCode</td>
-      <td class="menu">Salaryes</td>
+      <td class="menu">Salaries</td>
     </tr>
 
 
     <tr>
-      <td><?print $so1row->AltinnReport1ID; ?></td>
+      <td>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $so1row->AltinnReport1ID ?>">
+          <? print $so1row->AltinnReport1ID; ?>
+          </a>
+      </td>
       <td><?print $so1row->Period; ?></td>
       <td><?print $so1row->ReceiptId; ?></td>
       <td><?print $so1row->ReceiptText; ?></td>
@@ -121,7 +125,11 @@ print $_lib['sess']->doctype
     while($so4_row = $_lib['db']->db_fetch_object($so4)) {
     ?>
       <tr>
-        <td><?print $so4_row->AltinnReport4ID; ?></td>
+        <td>
+          <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $so1row->AltinnReport4ID ?>">
+            <? print $so1row->AltinnReport4ID; ?>
+          </a>
+        </td>
         <td><?print $so4_row->req_CorrespondenceID; ?></td>
         <td><?print $so4_row->res_ArchiveReference; ?></td>
         <td><?print $so4_row->res_ConfirmationDate; ?></td>
@@ -164,14 +172,11 @@ print $_lib['sess']->doctype
       </tr>
     <? } ?>
 
-
-
     <tr style="border-top: 5px solid black">
       <td style="border-top: 5px solid black" colspan="200">
       </td>
     </tr>
   <? } ?>
-  </tbody>
 </table>
 
 
