@@ -51,6 +51,8 @@ ReceiptStatusCode varchar(50) DEFAULT NULL,
 ExternalShipmentReference varchar(50) DEFAULT NULL,
 OwnerPartyReference varchar(50) DEFAULT NULL,
 PartyReference varchar(50) DEFAULT NULL,
+MeldingsId varchar(100) DEFAULT NULL,
+ErstatterMeldingsId varchar(100) DEFAULT NULL,
 PRIMARY KEY (AltinnReport1ID)
 );
 
@@ -61,8 +63,8 @@ DROP TABLE IF EXISTS altinnReport1salary;
 CREATE TABLE IF NOT EXISTS altinnReport1salary (
 AltinnReport1ID int(11) NOT NULL,
 SalaryId int(11) NOT NULL,
-SalaryId int(11) NOT NULL,
 JournalID int(11) NOT NULL,
+UpdatedAt timestamp NOT NULL,
 PRIMARY KEY (AltinnReport1ID, SalaryId)
 );
 

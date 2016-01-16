@@ -39,6 +39,7 @@ print $_lib['sess']->doctype ?>
     <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ExternalShipmentReference', 'width'=>'15' , 'value'=>'test_29')) ?>
   </p>
   <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Test Soap1')) ?>
+  <? print $_lib['form3']->submit(array('name'=>'action_generate_xml_report', 'value'=>'Generate XML')) ?>
 </form>
 
 <?
@@ -91,9 +92,13 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 </tbody>
 </table>
 
+<br />
 
+<?
+if (isset($xml_generated)) echo "XML DATA WILL GO HERE";
+?>
 
-<br /><br /><br />
+<br /><br />
 
 <table class="lodo_data">
   <thead>
@@ -136,12 +141,15 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       <td><?print $row->PartyReference; ?></td>
       <td>
         <?
-        $query_salary   = "SELECT * FROM altinnReport1salary WHERE AltinnReport1ID = ".$row->AltinnReport1ID." ORDER BY SalaryId ASC";
-        $result_salary  = $_lib['db']->db_query($query_salary);
+        $query_altin_salary = "SELECT * FROM altinnReport1salary WHERE AltinnReport1ID = ".$row->AltinnReport1ID." ORDER BY SalaryId ASC";
+        $result_altin_salary  = $_lib['db']->db_query($query_altin_salary);
 
-        while($_row = $_lib['db']->db_fetch_object($result_salary)){
+        while($_row = $_lib['db']->db_fetch_object($result_altin_salary)){
+          $query_salary = "SELECT * FROM salary WHERE JournalID = ".$_row->JournalID;
+          $result_salary  = $_lib['db']->db_query($query_salary);
+          $_salary = $_lib['db']->db_fetch_object($result_salary);
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? print $_row->JournalID ?></a>
+          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? ($_salary->UpdatedAt > $_row->UpdatedAt) ? print $_row->JournalID." (endrett)" : print $_row->JournalID ?></a>
         <? } ?>
       </td>
     </tr>
@@ -150,7 +158,10 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   <? } ?>
   </tbody>
 </table>
+<textarea rows='200' cols='200'>
+<?
+echo $report->generateXML(array());
+?>
+</textarea>
 </body>
 </html>
-
-

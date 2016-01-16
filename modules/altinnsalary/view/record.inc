@@ -1,5 +1,6 @@
 <?
 includelogic('altinnsalary/files');
+includelogic('altinnsalary/altinnreport');
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -96,7 +97,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
   </Leveranse>
 </melding>
 ';
-
+    // generate new MeldingsId
+    $use_some_variable = 'TODO CHANGE THIS VARIABLE';
+    // here logic should be use old MeldingsID as new erstatterMeldingsID
+    $use_erstatterMeldingsId = $_POST['altinnReport1_MeldingsId'] ? '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>' : '';
     $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
     $params = array(
       'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -126,7 +130,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
                   </InformasjonOmInnsender>
                   <InnsendtInformasjon>
                     <innsending>
-                      <meldingsId>108</meldingsId>
+                      <meldingsId>'.$use_some_variable.'</meldingsId>
+                      '.$use_erstatterMeldingsId.'
                       <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
                     </innsending>
                   </InnsendtInformasjon>
@@ -150,6 +155,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     $values = array();
     $values['Period']  = $_POST['altinnReport1_periode'];
+    $values['MeldingsId']  = $use_some_variable;
+    $values['ErstatterMeldingsId']  = $_POST['altinnReport1_MeldingsId'];
     $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
     $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
     $values['ReceiptHistory']  = $result->SubmitFormTaskBasicResult->ReceiptHistory;
@@ -374,6 +381,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
 
+} elseif($_lib['input']->getProperty('action_generate_xml_report')) {
+  $period = $_REQUEST['altinnReport1_periode'];
+  // generate the altinn report object for the selected period
+  $report = new altinn_report($period);
 }
 
 ?>
