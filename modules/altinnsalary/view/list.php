@@ -143,8 +143,8 @@ print $_lib['sess']->doctype
     ?>
       <tr>
         <td>
-          <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $so1row->AltinnReport4ID ?>">
-            <? print $so1row->AltinnReport4ID; ?>
+          <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&AltinnReport4ID=<? print $so4_row->AltinnReport4ID ?>">
+            <? print $so4_row->AltinnReport4ID; ?>
           </a>
         </td>
         <td><?print $so4_row->req_CorrespondenceID; ?></td>

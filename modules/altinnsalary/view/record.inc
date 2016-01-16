@@ -287,7 +287,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     'userPinCode'    => $pins[$_rowC->res_KodeNr],
     'authMethod'     => 'AltinnPin',
-    'CorrespondenceID' => $_rowB->res_ReceiversReference,
+    'correspondenceID' => $_rowB->res_ReceiversReference,
     'languageID'     => '1'
   );
 
