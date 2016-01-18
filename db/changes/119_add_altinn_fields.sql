@@ -6,10 +6,10 @@ ADD WorkTimeScheme varchar(50) DEFAULT '',
 ADD TypeOfEmployment varchar(50) DEFAULT 'Ordinaer',
 
 ADD OccupationID bigint(20) DEFAULT 0,
-ADD CreditDaysUpdatedAt timestamp,
+ADD CreditDaysUpdatedAt date,
 -- TS timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-ADD WorkPercentUpdatedAt timestamp,
+ADD WorkPercentUpdatedAt date,
 ADD inCurrentPositionSince date
 ;
 

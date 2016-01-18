@@ -121,7 +121,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     </td>
   </tr>
   <tr>
-    <td class='menu'>OccupationCode ID</td>
+    <td class='menu'>Yrke</td>
     <td></td>
     <td>
       <? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table, 'field'=>'OccupationID', 'value'=>$account->OccupationID)); ?>
@@ -240,6 +240,10 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
 
 </td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
+    <td>Kredittid oppdatert:</td>
+    <td>
+      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'CreditDaysUpdatedAt', 'value'=>$account->CreditDaysUpdatedAt)) ?>
+    </td>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
@@ -307,9 +311,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Stillingsprosent</td>
     <td></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent, 'class'=>'lodoreqfelt')) ?></td>
-    <td></td>
-    <td><? 
-  
+    <td>
+      Stillingsprosent oppdatert:
+      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkPercentUpdatedAt', 'value'=>$account->WorkPercentUpdatedAt)) ?>
+    </td>
+    <td><?
+
       if($_lib['db']->db_numrows($salary_conf) != 0) {
         $salary_conf_row = $_lib['db']->db_fetch_assoc($salary_conf);
         printf( "L&oslash;nnsmal %d", $salary_conf_row['SalaryConfID']);

@@ -190,7 +190,7 @@ $result2 = $_lib['db']->db_query($query2);
             'godstransportPaaVei'=>'Godstransport på vei'
         );
       ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $CalculationCodeForTaxTypes, 'table'=> 'company', 'field'=>'CalculationCodeForTax', 'value'=>$row->CalculationCodeForTax)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $CalculationCodeForTaxTypes, 'table'=> 'company', 'width'=>60, 'field'=>'CalculationCodeForTax', 'value'=>$row->CalculationCodeForTax)); ?>
     </td>
   </tr>
 
