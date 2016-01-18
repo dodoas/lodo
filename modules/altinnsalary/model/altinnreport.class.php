@@ -75,8 +75,7 @@ class altinn_report {
     // work measurement, ex. hours per week
     $arbeidsforhold->antallTimerPerUkeSomEnFullStillingTilsvarer = $employee->Workmeasurement;
     // work measurement type
-    // TODO: checkout what values this field can take and do not hardcode
-    $arbeidsforhold->avloenningstype = 'fast';
+    $arbeidsforhold->avloenningstype =  $employee->WorkTimeScheme;
     // occupation
     $arbeidsforhold->yrke = $occupation_code->YNr . $occupation_code->LNr;
     // work time scheme, ex. no shifts
@@ -137,10 +136,8 @@ class altinn_report {
 
     // amount for forskuddstrekk
     $virksomhet->inntektsmottaker->forskuddstrekk->beloep = $forskuddstrekk;
-    // TODO: implement field beregningskodeForArbeidsgiveravgift
-    // use convertNorwegianLettersToASCII since we might have it as utf8 in the db
     // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
-    $loennOgGodtgjoerelse->beregningskodeForArbeidsgiveravgift = self::convertNorwegianLettersToASCII('generelleNaeringer');
+    $loennOgGodtgjoerelse->beregningskodeForArbeidsgiveravgift = $_lib['sess']->get_companydef('CalculationCodeForTax');
     // amount
     $loennOgGodtgjoerelse->avgiftsgrunnlagBeloep = $arbeidsgiveravgiftbeloep;
     // taxing zone code
