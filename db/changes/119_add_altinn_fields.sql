@@ -13,11 +13,17 @@ ADD WorkPercentUpdatedAt timestamp,
 ADD inCurrentPositionSince date
 ;
 
+UPDATE accountplan SET CreditDaysUpdatedAt=WorkStart, WorkPercentUpdatedAt=WorkStart, inCurrentPositionSince=WorkStart WHERE AccountPlanType LIKE '%employee%';
+
 -- Add missing altinn field in salary
 ALTER TABLE salary
 ADD ActualPayDate date DEFAULT NULL
 ;
 
+-- Add new field CalculationCodeForTax to company table
+ALTER TABLE company
+ADD CalculationCodeForTax varchar(60) DEFAULT ''
+;
 
 DROP TABLE IF EXISTS occupation;
 -- Create new tables for Occupation, we will fetch data from ssb.no/a/yrke

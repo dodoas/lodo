@@ -176,6 +176,23 @@ $result2 = $_lib['db']->db_query($query2);
     <td></td>
     <td></td>
   </tr>
+  <tr>
+   <td>Beregningskode for arbeidsgiveravgift</td>
+   <td>
+      <?
+        $CalculationCodeForTaxTypes = array(
+            'generelleNaeringer'=>'Generelle næringer',
+            'helseforetakOgDelerAvStatsforvaltningen'=>'Helseforetakene og deler av statsforvaltningen',
+            'jordOgSkogbrukFiskeri'=>'Jord- og skogbruk, fiskeri etc.',
+            'kunForskuddstrekk'=>'Kun innberetning av forskuddstrekk',
+            'svalbard'=>'Lønnstrekk for Svalbard',
+            'sektorunnattAktivitet'=>'Sektorunnatt aktivitet',
+            'godstransportPaaVei'=>'Godstransport på vei'
+        );
+      ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $CalculationCodeForTaxTypes, 'table'=> 'company', 'field'=>'CalculationCodeForTax', 'value'=>$row->CalculationCodeForTax)); ?>
+    </td>
+  </tr>
 
   <?
   /*if($_lib['sess']->get_person('AccessLevel') > 2)

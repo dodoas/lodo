@@ -96,11 +96,11 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td>
       <?
         $WorkTimeSchemeTypes = array(
-          'Fastloeann'=>'Fastloeann',
-          'TimeLoenn'=>'TimeLoenn',
-          'Akkord'=>'Akkord',
-          'Provisjon'=>'Provisjon',
-          'Honorar'=>'Honorar'
+          'fast'=>'Fastloeann',
+          'time'=>'TimeLoenn',
+          'akkord'=>'Akkord',
+          'provisjonProsent'=>'Provisjon',
+          'honorar'=>'Honorar'
         );
       ?>
       <? print $_lib['form3']->Generic_menu3(array('data' => $WorkTimeSchemeTypes, 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme)); ?>
