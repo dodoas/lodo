@@ -15,6 +15,14 @@ ADD inCurrentPositionSince date
 
 UPDATE accountplan SET CreditDaysUpdatedAt=WorkStart, WorkPercentUpdatedAt=WorkStart, inCurrentPositionSince=WorkStart WHERE AccountPlanType LIKE '%employee%';
 
+-- Add missing altinn fields on salary
+ALTER TABLE salary
+ADD ShiftType varchar(50),
+ADD WorkTimeScheme varchar(50),
+ADD TypeOfEmployment varchar(50),
+ADD OccupationID bigint(20)
+;
+
 -- Add missing altinn field in salary
 ALTER TABLE salary
 ADD ActualPayDate date DEFAULT NULL

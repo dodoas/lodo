@@ -228,6 +228,10 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $postmain['salary_JournalDate']         = $journalDate;
         $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
         $postmain['salary_KommuneID']           = $accountplan->KommuneID;
+        $postmain['salary_ShiftType']           = $accountplan->ShiftType;
+        $postmain['salary_OccupationID']        = $accountplan->OccupationID;
+        $postmain['salary_WorkTimeScheme']      = $accountplan->WorkTimeScheme;
+        $postmain['salary_TypeOfEmployment']    = $accountplan->TypeOfEmployment;
 
         if($accountplan->EnableCredit == 1)
             $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
