@@ -36,7 +36,14 @@ if ($_lib['input']->getProperty('action_soap1')) {
   if (empty($_POST['altinnReport1_periode'])){
     $_lib['message']->add('Legg inn: periode');
   } else {
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>
+    $period = $_REQUEST['altinnReport1_periode'];
+    // generate the altinn report object for the selected period
+    $report = new altinn_report($period);
+    // TODO: Add error checking, after it is implemented in report class
+    $xml = $report->generateXML();
+    $xml_generated = true;
+/*
+'<?xml version="1.0" encoding="UTF-8"?>
 <melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0">
   <Leveranse>
     <leveringstidspunkt>2015-12-11T00:00:00Z</leveringstidspunkt>
@@ -97,8 +104,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   </Leveranse>
 </melding>
 ';
-    // generate new MeldingsId
-    $use_some_variable = 'TODO CHANGE THIS VARIABLE';
+*/
     // here logic should be use old MeldingsID as new erstatterMeldingsID
     $use_erstatterMeldingsId = $_POST['altinnReport1_MeldingsId'] ? '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>' : '';
     $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
@@ -130,7 +136,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
                   </InformasjonOmInnsender>
                   <InnsendtInformasjon>
                     <innsending>
-                      <meldingsId>'.$use_some_variable.'</meldingsId>
+                      <meldingsId>'.$report->meldingsId.'</meldingsId>
                       '.$use_erstatterMeldingsId.'
                       <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
                     </innsending>
@@ -155,7 +161,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     $values = array();
     $values['Period']  = $_POST['altinnReport1_periode'];
-    $values['MeldingsId']  = $use_some_variable;
+    $values['MeldingsId']  = $report->meldingsId;
     $values['ErstatterMeldingsId']  = $_POST['altinnReport1_MeldingsId'];
     $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
     $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
@@ -385,6 +391,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $period = $_REQUEST['altinnReport1_periode'];
   // generate the altinn report object for the selected period
   $report = new altinn_report($period);
+  $xml_generated = true;
 }
 
 ?>

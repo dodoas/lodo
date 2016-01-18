@@ -33,6 +33,7 @@ class altinn_report {
   function populateReportObject() {
     global $_lib;
 
+    $leveranse = null;
     // leveranse = deliver
     // delivery date
     $leveranse->leveringstidspunkt = strftime('%FT%TZ', time());
@@ -41,9 +42,13 @@ class altinn_report {
     // salary system
     $leveranse->kildesystem = 'LODO';
 
+    // government tax
+    // arbeidsgiveravgift = tax that the company pays
+    $arbeidsgiveravgiftbeloep = 0.0;
+
     // message id
     // save for future use in creation of SOAP request
-    $meldings_id = 'Report for ' . $_lib['sess']->get_companydef('OrgNumber') . ' at ' . strftime('%FT%TZ', time());
+    $meldings_id = 'report_for_' . $_lib['sess']->get_companydef('OrgNumber') . '_at_' . strftime('%FT%TZ', time());
     $leveranse->meldingsId = $meldings_id;
     $this->meldingsId = $meldings_id;
 
@@ -51,91 +56,94 @@ class altinn_report {
     // norskIdentifikator = norwegian identifier, personal id or company org number
     $leveranse->opplysningspliktig->norskIdentifikator = $_lib['sess']->get_companydef('OrgNumber'); 
 
+    $virksomhet = null;
     // select salary and the employee connected to it
-    // TODO: loop through all instead of just using the first one
-    $salary = $this->salaries[0];
-    $employee = $this->employees[$salary->AccountPlanID];
+    foreach($this->employees as $key_employee => $employee) {
+      foreach($this->salaries[$employee->AccountPlanID] as $key_salary => $salary) {
 
-    // get the occupation of the employee in the company
-    $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . $employee->OccupationID;
-    $result_occupation  = $_lib['db']->db_query($query_occupation);
-    $occupation_code = $_lib['db']->db_fetch_object($result_occupation);
+        $inntektsmottaker = null;
+        // forskuddstrekk = tax that is taken from the employee
+        $forskuddstrekk = 0.0;
+        // get the occupation of the employee in the company
+        $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . $employee->OccupationID;
+        $result_occupation  = $_lib['db']->db_query($query_occupation);
+        $occupation_code = $_lib['db']->db_fetch_object($result_occupation);
 
-    // norwegian id for company the employee works for
-    $virksomhet->norskIdentifikator = $_lib['sess']->get_companydef('OrgNumber');
-    // norwegian id for the employee, personal id number
-    $inntektsmottaker->norskIdentifikator = $employee->SocietyNumber;
-    // name and birthdate
-    $inntektsmottaker->identifiserendeInformasjon->navn = $employee->FirstName . ' ' . $employee->LastName;
-    $inntektsmottaker->identifiserendeInformasjon->foedselsdato = strftime('%F', strtotime($employee->BirthDate));
-    // employment date
-    $arbeidsforhold->startdato = strftime('%F', strtotime($employee->WorkStart));
-    // type of employment
-    $arbeidsforhold->typeArbeidsforhold = $employee->TypeOfEmployment;
-    // work measurement, ex. hours per week
-    $arbeidsforhold->antallTimerPerUkeSomEnFullStillingTilsvarer = $employee->Workmeasurement;
-    // work measurement type
-    $arbeidsforhold->avloenningstype =  $employee->WorkTimeScheme;
-    // occupation
-    $arbeidsforhold->yrke = $occupation_code->YNr . $occupation_code->LNr;
-    // work time scheme, ex. no shifts
-    $arbeidsforhold->arbeidstidsordning = $employee->ShiftType;
-    // employment percentage
-    $arbeidsforhold->stillingsprosent = (int) $employee->WorkPercent;
-    // date of last change for payment date for salary
-    $arbeidsforhold->sisteLoennsendringsdato = strftime('%F', strtotime($employee->CreditDaysUpdatedAt));
-    // date of last change for position in company
-    $arbeidsforhold->sisteDatoForStillingsprosentendring = strftime('%F', strtotime($employee->inCurrentPositionSince));
-    // date of last change for work percentage
-    $arbeidsforhold->loennsansiennitet = strftime('%F', strtotime($employee->WorkPercentUpdatedAt));
-    // work relation
-    $inntektsmottaker->arbeidsforhold = $arbeidsforhold;
-    // income reciever
-    $virksomhet->inntektsmottaker = $inntektsmottaker;
+        // norwegian id for company the employee works for
+        $virksomhet->norskIdentifikator = $_lib['sess']->get_companydef('OrgNumber');
+        // norwegian id for the employee, personal id number
+        $inntektsmottaker->norskIdentifikator = $employee->SocietyNumber;
+        // name and birthdate
+        $inntektsmottaker->identifiserendeInformasjon->navn = $employee->FirstName . ' ' . $employee->LastName;
+        $inntektsmottaker->identifiserendeInformasjon->foedselsdato = strftime('%F', strtotime($employee->BirthDate));
+        $arbeidsforhold = null;
+        // employment date
+        $arbeidsforhold->startdato = strftime('%F', strtotime($employee->WorkStart));
+        // type of employment
+        $arbeidsforhold->typeArbeidsforhold = $employee->TypeOfEmployment;
+        // work measurement, ex. hours per week
+        $arbeidsforhold->antallTimerPerUkeSomEnFullStillingTilsvarer = $employee->Workmeasurement;
+        // work measurement type
+        $arbeidsforhold->avloenningstype =  $employee->WorkTimeScheme;
+        // occupation
+        $arbeidsforhold->yrke = $occupation_code->YNr . $occupation_code->LNr;
+        // work time scheme, ex. no shifts
+        $arbeidsforhold->arbeidstidsordning = $employee->ShiftType;
+        // employment percentage
+        $arbeidsforhold->stillingsprosent = (int) $employee->WorkPercent;
+        // date of last change for payment date for salary
+        $arbeidsforhold->sisteLoennsendringsdato = strftime('%F', strtotime($employee->CreditDaysUpdatedAt));
+        // date of last change for position in company
+        $arbeidsforhold->sisteDatoForStillingsprosentendring = strftime('%F', strtotime($employee->inCurrentPositionSince));
+        // date of last change for work percentage
+        $arbeidsforhold->loennsansiennitet = strftime('%F', strtotime($employee->WorkPercentUpdatedAt));
+        // work relation
+        $inntektsmottaker->arbeidsforhold = $arbeidsforhold;
 
-    // government tax
-    // forskuddstrekk = tax that is taken from the employee
-    // arbeidsgiveravgift = tax that the company pays
-    $forskuddstrekk = 0.0;
-    $arbeidsgiveravgiftbeloep = 0.0;
-    // income entries/slary lines
-    foreach($this->salary_lines[$salary->SalaryID] as $salary_line) {
-      // if the code is 950 that is forskuddstrekk
-      // if not that is a regular income entry
-      if ($salary_line->SalaryCode == 950) $forskuddstrekk += (float) $salary_line->AmountThisPeriod;
-      else {
-        if ($salary_line->AmountThisPeriod == 0) continue;
-        // fordel = determines if the income entry is positive or negative
-        $inntekt->fordel = ($salary_line->LineNumber <= 69) ? 'kontantytelse' : 'utgiftsgodtgjoerelse';
-        // boolean flags if the entry falls under some taxing regulation or not
-        // both utloeserArbeidsgiveravgift and inngaarIGrunnlagForTrekk fields
-        // first is true if the salary line code has -A in it
-        // the second is true if we have a salary code for this entry
-        $inntekt->utloeserArbeidsgiveravgift = (strstr($salary_line->SalaryCode, '-A')) ? true : false;
-        $inntekt->inngaarIGrunnlagForTrekk = (!empty($salary_line->SalaryCode)) ? true : false;
-        // start and end date for this income
-        $inntekt->startdatoOpptjeningsperiode = $salary->ValidFrom;
-        $inntekt->sluttdatoOpptjeningsperiode = $salary->ValidTo;
-        // amount for entry
-        $inntekt->beloep = $salary_line->AmountThisPeriod;
-        // calculate total for arbeidsgiveravgift amount
-        $arbeidsgiveravgiftbeloep += $salary_line->AmountThisPeriod;
-        // description for the entry
-        $inntekt->loennsinntekt->beskrivelse = self::convertNorwegianLettersToASCII($salary_line->SalaryText);
-        // there can be multiple entries for one salary so we add to an array
-        $virksomhet->inntektsmottaker->inntekt[] = $inntekt;
+        // income entries/slary lines
+        $inntekt = null;
+        foreach($this->salary_lines[$salary->SalaryID] as $salary_line) {
+          if ($salary_line->AmountThisPeriod == 0) continue;
+          // if the code is 950 that is forskuddstrekk
+          // if not that is a regular income entry
+          if ($salary_line->SalaryCode == 950) $forskuddstrekk += (float) $salary_line->AmountThisPeriod;
+          else {
+            // fordel = determines if the income entry is positive or negative
+            $inntekt->fordel = ($salary_line->LineNumber <= 69) ? 'kontantytelse' : 'utgiftsgodtgjoerelse';
+            // boolean flags if the entry falls under some taxing regulation or not
+            // both utloeserArbeidsgiveravgift and inngaarIGrunnlagForTrekk fields
+            // first is true if the salary line code has -A in it
+            // the second is true if we have a salary code for this entry
+            $inntekt->utloeserArbeidsgiveravgift = (strstr($salary_line->SalaryCode, '-A')) ? true : false;
+            $inntekt->inngaarIGrunnlagForTrekk = (!empty($salary_line->SalaryCode)) ? true : false;
+            // start and end date for this income
+            $inntekt->startdatoOpptjeningsperiode = $salary->ValidFrom;
+            $inntekt->sluttdatoOpptjeningsperiode = $salary->ValidTo;
+            // amount for entry
+            $inntekt->beloep = $salary_line->AmountThisPeriod;
+            // calculate total for arbeidsgiveravgift amount
+            $arbeidsgiveravgiftbeloep += $salary_line->AmountThisPeriod;
+            // description for the entry
+            $inntekt->loennsinntekt->beskrivelse = self::convertNorwegianLettersToASCII($salary_line->SalaryText);
+            // there can be multiple entries for one salary so we add to an array
+            $inntektsmottaker->inntekt[] = $inntekt;
+          }
+        }
+
+        // get municipality tax percentage and zone info for arbeidsgiveravgift
+        $query_kommune_tax = "SELECT agag.*
+                              FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
+                              WHERE k.KommuneNumber = " . $_lib['sess']->get_companydef('CompanyMunicipality');
+        $result_kommune_tax  = $_lib['db']->db_query($query_kommune_tax);
+        $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
+
+        // amount for forskuddstrekk
+        $inntektsmottaker->forskuddstrekk->beloep = $forskuddstrekk;
+        // income reciever
+        $virksomhet->inntektsmottaker[] = $inntektsmottaker;
       }
     }
-
-    // get municipality tax percentage and zone info for arbeidsgiveravgift
-    $query_kommune_tax = "SELECT agag.*
-                          FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
-                          WHERE k.KommuneNumber = " . $_lib['sess']->get_companydef('CompanyMunicipality');
-    $result_kommune_tax  = $_lib['db']->db_query($query_kommune_tax);
-    $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
-
-    // amount for forskuddstrekk
-    $virksomhet->inntektsmottaker->forskuddstrekk->beloep = $forskuddstrekk;
+    $loennOgGodtgjoerelse = null;
     // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
     $loennOgGodtgjoerelse->beregningskodeForArbeidsgiveravgift = $_lib['sess']->get_companydef('CalculationCodeForTax');
     // amount
@@ -173,7 +181,7 @@ class altinn_report {
                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
-      $this->salaries[] = $salary;
+      $this->salaries[$salary->AccountPlanID][] = $salary;
       self::fetchSalaryLines($salary);
     }
   }
@@ -209,7 +217,7 @@ class altinn_report {
 
 /* Generate XML function creates an XML used for A02
  */
-  function generateXML($args) {
+  function generateXML($args = array()) {
     self::populateReportObject();
     return self::generateXMLFromObject($this->melding);
   }
@@ -264,7 +272,7 @@ class altinn_report {
                 $node_t = $doc->importNode($tmp_node, true);
                 $node->appendChild($node_t);
               }
-              $node_->appendChild($node);
+              $dummy_node->appendChild($node);
 
             }
           }

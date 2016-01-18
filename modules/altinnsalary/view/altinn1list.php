@@ -43,7 +43,7 @@ print $_lib['sess']->doctype ?>
 </form>
 
 <?
-$query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID AND PayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%' order by S.JournalID desc";
+$query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID AND ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%' order by S.JournalID desc";
 $result_salary  = $_lib['db']->db_query($query_salary);
 ?>
 
@@ -92,13 +92,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 </tbody>
 </table>
 
-<br />
-
-<?
-if (isset($xml_generated)) echo "XML DATA WILL GO HERE";
-?>
-
-<br /><br />
+<br /><br /><br />
 
 <table class="lodo_data">
   <thead>
@@ -158,10 +152,18 @@ if (isset($xml_generated)) echo "XML DATA WILL GO HERE";
   <? } ?>
   </tbody>
 </table>
+
+<?
+if (isset($xml_generated)) {
+  echo "XML DATA:";
+?>
 <textarea rows='200' cols='200'>
 <?
-echo $report->generateXML(array());
+echo $report->generateXML();
 ?>
 </textarea>
+<?
+}
+?>
 </body>
 </html>
