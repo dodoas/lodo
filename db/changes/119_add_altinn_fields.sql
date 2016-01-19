@@ -3,7 +3,7 @@ ALTER TABLE accountplan
 ADD ShiftType varchar(50) DEFAULT 'ikkeShift',
 ADD Workmeasurement decimal(4,2)  DEFAULT 0,
 ADD WorkTimeScheme varchar(50) DEFAULT '',
-ADD TypeOfEmployment varchar(50) DEFAULT 'Ordinaer',
+ADD TypeOfEmployment varchar(50) DEFAULT 'ordinaer',
 
 ADD OccupationID bigint(20) DEFAULT 0,
 ADD CreditDaysUpdatedAt date,

@@ -155,11 +155,15 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 
 <?
 if (isset($xml_generated)) {
-  echo "XML DATA:";
+  $xml = $report->generateXML();
+  echo "ERRORS:<br/>";
+  if (!empty($report->errors)) foreach($report->errors as $error) echo '<p>' . $error . '</p>';
+  else echo '<p>No errors.</p>';
+  echo "XML DATA:<br/>";
 ?>
-<textarea rows='200' cols='200'>
+<textarea rows='100' cols='100'>
 <?
-echo $report->generateXML();
+echo $xml;
 ?>
 </textarea>
 <?
