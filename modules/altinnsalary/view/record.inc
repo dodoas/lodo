@@ -151,7 +151,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
           'Attachment' => array(
             'Name' => 'A-melding',
             'FileName' => 'amelding.xml',
-            'AttachementData' => base64_encode($xml)
+            'AttachementData' => $xml
           )
         )
       )
