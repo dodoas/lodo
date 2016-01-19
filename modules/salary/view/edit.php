@@ -205,19 +205,13 @@ $formname = "salaryUpdate";
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
     <th class="sub"><?
-            if($kommune) {
-                printf("%s %s", $kommune->KommuneNumber, $kommune->KommuneName);
-            }
-            else {
-                print $_lib['form3']->kommune_menu(array(
-                                                       'table' => 'salary',
-                                                       'field' => 'KommuneID',
-                                                       'value' => 0,
-                                                       'accesskey' => 'K',
-                                                       'pk' => $head->SalaryID,
-
-                                                       ));
-            }
+            print $_lib['form3']->kommune_menu(array(
+                'table' => 'salary',
+                'field' => 'KommuneID',
+                'value' => $head->KommuneID,
+                'accesskey' => 'K',
+                'pk' => $head->SalaryID,
+            ));
     ?>
   </th>
     <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number">
