@@ -49,7 +49,7 @@ print $_lib['sess']->doctype
       <td class="menu">Check Status</td>
     </tr>
 
-
+v
     <tr>
       <td>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $so1row->AltinnReport1ID ?>">
@@ -102,29 +102,49 @@ print $_lib['sess']->doctype
       <td class="menu">ReceiptText</td>
       <td class="menu">ReceiversReference</td>
       <td class="menu">ArchiveReference</td>
+      <td class="menu"></td>
+      <td class="menu"></td>
+      <td class="menu">Get Feedback</td>
+      <td class="menu">Archive</td>
     </tr>
 
     <?
-    $so2_query = "SELECT * FROM altinnReport2 WHERE res_ReceiptId = ".$so1row->ReceiptId." ORDER BY res_ReceiversReference DESC , AltinnReport2ID LIMIT 1";
-    $so2 = $_lib['db']->db_query($so2_query);
-    $so2_last = null;
-    while($so2_row = $_lib['db']->db_fetch_object($so2)) {
-      $so2_last = $so2_row;
+    $so2query = "SELECT * FROM altinnReport2 WHERE res_ReceiptId = ".$so1row->ReceiptId." ORDER BY res_ReceiversReference DESC , AltinnReport2ID LIMIT 1";
+    $so2 = $_lib['db']->db_query($so2query);
+    $so2last = null;
+    while($so2row = $_lib['db']->db_fetch_object($so2)) {
+      $so2last = $so2row;
     ?>
       <tr>
-        <td><?print $so2_row->AltinnReport2ID; ?></td>
-        <td><?print $so2_row->res_LastChanged; ?></td>
-        <td><?print $so2_row->res_ReceiptId; ?></td>
-        <td><?print $so2_row->res_ReceiptStatus; ?></td>
-        <td><?print $so2_row->res_ReceiptHistory; ?></td>
-        <td><?print $so2_row->res_ReceiptTemplate; ?></td>
-        <td><?print $so2_row->res_ReceiptText; ?></td>
-        <td><?print $so2_row->res_ReceiversReference; ?></td>
-        <td><?print $so2_row->res_ArchiveReference; ?></td>
+        <td><?print $so2row->AltinnReport2ID; ?></td>
+        <td><?print $so2row->res_LastChanged; ?></td>
+        <td><?print $so2row->res_ReceiptId; ?></td>
+        <td><?print $so2row->res_ReceiptStatus; ?></td>
+        <td><?print $so2row->res_ReceiptHistory; ?></td>
+        <td><?print $so2row->res_ReceiptTemplate; ?></td>
+        <td><?print $so2row->res_ReceiptText; ?></td>
+        <td><?print $so2row->res_ReceiversReference; ?></td>
+        <td><?print $so2row->res_ArchiveReference; ?></td>
+        <td></td>
+        <td></td>
+        <td>
+          <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.confirm_authentication" method="post">
+            <input type="hidden" name="request_type" value='feedback'>
+            <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
+            <? print $_lib['form3']->submit(array('name'=>'action_confirm_authentication', 'value'=>'Get Feedback')) ?>
+          </form>
+        </td>
+        <td>
+          <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.confirm_authentication" method="post">
+            <input type="hidden" name="request_type" value='archive'>
+            <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
+            <? print $_lib['form3']->submit(array('name'=>'action_confirm_authentication', 'value'=>'Archive')) ?>
+          </form>
+        </td>
       </tr>
     <? } ?>
     <?
-    if (!$so2_last) {
+    if (!$so2last) {
       print ('<tr><td style="border-top:5px solid black" colspan="30"></td></tr>');
       continue;
     }
@@ -142,7 +162,7 @@ print $_lib['sess']->doctype
     </tr>
 
     <?
-    $so4_query = "SELECT * FROM altinnReport4 WHERE req_CorrespondenceID = '".$so2_last->res_ReceiversReference."' ORDER BY AltinnReport4ID";
+    $so4_query = "SELECT * FROM altinnReport4 WHERE req_CorrespondenceID = '".$so2last->res_ReceiversReference."' ORDER BY AltinnReport4ID";
     $so4 = $_lib['db']->db_query($so4_query);
     while($so4_row = $_lib['db']->db_fetch_object($so4)) {
     ?>
@@ -177,7 +197,7 @@ print $_lib['sess']->doctype
     </tr>
 
     <?
-    $so5_query = "SELECT * FROM altinnReport5 WHERE req_CorrespondenceID = '".$so2_last->res_ReceiversReference."' ORDER BY AltinnReport5ID";
+    $so5_query = "SELECT * FROM altinnReport5 WHERE req_CorrespondenceID = '".$so2last->res_ReceiversReference."' ORDER BY AltinnReport5ID";
     $so5 = $_lib['db']->db_query($so5_query);
     while($so5_row = $_lib['db']->db_fetch_object($so5)) {
     ?>
