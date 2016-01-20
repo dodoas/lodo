@@ -1,6 +1,9 @@
 <?
 includelogic('altinnsalary/files');
 includelogic('altinnsalary/altinnreport');
+includelogic('accounting/accounting');
+
+$accounting = new accounting();
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -213,6 +216,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $insert_query = substr($insert_query, 0, -1);
       $_lib['db']->db_query($insert_query);
     }
+    $_lib['message']->add('Report sent');
   }
 
 } elseif($_lib['input']->getProperty('action_soap2')) {
@@ -290,15 +294,14 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
 
 } elseif($_lib['input']->getProperty('action_soap4')) {
-  $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
-  $_rowB = $_lib['db']->get_row(array('query' => $query));
+  // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
+  // $_rowB = $_lib['db']->get_row(array('query' => $query));
 
-  $query = 'SELECT * FROM altinnReport3 order by AltinnReport3Id desc limit 1';
-  $_rowC = $_lib['db']->get_row(array('query' => $query));
-
+  // $query = 'SELECT * FROM altinnReport3 order by AltinnReport3Id desc limit 1';
+  // $_rowC = $_lib['db']->get_row(array('query' => $query));
 
   $values = array();
-  $values["req_CorrespondenceID"] = $_rowB->res_ReceiversReference;
+  $values["req_CorrespondenceID"] = $_POST['request_receivers_reference'];
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
   $params = array(
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -306,9 +309,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'userSSN'        => $_SETUP['ALTINN_USER_SSN'],
     'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
 
-    'userPinCode'    => $pins[$_rowC->res_KodeNr],
+    'userPinCode'    => $_POST['user_pin_code'],
     'authMethod'     => 'AltinnPin',
-    'correspondenceID' => $_rowB->res_ReceiversReference,
+    'correspondenceID' => $_POST['request_receivers_reference'],
     'languageID'     => '1'
   );
 
@@ -360,17 +363,18 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $altinnFile = new altinn_file($values['Folder']);
   $altinnFile->extract($zipContent);
 
-  $_lib['storage']->store_record(array('table' => 'altinnReport4', 'data' => $values, 'debug' => false));
+  // $_GET['AltinnReport4ID'] = 1;
+  $_GET['AltinnReport4ID'] = $_lib['storage']->store_record(array('table' => 'altinnReport4', 'data' => $values, 'debug' => false));
 
 } elseif($_lib['input']->getProperty('action_soap5')) {
-  $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
-  $_rowB = $_lib['db']->get_row(array('query' => $query));
+  // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
+  // $_rowB = $_lib['db']->get_row(array('query' => $query));
 
-  $query = 'SELECT * FROM altinnReport3 order by AltinnReport3Id desc limit 1';
-  $_rowC = $_lib['db']->get_row(array('query' => $query));
+  // $query = 'SELECT * FROM altinnReport3 order by AltinnReport3Id desc limit 1';
+  // $_rowC = $_lib['db']->get_row(array('query' => $query));
 
   $values = array();
-  $values['req_CorrespondenceID'] = $_rowB->res_ReceiversReference;
+  $values['req_CorrespondenceID'] = $_POST['request_receivers_reference'];
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl");
   $params = array(
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -378,9 +382,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'userSSN'        => $_SETUP['ALTINN_USER_SSN'],
     'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
 
-    'userPinCode'    => $pins[$_rowC->res_KodeNr],
+    'userPinCode'    => $_POST['user_pin_code'],
     'authMethod'     => 'AltinnPin',
-    'CorrespondenceID' => $_rowB->res_ReceiversReference
+    'CorrespondenceID' => $_POST['request_receivers_reference']
   );
 
   $result = $sc->__soapCall('ArchiveCorrespondenceForEndUserSystemBasic', array('parameters' => $params));
@@ -402,11 +406,36 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
 
+  $_lib['message']->add('Report Archived');
+
 } elseif($_lib['input']->getProperty('action_generate_xml_report')) {
   $period = $_REQUEST['altinnReport1_periode'];
   // generate the altinn report object for the selected period
   $report = new altinn_report($period);
   $xml_generated = true;
+} elseif($_lib['input']->getProperty('action_confirm_authentication')) {
+  $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
+  $params = array(
+    'challengeRequest' => array(
+      'AuthMethod' => 'AltinnPin',
+      'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
+      'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+      'UserSSN'        => $_SETUP['ALTINN_USER_SSN']
+    )
+  );
+
+  $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+
+  $values = array();
+  $values['res_Message']   = $result->GetAuthenticationChallengeResult->Message;
+  $_parseMessage           = explode(' ', $values['res_Message']);
+  $values['res_KodeNr']    = $_parseMessage[2];
+  $values['res_Status']    = $result->GetAuthenticationChallengeResult->Status;
+  $values['res_ValidFrom'] = $result->GetAuthenticationChallengeResult->ValidFrom;
+  $values['res_ValidTo']   = $result->GetAuthenticationChallengeResult->ValidTo;
+
+  $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
+  $authentication_challenge_message = $values['res_Message'];
 }
 
 ?>
