@@ -106,7 +106,22 @@ if ($_lib['input']->getProperty('action_soap1')) {
 ';
 */
     // here logic should be use old MeldingsID as new erstatterMeldingsID
-    $use_erstatterMeldingsId = $_POST['altinnReport1_MeldingsId'] ? '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>' : '';
+    $use_erstatterMeldingsId = '';
+    if (isset($_POST['altinnReport1_MeldingsId'])) {
+      $use_erstatterMeldingsId = '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>';
+      // update the old altinnReport one
+
+
+      $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
+      $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
+      if($record_exist) {
+        $_lib['storage']->db_update_hash(
+          array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId),
+          'altinnReport1',
+          array('AltinnReport1ID' => $record_exist->AltinnReport1ID));
+
+      }
+    }
     $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
     $params = array(
       'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
@@ -188,7 +203,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $res = $_lib['db']->db_query($query);
     $row = $_lib['db']->db_fetch_object($res);
 
-    $query_salary  = "SELECT SalaryID, JournalID FROM salary WHERE PayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
+    $query_salary  = "SELECT SalaryID, JournalID FROM salary WHERE ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
     $result_salary = $_lib['db']->db_query($query_salary);
     $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
     while($_row = $_lib['db']->db_fetch_object($result_salary)){

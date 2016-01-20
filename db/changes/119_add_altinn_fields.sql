@@ -21,10 +21,6 @@ ADD ShiftType varchar(50),
 ADD WorkTimeScheme varchar(50),
 ADD TypeOfEmployment varchar(50),
 ADD OccupationID bigint(20)
-;
-
--- Add missing altinn field in salary
-ALTER TABLE salary
 ADD ActualPayDate date DEFAULT NULL
 ;
 
@@ -65,8 +61,12 @@ ReceiptStatusCode varchar(50) DEFAULT NULL,
 ExternalShipmentReference varchar(50) DEFAULT NULL,
 OwnerPartyReference varchar(50) DEFAULT NULL,
 PartyReference varchar(50) DEFAULT NULL,
+-- This report is  ...
 MeldingsId varchar(100) DEFAULT NULL,
+-- This report is replacing ...
 ErstatterMeldingsId varchar(100) DEFAULT NULL,
+-- This report got replaced with ...
+ReplacedByMeldindsID varchar(100) DEFAULT NULL,
 PRIMARY KEY (AltinnReport1ID)
 );
 
@@ -79,6 +79,7 @@ AltinnReport1ID int(11) NOT NULL,
 SalaryId int(11) NOT NULL,
 JournalID int(11) NOT NULL,
 UpdatedAt timestamp NOT NULL,
+Changed tinyint(4) DEFAULT 0 NOT NULL,
 PRIMARY KEY (AltinnReport1ID, SalaryId)
 );
 

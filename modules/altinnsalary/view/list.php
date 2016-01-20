@@ -75,7 +75,9 @@ print $_lib['sess']->doctype
           $result_salary  = $_lib['db']->db_query($query_salary);
           $_salary = $_lib['db']->db_fetch_object($result_salary);
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? ($_salary->UpdatedAt > $_row->UpdatedAt) ? print $_row->JournalID." (endrett)" : print $_row->JournalID ?></a>
+          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">
+            L <? print $_row->JournalID?><? print ($_row->Changed) ? "(endrett)" : "" ?>
+            </a>
         <? } ?>
       </td>
       <td>

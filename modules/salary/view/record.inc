@@ -557,7 +557,21 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
     // set who updated and when if anything changed
     $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
     $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
+
+    // To show history of changed salaries on altinn salary page
+    $update_query = "UPDATE
+      altinnReport1salary AS ars
+    JOIN
+      altinnReport1 AS ar
+      ON ars.AltinnReport1ID = ar.AltinnReport1ID
+    SET
+      Changed = '1'
+    WHERE
+      ReplacedByMeldindsID IS NULL AND
+      SalaryId = '".$SalaryID."';";
+    $_lib['db']->db_query($update_query);
   }
+
   // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
   if ($_lib['input']->getProperty('action_salary_new')) {
     $_POST['SalaryID'] = $SalaryID;
