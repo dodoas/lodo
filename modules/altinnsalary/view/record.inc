@@ -1,6 +1,9 @@
 <?
 includelogic('altinnsalary/files');
 includelogic('altinnsalary/altinnreport');
+includelogic('accounting/accounting');
+
+$accounting = new accounting();
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -198,6 +201,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $insert_query = substr($insert_query, 0, -1);
       $_lib['db']->db_query($insert_query);
     }
+    $_lib['message']->add('Report sent');
   }
 
 } elseif($_lib['input']->getProperty('action_soap2')) {
@@ -415,7 +419,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ValidFrom'] = $result->GetAuthenticationChallengeResult->ValidFrom;
   $values['res_ValidTo']   = $result->GetAuthenticationChallengeResult->ValidTo;
 
-  $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));    
+  $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
   $authentication_challenge_message = $values['res_Message'];
 }
 

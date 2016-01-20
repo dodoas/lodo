@@ -19,7 +19,8 @@ print $_lib['sess']->doctype
 <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn4list">Soap 4 LIST</a>
 <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn5list">Soap 5 LIST</a>
 
-
+<br/><br/>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist">Send new report</a>
 
 <table class="lodo_data">
   <tbody>
@@ -49,7 +50,6 @@ print $_lib['sess']->doctype
       <td class="menu">Check Status</td>
     </tr>
 
-v
     <tr>
       <td>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $so1row->AltinnReport1ID ?>">
