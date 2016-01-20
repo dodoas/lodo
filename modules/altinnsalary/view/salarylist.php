@@ -1,4 +1,11 @@
 <?
+includelogic('accounting/accounting');
+$accounting = new accounting();
+$last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', time()));
+if (is_null($last_periode)) $last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', strtotime('last year')));
+if (isset($_POST['periode'])) $_periode = $_POST['periode'];
+else $_periode = $last_periode;
+
 require_once "record.inc";
 
 print $_lib['sess']->doctype ?>
@@ -14,10 +21,6 @@ print $_lib['sess']->doctype ?>
 includeinc('top');
 includeinc('left');
 print $_lib['message']->get();
-$last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', time()));
-if (is_null($last_periode)) $last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', strtotime('last year')));
-if (isset($_POST['periode'])) $_periode = $_POST['periode'];
-else $_periode = $last_periode;
 ?>
 
 <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist" method="post">
@@ -28,12 +31,7 @@ else $_periode = $last_periode;
   </p>
 </form>
 
-<?
-$query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%' order by S.JournalID desc";
-$result_salary  = $_lib['db']->db_query($query_salary);
-if ($_lib['db']->db_numrows($result_salary)) {
-?>
-
+<? if ($result_salary && $_lib['db']->db_numrows($result_salary)) { ?>
 <table class="lodo_data">
 <thead>
    <tr>
@@ -66,7 +64,6 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->Period ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $row->AccountPlanID ?>"><? print $row->AccountPlanID ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->AccountName ?></a></td>
-        <!-- <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Amount(array('value'=>$row->AmountThisPeriod, 'return'=>'value')) ?></a></td> -->
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Date(array('value'=>$row->PayDate, 'return'=>'value')) ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Date(array('value'=>$row->FromDate, 'return'=>'value')) ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Date(array('value'=>$row->ToDate, 'return'=>'value')) ?></a></td>

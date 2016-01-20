@@ -1,9 +1,6 @@
 <?
 includelogic('altinnsalary/files');
 includelogic('altinnsalary/altinnreport');
-includelogic('accounting/accounting');
-
-$accounting = new accounting();
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -436,6 +433,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
   $authentication_challenge_message = $values['res_Message'];
+} elseif ($_lib['input']->getProperty('action_show_slaries')) {
+  $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
+                     FROM salary s, accountplan a
+                     WHERE s.AccountPlanID = a.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%'
+                     ORDER BY s.JournalID DESC";
+  $result_salary  = $_lib['db']->db_query($query_salary);
 }
 
 ?>
