@@ -39,9 +39,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $period = $_REQUEST['altinnReport1_periode'];
     // generate the altinn report object for the selected period
     $report = new altinn_report($period);
-    // TODO: Add error checking, after it is implemented in report class
     $xml = $report->generateXML();
-    $xml_generated = true;
+    if (!empty($report->errors)) {
+      $_lib['message']->add('Report not sent, there were some errors.');
+      foreach($report->errors as $error) $_lib['message']->add($error);
+    }
+    else {
+      $xml_generated = true;
 /*
 '<?xml version="1.0" encoding="UTF-8"?>
 <melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0">
@@ -105,115 +109,116 @@ if ($_lib['input']->getProperty('action_soap1')) {
 </melding>
 ';
 */
-    // here logic should be use old MeldingsID as new erstatterMeldingsID
-    $use_erstatterMeldingsId = '';
-    if (isset($_POST['altinnReport1_MeldingsId'])) {
-      $use_erstatterMeldingsId = '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>';
-      // update the old altinnReport one
+      // here logic should be use old MeldingsID as new erstatterMeldingsID
+      $use_erstatterMeldingsId = '';
+      if (isset($_POST['altinnReport1_MeldingsId'])) {
+        $use_erstatterMeldingsId = '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>';
+        // update the old altinnReport one
 
 
-      $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
-      $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
-      if($record_exist) {
-        $_lib['storage']->db_update_hash(
-          array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId),
-          'altinnReport1',
-          array('AltinnReport1ID' => $record_exist->AltinnReport1ID));
+        $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
+        $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
+        if($record_exist) {
+          $_lib['storage']->db_update_hash(
+            array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId),
+            'altinnReport1',
+            array('AltinnReport1ID' => $record_exist->AltinnReport1ID));
 
+        }
       }
-    }
-    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
-    $params = array(
-      'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-      'systemPassword' => 'altinnlodo0',
-      'formTaskShipment' => array(
-        'Reportee' => 910748645,
-        'ExternalShipmentReference' => $_POST['altinnReport1_ExternalShipmentReference'],
-        'FormTasks' => array(
-          // this codes are for this very spesific report.
-          // so maybe hard coding is ok...
-          'ServiceCode' => 3357,
-          'ServiceEdition' => 130429,
-          'Forms' => array(
-            'Form' => array(
-              'Completed' => true,
-              'DataFormatId' => 4166,
-              'DataFormatVersion' => 35895,
-              'EndUserSystemReference' => 115173,
-              'FormData' => '
-                <![CDATA[
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-                <melding dataFormatVersion="35895" dataFormatId="4166" dataFormatProvider="SERES">
-                  <InformasjonOmInnsender>
-                    <innsender>
-                      <norskIdentifikator>910748645</norskIdentifikator>
-                    </innsender>
-                  </InformasjonOmInnsender>
-                  <InnsendtInformasjon>
-                    <innsending>
-                      <meldingsId>'.$report->meldingsId.'</meldingsId>
-                      '.$use_erstatterMeldingsId.'
-                      <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
-                    </innsending>
-                  </InnsendtInformasjon>
-                </melding>
-                ]]>
-              '
+      $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
+      $params = array(
+        'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
+        'systemPassword' => 'altinnlodo0',
+        'formTaskShipment' => array(
+          'Reportee' => 910748645,
+          'ExternalShipmentReference' => $_POST['altinnReport1_ExternalShipmentReference'],
+          'FormTasks' => array(
+            // this codes are for this very spesific report.
+            // so maybe hard coding is ok...
+            'ServiceCode' => 3357,
+            'ServiceEdition' => 130429,
+            'Forms' => array(
+              'Form' => array(
+                'Completed' => true,
+                'DataFormatId' => 4166,
+                'DataFormatVersion' => 35895,
+                'EndUserSystemReference' => 115173,
+                'FormData' => '
+                  <![CDATA[
+                  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                  <melding dataFormatVersion="35895" dataFormatId="4166" dataFormatProvider="SERES">
+                    <InformasjonOmInnsender>
+                      <innsender>
+                        <norskIdentifikator>910748645</norskIdentifikator>
+                      </innsender>
+                    </InformasjonOmInnsender>
+                    <InnsendtInformasjon>
+                      <innsending>
+                        <meldingsId>'.$report->meldingsId.'</meldingsId>
+                        '.$use_erstatterMeldingsId.'
+                        <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
+                      </innsending>
+                    </InnsendtInformasjon>
+                  </melding>
+                  ]]>
+                '
+              )
+            )
+          ),
+          'Attachments' => array(
+            'Attachment' => array(
+              'Name' => 'A-melding',
+              'FileName' => 'amelding.xml',
+              'AttachementData' => $xml
             )
           )
-        ),
-        'Attachments' => array(
-          'Attachment' => array(
-            'Name' => 'A-melding',
-            'FileName' => 'amelding.xml',
-            'AttachementData' => $xml
-          )
         )
-      )
-    );
+      );
 
-    $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
+      $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
 
-    $values = array();
-    $values['Period']  = $_POST['altinnReport1_periode'];
-    $values['MeldingsId']  = $report->meldingsId;
-    $values['ErstatterMeldingsId']  = $_POST['altinnReport1_MeldingsId'];
-    $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
-    $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
-    $values['ReceiptHistory']  = $result->SubmitFormTaskBasicResult->ReceiptHistory;
-    $values['LastChanged']  = $result->SubmitFormTaskBasicResult->LastChanged;
-    $values['ReceiptTypeName']  = $result->SubmitFormTaskBasicResult->ReceiptTypeName;
-    $values['ReceiptStatusCode']  = $result->SubmitFormTaskBasicResult->ReceiptStatusCode;
-    $values['ParentReceiptId']  = $result->SubmitFormTaskBasicResult->ParentReceiptId;
+      $values = array();
+      $values['Period']  = $_POST['altinnReport1_periode'];
+      $values['MeldingsId']  = $report->meldingsId;
+      $values['ErstatterMeldingsId']  = $_POST['altinnReport1_MeldingsId'];
+      $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
+      $values['ReceiptText']  = $result->SubmitFormTaskBasicResult->ReceiptText;
+      $values['ReceiptHistory']  = $result->SubmitFormTaskBasicResult->ReceiptHistory;
+      $values['LastChanged']  = $result->SubmitFormTaskBasicResult->LastChanged;
+      $values['ReceiptTypeName']  = $result->SubmitFormTaskBasicResult->ReceiptTypeName;
+      $values['ReceiptStatusCode']  = $result->SubmitFormTaskBasicResult->ReceiptStatusCode;
+      $values['ParentReceiptId']  = $result->SubmitFormTaskBasicResult->ParentReceiptId;
 
-    for ($i=0; $i < count($result->SubmitFormTaskBasicResult->References->ReferenceBE); $i++) {
-      $element = $result->SubmitFormTaskBasicResult->References->ReferenceBE[$i];
-      $values[$element->ReferenceTypeName] = $element->ReferenceValue;
+      for ($i=0; $i < count($result->SubmitFormTaskBasicResult->References->ReferenceBE); $i++) {
+        $element = $result->SubmitFormTaskBasicResult->References->ReferenceBE[$i];
+        $values[$element->ReferenceTypeName] = $element->ReferenceValue;
+      }
+
+      $values['Folder'] = (string) time();;
+      $altinnFile = new altinn_file($values['Folder']);
+      $altinnFile->save($xml);
+
+
+      $_lib['storage']->store_record(array('table' => 'altinnReport1', 'data' => $values, 'debug' => false));
+
+      // to fetch the AltinnReport1ID to the one I just saved
+      $query = 'SELECT AltinnReport1ID FROM altinnReport1 order by AltinnReport1ID desc limit 1';
+      $res = $_lib['db']->db_query($query);
+      $row = $_lib['db']->db_fetch_object($res);
+
+      $query_salary  = "SELECT SalaryID, JournalID FROM salary WHERE ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
+      $result_salary = $_lib['db']->db_query($query_salary);
+      $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
+      while($_row = $_lib['db']->db_fetch_object($result_salary)){
+        $insert_query .= "('".$row->AltinnReport1ID."', '".$_row->SalaryID."', '".$_row->JournalID."'),";
+      }
+      if (isset($result_salary->num_rows)) {
+        $insert_query = substr($insert_query, 0, -1);
+        $_lib['db']->db_query($insert_query);
+      }
+      $_lib['message']->add('Report sent');
     }
-
-    $values['Folder'] = (string) time();;
-    $altinnFile = new altinn_file($values['Folder']);
-    $altinnFile->save($xml);
-
-
-    $_lib['storage']->store_record(array('table' => 'altinnReport1', 'data' => $values, 'debug' => false));
-
-    // to fetch the AltinnReport1ID to the one I just saved
-    $query = 'SELECT AltinnReport1ID FROM altinnReport1 order by AltinnReport1ID desc limit 1';
-    $res = $_lib['db']->db_query($query);
-    $row = $_lib['db']->db_fetch_object($res);
-
-    $query_salary  = "SELECT SalaryID, JournalID FROM salary WHERE ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
-    $result_salary = $_lib['db']->db_query($query_salary);
-    $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
-    while($_row = $_lib['db']->db_fetch_object($result_salary)){
-      $insert_query .= "('".$row->AltinnReport1ID."', '".$_row->SalaryID."', '".$_row->JournalID."'),";
-    }
-    if (isset($result_salary->num_rows)) {
-      $insert_query = substr($insert_query, 0, -1);
-      $_lib['db']->db_query($insert_query);
-    }
-    $_lib['message']->add('Report sent');
   }
 
 } elseif($_lib['input']->getProperty('action_soap2')) {
