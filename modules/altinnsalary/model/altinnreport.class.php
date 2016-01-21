@@ -66,7 +66,7 @@ class altinn_report {
 
     // message id
     // save for future use in creation of SOAP request
-    $meldings_id = 'report_for_' . $_lib['sess']->get_companydef('OrgNumber') . '_at_' . strftime('%FT%TZ', time());
+    $meldings_id = 'report_for_' . $_lib['sess']->get_companydef('OrgNumber') . '_at_' . time();
     $leveranse->meldingsId = $meldings_id;
     $this->meldingsId = $meldings_id;
 
