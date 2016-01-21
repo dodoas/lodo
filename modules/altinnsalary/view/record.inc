@@ -132,7 +132,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
         'systemPassword' => 'altinnlodo0',
         'formTaskShipment' => array(
           'Reportee' => 910748645,
-          'ExternalShipmentReference' => $_POST['altinnReport1_ExternalShipmentReference'],
+          'ExternalShipmentReference' => 'LODO' . time(),
           'FormTasks' => array(
             // this codes are for this very spesific report.
             // so maybe hard coding is ok...
