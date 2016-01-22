@@ -24,6 +24,11 @@ ADD OccupationID bigint(20),
 ADD ActualPayDate date DEFAULT NULL
 ;
 
+-- Add missing altinn fields on salaryconfline
+ALTER TABLE salaryconfline
+ADD SalaryDescription varchar(100)
+;
+
 -- Add new field CalculationCodeForTax to company table
 ALTER TABLE company
 ADD CalculationCodeForTax varchar(60) DEFAULT ''

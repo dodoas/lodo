@@ -65,6 +65,7 @@ print $_lib['sess']->doctype ?>
     <th class="sub">Aktiv</th>
     <th class="sub">Linje</th>
     <th class="sub">Tekst</th>
+    <th class="sub">Altinn Beskrivelse</th>
     <th class="sub">Antall denne periode</th>
     <th class="sub">Sats</th>
     <th class="sub">Bel&oslash;p denne periode</th>
@@ -119,6 +120,9 @@ print $_lib['sess']->doctype ?>
             print $line->SalaryText;
         }
     ?>
+    </td>
+    <td>
+        <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'], 'pk'=>$line->SalaryConfLineID, 'width'=>80, 'table'=> 'salaryconfline', 'field'=>'SalaryDescription', 'value'=>$line->SalaryDescription)); ?>
     </td>
     <?
     if(($line->NumberInPeriod != $mainHead->NumberInPeriod) and ($ishovedmal != 1))
