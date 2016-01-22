@@ -45,45 +45,52 @@ class altinn_report {
   }
 
 /* Helper function that populates the report(melding)
- * object
+ * array
  */
-  function populateReportObject() {
+  function populateReportArray() {
     global $_lib;
 
-    $leveranse = null;
+    $leveranse = array();
     // leveranse = deliver
     // delivery date
-    $leveranse->leveringstidspunkt = strftime('%FT%TZ', time());
+    $leveranse['leveringstidspunkt'] = strftime('%FT%TZ', time());
     // calendar month
     self::checkIfEmpty($this->period, 'Period for report not chosen');
-    $leveranse->kalendermaaned = $this->period;
+    $leveranse['kalendermaaned'] = $this->period;
     // salary system
-    $leveranse->kildesystem = 'LODO';
+    $leveranse['kildesystem'] = 'LODO';
 
     // government tax
     // arbeidsgiveravgift = tax that the company pays
     $arbeidsgiveravgiftbeloep = 0.0;
+    $sumForskuddstrekk = 0.0;
+    $sumArbeidsgiveravgift = 0.0;
 
     // message id
     // save for future use in creation of SOAP request
     $meldings_id = 'report_for_' . $_lib['sess']->get_companydef('OrgNumber') . '_at_' . time();
-    $leveranse->meldingsId = $meldings_id;
+    $leveranse['meldingsId'] = $meldings_id;
     $this->meldingsId = $meldings_id;
 
     // opplysningspliktig = reportee
     // norskIdentifikator = norwegian identifier, personal id or company org number
     $org_number = $_lib['sess']->get_companydef('OrgNumber');
+    //TODO: Add regex and ... check for orgno
     self::checkIfEmpty($org_number, 'Company Norwegian organisation number missing(not set)');
-    $leveranse->opplysningspliktig->norskIdentifikator = $org_number;
+    $leveranse['opplysningspliktig'] = array();
+    $leveranse['opplysningspliktig']['norskIdentifikator'] = $org_number;
 
-    $virksomhet = null;
+    $virksomhet = array();
     // select salary and the employee connected to it
     self::checkIfEmpty($this->employees, 'No employees for this period');
     self::checkIfEmpty($this->salaries, 'No salaries for this period');
     foreach($this->employees as $key_employee => $employee) {
       foreach($this->salaries[$employee->AccountPlanID] as $key_salary => $salary) {
 
-        $inntektsmottaker = null;
+        // norwegian id for company the employee works for
+        $virksomhet['norskIdentifikator'] = $org_number; // already checked if empty
+        $inntektsmottaker = array();
+        $inntektsmottaker['inntektsmottaker'] = array();
         $full_name = $employee->FirstName . ' ' . $employee->LastName;
         $full_name_for_error_message = $full_name . '(' . $employee->AccountPlanID . ')';
         // forskuddstrekk = tax that is taken from the employee
@@ -95,127 +102,143 @@ class altinn_report {
         $occupation_code = $_lib['db']->db_fetch_object($result_occupation);
         self::checkIfEmpty($occupation_code, 'Occupation does not exist in the occupation list');
 
-        // norwegian id for company the employee works for
-        $virksomhet->norskIdentifikator = $org_number; // already checked if empty
         // norwegian id for the employee, personal id number
         $society_number = $employee->SocietyNumber;
         self::checkIfEmpty($society_number, 'Personal ID number(society number) not set for employee ' . $full_name_for_error_message);
-        $inntektsmottaker->norskIdentifikator = $society_number;
+        $inntektsmottaker['inntektsmottaker']['norskIdentifikator'] = $society_number;
         // name and birthdate
-        $inntektsmottaker->identifiserendeInformasjon->navn = $full_name;
+        $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon'] = array();
+        $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['navn'] = $full_name;
         $birth_date = $employee->BirthDate;
         self::checkIfEmpty($birth_date, 'Birth date not set for employee ' . $full_name_for_error_message, 'date');
-        $inntektsmottaker->identifiserendeInformasjon->foedselsdato = strftime('%F', strtotime($birth_date));
-        $arbeidsforhold = null;
+        $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['foedselsdato'] = strftime('%F', strtotime($birth_date));
+        $arbeidsforhold = array();
+        // type of employment
+        self::checkIfEmpty($employee->TypeOfEmployment, 'Employment type not set for employee ' . $full_name_for_error_message);
+        $arbeidsforhold['typeArbeidsforhold'] = $employee->TypeOfEmployment;
         $work_start = $employee->WorkStart;
         self::checkIfEmpty($work_start, 'Employment date not set for employee ' . $full_name_for_error_message, 'date');
         // employment date
-        $arbeidsforhold->startdato = strftime('%F', strtotime($work_start));
-        // type of employment
-        self::checkIfEmpty($employee->TypeOfEmployment, 'Employment type not set for employee ' . $full_name_for_error_message);
-        $arbeidsforhold->typeArbeidsforhold = $employee->TypeOfEmployment;
+        $arbeidsforhold['startdato'] = strftime('%F', strtotime($work_start));
         // work measurement, ex. hours per week
         self::checkIfEmpty($employee->Workmeasurement, 'Work measurement not set for employee ' . $full_name_for_error_message, 'number');
-        $arbeidsforhold->antallTimerPerUkeSomEnFullStillingTilsvarer = $employee->Workmeasurement;
+        $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $employee->Workmeasurement;
         // work measurement type
         self::checkIfEmpty($employee->WorkTimeScheme, 'Work time scheme not set for employee ' . $full_name_for_error_message);
-        $arbeidsforhold->avloenningstype =  $employee->WorkTimeScheme;
+        $arbeidsforhold['avloenningstype'] =  $employee->WorkTimeScheme;
         // occupation, already checked above before query for occupation
-        $arbeidsforhold->yrke = $occupation_code->YNr . $occupation_code->LNr;
+        $arbeidsforhold['yrke'] = $occupation_code->YNr . $occupation_code->LNr;
         // work time scheme, ex. no shifts
         self::checkIfEmpty($employee->ShiftType, 'Shift type not set for employee ' . $full_name_for_error_message);
-        $arbeidsforhold->arbeidstidsordning = $employee->ShiftType;
+        $arbeidsforhold['arbeidstidsordning'] = $employee->ShiftType;
         // employment percentage
         self::checkIfEmpty($employee->WorkPercent, 'Work percent not set for employee ' . $full_name_for_error_message, 'number');
-        $arbeidsforhold->stillingsprosent = (int) $employee->WorkPercent;
+        $arbeidsforhold['stillingsprosent'] = (int) $employee->WorkPercent;
         // date of last change for payment date for salary
         $last_change_of_pay_date = $employee->CreditDaysUpdatedAt;
         self::checkIfEmpty($last_change_of_pay_date, 'Last change of salary pay date not set for employee ' . $full_name_for_error_message, 'date');
-        $arbeidsforhold->sisteLoennsendringsdato = strftime('%F', strtotime($last_change_of_pay_date));
+        $arbeidsforhold['sisteLoennsendringsdato'] = strftime('%F', strtotime($last_change_of_pay_date));
         // date of last change for position in company
         $last_change_of_position_in_company = $employee->inCurrentPositionSince;
         self::checkIfEmpty($last_change_of_position_in_company, 'Last change of position in company date not set for employee ' . $full_name_for_error_message, 'date');
-        $arbeidsforhold->sisteDatoForStillingsprosentendring = strftime('%F', strtotime($last_change_of_position_in_company));
+        $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
         // date of last change for work percentage
         $last_change_of_work_percentage = $employee->WorkPercentUpdatedAt;
         self::checkIfEmpty($last_change_of_pay_date, 'Last change of work percent date not set for employee ' . $full_name_for_error_message, 'date');
-        $arbeidsforhold->loennsansiennitet = strftime('%F', strtotime($last_change_of_work_percentage));
+        $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
         // work relation
-        $inntektsmottaker->arbeidsforhold = $arbeidsforhold;
+        $inntektsmottaker['inntektsmottaker']['arbeidsforhold'] = $arbeidsforhold;
 
         // check if valid from and to dates are set
         self::checkIfEmpty($salary->ValidFrom, 'Valid from date not set for salary L' . $salary->JournalID, 'date');
         self::checkIfEmpty($salary->ValidTo, 'Valid to date not set for salary L' . $salary->JournalID, 'date');
 
         // income entries/salary lines
-        $inntekt = null;
+        $inntekt_tmp = array();
         $all_salary_lines_empty = true;
         foreach($this->salary_lines[$salary->SalaryID] as $salary_line) {
+          $inntekt = array();
+          $inntekt['inntekt'] = array();
           if ($salary_line->AmountThisPeriod == 0) continue;
           else $all_salary_lines_empty = false;
           // if the code is 950 that is forskuddstrekk
           // if not that is a regular income entry
           if ($salary_line->SalaryCode == 950) $forskuddstrekk += (float) $salary_line->AmountThisPeriod;
           else {
+            // start and end date for this income, already checked once outside the foreach loop
+            $inntekt['inntekt']['startdatoOpptjeningsperiode'] = $salary->ValidFrom;
+            $inntekt['inntekt']['sluttdatoOpptjeningsperiode'] = $salary->ValidTo;
             // fordel = determines if the income entry is positive or negative
-            $inntekt->fordel = ($salary_line->LineNumber <= 69) ? 'kontantytelse' : 'utgiftsgodtgjoerelse';
+            $inntekt['inntekt']['fordel'] = ($salary_line->LineNumber <= 69) ? 'kontantytelse' : 'utgiftsgodtgjoerelse';
             // boolean flags if the entry falls under some taxing regulation or not
             // both utloeserArbeidsgiveravgift and inngaarIGrunnlagForTrekk fields
             // first is true if the salary line code has -A in it
             // the second is true if we have a salary code for this entry
-            $inntekt->utloeserArbeidsgiveravgift = (strstr($salary_line->SalaryCode, '-A')) ? true : false;
-            $inntekt->inngaarIGrunnlagForTrekk = (!empty($salary_line->SalaryCode)) ? true : false;
-            // start and end date for this income
-            // already checked once outside the foreach loop
-            $inntekt->startdatoOpptjeningsperiode = $salary->ValidFrom;
-            $inntekt->sluttdatoOpptjeningsperiode = $salary->ValidTo;
+            $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = (strstr($salary_line->SalaryCode, '-A')) ? true : false;
+            $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = (!empty($salary_line->SalaryCode)) ? true : false;
             // amount for entry
-            $inntekt->beloep = $salary_line->AmountThisPeriod;
+            $inntekt['inntekt']['beloep'] = $salary_line->AmountThisPeriod;
             // calculate total for arbeidsgiveravgift amount
             $arbeidsgiveravgiftbeloep += $salary_line->AmountThisPeriod;
             // description for the entry
-            $inntekt->loennsinntekt->beskrivelse = self::convertNorwegianLettersToASCII($salary_line->SalaryText);
+            $inntekt['inntekt']['loennsinntekt'] = array();
+            $inntekt['inntekt']['loennsinntekt']['beskrivelse'] = self::convertNorwegianLettersToASCII($salary_line->SalaryText);
             // there can be multiple entries for one salary so we add to an array
-            $inntektsmottaker->inntekt[] = $inntekt;
+            $inntekt_tmp[] = $inntekt;
           }
         }
         // check if all salary lines were empty/skipped(with 0 amount)
         $empty_salary = $all_salary_lines_empty ? '' : 'not empty';
         self::checkIfEmpty($empty_salary, 'Salary L' . $salary->JournalID . ' has only 0 amount lines');
 
-        // get municipality tax percentage and zone info for arbeidsgiveravgift
-        $company_municipality = $_lib['sess']->get_companydef('CompanyMunicipality');
-        self::checkIfEmpty($company_municipality, 'Municipality for company not set');
-        $query_kommune_tax = "SELECT agag.*
-                              FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
-                              WHERE k.KommuneNumber = " . $company_municipality;
-        $result_kommune_tax  = $_lib['db']->db_query($query_kommune_tax);
-        $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
-
         // amount for forskuddstrekk
-        $inntektsmottaker->forskuddstrekk->beloep = $forskuddstrekk;
+        $inntektsmottaker['inntektsmottaker']['forskuddstrekk'] = array();
+        $inntektsmottaker['inntektsmottaker']['forskuddstrekk']['beloep'] = -$forskuddstrekk;
+        $sumForskuddstrekk += $forskuddstrekk;
+
+        //TODO: if some problems occur assign this with a foreach loop
+        $inntektsmottaker['inntektsmottaker'][] = $inntekt_tmp;
+
         // income reciever
-        $virksomhet->inntektsmottaker[] = $inntektsmottaker;
+        $virksomhet[] = $inntektsmottaker;
       }
     }
-    $loennOgGodtgjoerelse = null;
+    // get municipality tax percentage and zone info for arbeidsgiveravgift
+    $company_municipality = $_lib['sess']->get_companydef('CompanyMunicipality');
+    self::checkIfEmpty($company_municipality, 'Municipality for company not set');
+    $query_kommune_tax = "SELECT agag.*
+                          FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
+                          WHERE k.KommuneNumber = " . $company_municipality;
+    $result_kommune_tax  = $_lib['db']->db_query($query_kommune_tax);
+    $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
+
+    $loennOgGodtgjoerelse = array();
     // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
     $code_for_tax_calculation = $_lib['sess']->get_companydef('CalculationCodeForTax');
     self::checkIfEmpty($code_for_tax_calculation, 'Code for tax calculation not set on company');
-    $loennOgGodtgjoerelse->beregningskodeForArbeidsgiveravgift = $code_for_tax_calculation;
-    // amount
-    $loennOgGodtgjoerelse->avgiftsgrunnlagBeloep = $arbeidsgiveravgiftbeloep;
+    $loennOgGodtgjoerelse['beregningskodeForArbeidsgiveravgift'] = $code_for_tax_calculation;
     // taxing zone code, already checked above before the query
     self::checkIfEmpty($kommune_tax, 'Municipality selected for the company does not exist in the list of municipalities or does not have a zone code set');
     // Code property covered by the above check since it is the id for arbeidsgiveravggift table
     self::checkIfEmpty($kommune_tax->Percent, 'Municipality selected for the company does not have a tax percent set');
-    $loennOgGodtgjoerelse->sone = $kommune_tax->Code;
+    $loennOgGodtgjoerelse['sone'] = $kommune_tax->Code;
+    // amount
+    $loennOgGodtgjoerelse['avgiftsgrunnlagBeloep'] = $arbeidsgiveravgiftbeloep;
     // taxing percent
-    $loennOgGodtgjoerelse->prosentsatsForAvgiftsberegning = $kommune_tax->Percent;
+    $loennOgGodtgjoerelse['prosentsatsForAvgiftsberegning'] = $kommune_tax->Percent;
+    $sumArbeidsgiveravgift = $arbeidsgiveravgiftbeloep * $kommune_tax->Percent/100.0;
     // loennOgGodtgjoerelse = salary and refunds
-    $virksomhet->arbeidsgiveravgift->loennOgGodtgjoerelse = $loennOgGodtgjoerelse;
-    $leveranse->oppgave->virksomhet = $virksomhet;
-    $this->melding->Leveranse = $leveranse;
+    $arbeidsgiveravgift = array();
+    $arbeidsgiveravgift['loennOgGodtgjoerelse'] = $loennOgGodtgjoerelse;
+    $virksomhet['arbeidsgiveravgift'] = $arbeidsgiveravgift;
+
+    $leveranse['oppgave'] = array();
+    $leveranse['oppgave']['betalingsinformasjon'] = array();
+    $leveranse['oppgave']['betalingsinformasjon']['sumForskuddstrekk'] = (int) round($sumForskuddstrekk);
+    $leveranse['oppgave']['betalingsinformasjon']['sumumArbeidsgiveravgift'] = (int) round($sumArbeidsgiveravgift);
+    $leveranse['oppgave']['virksomhet'] = $virksomhet;
+    $melding['Leveranse'] = $leveranse;
+    $this->melding = $melding;
   }
 
 /* Helper function that converts norwegian letters to
@@ -278,97 +301,40 @@ class altinn_report {
 /* Generate XML function creates an XML used for A02
  */
   function generateXML($args = array()) {
-    self::populateReportObject();
-    if (empty($this->errors)) return self::generateXMLFromObject($this->melding);
+    self::populateReportArray();
+    if (empty($this->errors)) {
+      $xml_data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0"></melding>');
+      self::generateXMLFromArray($this->melding, $xml_data);
+      $xml = $xml_data->saveXML();
+      // use DOMDocument to format XML properly
+      $doc = new DOMDocument();
+      $doc->formatOutput = true;
+      $doc->loadXML($xml);
+      return $doc->saveXML();
+    }
     else return 'Error!';
   }
 
 /* Helper function that generates an XML with the same
- * structure as the object that gets passed as an
- * argument.
+ * structure as array that gets passed as an argument.
  */
-  function generateXMLFromObject($object_or_value, $first_time = true) {
-    $doc = new DOMDocument('1.0', 'UTF-8');
-    $doc->formatOutput = true;
-    $node = null;
-    if (!is_object($object_or_value) && $first_time) {
-      // var_dump('DEBUG: first_time, non object');
-      return $doc->saveXML();
-    }
-    if ($first_time) {
-      // var_dump('DEBUG: first_time, melding object');
-      // var_dump($object_or_value);
-      $node = $doc->createElement('melding');
-      $xmlns = $doc->createAttribute('xmlns');
-      $xmlns->value = 'urn:ske:fastsetting:innsamling:a-meldingen:v2_0';
-      $node->appendChild($xmlns);
-      // var_dump('recursive call generateXMLFromObject');
-      $tmp_nodes = self::generateXMLFromObject($object_or_value, false);
-      // var_dump($tmp_nodes);
-      foreach ($tmp_nodes->childNodes as $tmp_node) {
-        // var_dump('append child ' . $tmp_node->nodeName . ' : ' . $tmp_node->nodeValue);
-        $node_t = $doc->importNode($tmp_node, true);
-        $node->appendChild($node_t);
-      }
-      $doc->appendChild($node);
-    }
-    else {
-      // var_dump('DEBUG: melding object');
-      // var_dump($object_or_value);
-      $dummy_node = $doc->createElement('dummy');
-      // var_dump('foreach object');
-      foreach(get_object_vars($object_or_value) as $key => $value) {
-        // var_dump('key ' . $key);
-        // var_dump($value);
-        if (!is_object($value)) {
-          // var_dump('value not object');
-          if(is_array($value)) {
-            // var_dump('value is array of object');
-            // var_dump('foreach object in array');
-            foreach($value as $object_from_array) {
-              $node = $doc->createElement($key);
-              // var_dump('recursive call generateXMLFromObject');
-              $tmp_nodes = self::generateXMLFromObject($object_from_array, false);
-              // var_dump($tmp_nodes);
-              foreach ($tmp_nodes->childNodes as $tmp_node) {
-                // var_dump('append child ' . $tmp_node->nodeName . ' : ' . $tmp_node->nodeValue);
-                $node_t = $doc->importNode($tmp_node, true);
-                $node->appendChild($node_t);
-              }
-              $dummy_node->appendChild($node);
-            }
-          }
-          else {
-            $node_ = $doc->createElement($key, $value);
-          }
+  function generateXMLFromArray($report_message, &$xml) {
+    foreach($report_message as $key => $value) {
+      if(is_array($value)) {
+        if(!is_numeric($key)) {
+          $subnode = $xml->addChild("$key");
+          self::generateXMLFromArray($value, $subnode);
         }
         else {
-          // var_dump('value IS object');
-          $node_ = $doc->createElement($key);
-          // var_dump('recursive call generateXMLFromObject');
-          $tmp_nodes = self::generateXMLFromObject($value, false);
-          foreach ($tmp_nodes->childNodes as $tmp_node) {
-            // var_dump('append child ' . $tmp_node->nodeName . ' : ' . $tmp_node->nodeValue);
-            $node_t = $doc->importNode($tmp_node, true);
-            $node_->appendChild($node_t);
-          }
+          self::generateXMLFromArray($value, $xml);
         }
-        // var_dump('append child to dummy node');
-        $dummy_node->appendChild($node_);
-        // var_dump($dummy_node);
+      }
+      else {
+        $xml->addChild("$key","$value");
       }
     }
-    if ($first_time) {
-      // var_dump('returning final xml');
-      return $doc->saveXML();
-      // var_dump('returning final xml');
-    }
-    else {
-      // var_dump('returning dummy node');
-      // var_dump($dummy_node);
-      return $dummy_node;
-    }
+    return $xml;
   }
-}
 
+}
 ?>
