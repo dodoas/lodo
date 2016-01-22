@@ -50,6 +50,11 @@ class altinn_report {
   function populateReportArray() {
     global $_lib;
 
+    $org_number = $_lib['sess']->get_companydef('OrgNumber');
+    $org_number = preg_replace('/\s+/', '', $org_number);
+    if (!preg_match('/^([0-9]{9})$/', $org_number)) {
+      $this->errors[] = 'Company OrgNumber needs to be 9 digits long!';
+    }
     $leveranse = array();
     // leveranse = deliver
     // delivery date
@@ -68,14 +73,12 @@ class altinn_report {
 
     // message id
     // save for future use in creation of SOAP request
-    $meldings_id = 'report_for_' . $_lib['sess']->get_companydef('OrgNumber') . '_at_' . time();
+    $meldings_id = 'report_for_' . $org_number . '_at_' . time();
     $leveranse['meldingsId'] = $meldings_id;
     $this->meldingsId = $meldings_id;
 
     // opplysningspliktig = reportee
     // norskIdentifikator = norwegian identifier, personal id or company org number
-    $org_number = $_lib['sess']->get_companydef('OrgNumber');
-    //TODO: Add regex and ... check for orgno
     self::checkIfEmpty($org_number, 'Company Norwegian organisation number missing(not set)');
     $leveranse['opplysningspliktig'] = array();
     $leveranse['opplysningspliktig']['norskIdentifikator'] = $org_number;
