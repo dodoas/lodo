@@ -99,8 +99,8 @@ class altinn_report {
         // forskuddstrekk = tax that is taken from the employee
         $forskuddstrekk = 0.0;
         // get the occupation of the employee in the company
-        self::checkIfEmpty($employee->OccupationID, 'Occupation not set for employee ' . $full_name_for_error_message);
-        $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . $employee->OccupationID;
+        self::checkIfEmpty($salary->OccupationID, 'Occupation not set for salary L' . $salary->JournalID);
+        $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . $salary->OccupationID;
         $result_occupation  = $_lib['db']->db_query($query_occupation);
         $occupation_code = $_lib['db']->db_fetch_object($result_occupation);
         self::checkIfEmpty($occupation_code, 'Occupation does not exist in the occupation list');
@@ -117,8 +117,8 @@ class altinn_report {
         $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['foedselsdato'] = strftime('%F', strtotime($birth_date));
         $arbeidsforhold = array();
         // type of employment
-        self::checkIfEmpty($employee->TypeOfEmployment, 'Employment type not set for employee ' . $full_name_for_error_message);
-        $arbeidsforhold['typeArbeidsforhold'] = $employee->TypeOfEmployment;
+        self::checkIfEmpty($salary->TypeOfEmployment, 'Employment type not set for salary L' . $salary->JournalID);
+        $arbeidsforhold['typeArbeidsforhold'] = $salary->TypeOfEmployment;
         $work_start = $employee->WorkStart;
         self::checkIfEmpty($work_start, 'Employment date not set for employee ' . $full_name_for_error_message, 'date');
         // employment date
@@ -127,13 +127,13 @@ class altinn_report {
         self::checkIfEmpty($employee->Workmeasurement, 'Work measurement not set for employee ' . $full_name_for_error_message, 'number');
         $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $employee->Workmeasurement;
         // work measurement type
-        self::checkIfEmpty($employee->WorkTimeScheme, 'Work time scheme not set for employee ' . $full_name_for_error_message);
-        $arbeidsforhold['avloenningstype'] =  $employee->WorkTimeScheme;
+        self::checkIfEmpty($salary->WorkTimeScheme, 'Work time scheme not set for salary L' . $salary->JournalID);
+        $arbeidsforhold['avloenningstype'] =  $salary->WorkTimeScheme;
         // occupation, already checked above before query for occupation
         $arbeidsforhold['yrke'] = $occupation_code->YNr . $occupation_code->LNr;
         // work time scheme, ex. no shifts
-        self::checkIfEmpty($employee->ShiftType, 'Shift type not set for employee ' . $full_name_for_error_message);
-        $arbeidsforhold['arbeidstidsordning'] = $employee->ShiftType;
+        self::checkIfEmpty($salary->ShiftType, 'Shift type not set for salary L' . $salary->JournalID);
+        $arbeidsforhold['arbeidstidsordning'] = $salary->ShiftType;
         // employment percentage
         self::checkIfEmpty($employee->WorkPercent, 'Work percent not set for employee ' . $full_name_for_error_message, 'number');
         $arbeidsforhold['stillingsprosent'] = (int) $employee->WorkPercent;
