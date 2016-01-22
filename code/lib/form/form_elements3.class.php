@@ -9,6 +9,7 @@ class form3
 {
     public $_SETUP;
     public $_QUERY;
+    public $_ALTINN;
     public $tabindex    = 0;
     public $Locked      = false;
 
@@ -17,6 +18,8 @@ class form3
         #Init
         $this->_SETUP   = $args['_SETUP'];
         $this->_QUERY   = $args['_QUERY'];
+        // Include values for altinn dropdowns
+        $this->_ALTINN   = $args['_ALTINN'];
 
         #print "$this->_dbh, $this->_dsn<br>";
         #print_r($this->_dbh);
