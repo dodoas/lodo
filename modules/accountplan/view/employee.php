@@ -79,11 +79,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Shift type:</td>
     <td></td>
     <td>
-      <? $ShiftTypes = array(
-        'ikkeShift'=>'ikkeShift',
-        'Shift'=>'Shift'
-      ); ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $ShiftTypes, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType)); ?>
     </td>
     <td>Timer hver uke:</td>
     <td>
@@ -94,30 +90,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class='menu'>Arbeidstid:</td>
     <td></td>
     <td>
-      <?
-        $WorkTimeSchemeTypes = array(
-          'fast'=>'Fastloeann',
-          'time'=>'TimeLoenn',
-          'akkord'=>'Akkord',
-          'provisjonProsent'=>'Provisjon',
-          'honorar'=>'Honorar'
-        );
-      ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $WorkTimeSchemeTypes, 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme)); ?>
     </td>
 
     <td>Type ansettelse:</td>
     <td>
-      <?
-        $TypeOfEmploymentTypes = array(
-          'ordinaert'=>'Ordinaert',
-          'maritimt'=>'Maritimt',
-          'frilanser'=>'Frilanser',
-          'pensjon'=>'Pensjon',
-          'uten'=>'Uten'
-        );
-      ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $TypeOfEmploymentTypes, 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment)); ?>
     </td>
   </tr>
   <tr>
