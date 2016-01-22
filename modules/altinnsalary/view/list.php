@@ -83,8 +83,11 @@ print $_lib['sess']->doctype
         ?>
       </td>
       <td>
-        <?print $so2row->res_ReceiptStatus; ?>
-        <? // print $so2row->res_ReceiversReference; ?>
+        <?
+          if ($so2row && !empty($so2row->res_ReceiversReference)) print 'Recieved with reference ' . $so2row->res_ReceiversReference;
+          elseif (strstr($so2row->res_ReceiptStatus, 'OK')) print 'Processing';
+          else print $so2row->res_ReceiptStatus;
+        ?>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <? print $_lib['form3']->submit(array('name'=>'action_soap2', 'value'=>'Check Status')) ?>
         </form>
