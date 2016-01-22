@@ -232,36 +232,14 @@ $formname = "salaryUpdate";
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
     <th class="sub"></th>
     <th class="sub">
-      <? $ShiftTypes = array(
-        'ikkeShift'=>'ikkeShift',
-        'Shift'=>'Shift'
-      ); ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $ShiftTypes, 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
     </th>
 
     <th class="sub">
-      <?
-        $WorkTimeSchemeTypes = array(
-          'fast'=>'Fastloeann',
-          'time'=>'TimeLoenn',
-          'akkord'=>'Akkord',
-          'provisjonProsent'=>'Provisjon',
-          'honorar'=>'Honorar'
-        );
-      ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $WorkTimeSchemeTypes, 'table'=> 'salary', 'field'=>'WorkTimeScheme', 'pk'=>$head->SalaryID, 'value'=>$head->WorkTimeScheme, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'salary', 'field'=>'WorkTimeScheme', 'pk'=>$head->SalaryID, 'value'=>$head->WorkTimeScheme, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
     </th>
     <th class="sub">
-      <?
-        $TypeOfEmploymentTypes = array(
-          'ordinaert'=>'Ordinaert',
-          'maritimt'=>'Maritimt',
-          'frilanser'=>'Frilanser',
-          'pensjon'=>'Pensjon',
-          'uten'=>'Uten'
-        );
-      ?>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $TypeOfEmploymentTypes, 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
     </th>
     <th class="sub" colspan="3">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
