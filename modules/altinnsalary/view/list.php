@@ -33,6 +33,11 @@ print $_lib['sess']->doctype
   $so1 = $_lib['db']->db_query($so1_query);
   while($so1row = $_lib['db']->db_fetch_object($so1)) {
   ?>
+    <?
+    $so2query = "SELECT * FROM altinnReport2 WHERE res_ReceiptId = ".$so1row->ReceiptId." ORDER BY res_ReceiversReference DESC , AltinnReport2ID LIMIT 1";
+    $so2 = $_lib['db']->db_query($so2query);
+    $so2row = $_lib['db']->db_fetch_object($so2);
+    ?>
     <tr>
       <td>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $so1row->AltinnReport1ID ?>">
@@ -67,19 +72,19 @@ print $_lib['sess']->doctype
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.confirm_authentication" method="post">
           <input type="hidden" name="request_type" value='archive'>
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
-          <? print $_lib['form3']->submit(array('name'=>'action_confirm_authentication', 'value'=>'Archive')) ?>
+          <? print $_lib['form3']->submit(array(
+            'name'=>'action_confirm_authentication',
+            'value'=>'Archive',
+            'disabled' => $so2row->res_ReceiversReference ? false : true
+          )) ?>
         </form>
         <?
         }
         ?>
       </td>
-      <?
-      $so2query = "SELECT * FROM altinnReport2 WHERE res_ReceiptId = ".$so1row->ReceiptId." ORDER BY res_ReceiversReference DESC , AltinnReport2ID LIMIT 1";
-      $so2 = $_lib['db']->db_query($so2query);
-      $so2row = $_lib['db']->db_fetch_object($so2);
-      ?>
       <td>
         <?print $so2row->res_ReceiptStatus; ?>
+        <? // print $so2row->res_ReceiversReference; ?>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <? print $_lib['form3']->submit(array('name'=>'action_soap2', 'value'=>'Check Status')) ?>
         </form>
@@ -89,12 +94,20 @@ print $_lib['sess']->doctype
           <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
           <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print date(DATE_RFC2822); ?>'>
-          <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Resend')) ?>
+          <? print $_lib['form3']->submit(array(
+            'name'=>'action_soap1',
+            'value'=>'Resend',
+            'disabled' => !($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID))
+          )); ?>
         </form>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.confirm_authentication" method="post">
           <input type="hidden" name="request_type" value='feedback'>
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
-          <? print $_lib['form3']->submit(array('name'=>'action_confirm_authentication', 'value'=>'Get Feedback')) ?>
+          <? print $_lib['form3']->submit(array(
+            'name'=>'action_confirm_authentication',
+            'value'=>'Get Feedback',
+            'disabled' => $so2row->res_ReceiversReference ? false : true
+            )) ?>
         </form>
       </td>
     </tr>
@@ -105,7 +118,6 @@ print $_lib['sess']->doctype
       </td>
     </tr>
 </table>
-
 
 </body>
 </html>
