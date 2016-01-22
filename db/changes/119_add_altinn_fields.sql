@@ -20,7 +20,7 @@ ALTER TABLE salary
 ADD ShiftType varchar(50),
 ADD WorkTimeScheme varchar(50),
 ADD TypeOfEmployment varchar(50),
-ADD OccupationID bigint(20)
+ADD OccupationID bigint(20),
 ADD ActualPayDate date DEFAULT NULL
 ;
 
