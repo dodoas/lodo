@@ -62,7 +62,7 @@
       wasOpen = false;
       $( "<a>" )
       .attr( "tabIndex", -1 )
-      .attr( "title", "Vis alle produkter" )
+      .attr( "title", "Vis alle" )
       .tooltip()
       .appendTo( this.wrapper )
       .button({

@@ -141,21 +141,21 @@ $db_sum   = $row->sum;
           else
             $invoice_period = date("Y-m");    
 	?>
-	<? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>	
-	Periode:
-	<?
-	print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $invoice_period,
-	'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
-	?>
+  <? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>
+  Periode:
+  <?
+  print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $invoice_period,
+  'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true));
+  ?>
 
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Lagre dato" name="action_auto_save">
+        <? print $_lib['form3']->submit(array('name' => 'action_auto_save','value' => "Lagre dato")) ?>
         <?
 	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
             list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true));
 
             echo ' fakturanummer: ' . $nextJournalID;
-	    echo '<input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">';
+      print $_lib['form3']->submit(array('name' => 'action_invoice_new', 'value' => "Ny faktura (N)", 'accesskey'=>"N"));
         }
         else {
             echo '<i>Du m&aring; velge en &aring;pen periode for &aring; lage ny faktura</i>';
@@ -350,8 +350,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
 }
 ?>
 <tr>
-    <td colspan="9"></td>
-    <td class="number"><? print $TotalCustPrice ?></td>
+    <td colspan="10"></td>
+    <td class="number"><? print $_lib['format']->Amount($TotalCustPrice) ?></td>
     <td></td>
 </tr>
 </tbody>
