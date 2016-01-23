@@ -92,7 +92,7 @@ print $_lib['sess']->doctype ?>
         <td><b>Avsender</b></td>
         <td><? print $row->SName ?></td>
         <td><b>Mottaker</b></td>
-        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$RecurringID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer))) ?></td>
+        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$RecurringID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer), 'class' => 'combobox', 'onlyonce'=> true)) ?></td>
     </tr>
     <tr>
         <td>Adresse</a></td>

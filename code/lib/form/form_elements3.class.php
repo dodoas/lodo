@@ -1059,10 +1059,13 @@ class form3
         $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountName";
         $result = $_lib['db']->db_query($query);
 
-        while($_row = $_lib['db']->db_fetch_object($result))
-        {
-            $optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
-            $element .= "<option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+        // In inovice edit do we only want the customerID and name showed, not both ways.
+        if(!$args['onlyonce']){
+            while($_row = $_lib['db']->db_fetch_object($result))
+            {
+                $optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
+                $element .= "<option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+            }
         }
 
         if(!$found && isset($args['value']) && $args['value'] > 0)
