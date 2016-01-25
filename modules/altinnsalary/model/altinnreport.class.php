@@ -184,7 +184,7 @@ class altinn_report {
             // calculate total for arbeidsgiveravgift amount
             $arbeidsgiveravgiftbeloep += $salary_line->AmountThisPeriod;
             // description for the entry
-            self::checkIfEmpty($salary_line->SalaryDescription, 'Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "\'");
+            self::checkIfEmpty($salary_line->SalaryDescription, 'Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
             $inntekt['inntekt']['loennsinntekt'] = array();
             $inntekt['inntekt']['loennsinntekt']['beskrivelse'] = self::convertNorwegianLettersToASCII($salary_line->SalaryDescription);
             // there can be multiple entries for one salary so we add to an array

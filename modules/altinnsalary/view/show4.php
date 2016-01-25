@@ -197,15 +197,13 @@ print $_lib['sess']->doctype ?>
     <tr>
       <td class="menu">XML</td>
       <td>
-        <textarea rows="50" cols="130">
-          <?
+        <textarea rows="50" cols="130"><?
           $altinnFile = new altinn_file($row->Folder);
           $doc = new DOMDocument();
           $doc->formatOutput = true;
           $doc->loadXML($altinnFile->readFile("/tilbakemelding.xml"));
           print $doc->saveXML();
-          ?>
-        </textarea>
+        ?></textarea>
       </td>
     </tr>
 

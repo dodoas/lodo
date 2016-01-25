@@ -100,13 +100,10 @@ print $_lib['sess']->doctype ?>
     <tr>
       <td class="menu">XML</td>
       <td>
-        <textarea rows="50" cols="130">
-
-          <?
+        <textarea rows="50" cols="130"><?
           $altinnFile = new altinn_file($row->Folder);
           print $altinnFile->readFile("/A-melding.xml");
-          ?>
-        </textarea>
+        ?></textarea>
       </td>
     </tr>
   </table>
