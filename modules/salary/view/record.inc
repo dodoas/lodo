@@ -864,6 +864,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             $fields['salaryconfline_LineNumber']            = $row['LineNumber'];
             $fields['salaryconfline_Active']                = $row['Active'];
             $fields['salaryconfline_SalaryText']            = $row['SalaryText'];
+            $fields['salaryconfline_SalaryDescription']     = $row['SalaryDescription'];
             $fields['salaryconfline_NumberInPeriod']        = $row['NumberInPeriod'];
             $fields['salaryconfline_Rate']                  = $row['Rate'];
             $fields['salaryconfline_AmountThisPeriod']      = $row['AmountThisPeriod'];
@@ -881,7 +882,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             #print "Lagt til linje nr ".$SalaryConfID."<br>\n";
         }
         else {
-          $sql_update = "UPDATE salaryconfline SET SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
+          $sql_update = "UPDATE salaryconfline SET SalaryDescription ='" . $row['SalaryDescription'] . "', SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
           $_lib['db']->db_update($sql_update);
         }
     }
