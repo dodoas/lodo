@@ -284,6 +284,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
             $lines[$line->LineNumber]['Rate']               = $line->Rate;
             $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
+            $lines[$line->LineNumber]['SalaryDescription']  = $line->SalaryDescription;
             $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
             $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
             $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
@@ -310,6 +311,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
             $lines[$line->LineNumber]['Rate']               = $line->Rate;
             $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
+            $lines[$line->LineNumber]['SalaryDescription']  = $line->SalaryDescription;
             $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
             $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
             $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
@@ -327,6 +329,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber][$i]['NumberInPeriod'] = $lines[$line->LineNumber]['NumberInPeriod'];
             $lines[$line->LineNumber][$i]['Rate'] = $lines[$line->LineNumber]['Rate'];
             $lines[$line->LineNumber][$i]['SalaryText'] = $lines[$line->LineNumber]['SalaryText'];
+            $lines[$line->LineNumber][$i]['SalaryDescription'] = $lines[$line->LineNumber]['SalaryDescription'];
             $lines[$line->LineNumber][$i]['AmountThisPeriod'] = $lines[$line->LineNumber]['AmountThisPeriod'];
             $lines[$line->LineNumber][$i]['EnableEmployeeTax'] = $lines[$line->LineNumber]['EnableEmployeeTax'];
             $lines[$line->LineNumber][$i]['SalaryID'] = $lines[$line->LineNumber]['SalaryID'];
@@ -360,6 +363,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
                 $postsub['salaryline_NumberInPeriod']    = $field[$i]['NumberInPeriod'];
                 $postsub['salaryline_Rate']              = $field[$i]['Rate'];
                 $postsub['salaryline_SalaryText']        = $field[$i]['SalaryText'];
+                $postsub['salaryline_SalaryDescription'] = $field[$i]['SalaryDescription'];
                 $postsub['salaryline_AmountThisPeriod']  = $field[$i]['AmountThisPeriod'];
                 $postsub['salaryline_EnableEmployeeTax'] = $field[$i]['EnableEmployeeTax'];
                 $postsub['salaryline_ProjectID']         = $field[$i]['ProjectID'];
@@ -386,6 +390,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $postsub['salaryline_NumberInPeriod']    = $lines[$linenum]['NumberInPeriod'];
             $postsub['salaryline_Rate']              = $lines[$linenum]['Rate'];
             $postsub['salaryline_SalaryText']        = $lines[$linenum]['SalaryText'];
+            $postsub['salaryline_SalaryDescription'] = $lines[$linenum]['SalaryDescription'];
             $postsub['salaryline_AmountThisPeriod']  = $lines[$linenum]['AmountThisPeriod'];
             $postsub['salaryline_EnableEmployeeTax'] = $lines[$linenum]['EnableEmployeeTax'];
             $postsub['salaryline_ProjectID']         = $lines[$linenum]['ProjectID'];
