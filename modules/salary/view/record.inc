@@ -864,6 +864,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             $fields['salaryconfline_LineNumber']            = $row['LineNumber'];
             $fields['salaryconfline_Active']                = $row['Active'];
             $fields['salaryconfline_SalaryText']            = $row['SalaryText'];
+            $fields['salaryconfline_SalaryDescription']     = $row['SalaryDescription'];
             $fields['salaryconfline_NumberInPeriod']        = $row['NumberInPeriod'];
             $fields['salaryconfline_Rate']                  = $row['Rate'];
             $fields['salaryconfline_AmountThisPeriod']      = $row['AmountThisPeriod'];
@@ -881,7 +882,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             #print "Lagt til linje nr ".$SalaryConfID."<br>\n";
         }
         else {
-          $sql_update = "UPDATE salaryconfline SET SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
+          $sql_update = "UPDATE salaryconfline SET SalaryDescription ='" . $row['SalaryDescription'] . "', SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
           $_lib['db']->db_update($sql_update);
         }
     }
@@ -918,11 +919,11 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
       $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
       if (!$exists) {
         #print "Lager ny linje";
-        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] ."');";
+        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText, SalaryDescription) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] . "', '". $row['SalaryDescription'] ."');";
         #print "$sql_insert<br>\n";
         $_lib['db']->db_update($sql_insert);
       }
-      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
+      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "', SalaryDescription='" . $row['SalaryDescription'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
       #print "$sql_update<br>\n";
       $_lib['db']->db_update($sql_update);
     }

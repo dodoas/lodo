@@ -294,6 +294,10 @@ $formname = "salaryUpdate";
             {
                 ?><input type="text" name="salaryline.SalaryText.<? print $line->SalaryLineID ?>" value="<? print $line->SalaryText ?>" size="30" class="number"><?
             }
+            elseif($line->SalaryDescription)
+            {
+                print $line->SalaryText . " (" . $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'][$line->SalaryDescription] . ")";
+            }
             else
             {
                 print $line->SalaryText;

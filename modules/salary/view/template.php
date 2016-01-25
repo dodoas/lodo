@@ -122,7 +122,16 @@ print $_lib['sess']->doctype ?>
     ?>
     </td>
     <td>
-        <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'], 'pk'=>$line->SalaryConfLineID, 'width'=>80, 'table'=> 'salaryconfline', 'field'=>'SalaryDescription', 'value'=>$line->SalaryDescription)); ?>
+        <?
+        if($ishovedmal == 1)
+        {
+            print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'], 'pk'=>$line->SalaryConfLineID, 'width'=>80, 'table'=> 'salaryconfline', 'field'=>'SalaryDescription', 'value'=>$line->SalaryDescription));
+        }
+        else
+        {
+            print $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'][$line->SalaryDescription];
+        }
+        ?>
     </td>
     <?
     if(($line->NumberInPeriod != $mainHead->NumberInPeriod) and ($ishovedmal != 1))
