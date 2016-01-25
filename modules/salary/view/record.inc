@@ -919,11 +919,11 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
       $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
       if (!$exists) {
         #print "Lager ny linje";
-        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] ."');";
+        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText, SalaryDescription) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] . "', '". $row['SalaryDescription'] ."');";
         #print "$sql_insert<br>\n";
         $_lib['db']->db_update($sql_insert);
       }
-      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
+      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "', SalaryDescription='" . $row['SalaryDescription'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
       #print "$sql_update<br>\n";
       $_lib['db']->db_update($sql_update);
     }
