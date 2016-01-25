@@ -32,11 +32,13 @@ print $_lib['message']->get();
 </form>
 
 <? if ($result_salary && $_lib['db']->db_numrows($result_salary)) { ?>
+<form name="altinnsalary_send_report" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
 <table class="lodo_data">
 <thead>
    <tr>
      <th colspan="12">L&oslash;nnsutbetalinger
   <tr>
+    <th class="sub">Velg</th>
     <th class="sub">Nr</th>
     <th class="sub">Dato</th>
     <th class="sub">Periode</th>
@@ -47,7 +49,7 @@ print $_lib['message']->get();
     <th class="sub">Til perioden</th>
     <th class="sub">Bankkonto</th>
     <th class="sub">Utskrift</th>
-    <th class="sub"></th>
+    <th class="sub">Sent i raport</th>
   </tr>
 </thead>
 
@@ -58,7 +60,13 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     $i++;
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
+    <?
+    $query_report_id  = "SELECT * FROM altinnReport1salary AS ars JOIN altinnReport1 AS ar ON ars.AltinnReport1ID = ar.AltinnReport1ID WHERE ars.SalaryId =  " . $row->SalaryID . " ORDER BY UpdatedAt desc LIMIT 1";
+    $result_report_id = $_lib['db']->db_query($query_report_id);
+    $report_id = $_lib['db']->db_fetch_object($result_report_id);
+    ?>
     <tr class="<? print "$sec_color"; ?>">
+        <td><? print $_lib['form3']->checkbox(array('name' => "use_salary_" . $row->SalaryID, 'disabled'=>$report_id->AltinnReport1ID ? 'disabled' : '')); ?></td>
         <td>L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalID ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalDate ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->Period ?></a></td>
@@ -69,6 +77,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Date(array('value'=>$row->ToDate, 'return'=>'value')) ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->DomesticBankAccount ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.print&SalaryID=<? print $row->SalaryID ?>" target="print">Vis</a></td>
+        <td><a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $report_id->AltinnReport1ID ?>" target="print"><? print $report_id->AltinnReport1ID ? $report_id->AltinnReport1ID . " (" . $report_id->Period . ")" : ""?></a></td>
     </tr>
     <?
   }
@@ -77,7 +86,6 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 </table>
 
 <br/>
-<form name="altinnsalary_send_report" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
   <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
 <?
   print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send report'));
