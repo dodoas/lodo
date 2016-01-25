@@ -200,7 +200,10 @@ print $_lib['sess']->doctype ?>
         <textarea rows="50" cols="130">
           <?
           $altinnFile = new altinn_file($row->Folder);
-          print $altinnFile->readFile("/tilbakemelding.xml");
+          $doc = new DOMDocument();
+          $doc->formatOutput = true;
+          $doc->loadXML($altinnFile->readFile("/tilbakemelding.xml"));
+          print $doc->saveXML();
           ?>
         </textarea>
       </td>
