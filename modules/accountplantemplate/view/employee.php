@@ -103,6 +103,16 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td><? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'CreditColor', 'value'=>$account->CreditColor, 'type'=>'CreditColor', 'required' => 1)) ?></td>
   </tr>
 
+  <tr class="result">
+    <th colspan="5">Ansatte</th>
+  </tr>
+  <tr>
+    <td class="menu">Stillingsprosent</td>
+    <td></td>
+    <td>
+      <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent, 'class'=>'lodoreqfelt')) ?>
+    </td>
+  </tr>
   <tr>
     <th colspan="5">Logg</th>
   </tr>
