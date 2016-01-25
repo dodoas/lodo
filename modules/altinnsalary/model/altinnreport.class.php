@@ -177,8 +177,8 @@ class altinn_report {
             // both utloeserArbeidsgiveravgift and inngaarIGrunnlagForTrekk fields
             // first is true if the salary line code has -A in it
             // the second is true if we have a salary code for this entry
-            $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = (strstr($salary_line->SalaryCode, '-A')) ? true : false;
-            $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = (!empty($salary_line->SalaryCode)) ? true : false;
+            $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = (strstr($salary_line->SalaryCode, '-A')) ? 'true' : 'false';
+            $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = (!empty($salary_line->SalaryCode)) ? 'true' : 'false';
             // amount for entry
             $inntekt['inntekt']['beloep'] = $salary_line->AmountThisPeriod;
             // calculate total for arbeidsgiveravgift amount
