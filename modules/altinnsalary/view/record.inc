@@ -31,6 +31,14 @@ class LocalSoapClient extends SoapClient {
 $pins = array('','ajhhs', 'piksd', 'iuyhs', 'asdfg', 'rtefs', 'loj7s', 'mmmyp', 'juksa', 'fizck', 'qicks', '98ujs', 'mnbvs', 'qwers', 'polze', 'ztang', 'alt1n', 'zcatt', 'kjasd', '23as3', 'lkiju', '4564s', 'zxhfg', 'alsks', 'ooiks', 'likme', 'kaffe', 'arbei', '00kks', 'mjhgg', 'ziste');
 
 
+if (isset($_POST['use_salary'])) {
+  $salary_ids = array();
+  foreach($_POST['use_salary'] as $salary_id => $selected) {
+    if ($selected) $salary_ids[] = $salary_id;
+  }
+}
+else $salary_ids = null;
+
 if ($_lib['input']->getProperty('action_soap1')) {
   // If you didn't select a period, don't send.
   if (empty($_POST['altinnReport1_periode'])){
@@ -38,7 +46,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   } else {
     $period = $_REQUEST['altinnReport1_periode'];
     // generate the altinn report object for the selected period
-    $report = new altinn_report($period);
+    $report = new altinn_report($period, $salary_ids);
     $xml = $report->generateXML();
     if (!empty($report->errors)) {
       $_lib['message']->add('Report not sent, there were some errors.');
@@ -413,7 +421,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 } elseif($_lib['input']->getProperty('action_generate_xml_report')) {
   $period = $_REQUEST['altinnReport1_periode'];
   // generate the altinn report object for the selected period
-  $report = new altinn_report($period);
+  $report = new altinn_report($period, $salary_ids);
   $xml_generated = true;
 } elseif($_lib['input']->getProperty('action_confirm_authentication')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");

@@ -17,13 +17,14 @@ class altinn_report {
  * periode and all the employees for those salaries to
  * the arrays.
  */
-  function __construct($period) {
+  function __construct($period, $salary_ids = null) {
     // if no period selected, exit
     if (empty($period)) return;
     else $this->period = $period;
 
     // fetch the salaries
-    self::fetchSalaries();
+    if (!$salary_ids) self::fetchSalaries();
+    else self::fetchSalaries($salary_ids);
     // fetch the employees
     self::fetchEmployees();
   }
@@ -269,12 +270,19 @@ class altinn_report {
 /* Helper function that populates the salaries array
  * for the selected period
  */
-  function fetchSalaries() {
+  function fetchSalaries($salary_ids = null) {
     global $_lib;
     // only the ones that have the altinn/actual pay date set
     $query_salaries = "SELECT s.*
                        FROM salary s
                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+    if ($salary_ids) {
+      $query_salaries .= ' AND SalaryID IN (';
+      for($i = 0; $i < count($salary_ids); ++$i) {
+        if ($i == count($salary_ids)-1) $query_salaries .= (string) $salary_ids[$i] . ')';
+        else $query_salaries .= (string) $salary_ids[$i] . ', ';
+      }
+    }
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
       $this->salaries[$salary->AccountPlanID][] = $salary;

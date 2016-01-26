@@ -66,7 +66,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     $report_id = $_lib['db']->db_fetch_object($result_report_id);
     ?>
     <tr class="<? print "$sec_color"; ?>">
-        <td><? print $_lib['form3']->checkbox(array('name' => "use_salary_" . $row->SalaryID, 'disabled'=>$report_id->AltinnReport1ID ? 'disabled' : '')); ?></td>
+        <td><? print $_lib['form3']->checkbox(array('name' => "use_salary[" . $row->SalaryID . "]", 'disabled'=>$report_id->AltinnReport1ID ? 'disabled' : '')); ?></td>
         <td>L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalID ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalDate ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->Period ?></a></td>
