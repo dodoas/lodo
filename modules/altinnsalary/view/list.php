@@ -96,7 +96,7 @@ print $_lib['sess']->doctype
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
           <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
-          <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print date(DATE_RFC2822); ?>'>
+          <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap1',
             'value'=>'Resend',
@@ -112,6 +112,14 @@ print $_lib['sess']->doctype
             'disabled' => $so2row->res_ReceiversReference ? false : true
             )) ?>
         </form>
+        <?
+          $so4query = "SELECT ar4.* FROM altinnReport1 ar1 JOIN altinnReport2 ar2 ON ar1.ReceiptId = ar2.res_ReceiptId JOIN altinnReport4 ar4 ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID WHERE ar1.ReceiptId = " . $so1row->ReceiptId . " ORDER BY AltinnReport4ID DESC LIMIT 1";
+          $so4 = $_lib['db']->db_query($so4query);
+          $so4row = $_lib['db']->db_fetch_object($so4);
+          if ($so4row) {
+        ?>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&AltinnReport4ID=<? print $so4row->AltinnReport4ID ?>">View feedback</a>
+        <? } ?>
       </td>
     </tr>
     <? } ?>
