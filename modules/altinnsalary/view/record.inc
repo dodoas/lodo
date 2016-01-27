@@ -137,10 +137,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
 </melding>
 ';
 */
-      // here logic should be use old MeldingsID as new erstatterMeldingsID
+      // here logic should be use old MeldingsID as new erstatterMeldingsId
       $use_erstatterMeldingsId = '';
       if (isset($_POST['altinnReport1_MeldingsId'])) {
-        $use_erstatterMeldingsId = '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>';
+        $use_erstatterMeldingsId = '<erstatterMeldingsId>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsId>';
         // update the old altinnReport one
 
 
