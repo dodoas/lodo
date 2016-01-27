@@ -69,11 +69,11 @@ print $_lib['sess']->doctype
         if (!empty($so5_row->res_LastChanged)) print $so5_row->res_LastChanged;
         else {
         ?>
-        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.confirm_authentication" method="post">
+        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <input type="hidden" name="request_type" value='archive'>
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
           <? print $_lib['form3']->submit(array(
-            'name'=>'action_confirm_authentication',
+            'name'=>'action_soap5',
             'value'=>'Archive',
             'disabled' => $so2row->res_ReceiversReference ? false : true
           )) ?>
@@ -103,11 +103,11 @@ print $_lib['sess']->doctype
             'disabled' => !($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID))
           )); ?>
         </form>
-        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.confirm_authentication" method="post">
+        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4" method="post">
           <input type="hidden" name="request_type" value='feedback'>
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
           <? print $_lib['form3']->submit(array(
-            'name'=>'action_confirm_authentication',
+            'name'=>'action_soap4',
             'value'=>'Get Feedback',
             'disabled' => $so2row->res_ReceiversReference ? false : true
             )) ?>

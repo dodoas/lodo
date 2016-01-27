@@ -1,4 +1,5 @@
 <?
+session_start();
 includelogic('altinnsalary/files');
 includelogic('altinnsalary/altinnreport');
 
@@ -38,6 +39,22 @@ if (isset($_POST['use_salary'])) {
   }
 }
 else $salary_ids = null;
+
+// if action is soap4 or soap5 check if pin set and not expired
+if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('action_soap5')) {
+  // if pin already entered and not expired use it, if not unset and redirect to enter a new one
+  if (!isset($_SESSION['altinn_pin']) || (isset($_SESSION['altinn_pin']) && (time() > strtotime($_SESSION['altinn_pin']['expires_at'])))) {
+    unset($_SESSION['altinn_pin']);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_authentication&action_confirm_authentication=confirm&request_type=feedback&request_receivers_reference=" . $_POST['request_receivers_reference']);
+  }
+  else {
+    if (!isset($_SESSION['altinn_pin']['value'])) {
+      // if altinn_pin is set but value is not, set the entered pin as the value
+      $_SESSION['altinn_pin']['value'] = $_POST['user_pin_code'];
+    }
+    else $_POST['user_pin_code'] = $_SESSION['altinn_pin']['value'];
+  }
+}
 
 if ($_lib['input']->getProperty('action_soap1')) {
   // If you didn't select a period, don't send.
@@ -303,6 +320,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
 
+} elseif($_lib['input']->getProperty('action_delete_pin')) {
+  $_lib['message']->add('Pin deleted');
+  unset($_SESSION['altinn_pin']);
+} elseif($_lib['input']->getProperty('action_expire_pin')) {
+  $_lib['message']->add('Pin expired');
+  $_SESSION['altinn_pin']['expires_at'] = strftime("%F %T", time()-1);
 } elseif($_lib['input']->getProperty('action_soap4')) {
   // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
   // $_rowB = $_lib['db']->get_row(array('query' => $query));
@@ -445,6 +468,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ValidTo']   = $result->GetAuthenticationChallengeResult->ValidTo;
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
+
+  // save all info for altinn pin in the session
+  // except the value, that will get set in soap4 or soap5
+  $_SESSION['altinn_pin']['type'] = 'AltinnPin'; //$params['challengeRequest']['AuthMethod'];
+  $_SESSION['altinn_pin']['created_at'] = strftime("%F %T", time()); //strtotime($values['res_ValidFrom']);
+  $_SESSION['altinn_pin']['expires_at'] = strftime("%F %T", time() + 30*60); //strtotime($values['res_ValidTo']);
   $authentication_challenge_message = $values['res_Message'];
 } elseif ($_lib['input']->getProperty('action_show_slaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
