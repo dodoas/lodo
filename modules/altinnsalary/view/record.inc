@@ -17,6 +17,9 @@ class LocalSoapClient extends SoapClient {
     // untill this moneypatch
     $request = str_replace('&lt;','<', $request);
     $request = str_replace('&gt;','>', $request);
+    // done so we remove some unnecessary characters generated because of the
+    // encoding format of the php script file
+    $request = str_replace('&#13;','', $request);
 
     // error_log("Now it is replaced\n", 3, $_SETUP['HOME_DIR']."/error.log");
     // error_log("$request\n", 3, $_SETUP['HOME_DIR']."/error.log");
