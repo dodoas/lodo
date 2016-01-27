@@ -67,6 +67,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $period = $_REQUEST['altinnReport1_periode'];
     // generate the altinn report object for the selected period
     $report = new altinn_report($period, $salary_ids);
+    if (isset($_POST['altinnReport1_MeldingsId'])) {
+      $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
+    }
     $xml = $report->generateXML();
     if (!empty($report->errors)) {
       $_lib['message']->add('Report not sent, there were some errors.');

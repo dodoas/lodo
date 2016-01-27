@@ -10,6 +10,8 @@ class altinn_report {
   public $employees    = array();
   public $period       = '';
   public $melding      = null; // structured object that contains the report
+  public $meldingsId   = null; // mesasge id
+  public $erstatterMeldingsId = null; // replacement message id
   public $errors       = null; // to be populated if errors occur
 
 /* Constructor accepts the accounting period(year-month)
@@ -27,6 +29,12 @@ class altinn_report {
     else self::fetchSalaries($salary_ids);
     // fetch the employees
     self::fetchEmployees();
+  }
+
+/* Helper function to add replacement message id
+ */
+  function addReplacementMessageID($message_id) {
+    $this->erstatterMeldingsId = $message_id;
   }
 
 /* Helper function to check if the variable is empty
@@ -73,6 +81,8 @@ class altinn_report {
     $sumArbeidsgiveravgift = 0.0;
 
     // message id
+    // replacement if we are sending a replacement report
+    if ($this->erstatterMeldingsId) $leveranse['erstatterMeldingsId'] = $this->erstatterMeldingsId;
     // save for future use in creation of SOAP request
     $meldings_id = 'report_for_' . $org_number . '_at_' . time();
     $leveranse['meldingsId'] = $meldings_id;
