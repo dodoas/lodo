@@ -110,7 +110,7 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Faktura nr</th>
     <th class="number">Fakturadato</th>
     <th class="number">Periode</th>
-    <th class="number">Org Nummer</th>
+    <th class="number">FirmaID</th>
     <th class="number">Lev. Konto</th>
     <th>Firmanavn</th>
     <th>Motkonto</th>
@@ -119,7 +119,7 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>&Aringrsaks informasjon</th>
+    <th>&Aring;rsaks informasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">Betaling</th>
     <th class="number">KID</th>
@@ -132,6 +132,12 @@ print $_lib['sess']->doctype; ?>
 <?
 $invoicein->changeOrder();
 foreach($invoicein as $InvoiceO) {
+    // set InvoiceO->FirmaID
+    $firma_id_query = "SELECT aps.SchemeValue, fbs.SchemeType FROM accountplanscheme aps JOIN fakturabankscheme fbs ON aps.FakturabankSchemeID = fbs.FakturabankSchemeID WHERE AccountPlanID = '" . $InvoiceO->SupplierAccountPlanID . "' LIMIT 1";
+    $firma_id = $_lib['storage']->get_row(array('query' => $firma_id_query));
+    if (!empty($firma_id->SchemeValue)) $InvoiceO->FirmaID = $firma_id->SchemeType . "(" . $firma_id->SchemeValue . ")";
+    else $InvoiceO->FirmaID = "ikke funnet";
+
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
     $TotalCustPriceForeign += $InvoiceO->ForeignAmount;
     $ForeignCurrencyID = '';
@@ -159,7 +165,7 @@ foreach($invoicein as $InvoiceO) {
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? print $InvoiceO->InvoiceNumber ?></a></td>
       <td class="number"><? print $InvoiceO->InvoiceDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
-      <td class="number"><? print $InvoiceO->OrgNumber ?> ?</td>
+      <td class="number"><? print $InvoiceO->FirmaID ?></td>
       <td class="number"><? print $InvoiceO->SupplierAccountPlanID ?></td>
       <td><? print substr($InvoiceO->IName,0,20) ?></td>
       <td><? print $InvoiceO->MotkontoAccountPlanID ?></td>

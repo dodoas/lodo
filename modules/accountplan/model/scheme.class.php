@@ -25,7 +25,7 @@ class lodo_accountplan_scheme {
 
         $l = array();
 
-        $r = $_lib['db']->db_query("SELECT * FROM fakturabankscheme");
+        $r = $_lib['db']->db_query("SELECT * FROM fakturabankscheme ORDER BY SchemeType");
         while( ($row = $_lib['db']->db_fetch_assoc($r)) ) {
             $l[] = $row;
         }
