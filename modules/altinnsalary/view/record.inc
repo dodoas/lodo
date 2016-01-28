@@ -433,8 +433,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $_parseMessage           = explode(' ', $values['res_Message']);
   $values['res_KodeNr']    = $_parseMessage[2];
   $values['res_Status']    = $result->GetAuthenticationChallengeResult->Status;
-  $values['res_ValidFrom'] = $result->GetAuthenticationChallengeResult->ValidFrom;
-  $values['res_ValidTo']   = $result->GetAuthenticationChallengeResult->ValidTo;
+  $values['res_ValidFrom'] = preg_replace('/\+.*/', '', $result->GetAuthenticationChallengeResult->ValidFrom);
+  $values['res_ValidTo']   = preg_replace('/\+.*/', '', $result->GetAuthenticationChallengeResult->ValidTo);
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
   $authentication_challenge_message = $values['res_Message'];
