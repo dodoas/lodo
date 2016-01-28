@@ -10,6 +10,8 @@ class altinn_report {
   public $employees    = array();
   public $period       = '';
   public $melding      = null; // structured object that contains the report
+  public $meldingsId   = null; // mesasge id
+  public $erstatterMeldingsId = null; // replacement message id
   public $errors       = null; // to be populated if errors occur
 
 /* Constructor accepts the accounting period(year-month)
@@ -17,15 +19,22 @@ class altinn_report {
  * periode and all the employees for those salaries to
  * the arrays.
  */
-  function __construct($period) {
+  function __construct($period, $salary_ids = null) {
     // if no period selected, exit
     if (empty($period)) return;
     else $this->period = $period;
 
     // fetch the salaries
-    self::fetchSalaries();
+    if (!$salary_ids) self::fetchSalaries();
+    else self::fetchSalaries($salary_ids);
     // fetch the employees
     self::fetchEmployees();
+  }
+
+/* Helper function to add replacement message id
+ */
+  function addReplacementMessageID($message_id) {
+    $this->erstatterMeldingsId = $message_id;
   }
 
 /* Helper function to check if the variable is empty
@@ -36,6 +45,7 @@ class altinn_report {
     if ($type == 'string') $is_empty = empty($field);
     elseif ($type == 'date') $is_empty = strstr($field, '0000-00-00');
     elseif ($type == 'number') $is_empty = empty($field) || ($field == 0);
+    elseif ($type == 'percent') $is_empty = is_null($field);
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -67,11 +77,12 @@ class altinn_report {
 
     // government tax
     // arbeidsgiveravgift = tax that the company pays
-    $arbeidsgiveravgiftbeloep = 0.0;
     $sumForskuddstrekk = 0.0;
     $sumArbeidsgiveravgift = 0.0;
 
     // message id
+    // replacement if we are sending a replacement report
+    if ($this->erstatterMeldingsId) $leveranse['erstatterMeldingsId'] = $this->erstatterMeldingsId;
     // save for future use in creation of SOAP request
     $meldings_id = 'report_for_' . $org_number . '_at_' . time();
     $leveranse['meldingsId'] = $meldings_id;
@@ -82,6 +93,12 @@ class altinn_report {
     self::checkIfEmpty($org_number, 'Company Norwegian organisation number missing(not set)');
     $leveranse['opplysningspliktig'] = array();
     $leveranse['opplysningspliktig']['norskIdentifikator'] = $org_number;
+
+    // used for arbeidsgiveravgift node
+    $loennOgGodtgjoerelse = array();
+    // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
+    $code_for_tax_calculation = $_lib['sess']->get_companydef('CalculationCodeForTax');
+    self::checkIfEmpty($code_for_tax_calculation, 'Code for tax calculation not set on company');
 
     $virksomhet = array();
     // select salary and the employee connected to it
@@ -156,6 +173,30 @@ class altinn_report {
         self::checkIfEmpty($salary->ValidFrom, 'Valid from date not set for salary L' . $salary->JournalID, 'date');
         self::checkIfEmpty($salary->ValidTo, 'Valid to date not set for salary L' . $salary->JournalID, 'date');
 
+        // get municipality tax percentage and zone info for arbeidsgiveravgift
+        $salary_municipality = $salary->KommuneID;
+        self::checkIfEmpty($salary_municipality, 'Municipality not set for salary L' . $salary->JournalID);
+        $query_kommune_tax = "SELECT agag.*
+                              FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
+                              WHERE k.KommuneID = '" . $salary_municipality . "'";
+        $result_kommune_tax  = $_lib['db']->db_query($query_kommune_tax);
+        $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
+
+        // taxing zone code, already checked above before the query
+        self::checkIfEmpty($kommune_tax, 'Municipality selected for the salary L' . $salary->JournalID . ' does not exist in the list of municipalities or does not have a zone code set');
+        // Code property covered by the above check since it is the id for arbeidsgiveravggift table
+        self::checkIfEmpty($kommune_tax->Percent, 'Municipality selected for the salary L' . $salary->JournalID . ' does not have a tax percent set', 'percent');
+        $zone_code = $kommune_tax->Code;
+        if (!isset($loennOgGodtgjoerelse[$zone_code])) {
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse'] = array();
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['beregningskodeForArbeidsgiveravgift'] = $code_for_tax_calculation;
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['sone'] = $kommune_tax->Code;
+          // amount
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] = 0;
+          // taxing percent
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['prosentsatsForAvgiftsberegning'] = $kommune_tax->Percent;
+        }
+
         // income entries/salary lines
         $inntekt_tmp = array();
         $all_salary_lines_empty = true;
@@ -182,7 +223,7 @@ class altinn_report {
             // amount for entry
             $inntekt['inntekt']['beloep'] = $salary_line->AmountThisPeriod;
             // calculate total for arbeidsgiveravgift amount
-            $arbeidsgiveravgiftbeloep += $salary_line->AmountThisPeriod;
+            $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] += $salary_line->AmountThisPeriod;
             // description for the entry
             self::checkIfEmpty($salary_line->SalaryDescription, 'Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
             $inntekt['inntekt']['loennsinntekt'] = array();
@@ -207,34 +248,13 @@ class altinn_report {
         $virksomhet[] = $inntektsmottaker;
       }
     }
-    // get municipality tax percentage and zone info for arbeidsgiveravgift
-    $company_municipality = $_lib['sess']->get_companydef('CompanyMunicipality');
-    self::checkIfEmpty($company_municipality, 'Municipality for company not set');
-    $query_kommune_tax = "SELECT agag.*
-                          FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
-                          WHERE k.KommuneNumber = " . $company_municipality;
-    $result_kommune_tax  = $_lib['db']->db_query($query_kommune_tax);
-    $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
+    foreach($loennOgGodtgjoerelse as $zone_tax_array) {
+      $zone_tax = $zone_tax_array['loennOgGodtgjoerelse'];
+      $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
+    }
 
-    $loennOgGodtgjoerelse = array();
-    // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
-    $code_for_tax_calculation = $_lib['sess']->get_companydef('CalculationCodeForTax');
-    self::checkIfEmpty($code_for_tax_calculation, 'Code for tax calculation not set on company');
-    $loennOgGodtgjoerelse['beregningskodeForArbeidsgiveravgift'] = $code_for_tax_calculation;
-    // taxing zone code, already checked above before the query
-    self::checkIfEmpty($kommune_tax, 'Municipality selected for the company does not exist in the list of municipalities or does not have a zone code set');
-    // Code property covered by the above check since it is the id for arbeidsgiveravggift table
-    self::checkIfEmpty($kommune_tax->Percent, 'Municipality selected for the company does not have a tax percent set');
-    $loennOgGodtgjoerelse['sone'] = $kommune_tax->Code;
-    // amount
-    $loennOgGodtgjoerelse['avgiftsgrunnlagBeloep'] = $arbeidsgiveravgiftbeloep;
-    // taxing percent
-    $loennOgGodtgjoerelse['prosentsatsForAvgiftsberegning'] = $kommune_tax->Percent;
-    $sumArbeidsgiveravgift = $arbeidsgiveravgiftbeloep * $kommune_tax->Percent/100.0;
     // loennOgGodtgjoerelse = salary and refunds
-    $arbeidsgiveravgift = array();
-    $arbeidsgiveravgift['loennOgGodtgjoerelse'] = $loennOgGodtgjoerelse;
-    $virksomhet['arbeidsgiveravgift'] = $arbeidsgiveravgift;
+    $virksomhet['arbeidsgiveravgift'] = $loennOgGodtgjoerelse;
 
     $leveranse['oppgave'] = array();
     $leveranse['oppgave']['betalingsinformasjon'] = array();
@@ -260,12 +280,19 @@ class altinn_report {
 /* Helper function that populates the salaries array
  * for the selected period
  */
-  function fetchSalaries() {
+  function fetchSalaries($salary_ids = null) {
     global $_lib;
     // only the ones that have the altinn/actual pay date set
     $query_salaries = "SELECT s.*
                        FROM salary s
                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+    if ($salary_ids) {
+      $query_salaries .= ' AND SalaryID IN (';
+      for($i = 0; $i < count($salary_ids); ++$i) {
+        if ($i == count($salary_ids)-1) $query_salaries .= (string) $salary_ids[$i] . ')';
+        else $query_salaries .= (string) $salary_ids[$i] . ', ';
+      }
+    }
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
       $this->salaries[$salary->AccountPlanID][] = $salary;

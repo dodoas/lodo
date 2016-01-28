@@ -1,4 +1,5 @@
 <?
+session_start();
 includelogic('altinnsalary/files');
 includelogic('altinnsalary/altinnreport');
 
@@ -7,7 +8,6 @@ class LocalSoapClient extends SoapClient {
     // error_log('===================================', 3, $_SETUP['HOME_DIR']."/error.log");
     // error_log("$request\n", 3, $_SETUP['HOME_DIR']."/error.log");
 
-    // TODO !!why
     // formTaskShipment->FormTasks->Forms->Form->FormData
     // In soap reqest 1 we send one string that contain xml and this have
     // to be valid xml when we send it. The only way I found to do that,
@@ -16,6 +16,9 @@ class LocalSoapClient extends SoapClient {
     // untill this moneypatch
     $request = str_replace('&lt;','<', $request);
     $request = str_replace('&gt;','>', $request);
+    // done so we remove some unnecessary characters generated because of the
+    // encoding format of the php script file
+    $request = str_replace('&#13;','', $request);
 
     // error_log("Now it is replaced\n", 3, $_SETUP['HOME_DIR']."/error.log");
     // error_log("$request\n", 3, $_SETUP['HOME_DIR']."/error.log");
@@ -23,22 +26,49 @@ class LocalSoapClient extends SoapClient {
   }
 }
 
-// TODO Make some interface for inputting this. We should't eave store
-// this in lodo. There is also a possabliety to get a SMS with pin code
-// If we do we are storing information that makes it possible to send
-// report to altinn if you broke into lodo.
-// This ones are the one I got in the letter with all pincodes for the test user
-$pins = array('','ajhhs', 'piksd', 'iuyhs', 'asdfg', 'rtefs', 'loj7s', 'mmmyp', 'juksa', 'fizck', 'qicks', '98ujs', 'mnbvs', 'qwers', 'polze', 'ztang', 'alt1n', 'zcatt', 'kjasd', '23as3', 'lkiju', '4564s', 'zxhfg', 'alsks', 'ooiks', 'likme', 'kaffe', 'arbei', '00kks', 'mjhgg', 'ziste');
+if (isset($_POST['use_salary'])) {
+  $salary_ids = array();
+  foreach($_POST['use_salary'] as $salary_id => $selected) {
+    if ($selected) $salary_ids[] = $salary_id;
+  }
+}
+else $salary_ids = null;
 
+// if action is soap4 or soap5 check if pin set and not expired
+if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('action_soap5')) {
+  // if pin already entered and not expired use it, if not unset and redirect to enter a new one
+  if (!isset($_SESSION['altinn_pin']) || (isset($_SESSION['altinn_pin']) && (time() > strtotime($_SESSION['altinn_pin']['expires_at'])))) {
+    unset($_SESSION['altinn_pin']);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_authentication&action_confirm_authentication=confirm&request_type=feedback&request_receivers_reference=" . $_POST['request_receivers_reference']);
+  }
+  else {
+    if (!isset($_SESSION['altinn_pin']['value'])) {
+      // if altinn_pin is set but value is not, set the entered pin as the value
+      $_SESSION['altinn_pin']['value'] = $_POST['user_pin_code'];
+    }
+    else $_POST['user_pin_code'] = $_SESSION['altinn_pin']['value'];
+  }
+}
 
 if ($_lib['input']->getProperty('action_soap1')) {
+  // redirect to salary list page if no salaries are selected for the report
+  if (empty($salary_ids)) {
+    $message = 'No salaries were selected.';
+    if (isset($_REQUEST['altinnReport1_periode'])) $periode = '&periode=' . $_REQUEST['altinnReport1_periode'];
+    else $periode = '';
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_slaries=show&message=" . $message . $periode);
+  }
+
   // If you didn't select a period, don't send.
   if (empty($_POST['altinnReport1_periode'])){
     $_lib['message']->add('Legg inn: periode');
   } else {
     $period = $_REQUEST['altinnReport1_periode'];
     // generate the altinn report object for the selected period
-    $report = new altinn_report($period);
+    $report = new altinn_report($period, $salary_ids);
+    if (isset($_POST['altinnReport1_MeldingsId'])) {
+      $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
+    }
     $xml = $report->generateXML();
     if (!empty($report->errors)) {
       $_lib['message']->add('Report not sent, there were some errors.');
@@ -109,10 +139,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
 </melding>
 ';
 */
-      // here logic should be use old MeldingsID as new erstatterMeldingsID
+      // here logic should be use old MeldingsID as new erstatterMeldingsId
       $use_erstatterMeldingsId = '';
       if (isset($_POST['altinnReport1_MeldingsId'])) {
-        $use_erstatterMeldingsId = '<erstatterMeldingsID>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsID>';
+        $use_erstatterMeldingsId = '<erstatterMeldingsId>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsId>';
         // update the old altinnReport one
 
 
@@ -295,6 +325,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
 
+} elseif($_lib['input']->getProperty('action_delete_pin')) {
+  $_lib['message']->add('Pin deleted');
+  unset($_SESSION['altinn_pin']);
+} elseif($_lib['input']->getProperty('action_expire_pin')) {
+  $_lib['message']->add('Pin expired');
+  $_SESSION['altinn_pin']['expires_at'] = strftime("%F %T", time()-1);
 } elseif($_lib['input']->getProperty('action_soap4')) {
   // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
   // $_rowB = $_lib['db']->get_row(array('query' => $query));
@@ -413,7 +449,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 } elseif($_lib['input']->getProperty('action_generate_xml_report')) {
   $period = $_REQUEST['altinnReport1_periode'];
   // generate the altinn report object for the selected period
-  $report = new altinn_report($period);
+  $report = new altinn_report($period, $salary_ids);
   $xml_generated = true;
 } elseif($_lib['input']->getProperty('action_confirm_authentication')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
@@ -437,6 +473,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ValidTo']   = preg_replace('/\+.*/', '', $result->GetAuthenticationChallengeResult->ValidTo);
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
+
+  // save all info for altinn pin in the session
+  // except the value, that will get set in soap4 or soap5
+  $_SESSION['altinn_pin']['type'] = 'AltinnPin'; //$params['challengeRequest']['AuthMethod'];
+  $_SESSION['altinn_pin']['created_at'] = strftime("%F %T", time()); //strtotime($values['res_ValidFrom']);
+  $_SESSION['altinn_pin']['expires_at'] = strftime("%F %T", time() + 30*60); //strtotime($values['res_ValidTo']);
   $authentication_challenge_message = $values['res_Message'];
 } elseif ($_lib['input']->getProperty('action_show_slaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period

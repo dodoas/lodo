@@ -127,6 +127,7 @@ elseif($_lib['input']->getProperty('action_salaryline_new'))
     $fields['salaryline_SalaryID']          = $orgLine->SalaryID;
     $fields['salaryline_LineNumber']        = $orgLine->LineNumber;
     $fields['salaryline_SalaryText']        = $orgLine->SalaryText;
+    $fields['salaryline_SalaryDescription'] = $orgLine->SalaryDescription;
     $fields['salaryline_NumberInPeriod']    = $orgLine->NumberInPeriod;
     $fields['salaryline_Rate']              = $orgLine->Rate;
     $fields['salaryline_AmountThisPeriod']  = $orgLine->AmountThisPeriod;
