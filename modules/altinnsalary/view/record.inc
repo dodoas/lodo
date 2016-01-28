@@ -476,9 +476,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   // save all info for altinn pin in the session
   // except the value, that will get set in soap4 or soap5
-  $_SESSION['altinn_pin']['type'] = 'AltinnPin'; //$params['challengeRequest']['AuthMethod'];
-  $_SESSION['altinn_pin']['created_at'] = strftime("%F %T", time()); //strtotime($values['res_ValidFrom']);
-  $_SESSION['altinn_pin']['expires_at'] = strftime("%F %T", time() + 30*60); //strtotime($values['res_ValidTo']);
+  $_SESSION['altinn_pin']['type'] = $params['challengeRequest']['AuthMethod'];
+  $_SESSION['altinn_pin']['created_at'] = strtotime($values['res_ValidFrom']);
+  $_SESSION['altinn_pin']['expires_at'] = strtotime($values['res_ValidTo']);
   $authentication_challenge_message = $values['res_Message'];
 } elseif ($_lib['input']->getProperty('action_show_slaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
