@@ -3,7 +3,7 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 $last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', time()));
 if (is_null($last_periode)) $last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', strtotime('last year')));
-if (isset($_POST['periode'])) $_periode = $_POST['periode'];
+if (isset($_REQUEST['periode'])) $_periode = $_REQUEST['periode'];
 else $_periode = $last_periode;
 
 require_once "record.inc";

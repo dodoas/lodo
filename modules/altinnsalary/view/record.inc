@@ -8,7 +8,6 @@ class LocalSoapClient extends SoapClient {
     // error_log('===================================', 3, $_SETUP['HOME_DIR']."/error.log");
     // error_log("$request\n", 3, $_SETUP['HOME_DIR']."/error.log");
 
-    // TODO !!why
     // formTaskShipment->FormTasks->Forms->Form->FormData
     // In soap reqest 1 we send one string that contain xml and this have
     // to be valid xml when we send it. The only way I found to do that,
@@ -26,14 +25,6 @@ class LocalSoapClient extends SoapClient {
     return parent::__doRequest($request, $location, $action, $version, $one_way);
   }
 }
-
-// TODO Make some interface for inputting this. We should't eave store
-// this in lodo. There is also a possabliety to get a SMS with pin code
-// If we do we are storing information that makes it possible to send
-// report to altinn if you broke into lodo.
-// This ones are the one I got in the letter with all pincodes for the test user
-$pins = array('','ajhhs', 'piksd', 'iuyhs', 'asdfg', 'rtefs', 'loj7s', 'mmmyp', 'juksa', 'fizck', 'qicks', '98ujs', 'mnbvs', 'qwers', 'polze', 'ztang', 'alt1n', 'zcatt', 'kjasd', '23as3', 'lkiju', '4564s', 'zxhfg', 'alsks', 'ooiks', 'likme', 'kaffe', 'arbei', '00kks', 'mjhgg', 'ziste');
-
 
 if (isset($_POST['use_salary'])) {
   $salary_ids = array();
@@ -60,6 +51,14 @@ if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('
 }
 
 if ($_lib['input']->getProperty('action_soap1')) {
+  // redirect to salary list page if no salaries are selected for the report
+  if (empty($salary_ids)) {
+    $message = 'No salaries were selected.';
+    if (isset($_REQUEST['altinnReport1_periode'])) $periode = '&periode=' . $_REQUEST['altinnReport1_periode'];
+    else $periode = '';
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_slaries=show&message=" . $message . $periode);
+  }
+
   // If you didn't select a period, don't send.
   if (empty($_POST['altinnReport1_periode'])){
     $_lib['message']->add('Legg inn: periode');
