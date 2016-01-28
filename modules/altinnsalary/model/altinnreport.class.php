@@ -6,6 +6,7 @@
 
 class altinn_report {
   public $salaries     = array();
+  public $salary_ids   = array();
   public $salary_lines = array();
   public $employees    = array();
   public $period       = '';
@@ -274,7 +275,65 @@ class altinn_report {
   function convertNorwegianLettersToASCII($text) {
     $norwegian_letters = array('æ', 'ø', 'å', 'Æ', 'Ø', 'Å');
     $ascii_representations = array('ae', 'oe', 'aa', 'AE', 'OE', 'AA');
-    return str_replace($norwegian_letters, $ascii_representations, utf8_encode($text));    
+    return str_replace($norwegian_letters, $ascii_representations, utf8_encode($text));
+  }
+
+/* Helper function to save a relation which salaries were sent
+ * in this report.
+ * Returns false if no salaries were selected.
+ */
+  function saveSalaryReportLinks($altinn_report_id) {
+    global $_lib;
+    if (empty($this->salary_ids)) return false;
+    $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
+    $query_salaries = self::queryStringForSelectedSalaries();
+    $result_salaries  = $_lib['db']->db_query($query_salaries);
+    while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
+      $insert_query .= "('" . $altinn_report_id . "', '" . $salary->SalaryID . "', '" . $salary->JournalID . "'),";
+    }
+    $insert_query = substr($insert_query, 0, -1);
+    $_lib['db']->db_query($insert_query);
+    return true;
+  }
+
+/* Helper function that generates the query to get
+ * the employees for the included salaries
+ */
+  function queryStringForIncludedEmployees() {
+    // only the ones whose salaries have the altinn/actual pay date set
+    $query_employees = "SELECT ap.*
+                       FROM salary s JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID
+                       WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+    // and restrict further by selected salary ids
+    if ($this->salary_ids) {
+      $query_employees .= ' AND s.SalaryID IN (';
+      foreach($this->salary_ids as $salary_id) {
+        $query_employees .= (string) $salary_id . ', ';
+      }
+      $query_employees = substr($query_employees, 0, -2);
+      $query_employees .= ')';
+    }
+    return $query_employees;
+  }
+
+/* Helper function that generates the query to get
+ * the salaries with the ids that are chosen
+ */
+  function queryStringForSelectedSalaries() {
+    // only the ones that have the altinn/actual pay date set
+    $query_salaries = "SELECT s.*
+                       FROM salary s
+                       WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+    // and restrict further by ids
+    if ($this->salary_ids) {
+      $query_salaries .= ' AND SalaryID IN (';
+      foreach($this->salary_ids as $salary_id) {
+        $query_salaries .= (string) $salary_id . ', ';
+      }
+      $query_salaries = substr($query_salaries, 0, -2);
+      $query_salaries .= ')';
+    }
+    return $query_salaries;
   }
 
 /* Helper function that populates the salaries array
@@ -282,17 +341,8 @@ class altinn_report {
  */
   function fetchSalaries($salary_ids = null) {
     global $_lib;
-    // only the ones that have the altinn/actual pay date set
-    $query_salaries = "SELECT s.*
-                       FROM salary s
-                       WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
-    if ($salary_ids) {
-      $query_salaries .= ' AND SalaryID IN (';
-      for($i = 0; $i < count($salary_ids); ++$i) {
-        if ($i == count($salary_ids)-1) $query_salaries .= (string) $salary_ids[$i] . ')';
-        else $query_salaries .= (string) $salary_ids[$i] . ', ';
-      }
-    }
+    if (!empty($salary_ids)) $this->salary_ids = $salary_ids;
+    $query_salaries = self::queryStringForSelectedSalaries();
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
       $this->salaries[$salary->AccountPlanID][] = $salary;
@@ -320,9 +370,7 @@ class altinn_report {
   function fetchEmployees() {
     global $_lib;
     // only the ones whose salaries have the altinn/actual pay date set
-    $query_employees = "SELECT ap.*
-                       FROM salary s JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID
-                       WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+    $query_employees = self::queryStringForIncludedEmployees();
     $result_employees  = $_lib['db']->db_query($query_employees);
     while ($employee = $_lib['db']->db_fetch_object($result_employees)) {
       $this->employees[$employee->AccountPlanID] = $employee;

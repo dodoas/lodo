@@ -170,18 +170,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $query = 'SELECT AltinnReport1ID FROM altinnReport1 order by AltinnReport1ID desc limit 1';
       $res = $_lib['db']->db_query($query);
       $row = $_lib['db']->db_fetch_object($res);
+      $altinnReport1ID = $row->AltinnReport1ID;
 
-      $query_salary  = "SELECT SalaryID, JournalID FROM salary WHERE ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%'";
-      $result_salary = $_lib['db']->db_query($query_salary);
-      $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, SalaryId, JournalID) VALUES ';
-      while($_row = $_lib['db']->db_fetch_object($result_salary)){
-        $insert_query .= "('".$row->AltinnReport1ID."', '".$_row->SalaryID."', '".$_row->JournalID."'),";
-      }
-      if (isset($result_salary->num_rows)) {
-        $insert_query = substr($insert_query, 0, -1);
-        $_lib['db']->db_query($insert_query);
-      }
-      $_lib['message']->add('Report sent');
+      // Save which salaries have been sent in the report and notify
+      if ($report->saveSalaryReportLinks($altinnReport1ID)) $_lib['message']->add('Report sent');
     }
   }
 
