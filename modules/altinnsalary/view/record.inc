@@ -5,9 +5,6 @@ includelogic('altinnsalary/altinnreport');
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
-    // error_log('===================================', 3, $_SETUP['HOME_DIR']."/error.log");
-    // error_log("$request\n", 3, $_SETUP['HOME_DIR']."/error.log");
-
     // formTaskShipment->FormTasks->Forms->Form->FormData
     // In soap reqest 1 we send one string that contain xml and this have
     // to be valid xml when we send it. The only way I found to do that,
@@ -76,75 +73,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
     }
     else {
       $xml_generated = true;
-/*
-'<?xml version="1.0" encoding="UTF-8"?>
-<melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0">
-  <Leveranse>
-    <leveringstidspunkt>2015-12-11T00:00:00Z</leveringstidspunkt>
-    <kalendermaaned>2015-12</kalendermaaned>
-    <kildesystem>LODO</kildesystem>
-    <meldingsId>108</meldingsId>
-    <opplysningspliktig>
-      <norskIdentifikator>910748645</norskIdentifikator>
-    </opplysningspliktig>
-    <oppgave>
-      <betalingsinformasjon>
-        <sumForskuddstrekk>3000</sumForskuddstrekk>
-        <sumArbeidsgiveravgift>1410</sumArbeidsgiveravgift>
-      </betalingsinformasjon>
-      <virksomhet>
-        <norskIdentifikator>910748645</norskIdentifikator>
-        <inntektsmottaker>
-          <norskIdentifikator>24040100918</norskIdentifikator>
-          <identifiserendeInformasjon>
-            <navn>MARTIN EIDEM</navn>
-            <foedselsdato>2001-04-24</foedselsdato>
-          </identifiserendeInformasjon>
-          <arbeidsforhold>
-            <typeArbeidsforhold>ordinaertArbeidsforhold</typeArbeidsforhold>
-            <startdato>2013-11-01</startdato>
-            <antallTimerPerUkeSomEnFullStillingTilsvarer>37.5</antallTimerPerUkeSomEnFullStillingTilsvarer>
-            <avloenningstype>fast</avloenningstype>
-            <yrke>2130109</yrke>
-            <arbeidstidsordning>ikkeSkift</arbeidstidsordning>
-            <stillingsprosent>100</stillingsprosent>
-            <sisteLoennsendringsdato>2013-11-01</sisteLoennsendringsdato>
-            <loennsansiennitet>2013-11-01</loennsansiennitet>
-            <sisteDatoForStillingsprosentendring>2013-11-01</sisteDatoForStillingsprosentendring>
-          </arbeidsforhold>
-          <forskuddstrekk>
-            <beloep>-3000</beloep>
-          </forskuddstrekk>
-          <inntekt>
-            <fordel>kontantytelse</fordel>
-            <utloeserArbeidsgiveravgift>true</utloeserArbeidsgiveravgift>
-            <inngaarIGrunnlagForTrekk>true</inngaarIGrunnlagForTrekk>
-            <beloep>10000</beloep>
-            <loennsinntekt>
-              <beskrivelse>fastloenn</beskrivelse>
-            </loennsinntekt>
-          </inntekt>
-        </inntektsmottaker>
-        <arbeidsgiveravgift>
-          <loennOgGodtgjoerelse>
-            <beregningskodeForArbeidsgiveravgift>generelleNaeringer</beregningskodeForArbeidsgiveravgift>
-            <sone>1</sone>
-            <avgiftsgrunnlagBeloep>10000</avgiftsgrunnlagBeloep>
-            <prosentsatsForAvgiftsberegning>14.1</prosentsatsForAvgiftsberegning>
-          </loennOgGodtgjoerelse>
-        </arbeidsgiveravgift>
-      </virksomhet>
-    </oppgave>
-  </Leveranse>
-</melding>
-';
-*/
+
       // here logic should be use old MeldingsID as new erstatterMeldingsId
       $use_erstatterMeldingsId = '';
       if (isset($_POST['altinnReport1_MeldingsId'])) {
         $use_erstatterMeldingsId = '<erstatterMeldingsId>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsId>';
         // update the old altinnReport one
-
 
         $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
         $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
