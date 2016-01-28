@@ -80,6 +80,8 @@ $myIndex = "inbarbeidsgiveravgiftID";
 $myIndexNr = $result->$myIndex;
 ?>
             <input type="hidden" name="<?php print $db_table . "_" . $termin . "_" . $myIndex; ?>"  value="<?php print $myIndexNr; ?>">
+            <?php // Added to have a field which is sent to determine what the database of the form we submit was ?>
+            <input type="hidden" name="<?php print $db_table . "_" . $termin . "_db_name"; ?>"      value="<?php print $_SETUP['DB_NAME'][0]; ?>">
             <input type="hidden" name="<?php print $db_table . "_" . $termin . "_year"; ?>"         value="<?php print $_REQUEST["Period"]; ?>">
             <input type="hidden" name="<?php print $db_table . "_" . $termin . "_termin"; ?>"       value="<?php print $termin; ?>">
         <tr>
@@ -249,6 +251,8 @@ $result = $arbAvg->gridNextTermin(20);
 		$myIndexNr = $result->$myIndex;
 ?>
             <input type="hidden" name="<?php print $db_table . "_20_" . $myIndex; ?>" value="<?php print $myIndexNr; ?>">
+            <?php // Added to have a field which is sent to determine what the database of the form we submit was ?>
+            <input type="hidden" name="<?php print $db_table . "_20_db_name"; ?>" value="<?php print $_SETUP['DB_NAME'][0]; ?>">
             <input type="hidden" name="<?php print $db_table . "_20_year"; ?>" value="<?php print $_REQUEST["Period"]; ?>">
             <input type="hidden" name="<?php print $db_table . "_20_termin"; ?>" value="20">
             <td class="number">
@@ -350,6 +354,8 @@ $result = $arbAvg->gridNextTermin(30);
 		$myIndexNr = $result->$myIndex;
 ?>
             <input type="hidden" name="<?php print $db_table . "_30_" . $myIndex; ?>" value="<?php print $myIndexNr; ?>">
+            <?php // Added to have a field which is sent to determine what the database of the form we submit was ?>
+            <input type="hidden" name="<?php print $db_table . "_30_db_name"; ?>" value="<?php print $_SETUP['DB_NAME'][0]; ?>">
             <input type="hidden" name="<?php print $db_table . "_30_year"; ?>" value="<?php print $_REQUEST["Period"]; ?>">
             <input type="hidden" name="<?php print $db_table . "_30_termin"; ?>" value="30">
             <td class="number">
@@ -462,7 +468,18 @@ Differanser.
     </tbody>
 </table>
 <br/><br/>
-<? if($accounting->is_valid_accountperiod($_REQUEST["Period"] . "-13", $_lib['sess']->get_person('AccessLevel')) && $_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+<?
+  // check if any of the selected year's periods is open, and only then and with
+  // propper access rights show the save button
+  $is_open = false;
+  for($i = 1; $i <= 13; $i++) {
+    $month = sprintf("%02d", $i);
+    if ($accounting->is_valid_accountperiod($_REQUEST["Period"] . "-" . $month, $_lib['sess']->get_person('AccessLevel'))) {
+      $is_open = true;
+      break;
+    }
+  }
+ if($is_open && $_lib['sess']->get_person('AccessLevel') >= 2) { ?>
 <table>
     <tr>
         <td width="500" align="right"><? print $_lib['form3']->submit(array('name'=>'action_inberarbeidsgiveravgift_update', 'value'=>'Lagre (S)', 'accesskey'=>'S')) ?></td>
