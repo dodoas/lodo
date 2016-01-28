@@ -32,6 +32,7 @@ print $_lib['sess']->doctype
   $so1_query = "select * from altinnReport1 order by AltinnReport1ID";
   $so1 = $_lib['db']->db_query($so1_query);
   while($so1row = $_lib['db']->db_fetch_object($so1)) {
+    $salary_ids = array();
   ?>
     <?
     $so2query = "SELECT * FROM altinnReport2 WHERE res_ReceiptId = ".$so1row->ReceiptId." ORDER BY res_ReceiversReference DESC , AltinnReport2ID LIMIT 1";
@@ -52,13 +53,9 @@ print $_lib['sess']->doctype
         $result_altin_salary  = $_lib['db']->db_query($query_altin_salary);
 
         while($_row = $_lib['db']->db_fetch_object($result_altin_salary)){
-          $query_salary = "SELECT * FROM salary WHERE JournalID = ".$_row->JournalID;
-          $result_salary  = $_lib['db']->db_query($query_salary);
-          $_salary = $_lib['db']->db_fetch_object($result_salary);
+          $salary_ids[] = $_row->SalaryId;
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">
-            L <? print $_row->JournalID?><? print ($_row->Changed) ? "(endrett)" : "" ?>
-            </a>
+          L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>"><? print $_row->JournalID?><? print ($_row->Changed) ? "(endrett)" : "" ?></a>
         <? } ?>
       </td>
       <td>
@@ -96,6 +93,9 @@ print $_lib['sess']->doctype
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
           <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
+          <? foreach($salary_ids as $salary_id) { ?>
+            <input type="hidden" name="use_salary[<? print $salary_id; ?>]" value='1'>
+          <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap1',
