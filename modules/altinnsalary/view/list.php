@@ -86,7 +86,7 @@ print $_lib['sess']->doctype
           else print $so2row->res_ReceiptStatus;
         ?>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
-          <? print $_lib['form3']->hidden(array('name'=>'receiptId', 'value'=>$so2row->req_ReceiptId)) ?>
+          <? print $_lib['form3']->hidden(array('name'=>'receiptId', 'value'=>$so1row->ReceiptId)) ?>
           <? print $_lib['form3']->submit(array('name'=>'action_soap2', 'value'=>'Check Status')) ?>
         </form>
       </td>

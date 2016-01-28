@@ -5,6 +5,8 @@ includelogic('altinnsalary/altinnreport');
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
+    global $_SETUP;
+
     // formTaskShipment->FormTasks->Forms->Form->FormData
     // In soap reqest 1 we send one string that contain xml and this have
     // to be valid xml when we send it. The only way I found to do that,
@@ -403,8 +405,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   // save all info for altinn pin in the session
   // except the value, that will get set in soap4 or soap5
   $_SESSION['altinn_pin']['type'] = $params['challengeRequest']['AuthMethod'];
-  $_SESSION['altinn_pin']['created_at'] = strtotime($values['res_ValidFrom']);
-  $_SESSION['altinn_pin']['expires_at'] = strtotime($values['res_ValidTo']);
+  $_SESSION['altinn_pin']['created_at'] = strftime('%F %T', strtotime($values['res_ValidFrom']));
+  $_SESSION['altinn_pin']['expires_at'] = strftime('%F %T', strtotime($values['res_ValidTo']));
   $authentication_challenge_message = $values['res_Message'];
 } elseif ($_lib['input']->getProperty('action_show_slaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period

@@ -102,7 +102,10 @@ print $_lib['sess']->doctype ?>
       <td>
         <textarea rows="50" cols="130"><?
           $altinnFile = new altinn_file($row->Folder);
-          print $altinnFile->readFile("/A-melding.xml");
+          $doc = new DOMDocument();
+          $doc->formatOutput = true;
+          $doc->loadXML($altinnFile->readFile("/A-melding.xml"));
+          print $doc->saveXML();
         ?></textarea>
       </td>
     </tr>
