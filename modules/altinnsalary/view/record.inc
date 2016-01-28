@@ -186,55 +186,55 @@ if ($_lib['input']->getProperty('action_soap1')) {
   }
 
 } elseif($_lib['input']->getProperty('action_soap2')) {
-  // TODO, abstract this into a function
-  $query = 'SELECT * FROM altinnReport1 order by ReceiptId desc limit 1';
-  $_row = $_lib['db']->get_row(array('query' => $query));
+  if(empty($_POST['receiptId'])){
+    $_lib['message']->add('Noe gikk galt, fikk ikke receiptId som vi skulle');
+  } else {
+    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/ReceiptExternalBasic.svc?wsdl");
+    $params = array(
+      'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
+      'systemPassword' => 'altinnlodo0',
+      'receipt' => array(
+        'ReceiptId' => $_POST['receiptId'],
+      )
+    );
+    $result = $sc->__soapCall('GetReceiptBasicV2', array('parameters' => $params));
 
-  $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/ReceiptExternalBasic.svc?wsdl");
-  $params = array(
-    'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-    'systemPassword' => 'altinnlodo0',
-    'receipt' => array(
-      'ReceiptId' => $_row->ReceiptId,
-    )
-  );
-  $result = $sc->__soapCall('GetReceiptBasicV2', array('parameters' => $params));
+    $values = array();
+    $values['req_ReceiptId']       = $_POST['receiptId'];
+    $values['res_LastChanged']     = $result->GetReceiptBasicV2Result->LastChanged;
+    $values['res_ParentReceiptId'] = $result->GetReceiptBasicV2Result->ParentReceiptId;
+    $values['res_ReceiptHistory']  = $result->GetReceiptBasicV2Result->ReceiptHistory;
+    $values['res_ReceiptId']       = $result->GetReceiptBasicV2Result->ReceiptId;
+    $values['res_ReceiptStatus']   = $result->GetReceiptBasicV2Result->ReceiptStatus;
+    $values['res_ReceiptTemplate'] = $result->GetReceiptBasicV2Result->ReceiptTemplate;
+    $values['res_ReceiptText']     = $result->GetReceiptBasicV2Result->ReceiptText;
+    $values['res_ReceiptType']     = $result->GetReceiptBasicV2Result->ReceiptType;
 
-  $values = array();
-  $values['req_ReceiptId']       = $_row->ReceiptId;
-  $values['res_LastChanged']     = $result->GetReceiptBasicV2Result->LastChanged;
-  $values['res_ParentReceiptId'] = $result->GetReceiptBasicV2Result->ParentReceiptId;
-  $values['res_ReceiptHistory']  = $result->GetReceiptBasicV2Result->ReceiptHistory;
-  $values['res_ReceiptId']       = $result->GetReceiptBasicV2Result->ReceiptId;
-  $values['res_ReceiptStatus']   = $result->GetReceiptBasicV2Result->ReceiptStatus;
-  $values['res_ReceiptTemplate'] = $result->GetReceiptBasicV2Result->ReceiptTemplate;
-  $values['res_ReceiptText']     = $result->GetReceiptBasicV2Result->ReceiptText;
-  $values['res_ReceiptType']     = $result->GetReceiptBasicV2Result->ReceiptType;
-
-  for ($i=0; $i < count($result->GetReceiptBasicV2Result->References->Reference); $i++) {
-    $element = $result->GetReceiptBasicV2Result->References->Reference[$i];
-    if ($element->ReferenceType == "PartyReference") {
-      if (!isset($values['res_'.$element->ReferenceType.'A'])) {
-        $values['res_'.$element->ReferenceType.'A'] = $element->ReferenceValue;
+    for ($i=0; $i < count($result->GetReceiptBasicV2Result->References->Reference); $i++) {
+      $element = $result->GetReceiptBasicV2Result->References->Reference[$i];
+      if ($element->ReferenceType == "PartyReference") {
+        if (!isset($values['res_'.$element->ReferenceType.'A'])) {
+          $values['res_'.$element->ReferenceType.'A'] = $element->ReferenceValue;
+        } else {
+          $values['res_'.$element->ReferenceType.'B'] = $element->ReferenceValue;
+        }
       } else {
-        $values['res_'.$element->ReferenceType.'B'] = $element->ReferenceValue;
+        $values['res_'.$element->ReferenceType] = $element->ReferenceValue;
       }
-    } else {
-      $values['res_'.$element->ReferenceType] = $element->ReferenceValue;
     }
+
+    $values['res_SubReceiptsLastChanged']      = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->LastChanged;
+    $values['res_SubReceiptsParentReceiptId']  = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ParentReceiptId;
+    $values['res_SubReceiptsReceiptHistory']   = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptHistory;
+    $values['res_SubReceiptsReceiptId']        = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptId;
+    $values['res_SubReceiptsReceiptStatus']    = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptStatus;
+    $values['res_SubReceiptsReceiptTemplate']  = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptTemplate;
+    $values['res_SubReceiptsReceiptText']      = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptText;
+    $values['res_SubReceiptsReceiptType']      = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptType;
+    $values['res_SubReceiptsSendersReference'] = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->References->Reference->ReferenceValue;
+
+    $_lib['storage']->store_record(array('table' => 'altinnReport2', 'data' => $values, 'debug' => false));
   }
-
-  $values['res_SubReceiptsLastChanged']      = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->LastChanged;
-  $values['res_SubReceiptsParentReceiptId']  = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ParentReceiptId;
-  $values['res_SubReceiptsReceiptHistory']   = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptHistory;
-  $values['res_SubReceiptsReceiptId']        = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptId;
-  $values['res_SubReceiptsReceiptStatus']    = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptStatus;
-  $values['res_SubReceiptsReceiptTemplate']  = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptTemplate;
-  $values['res_SubReceiptsReceiptText']      = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptText;
-  $values['res_SubReceiptsReceiptType']      = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->ReceiptType;
-  $values['res_SubReceiptsSendersReference'] = $result->GetReceiptBasicV2Result->SubReceipts->Receipt->References->Reference->ReferenceValue;
-
-  $_lib['storage']->store_record(array('table' => 'altinnReport2', 'data' => $values, 'debug' => false));
 
 } elseif($_lib['input']->getProperty('action_soap3')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
