@@ -91,4 +91,8 @@ $_ALTINN['SalaryLineDescriptionTypes'] = array(
     'loennEtterDoedsfall'=>'L&oslash;nn Etter D&oslash;dsfall'
 );
 
-          
+$_ALTINN['AuthMethods'] = array(
+  'AltinnPin' => 'Kode fra brev',
+  'SMSPin'    => 'Kode p&aring; SMS'
+);
+

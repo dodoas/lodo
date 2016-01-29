@@ -39,6 +39,16 @@ ALTER TABLE company
 ADD CalculationCodeForTax varchar(60) DEFAULT ''
 ;
 
+-- Add missing altinn fields on salaryconfline
+ALTER TABLE person
+-- there are only two valid optins AltinnPin and SMSPin
+ADD AltinnAuthMethod varchar(100) NOT NULL DEFAULT 'SMSPin',
+-- this es 'personnummer' same as social security number
+ADD AltinnUserSSN varchar(100)
+;
+-- Set SMSPin to all existing persons
+UPDATE person SET AltinnUserSSN = 'SMSPin';
+
 DROP TABLE IF EXISTS occupation;
 -- Create new tables for Occupation, we will fetch data from ssb.no/a/yrke
 CREATE TABLE IF NOT EXISTS occupation (

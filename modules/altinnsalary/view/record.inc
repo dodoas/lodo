@@ -33,6 +33,23 @@ if (isset($_POST['use_salary'])) {
 }
 else $salary_ids = null;
 
+// Make sure user have set AltinnUserSSN
+if ($_lib['input']->getProperty('action_soap3') ||
+    $_lib['input']->getProperty('action_soap4') ||
+    $_lib['input']->getProperty('action_soap5') ||
+    $_lib['input']->getProperty('action_confirm_authentication')){
+    $_tmp = $_lib['sess']->get_person('AltinnUserSSN');
+    if (empty($_tmp)){
+      $msg = "Systembruker har ikke satt Personnummer";
+      header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$msg);
+      // We need to die here otherwise we may be
+      // rejected later. Code continue to execute
+      // after a header statement.
+      die();
+    }
+    unset($_tmp);
+}
+
 // if action is soap4 or soap5 check if pin set and not expired
 if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('action_soap5')) {
   // if pin already entered and not expired use it, if not unset and redirect to enter a new one
@@ -203,7 +220,6 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $values['res_ReceiptTemplate'] = $result->GetReceiptBasicV2Result->ReceiptTemplate;
     $values['res_ReceiptText']     = $result->GetReceiptBasicV2Result->ReceiptText;
     $values['res_ReceiptType']     = $result->GetReceiptBasicV2Result->ReceiptType;
-
     for ($i=0; $i < count($result->GetReceiptBasicV2Result->References->Reference); $i++) {
       $element = $result->GetReceiptBasicV2Result->References->Reference[$i];
       if ($element->ReferenceType == "PartyReference") {
@@ -234,10 +250,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
   $params = array(
     'challengeRequest' => array(
-      'AuthMethod' => 'AltinnPin',
+      'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
       'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
       'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
-      'UserSSN'        => $_SETUP['ALTINN_USER_SSN']
+      'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
   );
 
@@ -272,11 +288,11 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $params = array(
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
     'systemPassword' => 'altinnlodo0',
-    'userSSN'        => $_SETUP['ALTINN_USER_SSN'],
+    'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
     'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
 
     'userPinCode'    => $_POST['user_pin_code'],
-    'authMethod'     => 'AltinnPin',
+    'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
     'correspondenceID' => $_POST['request_receivers_reference'],
     'languageID'     => '1'
   );
@@ -345,11 +361,11 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $params = array(
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
     'systemPassword' => 'altinnlodo0',
-    'userSSN'        => $_SETUP['ALTINN_USER_SSN'],
+    'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
     'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
 
     'userPinCode'    => $_POST['user_pin_code'],
-    'authMethod'     => 'AltinnPin',
+    'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
     'CorrespondenceID' => $_POST['request_receivers_reference']
   );
 
@@ -383,10 +399,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
   $params = array(
     'challengeRequest' => array(
-      'AuthMethod' => 'AltinnPin',
+      'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
       'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
       'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
-      'UserSSN'        => $_SETUP['ALTINN_USER_SSN']
+      'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
   );
 
