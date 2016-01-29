@@ -6,6 +6,7 @@ ADD WorkTimeScheme varchar(50) DEFAULT '',
 ADD TypeOfEmployment varchar(50) DEFAULT 'ordinaer',
 
 ADD OccupationID bigint(20) DEFAULT 0,
+ADD SubcompanyID bigint(20) DEFAULT 0,
 ADD CreditDaysUpdatedAt date,
 -- TS timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -21,6 +22,7 @@ ADD ShiftType varchar(50),
 ADD WorkTimeScheme varchar(50),
 ADD TypeOfEmployment varchar(50),
 ADD OccupationID bigint(20),
+ADD SubcompanyID bigint(20),
 ADD ActualPayDate date DEFAULT NULL
 ;
 
@@ -219,6 +221,15 @@ res_OwnerPartyReference varchar(50) DEFAULT NULL,
 PRIMARY KEY (AltinnReport5ID)
 );
 
+DROP TABLE IF EXISTS subcompany;
+-- Create new table for Subcompany
+CREATE TABLE IF NOT EXISTS subcompany (
+SubcompanyID int(11) NOT NULL AUTO_INCREMENT,
+Name varchar(255) NOT NULL DEFAULT '',
+OrgNumber varchar(20) NOT NULL DEFAULT '0',
+TS timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (SubcompanyID)
+);
 
 
 -- -- ALTER TABLE accountplan

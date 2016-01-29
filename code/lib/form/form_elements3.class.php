@@ -792,6 +792,14 @@ class form3
 
 ###########################################################
 
+    function Subcompany_menu3($args)
+    {
+        $args['query'] = $this->_QUERY['form']['subcompanymenu'];
+        return $this->_MakeSelect($args);
+    }
+
+###########################################################
+
     function vat_menu3($args)
     {
         global $_lib;

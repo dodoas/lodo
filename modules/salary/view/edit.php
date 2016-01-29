@@ -224,7 +224,8 @@ $formname = "salaryUpdate";
     <th class="salaryhead">Shift type</th>
     <th class="salaryhead">Arbeidstid</th>
     <th class="salaryhead">Type ansettelse</th>
-    <th class="salaryhead" colspan="3">Yrke</th>
+    <th class="salaryhead" colspan="2">Yrke</th>
+    <th class="salaryhead">Ansatt ved</th>
   </tr>
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
@@ -241,8 +242,11 @@ $formname = "salaryUpdate";
     <th class="sub">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
     </th>
-    <th class="sub" colspan="3">
+    <th class="sub" colspan="2">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=>'1')); ?>
+    </th>
+    <th>
+      <? print $_lib['form3']->Subcompany_menu3(array('table'=>'salary', 'field'=>'SubcompanyID', 'pk'=>$head->SalaryID, 'value'=>$head->SubcompanyID, 'access' => $_lib['sess']->get_person('AccessLevel'))); ?>
     </th>
   </tr>
 </table>

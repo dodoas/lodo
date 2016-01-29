@@ -260,8 +260,8 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Personnr</td>
     <td></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SocietyNumber', 'value'=>$account->SocietyNumber, 'class'=>'lodoreqfelt')) ?></td>
-    <td></td>
-    <td></td>
+    <td>Ansatt ved</td>
+    <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table, 'field'=>'SubcompanyID', 'value'=>$account->SubcompanyID)); ?></td>
   </tr>
   <tr>
     <td class="menu">Kommune</td>
