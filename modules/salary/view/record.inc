@@ -5,7 +5,10 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
   $Changed = false;
   $Salary = $_lib['storage']->get_row(array('query' => "SELECT * FROM salary WHERE SalaryID = " . $SalaryID));
   // Check if anything changed
-  $SalaryFieldNames = array("JournalDate" => false, "Period" => false, "AccountPlanID" => false, "ValidFrom" => false, "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false, "VacationPayment" => false);
+  $SalaryFieldNames = array("JournalDate" => false, "Period" => false, "AccountPlanID" => false, "ValidFrom" => false,
+                            "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false,
+                            "VacationPayment" => false, "ActualPayDate" => false, "ShiftType" => false,
+                            "WorkTimeScheme" => false, "TypeOfEmployment" => false, "OccupationID" => false);
   foreach ($SalaryFieldNames as $FieldName => $IsAmount) {
     $ArgName = "salary_".$FieldName."_".$SalaryID;
     if ($IsAmount) {
