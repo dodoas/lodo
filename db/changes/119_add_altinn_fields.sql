@@ -41,6 +41,21 @@ ALTER TABLE company
 ADD CalculationCodeForTax varchar(60) DEFAULT ''
 ;
 
+-- Add missing altinn fields on salaryconfline
+ALTER TABLE person
+-- there are only two valid optins AltinnPin and SMSPin
+ADD AltinnAuthMethod varchar(100) NOT NULL DEFAULT 'SMSPin',
+-- this es 'personnummer' same as social security number
+ADD AltinnUserSSN varchar(100)
+;
+-- Set SMSPin to all existing persons
+UPDATE person SET AltinnUserSSN = 'SMSPin';
+
+-- Set default WorkPercent and update all existing with blank or empty to 100.00
+ALTER TABLE accountplantemplate CHANGE WorkPercent WorkPercent DECIMAL(16,2) NULL DEFAULT '100.00'
+UPDATE accountplantemplate SET WorkPercent = 100.00 WHERE WorkPercent = 0.00 ||WorkPercent = '' || WorkPercent IS NULL;
+
+
 DROP TABLE IF EXISTS occupation;
 -- Create new tables for Occupation, we will fetch data from ssb.no/a/yrke
 CREATE TABLE IF NOT EXISTS occupation (
