@@ -275,7 +275,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
       'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-      'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+      'UserPassword'   => $_SESSION['altinn_password']['value'],
       'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
   );
@@ -317,7 +317,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
     'systemPassword' => 'altinnlodo0',
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
-    'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+    'userPassword'   => $_SESSION['altinn_password']['value'],
 
     'userPinCode'    => $_POST['user_pin_code'],
     'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
@@ -389,7 +389,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
     'systemPassword' => 'altinnlodo0',
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
-    'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+    'userPassword'   => $_SESSION['altinn_password']['value'],
 
     'userPinCode'    => $_POST['user_pin_code'],
     'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
@@ -428,7 +428,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
       'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-      'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+      'UserPassword'   => $_SESSION['altinn_password']['value'],
       'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
   );
