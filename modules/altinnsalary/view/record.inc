@@ -50,12 +50,43 @@ if ($_lib['input']->getProperty('action_soap3') ||
     unset($_tmp);
 }
 
-// if action is soap4 or soap5 check if pin set and not expired
+
+
+error_log(var_export($_SESSION,1)."\n", 3, $_SETUP['HOME_DIR']."/error.log");
+error_log("this part<3<3"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
+// if action is soap3 or soap4 or soap5, we need the user password
+if ($_lib['input']->getProperty('action_soap3') ||
+  $_lib['input']->getProperty('action_soap4') ||
+  $_lib['input']->getProperty('action_soap5')) {
+  // if pin already entered and not expired use it, if not unset and redirect to enter a new one
+  if (!isset($_SESSION['altinn_password']) || (isset($_SESSION['altinn_password']) && (time() > strtotime($_SESSION['altinn_password']['expires_at'])))) {
+    // We don't have a valid password
+    error_log("this part!!!??"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
+    unset($_SESSION['altinn_password']);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_password&action_confirm_password=confirm&request_type=".$_POST['request_type']."&request_receivers_reference=" . $_POST['request_receivers_reference']);
+    die();
+  }
+  else {
+    error_log("this Mladen!!!"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
+    if (!isset($_SESSION['altinn_password']['value'])) {
+      // if altinn_password is set but value is not, set the entered password as the value
+      error_log("this part"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
+      error_log(var_export($_POST,1)."\n", 3, $_SETUP['HOME_DIR']."/error.log");
+      $_SESSION['altinn_password']['value'] = $_POST['user_pass_code'];
+    }
+    else $_POST['user_pass_code'] = $_SESSION['altinn_password']['value'];
+  }
+}
+
+
+
+
 if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('action_soap5')) {
   // if pin already entered and not expired use it, if not unset and redirect to enter a new one
   if (!isset($_SESSION['altinn_pin']) || (isset($_SESSION['altinn_pin']) && (time() > strtotime($_SESSION['altinn_pin']['expires_at'])))) {
     unset($_SESSION['altinn_pin']);
-    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_authentication&action_confirm_authentication=confirm&request_type=feedback&request_receivers_reference=" . $_POST['request_receivers_reference']);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_authentication&action_confirm_authentication=confirm&request_type=".$_POST['request_type']."&request_receivers_reference=" . $_POST['request_receivers_reference']);
+    die();
   }
   else {
     if (!isset($_SESSION['altinn_pin']['value'])) {
@@ -195,7 +226,6 @@ if ($_lib['input']->getProperty('action_soap1')) {
       if ($report->saveSalaryReportLinks($altinnReport1ID)) $_lib['message']->add('Report sent');
     }
   }
-
 } elseif($_lib['input']->getProperty('action_soap2')) {
   if(empty($_POST['receiptId'])){
     $_lib['message']->add('Noe gikk galt, fikk ikke receiptId som vi skulle');
@@ -245,7 +275,6 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
     $_lib['storage']->store_record(array('table' => 'altinnReport2', 'data' => $values, 'debug' => false));
   }
-
 } elseif($_lib['input']->getProperty('action_soap3')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
   $params = array(
@@ -268,13 +297,18 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ValidTo']   = $result->GetAuthenticationChallengeResult->ValidTo;
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
-
 } elseif($_lib['input']->getProperty('action_delete_pin')) {
   $_lib['message']->add('Pin deleted');
   unset($_SESSION['altinn_pin']);
 } elseif($_lib['input']->getProperty('action_expire_pin')) {
   $_lib['message']->add('Pin expired');
   $_SESSION['altinn_pin']['expires_at'] = strftime("%F %T", time()-1);
+} elseif($_lib['input']->getProperty('action_delete_password')) {
+  $_lib['message']->add('Password deleted');
+  unset($_SESSION['altinn_password']);
+} elseif($_lib['input']->getProperty('action_expire_password')) {
+  $_lib['message']->add('Password expired');
+  $_SESSION['altinn_password']['expires_at'] = strftime("%F %T", time()-1);
 } elseif($_lib['input']->getProperty('action_soap4')) {
   // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
   // $_rowB = $_lib['db']->get_row(array('query' => $query));
@@ -347,7 +381,6 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   // $_GET['AltinnReport4ID'] = 1;
   $_GET['AltinnReport4ID'] = $_lib['storage']->store_record(array('table' => 'altinnReport4', 'data' => $values, 'debug' => false));
-
 } elseif($_lib['input']->getProperty('action_soap5')) {
   // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
   // $_rowB = $_lib['db']->get_row(array('query' => $query));
@@ -424,6 +457,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $_SESSION['altinn_pin']['created_at'] = strftime('%F %T', strtotime($values['res_ValidFrom']));
   $_SESSION['altinn_pin']['expires_at'] = strftime('%F %T', strtotime($values['res_ValidTo']));
   $authentication_challenge_message = $values['res_Message'];
+} elseif($_lib['input']->getProperty('action_confirm_password')) {
+  // save all info for altinn userpassord in the session
+  $_SESSION['altinn_password']['expires_at'] = strftime('%F %T', time() + 60*60*30);
 } elseif ($_lib['input']->getProperty('action_show_slaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
                      FROM salary s, accountplan a

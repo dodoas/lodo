@@ -48,6 +48,13 @@ print $_lib['sess']->doctype ?>
   <? print $_lib['form3']->submit(array('name'=>'action_expire_pin', 'value'=>'Expire saved pin')) ?>
 </form>
 
+<form name="delete_altinn_password" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
+  <? print $_lib['form3']->submit(array('name'=>'action_delete_password', 'value'=>'Delete saved altinn password')) ?>
+</form>
+<form name="expire_altinn_password" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
+  <? print $_lib['form3']->submit(array('name'=>'action_expire_password', 'value'=>'Expire saved altinn password')) ?>
+</form>
+
 <?
 $query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID AND ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%' order by S.JournalID desc";
 $result_salary  = $_lib['db']->db_query($query_salary);
