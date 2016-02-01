@@ -8,7 +8,8 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
   $SalaryFieldNames = array("JournalDate" => false, "Period" => false, "AccountPlanID" => false, "ValidFrom" => false,
                             "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false,
                             "VacationPayment" => false, "ActualPayDate" => false, "ShiftType" => false,
-                            "WorkTimeScheme" => false, "TypeOfEmployment" => false, "OccupationID" => false);
+                            "WorkTimeScheme" => false, "TypeOfEmployment" => false, "OccupationID" => false,
+                            "SubcompanyID" => false);
   foreach ($SalaryFieldNames as $FieldName => $IsAmount) {
     $ArgName = "salary_".$FieldName."_".$SalaryID;
     if ($IsAmount) {
@@ -240,6 +241,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $postmain['salary_OccupationID']        = $accountplan->OccupationID;
         $postmain['salary_WorkTimeScheme']      = $accountplan->WorkTimeScheme;
         $postmain['salary_TypeOfEmployment']    = $accountplan->TypeOfEmployment;
+        $postmain['salary_SubcompanyID']        = $accountplan->SubcompanyID;
 
         if($accountplan->EnableCredit == 1)
             $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
