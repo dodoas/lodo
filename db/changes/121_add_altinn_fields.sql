@@ -52,8 +52,8 @@ ADD AltinnUserSSN varchar(100)
 UPDATE person SET AltinnUserSSN = 'SMSPin';
 
 -- Set default WorkPercent and update all existing with blank or empty to 100.00
-ALTER TABLE accountplantemplate CHANGE WorkPercent WorkPercent DECIMAL(16,2) NULL DEFAULT '100.00'
-UPDATE accountplantemplate SET WorkPercent = 100.00 WHERE WorkPercent = 0.00 ||WorkPercent = '' || WorkPercent IS NULL;
+ALTER TABLE accountplantemplate CHANGE WorkPercent WorkPercent DECIMAL(16,2) NULL DEFAULT '100.00';
+UPDATE accountplantemplate SET WorkPercent = 100.00 WHERE WorkPercent = 0.00 OR WorkPercent = '' OR WorkPercent IS NULL;
 
 
 DROP TABLE IF EXISTS occupation;

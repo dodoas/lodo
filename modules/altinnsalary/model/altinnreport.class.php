@@ -130,7 +130,7 @@ class altinn_report {
           $forskuddstrekk = 0.0;
           // get the occupation of the employee in the company
           self::checkIfEmpty($salary->OccupationID, 'Occupation not set for salary L' . $salary->JournalID);
-          $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . $salary->OccupationID;
+          $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . (int)$salary->OccupationID;
           $result_occupation  = $_lib['db']->db_query($query_occupation);
           $occupation_code = $_lib['db']->db_fetch_object($result_occupation);
           self::checkIfEmpty($occupation_code, 'Occupation does not exist in the occupation list');
