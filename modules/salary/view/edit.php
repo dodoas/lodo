@@ -245,7 +245,7 @@ $formname = "salaryUpdate";
     <th class="sub" colspan="2">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P')); ?>
     </th>
-    <th>
+    <th class="sub">
       <? print $_lib['form3']->Subcompany_menu3(array('table'=>'salary', 'field'=>'SubcompanyID', 'pk'=>$head->SalaryID, 'value'=>$head->SubcompanyID, 'access' => $_lib['sess']->get_person('AccessLevel'))); ?>
     </th>
   </tr>

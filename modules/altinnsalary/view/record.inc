@@ -52,8 +52,6 @@ if ($_lib['input']->getProperty('action_soap3') ||
 
 
 
-error_log(var_export($_SESSION,1)."\n", 3, $_SETUP['HOME_DIR']."/error.log");
-error_log("this part<3<3"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
 // if action is soap3 or soap4 or soap5, we need the user password
 if ($_lib['input']->getProperty('action_soap3') ||
   $_lib['input']->getProperty('action_soap4') ||
@@ -61,17 +59,13 @@ if ($_lib['input']->getProperty('action_soap3') ||
   // if pin already entered and not expired use it, if not unset and redirect to enter a new one
   if (!isset($_SESSION['altinn_password']) || (isset($_SESSION['altinn_password']) && (time() > strtotime($_SESSION['altinn_password']['expires_at'])))) {
     // We don't have a valid password
-    error_log("this part!!!??"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
     unset($_SESSION['altinn_password']);
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_password&action_confirm_password=confirm&request_type=".$_POST['request_type']."&request_receivers_reference=" . $_POST['request_receivers_reference']);
     die();
   }
   else {
-    error_log("this Mladen!!!"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
     if (!isset($_SESSION['altinn_password']['value'])) {
       // if altinn_password is set but value is not, set the entered password as the value
-      error_log("this part"."\n", 3, $_SETUP['HOME_DIR']."/error.log");
-      error_log(var_export($_POST,1)."\n", 3, $_SETUP['HOME_DIR']."/error.log");
       $_SESSION['altinn_password']['value'] = $_POST['user_pass_code'];
     }
     else $_POST['user_pass_code'] = $_SESSION['altinn_password']['value'];

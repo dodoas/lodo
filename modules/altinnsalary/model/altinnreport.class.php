@@ -177,7 +177,7 @@ class altinn_report {
           $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
           // date of last change for work percentage
           $last_change_of_work_percentage = $employee->WorkPercentUpdatedAt;
-          self::checkIfEmpty($last_change_of_pay_date, 'Last change of work percent date not set for employee ' . $full_name_for_error_message, 'date');
+          self::checkIfEmpty($last_change_of_work_percentage, 'Last change of work percent date not set for employee ' . $full_name_for_error_message, 'date');
           $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
           // work relation
           $inntektsmottaker['inntektsmottaker']['arbeidsforhold'] = $arbeidsforhold;

@@ -95,7 +95,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
 
     <td>Type ansettelse:</td>
     <td>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment, 'width' => 32)); ?>
     </td>
   </tr>
   <tr>
