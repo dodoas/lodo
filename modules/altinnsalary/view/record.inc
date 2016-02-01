@@ -68,7 +68,6 @@ if ($_lib['input']->getProperty('action_soap3') ||
       // if altinn_password is set but value is not, set the entered password as the value
       $_SESSION['altinn_password']['value'] = $_POST['user_pass_code'];
     }
-    else $_POST['user_pass_code'] = $_SESSION['altinn_password']['value'];
   }
 }
 
@@ -87,7 +86,6 @@ if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('
       // if altinn_pin is set but value is not, set the entered pin as the value
       $_SESSION['altinn_pin']['value'] = $_POST['user_pin_code'];
     }
-    else $_POST['user_pin_code'] = $_SESSION['altinn_pin']['value'];
   }
 }
 
@@ -319,7 +317,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
     'userPassword'   => $_SESSION['altinn_password']['value'],
 
-    'userPinCode'    => $_POST['user_pin_code'],
+    'userPinCode'    => $_SESSION['altinn_pin']['value'],
     'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
     'correspondenceID' => $_POST['request_receivers_reference'],
     'languageID'     => '1'
@@ -391,7 +389,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
     'userPassword'   => $_SESSION['altinn_password']['value'],
 
-    'userPinCode'    => $_POST['user_pin_code'],
+    'userPinCode'    => $_SESSION['altinn_pin']['value'],
     'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
     'CorrespondenceID' => $_POST['request_receivers_reference']
   );
