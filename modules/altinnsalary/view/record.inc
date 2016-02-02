@@ -182,7 +182,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
         )
       );
 
-      $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
+      try {
+        $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
+      }
+      catch (SoapFault $sf) {
+        header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+        die();
+      }
 
       $values = array();
       $values['Period']  = $_POST['altinnReport1_periode'];
@@ -230,7 +236,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
         'ReceiptId' => $_POST['receiptId'],
       )
     );
-    $result = $sc->__soapCall('GetReceiptBasicV2', array('parameters' => $params));
+    try {
+      $result = $sc->__soapCall('GetReceiptBasicV2', array('parameters' => $params));
+    }
+    catch (SoapFault $sf) {
+      header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+      die();
+    }
 
     $values = array();
     $values['req_ReceiptId']       = $_POST['receiptId'];
@@ -278,7 +290,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     )
   );
 
-  $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+  try {
+    $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
 
   $values = array();
   $values['res_Message']   = $result->GetAuthenticationChallengeResult->Message;
@@ -323,7 +341,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'languageID'     => '1'
   );
 
-  $result = $sc->__soapCall('GetCorrespondenceForEndUserSystemsBasicV2', array('parameters' => $params));
+  try {
+    $result = $sc->__soapCall('GetCorrespondenceForEndUserSystemsBasicV2', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
   $correspondence = $result->GetCorrespondenceForEndUserSystemsBasicV2Result->Correspondence;
   $correspondenceAttachments = $result->GetCorrespondenceForEndUserSystemsBasicV2Result->CorrespondenceAttachments;
   $values['res_AllowForwarding']          = $correspondence->AllowForwarding;
@@ -394,7 +418,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'CorrespondenceID' => $_POST['request_receivers_reference']
   );
 
-  $result = $sc->__soapCall('ArchiveCorrespondenceForEndUserSystemBasic', array('parameters' => $params));
+  try {
+    $result = $sc->__soapCall('ArchiveCorrespondenceForEndUserSystemBasic', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
   $_result = $result->ArchiveCorrespondenceForEndUserSystemBasicResult;
 
   $values['res_LastChanged']       = $_result->LastChanged;
@@ -431,8 +461,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     )
   );
 
-  $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
-
+  try {
+    $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
   $values = array();
   $values['res_Message']   = $result->GetAuthenticationChallengeResult->Message;
   $_parseMessage           = explode(' ', $values['res_Message']);

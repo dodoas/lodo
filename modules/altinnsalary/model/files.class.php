@@ -6,7 +6,7 @@ class altinn_file {
       $folder = (string) time();
 
     // TODO change this path to somewhere outside repo
-    $this->folderPath = $_SETUP['HOME_DIR']."/".$folder;
+    $this->folderPath = $_SETUP['HOME_DIR']."/xml/".$folder;
   }
 
   function save($content) {
