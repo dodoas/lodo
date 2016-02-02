@@ -254,8 +254,9 @@ class altinn_report {
           $inntektsmottaker['inntektsmottaker']['forskuddstrekk']['beloep'] = -$forskuddstrekk;
           $sumForskuddstrekk += $forskuddstrekk;
 
-          //TODO: if some problems occur assign this with a foreach loop
-          $inntektsmottaker['inntektsmottaker'] = $inntekt_tmp;
+          foreach($inntekt_tmp as $single_inntekt) {
+            $inntektsmottaker['inntektsmottaker'][] = $single_inntekt;
+          }
 
           // income reciever
           $virksomhet[] = $inntektsmottaker;
