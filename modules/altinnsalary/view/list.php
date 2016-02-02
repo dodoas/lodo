@@ -13,7 +13,7 @@ print $_lib['sess']->doctype
 <? includeinc('left') ?>
 <? print $_lib['message']->get() ?>
 
-<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist">Send new report</a>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist">Send en ny rapport</a>
 
 <br/><br/>
 
@@ -21,12 +21,12 @@ print $_lib['sess']->doctype
   <tbody>
     <tr>
       <td class="menu">ID</td>
-      <td class="menu">Period</td>
-      <td class="menu">Sent at</td>
-      <td class="menu">Salaries</td>
-      <td class="menu">Archived at</td>
+      <td class="menu">Periode</td>
+      <td class="menu">Sent kl</td>
+      <td class="menu">L&oslash;nnslipper</td>
+      <td class="menu">Arkivert kl</td>
       <td class="menu">Status</td>
-      <td class="menu">Actions</td>
+      <td class="menu">Handlinger</td>
     </tr>
   <?
   $so1_query = "select * from altinnReport1 order by AltinnReport1ID";
@@ -71,7 +71,7 @@ print $_lib['sess']->doctype
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap5',
-            'value'=>'Archive',
+            'value'=>'Arkiver',
             'disabled' => $so2row->res_ReceiversReference ? false : true
           )) ?>
         </form>
@@ -81,13 +81,13 @@ print $_lib['sess']->doctype
       </td>
       <td>
         <?
-          if ($so2row && !empty($so2row->res_ReceiversReference)) print 'Recieved with reference ' . $so2row->res_ReceiversReference;
-          elseif (strstr($so2row->res_ReceiptStatus, 'OK')) print 'Processing';
+          if ($so2row && !empty($so2row->res_ReceiversReference)) print 'Motatt med referanse ' . $so2row->res_ReceiversReference;
+          elseif (strstr($so2row->res_ReceiptStatus, 'OK')) print 'Prosseseres';
           else print $so2row->res_ReceiptStatus;
         ?>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <? print $_lib['form3']->hidden(array('name'=>'receiptId', 'value'=>$so1row->ReceiptId)) ?>
-          <? print $_lib['form3']->submit(array('name'=>'action_soap2', 'value'=>'Check Status')) ?>
+          <? print $_lib['form3']->submit(array('name'=>'action_soap2', 'value'=>'Sjekk status')) ?>
         </form>
       </td>
       <td>
@@ -100,7 +100,7 @@ print $_lib['sess']->doctype
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap1',
-            'value'=>'Resend',
+            'value'=>'Send p&aring; nytt',
             'disabled' => !($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID))
           )); ?>
         </form>
@@ -109,7 +109,7 @@ print $_lib['sess']->doctype
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap4',
-            'value'=>'Get Feedback',
+            'value'=>'Helt tilbakemelding',
             'disabled' => $so2row->res_ReceiversReference ? false : true
             )) ?>
         </form>
@@ -119,7 +119,7 @@ print $_lib['sess']->doctype
           $so4row = $_lib['db']->db_fetch_object($so4);
           if ($so4row) {
         ?>
-        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&AltinnReport4ID=<? print $so4row->AltinnReport4ID ?>">View feedback</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&AltinnReport4ID=<? print $so4row->AltinnReport4ID ?>">Se tilbakemelding</a>
         <? } ?>
       </td>
     </tr>

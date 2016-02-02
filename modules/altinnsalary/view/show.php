@@ -84,7 +84,7 @@ print $_lib['sess']->doctype ?>
     </tr>
 
     <tr>
-      <td class="menu">Lønnslipper</td>
+      <td class="menu">L&oslash;nnslipper</td>
       <td>
         <?
         // TODO maybe save changed to show changed one
@@ -93,7 +93,7 @@ print $_lib['sess']->doctype ?>
 
         while($_row = $_lib['db']->db_fetch_object($result_salary)){
         ?>
-          <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>">L <? print $_row->JournalID ?></a>
+          L<a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>"><? print $_row->JournalID ?></a>
         <? } ?>
       </td>
     </tr>

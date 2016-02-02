@@ -7,7 +7,7 @@ $result_subcompany = $_lib['db']->db_query($query_subcompany);
 print $_lib['sess']->doctype ?>
 
 <head>
-    <title>Empatix - underenhet list</title>
+    <title>Empatix - Virksomhetliste</title>
     <meta name="cvs" content="$Id: list.php,v 1.25 2005/10/28 17:59:40 thomasek Exp $" />
     <? includeinc('head') ?>
 </head>
@@ -21,7 +21,7 @@ print $_lib['sess']->doctype ?>
 <table class="lodo_data">
 <thead>
   <tr>
-    <th>Underenheter:</th>
+    <th>Virksomheter:</th>
     <th colspan="3"></th>
   <tr>
     <th></th>
@@ -30,13 +30,13 @@ print $_lib['sess']->doctype ?>
       <form name="subcompany_search" action="<? print $_lib['sess']->dispatch ?>t=subcompany.edit" method="post">
         Nytt nr:
         <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SubcompanyID', 'width'=>'10')) ?>
-        <? print $_lib['form3']->submit(array('name'=>'action_subcompany_new', 'value'=>'Ny underenhet')) ?>
+        <? print $_lib['form3']->submit(array('name'=>'action_subcompany_new', 'value'=>'Ny virksomhet')) ?>
       </form>
     <? } ?>
     </th>
   </tr>
   <tr>
-    <td class="menu">Underenhet</td>
+    <td class="menu">Virksomhet</td>
     <td class="menu">Navn</td>
     <td class="menu">NO:ORGNO</td>
   </tr>

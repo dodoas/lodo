@@ -38,159 +38,159 @@ print $_lib['sess']->doctype ?>
       <td><? print $row->Folder; ?></td>
     </tr>
     <tr>
-      <td class="menu">req_CorrespondenceID</td>
+      <td class="menu">CorrespondenceID</td>
       <td><? print $row->req_CorrespondenceID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AllowForwarding</td>
+      <td class="menu">AllowForwarding</td>
       <td><? print $row->res_AllowForwarding; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_ArchiveReference</td>
+      <td class="menu">ArchiveReference</td>
       <td><? print $row->res_ArchiveReference; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AuthenticatedUser</td>
+      <td class="menu">AuthenticatedUser</td>
       <td><? print $row->res_AuthenticatedUser; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CaseID</td>
+      <td class="menu">CaseID</td>
       <td><? print $row->res_CaseID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_ConfirmationDate</td>
+      <td class="menu">ConfirmationDate</td>
       <td><? print $row->res_ConfirmationDate; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceID</td>
+      <td class="menu">CorrespondenceID</td>
       <td><? print $row->res_CorrespondenceID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceName</td>
+      <td class="menu">CorrespondenceName</td>
       <td><? print $row->res_CorrespondenceName; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceStatus</td>
+      <td class="menu">CorrespondenceStatus</td>
       <td><? print $row->res_CorrespondenceStatus; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceSubject</td>
+      <td class="menu">CorrespondenceSubject</td>
       <td><? print $row->res_CorrespondenceSubject; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceSummary</td>
+      <td class="menu">CorrespondenceSummary</td>
       <td><? print $row->res_CorrespondenceSummary; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceTitle</td>
+      <td class="menu">CorrespondenceTitle</td>
       <td><? print $row->res_CorrespondenceTitle; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CorrespondenceTxt</td>
+      <td class="menu">CorrespondenceTxt</td>
       <td><? print $row->res_CorrespondenceTxt; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CustomMessageData</td>
+      <td class="menu">CustomMessageData</td>
       <td><? print $row->res_CustomMessageData; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_DateSent</td>
+      <td class="menu">DateSent</td>
       <td><? print $row->res_DateSent; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_Description</td>
+      <td class="menu">Description</td>
       <td><? print $row->res_Description; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_DueDate</td>
+      <td class="menu">DueDate</td>
       <td><? print $row->res_DueDate; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_ExternalSystemReference</td>
+      <td class="menu">ExternalSystemReference</td>
       <td><? print $row->res_ExternalSystemReference; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_Header</td>
+      <td class="menu">Header</td>
       <td><? print $row->res_Header; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_IsConfirmationNeeded</td>
+      <td class="menu">IsConfirmationNeeded</td>
       <td><? print $row->res_IsConfirmationNeeded; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_LanguageID</td>
+      <td class="menu">LanguageID</td>
       <td><? print $row->res_LanguageID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_Reportee</td>
+      <td class="menu">Reportee</td>
       <td><? print $row->res_Reportee; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_SentBy</td>
+      <td class="menu">SentBy</td>
       <td><? print $row->res_SentBy; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_SentTo</td>
+      <td class="menu">SentTo</td>
       <td><? print $row->res_SentTo; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_UserID</td>
+      <td class="menu">UserID</td>
       <td><? print $row->res_UserID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AttachmentData</td>
+      <td class="menu">AttachmentData</td>
       <td><? print $row->res_AttachmentData; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AttachmentFunctionTypeID</td>
+      <td class="menu">AttachmentFunctionTypeID</td>
       <td><? print $row->res_AttachmentFunctionTypeID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AttachmentID</td>
+      <td class="menu">AttachmentID</td>
       <td><? print $row->res_AttachmentID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AttachmentName</td>
+      <td class="menu">AttachmentName</td>
       <td><? print $row->res_AttachmentName; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_AttachmentTypeID</td>
+      <td class="menu">AttachmentTypeID</td>
       <td><? print $row->res_AttachmentTypeID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CreatedByUserID</td>
+      <td class="menu">CreatedByUserID</td>
       <td><? print $row->res_CreatedByUserID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_CreatedDateTime</td>
+      <td class="menu">CreatedDateTime</td>
       <td><? print $row->res_CreatedDateTime; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_DestinationType</td>
+      <td class="menu">DestinationType</td>
       <td><? print $row->res_DestinationType; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_FileName</td>
+      <td class="menu">FileName</td>
       <td><? print $row->res_FileName; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_IsAddedAfterFormFillin</td>
+      <td class="menu">IsAddedAfterFormFillin</td>
       <td><? print $row->res_IsAddedAfterFormFillin; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_IsAssociatedToFormSet</td>
+      <td class="menu">IsAssociatedToFormSet</td>
       <td><? print $row->res_IsAssociatedToFormSet; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_IsEncrypted</td>
+      <td class="menu">IsEncrypted</td>
       <td><? print $row->res_IsEncrypted; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_ReporteeElementID</td>
+      <td class="menu">ReporteeElementID</td>
       <td><? print $row->res_ReporteeElementID; ?></td>
     </tr>
     <tr>
-      <td class="menu">res_SendersReference</td>
+      <td class="menu">SendersReference</td>
       <td><? print $row->res_SendersReference; ?></td>
     </tr>
 
