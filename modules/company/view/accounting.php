@@ -194,6 +194,18 @@ $result2 = $_lib['db']->db_query($query2);
     </td>
   </tr>
 
+
+  <tr>
+    <th colspan="4" class="menu">Altinn</th>
+  </tr>
+  <tr>
+   <td>Systemnavn</td>
+    <td class="BGColorLight"><input type="text" name="company.AltinnSystemUsername"  value="<? print "$row->AltinnSystemUsername" ?>" size="24"></td>
+    <td>Systempassord</td>
+    <td class="BGColorLight"><input type="password" name="company.AltinnSystemPassword"  value="<? print "$row->AltinnSystemPassword" ?>" size="24"></td>
+  </tr>
+
+
   <?
   /*if($_lib['sess']->get_person('AccessLevel') > 2)
   {

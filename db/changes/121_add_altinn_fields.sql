@@ -38,7 +38,10 @@ ADD SalaryDescription varchar(100)
 
 -- Add new field CalculationCodeForTax to company table
 ALTER TABLE company
-ADD CalculationCodeForTax varchar(60) DEFAULT ''
+ADD CalculationCodeForTax varchar(60) DEFAULT '',
+-- Link between company and Altinn
+ADD AltinnSystemUsername varchar(10) DEFAULT '',
+ADD AltinnSystemPassword varchar(60) DEFAULT ''
 ;
 
 -- Add missing altinn fields on salaryconfline
@@ -48,8 +51,9 @@ ADD AltinnAuthMethod varchar(100) NOT NULL DEFAULT 'SMSPin',
 -- this es 'personnummer' same as social security number
 ADD AltinnUserSSN varchar(100)
 ;
+
 -- Set SMSPin to all existing persons
-UPDATE person SET AltinnUserSSN = 'SMSPin';
+UPDATE person SET AltinnAuthMethod = 'SMSPin';
 
 -- Set default WorkPercent and update all existing with blank or empty to 100.00
 ALTER TABLE accountplantemplate CHANGE WorkPercent WorkPercent DECIMAL(16,2) NULL DEFAULT '100.00';

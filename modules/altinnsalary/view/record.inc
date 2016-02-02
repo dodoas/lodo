@@ -33,6 +33,8 @@ if (isset($_POST['use_salary'])) {
 }
 else $salary_ids = null;
 
+
+$error_msg = "";
 // Make sure user have set AltinnUserSSN
 if ($_lib['input']->getProperty('action_soap3') ||
     $_lib['input']->getProperty('action_soap4') ||
@@ -40,14 +42,34 @@ if ($_lib['input']->getProperty('action_soap3') ||
     $_lib['input']->getProperty('action_confirm_authentication')){
     $_tmp = $_lib['sess']->get_person('AltinnUserSSN');
     if (empty($_tmp)){
-      $msg = "Systembruker har ikke satt Personnummer";
-      header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$msg);
-      // We need to die here otherwise we may be
-      // rejected later. Code continue to execute
-      // after a header statement.
-      die();
+      $error_msg .= "Systembruker: Har ikke satt Personnummer. ";
     }
     unset($_tmp);
+}
+// Make sure user have set AltinnSystemUsername and AltinnSystemPassword
+if ($_lib['input']->getProperty('action_soap1') ||
+    $_lib['input']->getProperty('action_soap2') ||
+    $_lib['input']->getProperty('action_soap3') ||
+    $_lib['input']->getProperty('action_soap4') ||
+    $_lib['input']->getProperty('action_soap5') ||
+    $_lib['input']->getProperty('action_confirm_authentication')){
+    $_tmp = $_lib['sess']->get_companydef('AltinnSystemUsername');
+    if (empty($_tmp)){
+      $error_msg .= "Firmaopplyning: Firma har ikke registrert Altinnsystemnavn. ";
+    }
+
+    $_tmp = $_lib['sess']->get_companydef('AltinnSystemPassword');
+    if (empty($_tmp)){
+      $error_msg .= "Firmaopplyning: Firma har ikke registrert Altinnsystempassord. ";
+    }
+}
+
+if (!empty($error_msg)) {
+  header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$error_msg);
+  // We need to die here otherwise we may be
+  // rejected later. Code continue to execute
+  // after a header statement.
+  die();
 }
 
 
@@ -134,10 +156,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
       }
       $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
       $params = array(
-        'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-        'systemPassword' => 'altinnlodo0',
+        'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
+        'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
         'formTaskShipment' => array(
-          'Reportee' => 910748645,
+          'Reportee' => preg_replace('/\s+/', '', $_lib['sess']->get_companydef('OrgNumber')),
           'ExternalShipmentReference' => 'LODO' . time(),
           'FormTasks' => array(
             // this codes are for this very spesific report.
@@ -230,8 +252,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   } else {
     $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/ReceiptExternalBasic.svc?wsdl");
     $params = array(
-      'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-      'systemPassword' => 'altinnlodo0',
+      'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
+      'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
       'receipt' => array(
         'ReceiptId' => $_POST['receiptId'],
       )
@@ -284,7 +306,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $params = array(
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
-      'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
+      'SystemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
       'UserPassword'   => $_SESSION['altinn_password']['value'],
       'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
@@ -330,8 +352,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values["req_CorrespondenceID"] = $_POST['request_receivers_reference'];
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
   $params = array(
-    'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-    'systemPassword' => 'altinnlodo0',
+    'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
+    'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
     'userPassword'   => $_SESSION['altinn_password']['value'],
 
@@ -408,8 +430,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['req_CorrespondenceID'] = $_POST['request_receivers_reference'];
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl");
   $params = array(
-    'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-    'systemPassword' => 'altinnlodo0',
+    'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
+    'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
     'userPassword'   => $_SESSION['altinn_password']['value'],
 
@@ -455,7 +477,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $params = array(
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
-      'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
+      'SystemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
       'UserPassword'   => $_SESSION['altinn_password']['value'],
       'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
