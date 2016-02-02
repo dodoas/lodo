@@ -18,9 +18,9 @@ Skriv inn passord for &aring; logge inn i altinn
   <? print $_lib['form3']->input(array('name'=>'user_pass_code', 'type'=>'password','value'=>'')) ?>
     <?
     if($_REQUEST['request_type'] == 'feedback'){
-      print $_lib['form3']->submit(array('name'=>'action_soap4', 'value'=>'Get Feedback'));
+      print $_lib['form3']->submit(array('name'=>'action_soap4', 'value'=>'Hent tilbakemelding'));
     }elseif($_REQUEST['request_type'] == 'archive'){
-      print $_lib['form3']->submit(array('name'=>'action_soap5', 'value'=>'Archive Report'));
+      print $_lib['form3']->submit(array('name'=>'action_soap5', 'value'=>'Arkiver'));
     }?>
 </form>
 

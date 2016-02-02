@@ -78,7 +78,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Aktiv</td>
     <td>
-      <? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> 
+      <? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?>
     </td>
     <td>
       <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value' => $AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled'=>true)) ?>
@@ -152,7 +152,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td></td>
     <td><input type="text" name="fakturabankemail.Email" value="<? print $fakturabankemail->Email  ?>" size="30"></td>
     <td></td>
-    <td></td>    
+    <td></td>
   </tr>
   <tr>
     <td class="menu">Tekst informasjon</td>
@@ -173,7 +173,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Kreditt tid</td>
     <td>
      <input type="hidden" name="accountplan.EnableCredit" value="1"/>
-<? /* $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); */ ?> 
+<? /* $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); */ ?>
 
 </td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
@@ -261,7 +261,6 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
 
     ?></td>
   </tr>
-
   <tr class="result">
     <th colspan="5">Altinn felt</th>
   </tr>
@@ -317,7 +316,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
         Passord: <b><?= $password->Password ?></b></td>
 
   </tr>
-  
+
   <tr class="result">
     <th colspan="5">Logg</th>
   </tr>
