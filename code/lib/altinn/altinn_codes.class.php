@@ -96,3 +96,12 @@ $_ALTINN['AuthMethods'] = array(
   'SMSPin'    => 'Kode p&aring; SMS'
 );
 
+$_ALTINN['CalculationCodeForTaxTypes'] = array(
+  'generelleNaeringer'=>'Generelle næringer',
+  'helseforetakOgDelerAvStatsforvaltningen'=>'Helseforetakene og deler av statsforvaltningen',
+  'jordOgSkogbrukFiskeri'=>'Jord- og skogbruk, fiskeri etc.',
+  'kunForskuddstrekk'=>'Kun innberetning av forskuddstrekk',
+  'svalbard'=>'Lønnstrekk for Svalbard',
+  'sektorunnattAktivitet'=>'Sektorunnatt aktivitet',
+  'godstransportPaaVei'=>'Godstransport på vei'
+);
