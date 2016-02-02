@@ -110,9 +110,9 @@ class altinn_report {
     self::checkIfEmpty($this->employees, 'Det er ingen ansatte i perioden');
     // Error is: No salaries for this period
     self::checkIfEmpty($this->salaries, 'Det er ingen l&oslash;nnslipper  i perioden');
-    foreach($this->employees as $key_employee => $employee) {
+    foreach($this->salaries as $key_subcompany => $salaries) {
       $virksomhet = array();
-      foreach($this->salaries as $key_subcompany => $salaries) {
+      foreach($this->employees as $key_employee => $employee) {
         // if there is no salaries for current subcompany and current employee, skip over
         // it so we do not try to loop over a null value
         if (empty($salaries[$employee->AccountPlanID])) continue;
@@ -284,7 +284,7 @@ class altinn_report {
           $sumForskuddstrekk += $forskuddstrekk;
 
           //TODO: if some problems occur assign this with a foreach loop
-          $inntektsmottaker['inntektsmottaker'][] = $inntekt_tmp;
+          $inntektsmottaker['inntektsmottaker'] = $inntekt_tmp;
 
           // income reciever
           $virksomhet[] = $inntektsmottaker;
@@ -302,7 +302,7 @@ class altinn_report {
     $leveranse['oppgave']['betalingsinformasjon'] = array();
     $leveranse['oppgave']['betalingsinformasjon']['sumForskuddstrekk'] = (int) round($sumForskuddstrekk);
     $leveranse['oppgave']['betalingsinformasjon']['sumArbeidsgiveravgift'] = (int) round($sumArbeidsgiveravgift);
-    $leveranse['oppgave'][] = $virksomhet_array;
+    $leveranse['oppgave'] = $virksomhet_array;
     $melding['Leveranse'] = $leveranse;
     $this->melding = $melding;
   }

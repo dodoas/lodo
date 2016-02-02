@@ -60,7 +60,7 @@ if ($_lib['input']->getProperty('action_soap3') ||
   if (!isset($_SESSION['altinn_password']) || (isset($_SESSION['altinn_password']) && (time() > strtotime($_SESSION['altinn_password']['expires_at'])))) {
     // We don't have a valid password
     unset($_SESSION['altinn_password']);
-    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_password&action_confirm_password=confirm&request_type=".$_POST['request_type']."&request_receivers_reference=" . $_POST['request_receivers_reference']);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_password&action_confirm_password=confirm&request_type=".$_REQUEST['request_type']."&request_receivers_reference=" . $_REQUEST['request_receivers_reference']);
     die();
   }
   else {
@@ -68,7 +68,6 @@ if ($_lib['input']->getProperty('action_soap3') ||
       // if altinn_password is set but value is not, set the entered password as the value
       $_SESSION['altinn_password']['value'] = $_POST['user_pass_code'];
     }
-    else $_POST['user_pass_code'] = $_SESSION['altinn_password']['value'];
   }
 }
 
@@ -79,7 +78,7 @@ if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('
   // if pin already entered and not expired use it, if not unset and redirect to enter a new one
   if (!isset($_SESSION['altinn_pin']) || (isset($_SESSION['altinn_pin']) && (time() > strtotime($_SESSION['altinn_pin']['expires_at'])))) {
     unset($_SESSION['altinn_pin']);
-    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_authentication&action_confirm_authentication=confirm&request_type=".$_POST['request_type']."&request_receivers_reference=" . $_POST['request_receivers_reference']);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_authentication&action_confirm_authentication=confirm&request_type=".$_REQUEST['request_type']."&request_receivers_reference=" . $_REQUEST['request_receivers_reference']);
     die();
   }
   else {
@@ -87,7 +86,6 @@ if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('
       // if altinn_pin is set but value is not, set the entered pin as the value
       $_SESSION['altinn_pin']['value'] = $_POST['user_pin_code'];
     }
-    else $_POST['user_pin_code'] = $_SESSION['altinn_pin']['value'];
   }
 }
 
@@ -184,7 +182,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
         )
       );
 
-      $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
+      try {
+        $result = $sc->__soapCall('SubmitFormTaskBasic', array('parameters' => $params));
+      }
+      catch (SoapFault $sf) {
+        header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+        die();
+      }
 
       $values = array();
       $values['Period']  = $_POST['altinnReport1_periode'];
@@ -232,7 +236,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
         'ReceiptId' => $_POST['receiptId'],
       )
     );
-    $result = $sc->__soapCall('GetReceiptBasicV2', array('parameters' => $params));
+    try {
+      $result = $sc->__soapCall('GetReceiptBasicV2', array('parameters' => $params));
+    }
+    catch (SoapFault $sf) {
+      header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+      die();
+    }
 
     $values = array();
     $values['req_ReceiptId']       = $_POST['receiptId'];
@@ -275,12 +285,18 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
       'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-      'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+      'UserPassword'   => $_SESSION['altinn_password']['value'],
       'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
   );
 
-  $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+  try {
+    $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
 
   $values = array();
   $values['res_Message']   = $result->GetAuthenticationChallengeResult->Message;
@@ -317,15 +333,21 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
     'systemPassword' => 'altinnlodo0',
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
-    'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+    'userPassword'   => $_SESSION['altinn_password']['value'],
 
-    'userPinCode'    => $_POST['user_pin_code'],
+    'userPinCode'    => $_SESSION['altinn_pin']['value'],
     'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
     'correspondenceID' => $_POST['request_receivers_reference'],
     'languageID'     => '1'
   );
 
-  $result = $sc->__soapCall('GetCorrespondenceForEndUserSystemsBasicV2', array('parameters' => $params));
+  try {
+    $result = $sc->__soapCall('GetCorrespondenceForEndUserSystemsBasicV2', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
   $correspondence = $result->GetCorrespondenceForEndUserSystemsBasicV2Result->Correspondence;
   $correspondenceAttachments = $result->GetCorrespondenceForEndUserSystemsBasicV2Result->CorrespondenceAttachments;
   $values['res_AllowForwarding']          = $correspondence->AllowForwarding;
@@ -389,14 +411,20 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'systemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
     'systemPassword' => 'altinnlodo0',
     'userSSN'        => $_lib['sess']->get_person('AltinnUserSSN'),
-    'userPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+    'userPassword'   => $_SESSION['altinn_password']['value'],
 
-    'userPinCode'    => $_POST['user_pin_code'],
+    'userPinCode'    => $_SESSION['altinn_pin']['value'],
     'authMethod'     => $_lib['sess']->get_person('AltinnAuthMethod'),
     'CorrespondenceID' => $_POST['request_receivers_reference']
   );
 
-  $result = $sc->__soapCall('ArchiveCorrespondenceForEndUserSystemBasic', array('parameters' => $params));
+  try {
+    $result = $sc->__soapCall('ArchiveCorrespondenceForEndUserSystemBasic', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
   $_result = $result->ArchiveCorrespondenceForEndUserSystemBasicResult;
 
   $values['res_LastChanged']       = $_result->LastChanged;
@@ -428,13 +456,18 @@ if ($_lib['input']->getProperty('action_soap1')) {
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
       'SystemUserName' => $_SETUP['ALTINN_SYSTEM_USER_NAME'],
-      'UserPassword'   => $_SETUP['ALTINN_USER_PASSWORD'],
+      'UserPassword'   => $_SESSION['altinn_password']['value'],
       'UserSSN'        => $_lib['sess']->get_person('AltinnUserSSN')
     )
   );
 
-  $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
-
+  try {
+    $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
+  }
+  catch (SoapFault $sf) {
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->faultstring);
+    die();
+  }
   $values = array();
   $values['res_Message']   = $result->GetAuthenticationChallengeResult->Message;
   $_parseMessage           = explode(' ', $values['res_Message']);
@@ -445,6 +478,14 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport3', 'data' => $values, 'debug' => false));
 
+  // Back to password authentication since the wrong one was entered
+  if ($values['res_Status'] == 'InvalidCredentials') {
+    unset($_SESSION['altinn_password']);
+    $error_message = $rowC->res_Message;
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.confirm_password&action_confirm_password=confirm&message=".$error_message."&request_type=".$_REQUEST['request_type']."&request_receivers_reference=" . $_REQUEST['request_receivers_reference']);
+    die();
+  }
+
   // save all info for altinn pin in the session
   // except the value, that will get set in soap4 or soap5
   $_SESSION['altinn_pin']['type'] = $params['challengeRequest']['AuthMethod'];
@@ -453,7 +494,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $authentication_challenge_message = $values['res_Message'];
 } elseif($_lib['input']->getProperty('action_confirm_password')) {
   // save all info for altinn userpassord in the session
-  $_SESSION['altinn_password']['expires_at'] = strftime('%F %T', time() + 60*60*30);
+  $_SESSION['altinn_password']['expires_at'] = strftime('%F %T', time() + 60*30);
 } elseif ($_lib['input']->getProperty('action_show_slaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
                      FROM salary s, accountplan a

@@ -26,40 +26,34 @@ print $_lib['sess']->doctype ?>
 <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn4list">Soap 4 LIST</a>
 <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn5list">Soap 5 LIST</a>
 
-<br />
-<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
-  <p>
-    Periode:
-    <? print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'periode', 'value' => $_REQUEST['altinnReport1_periode'])); ?>
-    <? print $_lib['form3']->submit(array('name'=>'action_soap1_show_slaries', 'value'=>'show salares')); ?>
-
-  </p>
-  <p>
-    ExternalShipmentReference
-    <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ExternalShipmentReference', 'width'=>'15' , 'value'=>'test_29')) ?>
-  </p>
-  <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Test Soap1')) ?>
-  <? print $_lib['form3']->submit(array('name'=>'action_generate_xml_report', 'value'=>'Generate XML')) ?>
-</form>
+<p>Altinn pin:</p>
+<textarea rows='7' cols='20'><? print_r($_SESSION['altinn_pin']); ?></textarea><br />
 <form name="delete_pin" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
   <? print $_lib['form3']->submit(array('name'=>'action_delete_pin', 'value'=>'Delete saved pin')) ?>
 </form>
 <form name="expire_pin" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
   <? print $_lib['form3']->submit(array('name'=>'action_expire_pin', 'value'=>'Expire saved pin')) ?>
 </form>
-
+<p>Altinn password:</p>
+<textarea rows='7' cols='20'><? print_r($_SESSION['altinn_password']); ?></textarea><br />
 <form name="delete_altinn_password" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
   <? print $_lib['form3']->submit(array('name'=>'action_delete_password', 'value'=>'Delete saved altinn password')) ?>
 </form>
 <form name="expire_altinn_password" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
   <? print $_lib['form3']->submit(array('name'=>'action_expire_password', 'value'=>'Expire saved altinn password')) ?>
 </form>
-
+<br /> <br />
+<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
+    Periode:
+    <? print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'periode', 'value' => $_REQUEST['altinnReport1_periode'])); ?>
+    <? print $_lib['form3']->submit(array('name'=>'action_soap1_show_slaries', 'value'=>'show salares')); ?>
+  <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Test Soap1')) ?>
+  <? print $_lib['form3']->submit(array('name'=>'action_generate_xml_report', 'value'=>'Generate XML')) ?>
 <?
 $query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID AND ActualPayDate LIKE  '" . $_REQUEST['altinnReport1_periode'] . "%' order by S.JournalID desc";
 $result_salary  = $_lib['db']->db_query($query_salary);
 ?>
-
+<br /><br />
 <table class="lodo_data">
 <thead>
    <tr>
@@ -87,7 +81,8 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
     <tr class="<? print "$sec_color"; ?>">
-        <td>L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalID ?></a></td>
+        <td>
+        <? print $_lib['form3']->checkbox(array('name' => "use_salary[" . $row->SalaryID . "]")); ?>L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalID ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalDate ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->Period ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $row->AccountPlanID ?>"><? print $row->AccountPlanID ?></a></td>
@@ -104,6 +99,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 ?>
 </tbody>
 </table>
+</form>
 
 <br /><br /><br />
 
@@ -174,8 +170,12 @@ if (isset($xml_generated)) {
   else echo '<p>No errors.</p>';
   echo "XML DATA:<br/>";
 ?>
-<textarea rows='100' cols='100'>
+<textarea rows='100' cols='150'>
 <?
+echo "Salaries array:\n";
+print_r($report->salaries);
+echo "Message array:\n";
+print_r($report->melding);
 echo $xml;
 ?>
 </textarea>
