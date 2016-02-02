@@ -64,13 +64,17 @@ class altinn_report {
 
     $org_number = $_lib['sess']->get_companydef('OrgNumber');
     $org_number = preg_replace('/\s+/', '', $org_number);
-    self::checkIfEmpty($org_number, 'Company OrgNumber needs to be 9 digits long!', 'org_number');
+    // Error is: Organisation number missing(not set);
+    self::checkIfEmpty($org_number, 'Firmaopplysning: Organisasjonsnr mangler (ikke satt)');
+    // Error is: OrgNumber needs to be 9 digits long!
+    self::checkIfEmpty($org_number, 'Firmaopplysning: Organisasjonsnr m&aring; v&aelig;re 9 tall langt', 'org_number');
     $leveranse = array();
     // leveranse = deliver
     // delivery date
     $leveranse['leveringstidspunkt'] = strftime('%FT%TZ', time());
     // calendar month
-    self::checkIfEmpty($this->period, 'Period for report not chosen');
+    // Error is: Period for report not chosen
+    self::checkIfEmpty($this->period, 'Periode er ikke satt');
     $leveranse['kalendermaaned'] = $this->period;
     // salary system
     $leveranse['kildesystem'] = 'LODO';
@@ -90,7 +94,6 @@ class altinn_report {
 
     // opplysningspliktig = reportee
     // norskIdentifikator = norwegian identifier, personal id or company org number
-    self::checkIfEmpty($org_number, 'Company Norwegian organisation number missing(not set)');
     $leveranse['opplysningspliktig'] = array();
     $leveranse['opplysningspliktig']['norskIdentifikator'] = $org_number;
 
@@ -98,12 +101,15 @@ class altinn_report {
     $loennOgGodtgjoerelse = array();
     // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
     $code_for_tax_calculation = $_lib['sess']->get_companydef('CalculationCodeForTax');
-    self::checkIfEmpty($code_for_tax_calculation, 'Code for tax calculation not set on company');
+    // Error is: Code for tax calculation not set on company
+    self::checkIfEmpty($code_for_tax_calculation, 'Firmaopplysning: Mangler beregningskode for arbeidsgiveravgift for firma');
 
     $virksomhet_array = array();
     // select salary and the employee connected to it
-    self::checkIfEmpty($this->employees, 'No employees for this period');
-    self::checkIfEmpty($this->salaries, 'No salaries for this period');
+    // Error is: No employees for this period
+    self::checkIfEmpty($this->employees, 'Det er ingen ansatte i perioden');
+    // Error is: No salaries for this period
+    self::checkIfEmpty($this->salaries, 'Det er ingen l&oslash;nnslipper  i perioden');
     foreach($this->employees as $key_employee => $employee) {
       $virksomhet = array();
       foreach($this->salaries as $key_subcompany => $salaries) {
@@ -112,7 +118,8 @@ class altinn_report {
         if (empty($salaries[$employee->AccountPlanID])) continue;
         foreach($salaries[$employee->AccountPlanID] as $key_salary => $salary) {
           // subcompany is the virksomhet for which we report this salary
-          $org_number_set = !self::checkIfEmpty($key_subcompany, 'No subcompany selected for salary L' . $salary->JournalID);
+          // Error is: No subcompany selected for salary L' . $salary->JournalID
+          $org_number_set = !self::checkIfEmpty($key_subcompany, 'L&oslash;nnslipp: Mangler virksomhet p&aring; L' . $salary->JournalID);
 
           // norwegian id for company the employee works for
           $query_subcompany = "SELECT sc.* FROM subcompany sc
@@ -120,7 +127,8 @@ class altinn_report {
           $result_subcompany = $_lib['db']->db_query($query_subcompany);
           $subcompany = $_lib['db']->db_fetch_object($result_subcompany);
           $subcompany_org_number = preg_replace('/\s+/', '', $subcompany->OrgNumber);
-          if ($org_number_set) self::checkIfEmpty($subcompany_org_number, 'OrgNumber for subcompany ' . $subcompany->Name . ' needs to be 9 digits long!', 'org_number');
+          // Error is: OrgNumber for subcompany ' . $subcompany->Name . ' needs to be 9 digits long!', 'org_number
+          if ($org_number_set) self::checkIfEmpty($subcompany_org_number, 'Virksomhet: Organisasjonsnr for ' . $subcompany->Name . '(virksomhet) v&aelig;re 9 tall langt', 'org_number');
           $virksomhet['norskIdentifikator'] = $subcompany_org_number;
           $inntektsmottaker = array();
           $inntektsmottaker['inntektsmottaker'] = array();
@@ -129,66 +137,82 @@ class altinn_report {
           // forskuddstrekk = tax that is taken from the employee
           $forskuddstrekk = 0.0;
           // get the occupation of the employee in the company
-          self::checkIfEmpty($salary->OccupationID, 'Occupation not set for salary L' . $salary->JournalID);
+          // Error is: Occupation not set for salary L' . $salary->JournalID
+          self::checkIfEmpty($salary->OccupationID, 'L&oslash;nnslipp: Mangler yrke p&aring; L' . $salary->JournalID);
           $query_occupation = "SELECT * FROM occupation WHERE OccupationID = " . (int)$salary->OccupationID;
           $result_occupation  = $_lib['db']->db_query($query_occupation);
           $occupation_code = $_lib['db']->db_fetch_object($result_occupation);
-          self::checkIfEmpty($occupation_code, 'Occupation does not exist in the occupation list');
+          // Error is: Occupation does not exist in the occupation list
+          self::checkIfEmpty($occupation_code, 'L&oslash;nnslipp: Yrket finnes ikke i listen over yrker');
 
           // norwegian id for the employee, personal id number
           $society_number = $employee->SocietyNumber;
-          self::checkIfEmpty($society_number, 'Personal ID number(society number) not set for employee ' . $full_name_for_error_message);
+          // Error is: Personal ID number(society number) not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($society_number, 'Ansatt: Mangler personnummer for ' . $full_name_for_error_message);
           $inntektsmottaker['inntektsmottaker']['norskIdentifikator'] = $society_number;
           // name and birthdate
           $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon'] = array();
           $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['navn'] = $full_name;
           $birth_date = $employee->BirthDate;
-          self::checkIfEmpty($birth_date, 'Birth date not set for employee ' . $full_name_for_error_message, 'date');
+          // Error is: Birth date not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($birth_date, 'Ansatt: Mangler f&oring;dtselsdag for ' . $full_name_for_error_message, 'date');
           $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['foedselsdato'] = strftime('%F', strtotime($birth_date));
           $arbeidsforhold = array();
           // type of employment
-          self::checkIfEmpty($salary->TypeOfEmployment, 'Employment type not set for salary L' . $salary->JournalID);
+          // Error is: Employment type not set for salary L' . $salary->JournalID
+          self::checkIfEmpty($salary->TypeOfEmployment, 'L&oslash;nnslipp: Mangler ansettelsestype p&aring; L' . $salary->JournalID);
           $arbeidsforhold['typeArbeidsforhold'] = $salary->TypeOfEmployment;
           $work_start = $employee->WorkStart;
-          self::checkIfEmpty($work_start, 'Employment date not set for employee ' . $full_name_for_error_message, 'date');
+          // Error is: Employment date not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($work_start, 'Ansatt: Mangler Ansettelsesdato for ' . $full_name_for_error_message, 'date');
           // employment date
           $arbeidsforhold['startdato'] = strftime('%F', strtotime($work_start));
           // work measurement, ex. hours per week
-          self::checkIfEmpty($employee->Workmeasurement, 'Work measurement not set for employee ' . $full_name_for_error_message, 'number');
+          // Error is: Work measurement not set for employee ' . $full_name_for_error_message
+        self::checkIfEmpty($employee->Workmeasurement, 'Ansatt: Mangler arbeidsdtimer hver uke for ' . $full_name_for_error_message, 'number');
           $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $employee->Workmeasurement;
           // work measurement type
-          self::checkIfEmpty($salary->WorkTimeScheme, 'Work time scheme not set for salary L' . $salary->JournalID);
+          // Error is: Work time scheme not set for salary L' . $salary->JournalID
+          self::checkIfEmpty($salary->WorkTimeScheme, 'L&oslash;nnslipp: Mangler arbeidstid for for salary L' . $salary->JournalID);
           $arbeidsforhold['avloenningstype'] =  $salary->WorkTimeScheme;
           // occupation, already checked above before query for occupation
           $arbeidsforhold['yrke'] = $occupation_code->YNr . $occupation_code->LNr;
           // work time scheme, ex. no shifts
-          self::checkIfEmpty($salary->ShiftType, 'Shift type not set for salary L' . $salary->JournalID);
+          // Error is: Shift type not set for salary L' . $salary->JournalI
+          self::checkIfEmpty($salary->ShiftType, 'L&oslash;nnslipp: Mangler skifttype  for salary L' . $salary->JournalID);
           $arbeidsforhold['arbeidstidsordning'] = $salary->ShiftType;
           // employment percentage
-          self::checkIfEmpty($employee->WorkPercent, 'Work percent not set for employee ' . $full_name_for_error_message, 'number');
+          // Error is: Work percent not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($employee->WorkPercent, 'Ansatt: Mangler stillingsprosent for ' . $full_name_for_error_message, 'number');
           $arbeidsforhold['stillingsprosent'] = (int) $employee->WorkPercent;
           // date of last change for payment date for salary
           $last_change_of_pay_date = $employee->CreditDaysUpdatedAt;
-          self::checkIfEmpty($last_change_of_pay_date, 'Last change of salary pay date not set for employee ' . $full_name_for_error_message, 'date');
+          // Error is: Last change of salary pay date not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($last_change_of_pay_date, 'Ansatt: Mangler kredittid oppdatert for ' . $full_name_for_error_message, 'date');
           $arbeidsforhold['sisteLoennsendringsdato'] = strftime('%F', strtotime($last_change_of_pay_date));
           // date of last change for position in company
           $last_change_of_position_in_company = $employee->inCurrentPositionSince;
-          self::checkIfEmpty($last_change_of_position_in_company, 'Last change of position in company date not set for employee ' . $full_name_for_error_message, 'date');
+          // Error is: Last change of position in company date not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($last_change_of_position_in_company, 'Ansatt: Mangler siste posisjonendringsdato for ' . $full_name_for_error_message, 'date');
           $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
           // date of last change for work percentage
           $last_change_of_work_percentage = $employee->WorkPercentUpdatedAt;
-          self::checkIfEmpty($last_change_of_work_percentage, 'Last change of work percent date not set for employee ' . $full_name_for_error_message, 'date');
+          // Error is: Last change of work percent date not set for employee ' . $full_name_for_error_message
+          self::checkIfEmpty($last_change_of_work_percentage, 'Ansatt: Mangler stillingsprosentendret for' . $full_name_for_error_message, 'date');
           $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
           // work relation
           $inntektsmottaker['inntektsmottaker']['arbeidsforhold'] = $arbeidsforhold;
 
           // check if valid from and to dates are set
-          self::checkIfEmpty($salary->ValidFrom, 'Valid from date not set for salary L' . $salary->JournalID, 'date');
-          self::checkIfEmpty($salary->ValidTo, 'Valid to date not set for salary L' . $salary->JournalID, 'date');
+          // Error is: Valid from date not set for salary L' . $salary->JournalID, 'date
+          self::checkIfEmpty($salary->ValidFrom, 'L&oslash;nnslipp: Manger til dato p&aring; L' . $salary->JournalID, 'date');
+          // Error is: Valid to date not set for salary L' . $salary->JournalID, 'date
+          self::checkIfEmpty($salary->ValidTo, 'L&oslash;nnslipp: Manger til dato p&aring; L' . $salary->JournalID, 'date');
 
           // get municipality tax percentage and zone info for arbeidsgiveravgift
           $salary_municipality = $salary->KommuneID;
-          self::checkIfEmpty($salary_municipality, 'Municipality not set for salary L' . $salary->JournalID);
+          // Error is: Municipality not set for salary L' . $salary->JournalI
+          self::checkIfEmpty($salary_municipality, 'L&oslash;nnslipp: Mangler komune p&aring; L' . $salary->JournalID);
           $query_kommune_tax = "SELECT agag.*
                                 FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
                                 WHERE k.KommuneID = '" . $salary_municipality . "'";
@@ -196,9 +220,12 @@ class altinn_report {
           $kommune_tax = $_lib['db']->db_fetch_object($result_kommune_tax);
 
           // taxing zone code, already checked above before the query
-          self::checkIfEmpty($kommune_tax, 'Municipality selected for the salary L' . $salary->JournalID . ' does not exist in the list of municipalities or does not have a zone code set');
+          // Error is: Municipality selected for the salary L' . $salary->JournalID . '
+          // does not exist in the list of municipalities or does not have a zone code set
+          self::checkIfEmpty($kommune_tax, 'L&oslash;nnslipp: Mangler komune p&aring; L' . $salary->JournalID . ', er ikke valgt eller komunen har ikke valgt kode');
           // Code property covered by the above check since it is the id for arbeidsgiveravggift table
-          self::checkIfEmpty($kommune_tax->Percent, 'Municipality selected for the salary L' . $salary->JournalID . ' does not have a tax percent set', 'percent');
+          // Error is: Municipality selected for the salary L' . $salary->JournalID . ' does not have a tax percent set', 'percent
+          self::checkIfEmpty($kommune_tax->Percent, 'L&oslash;nnslipp: Mangler prosent for komune valgt p$aring;  L' . $salary->JournalID, 'percent');
           $zone_code = $kommune_tax->Code;
           if (!isset($loennOgGodtgjoerelse[$zone_code])) {
             $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse'] = array();
@@ -238,7 +265,8 @@ class altinn_report {
               // calculate total for arbeidsgiveravgift amount
               $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] += $salary_line->AmountThisPeriod;
               // description for the entry
-              self::checkIfEmpty($salary_line->SalaryDescription, 'Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
+              // Error is: Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_linSalaryText . "'");
+              self::checkIfEmpty($salary_line->SalaryDescription, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . ' har ikke satt altinnbeskrivelse med text \'' . $salary_line->SalaryText . "'");
               $inntekt['inntekt']['loennsinntekt'] = array();
               $inntekt['inntekt']['loennsinntekt']['beskrivelse'] = self::convertNorwegianLettersToASCII($salary_line->SalaryDescription);
               // there can be multiple entries for one salary so we add to an array
@@ -247,7 +275,8 @@ class altinn_report {
           }
           // check if all salary lines were empty/skipped(with 0 amount)
           $empty_salary = $all_salary_lines_empty ? '' : 'not empty';
-          self::checkIfEmpty($empty_salary, 'Salary L' . $salary->JournalID . ' has only 0 amount lines');
+          // Error is: Salary L' . $salary->JournalID . ' has only 0 amount lines
+          self::checkIfEmpty($empty_salary, 'L&oslash;nnslipp: L&oslash;nnslipp L' . $salary->JournalID . ' har bare 0,00 linjer');
 
           // amount for forskuddstrekk
           $inntektsmottaker['inntektsmottaker']['forskuddstrekk'] = array();

@@ -18,7 +18,7 @@ elseif($_lib['input']->getProperty('action_subcompany_new'))
 			$_lib['db']->db_insert2(array('query' => $query_insert));
 		}
 	} else {
-		$message = "Underenhet nummer ikke oppgitt";
+		$message = "Virksomhetnummer ikke oppgitt";
     header("Location: " . $_lib['sess']->dispatchs . "t=subcompany.list&message=" . $message);
 	}
 }

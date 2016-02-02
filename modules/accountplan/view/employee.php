@@ -76,7 +76,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <th colspan="5">Altinn felt</th>
   </tr>
   <tr>
-    <td class="menu">Shift type:</td>
+    <td class="menu">Skifttype:</td>
     <td></td>
     <td>
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType)); ?>

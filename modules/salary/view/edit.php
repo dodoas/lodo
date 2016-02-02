@@ -221,7 +221,7 @@ $formname = "salaryUpdate";
     <th class="salaryhead">Prosenttrekk</th>
     <th class="salaryhead">Skatteetaten</th>
     <th></th>
-    <th class="salaryhead">Shift type</th>
+    <th class="salaryhead">Skifttype</th>
     <th class="salaryhead">Arbeidstid</th>
     <th class="salaryhead">Type ansettelse</th>
     <th class="salaryhead" colspan="2">Yrke</th>
