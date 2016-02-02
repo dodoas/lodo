@@ -27,7 +27,7 @@ print $_lib['message']->get();
   <p>
     Periode:
     <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'periode', 'value' => $_periode)); ?>
-    <? print $_lib['form3']->submit(array('name'=>'action_show_slaries', 'value'=>'show salares')); ?>
+    <? print $_lib['form3']->submit(array('name'=>'action_show_slaries', 'value'=>'Vis l&oslash;nnslipper')); ?>
   </p>
 </form>
 

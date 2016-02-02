@@ -21,24 +21,28 @@ print $_lib['sess']->doctype ?>
 <table class="lodo_data">
 <thead>
   <tr>
-    <th>Virksomheter:</th>
-    <th colspan="3"></th>
+    <th>Virksomhet(er):</th>
+    <th colspan="3">
+      se
+      <a href="https://www.brreg.no">www.brreg.no</a>
+
+    </th>
   <tr>
     <th></th>
     <th align="right" colspan="3">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       <form name="subcompany_search" action="<? print $_lib['sess']->dispatch ?>t=subcompany.edit" method="post">
-        Nytt nr:
+        Virksomhet(er):
         <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SubcompanyID', 'width'=>'10')) ?>
-        <? print $_lib['form3']->submit(array('name'=>'action_subcompany_new', 'value'=>'Ny virksomhet')) ?>
+        <? print $_lib['form3']->submit(array('name'=>'action_subcompany_new', 'value'=>'Lagre')) ?>
       </form>
     <? } ?>
     </th>
   </tr>
   <tr>
-    <td class="menu">Virksomhet</td>
+    <td class="menu">ID</td>
     <td class="menu">Navn</td>
-    <td class="menu">NO:ORGNO</td>
+    <td class="menu">Virksomhet(er)</td>
   </tr>
 </thead>
 

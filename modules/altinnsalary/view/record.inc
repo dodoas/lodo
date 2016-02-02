@@ -132,7 +132,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
     }
     $xml = $report->generateXML();
     if (!empty($report->errors)) {
-      $_lib['message']->add('Report not sent, there were some errors.');
+      // Message is: Report not sent, there were some errors.
+      $_lib['message']->add('Rapporten er ikke sendt, det er noen mangler.');
       foreach($report->errors as $error) $_lib['message']->add($error);
     }
     else {

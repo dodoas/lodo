@@ -560,7 +560,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 <? } /* if($period_open) */ ?>
 <? }else{ /* if($kommune_id->KommuneID) if we dont have kommune for company */ ?>
 <?
-    echo "Ingen kommune er valgt";
+    echo "Firmaopplysning: Ingen kommune er valgt";
 }
 ?>
 </body>

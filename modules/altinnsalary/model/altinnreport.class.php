@@ -119,7 +119,7 @@ class altinn_report {
         foreach($salaries[$employee->AccountPlanID] as $key_salary => $salary) {
           // subcompany is the virksomhet for which we report this salary
           // Error is: No subcompany selected for salary L' . $salary->JournalID
-          $org_number_set = !self::checkIfEmpty($key_subcompany, 'L&oslash;nnslipp: Mangler virksomhet p&aring; L' . $salary->JournalID);
+          $org_number_set = !self::checkIfEmpty($key_subcompany, 'L&oslash;nnslipp og virksomhet: Mangler virksomhet p&aring; L' . $salary->JournalID);
 
           // norwegian id for company the employee works for
           $query_subcompany = "SELECT sc.* FROM subcompany sc
@@ -155,7 +155,7 @@ class altinn_report {
           $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['navn'] = $full_name;
           $birth_date = $employee->BirthDate;
           // Error is: Birth date not set for employee ' . $full_name_for_error_message
-          self::checkIfEmpty($birth_date, 'Ansatt: Mangler f&oring;dtselsdag for ' . $full_name_for_error_message, 'date');
+          self::checkIfEmpty($birth_date, 'Ansatt: Mangler f&oslash;dselsdag for ' . $full_name_for_error_message, 'date');
           $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['foedselsdato'] = strftime('%F', strtotime($birth_date));
           $arbeidsforhold = array();
           // type of employment
@@ -173,13 +173,13 @@ class altinn_report {
           $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $employee->Workmeasurement;
           // work measurement type
           // Error is: Work time scheme not set for salary L' . $salary->JournalID
-          self::checkIfEmpty($salary->WorkTimeScheme, 'L&oslash;nnslipp: Mangler arbeidstid for for salary L' . $salary->JournalID);
+          self::checkIfEmpty($salary->WorkTimeScheme, 'L&oslash;nnslipp: Mangler arbeidstid for L' . $salary->JournalID);
           $arbeidsforhold['avloenningstype'] =  $salary->WorkTimeScheme;
           // occupation, already checked above before query for occupation
           $arbeidsforhold['yrke'] = $occupation_code->YNr . $occupation_code->LNr;
           // work time scheme, ex. no shifts
           // Error is: Shift type not set for salary L' . $salary->JournalI
-          self::checkIfEmpty($salary->ShiftType, 'L&oslash;nnslipp: Mangler skifttype  for salary L' . $salary->JournalID);
+          self::checkIfEmpty($salary->ShiftType, 'L&oslash;nnslipp: Mangler skifttype L' . $salary->JournalID);
           $arbeidsforhold['arbeidstidsordning'] = $salary->ShiftType;
           // employment percentage
           // Error is: Work percent not set for employee ' . $full_name_for_error_message
