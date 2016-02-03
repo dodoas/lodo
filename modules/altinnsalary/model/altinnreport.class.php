@@ -269,6 +269,9 @@ class altinn_report {
               self::checkIfEmpty($salary_line->SalaryDescription, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . ' har ikke satt altinnbeskrivelse med text \'' . $salary_line->SalaryText . "'");
               $inntekt['inntekt']['loennsinntekt'] = array();
               $inntekt['inntekt']['loennsinntekt']['beskrivelse'] = self::convertNorwegianLettersToASCII($salary_line->SalaryDescription);
+              if ($salary_line->SalaryDescription == 'timeloenn') {
+                $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
+              }
               // there can be multiple entries for one salary so we add to an array
               $inntekt_tmp[] = $inntekt;
             }
