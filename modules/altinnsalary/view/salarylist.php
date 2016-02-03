@@ -36,7 +36,7 @@ print $_lib['message']->get();
 <table class="lodo_data">
 <thead>
    <tr>
-     <th colspan="12">L&oslash;nnsutbetalinger
+     <th colspan="13">L&oslash;nnsutbetalinger
   <tr>
     <th class="sub">Velg</th>
     <th class="sub">Nr</th>
@@ -49,14 +49,23 @@ print $_lib['message']->get();
     <th class="sub">Til perioden</th>
     <th class="sub">Bankkonto</th>
     <th class="sub">Utskrift</th>
-    <th class="sub">Sent i raport</th>
+    <th class="sub">Sendt i raport</th>
+    <th class="sub"></th>
   </tr>
 </thead>
 
 <tbody>
 <?
+$errors = array();
 while($row = $_lib['db']->db_fetch_object($result_salary))
 {
+    $report_for_salary = new altinn_report($row->Period, array($row->SalaryID));
+    $report_for_salary->populateReportArray();
+    if (empty($report_for_salary->errors)) $is_ready_for_altinn = 'Klar';
+    else {
+      $errors[$row->JournalID] = $report_for_salary->errors;
+      $is_ready_for_altinn = 'Ikke klar';
+    }
     $i++;
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
@@ -78,6 +87,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->DomesticBankAccount ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.print&SalaryID=<? print $row->SalaryID ?>" target="print">Vis</a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $report_id->AltinnReport1ID ?>" target="print"><? print $report_id->AltinnReport1ID ? $report_id->AltinnReport1ID . " (" . $report_id->Period . ")" : ""?></a></td>
+        <td><? print $is_ready_for_altinn; ?></td>
     </tr>
     <?
   }
@@ -91,6 +101,31 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send report'));
 ?>
 </form>
+<br/><br/>
+<?
+if (!empty($errors)) {
+?>
+<table class="lodo_data">
+<?
+  foreach($errors as $salary_journal_id => $salary_errors) {
+?>
+  <tr>
+    <th>L <? print $salary_journal_id; ?></th>
+  </tr>
+<?
+    foreach($salary_errors as $error) {
+?>
+  <tr>
+    <td><? print $error; ?></td>
+  </tr>
+<?
+    }
+  }
+?>
+</table>
+<?
+}
+?>
 <?
 }
 else {
