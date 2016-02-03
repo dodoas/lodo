@@ -25,6 +25,11 @@ class LocalSoapClient extends SoapClient {
   }
 }
 
+// redirect back to lodo.main page if no access to altinn salary
+if(!$_lib['sess']->get_person('AltinnSalaryAccess')) {
+  header('Location: ' . $_lib['sess']->dispatchs . "t=lodo.main");
+  die();
+}
 if (isset($_POST['use_salary'])) {
   $salary_ids = array();
   foreach($_POST['use_salary'] as $salary_id => $selected) {
