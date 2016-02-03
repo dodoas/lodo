@@ -4,7 +4,7 @@ class altinn_file {
     global $_SETUP;
 
     // TODO change this path to somewhere outside repo
-    $this->folderPath = $_SETUP['HOME_DIR']."/altinn_xml/".$_SETUP['DB_NAME'].'/'.$date.'/';
+    $this->folderPath = $_SETUP['HOME_DIR']."/altinn_xml/".$_SESSION['DB_NAME'].'/'.$date.'/';
   }
 
   function save($content, $id) {
