@@ -39,9 +39,13 @@ class altinn_file {
   }
 
   function readFile($file_name){
-    $file = fopen($this->folderPath . $file_name, "r");
-    $content = fread($file,filesize($this->folderPath.$file_name));
-    fclose($file);
+    // the @ is there to suppress the warning message if the file can't be opened
+    $file = @fopen($this->folderPath . $file_name, "r");
+    if (!empty($file)) {
+      $content = fread($file,filesize($this->folderPath.$file_name));
+      fclose($file);
+    }
+    else $content = false;
     return $content;
   }
 
