@@ -46,7 +46,7 @@ print $_lib['sess']->doctype ?>
 <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
     Periode:
     <? print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'periode', 'value' => $_REQUEST['altinnReport1_periode'])); ?>
-    <? print $_lib['form3']->submit(array('name'=>'action_soap1_show_slaries', 'value'=>'show salares')); ?>
+    <? print $_lib['form3']->submit(array('name'=>'action_soap1_show_salaries', 'value'=>'show salares')); ?>
   <? print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Test Soap1')) ?>
   <? print $_lib['form3']->submit(array('name'=>'action_generate_xml_report', 'value'=>'Generate XML')) ?>
 <?

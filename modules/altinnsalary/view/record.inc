@@ -117,7 +117,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $message = 'No salaries were selected.';
     if (isset($_REQUEST['altinnReport1_periode'])) $periode = '&periode=' . $_REQUEST['altinnReport1_periode'];
     else $periode = '';
-    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_slaries=show&message=" . $message . $periode);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_salaries=show&message=" . $message . $periode);
   }
 
   // If you didn't select a period, don't send.
@@ -527,7 +527,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 } elseif($_lib['input']->getProperty('action_confirm_password')) {
   // save all info for altinn userpassord in the session
   $_SESSION['altinn_password']['expires_at'] = strftime('%F %T', time() + 60*30);
-} elseif ($_lib['input']->getProperty('action_show_slaries')) {
+} elseif ($_lib['input']->getProperty('action_show_salaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
                      FROM salary s, accountplan a
                      WHERE s.AccountPlanID = a.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%'
