@@ -74,11 +74,8 @@ print $_lib['sess']->doctype ?>
                 <a href="<? print $_lib['sess']->dispatch ?>t=exchange.edit">Valuta</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=accountperiod.edit">Periode</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=linetextmap.list">Linjenr til Tekst</a>
-				<?
-                if($_lib['sess']->get_person('AccessLevel') > 3 || true)
-                {
-                ?><a href="<? print $_lib['sess']->dispatch ?>t=altinn.config">AltInn</a><?
-                }
+                <!-- <a href="<? print $_lib['sess']->dispatch ?>t=altinn.config">AltInn</a> -->
+        <?
                 if($_lib['sess']->get_person('AccessLevel') > 2)
                 {
                     ?><a href="<? print $_lib['sess']->dispatch ?>t=timereg.holidays">Helligdager</a><?
@@ -109,8 +106,15 @@ print $_lib['sess']->doctype ?>
             </td>
 			<td>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=report.list">Rapporter</a>
-			  <a href="<? print $_lib['sess']->dispatch ?>t=altinn.index">AltInn</a>
+			  <!-- <a href="<? print $_lib['sess']->dispatch ?>t=altinn.index">AltInn</a> -->
+        <?
+        if($_lib['sess']->get_person('AccessLevel') > 3)
+        {
+        ?>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list">Altinn L&oslash;nnslipper</a>
+        <?
+        }
+        ?>
 
 			  <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=install.list">Installer</a>
