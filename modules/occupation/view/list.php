@@ -45,10 +45,8 @@ print $_lib['sess']->doctype ?>
   <tr>
     <td class="menu">ID</td>
     <td class="menu">Aktiv</td>
-    <td class="menu">Dems ID</td>
     <td class="menu">Kode</td>
     <td class="menu">Navn</td>
-    <td class="menu">Dems oppdatert</td>
   </tr>
 </thead>
 
@@ -61,10 +59,8 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
   <tr class="<? print "$sec_color"; ?>">
     <td><a href="<? print $_lib['sess']->dispatch ?>t=occupation.edit&occupation.OccupationID=<? print "$row->OccupationID"; ?>"><? print $row->OccupationID; ?></a></td>
     <td><? print $_lib['form3']->checkbox(array('table'=>'project', 'value'=>$row->Active, 'disabled'=>'1')) ?></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=occupation.edit&occupation.OccupationID=<? print "$row->OccupationID"; ?>"><? print $row->RemoteID; ?></a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=occupation.edit&occupation.OccupationID=<? print "$row->OccupationID"; ?>"><? print "$row->YNr $row->LNr"; ?></a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=occupation.edit&occupation.OccupationID=<? print "$row->OccupationID"; ?>"><? print $row->Name; ?></a></td>
-    <td><? print strftime("%F", strtotime($row->RemoteLastUpdatedAt)); ?></td>
   </tr>
 <? } ?>
 </tbody>

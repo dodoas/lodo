@@ -1,9 +1,9 @@
 -- Add missing altinn fields on employee
 ALTER TABLE accountplan
-ADD ShiftType varchar(50) DEFAULT 'ikkeShift',
+ADD ShiftType varchar(50) DEFAULT 'ikkeSkift',
 ADD Workmeasurement decimal(4,2)  DEFAULT 0,
 ADD WorkTimeScheme varchar(50) DEFAULT '',
-ADD TypeOfEmployment varchar(50) DEFAULT 'ordinaer',
+ADD TypeOfEmployment varchar(50) DEFAULT 'ordinaertArbeidsforhold',
 
 ADD OccupationID bigint(20) DEFAULT 0,
 ADD SubcompanyID bigint(20) DEFAULT 0,
@@ -68,8 +68,6 @@ Active tinyint(4) NOT NULL DEFAULT '0',
 YNr varchar(50) DEFAULT NULL,
 LNr varchar(50) DEFAULT NULL,
 Name varchar(255) NOT NULL DEFAULT '',
-RemoteID int(6) DEFAULT NULL,
-RemoteLastUpdatedAt datetime DEFAULT NULL,
 TS timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (OccupationID)
 );
