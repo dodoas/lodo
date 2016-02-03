@@ -303,7 +303,9 @@ class altinn_report {
     $leveranse['oppgave']['betalingsinformasjon'] = array();
     $leveranse['oppgave']['betalingsinformasjon']['sumForskuddstrekk'] = (int) round($sumForskuddstrekk);
     $leveranse['oppgave']['betalingsinformasjon']['sumArbeidsgiveravgift'] = (int) round($sumArbeidsgiveravgift);
-    $leveranse['oppgave'] = $virksomhet_array;
+    foreach($virksomhet_array as $one_virksomhet) {
+      $leveranse['oppgave'][] = $one_virksomhet;
+    }
     $melding['Leveranse'] = $leveranse;
     $this->melding = $melding;
   }
