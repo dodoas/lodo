@@ -230,9 +230,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
         $values[$element->ReferenceTypeName] = $element->ReferenceValue;
       }
 
-      $values['Folder'] = (string) time();;
-      $altinnFile = new altinn_file($values['Folder']);
-      $altinnFile->save($xml);
+      $values['Folder'] = strftime('%Y%m%d', time());
 
 
       $_lib['storage']->store_record(array('table' => 'altinnReport1', 'data' => $values, 'debug' => false));
@@ -245,6 +243,10 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
       // Save which salaries have been sent in the report and notify
       if ($report->saveSalaryReportLinks($altinnReport1ID)) $_lib['message']->add('Report sent');
+
+      // Save xml we sent
+      $altinnFile = new altinn_file($values['Folder']);
+      $altinnFile->save($xml, $altinnReport1ID);
     }
   }
 } elseif($_lib['input']->getProperty('action_soap2')) {
@@ -412,14 +414,21 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ReporteeElementID']        = $correspondenceAttachments->AttachmentBEV2->ReporteeElementID;
   $values['res_SendersReference']         = $correspondenceAttachments->AttachmentBEV2->SendersReference;
 
-  $values['Folder'] = (string) time();;
+  $values['Folder'] = strftime('%Y%m%d', time());
   $zipContent = $correspondenceAttachments->AttachmentBEV2->AttachmentData;
 
-  $altinnFile = new altinn_file($values['Folder']);
-  $altinnFile->extract($zipContent);
 
   // $_GET['AltinnReport4ID'] = 1;
   $_GET['AltinnReport4ID'] = $_lib['storage']->store_record(array('table' => 'altinnReport4', 'data' => $values, 'debug' => false));
+
+
+  // to fetch the AltinnReport4ID to the one I just saved
+  $query = 'SELECT AltinnReport4ID FROM altinnReport4 order by AltinnReport4ID desc limit 1';
+  $res = $_lib['db']->db_query($query);
+  $row = $_lib['db']->db_fetch_object($res);
+  $altinnReport4ID = $row->AltinnReport4ID;
+  $altinnFile = new altinn_file($values['Folder']);
+  $altinnFile->extract($zipContent, $altinnReport4ID);
 } elseif($_lib['input']->getProperty('action_soap5')) {
   // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
   // $_rowB = $_lib['db']->get_row(array('query' => $query));
