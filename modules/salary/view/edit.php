@@ -189,6 +189,7 @@ $formname = "salaryUpdate";
     <th>Utbetalt dato
     <th>Konto for utbetaling
     <th>Skattekommune
+    <th>Altinndato
   </tr>
   <tr>
     <th class="sub">L <a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$head->JournalID"; ?>&type=salary&view=1"><? print $head->JournalID ?></a>
@@ -204,31 +205,49 @@ $formname = "salaryUpdate";
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
     <th class="sub"><?
-            if($kommune) {
-                printf("%s %s", $kommune->KommuneNumber, $kommune->KommuneName);
-            }
-            else {
-                print $_lib['form3']->kommune_menu(array(
-                                                       'table' => 'salary',
-                                                       'field' => 'KommuneID',
-                                                       'value' => 0,
-                                                       'accesskey' => 'K',
-                                                       'pk' => $head->SalaryID,
-
-                                                       ));
-            }
+            print $_lib['form3']->kommune_menu(array(
+                'table' => 'salary',
+                'field' => 'KommuneID',
+                'value' => $head->KommuneID,
+                'accesskey' => 'K',
+                'pk' => $head->SalaryID,
+            ));
     ?>
   </th>
+    <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number">
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
     <th class="salaryhead">Prosenttrekk</th>
     <th class="salaryhead">Skatteetaten</th>
+    <th></th>
+    <th class="salaryhead">Skifttype</th>
+    <th class="salaryhead">Arbeidstid</th>
+    <th class="salaryhead">Ansettelsestype</th>
+    <th class="salaryhead" colspan="2">Yrke</th>
+    <th class="salaryhead">Ansatt ved</th>
   </tr>
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
+    <th class="sub"></th>
+    <th class="sub">
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 40)); ?>
+    </th>
+
+    <th class="sub">
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'salary', 'field'=>'WorkTimeScheme', 'pk'=>$head->SalaryID, 'value'=>$head->WorkTimeScheme, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
+    </th>
+    <th class="sub">
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
+    </th>
+    <th class="sub" colspan="2">
+      <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
+    </th>
+    <th class="sub">
+      <? print $_lib['form3']->Subcompany_menu3(array('table'=>'salary', 'field'=>'SubcompanyID', 'pk'=>$head->SalaryID, 'value'=>$head->SubcompanyID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'width' => 40)); ?>
+    </th>
   </tr>
 </table>
 <br>
@@ -278,6 +297,10 @@ $formname = "salaryUpdate";
             if($ishovedmal == 1)
             {
                 ?><input type="text" name="salaryline.SalaryText.<? print $line->SalaryLineID ?>" value="<? print $line->SalaryText ?>" size="30" class="number"><?
+            }
+            elseif($line->SalaryDescription)
+            {
+                print $line->SalaryText . " (" . $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'][$line->SalaryDescription] . ")";
             }
             else
             {

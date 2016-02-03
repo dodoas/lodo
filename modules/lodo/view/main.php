@@ -46,10 +46,12 @@ print $_lib['sess']->doctype ?>
             <td>
                 <a href="<? print $_lib['sess']->dispatch ?>t=company.edit&CompanyID=<? print $_SETUP[COMPANY_ID]; ?>">Firmaopplysning</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=employee">Ansatte</a>
+                <a href="<? print $_lib['sess']->dispatch ?>t=occupation.list">Yrke</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=company.employees&CompanyID=<? print $_SETUP[COMPANY_ID] ?>">Systembrukere</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=car.list">Bil</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=department.list">Avdeling</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=project.list">Prosjekt</a>
+                <a href="<? print $_lib['sess']->dispatch ?>t=subcompany.list">Virksomhet</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=shelf.list">Hyller</a>
             </td>
             <td>
@@ -72,11 +74,8 @@ print $_lib['sess']->doctype ?>
                 <a href="<? print $_lib['sess']->dispatch ?>t=exchange.edit">Valuta</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=accountperiod.edit">Periode</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=linetextmap.list">Linjenr til Tekst</a>
-				<?
-                if($_lib['sess']->get_person('AccessLevel') > 3 || true)
-                {
-                ?><a href="<? print $_lib['sess']->dispatch ?>t=altinn.config">AltInn</a><?
-                }
+                <!-- <a href="<? print $_lib['sess']->dispatch ?>t=altinn.config">AltInn</a> -->
+        <?
                 if($_lib['sess']->get_person('AccessLevel') > 2)
                 {
                     ?><a href="<? print $_lib['sess']->dispatch ?>t=timereg.holidays">Helligdager</a><?
@@ -103,11 +102,20 @@ print $_lib['sess']->doctype ?>
 			  <? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=aarsoppgjoer.index" target="_new">&Aring;rsoppgj&oslash;r</a>
 			  <? } ?>
-				<a href="<? print $_lib['sess']->dispatch ?>t=documentation.list">Brukerveiledning</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=documentation.list">Brukerveiledning</a>
             </td>
 			<td>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=report.list">Rapporter</a>
-			  <a href="<? print $_lib['sess']->dispatch ?>t=altinn.index">AltInn</a>
+			  <!-- <a href="<? print $_lib['sess']->dispatch ?>t=altinn.index">AltInn</a> -->
+        <?
+        if($_lib['sess']->get_person('AccessLevel') > 3)
+        {
+        ?>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list">Altinn L&oslash;nnslipper</a>
+        <?
+        }
+        ?>
+
 			  <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=install.list">Installer</a>
 			  <? } ?>

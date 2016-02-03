@@ -71,13 +71,14 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
 <input type="hidden" name="accountplan_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="fakturabankemail_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="JournalID" value="<? print $JournalID ?>">
+
   <tr class="result">
     <th colspan="5">Ansatt <? print $AccountPlanID ?> (underkonto til hovedbok)</th>
   </tr>
   <tr>
     <td class="menu">Aktiv</td>
     <td>
-      <? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> 
+      <? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?>
     </td>
     <td>
       <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value' => $AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled'=>true)) ?>
@@ -151,7 +152,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td></td>
     <td><input type="text" name="fakturabankemail.Email" value="<? print $fakturabankemail->Email  ?>" size="30"></td>
     <td></td>
-    <td></td>    
+    <td></td>
   </tr>
   <tr>
     <td class="menu">Tekst informasjon</td>
@@ -172,10 +173,14 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Kreditt tid</td>
     <td>
      <input type="hidden" name="accountplan.EnableCredit" value="1"/>
-<? /* $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); */ ?> 
+<? /* $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); */ ?>
 
 </td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
+    <td>Kredittid oppdatert:</td>
+    <td>
+      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'CreditDaysUpdatedAt', 'value'=>$account->CreditDaysUpdatedAt)) ?>
+    </td>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
@@ -214,8 +219,8 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Personnr</td>
     <td></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SocietyNumber', 'value'=>$account->SocietyNumber, 'class'=>'lodoreqfelt')) ?></td>
-    <td></td>
-    <td></td>
+    <td>Ansatt ved</td>
+    <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table, 'field'=>'SubcompanyID', 'value'=>$account->SubcompanyID)); ?></td>
   </tr>
   <tr>
     <td class="menu">Kommune</td>
@@ -243,15 +248,55 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Stillingsprosent</td>
     <td></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent, 'class'=>'lodoreqfelt')) ?></td>
-    <td></td>
-    <td><? 
-  
+    <td>
+      Stillingsprosent oppdatert:
+      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkPercentUpdatedAt', 'value'=>$account->WorkPercentUpdatedAt)) ?>
+    </td>
+    <td><?
+
       if($_lib['db']->db_numrows($salary_conf) != 0) {
         $salary_conf_row = $_lib['db']->db_fetch_assoc($salary_conf);
         printf( "L&oslash;nnsmal %d", $salary_conf_row['SalaryConfID']);
       }
 
     ?></td>
+  </tr>
+  <tr class="result">
+    <th colspan="5">Altinn felt</th>
+  </tr>
+  <tr>
+    <td class="menu">Skifttype:</td>
+    <td></td>
+    <td>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType)); ?>
+    </td>
+    <td>Timer hver uke:</td>
+    <td>
+      <input type="text" name="accountplan.Workmeasurement" value="<?= $account->Workmeasurement ?>" />
+    </td>
+  </tr>
+  <tr>
+    <td class='menu'>Arbeidstid:</td>
+    <td></td>
+    <td>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme)); ?>
+    </td>
+
+    <td>Ansettelsestype:</td>
+    <td>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment, 'width' => 32)); ?>
+    </td>
+  </tr>
+  <tr>
+    <td class='menu'>Yrke</td>
+    <td></td>
+    <td>
+      <? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table, 'field'=>'OccupationID', 'value'=>$account->OccupationID)); ?>
+    </td>
+    <td>Samme posisjon siden:</td>
+    <td>
+      <? print $_lib['form3']->date(array('table'=>'accountplan', 'field'=>'inCurrentPositionSince', 'value'=>$account->inCurrentPositionSince)) ?>
+    </td>
   </tr>
 
   <tr class="result">
@@ -271,7 +316,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
         Passord: <b><?= $password->Password ?></b></td>
 
   </tr>
-  
+
   <tr class="result">
     <th colspan="5">Logg</th>
   </tr>

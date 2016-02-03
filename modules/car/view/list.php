@@ -12,7 +12,7 @@ $result_car = $_lib['db']->db_query($query_car);
 print $_lib['sess']->doctype ?>
 
 <head>
-    <title>Empatix - car list</title>
+    <title>Empatix - Bil liste</title>
     <? includeinc('head') ?>
 </head>
 

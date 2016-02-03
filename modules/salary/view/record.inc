@@ -5,7 +5,11 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
   $Changed = false;
   $Salary = $_lib['storage']->get_row(array('query' => "SELECT * FROM salary WHERE SalaryID = " . $SalaryID));
   // Check if anything changed
-  $SalaryFieldNames = array("JournalDate" => false, "Period" => false, "AccountPlanID" => false, "ValidFrom" => false, "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false, "VacationPayment" => false);
+  $SalaryFieldNames = array("JournalDate" => false, "Period" => false, "AccountPlanID" => false, "ValidFrom" => false,
+                            "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false,
+                            "VacationPayment" => false, "ActualPayDate" => false, "ShiftType" => false,
+                            "WorkTimeScheme" => false, "TypeOfEmployment" => false, "OccupationID" => false,
+                            "SubcompanyID" => false);
   foreach ($SalaryFieldNames as $FieldName => $IsAmount) {
     $ArgName = "salary_".$FieldName."_".$SalaryID;
     if ($IsAmount) {
@@ -127,6 +131,7 @@ elseif($_lib['input']->getProperty('action_salaryline_new'))
     $fields['salaryline_SalaryID']          = $orgLine->SalaryID;
     $fields['salaryline_LineNumber']        = $orgLine->LineNumber;
     $fields['salaryline_SalaryText']        = $orgLine->SalaryText;
+    $fields['salaryline_SalaryDescription'] = $orgLine->SalaryDescription;
     $fields['salaryline_NumberInPeriod']    = $orgLine->NumberInPeriod;
     $fields['salaryline_Rate']              = $orgLine->Rate;
     $fields['salaryline_AmountThisPeriod']  = $orgLine->AmountThisPeriod;
@@ -219,6 +224,10 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $head_employee        = $_lib['db']->db_fetch_object($result_head_employee);
         $accountplan = $accounting->get_accountplan_object($head_employee->AccountPlanID);
 
+        $query_kommune_id = "select * from kommune where KommuneNumber = '" . $_lib['sess']->get_companydef('CompanyMunicipality') . "'";
+        $result_kommune_id = $_lib['db']->db_query($query_kommune_id);
+        $kommune_id = $_lib['db']->db_fetch_object($result_kommune_id);
+
         //#Possible to extend or alter parameters here
         $postmain['salary_JournalID']           = $JournalID;
         $postmain['salary_SalaryConfID']        = $SalaryConfID;
@@ -227,7 +236,12 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $postmain['salary_ValidTo']             = $toDate;
         $postmain['salary_JournalDate']         = $journalDate;
         $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
-        $postmain['salary_KommuneID']           = $accountplan->KommuneID;
+        $postmain['salary_KommuneID']           = $kommune_id->KommuneID;
+        $postmain['salary_ShiftType']           = $accountplan->ShiftType;
+        $postmain['salary_OccupationID']        = $accountplan->OccupationID;
+        $postmain['salary_WorkTimeScheme']      = $accountplan->WorkTimeScheme;
+        $postmain['salary_TypeOfEmployment']    = $accountplan->TypeOfEmployment;
+        $postmain['salary_SubcompanyID']        = $accountplan->SubcompanyID;
 
         if($accountplan->EnableCredit == 1)
             $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
@@ -276,6 +290,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
             $lines[$line->LineNumber]['Rate']               = $line->Rate;
             $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
+            $lines[$line->LineNumber]['SalaryDescription']  = $line->SalaryDescription;
             $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
             $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
             $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
@@ -302,6 +317,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
             $lines[$line->LineNumber]['Rate']               = $line->Rate;
             $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
+            $lines[$line->LineNumber]['SalaryDescription']  = $line->SalaryDescription;
             $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
             $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
             $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
@@ -319,6 +335,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber][$i]['NumberInPeriod'] = $lines[$line->LineNumber]['NumberInPeriod'];
             $lines[$line->LineNumber][$i]['Rate'] = $lines[$line->LineNumber]['Rate'];
             $lines[$line->LineNumber][$i]['SalaryText'] = $lines[$line->LineNumber]['SalaryText'];
+            $lines[$line->LineNumber][$i]['SalaryDescription'] = $lines[$line->LineNumber]['SalaryDescription'];
             $lines[$line->LineNumber][$i]['AmountThisPeriod'] = $lines[$line->LineNumber]['AmountThisPeriod'];
             $lines[$line->LineNumber][$i]['EnableEmployeeTax'] = $lines[$line->LineNumber]['EnableEmployeeTax'];
             $lines[$line->LineNumber][$i]['SalaryID'] = $lines[$line->LineNumber]['SalaryID'];
@@ -352,6 +369,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
                 $postsub['salaryline_NumberInPeriod']    = $field[$i]['NumberInPeriod'];
                 $postsub['salaryline_Rate']              = $field[$i]['Rate'];
                 $postsub['salaryline_SalaryText']        = $field[$i]['SalaryText'];
+                $postsub['salaryline_SalaryDescription'] = $field[$i]['SalaryDescription'];
                 $postsub['salaryline_AmountThisPeriod']  = $field[$i]['AmountThisPeriod'];
                 $postsub['salaryline_EnableEmployeeTax'] = $field[$i]['EnableEmployeeTax'];
                 $postsub['salaryline_ProjectID']         = $field[$i]['ProjectID'];
@@ -378,6 +396,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $postsub['salaryline_NumberInPeriod']    = $lines[$linenum]['NumberInPeriod'];
             $postsub['salaryline_Rate']              = $lines[$linenum]['Rate'];
             $postsub['salaryline_SalaryText']        = $lines[$linenum]['SalaryText'];
+            $postsub['salaryline_SalaryDescription'] = $lines[$linenum]['SalaryDescription'];
             $postsub['salaryline_AmountThisPeriod']  = $lines[$linenum]['AmountThisPeriod'];
             $postsub['salaryline_EnableEmployeeTax'] = $lines[$linenum]['EnableEmployeeTax'];
             $postsub['salaryline_ProjectID']         = $lines[$linenum]['ProjectID'];
@@ -549,7 +568,21 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
     // set who updated and when if anything changed
     $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
     $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
+
+    // To show history of changed salaries on altinn salary page
+    $update_query = "UPDATE
+      altinnReport1salary AS ars
+    JOIN
+      altinnReport1 AS ar
+      ON ars.AltinnReport1ID = ar.AltinnReport1ID
+    SET
+      Changed = '1'
+    WHERE
+      ReplacedByMeldindsID IS NULL AND
+      SalaryId = '".$SalaryID."';";
+    $_lib['db']->db_query($update_query);
   }
+
   // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
   if ($_lib['input']->getProperty('action_salary_new')) {
     $_POST['SalaryID'] = $SalaryID;
@@ -842,6 +875,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             $fields['salaryconfline_LineNumber']            = $row['LineNumber'];
             $fields['salaryconfline_Active']                = $row['Active'];
             $fields['salaryconfline_SalaryText']            = $row['SalaryText'];
+            $fields['salaryconfline_SalaryDescription']     = $row['SalaryDescription'];
             $fields['salaryconfline_NumberInPeriod']        = $row['NumberInPeriod'];
             $fields['salaryconfline_Rate']                  = $row['Rate'];
             $fields['salaryconfline_AmountThisPeriod']      = $row['AmountThisPeriod'];
@@ -859,7 +893,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             #print "Lagt til linje nr ".$SalaryConfID."<br>\n";
         }
         else {
-          $sql_update = "UPDATE salaryconfline SET SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
+          $sql_update = "UPDATE salaryconfline SET SalaryDescription ='" . $row['SalaryDescription'] . "', SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
           $_lib['db']->db_update($sql_update);
         }
     }
@@ -896,11 +930,11 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
       $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
       if (!$exists) {
         #print "Lager ny linje";
-        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] ."');";
+        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText, SalaryDescription) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] . "', '". $row['SalaryDescription'] ."');";
         #print "$sql_insert<br>\n";
         $_lib['db']->db_update($sql_insert);
       }
-      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
+      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "', SalaryDescription='" . $row['SalaryDescription'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
       #print "$sql_update<br>\n";
       $_lib['db']->db_update($sql_update);
     }
