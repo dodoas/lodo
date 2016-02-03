@@ -460,8 +460,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ReceiptTypeName']   = $_result->ReceiptTypeName;
 
   for ($i=0; $i < count($_result->References->Reference); $i++) {
-    $element = $_result->GetReceiptBasicV2Result->References->Reference[$i];
-    $values['res_'.$element->ReferenceType] = $element->ReferenceValue;
+    $element = $_result->References->Reference[$i];
+    $values['res_'.$element->ReferenceTypeName] = $element->ReferenceValue;
   }
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
