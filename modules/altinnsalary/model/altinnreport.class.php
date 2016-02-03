@@ -97,8 +97,6 @@ class altinn_report {
     $leveranse['opplysningspliktig'] = array();
     $leveranse['opplysningspliktig']['norskIdentifikator'] = $org_number;
 
-    // used for arbeidsgiveravgift node
-    $loennOgGodtgjoerelse = array();
     // beregningskodeForArbeidsgiveravgift = calculation code for arbeidsgiveravgift
     $code_for_tax_calculation = $_lib['sess']->get_companydef('CalculationCodeForTax');
     // Error is: Code for tax calculation not set on company
@@ -112,6 +110,8 @@ class altinn_report {
     self::checkIfEmpty($this->salaries, 'Det er ingen l&oslash;nnslipper  i perioden');
     foreach($this->salaries as $key_subcompany => $salaries) {
       $virksomhet = array();
+      // used for arbeidsgiveravgift node
+      $loennOgGodtgjoerelse = array();
       foreach($this->employees as $key_employee => $employee) {
         // if there is no salaries for current subcompany and current employee, skip over
         // it so we do not try to loop over a null value
