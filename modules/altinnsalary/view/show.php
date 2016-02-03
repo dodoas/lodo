@@ -104,7 +104,7 @@ print $_lib['sess']->doctype ?>
           $altinnFile = new altinn_file($row->Folder);
           $doc = new DOMDocument();
           $doc->formatOutput = true;
-          $doc->loadXML($altinnFile->readFile("/A-melding.xml"));
+          $doc->loadXML($altinnFile->readFile("req_".$row->AltinnReport1ID.".xml"));
           print $doc->saveXML();
         ?></textarea>
       </td>

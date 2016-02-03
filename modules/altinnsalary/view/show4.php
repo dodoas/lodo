@@ -201,7 +201,7 @@ print $_lib['sess']->doctype ?>
           $altinnFile = new altinn_file($row->Folder);
           $doc = new DOMDocument();
           $doc->formatOutput = true;
-          $doc->loadXML($altinnFile->readFile("/tilbakemelding.xml"));
+          $doc->loadXML($altinnFile->readFile("tilbakemelding" . $row->AltinnReport4ID . ".xml"));
           print $doc->saveXML();
         ?></textarea>
       </td>

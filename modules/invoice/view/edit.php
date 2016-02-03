@@ -74,7 +74,7 @@ $tabindex = 1;
         <td><b>Avsender</b></td>
         <td><? print $row->SName ?></td>
         <td><b>Mottaker</b></td>
-        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$InvoiceID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer), 'tabindex' => $tabindex++)) ?></td>
+        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$InvoiceID, 'value'=>$row->CustomerAccountPlanID, 'type' => array(0 => customer), 'tabindex' => $tabindex++, 'class' => 'combobox', 'onlyonce'=> true)) ?></td>
     </tr>
     <tr>
         <td>Adresse</a></td>
@@ -167,7 +167,7 @@ $tabindex = 1;
     </tr>
     <tr>
         <td colspan="2"></td>
-        <td>By</td>
+        <td>Poststed</td>
         <td><? print $_lib['form3']->text(array('field'=>'DCity', 'value'=>$row->DCity, 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
     </tr>
     <tr>
