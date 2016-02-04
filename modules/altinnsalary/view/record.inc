@@ -25,6 +25,11 @@ class LocalSoapClient extends SoapClient {
   }
 }
 
+// redirect back to lodo.main page if no access to altinn salary
+if(!$_lib['sess']->get_person('AltinnSalaryAccess')) {
+  header('Location: ' . $_lib['sess']->dispatchs . "t=lodo.main");
+  die();
+}
 if (isset($_POST['use_salary'])) {
   $salary_ids = array();
   foreach($_POST['use_salary'] as $salary_id => $selected) {
@@ -117,7 +122,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $message = 'No salaries were selected.';
     if (isset($_REQUEST['altinnReport1_periode'])) $periode = '&periode=' . $_REQUEST['altinnReport1_periode'];
     else $periode = '';
-    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_slaries=show&message=" . $message . $periode);
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_salaries=show&message=" . $message . $periode);
   }
 
   // If you didn't select a period, don't send.
@@ -242,7 +247,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $altinnReport1ID = $row->AltinnReport1ID;
 
       // Save which salaries have been sent in the report and notify
-      if ($report->saveSalaryReportLinks($altinnReport1ID)) $_lib['message']->add('Report sent');
+      if ($report->saveSalaryReportLinks($altinnReport1ID)) $_lib['message']->add('Rapport sendt');
 
       // Save xml we sent
       $altinnFile = new altinn_file($values['Folder']);
@@ -469,8 +474,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ReceiptTypeName']   = $_result->ReceiptTypeName;
 
   for ($i=0; $i < count($_result->References->Reference); $i++) {
-    $element = $_result->GetReceiptBasicV2Result->References->Reference[$i];
-    $values['res_'.$element->ReferenceType] = $element->ReferenceValue;
+    $element = $_result->References->Reference[$i];
+    $values['res_'.$element->ReferenceTypeName] = $element->ReferenceValue;
   }
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
@@ -527,7 +532,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 } elseif($_lib['input']->getProperty('action_confirm_password')) {
   // save all info for altinn userpassord in the session
   $_SESSION['altinn_password']['expires_at'] = strftime('%F %T', time() + 60*30);
-} elseif ($_lib['input']->getProperty('action_show_slaries')) {
+} elseif ($_lib['input']->getProperty('action_show_salaries')) {
   $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
                      FROM salary s, accountplan a
                      WHERE s.AccountPlanID = a.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%'

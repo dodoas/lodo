@@ -13,7 +13,7 @@ print $_lib['sess']->doctype
 <? includeinc('left') ?>
 <? print $_lib['message']->get() ?>
 
-<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist">Send en ny rapport</a>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist&action_show_salaries=show">Send en ny rapport</a>
 
 <br/><br/>
 

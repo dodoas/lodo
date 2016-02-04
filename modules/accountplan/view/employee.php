@@ -130,7 +130,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Land</td>
     <td></td>
-    <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplan', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'required'=>false)); ?></td>
+    <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplan', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'class'=> 'lodoreqfelt')); ?></td>
     <td colspan="2">&nbsp</td>
   </tr>
   <tr>
@@ -179,7 +179,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
     <td>Kredittid oppdatert:</td>
     <td>
-      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'CreditDaysUpdatedAt', 'value'=>$account->CreditDaysUpdatedAt)) ?>
+      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'CreditDaysUpdatedAt', 'value'=>$account->CreditDaysUpdatedAt, 'class'=>'lodoreqfelt')) ?>
     </td>
   </tr>
   <tr>
@@ -220,7 +220,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SocietyNumber', 'value'=>$account->SocietyNumber, 'class'=>'lodoreqfelt')) ?></td>
     <td>Ansatt ved</td>
-    <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table, 'field'=>'SubcompanyID', 'value'=>$account->SubcompanyID)); ?></td>
+    <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table, 'field'=>'SubcompanyID', 'value'=>$account->SubcompanyID, 'class'=> 'lodoreqfelt')); ?></td>
   </tr>
   <tr>
     <td class="menu">Kommune</td>
@@ -250,7 +250,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent, 'class'=>'lodoreqfelt')) ?></td>
     <td>
       Stillingsprosent oppdatert:
-      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkPercentUpdatedAt', 'value'=>$account->WorkPercentUpdatedAt)) ?>
+      <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkPercentUpdatedAt', 'value'=>$account->WorkPercentUpdatedAt, 'class'=>'lodoreqfelt')) ?>
     </td>
     <td><?
 
@@ -268,34 +268,34 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td class="menu">Skifttype:</td>
     <td></td>
     <td>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType, 'class'=> 'lodoreqfelt')); ?>
     </td>
     <td>Timer hver uke:</td>
     <td>
-      <input type="text" name="accountplan.Workmeasurement" value="<?= $account->Workmeasurement ?>" />
+      <input class="lodoreqfelt" type="text" name="accountplan.Workmeasurement" value="<?= $account->Workmeasurement ?>" />
     </td>
   </tr>
   <tr>
     <td class='menu'>Arbeidstid:</td>
     <td></td>
     <td>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'accountplan', 'field'=>'WorkTimeScheme', 'value'=>$account->WorkTimeScheme, 'class'=> 'lodoreqfelt')); ?>
     </td>
 
     <td>Ansettelsestype:</td>
     <td>
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment, 'width' => 32)); ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'accountplan', 'field'=>'TypeOfEmployment', 'value'=>$account->TypeOfEmployment, 'width' => 32, 'class'=> 'lodoreqfelt')); ?>
     </td>
   </tr>
   <tr>
     <td class='menu'>Yrke</td>
     <td></td>
     <td>
-      <? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table, 'field'=>'OccupationID', 'value'=>$account->OccupationID)); ?>
+      <? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table, 'field'=>'OccupationID', 'value'=>$account->OccupationID, 'class'=> 'lodoreqfelt')); ?>
     </td>
     <td>Samme posisjon siden:</td>
     <td>
-      <? print $_lib['form3']->date(array('table'=>'accountplan', 'field'=>'inCurrentPositionSince', 'value'=>$account->inCurrentPositionSince)) ?>
+      <? print $_lib['form3']->date(array('table'=>'accountplan', 'field'=>'inCurrentPositionSince', 'value'=>$account->inCurrentPositionSince, 'class'=> 'lodoreqfelt')) ?>
     </td>
   </tr>
 

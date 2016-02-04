@@ -4,7 +4,7 @@ class altinn_file {
     global $_SETUP;
 
     // TODO change this path to somewhere outside repo
-    $this->folderPath = $_SETUP['HOME_DIR']."/altinn_xml/".$_SETUP['DB_NAME'].'/'.$date.'/';
+    $this->folderPath = $_SETUP['HOME_DIR']."/altinn_xml/".$_SESSION['DB_NAME'].'/'.$date.'/';
   }
 
   function save($content, $id) {
@@ -39,9 +39,13 @@ class altinn_file {
   }
 
   function readFile($file_name){
-    $file = fopen($this->folderPath . $file_name, "r");
-    $content = fread($file,filesize($this->folderPath.$file_name));
-    fclose($file);
+    // the @ is there to suppress the warning message if the file can't be opened
+    $file = @fopen($this->folderPath . $file_name, "r");
+    if (!empty($file)) {
+      $content = fread($file,filesize($this->folderPath.$file_name));
+      fclose($file);
+    }
+    else $content = false;
     return $content;
   }
 

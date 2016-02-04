@@ -108,8 +108,7 @@ print $_lib['sess']->doctype ?>
 			  <a href="<? print $_lib['sess']->dispatch ?>t=report.list">Rapporter</a>
 			  <!-- <a href="<? print $_lib['sess']->dispatch ?>t=altinn.index">AltInn</a> -->
         <?
-        if($_lib['sess']->get_person('AccessLevel') > 3)
-        {
+        if($_lib['sess']->get_person('AltinnSalaryAccess')) {
         ?>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list">Altinn L&oslash;nnslipper</a>
         <?

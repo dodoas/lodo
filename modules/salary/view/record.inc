@@ -952,4 +952,25 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
         
     } // else TODO later: handle illegal access attempt
 }
+elseif($_lib['input']->getProperty('action_salary_update_extra')) {
+    // update salary fields with employee information
+    $query_employee_info = "SELECT a.*
+                            FROM accountplan a JOIN salary s ON s.AccountPlanID = a.AccountPlanID
+                            WHERE s.SalaryID='$SalaryID'";
+    $employee_info = $_lib['storage']->get_row(array('query' => $query_employee_info));
+    $query_update_salary_with_employee_info = sprintf("UPDATE salary SET
+                                                       DomesticBankAccount = '%s', KommuneID = '%s', ShiftType = '%s',
+                                                       WorkTimeScheme = '%s', TypeOfEmployment = '%s', OccupationID = '%s',
+                                                       SubcompanyID = '%s'
+                                                       WHERE SalaryID = %d;",
+                                                       $employee_info->DomesticBankAccount,
+                                                       $employee_info->KommuneID,
+                                                       $employee_info->ShiftType,
+                                                       $employee_info->WorkTimeScheme,
+                                                       $employee_info->TypeOfEmployment,
+                                                       $employee_info->OccupationID,
+                                                       $employee_info->SubcompanyID,
+                                                       $SalaryID);
+    $_lib['db']->db_query($query_update_salary_with_employee_info);
+}
 ?>
