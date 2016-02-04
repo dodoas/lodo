@@ -324,6 +324,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
   }
   catch (SoapFault $sf) {
+    unset($_SESSION['altinn_pin']);
+    unset($_SESSION['altinn_password']);
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->detail->AltinnFault->AltinnErrorMessage." ".$sf->detail->AltinnFault->AltinnExtendedErrorMessage);
     die();
   }
@@ -375,6 +377,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $result = $sc->__soapCall('GetCorrespondenceForEndUserSystemsBasicV2', array('parameters' => $params));
   }
   catch (SoapFault $sf) {
+    unset($_SESSION['altinn_pin']);
+    unset($_SESSION['altinn_password']);
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->detail->AltinnFault->AltinnErrorMessage." ".$sf->detail->AltinnFault->AltinnExtendedErrorMessage);
     die();
   }
@@ -459,6 +463,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $result = $sc->__soapCall('ArchiveCorrespondenceForEndUserSystemBasic', array('parameters' => $params));
   }
   catch (SoapFault $sf) {
+    unset($_SESSION['altinn_pin']);
+    unset($_SESSION['altinn_password']);
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->detail->AltinnFault->AltinnErrorMessage." ".$sf->detail->AltinnFault->AltinnExtendedErrorMessage);
     die();
   }
@@ -502,6 +508,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $result = $sc->__soapCall('GetAuthenticationChallenge', array('parameters' => $params));
   }
   catch (SoapFault $sf) {
+    unset($_SESSION['altinn_pin']);
+    unset($_SESSION['altinn_password']);
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=".$sf->detail->AltinnFault->AltinnErrorMessage." ".$sf->detail->AltinnFault->AltinnExtendedErrorMessage);
     die();
   }
