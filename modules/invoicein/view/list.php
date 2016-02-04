@@ -119,7 +119,7 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>&Aring;rsaks informasjon</th>
+    <th>&Aring;rsaksinformasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">Betaling</th>
     <th class="number">KID</th>
@@ -135,7 +135,7 @@ foreach($invoicein as $InvoiceO) {
     // set InvoiceO->FirmaID
     $firma_id_query = "SELECT aps.SchemeValue, fbs.SchemeType FROM accountplanscheme aps JOIN fakturabankscheme fbs ON aps.FakturabankSchemeID = fbs.FakturabankSchemeID WHERE AccountPlanID = '" . $InvoiceO->SupplierAccountPlanID . "' LIMIT 1";
     $firma_id = $_lib['storage']->get_row(array('query' => $firma_id_query));
-    if (!empty($firma_id->SchemeValue)) $InvoiceO->FirmaID = $firma_id->SchemeType . "(" . $firma_id->SchemeValue . ")";
+    if (!empty($firma_id->SchemeValue)) $InvoiceO->FirmaID = $firma_id->SchemeType . " " . $firma_id->SchemeValue;
     else $InvoiceO->FirmaID = "ikke funnet";
 
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
