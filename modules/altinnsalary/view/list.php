@@ -81,7 +81,7 @@ print $_lib['sess']->doctype
       </td>
       <td>
         <?
-          if ($so2row && !empty($so2row->res_ReceiversReference)) print 'Motatt med referanse ' . $so2row->res_ReceiversReference;
+          if ($so2row && !empty($so2row->res_ReceiversReference)) print 'Mottatt med referanse ' . $so2row->res_ReceiversReference;
           elseif (strstr($so2row->res_ReceiptStatus, 'OK')) print 'Prosseseres';
           else print $so2row->res_ReceiptStatus;
         ?>
@@ -109,7 +109,7 @@ print $_lib['sess']->doctype
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap4',
-            'value'=>'Helt tilbakemelding',
+            'value'=>'Hent tilbakemelding',
             'disabled' => $so2row->res_ReceiversReference ? false : true
             )) ?>
         </form>

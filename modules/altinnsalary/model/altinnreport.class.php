@@ -622,7 +622,7 @@ class altinn_report {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
         $this->salaries[(int)$salary->SubcompanyID][$salary->AccountPlanID][] = $salary;
         $this->employees[(int)$salary->SubcompanyID][$salary->AccountPlanID] = $this->employee_list[$salary->AccountPlanID];
-        $this->employee_ids[] = $salary->AccoutPlanID;
+        $this->employee_ids[] = $salary->AccountPlanID;
         self::fetchSalaryLines($salary);
       }
     }
