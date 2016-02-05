@@ -524,6 +524,7 @@ class altinn_report {
  */
   function saveEmployeeReportLinks($altinn_report_id) {
     global $_lib;
+    if (empty($this->employee_ids)) return false;
     $insert_query = 'INSERT INTO altinnReport1employee (AltinnReport1ID, AccountPlanID) VALUES ';
     foreach ($this->employee_ids as $employee_id) {
       $insert_query .= "('" . $altinn_report_id . "', '" . $employee_id . "'),";
@@ -621,6 +622,7 @@ class altinn_report {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
         $this->salaries[(int)$salary->SubcompanyID][$salary->AccountPlanID][] = $salary;
         $this->employees[(int)$salary->SubcompanyID][$salary->AccountPlanID] = $this->employee_list[$salary->AccountPlanID];
+        $this->employee_ids[] = $salary->AccoutPlanID;
         self::fetchSalaryLines($salary);
       }
     }
