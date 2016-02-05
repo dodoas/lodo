@@ -383,18 +383,22 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_ArchiveReference']         = $correspondence->ArchiveReference;
   $values['res_AuthenticatedUser']        = $correspondence->AuthenticatedUser;
   $values['res_CaseID']                   = $correspondence->CaseID;
-  $values['res_ConfirmationDate']         = $correspondence->ConfirmationDate;
+  if (empty($correspondence->ConfirmationDate))
+    $values['res_ConfirmationDate']       = $correspondence->ConfirmationDate;
   $values['res_CorrespondenceID']         = $correspondence->CorrespondenceID;
   $values['res_CorrespondenceName']       = $correspondence->CorrespondenceName;
-  $values['res_CorrespondenceStatus']     = $correspondence->CorrespondenceStatus;
-  $values['res_CorrespondenceSubject']    = $correspondence->CorrespondenceSubject;
+  if (empty($correspondence->CorrespondenceStatus))
+    $values['res_CorrespondenceStatus']   = $correspondence->CorrespondenceStatus;
+  if (empty($correspondence->CorrespondenceSubject))
+    $values['res_CorrespondenceSubject']  = $correspondence->CorrespondenceSubject;
   $values['res_CorrespondenceSummary']    = $correspondence->CorrespondenceSummary;
   $values['res_CorrespondenceTitle']      = $correspondence->CorrespondenceTitle;
   $values['res_CorrespondenceTxt']        = $correspondence->CorrespondenceTxt;
   $values['res_CustomMessageData']        = $correspondence->CustomMessageData;
   $values['res_DateSent']                 = $correspondence->DateSent;
   $values['res_Description']              = $correspondence->Description;
-  $values['res_DueDate']                  = $correspondence->DueDate;
+  if (empty($correspondence->DueDate))
+    $values['res_DueDate']                = $correspondence->DueDate;
   $values['res_ExternalSystemReference']  = $correspondence->ExternalSystemReference;
   $values['res_Header']                   = $correspondence->Header;
   $values['res_IsConfirmationNeeded']     = $correspondence->IsConfirmationNeeded;
@@ -409,7 +413,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $values['res_AttachmentName']           = $correspondenceAttachments->AttachmentBEV2->AttachmentName;
   $values['res_AttachmentTypeID']         = $correspondenceAttachments->AttachmentBEV2->AttachmentTypeID;
   $values['res_CreatedByUserID']          = $correspondenceAttachments->AttachmentBEV2->CreatedByUserID;
-  $values['res_CreatedDateTime']          = $correspondenceAttachments->AttachmentBEV2->CreatedDateTime;
+  if (empty($correspondence->DueDate))
+    $values['res_CreatedDateTime']        = $correspondenceAttachments->AttachmentBEV2->CreatedDateTime;
   $values['res_DestinationType']          = $correspondenceAttachments->AttachmentBEV2->DestinationType;
   $values['res_FileName']                 = $correspondenceAttachments->AttachmentBEV2->FileName;
   $values['res_IsAddedAfterFormFillin']   = $correspondenceAttachments->AttachmentBEV2->IsAddedAfterFormFillin;
