@@ -312,44 +312,71 @@ class altinn_report {
     // Error is: Employment type not set for salary L' . $salary->JournalID
     self::checkIfEmpty($salary->TypeOfEmployment, 'L&oslash;nnslipp: Mangler ansettelsestype p&aring; L' . $salary->JournalID);
     $arbeidsforhold['typeArbeidsforhold'] = $salary->TypeOfEmployment;
+
+    if (self::shouldWeHaveWorkPeriode($arbeidsforhold['typeArbeidsforhold'])){
     $work_start = $employee->WorkStart;
     // Error is: Employment date not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($work_start, 'Ansatt: Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
     // employment date
     $arbeidsforhold['startdato'] = strftime('%F', strtotime($work_start));
+    }
+
+    if (self::shouldWeHaveWorkmeasurement($arbeidsforhold['typeArbeidsforhold'])){
     // work measurement, ex. hours per week
     // Error is: Work measurement not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($employee->Workmeasurement, 'Ansatt: Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
     $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $employee->Workmeasurement;
+    }
+
+    if (self::shouldWeHaveWorkTimeScheme($arbeidsforhold['typeArbeidsforhold'])){
     // work measurement type
     // Error is: Work time scheme not set for salary L' . $salary->JournalID
     self::checkIfEmpty($salary->WorkTimeScheme, 'L&oslash;nnslipp: Mangler arbeidstid for L' . $salary->JournalID);
     $arbeidsforhold['avloenningstype'] =  $salary->WorkTimeScheme;
+    }
+
+    if (self::shouldWeHaveOccupation($arbeidsforhold['typeArbeidsforhold'])){
     // occupation, already checked above before query for occupation
     $arbeidsforhold['yrke'] = $occupation_code->YNr . $occupation_code->LNr;
+    }
+
+    if (self::shouldWeHaveShift($arbeidsforhold['typeArbeidsforhold'])){
     // work time scheme, ex. no shifts
     // Error is: Shift type not set for salary L' . $salary->JournalID
     self::checkIfEmpty($salary->ShiftType, 'L&oslash;nnslipp: Mangler skifttype L' . $salary->JournalID);
     $arbeidsforhold['arbeidstidsordning'] = $salary->ShiftType;
+    }
+
+    if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
     // employment percentage
     // Error is: Work percent not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($employee->WorkPercent, 'Ansatt: Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
     $arbeidsforhold['stillingsprosent'] = (int) $employee->WorkPercent;
+    }
+
+    if (self::shouldWeHaveCreditDaysUpdatedAt($arbeidsforhold['typeArbeidsforhold'])){
     // date of last change for payment date for salary
     $last_change_of_pay_date = $employee->CreditDaysUpdatedAt;
     // Error is: Last change of salary pay date not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($last_change_of_pay_date, 'Ansatt: Mangler kredittid oppdatert for ' . self::fullNameForErrorMessage($employee), 'date');
     $arbeidsforhold['sisteLoennsendringsdato'] = strftime('%F', strtotime($last_change_of_pay_date));
+    }
+
+    if (self::shouldWeHaveCurrentPositionSince($arbeidsforhold['typeArbeidsforhold'])){
     // date of last change for position in company
     $last_change_of_position_in_company = $employee->inCurrentPositionSince;
     // Error is: Last change of position in company date not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($last_change_of_position_in_company, 'Ansatt: Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
     $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
+    }
+
+    if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
     // date of last change for work percentage
     $last_change_of_work_percentage = $employee->WorkPercentUpdatedAt;
     // Error is: Last change of work percent date not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($last_change_of_work_percentage, 'Ansatt: Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
     $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
+    }
     return $arbeidsforhold;
   }
 
@@ -513,6 +540,120 @@ class altinn_report {
     while ($employee = $_lib['db']->db_fetch_object($result_employees)) {
       $this->employees[$employee->AccountPlanID] = $employee;
     }
+  }
+
+/* Helper function that determine if the should have WorkTimeScheme
+ * This should be used in node avloenningstype.
+ * return a boolean
+ */
+  function shouldWeHaveWorkTimeScheme($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+/* Helper function that determine if the should have Occupation
+ * This should be used in node yrke.
+ * return a boolean
+ */
+  function shouldWeHaveOccupation($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+/* Helper function that determine if the should have CreditDaysUpdatedAt
+ * This should be used in node sisteLoennsendringsdato.
+ * return a boolean
+ */
+  function shouldWeHaveCreditDaysUpdatedAt($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+/* Helper function that determine if the should have CurrentPositionSince
+ * This should be used in node loennsansiennitet.
+ * return a boolean
+ */
+  function shouldWeHaveCurrentPositionSince($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+/* Helper function that determine if the should have WorkPeriode
+ * This should be used in node startdato and sluttdato.
+ * return a boolean
+ */
+  function shouldWeHaveWorkPeriode($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+
+/* Helper function that determine if the should have Shift
+ * This should be used in node arbeidstidsordning.
+ * return a boolean
+ */
+  function shouldWeHaveShift($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+
+/* Helper function that determine if the should have Workmeasurement
+ * This should be used in node antallTimerPerUkeSomEnFullStillingTilsvarer.
+ * return a boolean
+ */
+  function shouldWeHaveWorkmeasurement($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
+  }
+
+/* Helper function that determine if the should have WorkPercent
+ * This should be used in node antallTimerPerUkeSomEnFullStillingTilsvarer.
+ * return a boolean
+ */
+  function shouldWeHaveWorkPercent($type) {
+    global $_lib;
+    switch ($type) {
+      case "pensjonOgAndreTyperYtelserUtenAnsettelsesforhold":
+        return false;
+        break;
+    }
+    return true;
   }
 
 /* Generate XML function creates an XML used for A02
