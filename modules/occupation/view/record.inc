@@ -37,7 +37,7 @@ elseif($_lib['input']->getProperty('action_occupation_import')) {
     $result = $_lib['db']->db_query($max_occupation_id);
     $maxID = (int) $_lib['db']->db_fetch_object($result)->maxID;
 
-    $exits_query  = "select OccupationID from $db_table where name like '%" . $selected_name . "%'";
+    $exits_query  = "select OccupationID from $db_table where name = '" . $selected_name . "'";
     $result = $_lib['db']->db_query($exits_query);
     if($_lib['db']->db_numrows($result) == 0) {
       $query  = "insert into occupation (OccupationID, YNr, LNr, Name,  active) values (". ($maxID+1) .", '". $selected_ynr ."', '". $selected_lnr ."', '". $selected_name ."', 1)";

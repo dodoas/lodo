@@ -35,8 +35,9 @@ print $_lib['message']->get();
 <form name="altinnsalary_send_report" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
 <table class="lodo_data">
 <thead>
-   <tr>
-     <th colspan="13">L&oslash;nnsutbetalinger
+  <tr>
+    <th colspan="13">L&oslash;nnsutbetalinger</th>
+  </tr>
   <tr>
     <th class="sub">Velg</th>
     <th class="sub">Nr</th>
@@ -130,9 +131,80 @@ if (!empty($errors)) {
 }
 else {
 ?>
-<h4>Ingen l&oslash;nnslipper funnet<h4>
+<h4>Ingen l&oslash;nnslipper funnet</h4>
 <?
 }
 ?>
+
+<table class="lodo_data">
+  <thead>
+    <tr>
+      <th colspan="4">Ansatte</th>
+    </tr>
+    <tr>
+      <th class="sub">ID</th>
+      <th class="sub">Navn</th>
+      <th class="sub">Rapportert i denne perioden</th>
+      <th class="sub"></th>
+    </tr>
+  </thead>
+  <tbody>
+<?
+  $report = new altinn_report($_periode);
+  // all employees employed in this period
+  $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
+  $result_employees = $_lib['db']->db_query($query_employees);
+  while($employee = $_lib['db']->db_fetch_object($result_employees)) {
+?>
+    <tr>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
+<?
+  // last report for this period that included this employee
+  $query_altin_employee = "SELECT ar1e.*
+                           FROM altinnReport1employee ar1e JOIN
+                                altinnReport1 ar1 ON ar1e.AltinnReport1ID = ar1.AltinnReport1ID
+                          WHERE ar1.Period = '" . $_periode . "' AND ar1e.AccountPlanID = " . $employee->AccountPlanID . "
+                          ORDER BY ar1.AltinnReport1ID";
+  $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
+  $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
+?>
+      <td>
+        <?
+          if ($employee_reported) {
+            $list_of_reports = "Sendt i rapporter ";
+            while($altinn_employee = $_lib['db']->db_fetch_object($result_altin_employee)) {
+              $list_of_reports .= "<a href='" . $_lib['sess']->dispatch . "t=altinnsalary.show&AltinnReport1ID=" . $altinn_employee->AltinnReport1ID . "'>" . $altinn_employee->AltinnReport1ID . "</a>, ";
+            }
+            $list_of_reports = substr($list_of_reports, 0, -2);
+            print $list_of_reports;
+          } else {
+            print "Ikke rapportert";
+          }
+        ?>
+      </td>
+      <td>
+        <?
+          if (!$employee_reported) {
+        ?>
+        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
+          <?
+            print $_lib['form3']->hidden(array('name'=>'altinnReport1_periode', 'value'=>$_periode));
+            print $_lib['form3']->hidden(array('name'=>'only_register_employee', 'value'=>1));
+            print $_lib['form3']->hidden(array('name'=>'use_employee['.$employee->AccountPlanID.']', 'value'=>1));
+            print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Register ansatte i Altinn'));
+          ?>
+        </form>
+        <?
+          }
+        ?>
+      </td>
+    </tr>
+<?
+  }
+?>
+  </tbody>
+</table>
+
 </body>
 </html>

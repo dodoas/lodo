@@ -270,7 +270,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td>
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> 'accountplan', 'field'=>'ShiftType', 'value'=>$account->ShiftType, 'class'=> 'lodoreqfelt')); ?>
     </td>
-    <td>Timer hver uke:</td>
+    <td>Timer hver uke ved full stilling:</td>
     <td>
       <input class="lodoreqfelt" type="text" name="accountplan.Workmeasurement" value="<?= $account->Workmeasurement ?>" />
     </td>

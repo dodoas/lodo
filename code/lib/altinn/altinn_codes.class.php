@@ -10,7 +10,7 @@ $_ALTINN['TypeOfEmploymentTypes'] = array(
     'ordinaertArbeidsforhold'=>'Ordin&aelig;rt',
     'maritimtArbeidsforhold'=>'Maritimt',
     'frilanserOppdragstakerHonorarPersonerMm'=>'Frilanser',
-    'pensjonOgAndreTyperYtelserUtenAnsettelsesforhold'=>'Pensjon',
+    'pensjonOgAndreTyperYtelserUtenAnsettelsesforhold'=>'Pensjon og andre typer ytelser uten ansettelsesforhold',
     'forenkletOppgjoersordning'=>'Forenklet Oppgj&oslash;rsordning'
 );
 $_ALTINN['WorkTimeSchemeTypes'] = array(

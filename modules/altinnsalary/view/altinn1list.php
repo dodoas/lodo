@@ -43,7 +43,7 @@ print $_lib['sess']->doctype ?>
   <? print $_lib['form3']->submit(array('name'=>'action_expire_password', 'value'=>'Expire saved altinn password')) ?>
 </form>
 <br /> <br />
-<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
+<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list&only_register_employee=1" method="post">
     Periode:
     <? print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'periode', 'value' => $_REQUEST['altinnReport1_periode'])); ?>
     <? print $_lib['form3']->submit(array('name'=>'action_soap1_show_salaries', 'value'=>'show salares')); ?>
@@ -174,6 +174,8 @@ if (isset($xml_generated)) {
 <?
 echo "Salaries array:\n";
 print_r($report->salaries);
+echo "Employees array:\n";
+print_r($report->employees);
 echo "Message array:\n";
 print_r($report->melding);
 echo $xml;
