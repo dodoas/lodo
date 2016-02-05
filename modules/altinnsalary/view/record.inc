@@ -144,12 +144,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
     else {
       $xml_generated = true;
 
-      // here logic should be use old MeldingsID as new erstatterMeldingsId
-      $use_erstatterMeldingsId = '';
       if (isset($_POST['altinnReport1_MeldingsId'])) {
-        $use_erstatterMeldingsId = '<erstatterMeldingsId>'.$_POST['altinnReport1_MeldingsId'].'</ErstatterMeldingsId>';
         // update the old altinnReport one
-
         $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
         $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
         if($record_exist) {
@@ -190,7 +186,6 @@ if ($_lib['input']->getProperty('action_soap1')) {
                     <InnsendtInformasjon>
                       <innsending>
                         <meldingsId>'.$report->meldingsId.'</meldingsId>
-                        '.$use_erstatterMeldingsId.'
                         <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
                       </innsending>
                     </InnsendtInformasjon>
