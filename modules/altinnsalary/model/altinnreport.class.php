@@ -524,7 +524,7 @@ class altinn_report {
  */
   function saveEmployeeReportLinks($altinn_report_id) {
     global $_lib;
-    $insert_query = 'INSERT INTO altinnReport1salary (AltinnReport1ID, AccountPlanID) VALUES ';
+    $insert_query = 'INSERT INTO altinnReport1employee (AltinnReport1ID, AccountPlanID) VALUES ';
     foreach ($this->employee_ids as $employee_id) {
       $insert_query .= "('" . $altinn_report_id . "', '" . $employee_id . "'),";
     }
@@ -537,7 +537,7 @@ class altinn_report {
  * the employees employed for the set period
  */
   function queryStringForCurrentlyEmployedEmployees() {
-    // only the ones whose salaries have the altinn/actual pay date set and the 
+    // only the ones whose salaries have the altinn/actual pay date set and the
     // ones that are still employed
     $query_employees = "SELECT ap.*
                         FROM accountplan ap
@@ -555,7 +555,7 @@ class altinn_report {
  * the included employees
  */
   function queryStringForIncludedEmployees() {
-    // only the ones whose salaries have the altinn/actual pay date set and the 
+    // only the ones whose salaries have the altinn/actual pay date set and the
     // ones that are still employed
     $query_employees = "SELECT ap.*
                         FROM accountplan ap
