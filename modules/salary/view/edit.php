@@ -220,18 +220,16 @@ $formname = "salaryUpdate";
     <th class="salaryhead">Tabelltrekk</th>
     <th class="salaryhead">Prosenttrekk</th>
     <th class="salaryhead">Skatteetaten</th>
-    <th></th>
     <th class="salaryhead">Skifttype</th>
     <th class="salaryhead">Arbeidstid</th>
-    <th class="salaryhead">Ansettelsestype</th>
-    <th class="salaryhead" colspan="2">Yrke</th>
+    <th class="salaryhead" colspan="3">Ansettelsestype</th>
+    <th class="salaryhead">Yrke</th>
     <th class="salaryhead">Ansatt ved</th>
   </tr>
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
-    <th class="sub"></th>
     <th class="sub">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 40)); ?>
     </th>
@@ -239,10 +237,10 @@ $formname = "salaryUpdate";
     <th class="sub">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'salary', 'field'=>'WorkTimeScheme', 'pk'=>$head->SalaryID, 'value'=>$head->WorkTimeScheme, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
-    <th class="sub">
+    <th class="sub" colspan="3">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
-    <th class="sub" colspan="2">
+    <th class="sub">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
     <th class="sub">
