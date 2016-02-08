@@ -66,7 +66,7 @@ class altinn_report {
 
 /* Helper function to check if the variable is empty
  * calls a sub function for for string, date, amount/number,
- * org_number check based on the type
+ * org_number, name check based on the type
  */
   function checkIfEmpty($field, $error_message, $type = 'string') {
     if ($type == 'string') $is_empty = empty($field);
@@ -74,6 +74,7 @@ class altinn_report {
     elseif ($type == 'number') $is_empty = empty($field) || ($field == 0);
     elseif ($type == 'percent') $is_empty = is_null($field);
     elseif ($type == 'org_number') $is_empty = !preg_match('/^([0-9]{9})$/', $field);
+    elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåÆØÅ\s]+)$/'), utf8_encode($field));
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -240,6 +241,8 @@ class altinn_report {
     $full_name = self::fullName($employee);
     // Error is: First and/or last name not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($full_name, 'Ansatt: Mangler fornavn og/eller etternavn for ' . self::fullNameForErrorMessage($employee));
+    // Error is: First and/or last name contains an unsupported character for employee ' . self::fullNameForErrorMessage($employee)
+    self::checkIfEmpty($full_name, 'Ansatt: Fornavn og/eller etternavn inneholder en ust&oslash;ttet bokstav for ' . self::fullNameForErrorMessage($employee), 'name');
     $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['navn'] = $full_name;
     $birth_date = $employee->BirthDate;
     // Error is: Birth date not set for employee ' . self::fullNameForErrorMessage($employee)
@@ -771,15 +774,16 @@ class altinn_report {
 /* Generate XML function creates an XML used for A02
  */
   function generateXML($args = array()) {
+    global $_SETUP;
     self::populateReportArray();
     if (empty($this->errors)) {
       $xml_data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0"></melding>');
       self::generateXMLFromArray($this->melding, $xml_data);
       $xml = $xml_data->saveXML();
       // use DOMDocument to format XML properly
-      $doc = new DOMDocument();
+      $doc = new DOMDocument('1.0', 'utf-8');
       $doc->formatOutput = true;
-      $doc->loadXML($xml);
+      $doc->loadXML(utf8_encode($xml));
       return $doc->saveXML();
     }
     else return 'Error!';

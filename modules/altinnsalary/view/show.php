@@ -102,7 +102,7 @@ print $_lib['sess']->doctype ?>
       <td>
         <textarea rows="50" cols="130"><?
           $altinnFile = new altinn_file($row->Folder);
-          $doc = new DOMDocument();
+          $doc = new DOMDocument('1.0', 'utf-8');
           $doc->formatOutput = true;
           $fileContents = $altinnFile->readFile("req_".$row->AltinnReport1ID.".xml");
           if ($fileContents) {
