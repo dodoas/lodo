@@ -776,7 +776,6 @@ class altinn_report {
 /* Generate XML function creates an XML used for A02
  */
   function generateXML($args = array()) {
-    global $_SETUP;
     self::populateReportArray();
     if (empty($this->errors)) {
       $xml_data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><melding xmlns="urn:ske:fastsetting:innsamling:a-meldingen:v2_0"></melding>');
