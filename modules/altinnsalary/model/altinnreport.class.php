@@ -635,7 +635,10 @@ class altinn_report {
     global $_lib;
     $query_salary_lines = "SELECT sl.*
                            FROM salaryline sl
-                           WHERE sl.SalaryID = " . $salary->SalaryID;
+                           WHERE sl.SalaryID = " . $salary->SalaryID .
+                           " AND sl.SendToAltinn = 1";
+    // only select lines we should send to altinn
+
     $result_salary_lines  = $_lib['db']->db_query($query_salary_lines);
     while ($salary_line = $_lib['db']->db_fetch_object($result_salary_lines)) {
       $this->salary_lines[$salary->SalaryID][] = $salary_line;
