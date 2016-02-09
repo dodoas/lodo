@@ -252,9 +252,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $altinnReport1ID = $row->AltinnReport1ID;
 
       // Save which salaries have been sent and which employees have been included in the report and notify
-      if ($report->saveSalaryReportLinks($altinnReport1ID) || $report->saveEmployeeReportLinks($altinnReport1ID)) {
-        $_lib['message']->add('Rapport sendt');
-      }
+      $report->saveSalaryReportLinks($altinnReport1ID);
+      $report->saveEmployeeReportLinks($altinnReport1ID);
+      $_lib['message']->add('Rapport sendt');
 
       // Save xml we sent
       $altinnFile = new altinn_file($values['Folder']);

@@ -60,7 +60,7 @@ print $_lib['message']->get();
 $errors = array();
 while($row = $_lib['db']->db_fetch_object($result_salary))
 {
-    $report_for_salary = new altinn_report($row->Period, array($row->SalaryID), null, false);
+    $report_for_salary = new altinn_report($_periode, array($row->SalaryID), array(), false);
     $report_for_salary->populateReportArray();
     if (empty($report_for_salary->errors)) $is_ready_for_altinn = 'Klar';
     else {
@@ -113,7 +113,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   </thead>
   <tbody>
 <?
-  $report = new altinn_report($_periode);
+  $report = new altinn_report($_periode, null, array());
   // all employees employed in this period
   $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);

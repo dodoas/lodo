@@ -619,7 +619,11 @@ class altinn_report {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
         $this->salaries[(int)$salary->SubcompanyID][$salary->AccountPlanID][] = $salary;
         $this->employees_subcompany[$salary->AccountPlanID] = (int)$salary->SubcompanyID;
-        $this->employee_ids[] = $salary->AccountPlanID;
+
+        // array_search will return the index so if it is 0 it should still be true
+        if (array_search((int) $salary->AccountPlanID, $this->employee_ids) === false){
+          $this->employee_ids[] = (int) $salary->AccountPlanID;
+        }
         self::fetchSalaryLines($salary);
       }
     }
