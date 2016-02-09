@@ -9,7 +9,6 @@ class altinn_report {
   public $salary_ids             = array();
   public $salary_lines           = array();
   public $employees              = array();
-  public $employee_list          = array();
   public $employee_ids           = array();
   public $only_register_employee = false;
   public $period                 = '';
@@ -30,12 +29,12 @@ class altinn_report {
 
     // TODO: Use and update initialize method and remove this below
     $this->only_register_employee = $only_register_employee;
-    // fetch the employees
-    if (!$employee_ids) self::fetchEmployees();
-    else self::fetchEmployees($employee_ids);
+    $this->salary_ids = $salary_ids;
+    $this->employee_ids = $employee_ids;
     // fetch the salaries
-    if (!$salary_ids) self::fetchSalaries();
-    else self::fetchSalaries($salary_ids);
+    self::fetchSalaries($this->salary_ids);
+    // fetch the employees
+    self::fetchEmployees($this->employee_ids);
   }
 
 /* Helper function to initialize all the needed parameters
@@ -563,9 +562,7 @@ class altinn_report {
     // ones that are still employed
     $query_employees = "SELECT ap.*
                         FROM accountplan ap
-                        WHERE ((WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
-                        (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
-                        AccountplanType LIKE '%employee%')";
+                        WHERE AccountplanType LIKE '%employee%'";
     // add for selected employee ids also
     if ($this->employee_ids) {
       $query_employees .= ' AND ap.AccountPlanID IN (';
@@ -574,21 +571,6 @@ class altinn_report {
       }
       $query_employees = substr($query_employees, 0, -2);
       $query_employees .= ')';
-    }
-    if (!$this->only_register_employee) {
-      $query_employees .= "UNION
-                          SELECT ap.*
-                          FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
-                          WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
-      // add for selected salary ids also
-      if ($this->salary_ids) {
-        $query_employees .= ' AND s.SalaryID IN (';
-        foreach($this->salary_ids as $salary_id) {
-          $query_employees .= (string) $salary_id . ', ';
-        }
-        $query_employees = substr($query_employees, 0, -2);
-        $query_employees .= ')';
-      }
     }
     return $query_employees;
   }
@@ -616,15 +598,14 @@ class altinn_report {
 /* Helper function that populates the salaries array
  * for the selected period
  */
-  function fetchSalaries($salary_ids = null) {
+  function fetchSalaries() {
     global $_lib;
-    if (!empty($salary_ids)) $this->salary_ids = $salary_ids;
     $query_salaries = self::queryStringForSelectedSalaries();
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     if (!$this->only_register_employee) {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
         $this->salaries[(int)$salary->SubcompanyID][$salary->AccountPlanID][] = $salary;
-        $this->employees[(int)$salary->SubcompanyID][$salary->AccountPlanID] = $this->employee_list[$salary->AccountPlanID];
+        $this->employees_subcompany[$salary->AccountPlanID] = (int)$salary->SubcompanyID;
         $this->employee_ids[] = $salary->AccountPlanID;
         self::fetchSalaryLines($salary);
       }
@@ -647,15 +628,18 @@ class altinn_report {
 
 /* Helper function that populates the employees array
  */
-  function fetchEmployees($employee_ids = null) {
+  function fetchEmployees() {
     global $_lib;
-    if (!empty($employee_ids)) $this->employee_ids = $employee_ids;
     // only the ones whose salaries have the altinn/actual pay date set
     $query_employees = self::queryStringForIncludedEmployees();
     $result_employees  = $_lib['db']->db_query($query_employees);
     while ($employee = $_lib['db']->db_fetch_object($result_employees)) {
-      $this->employee_list[$employee->AccountPlanID] = $employee;
-      $this->employees[$employee->SubcompanyID][$employee->AccountPlanID] = $employee;
+      if (isset($this->employees_subcompany[$employee->AccountPlanID])) {
+        $subcompany_id = $this->employees_subcompany[$employee->AccountPlanID];
+      } else {
+        $subcompany_id = $employee->SubcompanyID;
+      }
+      $this->employees[$subcompany_id][$employee->AccountPlanID] = $employee;
     }
   }
 
