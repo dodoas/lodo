@@ -177,7 +177,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 <br/>
   <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
 <?
-  print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send report'));
+  print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send rapport'));
 ?>
 
 <br/><br/>

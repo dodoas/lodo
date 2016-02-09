@@ -498,7 +498,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
 
-  $_lib['message']->add('Report Archived');
+  $_lib['message']->add('Rapport arkivert');
 
 } elseif($_lib['input']->getProperty('action_generate_xml_report')) {
   $period = $_REQUEST['altinnReport1_periode'];

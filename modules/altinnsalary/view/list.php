@@ -24,6 +24,7 @@ print $_lib['sess']->doctype
       <td class="menu">Periode</td>
       <td class="menu">Sent kl</td>
       <td class="menu">L&oslash;nnslipper</td>
+      <td class="menu">Ansatte</td>
       <td class="menu">Arkivert kl</td>
       <td class="menu">Status</td>
       <td class="menu">Handlinger</td>
@@ -52,11 +53,30 @@ print $_lib['sess']->doctype
         $query_altin_salary = "SELECT * FROM altinnReport1salary WHERE AltinnReport1ID = ".$so1row->AltinnReport1ID." ORDER BY SalaryId ASC";
         $result_altin_salary  = $_lib['db']->db_query($query_altin_salary);
 
+        $salary_count = 0;
         while($_row = $_lib['db']->db_fetch_object($result_altin_salary)){
           $salary_ids[] = $_row->SalaryId;
         ?>
           L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $_row->SalaryId ?>"><? print $_row->JournalID?><? print ($_row->Changed) ? "(endrett)" : "" ?></a>
-        <? } ?>
+        <?
+          if (++$salary_count % 3 == 0) echo '<br/>';
+        }
+        ?>
+      </td>
+      <td>
+        <?
+        $query_altin_employee = "SELECT ap.* FROM altinnReport1employee ar1e JOIN accountplan ap ON ap.AccountPlanID = ar1e.AccountPlanID WHERE ar1e.AltinnReport1ID = ".$so1row->AltinnReport1ID." ORDER BY ap.FirstName ASC";
+        $result_altin_employee  = $_lib['db']->db_query($query_altin_employee);
+
+        $employee_count = 0;
+        while($_row = $_lib['db']->db_fetch_object($result_altin_employee)){
+          $employee_ids[] = $_row->SalaryId;
+        ?>
+          <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $_row->AccountPlanID ?>"><? print $_row->FirstName . " " . $_row->LastName . "(" . $_row->AccountPlanID . ")" ?></a>
+        <?
+          if (++$employee_count % 4 == 0) echo '<br/>';
+        }
+        ?>
       </td>
       <td>
         <?
@@ -96,6 +116,9 @@ print $_lib['sess']->doctype
           <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
           <? foreach($salary_ids as $salary_id) { ?>
             <input type="hidden" name="use_salary[<? print $salary_id; ?>]" value='1'>
+          <? } ?>
+          <? foreach($employee_ids as $employee_id) { ?>
+            <input type="hidden" name="use_employee[<? print $employee_id; ?>]" value='1'>
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? print $_lib['form3']->submit(array(
