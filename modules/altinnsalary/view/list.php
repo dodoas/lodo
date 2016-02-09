@@ -117,6 +117,9 @@ print $_lib['sess']->doctype
           <? foreach($salary_ids as $salary_id) { ?>
             <input type="hidden" name="use_salary[<? print $salary_id; ?>]" value='1'>
           <? } ?>
+          <? foreach($employee_ids as $employee_id) { ?>
+            <input type="hidden" name="use_employee[<? print $employee_id; ?>]" value='1'>
+          <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap1',
