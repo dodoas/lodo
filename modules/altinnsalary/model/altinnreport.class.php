@@ -74,6 +74,7 @@ class altinn_report {
     elseif ($type == 'percent') $is_empty = is_null($field);
     elseif ($type == 'org_number') $is_empty = !preg_match('/^([0-9]{9})$/', $field);
     elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåÆØÅ\s]+)$/'), utf8_encode($field));
+    elseif ($type == 'boolean') $is_empty = $field;
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -177,12 +178,22 @@ class altinn_report {
       // because we do not want to try to loop over a null value
       if (empty($salaries[$employee->AccountPlanID])) {
         $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk, true);
-        // income reciever
+        // income receiver
         $virksomhet[] = $inntektsmottaker;
       } else {
+        if (count($salaries[$employee->AccountPlanID]) > 1) {
+          // Error is: There is more then 1 salary<L 1, L 3> for <name> in this report
+          $l_names = array_map(function($salary) {
+            return "L ". $salary->JournalID;
+          }, $salaries[$employee->AccountPlanID]);
+
+          $msg = 'Det er mere enn 1 l&oslash;nnslipp('.implode($l_names, ', ').') for '.$this->fullNameForErrorMessage($employee).' i denne rapporten';
+          self::checkIfEmpty(true, $msg, 'boolean');
+        }
+
         foreach($salaries[$employee->AccountPlanID] as $key_salary => $salary) {
-          // generate income reciever array
-          // virksonhet, loennOgGodtgjoerelse and sumForskuddstrekk are affected in this function because they are sent by reference
+          // generate income receiver array
+          // virksomhet, loennOgGodtgjoerelse and sumForskuddstrekk are affected in this function because they are sent by reference
           $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk);
           $use_loennOgGodtgjoerelse = true;
 
