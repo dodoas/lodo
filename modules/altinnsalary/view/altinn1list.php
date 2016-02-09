@@ -43,7 +43,7 @@ print $_lib['sess']->doctype ?>
   <? print $_lib['form3']->submit(array('name'=>'action_expire_password', 'value'=>'Expire saved altinn password')) ?>
 </form>
 <br /> <br />
-<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list&only_register_employee=1" method="post">
+<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.altinn1list" method="post">
     Periode:
     <? print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'periode', 'value' => $_REQUEST['altinnReport1_periode'])); ?>
     <? print $_lib['form3']->submit(array('name'=>'action_soap1_show_salaries', 'value'=>'show salares')); ?>
@@ -98,6 +98,62 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   }
 ?>
 </tbody>
+</table>
+<br/><br/>
+<table class="lodo_data">
+  <thead>
+    <tr>
+      <th colspan="4">Ansatte</th>
+    </tr>
+    <tr>
+      <th class="sub">Velg</th>
+      <th class="sub">ID</th>
+      <th class="sub">Navn</th>
+      <th class="sub">Rapportert i denne perioden</th>
+    </tr>
+  </thead>
+  <tbody>
+<?
+  $_periode = $_REQUEST['altinnReport1_periode'];
+  $report_ = new altinn_report($_periode);
+  // all employees employed in this period
+  $query_employees = $report_->queryStringForCurrentlyEmployedEmployees();
+  $result_employees = $_lib['db']->db_query($query_employees);
+  while($employee = $_lib['db']->db_fetch_object($result_employees)) {
+?>
+    <tr>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_employee[" . $employee->AccountPlanID . "]")); ?></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
+<?
+  // last report for this period that included this employee
+  $query_altin_employee = "SELECT ar1e.*
+                           FROM altinnReport1employee ar1e JOIN
+                                altinnReport1 ar1 ON ar1e.AltinnReport1ID = ar1.AltinnReport1ID
+                          WHERE ar1.Period = '" . $_periode . "' AND ar1e.AccountPlanID = " . $employee->AccountPlanID . "
+                          ORDER BY ar1.AltinnReport1ID";
+  $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
+  $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
+?>
+      <td>
+        <?
+          if ($employee_reported) {
+            $list_of_reports = "Sendt i rapporter ";
+            while($altinn_employee = $_lib['db']->db_fetch_object($result_altin_employee)) {
+              $list_of_reports .= "<a href='" . $_lib['sess']->dispatch . "t=altinnsalary.show&AltinnReport1ID=" . $altinn_employee->AltinnReport1ID . "'>" . $altinn_employee->AltinnReport1ID . "</a>, ";
+            }
+            $list_of_reports = substr($list_of_reports, 0, -2);
+            print $list_of_reports;
+          } else {
+            print "Ikke rapportert";
+          }
+        ?>
+      </td>
+    </tr>
+<?
+  }
+?>
+  </tbody>
 </table>
 </form>
 

@@ -39,13 +39,14 @@ if (isset($_POST['use_salary'])) {
 }
 else $salary_ids = null;
 // get the list of selected employees
-if (isset($_POST['use_employee'])) {
+if (isset($_REQUEST['use_employee'])) {
   $employee_ids = array();
-  foreach($_POST['use_employee'] as $employee_id => $selected) {
+  foreach($_REQUEST['use_employee'] as $employee_id => $selected) {
     if ($selected) $employee_ids[] = $employee_id;
   }
 }
 else $employee_ids = null;
+if (empty($salary_ids) && !empty($employee_ids)) $_REQUEST['only_register_employee'] = true;
 
 $error_msg = "";
 // Make sure user have set AltinnUserSSN
@@ -127,7 +128,7 @@ if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('
 if ($_lib['input']->getProperty('action_soap1')) {
   // redirect to salary list page if no salaries are selected for the report
   if (empty($salary_ids) && !isset($_REQUEST[only_register_employee])) {
-    $message = 'No salaries were selected.';
+    $message = urlencode('Ingen l&oslash;nnslipper eller ansatte valgt.');
     if (isset($_REQUEST['altinnReport1_periode'])) $periode = '&periode=' . $_REQUEST['altinnReport1_periode'];
     else $periode = '';
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_salaries=show&message=" . $message . $periode);
@@ -135,7 +136,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   }
 
   // If you didn't select a period, don't send.
-  if (empty($_POST['altinnReport1_periode'])){
+  if (empty($_REQUEST['altinnReport1_periode'])){
     $_lib['message']->add('Legg inn: periode');
   } else {
     $period = $_REQUEST['altinnReport1_periode'];
@@ -195,7 +196,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
                     <InnsendtInformasjon>
                       <innsending>
                         <meldingsId>'.$report->meldingsId.'</meldingsId>
-                        <kalendermaaned>'.$_POST['altinnReport1_periode'].'</kalendermaaned>
+                        <kalendermaaned>'.$_REQUEST['altinnReport1_periode'].'</kalendermaaned>
                       </innsending>
                     </InnsendtInformasjon>
                   </melding>
@@ -223,7 +224,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
       }
 
       $values = array();
-      $values['Period']  = $_POST['altinnReport1_periode'];
+      $values['Period']  = $_REQUEST['altinnReport1_periode'];
       $values['MeldingsId']  = $report->meldingsId;
       $values['ErstatterMeldingsId']  = $_POST['altinnReport1_MeldingsId'];
       $values['ReceiptId']  = $result->SubmitFormTaskBasicResult->ReceiptId;
@@ -251,9 +252,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $altinnReport1ID = $row->AltinnReport1ID;
 
       // Save which salaries have been sent and which employees have been included in the report and notify
-      if ($report->saveSalaryReportLinks($altinnReport1ID) || $report->saveEmployeeReportLinks($altinnReport1ID)) {
-        $_lib['message']->add('Rapport sendt');
-      }
+      $report->saveSalaryReportLinks($altinnReport1ID);
+      $report->saveEmployeeReportLinks($altinnReport1ID);
+      $_lib['message']->add('Rapport sendt');
 
       // Save xml we sent
       $altinnFile = new altinn_file($values['Folder']);
@@ -497,12 +498,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $_lib['storage']->store_record(array('table' => 'altinnReport5', 'data' => $values, 'debug' => false));
 
-  $_lib['message']->add('Report Archived');
+  $_lib['message']->add('Rapport arkivert');
 
 } elseif($_lib['input']->getProperty('action_generate_xml_report')) {
   $period = $_REQUEST['altinnReport1_periode'];
   if (empty($salary_ids) && !isset($_REQUEST[only_register_employee])) {
-    $message = 'Ikke l&oslash;nnslipper valgt.';
+    $message = urlencode('Ingen l&oslash;nnslipper eller ansatte valgt.');
     if (isset($_REQUEST['altinnReport1_periode'])) $periode = '&periode=' . $_REQUEST['altinnReport1_periode'];
     else $periode = '';
     header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.salarylist&action_show_salaries=show&message=" . $message . $periode);

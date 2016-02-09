@@ -9,7 +9,6 @@ class altinn_report {
   public $salary_ids             = array();
   public $salary_lines           = array();
   public $employees              = array();
-  public $employee_list          = array();
   public $employee_ids           = array();
   public $only_register_employee = false;
   public $period                 = '';
@@ -30,12 +29,12 @@ class altinn_report {
 
     // TODO: Use and update initialize method and remove this below
     $this->only_register_employee = $only_register_employee;
-    // fetch the employees
-    if (!$employee_ids) self::fetchEmployees();
-    else self::fetchEmployees($employee_ids);
+    $this->salary_ids = $salary_ids;
+    $this->employee_ids = $employee_ids;
     // fetch the salaries
-    if (!$salary_ids) self::fetchSalaries();
-    else self::fetchSalaries($salary_ids);
+    self::fetchSalaries($this->salary_ids);
+    // fetch the employees
+    self::fetchEmployees($this->employee_ids);
   }
 
 /* Helper function to initialize all the needed parameters
@@ -74,7 +73,8 @@ class altinn_report {
     elseif ($type == 'number') $is_empty = empty($field) || ($field == 0);
     elseif ($type == 'percent') $is_empty = is_null($field);
     elseif ($type == 'org_number') $is_empty = !preg_match('/^([0-9]{9})$/', $field);
-    elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåÆØÅ\s]+)$/'), utf8_encode($field));
+    elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåäöÆØÅÄÖ\s]+)$/'), utf8_encode($field));
+    elseif ($type == 'boolean') $is_empty = $field;
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -178,12 +178,22 @@ class altinn_report {
       // because we do not want to try to loop over a null value
       if (empty($salaries[$employee->AccountPlanID])) {
         $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk, true);
-        // income reciever
+        // income receiver
         $virksomhet[] = $inntektsmottaker;
       } else {
+        if (count($salaries[$employee->AccountPlanID]) > 1) {
+          // Error is: There is more then 1 salary<L 1, L 3> for <name> in this report
+          $l_names = array_map(function($salary) {
+            return "L ". $salary->JournalID;
+          }, $salaries[$employee->AccountPlanID]);
+
+          $msg = 'Det er mere enn 1 l&oslash;nnslipp('.implode($l_names, ', ').') for '.$this->fullNameForErrorMessage($employee).' i denne rapporten';
+          self::checkIfEmpty(true, $msg, 'boolean');
+        }
+
         foreach($salaries[$employee->AccountPlanID] as $key_salary => $salary) {
-          // generate income reciever array
-          // virksonhet, loennOgGodtgjoerelse and sumForskuddstrekk are affected in this function because they are sent by reference
+          // generate income receiver array
+          // virksomhet, loennOgGodtgjoerelse and sumForskuddstrekk are affected in this function because they are sent by reference
           $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk);
           $use_loennOgGodtgjoerelse = true;
 
@@ -543,7 +553,8 @@ class altinn_report {
   function queryStringForCurrentlyEmployedEmployees() {
     // only the ones whose salaries have the altinn/actual pay date set and the
     // ones that are still employed
-    $query_employees = "SELECT ap.*
+    $query_employees = "SELECT ap_merged.* FROM (
+                        SELECT ap.*
                         FROM accountplan ap
                         WHERE (WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
                         (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
@@ -551,7 +562,8 @@ class altinn_report {
                         UNION
                         SELECT ap.*
                         FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
-                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%' ) AS ap_merged
+                        ORDER BY ap_merged.FirstName";
     return $query_employees;
   }
 
@@ -563,9 +575,7 @@ class altinn_report {
     // ones that are still employed
     $query_employees = "SELECT ap.*
                         FROM accountplan ap
-                        WHERE ((WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
-                        (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
-                        AccountplanType LIKE '%employee%')";
+                        WHERE AccountplanType LIKE '%employee%'";
     // add for selected employee ids also
     if ($this->employee_ids) {
       $query_employees .= ' AND ap.AccountPlanID IN (';
@@ -574,21 +584,6 @@ class altinn_report {
       }
       $query_employees = substr($query_employees, 0, -2);
       $query_employees .= ')';
-    }
-    if (!$this->only_register_employee) {
-      $query_employees .= "UNION
-                          SELECT ap.*
-                          FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
-                          WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
-      // add for selected salary ids also
-      if ($this->salary_ids) {
-        $query_employees .= ' AND s.SalaryID IN (';
-        foreach($this->salary_ids as $salary_id) {
-          $query_employees .= (string) $salary_id . ', ';
-        }
-        $query_employees = substr($query_employees, 0, -2);
-        $query_employees .= ')';
-      }
     }
     return $query_employees;
   }
@@ -616,16 +611,19 @@ class altinn_report {
 /* Helper function that populates the salaries array
  * for the selected period
  */
-  function fetchSalaries($salary_ids = null) {
+  function fetchSalaries() {
     global $_lib;
-    if (!empty($salary_ids)) $this->salary_ids = $salary_ids;
     $query_salaries = self::queryStringForSelectedSalaries();
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     if (!$this->only_register_employee) {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
         $this->salaries[(int)$salary->SubcompanyID][$salary->AccountPlanID][] = $salary;
-        $this->employees[(int)$salary->SubcompanyID][$salary->AccountPlanID] = $this->employee_list[$salary->AccountPlanID];
-        $this->employee_ids[] = $salary->AccountPlanID;
+        $this->employees_subcompany[$salary->AccountPlanID] = (int)$salary->SubcompanyID;
+
+        // array_search will return the index so if it is 0 it should still be true
+        if (array_search((int) $salary->AccountPlanID, $this->employee_ids) === false){
+          $this->employee_ids[] = (int) $salary->AccountPlanID;
+        }
         self::fetchSalaryLines($salary);
       }
     }
@@ -650,15 +648,18 @@ class altinn_report {
 
 /* Helper function that populates the employees array
  */
-  function fetchEmployees($employee_ids = null) {
+  function fetchEmployees() {
     global $_lib;
-    if (!empty($employee_ids)) $this->employee_ids = $employee_ids;
     // only the ones whose salaries have the altinn/actual pay date set
     $query_employees = self::queryStringForIncludedEmployees();
     $result_employees  = $_lib['db']->db_query($query_employees);
     while ($employee = $_lib['db']->db_fetch_object($result_employees)) {
-      $this->employee_list[$employee->AccountPlanID] = $employee;
-      $this->employees[$employee->SubcompanyID][$employee->AccountPlanID] = $employee;
+      if (isset($this->employees_subcompany[$employee->AccountPlanID])) {
+        $subcompany_id = $this->employees_subcompany[$employee->AccountPlanID];
+      } else {
+        $subcompany_id = $employee->SubcompanyID;
+      }
+      $this->employees[$subcompany_id][$employee->AccountPlanID] = $employee;
     }
   }
 

@@ -60,7 +60,7 @@ print $_lib['message']->get();
 $errors = array();
 while($row = $_lib['db']->db_fetch_object($result_salary))
 {
-    $report_for_salary = new altinn_report($row->Period, array($row->SalaryID));
+    $report_for_salary = new altinn_report($_periode, array($row->SalaryID), array(), false);
     $report_for_salary->populateReportArray();
     if (empty($report_for_salary->errors)) $is_ready_for_altinn = 'Klar';
     else {
@@ -97,51 +97,14 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 </table>
 
 <br/>
-  <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
-<?
-  print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send report'));
-?>
-</form>
-<br/><br/>
-<?
-if (!empty($errors)) {
-?>
-<table class="lodo_data">
-<?
-  foreach($errors as $salary_journal_id => $salary_errors) {
-?>
-  <tr>
-    <th>L <? print $salary_journal_id; ?></th>
-  </tr>
-<?
-    foreach($salary_errors as $error) {
-?>
-  <tr>
-    <td><? print $error; ?></td>
-  </tr>
-<?
-    }
-  }
-?>
-</table>
-<?
-}
-?>
-<?
-}
-else {
-?>
-<h4>Ingen l&oslash;nnslipper funnet</h4>
-<?
-}
-?>
 
 <table class="lodo_data">
   <thead>
     <tr>
-      <th colspan="4">Ansatte</th>
+      <th colspan="5">Ansatte</th>
     </tr>
     <tr>
+      <th class="sub">Velg</th>
       <th class="sub">ID</th>
       <th class="sub">Navn</th>
       <th class="sub">Rapportert i denne perioden</th>
@@ -150,13 +113,23 @@ else {
   </thead>
   <tbody>
 <?
-  $report = new altinn_report($_periode);
+  $report = new altinn_report($_periode, null, array());
   // all employees employed in this period
   $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);
   while($employee = $_lib['db']->db_fetch_object($result_employees)) {
+    $report_for_employee = new altinn_report($report->period, null, array($employee->AccountPlanID), true);
+    $employee_names_list[$employee->AccountPlanID] = $report_for_employee->fullNameForErrorMessage($employee);
+    $report_for_employee->populateReportArray();
+    if (empty($report_for_employee->errors)) {
+      $ready_for_altinn_status = false;
+    } else {
+      $employee_errors[$employee->AccountPlanID] = $report_for_employee->errors;
+      $ready_for_altinn_status = 'Ikke klar';
+    }
 ?>
     <tr>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_employee[" . $employee->AccountPlanID . "]")); ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
 <?
@@ -185,16 +158,11 @@ else {
       </td>
       <td>
         <?
-          if (!$employee_reported) {
+          if ($ready_for_altinn_status) {
+            print $ready_for_altinn_status;
+          } else {
         ?>
-        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
-          <?
-            print $_lib['form3']->hidden(array('name'=>'altinnReport1_periode', 'value'=>$_periode));
-            print $_lib['form3']->hidden(array('name'=>'only_register_employee', 'value'=>1));
-            print $_lib['form3']->hidden(array('name'=>'use_employee['.$employee->AccountPlanID.']', 'value'=>1));
-            print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Register ansatte i Altinn'));
-          ?>
-        </form>
+          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_employee[<? print $employee->AccountPlanID; ?>]=1&action_soap1=1">Register ansatte i Altinn</a>
         <?
           }
         ?>
@@ -205,6 +173,68 @@ else {
 ?>
   </tbody>
 </table>
+
+<br/>
+  <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
+<?
+  print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send rapport'));
+?>
+
+<br/><br/>
+
+</form>
+
+<?
+  if (!empty($errors) || !empty($employee_errors)) {
+?>
+  <table class="lodo_data">
+      <tr>
+        <th class="sub">Mangler</th>
+      </tr>
+<?
+    if (!empty($errors)) {
+      foreach($errors as $salary_journal_id => $salary_errors) {
+?>
+      <tr>
+        <th>L <? print $salary_journal_id; ?></th>
+      </tr>
+<?
+        foreach($salary_errors as $error) {
+?>
+      <tr>
+        <td><? print $error; ?></td>
+      </tr>
+<?
+        }
+      }
+    }
+    if (!empty($employee_errors)) {
+      foreach($employee_errors as $accountplan_id => $errors_for_employee) {
+?>
+      <tr>
+        <th>Ansatt <? print $employee_names_list[$accountplan_id]; ?></th>
+      </tr>
+<?
+        foreach($errors_for_employee as $error) {
+?>
+      <tr>
+        <td><? print $error; ?></td>
+      </tr>
+<?
+        }
+      }
+    }
+?>
+  </table>
+<?
+  }
+}
+else {
+?>
+<h4>Ingen l&oslash;nnslipper funnet</h4>
+<?
+}
+?>
 
 </body>
 </html>
