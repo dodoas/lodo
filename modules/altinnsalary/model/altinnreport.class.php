@@ -73,7 +73,7 @@ class altinn_report {
     elseif ($type == 'number') $is_empty = empty($field) || ($field == 0);
     elseif ($type == 'percent') $is_empty = is_null($field);
     elseif ($type == 'org_number') $is_empty = !preg_match('/^([0-9]{9})$/', $field);
-    elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåÆØÅ\s]+)$/'), utf8_encode($field));
+    elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåäöÆØÅÄÖ\s]+)$/'), utf8_encode($field));
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -542,7 +542,8 @@ class altinn_report {
   function queryStringForCurrentlyEmployedEmployees() {
     // only the ones whose salaries have the altinn/actual pay date set and the
     // ones that are still employed
-    $query_employees = "SELECT ap.*
+    $query_employees = "SELECT ap_merged.* FROM (
+                        SELECT ap.*
                         FROM accountplan ap
                         WHERE (WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
                         (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
@@ -550,7 +551,8 @@ class altinn_report {
                         UNION
                         SELECT ap.*
                         FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
-                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%' ) AS ap_merged
+                        ORDER BY ap_merged.FirstName";
     return $query_employees;
   }
 
