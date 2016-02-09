@@ -12,7 +12,7 @@ require_once "record.inc";
 
 $query_head     = "select * from $db_table where SalaryConfID = '$SalaryConfID'";
 $head           = $_lib['storage']->get_row(array('query' => $query_head));
-$ishovedmal = $head->SalaryConfID;
+$ishovedmal = ($head->SalaryConfID == 1);
 
 $query_salary   = "select * from $db_table2 where SalaryConfID = '$SalaryConfID' order by LineNumber, SalaryText asc";
 $result_salary  = $_lib['db']->db_query($query_salary);
@@ -46,9 +46,9 @@ print $_lib['sess']->doctype ?>
 <input type="hidden" name="SalaryConfID" value="<? print $SalaryConfID ?>" size="7" class="number">
 <table class="lodo_data">
   <tr class="result">
-    <th colspan="16">Lønnsmal: <? if($ishovedmal == 1) { print "hovedmal"; } else { print $head->SalaryConfID; } ?>
+    <th colspan="17">Lønnsmal: <? if($ishovedmal) { print "hovedmal"; } else { print $head->SalaryConfID; } ?>
   <?
-  if($ishovedmal != 1)
+  if(!$ishovedmal)
   {
     ?>
     <tr>
@@ -60,7 +60,7 @@ print $_lib['sess']->doctype ?>
   }
   ?>
       </th>
-      <th colspan="10"></th>
+      <th colspan="13"></th>
   <tr>
     <th class="sub">Aktiv</th>
     <th class="sub">Linje</th>
@@ -75,6 +75,7 @@ print $_lib['sess']->doctype ?>
     <th class="sub">Prosjekt</th>
     <th class="sub">Arb. giv. avg.</th>
     <th class="sub">Ferie.Gr</th>
+    <th class="sub">Altinn</th>
     <th class="sub">L&oslash;nnskode</th>
     <th class="sub" colspan="2"></th>
   </tr>
@@ -83,7 +84,7 @@ print $_lib['sess']->doctype ?>
    $counter = 0;
    while($line = $_lib['db']->db_fetch_object($result_salary))
    {
-        if($ishovedmal != 1)
+        if(!$ishovedmal)
         {
             $query = "select * from $db_table2 where LineNumber=$line->LineNumber and AccountPlanID=$line->AccountPlanID and SalaryConfID=1";
             $mainHead = $_lib['storage']->get_row(array('query' => $query));
@@ -98,7 +99,7 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if($ishovedmal == 1 and ($_lib['sess']->get_person('AccessLevel') >= 3))
+        if($ishovedmal and ($_lib['sess']->get_person('AccessLevel') >= 3))
         {
             ?><input type="hidden" name="<? print $counter ?>" value="<? print $line->SalaryConfLineID ?>"><?
             ?><input type="text" name="salaryconfline.LineNumber.<? print $line->SalaryConfLineID ?>" value="<? print $line->LineNumber ?>" size="3" class="number"><?
@@ -111,7 +112,7 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if($ishovedmal == 1)
+        if($ishovedmal)
         {
             ?><input type="text" name="salaryconfline.SalaryText.<? print $line->SalaryConfLineID ?>" value="<? print $line->SalaryText ?>" size="30" class="number"><?
         }
@@ -123,7 +124,7 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
         <?
-        if($ishovedmal == 1)
+        if($ishovedmal)
         {
             print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'], 'pk'=>$line->SalaryConfLineID, 'width'=>80, 'table'=> 'salaryconfline', 'field'=>'SalaryDescription', 'value'=>$line->SalaryDescription));
         }
@@ -134,7 +135,7 @@ print $_lib['sess']->doctype ?>
         ?>
     </td>
     <?
-    if(($line->NumberInPeriod != $mainHead->NumberInPeriod) and ($ishovedmal != 1))
+    if(($line->NumberInPeriod != $mainHead->NumberInPeriod) and !$ishovedmal)
     {
         print "<td class=\"debitred\">";
     }
@@ -146,7 +147,7 @@ print $_lib['sess']->doctype ?>
         <input type="text" name="salaryconfline.NumberInPeriod.<? print $line->SalaryConfLineID ?>"     value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>"     size="3" class="number">
     </td>
     <?
-    if(($line->Rate != $mainHead->Rate) and ($ishovedmal != 1))
+    if(($line->Rate != $mainHead->Rate) and !$ishovedmal)
     {
         print "<td class=\"debitred\">";
     }
@@ -158,7 +159,7 @@ print $_lib['sess']->doctype ?>
         <input type="text" name="salaryconfline.Rate.<? print $line->SalaryConfLineID ?>"               value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>"               size="4" class="number">
     </td>
     <?
-    if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and ($ishovedmal != 1))
+    if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and !$ishovedmal)
         print "<td class=\"debitred\">";
     else
         print "<td>";
@@ -167,17 +168,17 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if(($ishovedmal == 1) and ($line->LineNumber == 100))
+        if($ishovedmal and ($line->LineNumber == 100))
         {
             print $_lib['form3']->hidden(array('table'=>'salaryconfline', 'field'=>'AccountPlanID', 'pk'=>$line->SalaryConfLineID, 'value' => $line->AccountPlanID));
             print 'Velges på delmal';
         }
-        elseif($ishovedmal == 1)
+        elseif($ishovedmal)
         {
             $aconf = array('table'=>'salaryconfline', 'field'=>'AccountPlanID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->AccountPlanID, 'tabindex'=>'', 'accesskey'=>'K', 'type' => array(0 => 'hovedbokwemployee'), 'allaccounts' => 1);
             print $_lib['form3']->accountplan_number_menu($aconf);
         }
-        elseif(($ishovedmal != 1) and ($line->LineNumber != 100))
+        elseif(!$ishovedmal and ($line->LineNumber != 100))
         {
             $aconf = array('table'=>'salaryconfline', 'field'=>'AccountPlanID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->AccountPlanID, 'tabindex'=>'', 'accesskey'=>'K', 'type' => array(0 => 'hovedbokwemployee'), 'allaccounts' => 1);
             print $_lib['form3']->accountplan_number_menu($aconf);
@@ -190,7 +191,7 @@ print $_lib['sess']->doctype ?>
     ?>
     </td>
     <?
-        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and ($ishovedmal != 1))
+        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and !$ishovedmal)
             print "<td class=\"debitred\">";
         else
             print "<td>";
@@ -202,7 +203,7 @@ print $_lib['sess']->doctype ?>
     </td>
     </td>
     <?
-        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and ($ishovedmal != 1))
+        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and !$ishovedmal)
             print "<td class=\"debitred\">";
         else
             print "<td>";
@@ -213,7 +214,7 @@ print $_lib['sess']->doctype ?>
     ?>
     </td>
     <?
-        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and ($ishovedmal != 1))
+        if(($line->AmountThisPeriod != $mainHead->AmountThisPeriod) and !$ishovedmal)
             print "<td class=\"debitred\">";
         else
             print "<td>";
@@ -225,7 +226,7 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if($ishovedmal == 1)
+        if($ishovedmal)
         {
             $_lib['form2']->checkbox2('salaryconfline', "EnableEmployeeTax", $line->EnableEmployeeTax, $line->SalaryConfLineID);
         }
@@ -237,7 +238,7 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if($ishovedmal == 1)
+        if($ishovedmal)
         {
             $_lib['form2']->checkbox2('salaryconfline', "EnableVacationPayment", $line->EnableVacationPayment, $line->SalaryConfLineID);
         }
@@ -249,7 +250,19 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if($ishovedmal == 1)
+        if($ishovedmal)
+        {
+            $_lib['form2']->checkbox2('salaryconfline', "SendToAltinn", $line->SendToAltinn, $line->SalaryConfLineID);
+        }
+        else
+        {
+            if($line->SendToAltinn) { print "Ja"; };
+        }
+    ?>
+    </td>
+    <td>
+    <?
+        if($ishovedmal)
         {
             print $_lib['form3']->text(array('table'=>'salaryconfline', 'field'=>'SalaryCode', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->SalaryCode));
         }
@@ -261,7 +274,7 @@ print $_lib['sess']->doctype ?>
     </td>
     <td>
     <?
-        if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($ishovedmal == 1))
+        if(($_lib['sess']->get_person('AccessLevel') >= 4) and $ishovedmal)
         {
             ?><a href="<? print $MY_SELF ?>&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryConfLineID=<? print $line->SalaryConfLineID ?>&amp;action_salaryconfline_delete=1" class="button">Slett</a><?
         }
@@ -281,7 +294,7 @@ print $_lib['sess']->doctype ?>
 <tr>
 
   <td colspan="10"></td>
-  <td><nobr><? if(($_lib['sess']->get_person('AccessLevel') >= 3) and ($ishovedmal == 1)) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;action_salarymainconfline_new=1" class="button">Ny linje</a><? } ?></nobr></td>
+  <td><nobr><? if(($_lib['sess']->get_person('AccessLevel') >= 3) and $ishovedmal) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;action_salarymainconfline_new=1" class="button">Ny linje</a><? } ?></nobr></td>
   <td colspan="2" align="right">
   <? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_salaryconf_update"  value="Lagre l&oslash;nns konfigurasjon (S)" accesskey="S" /><?}?>
   </td>

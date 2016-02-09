@@ -262,6 +262,7 @@ $formname = "salaryUpdate";
     <th>Avdeling</th>
     <th>Prosjekt</th>
     <th>F</th>
+    <th>Altinn</th>
     <th>Kode</th>
     <th colspan="2"></th>
   </tr>
@@ -296,13 +297,10 @@ $formname = "salaryUpdate";
             {
                 ?><input type="text" name="salaryline.SalaryText.<? print $line->SalaryLineID ?>" value="<? print $line->SalaryText ?>" size="30" class="number"><?
             }
-            elseif($line->SalaryDescription)
-            {
-                print $line->SalaryText . " (" . $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'][$line->SalaryDescription] . ")";
-            }
-            else
-            {
-                print $line->SalaryText;
+            else {
+              print $line->SalaryText;
+              if($line->SalaryDescription)
+                print " (" . $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'][$line->SalaryDescription] . ")";
             }
         ?>
         </td>
@@ -388,9 +386,13 @@ $formname = "salaryUpdate";
         <td><? if($accountplan->EnableCar)     { $_lib['form2']->car_menu2(array('table' => 'salaryline', 'field' => 'CarID', 'value' => $line->CarID, 'tabindex' => $tabindex++, 'pk' => $line->SalaryLineID)); } ?></td>
         <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
         <td><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
+
         <td>
           <? if($line->EnableVacationPayment) { print "ja"; }; ?>
           <? print $_lib['form3']->hidden(array('name' => 'EnableVacationPayment_' . $line->SalaryLineID, 'value' => $line->EnableVacationPayment)); ?>
+        </td>
+        <td>
+          <? if($line->SendToAltinn) { print "ja"; }; ?>
         </td>
         <td><? print $line->SalaryCode ?></td>
         <td>
