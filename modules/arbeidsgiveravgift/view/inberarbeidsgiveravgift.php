@@ -81,7 +81,7 @@ $myIndexNr = $result->$myIndex;
 ?>
             <input type="hidden" name="<?php print $db_table . "_" . $termin . "_" . $myIndex; ?>"  value="<?php print $myIndexNr; ?>">
             <?php // Added to have a field which is sent to determine what the database of the form we submit was ?>
-            <input type="hidden" name="<?php print $db_table . "_" . $termin . "_db_name"; ?>"      value="<?php print $_SETUP['DB_NAME'][0]; ?>">
+            <input type="hidden" name="<?php print $db_table . "_" . $termin . "_db_name"; ?>"      value="<?php print $_SESSION['DB_NAME']; ?>">
             <input type="hidden" name="<?php print $db_table . "_" . $termin . "_year"; ?>"         value="<?php print $_REQUEST["Period"]; ?>">
             <input type="hidden" name="<?php print $db_table . "_" . $termin . "_termin"; ?>"       value="<?php print $termin; ?>">
         <tr>
@@ -252,7 +252,7 @@ $result = $arbAvg->gridNextTermin(20);
 ?>
             <input type="hidden" name="<?php print $db_table . "_20_" . $myIndex; ?>" value="<?php print $myIndexNr; ?>">
             <?php // Added to have a field which is sent to determine what the database of the form we submit was ?>
-            <input type="hidden" name="<?php print $db_table . "_20_db_name"; ?>" value="<?php print $_SETUP['DB_NAME'][0]; ?>">
+            <input type="hidden" name="<?php print $db_table . "_20_db_name"; ?>" value="<?php print $_SESSION['DB_NAME']; ?>">
             <input type="hidden" name="<?php print $db_table . "_20_year"; ?>" value="<?php print $_REQUEST["Period"]; ?>">
             <input type="hidden" name="<?php print $db_table . "_20_termin"; ?>" value="20">
             <td class="number">
@@ -355,7 +355,7 @@ $result = $arbAvg->gridNextTermin(30);
 ?>
             <input type="hidden" name="<?php print $db_table . "_30_" . $myIndex; ?>" value="<?php print $myIndexNr; ?>">
             <?php // Added to have a field which is sent to determine what the database of the form we submit was ?>
-            <input type="hidden" name="<?php print $db_table . "_30_db_name"; ?>" value="<?php print $_SETUP['DB_NAME'][0]; ?>">
+            <input type="hidden" name="<?php print $db_table . "_30_db_name"; ?>" value="<?php print $_SESSION['DB_NAME']; ?>">
             <input type="hidden" name="<?php print $db_table . "_30_year"; ?>" value="<?php print $_REQUEST["Period"]; ?>">
             <input type="hidden" name="<?php print $db_table . "_30_termin"; ?>" value="30">
             <td class="number">
