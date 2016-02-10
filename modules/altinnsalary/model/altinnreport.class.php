@@ -22,7 +22,7 @@ class altinn_report {
  * one employee.
  * It automatically loads all the salaries and employees.
  */
-  function __construct($period, $salary_ids = null, $employee_ids = null, $only_register_employee = false) {
+  function __construct($period, $salary_ids = array(), $employee_ids = array(), $only_register_employee = false) {
     // if no period selected, exit
     if (empty($period)) return;
     else $this->period = $period;

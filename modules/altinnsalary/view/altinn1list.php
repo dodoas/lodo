@@ -115,7 +115,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   <tbody>
 <?
   $_periode = $_REQUEST['altinnReport1_periode'];
-  $report_ = new altinn_report($_periode);
+  $report_ = new altinn_report($_periode, array(), array(), false);
   // all employees employed in this period
   $query_employees = $report_->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);
