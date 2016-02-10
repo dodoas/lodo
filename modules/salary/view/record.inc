@@ -748,7 +748,7 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
   if($sumTotal >= 0)
     $fields['voucher_AmountIn'] = $sumTotal;
   else
-    $fields['voucher_AmountOut'] = $sumTotal;
+    $fields['voucher_AmountOut'] = -$sumTotal;
 
   //print_r($fields);
 
