@@ -113,12 +113,12 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   </thead>
   <tbody>
 <?
-  $report = new altinn_report($_periode, null, array());
+  $report = new altinn_report($_periode, array(), array(), false);
   // all employees employed in this period
   $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);
   while($employee = $_lib['db']->db_fetch_object($result_employees)) {
-    $report_for_employee = new altinn_report($report->period, null, array($employee->AccountPlanID), true);
+    $report_for_employee = new altinn_report($report->period, array(), array($employee->AccountPlanID), true);
     $employee_names_list[$employee->AccountPlanID] = $report_for_employee->fullNameForErrorMessage($employee);
     $report_for_employee->populateReportArray();
     if (empty($report_for_employee->errors)) {
