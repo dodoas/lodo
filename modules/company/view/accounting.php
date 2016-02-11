@@ -176,6 +176,35 @@ $result2 = $_lib['db']->db_query($query2);
     <td></td>
     <td></td>
   </tr>
+  <tr>
+   <td>Beregningskode for arbeidsgiveravgift</td>
+   <td>
+      <?
+        $CalculationCodeForTaxTypes = array(
+            'generelleNaeringer'=>'Generelle næringer',
+            'helseforetakOgDelerAvStatsforvaltningen'=>'Helseforetakene og deler av statsforvaltningen',
+            'jordOgSkogbrukFiskeri'=>'Jord- og skogbruk, fiskeri etc.',
+            'kunForskuddstrekk'=>'Kun innberetning av forskuddstrekk',
+            'svalbard'=>'Lønnstrekk for Svalbard',
+            'sektorunnattAktivitet'=>'Sektorunnatt aktivitet',
+            'godstransportPaaVei'=>'Godstransport på vei'
+        );
+      ?>
+      <? print $_lib['form3']->Generic_menu3(array('data' => $CalculationCodeForTaxTypes, 'table'=> 'company', 'width'=>60, 'field'=>'CalculationCodeForTax', 'value'=>$row->CalculationCodeForTax)); ?>
+    </td>
+  </tr>
+
+
+  <tr>
+    <th colspan="4" class="menu">Altinn</th>
+  </tr>
+  <tr>
+   <td>Systemnavn</td>
+    <td class="BGColorLight"><input type="text" name="company.AltinnSystemUsername"  value="<? print "$row->AltinnSystemUsername" ?>" size="24"></td>
+    <td>Systempassord</td>
+    <td class="BGColorLight"><input type="password" name="company.AltinnSystemPassword"  value="<? print "$row->AltinnSystemPassword" ?>" size="24"></td>
+  </tr>
+
 
   <?
   /*if($_lib['sess']->get_person('AccessLevel') > 2)

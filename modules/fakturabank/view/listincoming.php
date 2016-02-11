@@ -61,7 +61,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
     <th class="number">Faktura nr</th>
     <th class="number">Fakturadato</th>
     <th class="number">Periode</th>
-    <th class="number">Org Nummer</th>
+    <th class="number">FirmaID</th>
     <th class="number">Lev. Konto</th>
     <th>Firmanavn</th>
     <th>Motkonto</th>
@@ -70,7 +70,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>&Aringrsaks informasjon</th>
+    <th>&Aringrsaksinformasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">KID</th>
     <th class="number">Utskrift</th>
@@ -185,7 +185,12 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><? print $InvoiceO->ID ?></td>
       <td class="number"><? print $InvoiceO->IssueDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?></a></td>
+      <td class="number">
+        <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>&inline=show" target="_new">
+          <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID ?>
+          <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>
+        </a>
+      </td>
       <td class="number">
         <? if (!$InvoiceO->MissingAccountPlan) { // if account exists print link to it ?>
           <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a>

@@ -9,6 +9,7 @@ class form3
 {
     public $_SETUP;
     public $_QUERY;
+    public $_ALTINN;
     public $tabindex    = 0;
     public $Locked      = false;
 
@@ -17,6 +18,8 @@ class form3
         #Init
         $this->_SETUP   = $args['_SETUP'];
         $this->_QUERY   = $args['_QUERY'];
+        // Include values for altinn dropdowns
+        $this->_ALTINN   = $args['_ALTINN'];
 
         #print "$this->_dbh, $this->_dsn<br>";
         #print_r($this->_dbh);
@@ -48,6 +51,8 @@ class form3
 
         # Radiobuttons has always 1/0 result
         $element = "<input type=\"radio\" name=\"$name\" id=\"$name\" value=\"".$args['value']."\"";
+        if($args['disabled'])
+            $element = " $element disabled";
         if($args['choice'] == $args['value'])
             $element = " $element checked=\"checked\" ";
         $element = " $element />";
@@ -390,6 +395,10 @@ class form3
         {
             $element .= " class=\"".$args['class']."\" ";
         }
+        if($args['style'])
+        {
+          $element .= " style=\"".$args['style']."\" ";
+        }
         if(isset($args['title']))
         {
             $element .= " title=\"".$args['title']."\" ";
@@ -674,6 +683,9 @@ class form3
                   $element .= '<option value="' . $key. '" selected="selected">';
                   $found = true;
                 }
+                elseif($args['same_key_value'] == true){
+                  $element .= '<option value="' . $value . '">';
+                }
                 else
                 {
                   $element .= '<option value="' . $key . '">';
@@ -760,7 +772,29 @@ class form3
     function Product_menu3($args)
     {
         $args['query']          = $this->_QUERY['form']['productmenu'];
-        $args['combinedmenu'] = true;
+
+        // Drop cominedmenu since we can search for product with combobox
+        // $args['combinedmenu'] = true;
+        return $this->_MakeSelect($args);
+    }
+###########################################################
+
+    function Occupation_menu3($args)
+    {
+        // if $args['show_all'] is NOT set then we want to set $args['query']
+        // and this function will return occupations stored in database
+        if(!isset($args['show_all'])){
+          $args['query']          = $this->_QUERY['form']['occupationmenu'];
+        }
+
+        return $this->_MakeSelect($args);
+    }
+
+###########################################################
+
+    function Subcompany_menu3($args)
+    {
+        $args['query'] = $this->_QUERY['form']['subcompanymenu'];
         return $this->_MakeSelect($args);
     }
 
@@ -1056,10 +1090,13 @@ class form3
         $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountName";
         $result = $_lib['db']->db_query($query);
 
-        while($_row = $_lib['db']->db_fetch_object($result))
-        {
-            $optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
-            $element .= "<option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+        // In inovice edit do we only want the customerID and name showed, not both ways.
+        if(!$args['onlyonce']){
+            while($_row = $_lib['db']->db_fetch_object($result))
+            {
+                $optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
+                $element .= "<option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+            }
         }
 
         if(!$found && isset($args['value']) && $args['value'] > 0)

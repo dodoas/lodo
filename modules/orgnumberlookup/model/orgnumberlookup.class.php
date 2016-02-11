@@ -68,8 +68,8 @@ class lodo_orgnumberlookup_orgnumberlookup {
         $xml_data = html_entity_decode($xml_data, ENT_NOQUOTES, 'UTF-8');
         $xml_data = str_replace("&", "&amp;", $xml_data);
 
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Error: " . curl_error($ch));
+        if (curl_errno($ch) || strstr($xml_data, '404 Not found')) {
+            $_lib['message']->add("Feil: " . curl_error($ch));
         } else {
             $_lib['message']->add("Fant OrgNumber");
             #var_dump($data);
@@ -85,8 +85,13 @@ class lodo_orgnumberlookup_orgnumberlookup {
     }
 
     function mapdata($company) {
+        global $_lib;
 
-        if($company) {
+        if (strstr((string)$company, '404 Not found')) {
+          $this->success = false;
+          $_lib['message']->add('Schemetyper ikke funnet. Oppdater schemetyper!');
+        }
+        elseif($company) {
             $this->success               = true;
             $this->OrgNumber            = (string) utf8_decode($company->number);
             $this->AccountName          = (string) utf8_decode($company->name);

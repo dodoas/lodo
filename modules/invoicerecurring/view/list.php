@@ -20,7 +20,7 @@ if(!$FromDate) {
 }
 
 if(!$ToDate) {
-    $ToDate   = $_lib['sess']->get_session('DateEndYear');
+    $ToDate   = strftime("%F", strtotime($_lib['sess']->get_session('DateEndYear') . "+1 year", 0));
 }
 
 $db_table = "recurringout";
@@ -143,8 +143,6 @@ $db_sum   = $row->sum;
         else
             {?> &lt;&lt; <?}
         ?>
-    <th colspan="1">Fant:<? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til ".$db_stop; ?></th>
-    <th colspan="10">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
     <th align="right">
         <?
         if($db_total > $db_stop)
@@ -153,6 +151,8 @@ $db_sum   = $row->sum;
             {?> &gt;&gt; <?}
         ?>
     </th>
+    <th colspan="10">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
+    <th colspan="1"></th>
 </tr>
 <tr>
     <th align="right">Rep. faktura</th>
