@@ -30,7 +30,7 @@ function createSchemeOptions($selected) {
 ?>
 
 <tr class="result">
-  <th colspan="5">Fakturabank Scheme ID</th>
+  <th colspan="5">Fakturabank Firma ID</th>
 </tr>
 
 <? foreach($schemes as $scheme) { ?>
@@ -49,7 +49,7 @@ function createSchemeOptions($selected) {
 <tr>
   <td class="menu"></td>
   <td colspan="2">
-    <input type="submit" name="action_save_scheme" value="Lagre scheme id" />
+    <input type="submit" name="action_save_scheme" value="Lagre firma id" />
     <input type="submit" name="action_add_scheme" value="Legg til ny" />
   </td>
   <td>
