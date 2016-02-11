@@ -31,21 +31,19 @@ if(!$_lib['sess']->get_person('AltinnSalaryAccess')) {
   die();
 }
 // get the list of selected salaries
+$salary_ids = array();
 if (isset($_POST['use_salary'])) {
-  $salary_ids = array();
   foreach($_POST['use_salary'] as $salary_id => $selected) {
     if ($selected) $salary_ids[] = $salary_id;
   }
 }
-else $salary_ids = null;
 // get the list of selected employees
+$employee_ids = array();
 if (isset($_REQUEST['use_employee'])) {
-  $employee_ids = array();
   foreach($_REQUEST['use_employee'] as $employee_id => $selected) {
     if ($selected) $employee_ids[] = $employee_id;
   }
 }
-else $employee_ids = null;
 if (empty($salary_ids) && !empty($employee_ids)) $_REQUEST['only_register_employee'] = true;
 
 $error_msg = "";
