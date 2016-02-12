@@ -228,4 +228,13 @@ class lodo_accountplan_scheme {
                      $AccountPlanSchemeID);
         $r = $_lib['db']->db_query($q);
     }
+
+    function findScheme($fakturabankId) {
+      global $_lib;
+      $q = sprintf("SELECT * FROM fakturabankscheme WHERE FakturabankRemoteSchemeID = %d LIMIT 1",
+                   $fakturabankId);
+      $db_obj = $_lib['db']->db_query($q);
+      $row = $_lib['db']->db_fetch_assoc($db_obj);
+      return $row['SchemeType'];
+    }
 };
