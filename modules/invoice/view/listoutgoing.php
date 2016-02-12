@@ -141,21 +141,21 @@ $db_sum   = $row->sum;
           else
             $invoice_period = date("Y-m");    
 	?>
-	<? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>	
-	Periode:
-	<?
-	print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $invoice_period,
-	'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
-	?>
+  <? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>
+  Periode:
+  <?
+  print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $invoice_period,
+  'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true));
+  ?>
 
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Lagre dato" name="action_auto_save">
+        <? print $_lib['form3']->submit(array('name' => 'action_auto_save','value' => "Lagre dato")) ?>
         <?
 	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
             list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true));
 
             echo ' fakturanummer: ' . $nextJournalID;
-	    echo '<input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">';
+      print $_lib['form3']->submit(array('name' => 'action_invoice_new', 'value' => "Ny faktura (N)", 'accesskey'=>"N"));
         }
         else {
             echo '<i>Du m&aring; velge en &aring;pen periode for &aring; lage ny faktura</i>';
@@ -177,7 +177,7 @@ $db_sum   = $row->sum;
             {?> &lt;&lt; <?}
         ?>
     <th colspan="2">Fant:<? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til ".$db_stop; ?></th>
-    <th colspan="12">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
+    <th colspan="13">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
     <th align="right">
         <?
         if($db_total > $db_stop)
@@ -204,6 +204,7 @@ $db_sum   = $row->sum;
     <th align="right">Endre</th>
     <th align="right"></th>
     <th align="right"></th>
+    <th align="right">Linjekontroll</th>
     <th align="right"></th>
 </tr>
 </thead>
@@ -259,6 +260,89 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       </td>
       <td class="number"><? if($row->Locked) { ?>L&aring;st<? } else { ?>&Aring;pen<? } ?></td>
       <td class="number"><? if($row->ExternalID > 0) { ?><a href="<? print $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $row->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
+<?
+  $InvoiceID = $row->InvoiceID;
+  // The query below creates the voucher lines that should exist based on the invoice lines.
+  // Then we do the same thing from the voucher lines and concatenate the two results.
+  // Group them and count the duplicates.
+  // If the count is an odd number then we either have some extra lines or some of the lines are missing.
+  // That is why we restrict the result to the lines having an odd count(or
+  // other than 2 for the total line), so we get left with the ones that are wrong.
+  // If everything is correct, this query should return an empty result, if not - we have an error.
+  $query_count_probable_voucher_lines = "SELECT *, COUNT(*) AS count
+                                         FROM (
+                                           SELECT *
+                                           FROM (
+                                             -- Create voucher lines for invoice lines in invoiceoutline table
+                                             SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
+                                             -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)) * -1), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut
+                                             FROM invoiceoutline il
+                                             WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
+
+                                             UNION
+
+                                             -- Create Vat voucher lines for invoice lines from invoiceoutline table once for the vat line and once more for the counterpart line
+                                             SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
+                                             -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountOut
+                                             FROM invoiceoutline il
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
+
+                                             UNION
+
+                                             SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
+                                             -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountIn,
+                                             ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountOut
+                                             FROM invoiceoutline il
+                                             WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID = $InvoiceID
+
+                                             UNION
+
+                                             -- Total amount line for invoice
+                                             SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
+                                             -- Take in account amount for credit note
+                                             IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
+                                             IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut
+                                             FROM invoiceout i
+                                             WHERE i.TotalCustPrice <> 0 AND i.InvoiceID = $InvoiceID
+                                           ) li
+
+                                           UNION ALL
+
+                                           -- Create the same as above only from lines in the voucher table
+                                           SELECT
+                                           -- Determine type from the voucher line data
+                                           CASE
+                                             WHEN ta.AutomaticReason LIKE 'Automatisk % MVA%' THEN 'VAT'
+                                             WHEN ta.AccountPlanType = 'customer' THEN 'Total'
+                                             WHEN ta.AutomaticReason LIKE 'Faktura%' AND ta.AccountPlanID >= 3000 && ta.AccountPlanID <= 3999 THEN 'Regular'
+                                             ELSE 'SOMETHING_IS_WRONG'
+                                           END AS Type,
+                                           '' AS LineID,
+                                           ta.vat AS tmpVat,
+                                           ta.AmountIn AS AmountIn,
+                                           ta.AmountOut AS AmountOut
+                                           FROM (
+                                             SELECT v.VoucherID, v.JournalID, v.VoucherType, v.AmountIn, v.AmountOut, v.AccountPlanID, v.Vat, v.Description, v.Active, v.AutomaticFromVoucherID, v.AutomaticReason, v.AutomaticVatVoucherID, v.InvoiceID, ap.AccountPlanType
+                                             FROM voucher v
+                                             JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+                                             WHERE
+                                             -- Exclude the hovedbok lines
+                                             ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID = $InvoiceID
+                                           ) ta
+                                         ) taa
+                                         -- Group the same so we can count the duplicates
+                                         GROUP BY Type, tmpVat, AmountIn, AmountOut
+                                         -- Leave only the ones that were oddly paired, and the total line that has other than count of 2
+                                         HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')";
+  $result_count_probable_voucher_lines = $_lib['db']->db_query($query_count_probable_voucher_lines);
+  $has_possible_errors = $_lib['db']->db_numrows($result_count_probable_voucher_lines) > 0;
+?>
+      <td><? if ($has_possible_errors) print "Linjekontroll"; ?></td>
       <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">feil periode</span><? } ?></td>
   </form>
   </tr>
@@ -266,8 +350,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
 }
 ?>
 <tr>
-    <td colspan="9"></td>
-    <td class="number"><? print $TotalCustPrice ?></td>
+    <td colspan="10"></td>
+    <td class="number"><? print $_lib['format']->Amount($TotalCustPrice) ?></td>
     <td></td>
 </tr>
 </tbody>

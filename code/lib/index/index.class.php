@@ -196,6 +196,7 @@ $_lib['convert']    = new convert(array('_dbh' => $_dbh, '_dsn' => $_dsn));
 $_lib['storage'] = $_lib['db'] = $_dbh[$_dsn] = new db_mysql(array('host' => $_SETUP['DB_SERVER']['0'], 'database' => $_SESSION['DB_NAME'], 'username' => $_SETUP['DB_USER']['0'], 'password' => $_SETUP['DB_PASSWORD']['0'], '_sess' => $_sess));
 
 require_once($_SETUP['HOME_DIR'] . "/code/lib/query/query.class.php");         #Saved queryes, to be replaced with web interface
+require_once($_SETUP['HOME_DIR'] . "/code/lib/altinn/altinn_codes.class.php");         #Include values for altinn dropdowns
 require_once($_SETUP['HOME_DIR'] . "/code/lib/form/form_elements.class.php");  #Auto save
 require_once($_SETUP['HOME_DIR'] . "/code/lib/form/form_elements2.class.php"); #No auto save
 require_once($_SETUP['HOME_DIR'] . "/code/lib/form/form_elements3.class.php"); #only hash parameters
@@ -280,7 +281,7 @@ $_lib['security']   = $_security  = new security(array('_sess' => $_sess, '_temp
 $_lib['log']        = $_log       = new logg(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess, 'path' => $log_path, 'module' => $args[0], 'template' => $args[1]));
 $_lib['form']       = $_form      = new form(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess));
 $_lib['form2']      = $_form2     = new form2(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess));
-$_lib['form3']      = $_form3     = new form3(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess, '_QUERY' => $_QUERY));
+$_lib['form3']      = $_form3     = new form3(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess, '_QUERY' => $_QUERY, '_ALTINN' => $_ALTINN));
 #print $_sess->get_person("FirstName");
 #print "Her og4<br>";
 if($searchstring) {

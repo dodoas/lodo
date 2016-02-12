@@ -55,6 +55,7 @@ print $_lib['sess']->doctype ?>
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Repeteremde faktura <? print $RecurringID ?></title>
     <meta name="cvs"                content="$Id: edit.php,v 1.78 2005/11/03 15:57:27 thomasek Exp $" />
     <? includeinc('head') ?>
+    <? includeinc('combobox') ?>
 </head>
     <script>
     function showhide(id)
@@ -91,7 +92,7 @@ print $_lib['sess']->doctype ?>
         <td><b>Avsender</b></td>
         <td><? print $row->SName ?></td>
         <td><b>Mottaker</b></td>
-        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$RecurringID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer))) ?></td>
+        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$RecurringID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer), 'class' => 'combobox', 'onlyonce'=> true)) ?></td>
     </tr>
     <tr>
         <td>Adresse</a></td>
@@ -162,13 +163,13 @@ print $_lib['sess']->doctype ?>
         <td colspan="4"></td>
     </tr>
 
-<?php
-
-?>
+    <?php
+      $tabindex=1;
+    ?>
     <tr>
       <td>Startdato</td>
       <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'StartDate', 'pk'=>$RecurringID, 'value'=>$recurring_row->StartDate, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
-      <td>Interval</td>
+      <td>Intervall</td>
       <td><? interval_menu($recurring_row->TimeInterval, $RecurringID) ?></td>
     </tr>
     <tr>
@@ -179,10 +180,10 @@ print $_lib['sess']->doctype ?>
       <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'EndDate', 'pk'=>$RecurringID, 'value'=>$recurring_row->EndDate, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
     </tr>
     <tr>
-      <td>TotalCustPrice</td>
-      <td><? print $row->TotalCustPrice ?></td>
-      <td>TotalVat</td>
-      <td><? print $row->TotalVat ?></td>
+      <td>Totalpris</td>
+      <td><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
+      <td>MVA</td>
+      <td><? print $_lib['format']->Amount($row->TotalVat) ?></td>
     </tr>
 
     <tr>
@@ -204,9 +205,9 @@ print $_lib['sess']->doctype ?>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$RecurringID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Leverings betingelse</td>
+      <td>Leveringsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$RecurringID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
-      <td>Betalings betingelse</td>
+      <td>Betalingsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'PaymentCondition', 'pk'=>$RecurringID, 'value'=>$row->PaymentCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
@@ -252,7 +253,7 @@ N&aring; er vi i <b>%H</b> halv&aring;r. Forrige m&aring;ned var <b>%LM</b>, nes
 <table border="0" cellspacing="0" width="775">
 <thead>
   <tr>
-    <td>ProduktNr</td>
+    <td style="width: 182px;">ProduktNr</td>
     <td>Produkt navn</td>
     <td>Antall</td>
     <td>Enhetspris</td>
@@ -277,7 +278,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $vatlines += $vatline;
     ?>
     <tr>
-        <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'35', 'tabindex'=>$tabindex++, 'required' => 1)) ?></td>
+        <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'455', 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false)) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductName', 'pk'=>$LineID, 'value'=>$row2->ProductName, 'width'=>'20', 'maxlength' => 80, 'tabindex'=>$tabindex++)) ?></td>
         <td align="center"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
@@ -326,19 +327,21 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
-	print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
+	print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_linenew', 'tabindex' => $tabindex++, 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
         ?>
         <td colspan="6" align="right">
 	<?
 	if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')
 	{
                	print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_delete', 
+        'tabindex' => $tabindex++,
 				'value'=>'Slett faktura (D)', 'accesskey'=>'D', 
 				'confirm' => 'Er du sikker p&aring; at du vil slette denne malen?'));
 	}
 	
 	print $_lib['form3']->Input(array('type'=>'submit', 
 						'name'=>'action_invoicerecurring_update', 
+            'tabindex' => $tabindex++,
 						'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
 
 	?>

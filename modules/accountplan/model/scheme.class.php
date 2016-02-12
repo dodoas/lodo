@@ -25,7 +25,7 @@ class lodo_accountplan_scheme {
 
         $l = array();
 
-        $r = $_lib['db']->db_query("SELECT * FROM fakturabankscheme");
+        $r = $_lib['db']->db_query("SELECT * FROM fakturabankscheme ORDER BY SchemeType");
         while( ($row = $_lib['db']->db_fetch_assoc($r)) ) {
             $l[] = $row;
         }
@@ -227,5 +227,14 @@ class lodo_accountplan_scheme {
         $q = sprintf("DELETE FROM accountplanscheme WHERE AccountplanSchemeID = %d LIMIT 1",
                      $AccountPlanSchemeID);
         $r = $_lib['db']->db_query($q);
+    }
+
+    function findScheme($fakturabankId) {
+      global $_lib;
+      $q = sprintf("SELECT * FROM fakturabankscheme WHERE FakturabankRemoteSchemeID = %d LIMIT 1",
+                   $fakturabankId);
+      $db_obj = $_lib['db']->db_query($q);
+      $row = $_lib['db']->db_fetch_assoc($db_obj);
+      return $row['SchemeType'];
     }
 };

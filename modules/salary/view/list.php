@@ -90,7 +90,12 @@ print $_lib['sess']->doctype;
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
-
+<?
+$query_kommune_id = "select * from kommune where KommuneNumber = '" . $_lib['storage']->db_escape($_lib['sess']->get_companydef('CompanyMunicipality')) . "'";
+$result_kommune_id = $_lib['db']->db_query($query_kommune_id);
+$kommune_id = $_lib['db']->db_fetch_object($result_kommune_id);
+if($kommune_id->KommuneID){
+?>
 <?
 
   $period_query = "SELECT SalaryperiodconfID, Name, Year, Period FROM salaryperiodconf ORDER BY Period DESC, SalaryperiodconfID";
@@ -121,6 +126,7 @@ print $_lib['sess']->doctype;
   <input type="submit" value="Velg periode" />
   </form>
   <a href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a>
+  <a href="<?= $_lib['sess']->dispatch ?>t=salary.listunpaid">Ubetalte l&oslash;nninger</a>
 </div>
 
 <? 
@@ -332,20 +338,20 @@ function worker_line($row, $i) {
 
         ?>
       </td>
-    
-<? 
+
+<?
 }  /* function */
 
 $current_workers = array();
 $old_workers = array();
 
 while($row = $_lib['db']->db_fetch_object($result_conf)) {
-    if($row->WorkStop != '0000-00-00' && strtotime($row->WorkStop) < time()) {
-        $old_workers[] = $row;
-    }
-    else {
-        $current_workers[] = $row;
-    }
+  if($row->WorkStop == '0000-00-00' || strtotime($row->WorkStop) >= strtotime($current_period . "-01")) {
+    $current_workers[] = $row;
+  }
+  else {
+    $old_workers[] = $row;
+  }
 }
 ?>
 
@@ -552,6 +558,10 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 </table>
 
 <? } /* if($period_open) */ ?>
-
+<? }else{ /* if($kommune_id->KommuneID) if we dont have kommune for company */ ?>
+<?
+    echo "Firmaopplysning: Ingen kommune er valgt";
+}
+?>
 </body>
 </html>

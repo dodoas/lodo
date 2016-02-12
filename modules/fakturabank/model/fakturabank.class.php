@@ -279,6 +279,7 @@ class lodo_fakturabank_fakturabank {
                      $dataRR['ClosingReasonId'] = $reason[0];
                      $dataRR['Amount'] = $reason[1];
                      $dataRR['IsCustomerClosingReason'] = (int)$reason[2];
+                     // InvoiceOut is automatically set to false since it is its default value
                      $reason_array[] = $dataRR;
                 }
             }
@@ -383,6 +384,8 @@ class lodo_fakturabank_fakturabank {
                      $dataRR['ClosingReasonId'] = $reason[0];
                      $dataRR['Amount'] = $reason[1];
                      $dataRR['IsCustomerClosingReason'] = (int)$reason[2];
+                     // InvoiceOut is set to true to note that this reason is for an outgoing invoice
+                     $dataRR['InvoiceOut'] = true;
                      $reason_array[] = $dataRR;
                 }
             }
@@ -1118,13 +1121,12 @@ class lodo_fakturabank_fakturabank {
 
       $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
       $schemes = $schemeControl->listSchemes();
-      $availableSchemeTypes = $schemeControl->listTypes();
       # added so if no schemes are present to try with AccountPlanId or OrgNo
       if (empty($schemes)) $schemes[] = array("SchemeValue" => "", "FakturabankSchemeID" => 1);
       # try to download info for each scheme. we only need one success
       foreach ($schemes as $scheme) {
         $scheme_value = $scheme['SchemeValue'];
-        $scheme_type = $availableSchemeTypes[$scheme['FakturabankSchemeID'] - 1]['SchemeType'];
+        $scheme_type = $schemeControl->findScheme($scheme['FakturabankSchemeID']);
         $org = new lodo_orgnumberlookup_orgnumberlookup();
         if (empty($scheme_value)) {
           if(strlen($_POST['accountplan_OrgNumber']) >= 9) $scheme_value = $_POST['accountplan_OrgNumber'];

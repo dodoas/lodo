@@ -92,7 +92,8 @@
 				$firstUpd = false;
 				for ($i = 0; $i < $this->numFields; $i++)
 				{
-					if ($this->indexName != $this->myFields[$i]["name"])
+          // skip if primary key or timestamp
+          if ($this->indexName != $this->myFields[$i]["name"] && $this->myFields[$i]["name"] != "TS")
 					{
 						if ($firstUpd != false)
 							$query = $query . ",";
@@ -110,6 +111,8 @@
 				$query = "INSERT INTO " . $this->tableName . "(";
 				for ($i = 0; $i < $this->numFields; $i++)
 				{
+          // skip if primary key or timestamp
+          if ($this->myFields[$i]["name"] == "TS") continue;
 					if ($i != 0)
 						$query = $query . ", ";
 					$query = $query . $this->myFields[$i]["name"];
@@ -117,6 +120,8 @@
 				$query = $query . ") VALUES(";
 				for ($i = 0; $i < $this->numFields; $i++)
 				{
+          // skip if timestamp
+          if ($this->myFields[$i]["name"] == "TS") continue;
 					if ($i != 0)
 					$query = $query . ", ";
 					if ($this->myFields[$i]["name"] != $this->indexName)
