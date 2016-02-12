@@ -639,6 +639,8 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryID=<? print $SalaryID ?>&amp;SalaryConfID=<? print $head->SalaryConfID ?>&amp;action_salary_updatesalarycode=1" class="button">Hent kode/feriepenger/arbeidsgiveravgift flagg fra ansatt mal</a><?}?>
 
 
-<? includeinc('bottom') ?>
+<? includeinc('bottom');
+unset($_SESSION['oauth_paycheck_sent']);
+?>
 </body>
 </html>

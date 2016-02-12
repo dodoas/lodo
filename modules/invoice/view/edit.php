@@ -15,10 +15,6 @@ if (strpos($tmp_redirect_url, 'InvoiceID') !== false) $_SESSION['oauth_tmp_redir
 // and if missing in url, add InvoiceID
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "InvoiceID=" . $InvoiceID;
 $_SESSION['oauth_invoice_id'] = $InvoiceID;
-if (isset($_SESSION['oauth_invoice_error'])) {
-  $_lib['message']->add($_SESSION['oauth_invoice_error']);
-  unset($_SESSION['oauth_invoice_error']);
-}
 
 $VoucherType='S';
 
@@ -33,6 +29,11 @@ includelogic('accounting/accounting');
 
 $accounting = new accounting();
 require_once "record.inc";
+
+if (isset($_SESSION['oauth_invoice_error'])) {
+  $_lib['message']->add($_SESSION['oauth_invoice_error']);
+  unset($_SESSION['oauth_invoice_error']);
+}
 
 $get_invoice            = "select I.* from $db_table as I where InvoiceID='$InvoiceID'";
 #print "Get invoice " . $get_invoice . "<br>\n";
@@ -477,4 +478,4 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 <a name="bottomPage"></a>
 </body>
 </html>
-<? unset($_SESSION['saved_invoice_export_data']); ?>
+<? unset($_SESSION['oauth_invoice_sent']); ?>

@@ -84,23 +84,25 @@ class lodo_fakturabank_fakturabankvoting {
 
         if (isset($_SESSION['oauth_balance_report_fetched'])) {
           unset($_SESSION['oauth_balance_report_fetched']);
-          $data = $_SESSION['oauth_resource']['result'];
+          $data = $_SESSION['oauth_resource'];
         }
         else {
           $_SESSION['oauth_action'] = 'get_balance_report';
           $oauth_client = new lodo_oauth();
           $_SESSION['oauth_balance_report_messages'][] = $url;
           $_SESSION['oauth_balance_report_fetched'] = true;
-          $data = $oauth_client->get_resources($url);
+          $oauth_client->get_resources($url);
+          $data = $_SESSION['oauth_resource'];
         }
+        unset($_SESSION['oauth_resource']);
 
-        $report_xml = $_SESSION['oauth_resource']['result'];
-        if ($_SESSION['oauth_resource']['code'] != 200) {
+        $report_xml = $data['result'];
+        if ($data['code'] != 200) {
           $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . $report_xml . "</span>";
-          if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . "Utilstrekkelige rettigheter i fakturabank!" . "</span>";
+          if ($data['code'] == 403) $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . "Utilstrekkelige rettigheter i fakturabank!" . "</span>";
         }
 
-        $voting = $this->retrieve_voting($data);
+        $voting = $this->retrieve_voting($data['result']);
 
         $bank_statement = $voting->{"bank-statement"};
 

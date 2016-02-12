@@ -301,6 +301,7 @@ class lodo_fakturabank_fakturabanksalary {
         if (isset($_SESSION['oauth_paycheck_sent'])) {
           $data = $_SESSION['oauth_resource']['result'];
           unset($_SESSION['oauth_paycheck_sent']);
+          unset($_SESSION['oauth_resource']);
         }
         else {
           $_SESSION['oauth_action'] = 'send_paycheck';

@@ -2200,17 +2200,28 @@ class lodo_fakturabank_fakturabank {
         $page = "/rest/invoices.xml";
         $url  = "$this->protocol://$this->host$page";
 
-        $oauth_client = new lodo_oauth();
-        $oauth_client->post_resources($url, array("xml" => $xml));
-        $this->save_invoice_export_data();
+        if (isset($_SESSION['oauth_invoice_sent'])) {
+          unset($_SESSION['oauth_invoice_sent']);
+          $data = $_SESSION['oauth_resource'];
+          unset($_SESSION['oauth_resource']);
+        }
+        else {
+          $_SESSION['oauth_action'] = 'send_invoice';
+          $_SESSION['oauth_invoice_object'] = $InvoiceO;
+          $oauth_client = new lodo_oauth();
+          $oauth_client->post_resources($url, array("xml" => $xml));
+          $_SESSION['oauth_invoice_sent'] = true;
+          $data = $_SESSION['oauth_resource'];
+        }
+        $this->save_invoice_export_data($data);
         return true;
     }
 
-    public function save_invoice_export_data() {
+    public function save_invoice_export_data($data) {
       global $_lib;
-      if ($_SESSION['oauth_resource']['code'] != 201) { // not created
-        $_SESSION['oauth_invoice_error'] = "Error: " . $_SESSION['oauth_resource']['result'];
-        if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+      if ($data['code'] != 201) { // not created
+        $_SESSION['oauth_invoice_error'] = "Error: " . $data['result'];
+        if ($data['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
       }
       else {
         $dataH = array();
@@ -2241,6 +2252,7 @@ class lodo_fakturabank_fakturabank {
       if (isset($_SESSION['oauth_car_info_fetched'])) {
         unset($_SESSION['oauth_car_info_fetched']);
         $data = $_SESSION['oauth_resource']['result'];
+        unset($_SESSION['oauth_resource']);
       }
       else {
         $_SESSION['oauth_action'] = 'get_car_info';

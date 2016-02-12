@@ -66,7 +66,7 @@ case 'get_car_info': // fetch car info from FB
   $CarID   = $_SESSION['oauth_car_id'];
   unset($_SESSION['oauth_car_code']);
   unset($_SESSION['oauth_car_id']);
-  $_SESSION['oauth_tmp_redirect_back_url'] = $_SETUP['DISPATCH'] . "?t=car.edit&car.CarID=". $CarID ."&car.CarCode=". $CarCode ."&submit=action_car_update_from_fakturabank";
+  $_SESSION['oauth_tmp_redirect_back_url'] = $_SETUP['DISPATCH'] . "t=car.edit&car.CarID=". $CarID ."&car.CarCode=". $CarCode ."&action_car_update_from_fakturabank=1";
   redirect();
   break;
 case 'send_paycheck': // sending a paycheck to FB
@@ -75,13 +75,12 @@ case 'send_paycheck': // sending a paycheck to FB
   unset($_SESSION['oauth_salary_id']);
   unset($_SESSION['oauth_salary_conf_id']);
   $fb_salary = new lodo_fakturabank_fakturabanksalary();
-  var_dump($_SESSION);
   $fb_salary->sendsalary($SalaryID, $SalaryConfID);
   redirect();
   break;
 case 'send_invoice': // sending an invoice to FB
   $fb = new lodo_fakturabank_fakturabank();
-  $fb->save_invoice_export_data();
+  $fb->write($_SESSION['oauth_invoice_object']);
   redirect();
   break;
 case 'set_invoice_statuses': // set status to registered for all invoices downloaded from FB

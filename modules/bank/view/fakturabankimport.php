@@ -1,6 +1,4 @@
 <?
-includelogic('fakturabank/fakturabankvoting');
-
 # $Id: import.php,v 1.16 2005/10/24 11:50:24 svenn Exp $ account_import.php,v 1.3 2001/11/20 17:55:12 thomasek Exp $
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
@@ -33,20 +31,7 @@ if (!is_numeric($AccountID)) {
 $query   = "select * from account where AccountID=$AccountID";
 $account = $_lib['storage']->get_row(array('query' => $query));
 
-
-# Import bank account files in format: Skandiabanken
-# Skb:  BookKeepingDate;InterestDate;UseDate;ArchiveRef;AccountCategory;AccountDescription;AmountOut;AmountIn
-# Spb1: Bet.dato;Beskrivelse;Rentedato;Ut/Inn;
-# Input: AccountNumber
-
-if (isset($_POST['Period'])) {
-
-    $fbvoting = new lodo_fakturabank_fakturabankvoting();
-    $_SESSION['oauth_balance_account_id'] = $AccountID;
-    $_SESSION['oauth_balance_period'] = $Period;
-    $_SESSION['oauth_balance_country'] = $account->CountryCode;
-    $fbvoting->import_transactions($AccountID, $Period, $account->CountryCode);
-}
+require_once 'record.inc';
 
 // get all saved messages and remove them
 if (isset($_SESSION['oauth_balance_report_messages']) && is_array($_SESSION['oauth_balance_report_messages'])) foreach ($_SESSION['oauth_balance_report_messages'] as $message) $_lib['message']->add($message);
@@ -71,7 +56,7 @@ unset($_SESSION['oauth_balance_report_messages']);
 <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
 <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> | 
 <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
-<? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?>
+<? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?>
 
 <h2><? print $_lib['message']->get() ?></h2>
 
@@ -85,7 +70,7 @@ unset($_SESSION['oauth_balance_report_messages']);
 Periode: <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 'pk' => $AccountID, 'value' => $PeriodSelection, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true)); ?>
 <br />
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-<input type="submit" name="action_bank_import"  value="Importer">
+<input type="submit" name="action_bank_import_from_fakturabank"  value="Importer">
 <? } ?>
 </form>
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
@@ -95,6 +80,8 @@ Periode: <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 
 <br>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
 </p>
-<? } ?>
+<? }
+unset($_SESSION['oauth_balance_report_fetched']);
+?>
 </body>
 </html>
