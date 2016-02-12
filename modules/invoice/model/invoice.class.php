@@ -1062,6 +1062,9 @@ class invoice {
         } else if (strstr(strtolower($invoice->SOrgNo), 'mva')) {
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo;
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
+        } else {
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo . ' MVA';
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $invoice->SName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $invoice->SAddress;
