@@ -223,6 +223,8 @@ for($skip_years = 0; $skip_years < count($_years); $skip_years+=$years_per_line)
 </tr>
 </form>
 </table>
-<? includeinc('bottom') ?>
+<? includeinc('bottom');
+  unset($_SESSION['oauth_car_info_fetched']);
+?>
 </body>
 </html>

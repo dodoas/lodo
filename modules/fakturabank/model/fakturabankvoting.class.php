@@ -2,16 +2,13 @@
 #should split to factory pattern with incoming and outgoing invoices.
 includelogic('invoice/invoice');
 includelogic("accountplan/scheme");
+includelogic("oauth/oauth");
 
 class lodo_fakturabank_fakturabankvoting {
     private $host           = '';
     private $protocol       = '';
-    private $username       = '';
-    private $password       = '';
-    private $login          = false;
     private $timeout        = 30;
     private $retrievestatus = '';
-    private $credentials    = '';
     private $OrgNumber      = '';
     private $account_number = '';
     public  $startexectime  = '';
@@ -55,24 +52,14 @@ class lodo_fakturabank_fakturabankvoting {
 	function setup_connection_values() {
         global $_lib;
 
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
         $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
 
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
         $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
-
-        $this->credentials = "$this->username:$this->password";
 	}
 
 	function get_balance_report($account_id = null, $period = null, $country_code = null) {
@@ -81,9 +68,8 @@ class lodo_fakturabank_fakturabankvoting {
 
 		$this->setup_connection_values();
 
-		$page       = "balance_report.xml";
-		// http://fakturabank.no/balance_report.xml?identifier=
-        // TODO: limit on account
+        $page       = "rest/balance_report.xml";
+        // http://fakturabank.no/rest/balance_report.xml?identifier=&identifier_type=&start_date=&end_date=&country_code=&account_number=
         # If no country_code is set, send Norway's country code
         $country_code = ($country_code == '')?'NO':$country_code;
         $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR';
@@ -95,9 +81,28 @@ class lodo_fakturabank_fakturabankvoting {
             $params .= "account_number=" . $this->get_account_number($account_id) . "&";
         }
         $url    = "$this->protocol://$this->host/$page$params";
-        $_lib['message']->add($url);
 
-        $voting = $this->retrieve_voting($page, $url);
+        if (isset($_SESSION['oauth_balance_report_fetched'])) {
+          unset($_SESSION['oauth_balance_report_fetched']);
+          $data = $_SESSION['oauth_resource'];
+        }
+        else {
+          $_SESSION['oauth_action'] = 'get_balance_report';
+          $oauth_client = new lodo_oauth();
+          $_SESSION['oauth_balance_report_messages'][] = $url;
+          $_SESSION['oauth_balance_report_fetched'] = true;
+          $oauth_client->get_resources($url);
+          $data = $_SESSION['oauth_resource'];
+        }
+        unset($_SESSION['oauth_resource']);
+
+        $report_xml = $data['result'];
+        if ($data['code'] != 200) {
+          $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . $report_xml . "</span>";
+          if ($data['code'] == 403) $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . "Utilstrekkelige rettigheter i fakturabank!" . "</span>";
+        }
+
+        $voting = $this->retrieve_voting($data['result']);
 
         $bank_statement = $voting->{"bank-statement"};
 
@@ -106,40 +111,8 @@ class lodo_fakturabank_fakturabankvoting {
 		return array($validated_voting, $bank_statement);
 	}
 
-    private function retrieve_voting($page, $url) {
+    private function retrieve_voting($xml_data) {
         global $_lib;
-
-        if(!$this->login) return false;
-
-        $headers = array(
-            "GET ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
-
-        $xml_data           = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
-            $_lib['message']->add("Error: " . curl_error($ch));
-        } else {
-            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
-        }
-        curl_close($ch);
 
         $size = strlen($xml_data);
 
@@ -539,7 +512,7 @@ class lodo_fakturabank_fakturabankvoting {
             $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline'));
         }
 
-        $_lib['message']->add("Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>");
+        $_SESSION['oauth_balance_report_messages'][] = "Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>";
     }
 
     public function lookup_invoice($FakturabankInvoiceID) {

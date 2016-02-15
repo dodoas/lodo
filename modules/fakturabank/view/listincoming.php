@@ -14,6 +14,9 @@ require_once "record.inc";
 $fb         = new lodo_fakturabank_fakturabank();
 $InvoicesO  = $fb->incoming();
 
+$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+
 print $_lib['sess']->doctype; ?>
 <head>
         <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Invoice List</title>
@@ -50,7 +53,6 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming" method="post">
 <input type="submit" value="Last ned fakturaer (L)" name="action_fakturabank_registerincoming" accesskey="B">
 <input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
-
 
 <table class="lodo_data">
 <thead>
@@ -271,7 +273,7 @@ if (!empty($InvoicesO->Invoice)) {
 <?
     // only add to temp table the first time
     if (!isset($already_printed_new[$scheme_value])) {
-      $_lib['storage']->store_record(array('data' => $TmpAccountPlanData, 'table' => 'accountplantemp', 'action' => 'auto', 'debug' => false));
+      if (!empty($TmpAccountPlanData)) $_lib['storage']->store_record(array('data' => $TmpAccountPlanData, 'table' => 'accountplantemp', 'action' => 'auto', 'debug' => false));
       $already_printed_new[$scheme_value] = true;
     }
   }
@@ -289,3 +291,6 @@ if (!empty($InvoicesO->Invoice)) {
 </form>
 </body>
 </html>
+<?php
+unset($_SESSION['oauth_invoices_fetched']);
+?>

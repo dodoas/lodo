@@ -1,4 +1,6 @@
 <?
+// needed to access oauth session parameters
+session_start();
 # $Id: edit.php,v 1.78 2005/11/03 15:57:27 thomasek Exp $ invoice_edit.php,v 1.7 2001/11/20 17:55:12 thomasek Exp $
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
@@ -6,6 +8,13 @@
 $InvoiceID = (int) $_REQUEST['InvoiceID'];
 $inline       = $_REQUEST['inline'];
 #print_r($_REQUEST);
+
+$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// change only if full(with InvoiceID) url
+if (strpos($tmp_redirect_url, 'InvoiceID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+// and if missing in url, add InvoiceID
+else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "InvoiceID=" . $InvoiceID;
+$_SESSION['oauth_invoice_id'] = $InvoiceID;
 
 $VoucherType='S';
 
@@ -20,6 +29,11 @@ includelogic('accounting/accounting');
 
 $accounting = new accounting();
 require_once "record.inc";
+
+if (isset($_SESSION['oauth_invoice_error'])) {
+  $_lib['message']->add($_SESSION['oauth_invoice_error']);
+  unset($_SESSION['oauth_invoice_error']);
+}
 
 $get_invoice            = "select I.* from $db_table as I where InvoiceID='$InvoiceID'";
 #print "Get invoice " . $get_invoice . "<br>\n";
@@ -56,8 +70,12 @@ $tabindex = 1;
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<? if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
-
+<?
+$message = $_lib['message']->get();
+if(strstr($message, "Success")) $class = 'user';
+else $class = 'warning';
+if($message) { print "<div class='$class'>$message</div><br>"; }
+?>
 <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="InvoiceID" value="<? print $InvoiceID ?>">
 <input type="hidden" name="inline" value="edit">
@@ -460,3 +478,4 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 <a name="bottomPage"></a>
 </body>
 </html>
+<? unset($_SESSION['oauth_invoice_sent']); ?>

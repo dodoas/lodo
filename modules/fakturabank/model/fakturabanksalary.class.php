@@ -1,15 +1,12 @@
 <?
 //includelogic('salary/salaryreport');
 includelogic('exchange/exchange');
+includelogic('oauth/oauth');
 
 class lodo_fakturabank_fakturabanksalary {
     private $host           = '';
     private $protocol       = '';
-    private $username       = '';
-    private $password       = '';
-    private $login          = false;
     private $timeout        = 30; 
-    private $credentials    = '';
     private $OrgNumber      = '';
     private $ArrayTag       = array(
                                     'import-paychecks-result' => true,
@@ -21,9 +18,6 @@ class lodo_fakturabank_fakturabanksalary {
     function __construct() {
         global $_lib;
 
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
-
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
@@ -33,17 +27,9 @@ class lodo_fakturabank_fakturabanksalary {
             }
         }
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
         $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber'))); 
-
-        $this->credentials = "$this->username:$this->password";
     }
     
     
@@ -293,20 +279,14 @@ class lodo_fakturabank_fakturabanksalary {
             return false;
         }
 
+        $_SESSION['oauth_salary_id'] = $SalaryID;
+        $_SESSION['oauth_salary_conf_id'] = $SalaryConfID;
         $fakturabank_salary_id = $this->write($xml);
 
         if (!$fakturabank_salary_id) {
             return false;
         }
 
-
-        $dataH = array();
-        $dataH['SalaryID']             = $SalaryID;
-        $dataH['FakturabankID']   = $fakturabank_salary_id;
-        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-        $dataH['FakturabankDateTime']   = strftime("%F %T");
-        
-        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
         return true;
     }
 
@@ -315,70 +295,57 @@ class lodo_fakturabank_fakturabanksalary {
     function write($xml) {
         global $_lib;
 
-        $page = "/import_paychecks";
+        $page = "/rest/import_paychecks.xml";
         $url  = "$this->protocol://$this->host$page";
-        
-        $headers = array(
-            "POST ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Content-length: ".strlen($xml),
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-        
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
-        // Apply the XML to our curl call
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
-
-        $data = curl_exec($ch); 
-
-        $unauthorized_error = false;
-        if (!($unauthorized_error = strstr($data, "401 Unauthorized"))) {
-            $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
+        if (isset($_SESSION['oauth_paycheck_sent'])) {
+          $data = $_SESSION['oauth_resource']['result'];
+          unset($_SESSION['oauth_paycheck_sent']);
+          unset($_SESSION['oauth_resource']);
         }
-        $ret = false;
-        if ($unauthorized_error) {
-            $_lib['message']->add("Error: lastet opp l&oslash;nnslipp: Du har feil brukernavn eller passord " . $import_paycheck_result['message']);
-            $ret = false;
-        } else if (curl_errno($ch)) {
-            $_lib['message']->add("Error: lastet opp lønnslipp: " . curl_error($ch) . " " . $import_paycheck_result['message']);
-            if (!empty($import_paycheck_result['paycheck-results'])) {
-                $_lib['message']->add("Error info: " . $import_paycheck_result['paycheck-results'][0]['error-message']);
-            }
-            $ret = false;
-        } else {
+        else {
+          $_SESSION['oauth_action'] = 'send_paycheck';
+          $_SESSION['oauth_paycheck_sent'] = true;
+          $oauth_client = new lodo_oauth();
+          $data = $oauth_client->post_resources($url, array('xml' => $xml));
+        }
 
-            // Show me the result
+        $_SESSION['oauth_paycheck_messages'][] = array();
+        $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
+        if ($_SESSION['oauth_resource']['code'] == 201) {
             if ($import_paycheck_result['omitted-paychecks'] == 1) {
-                $_lib['message']->add("L&oslash;nnslipp finnes allerede");
+                $_SESSION['oauth_paycheck_messages'][] = "Error: L&oslash;nnslipp finnes allerede";
                 $ret = false;
-            } else if ($import_paycheck_result['failed-paychecks'] == 1) { // we might get errors even if errno is 0
-                $_lib['message']->add("Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
+            } else if ($import_paycheck_result['failed-paychecks'] == 1) {
+                $_SESSION['oauth_paycheck_messages'][] = "Error: Feil under opplasting: " . $import_paycheck_result['message'];
                 $ret = false;
             } else if ($import_paycheck_result['created-paychecks'] == 0) {
-                $_lib['message']->add("Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . (empty($import_paycheck_result['exception']) ? "Unknown error." : $import_paycheck_result['exception']));
+                $_SESSION['oauth_paycheck_messages'][] = "Error: Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'];
                 $ret = false;
             } else {
-                $_lib['message']->add("L&oslash;nnslippen ble opprettet riktig");
+                $_SESSION['oauth_paycheck_messages'][] = "L&oslash;nnslippen ble opprettet riktig";
                 $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
-       
-        curl_close($ch);
-        // todo return salary id
+        elseif ($_SESSION['oauth_resource']['code'] == 400) $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
+        elseif ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+
+        if ($ret) {
+          $dataH = array();
+          $dataH['SalaryID']              = $SalaryID;
+          $dataH['FakturabankID']         = $ret;
+          $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+          $dataH['FakturabankDateTime']   = strftime("%F %T");
+          $result_salary = $_lib['db']->db_query("select * from salary where SalaryID=" . (int) $dataH['SalaryID']);
+          $salary = $_lib['db']->db_fetch_object($result_salary);
+          if (!$salary->LockedBy) {
+            $dataH['LockedBy']              = $_lib['sess']->get_person('FirstName') . " " . $_lib['sess']->get_person('LastName');
+            $dataH['LockedDate']            = strftime("%F %T");
+          }
+          $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
+          $_SESSION['oauth_paycheck_messages'][] = "Sendt til Fakturabank.";
+        }
+
         return $ret;
     }
 
@@ -391,14 +358,13 @@ class lodo_fakturabank_fakturabanksalary {
             return false;
         }
 
-
         if($size) {
             includelogic('xmldomtoobject/xmldomtoobject');
             $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag));
             #print "\n<hr>$xml_data\n<hr>";
             $import_paychecks_result    = $domtoobject->convert($xml_data);
         } else {
-                $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");            
+                $_SESSION['oauth_paycheck_messages'][] = "Error: XML Dokument tomt - pr&oslash;v igjen: $url";
                 return false;
         }
         // ugly convert from stdClass to array, and slight restructuring

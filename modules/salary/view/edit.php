@@ -1,4 +1,6 @@
 <?
+// needed to access session parameters for oauth
+session_start();
 /* $Id: edit.php,v 1.66 2005/10/28 17:59:41 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
 #########################################
 #This should be placed under firmaoppsett
@@ -12,9 +14,19 @@ $SalaryID       = (int) $_REQUEST['SalaryID'];
 $SalaryConfID   = (int) $_REQUEST['SalaryConfID'];
 $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 
+$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// change only if full(with SalaryID) url
+if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+// and if missing in url, add SalaryID
+else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
+
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
+
+// get all saved messages and remove them
+if (isset($_SESSION['oauth_paycheck_messages']) && is_array($_SESSION['oauth_paycheck_messages'])) foreach ($_SESSION['oauth_paycheck_messages'] as $message) $_lib['message']->add($message);
+unset($_SESSION['oauth_paycheck_messages']);
 
 $query_head = sprintf("
 select
@@ -572,7 +584,6 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
 <? } ?>
 
-<? print $message ?>
 </tr>
 </td>
 
@@ -628,6 +639,8 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryID=<? print $SalaryID ?>&amp;SalaryConfID=<? print $head->SalaryConfID ?>&amp;action_salary_updatesalarycode=1" class="button">Hent kode/feriepenger/arbeidsgiveravgift flagg fra ansatt mal</a><?}?>
 
 
-<? includeinc('bottom') ?>
+<? includeinc('bottom');
+unset($_SESSION['oauth_paycheck_sent']);
+?>
 </body>
 </html>

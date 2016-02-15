@@ -953,9 +953,6 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
 
         $fb->sendsalary($SalaryID, $SalaryConfID);
 
-        $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", 
-                         $_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
-        $_lib['db']->db_query($query);
         //        print "<h1>Feature is not available yet</h1>";
         
     } // else TODO later: handle illegal access attempt

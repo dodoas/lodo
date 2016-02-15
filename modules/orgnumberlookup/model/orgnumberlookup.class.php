@@ -1,14 +1,10 @@
 <?
-#http://gullfisk:rTp3Qzy@brreg.lodo.no/rest/companies/970131450
 
 class lodo_orgnumberlookup_orgnumberlookup {
     private $host           = 'fakturabank.no';
     private $protocol       = 'https';
-    private $username       = '';
-    private $password       = '';
     private $path           = '/rest/companies/';
     private $url            = '';
-    private $credentials    = '';
     public  $startexectime  = '';
     public  $stopexectime   = '';
     public  $diffexectime   = '';
@@ -20,16 +16,9 @@ class lodo_orgnumberlookup_orgnumberlookup {
 
         $this->startexectime  = microtime();
 
-        $this->username = $_lib['setup']->get_value('orgnumberlookup.username');
-        $this->password = $_lib['setup']->get_value('orgnumberlookup.password');
-
-        $this->credentials = "$this->username:$this->password";
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
         $this->url = "$this->protocol://$this->host$this->path";
-        #print "$this->url<br>\n";
-        #print "$this->credentials   <br>\n";
-        #$this->url = "$this->protocol://$this->username:$this->password@$this->host$this->path";
     }
 
     function __destruct() {
@@ -61,8 +50,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
             "Content-type: text/xml;charset=\"utf-8\"",
             "Accept: application/xml",
             "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "Authorization: Basic " . base64_encode($this->credentials)
+            "Pragma: no-cache"
         );
 
         $ch = curl_init();
