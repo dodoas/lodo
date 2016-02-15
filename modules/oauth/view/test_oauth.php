@@ -20,7 +20,7 @@ if (isset($_SESSION['oauth_token'])) {
 // redirect url and parameters we get
 if (isset($_REQUEST['get']) || isset($_REQUEST['post'])) {
   $_SESSION['oauth_action'] = 'test';
-  $_SESSION['oauth_tmp_redirect_back_url'] = "http://$_SERVER[HTTP_HOST]?t=oauth.test_oauth&info=show";
+  $_SESSION['oauth_tmp_redirect_back_url'] = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]?t=oauth.test_oauth&info=show";
   $params_json = json_decode($_REQUEST['params'], true);
 }
 

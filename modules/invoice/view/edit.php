@@ -9,8 +9,9 @@ $InvoiceID = (int) $_REQUEST['InvoiceID'];
 $inline       = $_REQUEST['inline'];
 #print_r($_REQUEST);
 
-$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$tmp_redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 // change only if full(with InvoiceID) url
+var_dump($_SETUP);
 if (strpos($tmp_redirect_url, 'InvoiceID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
 // and if missing in url, add InvoiceID
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "InvoiceID=" . $InvoiceID;

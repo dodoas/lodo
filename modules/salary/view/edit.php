@@ -14,7 +14,7 @@ $SalaryID       = (int) $_REQUEST['SalaryID'];
 $SalaryConfID   = (int) $_REQUEST['SalaryConfID'];
 $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 
-$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$tmp_redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 // change only if full(with SalaryID) url
 if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
 // and if missing in url, add SalaryID

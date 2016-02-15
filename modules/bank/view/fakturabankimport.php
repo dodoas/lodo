@@ -7,7 +7,7 @@ $AccountNumber  = $_REQUEST['AccountNumber'];
 $AccountID      = $_REQUEST['AccountID'];
 $Bank      		= $_REQUEST['Bank'];
 
-$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$tmp_redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 // change only if full(with AccountID) url
 if (strpos($tmp_redirect_url, 'AccountID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
 // and if missing in url, add AccountPlanID
