@@ -3,10 +3,11 @@
 
 // Redirects back to the page that requested the OAuth resource
 function redirect() {
+    global $_SETUP;
     $redirect_url = $_SESSION['oauth_tmp_redirect_back_url'];
     unset($_SESSION['oauth_tmp_redirect_back_url']);
     unset($_SESSION['oauth_action']);
-    if (empty($redirect_url)) $redirect_url = "http://$_SERVER[HTTP_HOST]/lodo.php?t=lodo.main";
+    if (empty($redirect_url)) $redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]/lodo.php?t=lodo.main";
     header('Location: ' . $redirect_url); 
 }
 
