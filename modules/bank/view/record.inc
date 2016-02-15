@@ -11,6 +11,13 @@ includelogic('fakturabank/bankreconciliationreason');
 if($_lib['input']->getProperty('action_bank_periodremove')) {
     $bankaccount->periodremove();
 }
+elseif($_lib['input']->getProperty('action_bank_import_from_fakturabank')) {
+    $fbvoting = new lodo_fakturabank_fakturabankvoting();
+    $_SESSION['oauth_balance_account_id'] = $AccountID;
+    $_SESSION['oauth_balance_period'] = $Period;
+    $_SESSION['oauth_balance_country'] = $account->CountryCode;
+    $fbvoting->import_transactions($AccountID, $Period, $account->CountryCode);
+}
 elseif($_lib['input']->getProperty('action_bank_zerojournalid')) {
     $bank->ZeroAccountLineJournalID();
 }

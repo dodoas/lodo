@@ -4,9 +4,6 @@
 includelogic("accountplan/scheme");
 
 $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
-if($_lib['input']->getProperty('action_refresh_sheme')) {
-    $schemeControl->refreshSchemes();
-}
 
 $schemes = $schemeControl->listSchemes();
 

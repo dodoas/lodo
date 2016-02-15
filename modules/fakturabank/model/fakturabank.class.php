@@ -3,6 +3,8 @@
 includelogic('invoice/invoice');
 includelogic('fakturabank/fakturabankvoting');
 includelogic('exchange/exchange');
+# oauth
+includelogic('oauth/oauth');
 # needed for updating unit from fakturabank
 includelogic('orgnumberlookup/orgnumberlookup');
 includelogic("accountplan/scheme");
@@ -10,12 +12,7 @@ includelogic("accountplan/scheme");
 class lodo_fakturabank_fakturabank {
     private $host           = '';
     private $protocol       = '';
-    private $username       = '';
-    private $password       = '';
-    private $login          = false;
     private $timeout        = 30;
-    private $retrievestatus = '';
-    private $credentials    = '';
     private $OrgNumber      = '';
     public  $startexectime  = '';
     public  $stopexectime   = '';
@@ -37,10 +34,6 @@ class lodo_fakturabank_fakturabank {
         global $_lib;
         $this->startexectime  = microtime();
 
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
-        $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
-
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
@@ -50,17 +43,10 @@ class lodo_fakturabank_fakturabank {
             }
         }
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
         $this->OrgNumber= strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
 
-        $this->credentials = "$this->username:$this->password";
     }
 
     function __destruct() {
@@ -71,37 +57,53 @@ class lodo_fakturabank_fakturabank {
     ####################################################################################################
     #Get a list of all outgoing invoices from fakturabank
     public function outgoing() {
-        global $_lib;
-        #https://fakturabank.no/invoices/outgoing.xml?orgnr=981951271
+        global $_lib, $_SETUP;
+        #https://fakturabank.no/invoices.xml?orgnr=981951271
 
-        $page       = "invoices/outgoing.xml";
+        $page       = "rest/invoices.xml";
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
-        $params     .= "&supplier_status=for_bookkeeping"; #Only retrieve with status 'for_bookkeeping'
-        $params     .= "&order=invoiceno&sord=asc";
+        $params     .= "&supplier_status=" . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
+        $params     .= "&order=invoiceno&sord=asc&type=outgoing";
 
         $url    = "$this->protocol://$this->host/$page$params";
-        $_lib['sess']->debug($url);
+        $_lib['message']->add($url);
 
-        $invoicesO = $this->retrieve($page, $url);
-		$validated_invoices = $this->validate_outgoing($invoicesO);
-		$this->save_outgoing($validated_invoices);
+        if (isset($_SESSION['oauth_invoices_fetched'])) {
+          $data = $_SESSION['oauth_resource']['result'];
+        }
+        else {
+          $_SESSION['oauth_action'] = 'outgoing_invoices';
+          $oauth_client = new lodo_oauth();
+          $data = $oauth_client->get_resources($url);
+        }
+        $invoicesO = $this->retrieve($data);
+        $validated_invoices = $this->validate_outgoing($invoicesO);
+        $this->save_outgoing($validated_invoices);
         return $validated_invoices;
     }
 
     ####################################################################################################
     #Get a list of all incoming invoices from fakturabank
     public function incoming() {
-        global $_lib;
+        global $_lib, $_SETUP;
         #https://fakturabank.no/invoices?orgnr=981951271
 
-        $page       = "invoices";
-        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc'; // add top limit rows=1000, otherwise we only get one record
-        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
+        $page       = "rest/invoices.xml";
+        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc&type=incoming'; // add top limit rows=1000, otherwise we only get one record
+        $params    .= '&customer_status=' . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
 
-        $invoicesO = $this->retrieve($page, $url);
+        if (isset($_SESSION['oauth_invoices_fetched'])) {
+          $data = $_SESSION['oauth_resource']['result'];
+        }
+        else {
+          $_SESSION['oauth_action'] = 'incoming_invoices';
+          $oauth_client = new lodo_oauth();
+          $data = $oauth_client->get_resources($url);
+        }
+        $invoicesO = $this->retrieve($data);
         if (empty($invoicesO)) {
             return false;
         }
@@ -411,56 +413,19 @@ class lodo_fakturabank_fakturabank {
 
     ####################################################################################################
     #READ XML
-    private function retrieve($page, $url) {
+    private function retrieve($xml_data) {
         global $_lib;
 
-        if(!$this->login) return false;
-
-        $headers = array(
-            "GET ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
-
-        $xml_data           = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
-            $_lib['message']->add("Error: " . curl_error($ch));
-        } else {
-            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
-        }
-        curl_close($ch);
-
-
         $size = strlen($xml_data);
-	$xml_std_header = '<?xml version="1.0"?>';
-	$std_hd_len = strlen($xml_std_header);
-	if (substr($xml_data, 0, $std_hd_len) == $xml_std_header) {
-		$xml_data = trim(substr($xml_data, $std_hd_len));
-	}
+        $xml_std_header = '<?xml version="1.0"?>';
+        $std_hd_len = strlen($xml_std_header);
+        if (substr($xml_data, 0, $std_hd_len) == $xml_std_header) {
+          $xml_data = trim(substr($xml_data, $std_hd_len));
+        }
         if(substr($xml_data,0,9) != '<Invoices') {
-
             $_lib['message']->add($xml_data);
-
+            if ($_SESSION['oauth_resource']['code'] == 403) $_lib['message']->add("Utilstrekkelige rettigheter i fakturabank!");
         } else {
-
             if($size) {
                 includelogic('xmldomtoobject/xmldomtoobject');
                 $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag, 'attributesOfInterest' => $this->attributesOfInterest));
@@ -478,65 +443,43 @@ class lodo_fakturabank_fakturabank {
     # Sets the given status and comment on an invoice in Fakturabank with a given internal FakturabankID
     #input: id (FakturabankI internal ID, status[registered], comment (without & signs)
     #outoupt: changed status event in Fakturabank
-    private function setEvent($id, $status, $comment) {
+    private function setEvents($events) {
         global $_lib;
         $retstatus = true;
 
+        if (empty($events)) return true;
         ############################################################################################
         #Make Event XML
         $dom            = new DOMDocument( "1.0", "UTF-8" );
-        $dom_event      = $dom->createElement('event');
-        $dom_name       = $dom->createElement('name', $status);
-        $dom_comment    = $dom->createElement('comment', $comment);
+        $dom_events     = $dom->createElement('events');
+        foreach ($events as $event) {
+          $dom_event      = $dom->createElement('event');
+          $dom_id         = $dom->createElement('id', $event['id']);
+          $dom_name       = $dom->createElement('name', $event['status']);
+          $dom_comment    = $dom->createElement('comment', $event['comment']);
+
+          $dom_event->appendChild($dom_id);
+          $dom_event->appendChild($dom_name);
+          $dom_event->appendChild($dom_comment);
+
+          $dom_events->appendChild($dom_event);
+        }
         $dom_company    = $dom->createElement('company');
         $dom_identifier = $dom->createElement('identifier', $this->OrgNumber);
-
         $dom_company->appendChild($dom_identifier);
-        $dom_event->appendChild($dom_name);
-        $dom_event->appendChild($dom_comment);
-        $dom_event->appendChild($dom_company);
-        $dom->appendChild($dom_event);
+        $dom_events->appendChild($dom_company);
+        $dom->appendChild($dom_events);
         $xml = $dom->saveXML();
 
         ############################################################################################
         #Set event status on fakturabank server
-        $page   = "invoices/$id/events";
+        $page   = "rest/statuses.xml";
         $url    = "$this->protocol://$this->host/$page";
 
-        #print("setEvent: $url: $xml");
-
-        $headers = array(
-            "GET " . $page . " HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
-        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
-
-        $returndata = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Error: " . curl_error($ch));
-            $retstatus = false;
-        } else {
-            #$_lib['message']->add("Satt event: $returndata");
-        }
-        curl_close($ch);
-        return $retstatus;
+        $client = new lodo_oauth();
+        $_SESSION['oauth_action'] = 'set_invoice_statuses';
+        $client->post_resources($url, array('xml' => $xml));
+        return true;
     }
 
     private function extractOutgoingAccountingCost(&$InvoiceO) {
@@ -863,7 +806,9 @@ class lodo_fakturabank_fakturabank {
 
             //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
 
-            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 'supplier', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID);
+            $_CompanyID = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+            $_SchemeID  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            list($account, $SchemeID)  = $this->find_reskontro($_CompanyID, 'supplier', $_SchemeID);
             if($account) {
                 $InvoiceO->AccountPlanID   = $account->AccountPlanID;
 
@@ -1344,8 +1289,10 @@ class lodo_fakturabank_fakturabank {
 
     ################################################################################################
     public function registerincoming() {
-        global $_lib, $accounting;
+        global $_lib, $accounting, $_SETUP;
 
+        // since when we load the page we already have fetched invoices
+        $_SESSION['oauth_invoices_fetched'] = true;
         $invoicesO        = $this->incoming();
         $conversion_rate  = 0;
         $is_foreign       = false;
@@ -1354,6 +1301,7 @@ class lodo_fakturabank_fakturabank {
 
         if (!empty($invoicesO->Invoice)) {
 
+        $events = array();
         foreach($invoicesO->Invoice as &$InvoiceO) {
             $is_foreign = false;
             #If all essential data quality is ok - download the invoice
@@ -1508,21 +1456,25 @@ class lodo_fakturabank_fakturabank {
                 $fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                 #Set status in fakturabank
-                $comment = "Lodo PHP Invoicein ID: " . $ID . " accounted " . $_lib['sess']->get_session('Datetime');
-                $this->setEvent($InvoiceO->FakturabankID, 'accounted', $comment);
+                $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . strftime("%F %T");
+                $events[] = array( 'id' => $InvoiceO->FakturabankID, 'status' => $_SETUP['FB_INVOICE_UPDATE_STATUS'], 'comment' => $comment);
 
             } else {
                 #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
             }
-        }
+          }
+          $this->setEvents($events);
         }
     }
 
     public function registeroutgoing() {
-        global $_lib;
+        global $_lib, $_SETUP;
 
+        // since when we load the page we already have fetched invoices
+        $_SESSION['oauth_invoices_fetched'] = true;
         $invoicesO = $this->outgoing();
 
+        $events = array();
         foreach($invoicesO->Invoice as &$InvoiceO) {
             if($InvoiceO->Journal) {
 
@@ -1647,8 +1599,8 @@ class lodo_fakturabank_fakturabank {
                     $fbvoting->update_fakturabank_outgoing_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                     #Set status in fakturabank
-                    $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " accounted " . $_lib['sess']->get_session('Datetime');
-                    $this->setEvent($InvoiceO->FakturabankID, 'accounted', $comment);
+                    $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . strftime("%F %T");
+                    $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => $_SETUP['FB_INVOICE_UPDATE_STATUS'], 'comment' => $comment);
 
                 } else {
                     #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
@@ -1658,6 +1610,7 @@ class lodo_fakturabank_fakturabank {
                 $invoice->journal();
             }
         }
+        $this->setEvents($events);
     }
 
     ################################################################################################
@@ -2243,82 +2196,71 @@ class lodo_fakturabank_fakturabank {
 
         #print "<br>\n<br>\n$xml\n<br>\n<br>";
 
-        $page = "/invoices";
+        $page = "/rest/invoices.xml";
         $url  = "$this->protocol://$this->host$page";
 
-        $headers = array(
-            "POST ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Content-length: ".strlen($xml),
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
-
-        // Apply the XML to our curl call
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
-
-        $data = curl_exec($ch);
-        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-        $body = substr($data, $header_size);
-        #$_lib['message']->add("FB->write()->exec()");
-
-        if (curl_errno($ch) || curl_getinfo($ch, CURLINFO_HTTP_CODE) != 201) {
-            if (curl_errno($ch)) $_lib['message']->add("Error: opprette faktura: " . curl_error($ch));
-            else $_lib['message']->add("Error: opprette faktura: " . $body);
-        } else {
-            // Show me the result
-            $_lib['message']->add(microtime() . " Opprettet faktura: $i");
-            $_lib['message']->add("<pre>$body</pre>");
-            #print_r(curl_getinfo($ch));
-            $this->success  = true;
+        if (isset($_SESSION['oauth_invoice_sent'])) {
+          unset($_SESSION['oauth_invoice_sent']);
+          $data = $_SESSION['oauth_resource'];
+          unset($_SESSION['oauth_resource']);
         }
+        else {
+          $_SESSION['oauth_action'] = 'send_invoice';
+          $_SESSION['oauth_invoice_object'] = $InvoiceO;
+          $oauth_client = new lodo_oauth();
+          $oauth_client->post_resources($url, array("xml" => $xml));
+          $_SESSION['oauth_invoice_sent'] = true;
+          $data = $_SESSION['oauth_resource'];
+        }
+        $this->save_invoice_export_data($data);
+        return true;
+    }
 
-        curl_close($ch);
-        return $this->success;
+    public function save_invoice_export_data($data) {
+      global $_lib;
+      if ($data['code'] != 201) { // not created
+        $_SESSION['oauth_invoice_error'] = "Error: " . $data['result'];
+        if ($data['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+      }
+      else {
+        $dataH = array();
+        $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
+        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+        $dataH['FakturabankDateTime']   = strftime("%F %T");
+        $result_invoice = $_lib['db']->db_query("select * from invoiceout where InvoiceID=" . (int) $dataH['InvoiceID']);
+        $invoice = $_lib['db']->db_fetch_object($result_invoice);
+        if (!$invoice->Locked) {
+          $dataH['Locked']   = 1;
+          $dataH['LockedAt'] = strftime("%F %T");
+          $dataH['LockedBy'] = $_lib['sess']->get_person('PersonID');
+        }
+        $_SESSION['oauth_invoice_error'] = "Success";
+        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+      }
     }
 
     public function updateCarFromFakturabank($CarCode, $CarID) {
       global $_lib;
 
-      if(!$this->login) return false;
-
       $page = "rest/cars.xml?orgno=". $this->OrgNumber ."&code=". $CarCode;
       $url = $this->construct_fakturabank_url($page);
 
-      $headers = array(
-          "GET ".$page." HTTP/1.0",
-          "Content-type: text/xml;charset=\"utf-8\"",
-          "Accept: application/xml",
-          "Cache-Control: no-cache",
-          "Pragma: no-cache",
-          "SOAPAction: \"run\"",
-          "Authorization: Basic " . base64_encode($this->credentials)
-      );
+      $_SESSION['oauth_car_code'] = $CarCode;
+      $_SESSION['oauth_car_id']   = $CarID;
 
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $url);
-      curl_setopt($ch, CURLOPT_HEADER, 0);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      if (isset($_SESSION['oauth_car_info_fetched'])) {
+        unset($_SESSION['oauth_car_info_fetched']);
+        $data = $_SESSION['oauth_resource']['result'];
+        unset($_SESSION['oauth_resource']);
+      }
+      else {
+        $_SESSION['oauth_action'] = 'get_car_info';
+        $oauth_client = new lodo_oauth();
+        $_SESSION['oauth_car_info_fetched'] = true;
+        $data = $oauth_client->get_resources($url);
+      }
 
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-      curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
-
-      $result = curl_exec($ch);
+      $result = $data;
       includelogic('xmldomtoobject/xmldomtoobject');
       $domtoobject = new empatix_framework_logic_xmldomtoobject(array());
       $car = $domtoobject->convert($result);
