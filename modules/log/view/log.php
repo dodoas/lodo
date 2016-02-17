@@ -48,6 +48,8 @@ var data = <? include('log.json'); ?>;
 var max_entries = 20;
 var colors = [ "F22", "A33", "844", "655", "666", "565", "484", "3A3", "2F2" ];
 
+// parses timestamp string and returns it in miliseconds after EPOCH
+// ignoring the minutes and seconds
 function parse_ts(TS) {
     var s = TS.split(/(-| |:)/);
     var a = [];
@@ -55,10 +57,19 @@ function parse_ts(TS) {
         a[i/2] = s[i];
     }
 
+    // month(the second param) is 0 for january and 11 for december, that is why
+    // there is a '- 1' there
     var date = new Date(a[0], a[1] - 1, a[2], a[3]);
     return date.getTime();
 }
 
+// calculates a percentage of usage(?) by the following algorithm
+// min(1.0, (7*entries)/(5*diff))
+// entries = number of entries fetched from logusage table of a db, max 10
+// diff = a diff in days since oldest entry in list
+// example: today is 2016-02-17, we get a list of 10 last logins of which the
+// oldest is 2016-01-09 at 23:00, diff in days is ~38.42 days,
+// so the rating is calculated as 0.3643... or 36%
 function rating(index)
 {
     var array = data[index];
@@ -66,12 +77,15 @@ function rating(index)
     var date = new Date();
     var now = date.getTime();
 
+    // limited to 10 max by query in log class
     var entries = array.length;
 
     if(entries <= 0)
         return 0;
 
     var first = parse_ts(array[entries - 1]['TS']);
+    // diff in days between the current day and first login in the list
+    // timestamps are in miliseconds so 60*60*24*1000 = 1 day
     var diff = (now - first) / (60*60*24*1000);
 
     var rating = Math.min( (7 * entries) / (5 * diff ), 1.0 );
@@ -111,10 +125,10 @@ $(document).ready(
 
                 var array = data[index];
 
-                //entries = 20;
+                //entries = 10;
                 //diff = 70;
 
-                // (n / (60*60*24* d )) * 151200 = (7*n) / (4*d)
+                // (n / (60*60*24* d )) * 151200 = (7*n) / (5*d)
                 var percent = rating(index);
 
                 var color = colors[ Math.round( (colors.length - 1) * percent / 100) ];
@@ -122,7 +136,7 @@ $(document).ready(
                 var row = $('<div>')
                     .addClass('row')
                     .css({'backgroundColor': '#' + color})
-                    .html('<h1>' + index + '</h1><h2>'+percent+'%</h2>');
+                    .html('<h1>' + index + ' ' + percent+'%</h1>');
 
 
                 var toggle = false;
