@@ -44,6 +44,14 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
   return $Changed;
 }
 
+function CheckIfAccountPlanChanged($SalaryID) {
+  global $_lib;
+  $Salary = $_lib['storage']->get_row(array('query' => "SELECT * FROM salary WHERE SalaryID = " . $SalaryID));
+  // Check if AccountPlanID change,
+
+  return $_POST["salary_AccountPlanID_". $SalaryID] != $Salary->AccountPlanID;
+}
+
 $debug = false;
 $VoucherType = 'L';
 
@@ -565,12 +573,13 @@ elseif($_lib['input']->getProperty('action_salary_internal')) {
 
     $_lib['storage']->db_update_multi_table($head, array('salary' => 'SalaryID'));
 }
-if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new'))
-{
+
+if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new')){
   $SalaryLineIDs = array();
   $SalaryLinesCount = $_REQUEST["fieldcount"];
   for ($i = 1; $i <= $SalaryLinesCount; $i++) { $SalaryLineIDs[] = $_REQUEST[$i]; }
-  if (!($_lib['input']->getProperty('action_salary_new')) && CheckIfAnythingChanged($SalaryID, $SalaryLineIDs, $_REQUEST)) {
+
+  if (!($_lib['input']->getProperty('action_salary_new')) && CheckIfAnythingChanged($SalaryID, $SalaryLineIDs)) {
     // set who updated and when if anything changed
     $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
     $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
@@ -703,6 +712,13 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
 
   #$_POST['salary_VacationPayment_'.$SalaryID]           = $VacationPayment; 
   $_POST['salary_AmountThisPeriod_'.$_POST['SalaryID']] = $sumTotal;
+
+  if(CheckIfAccountPlanChanged($SalaryID)){
+    // Update SalaryConfLine if AccountPlanID is updated
+    $q = "SELECT * FROM salaryconf WHERE AccountPlanID = ". $_POST["salary_AccountPlanID_". $SalaryID]." LIMIT 1";
+    $salaryConf = $_lib['storage']->get_row(array('query' => $q));
+    $_POST["salary_SalaryConfID_". $SalaryID] = $salaryConf->SalaryConfID;
+  }
 
   #print_r($_POST);
   $_lib['storage']->db_update_multi_table($_POST, $tables);
