@@ -406,6 +406,9 @@ class form3
         if(isset($args['OnKeyUp'])) {
             $element .= " OnKeyUp=\"".$args['OnKeyUp']."\" ";
         }
+        if(isset($args['OnKeyDown'])) {
+            $element .= " OnKeyDown=\"".$args['OnKeyDown']."\" ";
+        }
         if(isset($args['confirm'])) {
             $element .= " onClick=\"return confirm('" . $args['confirm'] . "')\"";
         }
@@ -611,6 +614,11 @@ class form3
         {
             $id = $name;
         }
+        if(isset($args['OnChange']))
+        {
+          $change = " OnChange=\"".$args['OnChange']."\" ";
+        }
+        else $change = "";
 
         // Disabled fields doesn't get submited
         // a quick fix for this is to make the selectbox with a different name than
@@ -620,7 +628,7 @@ class form3
             $element    .= "<select name=\"".$name."_disabled\" id=\"$id\" class=\"$class\" disabled=\"disabled\" ";
         }
         else {
-            $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" ";
+            $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" $change ";
         }
         if($tabindex)  { $element .= " tabindex=\"$tabindex\""; }
         if($accesskey) { $element .= " accesskey=\"$args[accesskey]\""; }
