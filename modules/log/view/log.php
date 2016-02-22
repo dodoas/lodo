@@ -45,7 +45,6 @@ a { color: black; }
 
 var data = <? include('log.json'); ?>;
 
-var max_entries = 20;
 var colors = [ "F22", "A33", "844", "655", "666", "565", "484", "3A3", "2F2" ];
 
 // parses timestamp string and returns it in miliseconds after EPOCH
@@ -117,6 +116,7 @@ for(k in data)
 }
 
 var data_keys = keys.sort(desc_sort);
+var toggle = false;
 
 $(document).ready(
     function() {
@@ -125,55 +125,47 @@ $(document).ready(
 
                 var array = data[index];
 
-                //entries = 10;
+                //entries = 20;
                 //diff = 70;
 
                 // (n / (60*60*24* d )) * 151200 = (7*n) / (5*d)
                 var percent = rating(index);
 
                 var color = colors[ Math.round( (colors.length - 1) * percent / 100) ];
+                var row_text = '<b>' + index + '</b> - ' + data[index][0]['Email'] + ' - ' + data[index][0]['TS'] + '<br />';
 
-                var row = $('<div>')
-                    .addClass('row')
-                    .css({'backgroundColor': '#' + color})
-                    .html('<h1>' + index + ' ' + percent+'%</h1>');
-
-
-                var toggle = false;
                 var hide_button = $('<a>')
-                    .text('hide')
+                    .text('skjul')
                     .attr({'href': '#'})
                     .click(function(){
-                            if(confirm('Are you sure you want to hide this item?'))
+                            if(confirm('Er du sikker på at du vil skjule dette?'))
                             {
                                 row.remove();
                             }
                         });
-                var inner_row = $('<div>')
-                    .text('more info')
-                    .css({'cursor': 'pointer', 'margin': '5px'})
+
+                var row = $('<div>')
+                    .addClass('row')
+                    .css({'backgroundColor': '#' + color, 'cursor': 'pointer'})
+                    .html(row_text)
                     .click(function() {
                             if(toggle == false)
                             {
-                                var str = ''
+                                var text = '<b>' + index + '</b><br />';
                                 for(l in array)
                                 {
-                                    str += array[l]['Email'] + ' - ' + array[l]['TS'] + '<br />';
+                                    text += array[l]['Email'] + ' - ' + array[l]['TS'] + '<br />';
                                 }
-                                inner_row.html(str + '<br />hide info');
+                                row.html(text);
+                                row.append(hide_button);
                             }
                             else
                             {
-                                inner_row.text('more info');
+                                row.html(row_text);
                             }
 
                             toggle = !toggle;
                         });
-
-                row
-                    .append(hide_button)
-                    .append(inner_row);
-
 
                 $('body').append(row);
             })(data_keys[d]);
