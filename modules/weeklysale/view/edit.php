@@ -467,7 +467,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <? }
                 } ?>
                 <td>
-                <td colspan=7">
+                <td colspan="7">
             </tr>
             <tr>
                 <td colspan="2">Prosjekter</td>
