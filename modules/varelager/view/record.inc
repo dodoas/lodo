@@ -92,6 +92,7 @@ elseif($_REQUEST['action_varelager_reload_products']) {
                                  $VareLagerID, $row->ProductID);
         $current_result = $_lib['db']->db_query($current_query);
         $post = $_lib['db']->db_fetch_assoc($current_result);
+        $post_copy = $post;
 
         if(!$post) {
             $post = array();
@@ -113,7 +114,7 @@ elseif($_REQUEST['action_varelager_reload_products']) {
         $post['varelagerline_BulkSize'] = $row->Bulksize;
         $post['varelagerline_RealProductNumber'] = $row->ProductNumber;
 
-        if(!$post) {
+        if(!$post_copy) {
             // Add new varelagerline
             $post['varelagerline_CostPrice']   = $row->UnitCostPrice;
             $post['varelagerline_Antall']      = 0;
