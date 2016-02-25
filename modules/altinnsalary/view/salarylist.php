@@ -26,7 +26,7 @@ print $_lib['message']->get();
 <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist" method="post">
   <p>
     Periode:
-    <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'periode', 'value' => $_periode)); ?>
+    <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'periode', 'value' => $_periode, "access" => $_lib['sess']->get_person('AccessLevel'))); ?>
     <? print $_lib['form3']->submit(array('name'=>'action_show_salaries', 'value'=>'Vis l&oslash;nnslipper')); ?>
   </p>
 </form>

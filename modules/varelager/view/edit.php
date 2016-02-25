@@ -73,9 +73,9 @@ print $_lib['sess']->doctype
         $lastProject = "";
         $lastShelf = "";
 
-        $departmentSum = -1;
-        $projectSum = -1;
-        $shelfSum = -1;
+        $departmentSum = null;
+        $projectSum = null;
+        $shelfSum = null;
         $departmentAmount = 0;
         $projectAmount = 0;
         $shelfAmount = 0;
@@ -83,7 +83,7 @@ print $_lib['sess']->doctype
         function sumDepartment() {
             global $departmentSum, $departmentAmount, $lastDepartment, $_lib;
 
-            if($departmentSum != -1) {
+            if(!is_null($departmentSum)) {
                 printf("<tr style='background-color: #888;'><td colspan='2'><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastDepartment, 
                        $_lib['format']->Amount(array('value'=>$departmentSum, 'return'=>'value')),
@@ -95,7 +95,7 @@ print $_lib['sess']->doctype
         function sumProject() {
             global $projectSum, $projectAmount, $lastProject, $_lib;
 
-            if($projectSum != -1) {
+            if(!is_null($projectSum)) {
                 printf("<tr style='background-color: #aaa;'><td colspan='2'><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastProject, 
                        $_lib['format']->Amount(array('value'=>$projectSum, 'return'=>'value')),
@@ -107,7 +107,7 @@ print $_lib['sess']->doctype
         function sumShelf() {
             global $shelfSum, $shelfAmount, $lastShelf, $_lib;
 
-            if($shelfSum != -1) {
+            if(!is_null($shelfSum)) {
                 printf("<tr style='background-color: #ccc;'><td colspan='2'><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastShelf, 
                        $_lib['format']->Amount(array('value'=>$shelfSum, 'return'=>'value')),
@@ -128,8 +128,8 @@ print $_lib['sess']->doctype
                 $lastShelf = "";
 
                 $departmentSum = 0;
-                $projectSum = -1;
-                $shelfSum = -1;
+                $projectSum = null;
+                $shelfSum = null;
                 $departmentAmount = 0;
                 $projectAmount = 0;
                 $shelfAmount = 0;
@@ -145,7 +145,7 @@ print $_lib['sess']->doctype
                 $lastShelf = "";
 
                 $projectSum = 0;
-                $shelfSum = -1;
+                $shelfSum = null;
                 $projectAmount = 0;
                 $shelfAmount = 0;
                 
