@@ -312,6 +312,34 @@ class logic_invoicein_invoicein implements Iterator {
                 $_lib['message']->add('Sted mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
+        if(!$invoicein->IName) {
+            if($accountplan->AccountName) {
+                $args['invoicein_IName_' . $ID] = $accountplan->AccountName;
+                $_lib['message']->add('Navn kopiert fra leverand&oslash;r kontoplan');
+            } else {
+                $_lib['message']->add('Navn mangler p&aring; leverand&oslash;r kontoplan');
+            }
+        }
+        if(!$invoicein->IAddress) {
+            if($accountplan->Address) {
+                $args['invoicein_IAddress_' . $ID] = $accountplan->Address;
+                $_lib['message']->add('Adresse kopiert fra leverand&oslash;r kontoplan');
+            } else {
+                $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
+            }
+        }
+        if(!$invoicein->DZipCode) {
+                $args['invoicein_DZipCode_' . $ID] = $accountplan->ZipCode;
+        }
+        if(!$invoicein->DName) {
+                $args['invoicein_DName_' . $ID] = $accountplan->AccountName;
+        }
+        if(!$invoicein->DCity) {
+                $args['invoicein_DCity_' . $ID] = $accountplan->City;
+        }
+        if(!$invoicein->DAddress) {
+                $args['invoicein_DAddress_' . $ID] = $accountplan->Address;
+        }
         if(!$invoicein->SupplierBankAccount) {
             if($accountplan->DomesticBankAccount) {
                 $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
@@ -322,6 +350,10 @@ class logic_invoicein_invoicein implements Iterator {
                 $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
+        if(!$invoicein->CustomerAccountPlanID) {
+          $args['invoicein_CustomerAccountPlanID_' . $ID] =  $_lib['sess']->get_companydef('OrgNumber');
+        }
+        $args['invoicein_RemittanceAmount_'.$ID] = $args['invoicein_TotalCustPrice_'.$ID];
 
         if(($args['invoicein_DepartmentID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
             $args['invoicein_DepartmentID_'.$ID] = $accountplan->DepartmentID;
@@ -420,10 +452,14 @@ class logic_invoicein_invoicein implements Iterator {
      * @return Current iteration
      */
     public function add() {
+        global $_lib;
         $dataH['CustomerBankAccount']       = $_lib['sess']->get_companydef('BankAccount');
         $old_pattern                        = array("/[^0-9]/");
         $new_pattern                        = array("");
         $dataH['CustomerAccountPlanID']     = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
+        $add_invoicein = "INSERT INTO invoicein(ID, VoucherType, InsertedByPersonID, InsertedDateTime, Imported) VALUES(NULL, 'U',". $_lib['sess']->get_person('PersonID') .", NOW(), 0)";
+        $_lib['db']->db_insert($add_invoicein);
+        return $_lib['db']->db_insert_id();
     }
 
     ################################################################################################

@@ -189,12 +189,21 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
 
 <table class="lodo_data">
 <thead>
+<? if ($invoicein->Imported) { ?>
     <tr>
         <td>Bilagsnummer</td>
         <td><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$invoicein->VoucherType&amp;voucher_JournalID=$invoicein->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $invoicein->VoucherType ?><? print $invoicein->JournalID ?></a></td>
         <td>Bilagsnummer</td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'JournalID', 'pk' => $ID, 'value'=>$invoicein->JournalID, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
+<? } else { ?>
+    <tr>
+        <td>Bilagsnummer</td>
+        <td><? print $invoicein->JournalID ?></td>
+        <td></td>
+        <td></td>
+    </tr>
+<? } ?>
     <tr>
         <td>Fakturanummer</td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceNumber', 'pk' => $ID, 'value'=>$invoicein->InvoiceNumber, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
@@ -215,7 +224,7 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
     </tr>
     <tr>
         <td><b>Betal (bel&oslash;p)</b></td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'RemittanceAmount', 'pk'=>$ID, 'value' => $invoicein->RemittanceAmount)) ?></td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'TotalCustPrice', 'pk'=>$ID, 'value' => $invoicein->TotalCustPrice)) ?></td>
         <td>Betalingsm&aring;te</td>
         <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'PaymentMeans', 'pk' => $ID, 'value' => $invoicein->PaymentMeans, 'query' => 'form.PaymentMeans', 'width' => 30)) ?></td>
     </tr>
