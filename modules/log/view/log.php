@@ -22,6 +22,7 @@ body
      margin-bottom: 5px;
  -moz-border-radius: 15px;
   border-radius: 15px;
+  text-align: left;
 }
 .row h1 {
     font: 20px "helvetica";
@@ -64,9 +65,9 @@ function parse_ts(TS) {
 
 // calculates a percentage of usage(?) by the following algorithm
 // min(1.0, (7*entries)/(5*diff))
-// entries = number of entries fetched from logusage table of a db, max 10
+// entries = number of entries fetched from logusage table of a db, max 20
 // diff = a diff in days since oldest entry in list
-// example: today is 2016-02-17, we get a list of 10 last logins of which the
+// example: today is 2016-02-17, we get a list of 20 last logins of which the
 // oldest is 2016-01-09 at 23:00, diff in days is ~38.42 days,
 // so the rating is calculated as 0.3643... or 36%
 function rating(index)
@@ -76,7 +77,7 @@ function rating(index)
     var date = new Date();
     var now = date.getTime();
 
-    // limited to 10 max by query in log class
+    // limited to 20 max by query in log class
     var entries = array.length;
 
     if(entries <= 0)
@@ -132,7 +133,7 @@ $(document).ready(
                 var percent = rating(index);
 
                 var color = colors[ Math.round( (colors.length - 1) * percent / 100) ];
-                var row_text = '<b>' + index + '</b> - ' + data[index][0]['Email'] + ' - ' + data[index][0]['TS'] + '<br />';
+                var row_text = '<b>' + index + '</b> - ' + data[index][0]['TS'] + ' - ' + data[index][0]['Email'] + '<br />';
 
                 var hide_button = $('<a>')
                     .text('skjul')
@@ -154,7 +155,7 @@ $(document).ready(
                                 var text = '<b>' + index + '</b><br />';
                                 for(l in array)
                                 {
-                                    text += array[l]['Email'] + ' - ' + array[l]['TS'] + '<br />';
+                                    text += array[l]['TS'] + ' - ' + array[l]['Email'] + '<br />';
                                 }
                                 row.html(text);
                                 row.append(hide_button);
