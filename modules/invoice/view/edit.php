@@ -65,7 +65,8 @@ $tabindex = 1;
     <? includeinc('head') ?>
     <? includeinc('javascript') ?>
     <? includeinc('combobox') ?>
-<script>
+
+<script type="text/javascript">
 // needed so we can update invoice line without reloading the page
 var products = [];
 <?
@@ -89,7 +90,7 @@ function newInvoiceLine(InvoiceID, CustomerAccountPlanID, LineNumber) {
                 action_invoice_linenew: 1
                 };
 
-  params['invoiceout_CustomerAccountPlanID_'+'InvoiceID'] = CustomerAccountPlanID;
+  params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
   $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
          function(data, status) {
            var InvoiceLineID = $($.parseHTML(data)).filter("#line_id").text();
@@ -114,7 +115,7 @@ function deleteInvoiceLine(InvoiceID, CustomerAccountPlanID, LineID) {
                 action_invoice_outlinedelete: 1
                 };
 
-  params['invoiceout_CustomerAccountPlanID_'+'InvoiceID'] = CustomerAccountPlanID;
+  params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
   $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
          function(data, status) {
            var fields = $('#invoiceline_fields_'+LineID);
@@ -132,17 +133,14 @@ function deleteInvoiceLine(InvoiceID, CustomerAccountPlanID, LineID) {
 // and changes them on page so we have a realtime update of amounts as the
 // invoice changes
 function updateInvoiceData() {
-  console.log("updateInvoiceLineData");
   var number_of_invoice_lines = parseInt(document.getElementById('field_count').value);
   var vat_amount_sum = 0.0;
   var amount_excluding_vat_sum = 0.0;
   for(i = 1; i <= number_of_invoice_lines; i++) {
     var invoice_line_id = document.getElementById(i);
     if (invoice_line_id != null) {
-      var invoice_line_vat_amount = toNumber(document.getElementById('<? print $db_table2 ?>.VatAmount.'+invoice_line_id.value).innerHTML);
-      var invoice_line_amount_excluding_vat = toNumber(document.getElementById('<? print $db_table2 ?>.AmountExcludingVat.'+invoice_line_id.value).innerHTML);
-      vat_amount_sum += invoice_line_vat_amount;
-      amount_excluding_vat_sum += invoice_line_amount_excluding_vat;
+      vat_amount_sum += toNumber(document.getElementById('<? print $db_table2 ?>.VatAmount.'+invoice_line_id.value).innerHTML);
+      amount_excluding_vat_sum += toNumber(document.getElementById('<? print $db_table2 ?>.AmountExcludingVat.'+invoice_line_id.value).innerHTML);
     }
   }
   var amount_including_vat_sum = amount_excluding_vat_sum + vat_amount_sum;
@@ -164,45 +162,46 @@ function updateInvoiceLineData(element, update_amount) {
   update_amount = typeof update_amount !== 'undefined' ? update_amount : true;
   var id = element.id;
   var name = element.id.split('.');
+
   name[1] = 'ProductID';
-  var product_id_id = name.join('.');
-  var product_id_element = document.getElementById(product_id_id);
+  var product_id_element = document.getElementById(name.join('.'));
   var product_id = product_id_element.value;
   if (product_id == '') return;
+
   name[1] = 'ProductName';
-  var product_name_id = name.join('.');
-  var product_name_element = document.getElementById(product_name_id);
-  product_name_element.value = products[product_id]['ProductName'];
+  var product_name_element = document.getElementById(name.join('.'));
+  if (update_amount) {
+    product_name_element.value = products[product_id]['ProductName'];
+  }
+
   name[1] = 'QuantityDelivered';
-  var quantity_delivered_id = name.join('.');
-  var quantity_delivered_element = document.getElementById(quantity_delivered_id);
+  var quantity_delivered_element = document.getElementById(name.join('.'));
   var quantity_delivered = toNumber(quantity_delivered_element.value);
   quantity_delivered_element.value = toAmountString(quantity_delivered, 2);
+
   name[1] = 'UnitCustPrice';
-  var unit_cust_price_id = name.join('.');
-  var unit_cust_price_element = document.getElementById(unit_cust_price_id);
+  var unit_cust_price_element = document.getElementById(name.join('.'));
   var unit_cust_price = 0;
   if (update_amount) {
     unit_cust_price = products[product_id]['UnitCustPrice'];
     unit_cust_price_element.value = toAmountString(unit_cust_price, 2);
-  }
-  else {
+  } else {
     unit_cust_price = toNumber(unit_cust_price_element.value);
     unit_cust_price_element.value = toAmountString(unit_cust_price, 2);
   }
+
   name[1] = 'VatPercent';
-  var vat_percent_id = name.join('.');
-  var vat_percent_element = document.getElementById(vat_percent_id);
+  var vat_percent_element = document.getElementById(name.join('.'));
   var vat_percent = products[product_id]['VatPercent'];
   vat_percent_element.innerHTML = toAmountString(vat_percent, 2) + "%";
+
   name[1] = 'VatAmount';
-  var vat_amount_id = name.join('.');
-  var vat_amount_element = document.getElementById(vat_amount_id);
+  var vat_amount_element = document.getElementById(name.join('.'));
   var vat_amount = (vat_percent/100.0) * unit_cust_price * quantity_delivered;
   vat_amount_element.innerHTML = toAmountString(vat_amount, 2);
+
   name[1] = 'AmountExcludingVat';
-  var amount_excluding_vat_id = name.join('.');
-  var amount_excluding_vat_element = document.getElementById(amount_excluding_vat_id);
+  var amount_excluding_vat_element = document.getElementById(name.join('.'));
   var amount_excluding_vat = unit_cust_price * quantity_delivered;
   amount_excluding_vat_element.innerHTML = toAmountString(amount_excluding_vat, 2);
   updateInvoiceData();
@@ -487,7 +486,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td style='<? if (empty($row2->ProductName)) echo "background-color: red;"; ?>'><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductName', 'pk'=>$LineID, 'value'=>$row2->ProductName, 'width'=>'20', 'maxlength' => 80, 'tabindex'=>$tabindex++)) ?></td>
         <td align="center" style='<? if ($row2->QuantityDelivered == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount($row2->QuantityDelivered), 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number', 'OnChange' => 'updateInvoiceLineData(this, false);')) ?></td>
         <td style='<? if ($row2->UnitCustPrice == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number', 'OnChange' => 'updateInvoiceLineData(this, false);')) ?></td>
-        <td id="<? print $db_table2 . ".VatPercent." . $LineID; ?>"><? print $_lib['format']->Amount($row2->Vat) ?>%<? #print $_lib['form3']->vat_menu3(array('percent2'=>'1', 'table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'SaleMenu'=>'1', 'date' => $row->InvoiceDate)) ?></>
+        <td id="<? print $db_table2 . ".VatPercent." . $LineID; ?>"><? print $_lib['format']->Amount($row2->Vat) ?>%<? #print $_lib['form3']->vat_menu3(array('percent2'=>'1', 'table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'SaleMenu'=>'1', 'date' => $row->InvoiceDate)) ?></td>
         <td align="right" id="<? print $db_table2 . ".VatAmount." . $LineID; ?>"><? print $_lib['format']->Amount($vatline) ?></td>
         <td align="right" id="<? print $db_table2 . ".AmountExcludingVat." . $LineID; ?>"><? print $_lib['format']->Amount($sumline) ?></td>
         <td>
