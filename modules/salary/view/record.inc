@@ -176,13 +176,9 @@ elseif($_lib['input']->getProperty('action_defconf_save'))
 }
 elseif($_lib['input']->getProperty('action_salary_new'))
 {
-    list($JournalID, $tmp) = 
-        $accounting->get_next_available_journalid(
-            array('available'=>true, 'update'=>true, 'type' =>'L'));
-
-    $query="select SalaryID from salary where JournalID=$JournalID";
-    if($debug) print "$query<br>\n";
+    $query="select MAX(JournalID) as MaxJournalID from salary";
     $row_salary = $_lib['storage']->get_row(array('query' => $query));
+    $JournalID = $row_salary->MaxJournalID + 1;
     if(isset($row_salary->SalaryID) and strlen($row_salary->SalaryID)>0)
     {
         $SalaryID=$row_salary->SalaryID;
