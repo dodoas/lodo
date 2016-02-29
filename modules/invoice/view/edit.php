@@ -466,7 +466,10 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             <br />
             <input type="text" value="<? print $row->IEmail; ?>" name="email_recipient" />
             <input type="hidden" value="<?=  $rowcomapny->CopyFakturaMail ?>" name="send_mail_copy_mail" />
-            <input name="send_mail_copy" type="checkbox" checked /> kopi til firma
+            <?
+              $send_copy_select = "SELECT 1 AS value, 'send kopi til firma' AS text UNION SELECT 0 AS value, 'ikke send kopi til firma' AS text";
+              print $_lib['form3']->_MakeSelect(array('query' => $send_copy_select, 'name' => 'send_mail_copy', 'num_letters' => 25, 'value' => 1, 'required' => 1));
+            ?>
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'tabindex' => $tabindex++, 'value'=>'Send email')) ?>
         </form>
      </tr>

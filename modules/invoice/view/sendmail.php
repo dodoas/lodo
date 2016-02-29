@@ -57,11 +57,13 @@ $data_html = strip_tags($data_html, "<html><body><table><h2><tr><td><thead><tbod
 
 $recipient = $_REQUEST['email_recipient'];
 
-if(isset($_REQUEST['send_mail_copy']) && $_REQUEST['send_mail_copy'])
+if(isset($_REQUEST['send_mail_copy']) && (bool)$_REQUEST['send_mail_copy'])
 {
   $recipient .= ', ' . $_REQUEST['send_mail_copy_mail'];
 }
 
+$get_invoicefrom = "SELECT * FROM company WHERE CompanyID='" . $_lib['sess']->get_companydef('CompanyID') . "'";
+$row_from = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
 send_invoice($recipient, $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf);
 echo $recipient;
