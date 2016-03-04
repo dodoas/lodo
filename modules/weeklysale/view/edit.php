@@ -416,7 +416,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                         <td class="number"><!-- diff --><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { print "<font color=\"red\">"; } ?><? print $_lib['format']->Amount($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID]) ?><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { print "</font>"; } ?></td>
                         <td><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { ?><input <? print $readonly ?> type="text" name="weeklysaleday.CashAmountExplanation.<? print $line->WeeklySaleDayID ?>" value="<? print $line->CashAmountExplanation ?>" size="20"><? } ?>
                         <td><? print $line->Person ?><? //$_lib['form2']->CompanyContactMenu( array('table' => 'weeklysaleday', 'field' => 'PersonID', 'value' => $line->PersonID, 'pk' => $line->WeeklySaleDayID, 'disabled'=>$line->Locked)); ?>
-                        <td><? if($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID] > 0) { print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>($_lib['sess']->get_person('AccessLevel') >= 3)?'0':$line->Locked)); } ; ?>
+                        <td><? if($line->Znr != 0) { print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>($_lib['sess']->get_person('AccessLevel') >= 3)?'0':$line->Locked)); } ; ?>
                     </tr>
                     <?
                     $counter += 1;
@@ -467,7 +467,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <? }
                 } ?>
                 <td>
-                <td colspan=7">
+                <td colspan="7">
             </tr>
             <tr>
                 <td colspan="2">Prosjekter</td>
