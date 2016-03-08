@@ -68,7 +68,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
         <table class="lodo_data">
             <thead>
             <tr>
-                <th colspan="13">Ukeomsetning: <? print $WeeklySaleID ?></th>
+                <th colspan="15">Ukeomsetning: <? print $WeeklySaleID ?></th>
             </tr>
             <tr class="voucher">
                 <th colspan="2">Bilagsnr</th>
@@ -77,7 +77,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <th colspan="2">Avdeling</th>
                 <th>Mal</th>
                 <th colspan="3"><? print $weeklysale->head->CompanyName ?></th>
-                <th colspan="2"></th>
+                <th colspan="4"></th>
             </tr>
             <tr class="voucher">
                 <td colspan="2"><nobr><? if ($weeklysale->head->JournalID) { ?>
@@ -97,7 +97,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
 		?>
                 <? print $_lib['form3']->hidden(array('name'=>'VoucherPeriodOld', 'value'=>$weeklysale->head->Period)) ?>
                 </td>
-                <td colspan="2">
+                <td colspan="4">
 		<? 
 		if($allow_changes) {
 			print $_lib['form3']->text(array('table'=>'weeklysale', 'field'=>'JournalDate', 'pk'=>$weeklysale->head->WeeklySaleID, 'value'=>$weeklysale->head->JournalDate, 'width'=>'10', 'OnChange'=>"update_period(this, '".$formname."', 'weeklysale.JournalDate.".$weeklysale->head->WeeklySaleID."', 'weeklysale.Period.".$weeklysale->head->WeeklySaleID."');")); 
@@ -128,14 +128,14 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 </td>
                 <td><? print $weeklysale->head->Name ?></td>
                 <td colspan="3"><? print $weeklysale->head->CompanyAddress ?></td>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <td colspan="1"></td>
                 <td colspan="3"><?php if($is_dup) echo "<b>Bilagsnummeret er allerede registrert!</b>"; ?></td>
                 <td colspan="3"></td>
                 <td colspan="3"><? print $weeklysale->head->CompanyZipCode ?> <? print $weeklysale->head->CompanyCity ?></td>
-                <td colspan="3"></td>
+                <td colspan="5"></td>
             </tr>
             <tr>
                 <td colspan="1">Uke</td>
@@ -155,14 +155,14 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="1">Fast kasse</td>
                 <td colspan="1"><? print $_lib['format']->Amount($weeklysale->head->PermanentCash) ?></td>
                 <td colspan="3">Tlf: <? print $weeklysale->head->CompanyPhone ?></td>
-                <td colspan="3"></td>
+                <td colspan="5"></td>
             </tr>
             <tr>
                 <td colspan="1"></td>
                 <td colspan="3"></td>
                 <td colspan="3"></td>
                 <td colspan="3">Mob: <? print $weeklysale->head->CompanyMobile ?></td>
-                <td colspan="3"></td>
+                <td colspan="5"></td>
             </tr>
         <tbody>
             <tr>
@@ -316,7 +316,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="number"><? print $_lib['format']->Amount($weeklysale->salehead['sumgroup'][$i]); if($weeklysale->salehead['sumquantity'][$i] > 0) { print " - "; print $_lib['format']->Amount($weeklysale->salehead['sumquantity'][$i]); } ?></nobr></td>
                 <? } ?>
                 <td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->head->saletotal) ?></nobr></td>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <td colspan="3">Inntektskonto</td>
@@ -326,7 +326,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td align="left"><nobr><? print $name ?></nobr></td>
                 <? } ?>
                 <td></td>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
             </tr>
             <? if(is_array($weeklysale->salehead['department'])) { ?>
             <tr>
@@ -338,7 +338,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <? } ?>
                 
                 <td></td>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
             </tr>
             <? } ?>
             <? if(is_array($weeklysale->salehead['project'])) { ?>
@@ -351,11 +351,11 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <? } ?>
                 
                 <td></td>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
             </tr>
             <? } ?>
             <tr>
-                <td colspan="12">&nbsp;</td>
+                <td colspan="15">&nbsp;</td>
             </tr>
             <tr>
                 <td class="menu" style="text-align: right;"></td>
@@ -376,6 +376,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="menu" style="text-align: left;">Forklaring</td>
                 <td class="menu" style="text-align: left;">Sig</td>
                 <td class="menu" style="text-align: left;">L&aring;s</td>
+                <td colspan="2" class="menu" style="text-align: left;"></td>
             <?
             $sumtot = 0;
             $sum = array();
@@ -417,6 +418,8 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                         <td><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { ?><input <? print $readonly ?> type="text" name="weeklysaleday.CashAmountExplanation.<? print $line->WeeklySaleDayID ?>" value="<? print $line->CashAmountExplanation ?>" size="20"><? } ?>
                         <td><? print $line->Person ?><? //$_lib['form2']->CompanyContactMenu( array('table' => 'weeklysaleday', 'field' => 'PersonID', 'value' => $line->PersonID, 'pk' => $line->WeeklySaleDayID, 'disabled'=>$line->Locked)); ?>
                         <td><? if($line->Znr != 0) { print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>($_lib['sess']->get_person('AccessLevel') >= 3)?'0':$line->Locked)); } ; ?>
+                        <td><? if ($line->Locked && $line->PersonID) print $line->TS; ?></td>
+                        <td></td>
                     </tr>
                     <?
                     $counter += 1;
@@ -446,7 +449,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="number"><? print $_lib['format']->Amount($weeklysale->head->sumActuallyCashAmount) ?></td>
                 <td class="number"><? if($weeklysale->head->sumcashdiff != 0) { print "<font color=\"red\">"; } ?><? print $_lib['format']->Amount($weeklysale->head->sumcashdiff) ?><? if($weeklysale->head->sumcashdiff != 0) { print "</font>"; } ?></td>
                 <td><? if($weeklysale->head->sumcashdiff != 0) { ?><input <? print $readonly ?> type="text" name="weeklysale.CashAmountExplanation.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->CashAmountExplanation ?>" size="20"><? } ?>
-                <td colspan="2"></td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <td colspan="2">Likvidkonto</td>
@@ -456,7 +459,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                     <td align="right"><? print $name ?></td>
                 <? } 
                 } ?>
-                <td colspan="8"></td>
+                <td colspan="10"></td>
             </tr>
             <tr>
                 <td colspan="2">Avdelinger</td>
@@ -467,7 +470,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <? }
                 } ?>
                 <td>
-                <td colspan="7">
+                <td colspan="9">
             </tr>
             <tr>
                 <td colspan="2">Prosjekter</td>
@@ -477,17 +480,17 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                     <td><? print $name ?></td>
                 <? }
                 } ?>
-                <td colspan="8"></td>
+                <td colspan="10"></td>
             </tr>
             <tr>
                 <td class="menu" colspan="3">Kontant inn</td>
                 <td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->head->sumcashin) ?></nobr></td>
-                <td colspan="10"></td>
+                <td colspan="11"></td>
             </tr>
             <tr>
                 <td class="menu" colspan="3">Kontant ut</td>
                 <td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->head->sumcashout) ?></nobr></td>
-                <td colspan="10"></td>
+                <td colspan="11"></td>
             </tr>
 	    <? foreach(range(1,3) as $bankn) { ?>
             <tr>
@@ -495,7 +498,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="number"><input <? print $readonly ?> type="text" name="weeklysale.Bank<?= $bankn ?>Amount.<? print $weeklysale->head->WeeklySaleID ?>" value="<? $hash = $_lib['format']->Amount(array('value'=>$weeklysale->head->{"Bank".$bankn."Amount"})); print $hash['value']; ?>" size="8" class="number"></td>
 		<td>Dato</td>
 		<td class="date" colspan="2"><input <? print $readonly ?> type="text" name="weeklysale.Bank<?= $bankn ?>Date.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->{"Bank".$bankn."Date"}; ?>"></td>
-		<td colspan="5">Negative bel&oslash;p er innskudd til bank</td>
+		<td colspan="8">Negative bel&oslash;p er innskudd til bank</td>
             </tr>
             <? } ?>
             <tr>
@@ -503,7 +506,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="number"><input <? print $readonly ?> type="text" name="weeklysale.PrivateAmount.<? print $weeklysale->head->WeeklySaleID ?>" value="<? $hash = $_lib['format']->Amount(array('value'=>$weeklysale->head->PrivateAmount)); print $hash['value']; ?>" size="8" class="number">
                 <td>Forklaring</td>
                 <td colspan="2"><input <? print $readonly ?> type="text" name="weeklysale.PrivateExplanation.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->PrivateExplanation ?>" size="20" class="number">
-                <td colspan="6">Negative bel&oslash;p er uttak fra kasse</td>
+                <td colspan="9">Negative bel&oslash;p er uttak fra kasse</td>
             </tr>
             <tr>
                 <td class="menu" colspan="3">Sum</td>
@@ -516,7 +519,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
 				$sumcolor = "blue";
 		?>
                 <td class="number" style="color: <?= $sumcolor ?>"><nobr><? print $_lib['format']->Amount($weeklysale->head->TotalAmount) ?></nobr></td>
-                <td colspan="10"></td>
+                <td colspan="11"></td>
             </tr>
         </table>
         <?
