@@ -41,6 +41,7 @@ $weeklysale->presentation();
             <?
             $ParentWeeklySaleDayID = $line->WeeklySaleDayID;
             $ZnrTotalAmount = $line->ZnrTotalAmount;
+            $SaleTotal = 0;
             ?>
            <tr><td class="menu">Navn</td><td><? print $_lib['sess']->get_companydef('VName') ?></td></tr>
            <tr><td class="menu">Org nr</td><td><? print $_lib['sess']->get_companydef('OrgNumber') ?></td></tr>
@@ -55,6 +56,7 @@ $weeklysale->presentation();
            <tr><th colspan="2">Salg</th></tr>
             <? foreach($weeklysale->salehead['groups'] as $name => $i) { 
                 $name = array_shift($salenameH);
+                $SaleTotal += $line->{"Group{$i}Amount"};
             ?>
             <tr>
                 <td class="menu"><? print $name ?></td>
@@ -63,6 +65,14 @@ $weeklysale->presentation();
             <? } ?>
              <tr>
             <td class="menu">Sum</td><td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID]) ?></nobr></td>
+            </tr>
+            <tr>
+            <?
+              $DiffSaleZnr = $ZnrTotalAmount - $SaleTotal;
+              if ($DiffSaleZnr != 0) $ControlClass = "red";
+              else $ControlClass = "";
+            ?>
+              <td class="menu" <? if (!empty($ControlClass)) print "style=\"color: $ControlClass\""; ?>>Kontroller salget</td><td class="number <? print $ControlClass; ?>"><nobr><? print $_lib['format']->Amount($DiffSaleZnr) ?></nobr></td>
             </tr>
         <? } ?>
         <tr><th colspan="2">Likvider</th></tr>
@@ -84,12 +94,17 @@ $weeklysale->presentation();
             $diffsum      = $sumrevenue - $weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID];
             ?>
             <td class="menu">Kontant</td><td class="number"><? print $_lib['format']->Amount($weeklysale->revenuehead['sumcash'][$line->ParentWeeklySaleDayID]) ?></td></tr>
+            <?
+              if ($line->Locked) {
+                $locked_by_at =  $_lib['format']->PersonIDToName($line->PersonID) . ", " . $line->TS;
+            ?>
+            <tr><td class="menu">Optelt</td><td class="number"><? print $line->ActuallyCashAmount; ?></td></tr>
+            <tr><td class="menu">Telt av</td><td class="number"><? print $locked_by_at; ?></td></tr>
+            <?
+              }
+            ?>
             <tr><td class="menu">Sum</td><td class="number"><? print $_lib['format']->Amount($sumrevenue) ?></td></tr>
         <? } ?>            
-            <tr><th colspan="2">Differanse</th></tr>
-            <tr><td class="menu">Sum likvider vs Znrtotal</td><td class="number"><? print $_lib['format']->Amount($diffznrtotal) ?></td></tr>
-            <tr><td class="menu">Sum likvider vs salg</td><td class="number"><? print $_lib['format']->Amount($diffsum) ?></td></tr>
-
     </table>
     </fieldset>
     <? includeinc('bottom') ?>
