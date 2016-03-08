@@ -3,7 +3,7 @@ if($VoucherDate) {
   $_this_date = $VoucherDate;
 }
 else {
-  $_this_date = $_lib['date']->get_this_year($_lib['sess']->get_session('LoginFormDate'));
+  $_this_date = $_lib['date']->get_this_period($_lib['sess']->get_session('LoginFormDate'));
 }
 ?>
 
