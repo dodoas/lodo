@@ -287,6 +287,8 @@ $formname = "salaryUpdate";
   while($line = $_lib['db']->db_fetch_object($result_salary))
   {
       $counter++;
+      if ((float)$line->NumberInPeriod * (float)$line->Rate != (float)$line->AmountThisPeriod) $WrongCalculation = "style='color: red'";
+      else $WrongCalculation = "";
       ?>
       <tr>
         <? print $_lib['form3']->hidden(array('name'=>$counter, 'value'=>$line->SalaryLineID)) ?>
@@ -316,9 +318,9 @@ $formname = "salaryUpdate";
             }
         ?>
         </td>
-        <td><input type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
-        <td><input type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
-        <td class="number"><input type="text" name="salaryline.AmountThisPeriod.<? print $line->SalaryLineID ?>"   value="<? print $_lib['format']->Amount(array('value'=>$line->AmountThisPeriod, 'return'=>'value')) ?>" size="8" class="number"></td>
+        <td><input <? print $WrongCalculation; ?> type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
+        <td><input <? print $WrongCalculation; ?> type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
+        <td class="number"><input <? print $WrongCalculation; ?> type="text" name="salaryline.AmountThisPeriod.<? print $line->SalaryLineID ?>"   value="<? print $_lib['format']->Amount(array('value'=>$line->AmountThisPeriod, 'return'=>'value')) ?>" size="8" class="number"></td>
         <td class="number">
             <nobr>
             <?
@@ -428,25 +430,25 @@ $formname = "salaryUpdate";
 
 <tr height="20">
   <td colspan="4">
-  <td colspan="9">Skattetrekk trekkes bare med hele kroner
+  <td colspan="11">Skattetrekk trekkes bare med hele kroner
 </tr>
 
 <tr>
-<th colspan="13">Kommentar</th>
+<th colspan="15">Kommentar</th>
 </tr>
 
 <tr>
-<td colspan="13">
+<td colspan="15">
 <textarea name="salary.Comment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->Comment  ?></textarea>
 </td>
 </tr>
 
 <tr>
-<th colspan="13">Internkommentar</th>
+<th colspan="15">Internkommentar</th>
 </tr>
 
 <tr>
-<td colspan="13">
+<td colspan="15">
 <textarea name="salary.InternComment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->InternComment  ?></textarea>
 </td>
 </tr>
@@ -577,9 +579,11 @@ $formname = "salaryUpdate";
 <tr>
 <td colspan="4"></td>
 <td colspan="7">
-<? if($_lib['message']->get()) {
+<?
+  if ($message) $_lib['message']->add($message);
+  if($_lib['message']->get()) {
     $msg = $_lib['message']->get();
-$mcolor = (strstr($msg, "rror")) ? "red" : "black";
+    $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 ?>
     <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
 <? } ?>

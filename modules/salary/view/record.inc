@@ -678,7 +678,7 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
       }
       elseif($AmountThisPeriod != ($NumberInPeriod * $Rate) )
       {
-          $message = "<font color=\"red\">OBS! Antall * Sats er ikke lik Totalen</font>";
+          $message = "<font color=\"red\">OBS! Feil utregning.</font>";
       }
 
       $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_AmountThisPeriod_'.$lineID]));
