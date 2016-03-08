@@ -56,8 +56,10 @@ else echo "{\n\"param1\": \"value\",\n\"param2\": \"other value\"\n}\n";
 <?php
 // Print response
 if (isset($_REQUEST['info'])) {
-  foreach($_SESSION['oauth_resource'] as $key => $value) {
-    echo "<h5>$key</h5><textarea rows='5' cols='40'>$value</textarea>";
+  if (isset($_SESSION['oauth_resource'])) {
+    foreach($_SESSION['oauth_resource'] as $key => $value) {
+      echo "<h5>$key</h5><textarea rows='5' cols='40'>$value</textarea>";
+    }
   }
 }
 else {
@@ -74,6 +76,7 @@ if (isset($_SESSION['oauth_token'])) {
       <tr><th>token_type</th><td><?php echo $_SESSION['oauth_token']['token_type']; ?></td></tr>
       <tr><th>created_at</th><td><?php echo strftime("%F %T", $_SESSION['oauth_token']['created_at']); ?></td></tr>
       <tr><th>expires_at</th><td><?php echo strftime("%F %T", $_SESSION['oauth_token']['created_at']+$_SESSION['oauth_token']['expires_in']); ?></td></tr>
+      <tr><th>is_expired</th><td><?php if ($oauth_client->isTokenExpired()) echo "yes"; else echo "no"; ?></td></tr>
     </table>
     <br/>
     <input type="submit" name="expire_token" value="Expire OAuth token"/>

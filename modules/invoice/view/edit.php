@@ -63,7 +63,167 @@ $tabindex = 1;
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Faktura <? print $InvoiceID ?></title>
     <meta name="cvs"                content="$Id: edit.php,v 1.78 2005/11/03 15:57:27 thomasek Exp $" />
     <? includeinc('head') ?>
+    <? includeinc('javascript') ?>
     <? includeinc('combobox') ?>
+
+<script type="text/javascript">
+// needed so we can update invoice line without reloading the page
+var products = [];
+<?
+$product_query = 'SELECT ProductID, ProductName, UnitCustPrice, AccountPlanID
+                  FROM product
+                  WHERE Active = 1';
+$product_result = $_lib['db']->db_query($product_query);
+while($product = $_lib['db']->db_fetch_assoc($product_result)) {
+  $accountplan = $accounting->get_accountplan_object($product['AccountPlanID']);
+  $vat = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $row->InvoiceDate));
+?>
+products['<? print $product['ProductID']; ?>'] = {ProductName: '<? print $product['ProductName']; ?>', UnitCustPrice: parseFloat('<? print $product['UnitCustPrice']; ?>'), VatPercent: parseFloat('<? print ($vat->Percent == '') ? 0 : $vat->Percent; ?>')};
+<?
+}
+?>
+// add a new invoice line, using ajax request
+function newInvoiceLine(InvoiceID, CustomerAccountPlanID, LineNumber) {
+  LineNumber = parseInt(LineNumber) + 1;
+  var params = {
+                InvoiceID: InvoiceID,
+                action_invoice_linenew: 1
+                };
+
+  params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
+  $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
+         function(data, status) {
+           var InvoiceLineID = $($.parseHTML(data)).filter("#line_id").text();
+           var newInvoiceLineHTML='<tr id="invoiceline_fields_'+InvoiceLineID+'"><td><? print str_replace("\n", '', $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>'placeholder_id', 'width'=>'35', 'tabindex'=> 0, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg produkt'))); ?></td> <td style="background-color: red;"><input type="text" name="invoiceoutline.ProductName.'+InvoiceLineID+'" id="invoiceoutline.ProductName.'+InvoiceLineID+'" value="" size="20" tabindex="0" maxlength="80"> </td> <td align="center" style="background-color: red;"><input type="text" name="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" id="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" value="0.00" size="8" tabindex="0" maxlength="8" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td style="background-color: red;"><input type="text" name="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" id="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" value="0,00" size="15" tabindex="0" maxlength="15" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td id="invoiceoutline.VatPercent.'+InvoiceLineID+'">0.00%</td> <td align="right" id="invoiceoutline.VatAmount.'+InvoiceLineID+'">0,00</td> <td align="right" id="invoiceoutline.AmountExcludingVat.'+InvoiceLineID+'">0,00</td> <td><input type="button" class="button" onclick="deleteInvoiceLine('+InvoiceID+', '+CustomerAccountPlanID+', '+InvoiceLineID+'); return false;", value="Slett" /></td></tr><tr id="invoiceline_comment_'+InvoiceLineID+'"> <td colspan="8"><textarea name="invoiceoutline.Comment.'+InvoiceLineID+'" id="invoiceoutline.Comment.'+InvoiceLineID+'" cols="80" rows="1" tabindex="0"></textarea> <input type="hidden" name="'+LineNumber+'" id="'+LineNumber+'" value="'+InvoiceLineID+'"> </td></tr>';
+           newInvoiceLineHTML = newInvoiceLineHTML.replace(/placeholder_id/g, InvoiceLineID);
+           $(newInvoiceLineHTML).insertBefore($('#placeholder'));
+           $("#field_count").val(LineNumber);
+           refreshComboboxOnPage();
+           setComboboxOnChangeAction();
+           console.log("Added invoice line "+InvoiceLineID);
+           // since we always add an empty line there is no need to update
+           // the total amounts here
+         });
+  return false;
+}
+
+// delete an invoice line, using ajax request
+function deleteInvoiceLine(InvoiceID, CustomerAccountPlanID, LineID) {
+  var params = {
+                InvoiceID: InvoiceID,
+                LineID: LineID,
+                action_invoice_outlinedelete: 1
+                };
+
+  params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
+  $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
+         function(data, status) {
+           var fields = $('#invoiceline_fields_'+LineID);
+           fields.remove();
+           var comment = $('#invoiceline_comment_'+LineID);
+           comment.remove();
+           console.log("Removed invoice line "+LineID);
+           // update total amounts for invoice
+           updateInvoiceData();
+         });
+  return false;
+}
+
+// goes through all invoice lines on page and calculates the total amounts
+// and changes them on page so we have a realtime update of amounts as the
+// invoice changes
+function updateInvoiceData() {
+  var number_of_invoice_lines = parseInt(document.getElementById('field_count').value);
+  var vat_amount_sum = 0.0;
+  var amount_excluding_vat_sum = 0.0;
+  for(i = 1; i <= number_of_invoice_lines; i++) {
+    var invoice_line_id = document.getElementById(i);
+    if (invoice_line_id != null) {
+      vat_amount_sum += toNumber(document.getElementById('<? print $db_table2 ?>.VatAmount.'+invoice_line_id.value).innerHTML);
+      amount_excluding_vat_sum += toNumber(document.getElementById('<? print $db_table2 ?>.AmountExcludingVat.'+invoice_line_id.value).innerHTML);
+    }
+  }
+  var amount_including_vat_sum = amount_excluding_vat_sum + vat_amount_sum;
+  var invoice_total_vat_element = document.getElementById('<? print $db_table ?>.TotalVat');
+  invoice_total_vat_element.innerHTML = toAmountString(vat_amount_sum, 2);
+  var invoice_total_cust_price_element = document.getElementById('<? print $db_table ?>.TotalCustPrice');
+  invoice_total_cust_price_element.innerHTML = toAmountString(amount_including_vat_sum, 2);
+  var invoice_amount_without_vat_sum_element = document.getElementById('<? print $db_table ?>.AmountWithoutVatSum');
+  invoice_amount_without_vat_sum_element.innerHTML = toAmountString(amount_excluding_vat_sum, 2);
+  var invoice_vat_amount_sum_element = document.getElementById('<? print $db_table ?>.VatAmountSum');
+  invoice_vat_amount_sum_element.innerHTML = toAmountString(vat_amount_sum, 2);
+  var invoice_amount_with_vat_sum_element = document.getElementById('<? print $db_table ?>.AmountWithVatSum');
+  invoice_amount_with_vat_sum_element.innerHTML = toAmountString(amount_including_vat_sum, 2);
+}
+
+// update data for the line if the product/quantity/price changes
+// should only change the price if the product changes
+function updateInvoiceLineData(element, update_amount) {
+  update_amount = typeof update_amount !== 'undefined' ? update_amount : true;
+  var id = element.id;
+  var name = element.id.split('.');
+
+  name[1] = 'ProductID';
+  var product_id_element = document.getElementById(name.join('.'));
+  var product_id = product_id_element.value;
+  if (product_id == '') return;
+
+  name[1] = 'ProductName';
+  var product_name_element = document.getElementById(name.join('.'));
+  if (update_amount) {
+    product_name_element.value = products[product_id]['ProductName'];
+  }
+
+  name[1] = 'QuantityDelivered';
+  var quantity_delivered_element = document.getElementById(name.join('.'));
+  var quantity_delivered = toNumber(quantity_delivered_element.value);
+  quantity_delivered_element.value = toAmountString(quantity_delivered, 2);
+
+  name[1] = 'UnitCustPrice';
+  var unit_cust_price_element = document.getElementById(name.join('.'));
+  var unit_cust_price = 0;
+  if (update_amount) {
+    unit_cust_price = products[product_id]['UnitCustPrice'];
+    unit_cust_price_element.value = toAmountString(unit_cust_price, 2);
+  } else {
+    unit_cust_price = toNumber(unit_cust_price_element.value);
+    unit_cust_price_element.value = toAmountString(unit_cust_price, 2);
+  }
+
+  name[1] = 'VatPercent';
+  var vat_percent_element = document.getElementById(name.join('.'));
+  var vat_percent = products[product_id]['VatPercent'];
+  vat_percent_element.innerHTML = toAmountString(vat_percent, 2) + "%";
+
+  name[1] = 'VatAmount';
+  var vat_amount_element = document.getElementById(name.join('.'));
+  var vat_amount = (vat_percent/100.0) * unit_cust_price * quantity_delivered;
+  vat_amount_element.innerHTML = toAmountString(vat_amount, 2);
+
+  name[1] = 'AmountExcludingVat';
+  var amount_excluding_vat_element = document.getElementById(name.join('.'));
+  var amount_excluding_vat = unit_cust_price * quantity_delivered;
+  amount_excluding_vat_element.innerHTML = toAmountString(amount_excluding_vat, 2);
+  updateInvoiceData();
+}
+
+// set/reset onchange action for all comboboxes on page
+function setComboboxOnChangeAction() {
+  $( ".combobox" ).change(function( event ) {
+    updateInvoiceLineData(this);
+  });
+}
+
+// when new selects are added of class combobox
+// this needs to be run in order to display them correctly
+function refreshComboboxOnPage() {
+  $(".combobox" ).combobox();
+}
+
+$(document).ready(function() {
+  setComboboxOnChangeAction();
+});
+</script>
 </head>
 
 <body>
@@ -250,9 +410,9 @@ foreach ($currencies as $currency) {
     </tr>
     <tr>
       <td>Total bel&oslash;p</td>
-      <td><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
+      <td id="invoiceout.TotalCustPrice"><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
       <td>MVA</td>
-      <td><? print $_lib['format']->Amount($row->TotalVat) ?></td>
+      <td id="invoiceout.TotalVat"><? print $_lib['format']->Amount($row->TotalVat) ?></td>
     </tr>
 
     <tr>
@@ -321,45 +481,47 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $sumlines += $sumline;
     $vatlines += $vatline;
     ?>
-    <tr>
+    <tr id='invoiceline_fields_<? print $LineID; ?>'>
         <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'35', 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg produkt')) ?></td>
         <td style='<? if (empty($row2->ProductName)) echo "background-color: red;"; ?>'><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductName', 'pk'=>$LineID, 'value'=>$row2->ProductName, 'width'=>'20', 'maxlength' => 80, 'tabindex'=>$tabindex++)) ?></td>
-        <td align="center" style='<? if ($row2->QuantityDelivered == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
-        <td style='<? if ($row2->UnitCustPrice == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
-        <td><? print $row2->Vat ?>%<? #print $_lib['form3']->vat_menu3(array('percent2'=>'1', 'table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'SaleMenu'=>'1', 'date' => $row->InvoiceDate)) ?></td>
-        <td align="right"><? print $_lib['format']->Amount($vatline) ?></td>
-        <td align="right"><? print $_lib['format']->Amount($sumline) ?></td>
+        <td align="center" style='<? if ($row2->QuantityDelivered == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount($row2->QuantityDelivered), 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number', 'OnChange' => 'updateInvoiceLineData(this, false);')) ?></td>
+        <td style='<? if ($row2->UnitCustPrice == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number', 'OnChange' => 'updateInvoiceLineData(this, false);')) ?></td>
+        <td id="<? print $db_table2 . ".VatPercent." . $LineID; ?>"><? print $_lib['format']->Amount($row2->Vat) ?>%<? #print $_lib['form3']->vat_menu3(array('percent2'=>'1', 'table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'SaleMenu'=>'1', 'date' => $row->InvoiceDate)) ?></td>
+        <td align="right" id="<? print $db_table2 . ".VatAmount." . $LineID; ?>"><? print $_lib['format']->Amount($vatline) ?></td>
+        <td align="right" id="<? print $db_table2 . ".AmountExcludingVat." . $LineID; ?>"><? print $_lib['format']->Amount($sumline) ?></td>
         <td>
         <? if(
                (!$row->Locked &&
                    $_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))
                ||
                 ($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))) { ?>
-        <a href="<? print $_SETUP[DISPATCH]."t=invoice.edit&InvoiceID=$InvoiceID&action_invoice_outlinedelete=1&amp;LineID=$LineID&amp;inline=edit#bottomPage" ?>" class="button">Slett</a>
+        <input type="button" class="button" onclick="deleteInvoiceLine(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $LineID; ?>); return false;" value="Slett" />
         <? } ?>
-    <tr>
+    <tr id='invoiceline_comment_<? print $LineID; ?>'>
         <td colspan="8"><? print $_lib['form3']->textarea(array('table'=>$db_table2, 'field'=>'Comment', 'pk'=>$LineID, 'value'=>$row2->Comment, 'tabindex'=>$tabindex++, 'min_height'=>'1', 'height'=>'1', 'width'=>'80')) ?>
     <?
     $rowCounter++;
     print $_lib['form3']->Input(array('type'=>'hidden', 'name'=>$rowCounter, 'value'=>$LineID));
 }
 ?>
+    <tr id="placeholder">
+    </tr>
     <tr height="20">
         <td></td>
     </tr>
     <tr>
         <td colspan="6" align="right">Sum linjer</td>
-        <td align="right"><? print $_lib['format']->Amount($sumlines) ?></td>
+        <td id="invoiceout.AmountWithoutVatSum" align="right"><? print $_lib['format']->Amount($sumlines) ?></td>
     </tr>
     <tr>
         <td colspan="6" align="right">Sum MVA</td>
-        <td align="right"><? print $_lib['format']->Amount($vatlines) ?></td>
+        <td id="invoiceout.VatAmountSum" align="right"><? print $_lib['format']->Amount($vatlines) ?></td>
     </tr>
     <tr>
         <td colspan="6" align="right">Total med MVA</td>
-        <td align="right"><? print $_lib['format']->Amount($vatlines + $sumlines) ?></td>
+        <td id="invoiceout.AmountWithVatSum" align="right"><? print $_lib['format']->Amount($vatlines + $sumlines) ?></td>
         <?
-            print $_lib['form3']->Input(array('type'=>'hidden', 'table'=>'field', 'field'=>'count', 'value'=>$rowCounter));
+            print $_lib['form3']->Input(array('type'=>'hidden', 'name'=>'field_count', 'value'=>$rowCounter));
         ?>
     </tr>
     <tr>
@@ -374,7 +536,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
             {
                 if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
-                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'tabindex' => $tabindex++, 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"this.form.action += '#bottomPage'"));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'tabindex' => $tabindex++, 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N', 'OnClick'=>"newInvoiceLine(".$InvoiceID.", ".$row->CustomerAccountPlanID.", $('#field_count').val()); return false;"));
                     print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'tabindex' => $tabindex++, 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'OnClick'=>"this.form.action += '#bottomPage'"));
                 }
                 else {

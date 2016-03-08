@@ -53,6 +53,8 @@
           this._trigger( "select", event, {
             item: ui.item.option
           });
+          // trigger OnChange when the combobox is changed
+          $(ui.item.option.parentElement).trigger("change")
         },
         autocompletechange: "_removeIfInvalid"
       });
