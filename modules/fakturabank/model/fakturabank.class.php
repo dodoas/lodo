@@ -2207,9 +2207,9 @@ class lodo_fakturabank_fakturabank {
         else {
           $_SESSION['oauth_action'] = 'send_invoice';
           $_SESSION['oauth_invoice_object'] = $InvoiceO;
+          $_SESSION['oauth_invoice_sent'] = true;
           $oauth_client = new lodo_oauth();
           $oauth_client->post_resources($url, array("xml" => $xml));
-          $_SESSION['oauth_invoice_sent'] = true;
           $data = $_SESSION['oauth_resource'];
         }
         $this->save_invoice_export_data($data);
