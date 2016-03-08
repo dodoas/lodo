@@ -202,6 +202,7 @@ $formname = "salaryUpdate";
     <th>Konto for utbetaling
     <th>Skattekommune
     <th>Altinndato
+    <th>Rapportert til Altinn
   </tr>
   <tr>
     <th class="sub">L <a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$head->JournalID"; ?>&type=salary&view=1"><? print $head->JournalID ?></a>
@@ -227,6 +228,7 @@ $formname = "salaryUpdate";
     ?>
   </th>
     <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number">
+    <th class="sub"><? print getAltinnReportedDateTime($head->SalaryID); ?>
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
@@ -235,7 +237,7 @@ $formname = "salaryUpdate";
     <th class="salaryhead">Skifttype</th>
     <th class="salaryhead">Arbeidstid</th>
     <th class="salaryhead" colspan="3">Ansettelsestype</th>
-    <th class="salaryhead">Yrke</th>
+    <th class="salaryhead" colspan="2">Yrke</th>
     <th class="salaryhead">Ansatt ved</th>
   </tr>
   <tr>
@@ -252,7 +254,7 @@ $formname = "salaryUpdate";
     <th class="sub" colspan="3">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
-    <th class="sub">
+    <th class="sub" colspan="2">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
     <th class="sub">

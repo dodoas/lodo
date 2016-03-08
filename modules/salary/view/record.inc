@@ -996,4 +996,11 @@ elseif($_lib['input']->getProperty('action_salary_update_extra')) {
                                                        $SalaryID);
     $_lib['db']->db_query($query_update_salary_with_employee_info);
 }
+
+function getAltinnReportedDateTime($SalaryID) {
+  global $_lib;
+  $reported_date = $_lib['db']->get_row(array('query' => "SELECT ar1.LastChanged FROM altinnReport1 ar1 JOIN altinnReport1salary ar1s ON ar1.AltinnReport1ID = ar1s.AltinnReport1ID WHERE ar1s.SalaryId = " . $SalaryID . " ORDER BY ar1.LastChanged DESC LIMIT 1"));
+  $reported_to_altinn_at = ($reported_date->LastChanged) ? strftime("%F %H:%M", strtotime($reported_date->LastChanged)) : "Ikke rapportert";
+  return $reported_to_altinn_at;
+}
 ?>
