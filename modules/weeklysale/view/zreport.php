@@ -41,7 +41,6 @@ $weeklysale->presentation();
             <?
             $ParentWeeklySaleDayID = $line->WeeklySaleDayID;
             $ZnrTotalAmount = $line->ZnrTotalAmount;
-            $SaleTotal = 0;
             ?>
            <tr><td class="menu">Navn</td><td><? print $_lib['sess']->get_companydef('VName') ?></td></tr>
            <tr><td class="menu">Org nr</td><td><? print $_lib['sess']->get_companydef('OrgNumber') ?></td></tr>
@@ -56,7 +55,6 @@ $weeklysale->presentation();
            <tr><th colspan="2">Salg</th></tr>
             <? foreach($weeklysale->salehead['groups'] as $name => $i) { 
                 $name = array_shift($salenameH);
-                $SaleTotal += $line->{"Group{$i}Amount"};
             ?>
             <tr>
                 <td class="menu"><? print $name ?></td>
@@ -68,7 +66,7 @@ $weeklysale->presentation();
             </tr>
             <tr>
             <?
-              $DiffSaleZnr = $ZnrTotalAmount - $SaleTotal;
+              $DiffSaleZnr = $ZnrTotalAmount - $weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID];
               if ($DiffSaleZnr != 0) $ControlClass = "red";
               else $ControlClass = "";
             ?>
