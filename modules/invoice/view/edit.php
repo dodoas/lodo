@@ -116,7 +116,7 @@ function deleteInvoiceLine(InvoiceID, CustomerAccountPlanID, LineID) {
                 };
 
   params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
-  $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
+  $.post('<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax', params,
          function(data, status) {
            var fields = $('#invoiceline_fields_'+LineID);
            fields.remove();
