@@ -76,7 +76,7 @@ class lodo_oauth {
     $_SESSION['oauth_http_verb'] = ($http_verb == OAuth2\Client::HTTP_METHOD_GET)?"GET":"POST";
     if ($params) $_SESSION['oauth_resource_params'] = $params;
     // if we have token saved in session and it has not expired yet, use it
-    if (isset($_SESSION['oauth_token']) && $_SESSION['oauth_token']['created_at']+$_SESSION['oauth_token']['expires_in'] > time()) {
+    if (!self::isTokenExpired()) {
       $this->client->setAccessToken($_SESSION['oauth_token']['access_token']);
       $this->client->setAccessTokenType(OAuth2\Client::ACCESS_TOKEN_BEARER);
     }
@@ -107,6 +107,10 @@ class lodo_oauth {
       $_SESSION['oauth_resource'] = $response;
       return $response['result'];
     }
+  }
+
+  function isTokenExpired() {
+    return !(isset($_SESSION['oauth_token']) && $_SESSION['oauth_token']['created_at']+$_SESSION['oauth_token']['expires_in'] > time());
   }
   
 };
