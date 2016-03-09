@@ -553,17 +553,20 @@ class altinn_report {
   function queryStringForCurrentlyEmployedEmployees() {
     // only the ones whose salaries have the altinn/actual pay date set and the
     // ones that are still employed
-    $query_employees = "SELECT ap_merged.* FROM (
-                        SELECT ap.*
+    $query_employees = "SELECT ap.*
                         FROM accountplan ap
-                        WHERE (WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
-                        (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
-                        AccountplanType LIKE '%employee%'
-                        UNION
-                        SELECT ap.*
-                        FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
-                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%' ) AS ap_merged
-                        ORDER BY ap_merged.FirstName";
+                        WHERE ap.AccountPlanID IN (
+                          SELECT AccountPlanID
+                          FROM accountplan
+                          WHERE (WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
+                          (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
+                          AccountplanType LIKE '%employee%'
+                        ) AND ap.AccountPlanID IN (
+                          SELECT ap.AccountPlanID
+                          FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
+                          WHERE s.ActualPayDate LIKE  '" . $this->period . "%'
+                        )
+                        ORDER BY ap.FirstName";
     return $query_employees;
   }
 
