@@ -91,10 +91,10 @@ function newInvoiceLine(InvoiceID, CustomerAccountPlanID, LineNumber) {
                 };
 
   params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
-  $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
+  $.post('<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax', params,
          function(data, status) {
            var InvoiceLineID = $($.parseHTML(data)).filter("#line_id").text();
-           var newInvoiceLineHTML='<tr id="invoiceline_fields_'+InvoiceLineID+'"><td><? print str_replace("\n", '', $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>'placeholder_id', 'width'=>'35', 'tabindex'=> 0, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg produkt'))); ?></td> <td style="background-color: red;"><input type="text" name="invoiceoutline.ProductName.'+InvoiceLineID+'" id="invoiceoutline.ProductName.'+InvoiceLineID+'" value="" size="20" tabindex="0" maxlength="80"> </td> <td align="center" style="background-color: red;"><input type="text" name="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" id="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" value="0.00" size="8" tabindex="0" maxlength="8" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td style="background-color: red;"><input type="text" name="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" id="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" value="0,00" size="15" tabindex="0" maxlength="15" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td id="invoiceoutline.VatPercent.'+InvoiceLineID+'">0.00%</td> <td align="right" id="invoiceoutline.VatAmount.'+InvoiceLineID+'">0,00</td> <td align="right" id="invoiceoutline.AmountExcludingVat.'+InvoiceLineID+'">0,00</td> <td><input type="button" class="button" onclick="deleteInvoiceLine('+InvoiceID+', '+CustomerAccountPlanID+', '+InvoiceLineID+'); return false;", value="Slett" /></td></tr><tr id="invoiceline_comment_'+InvoiceLineID+'"> <td colspan="8"><textarea name="invoiceoutline.Comment.'+InvoiceLineID+'" id="invoiceoutline.Comment.'+InvoiceLineID+'" cols="80" rows="1" tabindex="0"></textarea> <input type="hidden" name="'+LineNumber+'" id="'+LineNumber+'" value="'+InvoiceLineID+'"> </td></tr>';
+           var newInvoiceLineHTML='<tr id="invoiceline_fields_'+InvoiceLineID+'"><td><? print str_replace("\n", '', $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>'placeholder_id', 'width'=>'35', 'tabindex'=> 0, 'class' => 'combobox product', 'required' => false, 'notChoosenText' => 'Velg produkt'))); ?></td> <td style="background-color: red;"><input type="text" name="invoiceoutline.ProductName.'+InvoiceLineID+'" id="invoiceoutline.ProductName.'+InvoiceLineID+'" value="" size="20" tabindex="0" maxlength="80"> </td> <td align="center" style="background-color: red;"><input type="text" name="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" id="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" value="0.00" size="8" tabindex="0" maxlength="8" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td style="background-color: red;"><input type="text" name="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" id="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" value="0,00" size="15" tabindex="0" maxlength="15" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td id="invoiceoutline.VatPercent.'+InvoiceLineID+'">0.00%</td> <td align="right" id="invoiceoutline.VatAmount.'+InvoiceLineID+'">0,00</td> <td align="right" id="invoiceoutline.AmountExcludingVat.'+InvoiceLineID+'">0,00</td> <td><input type="button" class="button" onclick="deleteInvoiceLine('+InvoiceID+', '+CustomerAccountPlanID+', '+InvoiceLineID+'); return false;", value="Slett" /></td></tr><tr id="invoiceline_comment_'+InvoiceLineID+'"> <td colspan="8"><textarea name="invoiceoutline.Comment.'+InvoiceLineID+'" id="invoiceoutline.Comment.'+InvoiceLineID+'" cols="80" rows="1" tabindex="0"></textarea> <input type="hidden" name="'+LineNumber+'" id="'+LineNumber+'" value="'+InvoiceLineID+'"> </td></tr>';
            newInvoiceLineHTML = newInvoiceLineHTML.replace(/placeholder_id/g, InvoiceLineID);
            $(newInvoiceLineHTML).insertBefore($('#placeholder'));
            $("#field_count").val(LineNumber);
@@ -116,7 +116,7 @@ function deleteInvoiceLine(InvoiceID, CustomerAccountPlanID, LineID) {
                 };
 
   params['invoiceout_CustomerAccountPlanID_'+InvoiceID] = CustomerAccountPlanID;
-  $.post('http://lodo/lodo.php?t=invoice.ajax.php', params,
+  $.post('<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax', params,
          function(data, status) {
            var fields = $('#invoiceline_fields_'+LineID);
            fields.remove();
@@ -209,7 +209,7 @@ function updateInvoiceLineData(element, update_amount) {
 
 // set/reset onchange action for all comboboxes on page
 function setComboboxOnChangeAction() {
-  $( ".combobox" ).change(function( event ) {
+  $( "select.product" ).change(function( event ) {
     updateInvoiceLineData(this);
   });
 }
@@ -482,7 +482,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $vatlines += $vatline;
     ?>
     <tr id='invoiceline_fields_<? print $LineID; ?>'>
-        <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'35', 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg produkt')) ?></td>
+        <td><? print $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>$LineID, 'value'=>$row2->ProductID, 'width'=>'35', 'tabindex'=>$tabindex++, 'class' => 'combobox product', 'required' => false, 'notChoosenText' => 'Velg produkt')) ?></td>
         <td style='<? if (empty($row2->ProductName)) echo "background-color: red;"; ?>'><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'ProductName', 'pk'=>$LineID, 'value'=>$row2->ProductName, 'width'=>'20', 'maxlength' => 80, 'tabindex'=>$tabindex++)) ?></td>
         <td align="center" style='<? if ($row2->QuantityDelivered == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount($row2->QuantityDelivered), 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number', 'OnChange' => 'updateInvoiceLineData(this, false);')) ?></td>
         <td style='<? if ($row2->UnitCustPrice == 0) echo "background-color: red;"; ?>'><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number', 'OnChange' => 'updateInvoiceLineData(this, false);')) ?></td>
