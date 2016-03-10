@@ -38,7 +38,7 @@ $year = $_lib['date']->get_this_year($_lib['sess']->get_session('LoginFormDate')
 ##################################
 
 /* S&oslash;kestreng */
-$query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID order by S.JournalID desc";
+$query_salary   = "select S.AmountThisPeriod, S.JournalID, S.ValidFrom as FromDate, S.ValidTo as ToDate, A.AccountPlanID, A.AccountName, S.PayDate, S.DomesticBankAccount, S.TS, S.SalaryID, S.JournalDate, S.Period, S.ActualPayDate from salary as S, accountplan as A where S.AccountPlanID=A.AccountPlanID order by S.JournalID desc";
 $result_salary  = $_lib['db']->db_query($query_salary);
 
 $query_conf_head= "select * from salaryconf as S where S.SalaryConfID=1";
@@ -497,7 +497,7 @@ else {
 <table class="lodo_data">
 <thead>
    <tr>
-     <th colspan="12">L&oslash;nnsutbetalinger
+     <th colspan="14">L&oslash;nnsutbetalinger
   <tr>
     <th class="sub">Nr</th>
     <th class="sub">Dato</th>
@@ -509,6 +509,8 @@ else {
     <th class="sub">Fra perioden</th>
     <th class="sub">Til perioden</th>
     <th class="sub">Bankkonto</th>
+    <th class="sub">Altinndato</th>
+    <th class="sub">Rapportert til Altinn</th>
     <th class="sub">Utskrift</th>
     <th class="sub"></th>
   </tr>
@@ -532,6 +534,8 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Date(array('value'=>$row->FromDate, 'return'=>'value')) ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $_lib['format']->Date(array('value'=>$row->ToDate, 'return'=>'value')) ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->DomesticBankAccount ?></a></td>
+        <td><? print $row->ActualPayDate; ?></td>
+        <td><? print getAltinnReportedDateTime($row->SalaryID); ?></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.print&SalaryID=<? print $row->SalaryID ?>" target="print">Vis</a></td>
         <td>
           <? if($_lib['sess']->get_person('AccessLevel') > 3) {
