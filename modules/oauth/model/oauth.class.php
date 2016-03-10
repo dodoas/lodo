@@ -85,6 +85,7 @@ class lodo_oauth {
       // get code
       $authorize_url = $this->client->getAuthenticationUrl($this->generate_server_url() . $this->authorize_url, $this->callback_url);
       header("Location: " . $authorize_url);
+      die();
     }
     // if we have the code, get the token
     else {
