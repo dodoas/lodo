@@ -332,7 +332,7 @@ class lodo_fakturabank_fakturabanksalary {
 
         if ($ret) {
           $dataH = array();
-          $dataH['SalaryID']              = $SalaryID;
+          $dataH['SalaryID']              = $_SESSION['oauth_salary_id'];
           $dataH['FakturabankID']         = $ret;
           $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
           $dataH['FakturabankDateTime']   = strftime("%F %T");
