@@ -664,7 +664,7 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
       $AmountThisPeriod = $ValueHash['value'];
       $NumberInPeriod = $_POST['salaryline_NumberInPeriod_'.$lineID];
       $ValueHash = $_lib['convert']->Amount(array('value'=>$NumberInPeriod));
-      $NumberThisPeriod = $ValueHash['value'];
+      $NumberInPeriod = $ValueHash['value'];
       $Rate = $_POST['salaryline_Rate_'.$lineID];
       $ValueHash = $_lib['convert']->Amount(array('value'=>$Rate));
       $Rate = $ValueHash['value'];
@@ -678,13 +678,13 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
 
           $_POST['salaryline_AmountThisPeriod_'.$lineID] = ($tmpvalue1 * $tmpvalue2);
       }
-      elseif($AmountThisPeriod != ($NumberInPeriod * $Rate) )
+      elseif(($AmountThisPeriod != ($NumberInPeriod * $Rate) && !isset($_POST['floor_'.$lineID])) || (isset($_POST['floor_'.$lineID]) && (floor($AmountThisPeriod) != floor($NumberInPeriod * $Rate))))
       {
           $message = "<font color=\"red\">OBS! Feil utregning.</font>";
       }
 
       $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_AmountThisPeriod_'.$lineID]));
-      $_POST['salaryline_AmountThisPeriod_'.$lineID] = $hash['value'];
+      $_POST['salaryline_AmountThisPeriod_'.$lineID] = (isset($_POST['floor_'.$lineID])) ? floor($hash['value']) : $hash['value'];
 
       if( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineInFrom) and ($_POST['salaryline_LineNumber_'.$lineID] < $lineInTo) )
       {
