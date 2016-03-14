@@ -21,6 +21,9 @@ if (!isset($_GET['AltinnReport4ID'])) {
   } else {
     $xml = simplexml_load_string($file_contents);
 
+    # set locale for time (for month/day names) to Norwegian
+    setlocale(LC_TIME, 'nb_NO');
+
     # faktura fields
     $name = $_lib['sess']->get_companydef('CompanyName');
     $orgnr = (isset($xml->Mottak->innsender->norskIdentifikator)) ? $xml->Mottak->innsender->norskIdentifikator : "ikke funnet";
@@ -31,7 +34,7 @@ if (!isset($_GET['AltinnReport4ID'])) {
     $query_altinn_report5 = "select * from altinnReport5 where req_CorrespondenceID = '" . $altinn_report4_row->req_CorrespondenceID . "' order by AltinnReport5ID";
     $result_altinn_report5 = $_lib['db']->db_query($query_altinn_report5);
     $altinn_report5_row = $_lib['db']->db_fetch_object($result_altinn_report5);
-    $altinn_archive_date = (isset($altinn_report5_row->res_LastChanged)) ? strftime("%d.%m.%Y %H.%M.%S", strtotime($altinn_report5_row->res_LastChanged)) : "ikke arkivert";
+    $altinn_archive_date = (isset($altinn_report5_row->res_LastChanged)) ? strftime("%F %T", strtotime($altinn_report5_row->res_LastChanged)) : "ikke arkivert";
 
     $query_altinn_report1 = "select * from altinnReport1 where ReceiptId = (select req_ReceiptId from altinnReport2 where res_ReceiversReference = '" . $altinn_report4_row->req_CorrespondenceID . "' order by res_ReceiversReference desc, AltinnReport2ID limit 1)";
     $result_altinn_report1 = $_lib['db']->db_query($query_altinn_report1);
@@ -97,8 +100,8 @@ if (!isset($_GET['AltinnReport4ID'])) {
     <td class="menu"><?= $invoice_type_text ?></td>
   </tr>
 <? foreach($recieved_messages as $message) {
-     $message_archive_date = (isset($message->leveringstidspunkt)) ? strftime("%d.%m.%Y %H.%M.%S", strtotime($message->leveringstidspunkt)) : "";
-     $message_archive_date = (empty($message_archive_date) && $message->mottakstatus == "erstattet") ?  strftime("%d.%m.%Y %H.%M.%S", strtotime($message->tidsstempelFraAltinn)) : $message_archive_date;
+     $message_archive_date = (isset($message->leveringstidspunkt)) ? strftime("%F %T", strtotime($message->leveringstidspunkt)) : "";
+     $message_archive_date = (empty($message_archive_date) && $message->mottakstatus == "erstattet") ?  strftime("%F %T", strtotime($message->tidsstempelFraAltinn)) : $message_archive_date;
      $message_altinn_reference = $message->altinnReferanse;
      $message_id = (string)$message->meldingsId;
 
