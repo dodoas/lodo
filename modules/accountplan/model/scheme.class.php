@@ -27,7 +27,7 @@ class lodo_accountplan_scheme {
 
         $r = $_lib['db']->db_query("SELECT * FROM fakturabankscheme ORDER BY SchemeType");
         while( ($row = $_lib['db']->db_fetch_assoc($r)) ) {
-            $l[] = $row;
+            $l[(int)$row['FakturabankSchemeID']] = $row;
         }
 
         return $l;
@@ -171,7 +171,7 @@ class lodo_accountplan_scheme {
             $_lib['db']->db_query($q);
         }
 
-        $this->globalSchemes = lodo_accountplan_scheme::listAvailableTypes();        
+        $this->globalSchemes = lodo_accountplan_scheme::listAvailableTypes();
     }
 
     var $AccountPlanID = 0;
@@ -236,5 +236,17 @@ class lodo_accountplan_scheme {
       $db_obj = $_lib['db']->db_query($q);
       $row = $_lib['db']->db_fetch_assoc($db_obj);
       return $row['SchemeType'];
+    }
+
+    function getFirstFirmaID() {
+      $firma_ids = $this->listSchemes();
+      if (empty($firma_ids)) {
+        return false;
+      } else {
+        $fakturabank_scheme_id = (int)($firma_ids[0]['FakturabankSchemeID']);
+        $firma_id_type = $this->globalSchemes[$fakturabank_scheme_id]['SchemeType'];
+        $firma_id = $firma_ids[0]['SchemeValue'];
+      }
+      return array('value' => $firma_id, 'type' => $firma_id_type);
     }
 };

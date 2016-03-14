@@ -29,6 +29,7 @@
 includelogic('exchange/exchange');
 includelogic('fakturabank/fakturabank');
 includelogic('kid/kid');
+includelogic("accountplan/scheme");
 
 class invoice {
     public $InvoiceID       = 0;
@@ -1103,7 +1104,15 @@ class invoice {
 
         ############################################################################################
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $invoice->IWeb;
-        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $invoice->IOrgNo);
+
+        if (!empty($invoice->IOrgNo)) {
+          $firstFirmaID = array('value' => preg_replace('/[^0-9]+/', '', $invoice->IOrgNo), 'type' => 'NO:ORGNR');
+        } else {
+          $schemeControl = new lodo_accountplan_scheme($invoice->CustomerAccountPlanID);
+          $firstFirmaID = $schemeControl->getFirstFirmaID();
+        }
+        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = $firstFirmaID['value'];
+        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = $firstFirmaID['type'];
 
         if (!empty($invoice->IVatNo)) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IVatNo;
