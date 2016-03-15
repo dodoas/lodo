@@ -478,8 +478,11 @@ class altinn_report {
         $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = $salary_line->MandatoryTaxSubtraction ? 'true' : 'false';
         // amount for entry
         $inntekt['inntekt']['beloep'] = $salary_line->AmountThisPeriod;
-        // calculate total for arbeidsgiveravgift amount
-        $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] += $salary_line->AmountThisPeriod;
+        if ($salary_line->EnableEmployeeTax) {
+          // Only add this if this should have Employ tax(AGA)
+          // calculate total for arbeidsgiveravgift amount
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] += $salary_line->AmountThisPeriod;
+        }
         // description for the entry
         // Error is: Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
         self::checkIfEmpty($salary_line->SalaryDescription, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt altinnbeskrivelse");
