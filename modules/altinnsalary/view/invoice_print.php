@@ -44,6 +44,10 @@ if (!isset($_GET['AltinnReport4ID'])) {
     $recieved_messages = $xml->Mottak->mottattLeveranse;
 
     $bank_account_number = (isset($xml->Mottak->innbetalingsinformasjon->kontonummer)) ? $xml->Mottak->innbetalingsinformasjon->kontonummer : "ikke funnet";
+    if ($bank_account_number != 'ikke funnet') {
+      $bank_account_number = substr_replace($bank_account_number, ' ', 6, 0);
+      $bank_account_number = substr_replace($bank_account_number, ' ', 4, 0);
+    }
     if ($invoice_type == "AGA") {
       $kid = (isset($xml->Mottak->innbetalingsinformasjon->kidForArbeidsgiveravgift)) ? $xml->Mottak->innbetalingsinformasjon->kidForArbeidsgiveravgift : "ikke funnet";
       $amount = $_lib['format']->Amount($xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumArbeidsgiveravgift);
