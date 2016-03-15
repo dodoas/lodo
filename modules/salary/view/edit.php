@@ -442,13 +442,16 @@ $formname = "salaryUpdate";
     <?
   }
   ?>
-<tr><td></td><td><b>Sum</b></td><td colspan="2"></td>
+<tr>
+  <td></td>
+  <td><b>Sum</b></td>
+  <td colspan="3"></td>
 <td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisPeriod, 'return'=>'value')) ?></b></td>
 <td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisYear, 'return'=>'value')) ?></b></td>
 </tr>
 
 <tr height="20">
-  <td colspan="4">
+  <td colspan="5">
   <td colspan="11">Skattetrekk trekkes bare med hele kroner
 </tr>
 
