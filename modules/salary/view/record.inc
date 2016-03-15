@@ -118,11 +118,13 @@ elseif($_lib['input']->getProperty('action_salaryconfline_new'))
    $fields['salaryconfline_SalaryText']        = $orgConfLine->SalaryText;
    $fields['salaryconfline_SalaryDescription'] = $orgConfLine->SalaryDescription;
    $fields['salaryconfline_SendToAltinn']      = $orgConfLine->SendToAltinn;
+   $fields['salaryconfline_Fordel']            = $orgConfLine->Fordel;
    $fields['salaryconfline_NumberInPeriod']    = $orgConfLine->NumberInPeriod;
    $fields['salaryconfline_Rate']              = $orgConfLine->Rate;
    $fields['salaryconfline_AmountThisPeriod']  = $orgConfLine->AmountThisPeriod;
    $fields['salaryconfline_AccountPlanID']     = $orgConfLine->AccountPlanID;
    $fields['salaryconfline_EnableEmployeeTax'] = $orgConfLine->EnableEmployeeTax;
+   $fields['salaryconfline_MandatoryTaxSubtraction'] = $orgConfLine->MandatoryTaxSubtraction;
    $fields['salaryconfline_ProjectID']         = $orgConfLine->ProjectID;
    $fields['salaryconfline_DepartmentID']      = $orgConfLine->DepartmentID;
    $fields['salaryconfline_SalaryCode']        = $orgConfLine->SalaryCode;
@@ -143,12 +145,14 @@ elseif($_lib['input']->getProperty('action_salaryline_new'))
     $fields['salaryline_SalaryText']        = $orgLine->SalaryText;
     $fields['salaryline_SalaryDescription'] = $orgLine->SalaryDescription;
     $fields['salaryline_SendToAltinn']      = $orgLine->SendToAltinn;
+    $fields['salaryline_Fordel']            = $orgLine->Fordel;
     $fields['salaryline_NumberInPeriod']    = $orgLine->NumberInPeriod;
     $fields['salaryline_Rate']              = $orgLine->Rate;
     $fields['salaryline_AmountThisPeriod']  = $orgLine->AmountThisPeriod;
     $fields['salaryline_AmountThisYear']    = $orgLine->AmountThisYear;
     $fields['salaryline_AccountPlanID']     = $orgLine->AccountPlanID;
     $fields['salaryline_EnableEmployeeTax'] = $orgLine->EnableEmployeeTax;
+    $fields['salaryline_MandatoryTaxSubtraction'] = $orgLine->MandatoryTaxSubtraction;
     $fields['salaryline_EnableVacationPayment'] = $orgLine->EnableVacationPayment;
     $fields['salaryline_ProjectID']         = $orgLine->ProjectID;
     $fields['salaryline_DepartmentID']      = $orgLine->DepartmentID;
@@ -303,8 +307,10 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
             $lines[$line->LineNumber]['SalaryDescription']  = $line->SalaryDescription;
             $lines[$line->LineNumber]['SendToAltinn']       = $line->SendToAltinn;
+            $lines[$line->LineNumber]['Fordel']             = $line->Fordel;
             $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
             $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
+            $lines[$line->LineNumber]['MandatoryTaxSubtraction'] = $line->MandatoryTaxSubtraction;
             $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
             $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
             $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
@@ -331,8 +337,10 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
             $lines[$line->LineNumber]['SalaryDescription']  = $line->SalaryDescription;
             $lines[$line->LineNumber]['SendToAltinn']       = $line->SendToAltinn;
+            $lines[$line->LineNumber]['Fordel']             = $line->Fordel;
             $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
             $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
+            $lines[$line->LineNumber]['MandatoryTaxSubtraction'] = $line->MandatoryTaxSubtraction;
             $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
             $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
             $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
@@ -350,8 +358,10 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber][$i]['SalaryText'] = $lines[$line->LineNumber]['SalaryText'];
             $lines[$line->LineNumber][$i]['SalaryDescription'] = $lines[$line->LineNumber]['SalaryDescription'];
             $lines[$line->LineNumber][$i]['SendToAltinn'] = $lines[$line->LineNumber]['SendToAltinn'];
+            $lines[$line->LineNumber][$i]['Fordel'] = $lines[$line->LineNumber]['Fordel'];
             $lines[$line->LineNumber][$i]['AmountThisPeriod'] = $lines[$line->LineNumber]['AmountThisPeriod'];
             $lines[$line->LineNumber][$i]['EnableEmployeeTax'] = $lines[$line->LineNumber]['EnableEmployeeTax'];
+            $lines[$line->LineNumber][$i]['MandatoryTaxSubtraction'] = $lines[$line->LineNumber]['MandatoryTaxSubtraction'];
             $lines[$line->LineNumber][$i]['SalaryID'] = $lines[$line->LineNumber]['SalaryID'];
             $lines[$line->LineNumber][$i]['ProjectID'] = $lines[$line->LineNumber]['ProjectID'];
             $lines[$line->LineNumber][$i]['DepartmentID'] = $lines[$line->LineNumber]['DepartmentID'];
@@ -383,10 +393,12 @@ elseif($_lib['input']->getProperty('action_salary_new'))
                 $postsub['salaryline_NumberInPeriod']    = $field[$i]['NumberInPeriod'];
                 $postsub['salaryline_Rate']              = $field[$i]['Rate'];
                 $postsub['salaryline_SalaryText']        = $field[$i]['SalaryText'];
-                $postsub['salaryline_SendToAltinn']       = $field[$i]['SendToAltinn'];
                 $postsub['salaryline_SalaryDescription'] = $field[$i]['SalaryDescription'];
+                $postsub['salaryline_SendToAltinn']      = $field[$i]['SendToAltinn'];
+                $postsub['salaryline_Fordel']            = $field[$i]['Fordel'];
                 $postsub['salaryline_AmountThisPeriod']  = $field[$i]['AmountThisPeriod'];
                 $postsub['salaryline_EnableEmployeeTax'] = $field[$i]['EnableEmployeeTax'];
+                $postsub['salaryline_MandatoryTaxSubtraction'] = $field[$i]['MandatoryTaxSubtraction'];
                 $postsub['salaryline_ProjectID']         = $field[$i]['ProjectID'];
                 $postsub['salaryline_DepartmentID']      = $field[$i]['DepartmentID'];
                 $postsub['salaryline_EnableVacationPayment'] = $field[$i]['EnableVacationPayment'];
@@ -413,8 +425,10 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $postsub['salaryline_SalaryText']        = $lines[$linenum]['SalaryText'];
             $postsub['salaryline_SalaryDescription'] = $lines[$linenum]['SalaryDescription'];
             $postsub['salaryline_SendToAltinn']      = $lines[$linenum]['SendToAltinn'];
+            $postsub['salaryline_Fordel']            = $lines[$linenum]['Fordel'];
             $postsub['salaryline_AmountThisPeriod']  = $lines[$linenum]['AmountThisPeriod'];
             $postsub['salaryline_EnableEmployeeTax'] = $lines[$linenum]['EnableEmployeeTax'];
+            $postsub['salaryline_MandatoryTaxSubtraction'] = $lines[$linenum]['MandatoryTaxSubtraction'];
             $postsub['salaryline_ProjectID']         = $lines[$linenum]['ProjectID'];
             $postsub['salaryline_DepartmentID']      = $lines[$linenum]['DepartmentID'];
             $postsub['salaryline_EnableVacationPayment'] = $lines[$linenum]['EnableVacationPayment'];
@@ -475,7 +489,8 @@ elseif($_lib['input']->getProperty('action_salaryconf_new'))
     $lines[$line->LineNumber]['Rate']               	= $line->Rate;
     $lines[$line->LineNumber]['SalaryText']         	= $line->SalaryText;
     $lines[$line->LineNumber]['AmountThisPeriod']   	= $line->AmountThisPeriod;
-    $lines[$line->LineNumber]['EnableEmployeeTax']  	= $line->EnableEmployeeTax;
+    $lines[$line->LineNumber]['EnableEmployeeTax']    = $line->EnableEmployeeTax;
+    $lines[$line->LineNumber]['MandatoryTaxSubtraction'] = $line->MandatoryTaxSubtraction;
     $lines[$line->LineNumber]['SalaryID']           	= $SalaryID;
     $lines[$line->LineNumber]['ProjectID']          	= $line->ProjectID;
     $lines[$line->LineNumber]['DepartmentID']       	= $line->DepartmentID;
@@ -497,7 +512,8 @@ elseif($_lib['input']->getProperty('action_salaryconf_new'))
     $postsub['salaryconfline_Rate']              	= $lines[$linenum]['Rate'];
     $postsub['salaryconfline_SalaryText']        	= $lines[$linenum]['SalaryText'];
     $postsub['salaryconfline_AmountThisPeriod']  	= $lines[$linenum]['AmountThisPeriod'];
-    $postsub['salaryconfline_EnableEmployeeTax'] 	= $lines[$linenum]['EnableEmployeeTax'];
+    $postsub['salaryconfline_EnableEmployeeTax']  = $lines[$linenum]['EnableEmployeeTax'];
+    $postsub['salaryconfline_MandatoryTaxSubtraction'] = $lines[$linenum]['MandatoryTaxSubtraction'];
     $postsub['salaryconfline_ProjectID']         	= $lines[$linenum]['ProjectID'];
     $postsub['salaryconfline_DepartmentID']      	= $lines[$linenum]['DepartmentID'];
     $postsub['salaryconfline_EnableVacationPayment'] = $lines[$linenum]['EnableVacationPayment'];
@@ -633,7 +649,10 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
       $_POST['salaryline_Rate_'.$row->SalaryLineID] = $row->Rate;
       $_POST['salaryline_AmountThisPeriod_'.$row->SalaryLineID] = $row->AmountThisPeriod;
       $_POST['EnableVacationPayment_'.$row->SalaryLineID] = $row->EnableVacationPayment;
+      $_POST['EnableEmployeeTax_'.$row->SalaryLineID] = $row->EnableEmployeeTax;
+      $_POST['MandatoryTaxSubtraction_'.$row->SalaryLineID] = $row->MandatoryTaxSubtraction;
       $_POST['SendToAltinn_'.$row->SalaryLineID] = $row->SendToAltinn;
+      $_POST['Fordel_'.$row->SalaryLineID] = $row->Fordel;
     }
   }
   ################################################################
@@ -664,7 +683,7 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
       $AmountThisPeriod = $ValueHash['value'];
       $NumberInPeriod = $_POST['salaryline_NumberInPeriod_'.$lineID];
       $ValueHash = $_lib['convert']->Amount(array('value'=>$NumberInPeriod));
-      $NumberThisPeriod = $ValueHash['value'];
+      $NumberInPeriod = $ValueHash['value'];
       $Rate = $_POST['salaryline_Rate_'.$lineID];
       $ValueHash = $_lib['convert']->Amount(array('value'=>$Rate));
       $Rate = $ValueHash['value'];
@@ -678,13 +697,13 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
 
           $_POST['salaryline_AmountThisPeriod_'.$lineID] = ($tmpvalue1 * $tmpvalue2);
       }
-      elseif($AmountThisPeriod != ($NumberInPeriod * $Rate) )
+      elseif(($AmountThisPeriod != ($NumberInPeriod * $Rate) && !isset($_POST['floor_'.$lineID])) || (isset($_POST['floor_'.$lineID]) && (floor($AmountThisPeriod) != floor($NumberInPeriod * $Rate))))
       {
           $message = "<font color=\"red\">OBS! Feil utregning.</font>";
       }
 
       $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_AmountThisPeriod_'.$lineID]));
-      $_POST['salaryline_AmountThisPeriod_'.$lineID] = $hash['value'];
+      $_POST['salaryline_AmountThisPeriod_'.$lineID] = (isset($_POST['floor_'.$lineID])) ? floor($hash['value']) : $hash['value'];
 
       if( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineInFrom) and ($_POST['salaryline_LineNumber_'.$lineID] < $lineInTo) )
       {
@@ -902,11 +921,13 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             $fields['salaryconfline_SalaryText']            = $row['SalaryText'];
             $fields['salaryconfline_SalaryDescription']     = $row['SalaryDescription'];
             $fields['salaryconfline_SendToAltinn']          = $row['SendToAltinn'];
+            $fields['salaryconfline_Fordel']                = $row['Fordel'];
             $fields['salaryconfline_NumberInPeriod']        = $row['NumberInPeriod'];
             $fields['salaryconfline_Rate']                  = $row['Rate'];
             $fields['salaryconfline_AmountThisPeriod']      = $row['AmountThisPeriod'];
             $fields['salaryconfline_AccountPlanID']         = $row['AccountPlanID'];
             $fields['salaryconfline_EnableEmployeeTax']     = $row['EnableEmployeeTax'];
+            $fields['salaryconfline_MandatoryTaxSubtraction'] = $row['MandatoryTaxSubtraction'];
             $fields['salaryconfline_ProjectID']             = $row['Project ID'];
             $fields['salaryconfline_DepartmentID']          = $row['DepartmentID'];
             $fields['salaryconfline_CarID']                 = $row['CarID'];
@@ -919,7 +940,15 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             #print "Lagt til linje nr ".$SalaryConfID."<br>\n";
         }
         else {
-          $sql_update = "UPDATE salaryconfline SET SalaryDescription ='" . $row['SalaryDescription'] . "', SendToAltinn ='" . $row['SendToAltinn'] . "', SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
+          $sql_update = "UPDATE salaryconfline SET ".
+              "SalaryDescription ='" . $row['SalaryDescription'] .
+           "', SendToAltinn ='" . $row['SendToAltinn'] .
+           "', Fordel ='" . $row['Fordel'] .
+           "', SalaryCode='" . $row['SalaryCode'] .
+           "', EnableVacationPayment='" . $row['EnableVacationPayment'] .
+           "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] .
+           "', MandatoryTaxSubtraction='" . $row['MandatoryTaxSubtraction'] .
+           "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
           $_lib['db']->db_update($sql_update);
         }
     }
@@ -956,12 +985,24 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
       $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
       if (!$exists) {
         #print "Lager ny linje";
-        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText, SalaryDescription, SendToAltinn) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] . "', '". $row['SalaryDescription'] ."', '". $row['SendToAltinn'] ."');";
-        #print "$sql_insert<br>\n";
+        $sql_insert = "insert into salaryline " .
+        "(SalaryLineID, SalaryID, SalaryCode, EnableVacationPayment, EnableEmployeeTax, MandatoryTaxSubtraction, AccountPlanID, LineNumber, SalaryText, SalaryDescription,
+          SendToAltinn, Fordel) values".
+        "(NULL,'$SalaryID','".$row['SalaryCode']."','".$row['EnableVacationPayment']."','".$row['EnableEmployeeTax']."','".$row['MandatoryTaxSubtraction']."','".$row['AccountPlanID']."','" . $row['LineNumber'] . "','". $row['SalaryText'] . "','". $row['SalaryDescription'] ."','". $row['SendToAltinn'] . "','" . $row['Fordel'] ."');";
+        # print "$sql_insert<br>\n";
         $_lib['db']->db_update($sql_insert);
       }
-      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "', SalaryDescription='" . $row['SalaryDescription'] . "', SendToAltinn='" . $row['SendToAltinn'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
-      #print "$sql_update<br>\n";
+      $sql_update = "update salaryline set " .
+           "SalaryCode='" . $row['SalaryCode'] .
+        "', EnableVacationPayment='" . $row['EnableVacationPayment'] .
+        "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] .
+        "', MandatoryTaxSubtraction='" . $row['MandatoryTaxSubtraction'] .
+        "', AccountPlanID='" . $row['AccountPlanID'] .
+        "', SalaryDescription='" . $row['SalaryDescription'] .
+        "', SendToAltinn='" . $row['SendToAltinn'] .
+        "', Fordel='" . $row['Fordel'] .
+        "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
+      # print "$sql_update<br>\n";
       $_lib['db']->db_update($sql_update);
     }
 } elseif($_lib['input']->getProperty('action_salary_fakturabanksend')) {

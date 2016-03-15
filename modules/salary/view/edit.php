@@ -267,6 +267,7 @@ $formname = "salaryUpdate";
   <tr>
     <th class="line_number">Linje</th>
     <th>Tekst</th>
+    <th>Fordel</th>
     <th>Antall periode</th>
     <th>Sats</th>
     <th>Bel&oslash;p periode</th>
@@ -275,7 +276,9 @@ $formname = "salaryUpdate";
     <th>Bil</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>F</th>
+    <th>Skatt</th>
+    <th>Arb. giv.</th>
+    <th>Feriep.</th>
     <th>Altinn</th>
     <th>Kode</th>
     <th colspan="2"></th>
@@ -289,7 +292,8 @@ $formname = "salaryUpdate";
   while($line = $_lib['db']->db_fetch_object($result_salary))
   {
       $counter++;
-      if ((float)$line->NumberInPeriod * (float)$line->Rate != (float)$line->AmountThisPeriod) $WrongCalculation = "style='color: red'";
+      if ($line->SalaryCode != 950 && (float)$line->NumberInPeriod * (float)$line->Rate != (float)$line->AmountThisPeriod) $WrongCalculation = "style='color: red'";
+      elseif ($line->SalaryCode == 950 && floor((float)$line->NumberInPeriod * (float)$line->Rate) != floor((float)$line->AmountThisPeriod)) $WrongCalculation = "style='color: red'";
       else $WrongCalculation = "";
       ?>
       <tr>
@@ -319,6 +323,15 @@ $formname = "salaryUpdate";
                 print " (" . $_lib['form3']->_ALTINN['SalaryLineDescriptionTypes'][$line->SalaryDescription] . ")";
             }
         ?>
+        </td>
+        <td>
+          <?
+            if($ishovedmal == 1){
+                ?><input type="text" name="salaryline.Fordel.<? print $line->SalaryLineID ?>" value="<? print $line->Fordel ?>" size="30" class="number"><?
+            } else {
+              print $_lib['form3']->_ALTINN['Fordel'][$line->Fordel];
+            }
+          ?>
         </td>
         <td><input <? print $WrongCalculation; ?> type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
         <td><input <? print $WrongCalculation; ?> type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
@@ -403,14 +416,18 @@ $formname = "salaryUpdate";
         <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
         <td><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
 
+        <td><? print $line->MandatoryTaxSubtraction ? "ja" : "nei" ?></td>
+        <td><? print $line->EnableEmployeeTax ? "ja" : "nei" ?></td>
         <td>
-          <? if($line->EnableVacationPayment) { print "ja"; }; ?>
+          <? print $line->EnableVacationPayment ? "ja" : "nei" ?>
           <? print $_lib['form3']->hidden(array('name' => 'EnableVacationPayment_' . $line->SalaryLineID, 'value' => $line->EnableVacationPayment)); ?>
         </td>
         <td>
-          <? if($line->SendToAltinn) { print "ja"; }; ?>
+          <? print $line->SendToAltinn ? "ja" : "nei" ?>
         </td>
-        <td><? print $line->SalaryCode ?></td>
+        <td><?
+           if ($line->SalaryCode == 950) print $_lib['form3']->hidden(array('name' => 'floor_' . $line->SalaryLineID, 'value' => 1));
+           print $line->SalaryCode ?></td>
         <td>
         <? if($_lib['sess']->get_person('AccessLevel') >= 2  && $accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
             <a href="<? print $MY_SELF ?>&amp;SalaryLineID=<? print $line->SalaryLineID ?>&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryID=<? print $SalaryID ?>&amp;action_salaryline_delete=1" class="button">Slett</a>
