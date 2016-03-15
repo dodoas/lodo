@@ -292,7 +292,8 @@ $formname = "salaryUpdate";
   while($line = $_lib['db']->db_fetch_object($result_salary))
   {
       $counter++;
-      if ((float)$line->NumberInPeriod * (float)$line->Rate != (float)$line->AmountThisPeriod) $WrongCalculation = "style='color: red'";
+      if ($line->SalaryCode != 950 && (float)$line->NumberInPeriod * (float)$line->Rate != (float)$line->AmountThisPeriod) $WrongCalculation = "style='color: red'";
+      elseif ($line->SalaryCode == 950 && floor((float)$line->NumberInPeriod * (float)$line->Rate) != floor((float)$line->AmountThisPeriod)) $WrongCalculation = "style='color: red'";
       else $WrongCalculation = "";
       ?>
       <tr>
@@ -424,7 +425,9 @@ $formname = "salaryUpdate";
         <td>
           <? print $line->SendToAltinn ? "ja" : "nei" ?>
         </td>
-        <td><? print $line->SalaryCode ?></td>
+        <td><?
+           if ($line->SalaryCode == 950) print $_lib['form3']->hidden(array('name' => 'floor_' . $line->SalaryLineID, 'value' => 1));
+           print $line->SalaryCode ?></td>
         <td>
         <? if($_lib['sess']->get_person('AccessLevel') >= 2  && $accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
             <a href="<? print $MY_SELF ?>&amp;SalaryLineID=<? print $line->SalaryLineID ?>&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryID=<? print $SalaryID ?>&amp;action_salaryline_delete=1" class="button">Slett</a>
