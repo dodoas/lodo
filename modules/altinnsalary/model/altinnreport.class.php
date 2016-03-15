@@ -468,14 +468,14 @@ class altinn_report {
         // start and end date for this income, already checked once outside the foreach loop
         $inntekt['inntekt']['startdatoOpptjeningsperiode'] = $salary->ValidFrom;
         $inntekt['inntekt']['sluttdatoOpptjeningsperiode'] = $salary->ValidTo;
+
         // fordel = determines if the income entry is positive or negative
-        $inntekt['inntekt']['fordel'] = ($salary_line->LineNumber <= 69) ? 'kontantytelse' : 'utgiftsgodtgjoerelse';
+        self::checkIfEmpty($salary_line->Fordel, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt fordel");
+        $inntekt['inntekt']['fordel'] = $salary_line->Fordel;
+
         // boolean flags if the entry falls under some taxing regulation or not
-        // both utloeserArbeidsgiveravgift and inngaarIGrunnlagForTrekk fields
-        // first is true if the salary line code has -A in it
-        // the second is true if we have a salary code for this entry
-        $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = (strstr($salary_line->SalaryCode, '-A')) ? 'true' : 'false';
-        $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = (!empty($salary_line->SalaryCode)) ? 'true' : 'false';
+        $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = $salary_line->EnableEmployeeTax ? 'true' : 'false';
+        $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = $salary_line->MandatoryTaxSubtraction ? 'true' : 'false';
         // amount for entry
         $inntekt['inntekt']['beloep'] = $salary_line->AmountThisPeriod;
         // calculate total for arbeidsgiveravgift amount
