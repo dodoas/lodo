@@ -384,6 +384,7 @@ foreach ($currencies as $currency) {
     <td>Bil</td>
     <td>Antall</td>
     <td>Enhetspris</td>
+    <td>Enhetspris inklusiv MVA</td>
     <td>MVA</td>
     <td>MVA bel&oslash;p</td>
     <td>Bel&oslash;p U/MVA</td>
@@ -463,6 +464,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 ?></td>
         <td align="center"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
+        <td><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCostPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCostPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'width' => 5, 'maxlength' => 5, 'tabindex'=>$tabindex++)) ?></td>
         <td align="right"><nobr><? print $_lib['format']->Amount($row2->TaxAmount) ?></nobr></td>
         <td align="right"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'TotalWithoutTax', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->TotalWithoutTax, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>

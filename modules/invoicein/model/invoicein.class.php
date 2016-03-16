@@ -354,6 +354,21 @@ class logic_invoicein_invoicein implements Iterator {
           $args['invoicein_CustomerAccountPlanID_' . $ID] =  $_lib['sess']->get_companydef('OrgNumber');
         }
         $args['invoicein_RemittanceAmount_'.$ID] = $args['invoicein_TotalCustPrice_'.$ID];
+        // update UnitCustPrice(unit price without tax) from UnitCostPrice(unit price with tax) if it is set
+        for($i = 1; $i <= $args['field_count']; $i++) {
+          $line_id = $args[$i];
+          if (isset($args['invoiceinline_UnitCostPrice_'.$line_id])) {
+            $UnitCostPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCostPrice_'.$line_id], 'return' => 'value'));
+            $UnitCustPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCustPrice_'.$line_id], 'return' => 'value'));
+            $VATPercent = $_lib['convert']->Amount(array('value' => $args['invoiceinline_Vat_'.$line_id], 'return' => 'value'))/100.0;
+            if ($UnitCostPrice != 0) {
+              $args['invoiceinline_UnitCustPrice_'.$line_id] = $UnitCostPrice/($VATPercent+1);
+            // else update UnitCostPrice from UnitCustPrice
+            } elseif ($UnitCustPrice != 0) {
+              $args['invoiceinline_UnitCostPrice_'.$line_id] = $UnitCustPrice*($VATPercent+1);
+            }
+          }
+        }
 
         if(($args['invoicein_DepartmentID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
             $args['invoicein_DepartmentID_'.$ID] = $accountplan->DepartmentID;
