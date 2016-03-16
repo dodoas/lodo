@@ -187,7 +187,7 @@ $params["totaltmmva"] = $vatlines + $sumlines;
 // print giroinfo
 // Need to be before printing lines since it should be on first page
 $myFakutra->addSumLine($params);
-$myFakutra->fakturaGiro($params);
+if ($row_company->InvoicePDFPrintGiroInfo) $myFakutra->fakturaGiro($params);
 
 // printing lines
 foreach ($myFakutraLines as $params2) {

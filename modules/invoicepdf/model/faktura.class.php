@@ -708,7 +708,7 @@ function SplitByLength($string, $chunkLength=1){
         ////$this->pdf->Cell(85, $this->lineHeight, $this->korriger($params["recipient"]["name"]), $this->showMyFrame);
         $line = 0;
         $this->pdf->SetFont($this->invoiceFont,'B',16);
-        $compNameArr = $this->splitString($params["recipient"]["name"], 100);
+        $compNameArr = $this->splitString($params["recipient"]["name"], 90);
         $this->pdf->SetFont($this->invoiceGiroFont,'B',$this->invoiceGiroFontSize);
         for ($i =0; $i < count($compNameArr); $i++)
         {
@@ -719,8 +719,12 @@ function SplitByLength($string, $chunkLength=1){
         $this->pdf->SetFont($this->invoiceGiroFont,'',$this->invoiceGiroFontSize);
         ////$line = 1;
         $this->pdf->SetXY(16, 231 + ($line * $this->lineHeight));
-        $this->pdf->Cell(85, $this->lineHeight, $this->korriger($params["recipient"]["address1"]), $this->showMyFrame);
-        $line++;
+        $address1 = $this->splitString($this->korriger($params["recipient"]["address1"]), 90);
+        for ($i =0; $i < count($address1); $i++) {
+          $this->pdf->SetXY(16, 231 + ($line * $this->lineHeight));
+          $this->pdf->Cell(85, $this->lineHeight, $address1[$i], $this->showMyFrame);
+          $line++;
+        }
         $this->pdf->SetXY(16, 231 + ($line * $this->lineHeight));
         if ($params["recipient"]["address2"] != "")
         {
