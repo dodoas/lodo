@@ -23,6 +23,8 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
 
+$tabindex = 1;
+
 $get_invoice            = "select I.* from $db_table as I where ID='$ID'";
 #print "Get invoice " . $get_invoice . "<br>\n";
 $invoicein              = $_lib['storage']->get_row(array('query' => $get_invoice));
@@ -212,21 +214,21 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
     </tr>
     <tr>
         <td><b>Leverand&oslash;r</b></td>
-        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'SupplierAccountPlanID', 'pk'=>$ID, 'value'=>$invoicein->SupplierAccountPlanID,  'type' => array(0 => supplier))) ?></td>
+        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'SupplierAccountPlanID', 'pk'=>$ID, 'value'=>$invoicein->SupplierAccountPlanID, 'tabindex' => $tabindex++, 'type' => array(0 => supplier))) ?></td>
         <td><b>Mottaker</b></td>
         <td><? print $invoicein->to->CompanyName ?></td>
     </tr>
     <tr>
         <td><b>Betal til konto</b></td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SupplierBankAccount', 'pk' => $ID, 'value' => $invoicein->SupplierBankAccount)) ?></td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SupplierBankAccount', 'pk' => $ID, 'value' => $invoicein->SupplierBankAccount, 'tabindex' => $tabindex++)) ?></td>
         <td><b>Betal fra konto</b></td>
-        <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'CustomerBankAccount', 'pk' => $ID, 'value' => $invoicein->CustomerBankAccount, 'query' => 'form.BankAccount', 'width' => 30)) ?></td>
+        <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'CustomerBankAccount', 'pk' => $ID, 'value' => $invoicein->CustomerBankAccount, 'query' => 'form.BankAccount', 'width' => 30, 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
         <td><b>Betal (bel&oslash;p)</b></td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'TotalCustPrice', 'pk'=>$ID, 'value' => $invoicein->TotalCustPrice)) ?></td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'TotalCustPrice', 'pk'=>$ID, 'value' => $invoicein->TotalCustPrice, 'tabindex' => $tabindex++)) ?></td>
         <td>Betalingsm&aring;te</td>
-        <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'PaymentMeans', 'pk' => $ID, 'value' => $invoicein->PaymentMeans, 'query' => 'form.PaymentMeans', 'width' => 30)) ?></td>
+        <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'PaymentMeans', 'pk' => $ID, 'value' => $invoicein->PaymentMeans, 'query' => 'form.PaymentMeans', 'width' => 30, 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
         <td>Org nr</td>
@@ -282,7 +284,7 @@ foreach ($currencies as $currency) {
         <td>Forfalls dato</td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$ID, 'value'=>substr($invoicein->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
         <td>Er med i reisegarantifondet</td>
-        <td><? print $_lib['form3']->Checkbox(array('table'=>$db_table, 'field'=>'isReisegarantifond', 'pk'=>$ID, 'value'=>$invoicein->isReisegarantifond)) ?></td>
+        <td><? print $_lib['form3']->Checkbox(array('table'=>$db_table, 'field'=>'isReisegarantifond', 'pk'=>$ID, 'value'=>$invoicein->isReisegarantifond, 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
       <td>V&aring;r ref.</td>
@@ -433,6 +435,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         $aconf['width']         = '20';
         $aconf['type'][]        = 'result';
         $aconf['type'][]        = 'balance';
+        $aconf['tabindex']      = $tabindex++;
         $accountplan            = $accounting->get_accountplan_object($row2->AccountPlanID);
         print $_lib['form3']->accountplan_number_menu($aconf);
         ?>
@@ -646,7 +649,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 			if($_lib['sess']->get_person('AccessLevel') >= 2)
 			{
 				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($invoicein->Period), $_lib['sess']->get_person('AccessLevel'))) {
-					print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicein_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
+					print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicein_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S', 'tabindex' => $tabindex++));
 				} else {
 					print "Periode stengt";
 				}
