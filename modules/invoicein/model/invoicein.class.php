@@ -369,6 +369,17 @@ class logic_invoicein_invoicein implements Iterator {
             }
           }
         }
+        // if manually created invoice(not imported from Fakturabank)
+        if (!$invoicein->Imported) {
+          // calculate total cost for invoice
+          $TotalCustPrice = 0;
+          for($i = 1; $i <= $args['field_count']; $i++) {
+            $line_id = $args[$i];
+            $UnitCostPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCostPrice_'.$line_id], 'return' => 'value'));
+            $TotalCustPrice += $UnitCostPrice;
+          }
+          $args['invoicein_TotalCustPrice_'.$ID] = $TotalCustPrice;
+        }
 
         if(($args['invoicein_DepartmentID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
             $args['invoicein_DepartmentID_'.$ID] = $accountplan->DepartmentID;
