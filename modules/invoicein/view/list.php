@@ -180,8 +180,17 @@ foreach($invoicein as $InvoiceO) {
            print $_lib['format']->Amount($InvoiceO->TotalCustPrice);
         ?>
       </td>
-      <td><? print $InvoiceO->ProjectID ?></td>
-      <td><? print $InvoiceO->DepartmentID ?></td>
+      <?
+        $query_department = sprintf("SELECT * FROM department WHERE DepartmentID = %d", $InvoiceO->Department);
+        $department_row = $_lib['storage']->get_row(array('query' => $query_department, 'debug' => true));
+        $department = $department_row->DepartmentID . " - " . $department_row->DepartmentName;
+
+        $query_project = sprintf("SELECT * FROM project WHERE ProjectID = %d", $InvoiceO->Project);
+        $project_row = $_lib['storage']->get_row(array('query' => $query_project, 'debug' => true));
+        $project = $project_row->ProjectID . " - " . $project_row->Heading;
+      ?>
+      <td><? if ((string)$InvoiceO->Project != '') print $project ?></td>
+      <td><? if ((string)$InvoiceO->Department != '') print $department ?></td>
       <td title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';
