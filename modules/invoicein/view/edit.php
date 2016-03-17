@@ -333,12 +333,21 @@ foreach ($currencies as $currency) {
       <td>RemittanceDaySequence</td>
       <td><? print $invoicein->RemittanceDaySequence ?></td>
     </tr>
+<? if (!$invoicein->Imported) { ?>
+    <tr>
+      <td>Opprettet p&aring;</td>
+      <td><? print $invoicein->InsertedDateTime ?></td>
+      <td>Opprettet av</td>
+      <td><? print $_lib['format']->PersonIDToName($invoicein->InsertedByPersonID) ?></td>
+    </tr>
+<? } else { ?>
     <tr>
       <td>Hentet fra fakturabank</td>
       <td><? print $invoicein->FakturabankDateTime ?></td>
       <td>Hentet fra fakturabank av</td>
       <td><? print $_lib['format']->PersonIDToName($invoicein->FakturabankPersonID) ?></td>
     </tr>
+<? } ?>
 </tbody>
 </table>
   <?
