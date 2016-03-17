@@ -1643,7 +1643,7 @@ class lodo_fakturabank_fakturabank {
 
                         #Foreign currency
                         if ($is_foreign) {
-                            $datalineH['UnitCostPrice'] = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $CustPrice);
+                            $datalineH['UnitCustPrice'] = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $CustPrice);
                             $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
                             $datalineH['ForeignAmount']     = (float)$line->LineExtensionAmount + $line->TaxTotal->TaxAmount;
                             $datalineH['ForeignConvRate']   = $conversion_rate;
@@ -1655,8 +1655,6 @@ class lodo_fakturabank_fakturabank {
                             $datalineH['TaxAmount']         = (float)$line->TaxTotal->TaxAmount;
                         }
 
-                        $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
-
                         $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
                         $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
 
@@ -1664,6 +1662,8 @@ class lodo_fakturabank_fakturabank {
                         #$datalineH['VatID']             = $line->Price->PriceAmount; #This must probably be mapped
 
                         $datalineH['TotalWithTax'] = $datalineH['TotalWithoutTax'] + $datalineH['TaxAmount'];
+
+                        $datalineH['UnitCostPrice'] = $datalineH['UnitCustPrice'] + $datalineH['TaxAmount']/$Quantity;
 
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
