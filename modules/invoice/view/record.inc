@@ -104,7 +104,9 @@ elseif($_lib['input']->getProperty('action_invoice_fakturabankjournal')) {
 }
 elseif($_lib['input']->getProperty('action_invoice_lock')) {
     $invoice->init(array());
-    $invoice->lock();
+    if ($invoice->fakturabank_send_precheck()) {
+      $invoice->lock();
+    }
 }
 elseif($_lib['input']->getProperty('action_save_internal')) {
     $comment = "";
