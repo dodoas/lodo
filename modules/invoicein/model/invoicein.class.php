@@ -291,6 +291,7 @@ class logic_invoicein_invoicein implements Iterator {
 
         self::addVATPercentToAllowanceCharge($args);
         self::invertAllAllowanceAmounts($args);
+<<<<<<< HEAD
         self::calculatePriceAmountQuantity($args);
         if(!$invoicein->IZipCode) {
             if($accountplan->ZipCode) {
@@ -327,6 +328,20 @@ class logic_invoicein_invoicein implements Iterator {
             } else {
                 $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
             }
+        $changed_supplier_accountplan = $invoicein->SupplierAccountPlanID != $AccountPlanID;
+
+        // update all supplier related info on the invoice
+        if($changed_supplier_accountplan) {
+          $args['invoicein_IZipCode_' . $ID] = $accountplan->ZipCode;
+          if(!$accountplan->ZipCode) $_lib['message']->add('Postnummer mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_ICity_' . $ID] = $accountplan->City;
+          if(!$accountplan->City) $_lib['message']->add('Sted mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_IName_' . $ID] = $accountplan->AccountName;
+          if(!$accountplan->AccountName) $_lib['message']->add('Navn mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_IAddress_' . $ID] = $accountplan->Address;
+          if($accountplan->Address) $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
+          if(!$accountplan->DomesticBankAccount) $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
         }
         if(!$invoicein->DZipCode) {
                 $args['invoicein_DZipCode_' . $ID] = $accountplan->ZipCode;
@@ -369,6 +384,8 @@ class logic_invoicein_invoicein implements Iterator {
             }
           }
         }
+        // set the period as the period the invoice date belongs to
+        if ($args['invoicein_InvoiceDate_'.$ID] && !empty($args['invoicein_InvoiceDate_'.$ID])) $args['invoicein_Period_'.$ID] = strftime("%Y-%m", strtotime($args['invoicein_InvoiceDate_'.$ID]));
         // if manually created invoice(not imported from Fakturabank)
         if (!$invoicein->Imported) {
           // calculate total cost for invoice
