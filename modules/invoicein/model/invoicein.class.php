@@ -376,7 +376,8 @@ class logic_invoicein_invoicein implements Iterator {
           for($i = 1; $i <= $args['field_count']; $i++) {
             $line_id = $args[$i];
             $UnitCostPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCostPrice_'.$line_id], 'return' => 'value'));
-            $TotalCustPrice += $UnitCostPrice;
+            $QuantityDelivered = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_QuantityDelivered_'.$line_id], 'return' => 'value'));
+            $TotalCustPrice += $UnitCostPrice * $QuantityDelivered;
           }
           $args['invoicein_TotalCustPrice_'.$ID] = $TotalCustPrice;
         }
