@@ -60,6 +60,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        A.Address,
        A.City,
        A.ZipCode,
+       A.IDNumber,
        A.SocietyNumber,
        A.TabellTrekk,
        A.ProsentTrekk as AP_ProsentTrekk
@@ -103,7 +104,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        '%s'
      );
      ", $head->SalaryID, $head->AccountName, $head->Address,
-                                       $head->City, $head->ZipCode, $head->SocietyNumber,
+                                       $head->City, $head->ZipCode, (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber),
                                        $head->TabellTrekk, $head->ProsentTrekk, $arb->Percent);
 
     $_lib['db']->db_query($query_update_presistent);
@@ -564,7 +565,7 @@ $formname = "salaryUpdate";
   <td colspan = "7">
 
   <?
-    if($head->UpdatedBy) echo "Oppdatert " . $head->UpdatedAt . ", av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
+    if($head->UpdatedBy) echo $head->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
   ?>
   </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
@@ -573,7 +574,7 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($head->LockedBy) echo "L&aring;st " . $head->LockedDate . ", av " . $head->LockedBy;
+    if($head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
   ?>
   </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
@@ -582,10 +583,11 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
       <? if ($head->FakturabankPersonID) { ?>
-           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
+           <? print $head->FakturabankDateTime ?> fakturaBank <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
       <? } ?>
   </td>
-  <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
+  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
+  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>
