@@ -29,35 +29,28 @@ fputcsv($output, $headings);
 // Loop over balance accounts
 while($account = $_lib['db']->db_fetch_object($balance_accounts))
 {
-    $saldo_old      = 0;
     $query_saldo_old = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where $VoucherType V.VoucherPeriod < '$from_period' and V.AccountPlanID='$account->AccountPlanID' and V.Active=1 group by V.AccountPlanID";
     $voucher_saldo_old = $_lib['storage']->get_row(array('query' => $query_saldo_old));
     $saldo_old      = (round($voucher_saldo_old->sumin, 2) - round($voucher_saldo_old->sumout, 2));
 
-    $saldo_new      = 0;
     $query_saldo    = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where $VoucherType V.VoucherPeriod >= '$from_period' and V.VoucherPeriod <= '$to_period' and V.AccountPlanID='$account->AccountPlanID' and V.Active=1 group by V.AccountPlanID";
     $voucher_saldo  = $_lib['storage']->get_row(array('query' => $query_saldo));
     $saldo_new_sum_in = round($voucher_saldo->sumin, 2);
     $saldo_new_sum_out = round($voucher_saldo->sumout, 2);
     $saldo_new      = $saldo_new_sum_in - $saldo_new_sum_out;
 
-    $sumrow_new     = 0;
     $sumrow_new     = $saldo_old + $saldo_new;
 
-    ################################################################################
-    $saldo_prev_old             = 0;
     $query_prev_saldo_old       = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where $VoucherType V.VoucherPeriod < '$from_prev_period' and V.AccountPlanID='$account->AccountPlanID' and V.Active=1 group by V.AccountPlanID";
     $voucher_prev_saldo_old     = $_lib['storage']->get_row(array('query' => $query_prev_saldo_old));
     $saldo_prev_old             = (round($voucher_prev_saldo_old->sumin, 2) - round($voucher_prev_saldo_old->sumout, 2));
 
-    $saldo_prev_new         = 0;
     $query_prev_saldo_new   = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where $VoucherType V.VoucherPeriod >= '$from_prev_period' and V.VoucherPeriod <= '$to_prev_period' and V.AccountPlanID='$account->AccountPlanID' and V.Active=1 group by V.AccountPlanID";
     $voucher_prev_saldo_new = $_lib['storage']->get_row(array('query' => $query_prev_saldo_new));
     $saldo_prev_new_sum_in  = round($voucher_prev_saldo_new->sumin, 2);
     $saldo_prev_new_sum_out = round($voucher_prev_saldo_new->sumout, 2);
     $saldo_prev_new         = $saldo_prev_new_sum_in - $saldo_prev_new_sum_out;
 
-    $sumrow_prev_new    = 0;
     $sumrow_prev_new    = $saldo_prev_old + $saldo_prev_new;
 
     // if all saldos are zero and account plan is not active then skip it
