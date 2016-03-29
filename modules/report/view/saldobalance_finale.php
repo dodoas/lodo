@@ -1,16 +1,21 @@
 <?
-// Set header to a CSV file, and make it an attachment so it is downloaded and not displayed
-header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=Saldobalanse'.time().'.csv');
-
-// Open output stream as file output
-$output = fopen('php://output', 'w');
-
 // Fetch input parameters
 $enable_last_year = (bool) $_REQUEST['report_EnableLastYear'];
 $from_period = $_REQUEST['report_FromPeriod'];
 $to_period = $_REQUEST['report_ToPeriod'];
 $result_from_period = $_REQUEST['report_ResultFromPeriod'];
+
+list($report_year) = explode("-", $from_period);
+$company_name = $_lib['sess']->get_companydef('CompanyName');
+$last_year_text = ($enable_last_year) ? utf8_encode(' med fjoraarets') : '';
+$filename = $report_year .' '. $company_name .' Saldobalanse'. $last_year_text .'.csv';
+
+// Set header to a CSV file, and make it an attachment so it is downloaded and not displayed
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename="'. $filename .'"');
+
+// Open output stream as file output
+$output = fopen('php://output', 'w');
 
 $from_prev_period   = $_lib['date']->get_this_period_last_year($_REQUEST['report_FromPeriod'] . "-01");
 $to_prev_period     = $_lib['date']->get_this_period_last_year($_REQUEST['report_ToPeriod'] . "-01");
@@ -21,10 +26,10 @@ $query_result  = str_replace("balance", "result", $query_balance);
 $balance_accounts = $_lib['db']->db_query($query_balance);
 $result_accounts = $_lib['db']->db_query($query_result);
 
-// Headings
-$headings = array('Account number', 'Account name', 'Amount');
-if ($enable_last_year) array_push($headings, 'Amount last year');
-fputcsv($output, $headings);
+// Headings, left here just so we know what each column in CSV is
+// $headings = array('Account number', 'Account name', 'Amount');
+// if ($enable_last_year) array_push($headings, 'Amount last year');
+// fputcsv($output, $headings);
 
 // Loop over balance accounts
 while($account = $_lib['db']->db_fetch_object($balance_accounts))
