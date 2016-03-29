@@ -1663,7 +1663,13 @@ class lodo_fakturabank_fakturabank {
 
                         $datalineH['TotalWithTax'] = $datalineH['TotalWithoutTax'] + $datalineH['TaxAmount'];
 
-                        $datalineH['UnitCostPrice'] = $datalineH['UnitCustPrice'] + $datalineH['TaxAmount']/$Quantity;
+                        // If Quantity not zero, we can devide by it and get the tax amount per unit. If not then set the amount of
+                        // one unit with tax to 100 + Vat percent of the amount of one unit without tax
+                        if ($Quantity != 0) {
+                          $datalineH['UnitCostPrice'] = $datalineH['UnitCustPrice'] + $datalineH['TaxAmount']/$Quantity;
+                        } else {
+                          $datalineH['UnitCostPrice'] = $datalineH['UnitCustPrice'] * (1 + $datalineH['Vat']/100.0);
+                        }
 
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');

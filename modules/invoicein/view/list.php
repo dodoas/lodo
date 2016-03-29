@@ -181,16 +181,14 @@ foreach($invoicein as $InvoiceO) {
         ?>
       </td>
       <?
-        $query_department = sprintf("SELECT * FROM department WHERE DepartmentID = %d", $InvoiceO->Department);
-        $department_row = $_lib['storage']->get_row(array('query' => $query_department, 'debug' => true));
-        $department = $department_row->DepartmentID . " - " . $department_row->DepartmentName;
+        includelogic('department/department');
+        $department = new lodo_department(array('DepartmentID' => $InvoiceO->Department));
 
-        $query_project = sprintf("SELECT * FROM project WHERE ProjectID = %d", $InvoiceO->Project);
-        $project_row = $_lib['storage']->get_row(array('query' => $query_project, 'debug' => true));
-        $project = $project_row->ProjectID . " - " . $project_row->Heading;
+        includelogic('project/project');
+        $project = new lodo_project(array('ProjectID' => $InvoiceO->Project));
       ?>
-      <td><? if ((string)$InvoiceO->Project != '') print $project ?></td>
-      <td><? if ((string)$InvoiceO->Department != '') print $department ?></td>
+      <td><? if ((string)$InvoiceO->Project != '') print $project->getProjectIDAndName(); ?></td>
+      <td><? if ((string)$InvoiceO->Department != '') print $department->getDepartmentIDAndName(); ?></td>
       <td title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';
