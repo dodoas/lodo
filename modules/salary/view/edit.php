@@ -229,7 +229,7 @@ $formname = "salaryUpdate";
   </th>
     <?
       // if date is set just show it unless the user is admin in which case show the input
-      if (($head->ActualPayDate && ($head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00')) || $_lib['sess']->get_person('AccessLevel') >= 4) {
+      if (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00' || $_lib['sess']->get_person('AccessLevel') >= 4) {
         // used to enable/disable the update altinndato button
         // if the user is an admin he will always have it enabled
         $altinndato_set = false;
