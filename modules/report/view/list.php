@@ -383,7 +383,7 @@ print $_lib['sess']->doctype ?>
 <hr>
 
 <table class="lodo_data" width="100%">
-<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.terminoppgave_altinn" method="post" target="_blank">
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.terminoppgave&altinn=1" method="post" target="_blank">
 <tr class="r0">
 	<th rowspan="7">L<br />&Oslash;<br />N<br />N<br /></th>
     <td>Terminoppgave skattetrekk og arbeidsgiveravgift(Altinn)</td>
