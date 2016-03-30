@@ -138,7 +138,7 @@ if(!isset($row_comp->CompanyID))
   <tr>
     <td class="BGColorDark">Plassering av linjekommentar</td>
     <td class="BGColorLight"><? print $_lib['form3']->Type_menu3(array('table'=>'company', 'field'=>'InvoiceLineCommentPosition', 'value'=>$row_comp->InvoiceLineCommentPosition, 'type'=>'InvoiceCommentCustomerPosition', 'required'=>'1')) ?></td>
-    <td class="BGColorDark">Vis giro informasjon i pdf faktura</td>
+    <td class="BGColorDark">Vis giro informasjon p&aring; pdf faktura</td>
     <td class="BGColorLight"><? print $_lib['form2']->checkbox2('company', 'InvoicePDFPrintGiroInfo', $row_comp->InvoicePDFPrintGiroInfo, '') ?></td>
   </tr>
   <tr>

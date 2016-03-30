@@ -152,6 +152,7 @@ $params["comment"] = $row->CommentCustomer;
 
 // Legg til en ny faktura, lage header med sender og mottaker av fakturaen.
 $myFakutra->newInvoice($params);
+$myFakutra->setPrintGiro($row_company->InvoicePDFPrintGiroInfo);
 
 
 $sumlines = 0;
@@ -187,7 +188,7 @@ $params["totaltmmva"] = $vatlines + $sumlines;
 // print giroinfo
 // Need to be before printing lines since it should be on first page
 $myFakutra->addSumLine($params);
-if ($row_company->InvoicePDFPrintGiroInfo) $myFakutra->fakturaGiro($params);
+$myFakutra->fakturaGiro($params);
 
 // printing lines
 foreach ($myFakutraLines as $params2) {

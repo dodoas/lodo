@@ -32,8 +32,10 @@ class pdfInvoice
     public $invoiceLineFontSize = 9;
     public $invoiceHeadAdressWidth = 85;
 
+    public $invoicePrintGiro = true;
     public $invoiceGiroFont = 'Courier';
     public $invoiceGiroFontSize = 12;
+    public $invoiceAddionalTopMargintForTotalSums = 115;
 
     public $invoiceHeadSenderStart = 14;
     public $invoiceHeadSenderLeftMargin = 9;
@@ -59,8 +61,9 @@ class pdfInvoice
     public $invoiceHeaderFont = 16;
     public $invoiceHeaderHeight = 5;
 
-    public $invoiceLinesPerSite = 14;
-    public $invoiceLinesPerSiteFormSecondPage = 39;
+    public $invoiceLinesWithGiroInfo = 14;
+    public $invoiceLinesWithoutGiroInfo = 39;
+    public $invoiceLinesPerSite;
 
     public $invoiceLineHeadFontSize = 9;
     public $invoiceLineHeadStart = 98;
@@ -111,6 +114,16 @@ class pdfInvoice
     {
         $this->pdf=new FPDF('P', 'mm', 'A4');
     }
+
+/**
+ * Setter for invoicePrintGiro
+ */
+    function setPrintGiro($shouldPringGiro)
+    {
+      $this->invoicePrintGiro = $shouldPringGiro;
+      $this->invoiceLinesPerSite = ($this->invoicePrintGiro) ? $this->invoiceLinesWithGiroInfo : $this->invoiceLinesWithoutGiroInfo;
+    }
+
 /**
  * Oppretter ny faktura. Det er fult mulig å ha flere fakturaer i samme PDF fil.
  *
@@ -245,9 +258,14 @@ class pdfInvoice
         }
         $this->pdf->SetFont($this->invoiceFont,'',12);
         ////$lineNumber++;
-        $this->pdf->SetXY($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * $lineNumber));
-        $this->pdf->Cell($this->invoiceHeadAdressWidth,$this->lineHeight, $this->korriger($params["recipient"]["address1"]),$this->showMyFrame);
-        $lineNumber++;
+
+        $recipientAddress = $this->splitString($this->korriger($params["recipient"]["address1"]), 100);
+        for ($i =0; $i < count($recipientAddress); $i++) {
+          $this->pdf->SetXY($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * $lineNumber));
+          $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight, $recipientAddress[$i], $this->showMyFrame);
+          $lineNumber++;
+        }
+
         $this->pdf->SetXY($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * $lineNumber));
         if ($params["recipient"]["address2"] != "")
         {
@@ -286,9 +304,12 @@ class pdfInvoice
             $lineNumber++;
           }
           $this->pdf->SetFont($this->invoiceFont,'',10);
-          $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart + ($this->lineHeight * $lineNumber) - 4);
-          $this->pdf->Cell($this->invoiceHeadAdressWidth,$this->lineHeight - 1, $this->korriger($params["delivery"]["address1"]),$this->showMyFrame);
-          $lineNumber++;
+          $deliveryAddress = $this->splitString($this->korriger($params["delivery"]["address1"]), 100);
+          for ($i =0; $i < count($deliveryAddress); $i++) {
+            $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart + ($this->lineHeight * $lineNumber) - 4);
+            $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight - 1, $deliveryAddress[$i], $this->showMyFrame);
+            $lineNumber++;
+          }
           $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart + ($this->lineHeight * $lineNumber) - 4.5);
           $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight - 1, $this->korriger($params["delivery"]["zip"]) . " " . $this->korriger($params["delivery"]["city"]), $this->showMyFrame);
           if($params["delivery"]["country"] != $params["sender"]["country"]) {
@@ -509,7 +530,7 @@ class pdfInvoice
         $correction = 0.2;
         $this->pdf->SetLineWidth(0.2);
         $this->newInvoicePage();
-        $this->invoiceLinesPerSite = $this->invoiceLinesPerSiteFormSecondPage;
+        $this->invoiceLinesPerSite = $this->invoiceLinesWithoutGiroInfo;
     }
 /**
  * Legger inn nye tekstlinjer sammem med fakturalinjene. Denne må kalles hvis det blir mer enn en linje,
@@ -564,6 +585,10 @@ class pdfInvoice
         if ($params["comment"] == "")
         {
             $this->invoiceLineFootStart += $this->lineHeight;
+        }
+        if (!$this->invoicePrintGiro) {
+          // Add some more height if to the total sums if we don't want to show giro infomation
+          $this->invoiceLineFootStart += $this->invoiceAddionalTopMargintForTotalSums;
         }
         $this->pdf->SetXY(14, $this->invoiceLineFootStart);
         $this->pdf->Cell(30, $this->lineHeight, "Totalt u/MVA", $this->showMyFrame, 0, "R");
@@ -669,6 +694,8 @@ function SplitByLength($string, $chunkLength=1){
  */
     function fakturaGiro($params)
     {
+        if (!$this->invoicePrintGiro)
+          return;
         // From 174 mm to 297 mm.
         // Regning: Belop #1
         $this->pdf->SetFont($this->invoiceGiroFont,'',$this->invoiceGiroFontSize);
@@ -718,11 +745,10 @@ function SplitByLength($string, $chunkLength=1){
         }
         $this->pdf->SetFont($this->invoiceGiroFont,'',$this->invoiceGiroFontSize);
         ////$line = 1;
-        $this->pdf->SetXY(16, 231 + ($line * $this->lineHeight));
-        $address1 = $this->splitString($this->korriger($params["recipient"]["address1"]), 90);
-        for ($i =0; $i < count($address1); $i++) {
+        $recipientAddress = $this->splitString($this->korriger($params["recipient"]["address1"]), 90);
+        for ($i =0; $i < count($recipientAddress); $i++) {
           $this->pdf->SetXY(16, 231 + ($line * $this->lineHeight));
-          $this->pdf->Cell(85, $this->lineHeight, $address1[$i], $this->showMyFrame);
+          $this->pdf->Cell(85, $this->lineHeight, $recipientAddress[$i], $this->showMyFrame);
           $line++;
         }
         $this->pdf->SetXY(16, 231 + ($line * $this->lineHeight));
@@ -763,9 +789,12 @@ function SplitByLength($string, $chunkLength=1){
         }
         $this->pdf->SetFont($this->invoiceGiroFont,'',$this->invoiceGiroFontSize);
         ////$line = 1;
-        $this->pdf->SetXY(115, 231 + ($line * $this->lineHeight));
-        $this->pdf->Cell(85, $this->lineHeight, $this->korriger($params["sender"]["address1"]), $this->showMyFrame);
-        $line++;
+        $senderAddress = $this->splitString($this->korriger($params["sender"]["address1"]), 100);
+        for ($i =0; $i < count($senderAddress); $i++) {
+          $this->pdf->SetXY(115, 231 + ($line * $this->lineHeight));
+          $this->pdf->Cell(85, $this->lineHeight, $senderAddress[$i], $this->showMyFrame);
+          $line++;
+        }
         ////$this->pdf->SetXY(115, 231 + (2 * $this->lineHeight));
         $this->pdf->SetXY(115, 231 + ($line * $this->lineHeight));
         if ($params["sender"]["address2"] != "")
