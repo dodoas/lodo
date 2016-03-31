@@ -14,7 +14,7 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
 
-$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
+$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.IDNumber, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
 #print "$query_head<br>";
 $result_head    = $_lib['db']->db_query($query_head);
 $head           = $_lib['db']->db_fetch_object($result_head);
@@ -86,7 +86,8 @@ $kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommun
   </tr>
   <tr>
     <td><label>Personnr</label></td>
-    <td><? print $head->SocietyNumber ?></td>
+    <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
+    <td><? print $personal_number ?></td>
     <td class="empty"></td>
     <td><label>Fra dato</label></td>
     <td><? print $head->ValidFrom ?></td>
