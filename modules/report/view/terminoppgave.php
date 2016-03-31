@@ -85,6 +85,10 @@ foreach($termin->SalaryLineH as $ZoneID => $Zone) {
         </tr>
         <? foreach($termin->KommuneH[$ZoneID][$KommuneID] as $LineID => $Amount) { ?>
         <tr>
+          <th colspan="3">Sum totalt:</th>
+        </tr>
+        <? if (!empty($termin->SumH)) foreach($termin->SumH as $LineID => $Amount) { ?>
+          <tr>
             <td class="number"><b><? print $LineID ?></b></td>
             <td><b><? print $termin->LineIDToName($LineID) ?></b></td>
             <td class="number"><b><? print $_lib['format']->Amount($Amount) ?></b></td>
