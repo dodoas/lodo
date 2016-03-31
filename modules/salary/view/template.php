@@ -46,7 +46,7 @@ print $_lib['sess']->doctype ?>
 <input type="hidden" name="SalaryConfID" value="<? print $SalaryConfID ?>" size="7" class="number">
 <table class="lodo_data">
   <tr class="result">
-    <th colspan="17">Lønnsmal: <? if($ishovedmal) { print "hovedmal"; } else { print $head->SalaryConfID; } ?>
+    <th colspan="19">Lønnsmal: <? if($ishovedmal) { print "hovedmal"; } else { print $head->SalaryConfID; } ?>
   <?
   if(!$ishovedmal)
   {
@@ -60,7 +60,7 @@ print $_lib['sess']->doctype ?>
   }
   ?>
       </th>
-      <th colspan="13"></th>
+      <th colspan="15"></th>
   <tr>
     <th class="sub">Aktiv</th>
     <th class="sub">Linje</th>

@@ -383,29 +383,12 @@ print $_lib['sess']->doctype ?>
 <hr>
 
 <table class="lodo_data" width="100%">
-<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.terminoppgave&altinn=1" method="post" target="_blank">
-<tr class="r0">
-	<th rowspan="7">L<br />&Oslash;<br />N<br />N<br /></th>
-    <td>Terminoppgave skattetrekk og arbeidsgiveravgift(Altinn)</td>
-    <td>Fra periode</td>
-    <td>
-        <?
-            print $_lib['form3']->AccountPeriod_menu3(array('name' => 'FromPeriod', 'noaccess' => true, 'value'=>$firstPeriodThisYear));
-        ?>
-    <td>Til periode</td>
-    <td>
-        <?
-            print $_lib['form3']->AccountPeriod_menu3(array('name' => 'ToPeriod', 'noaccess' => true, 'value'=>$lastPeriodThisYear));
-        ?>
-
-    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
-</tr>
-</form>
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.terminoppgave" method="post" target="_blank">
 <input type="hidden" name="report.Type" value="reskontro">
 <input type="hidden" name="report.Sort" value="VoucherDate">
 
 <tr>
+	<th rowspan="6">L<br />&Oslash;<br />N<br />N<br /></th>
     <td>Terminoppgave skattetrekk og arbeidsgiveravgift</td>
     <td>Fra periode</td>
     <td>

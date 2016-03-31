@@ -60,6 +60,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        A.Address,
        A.City,
        A.ZipCode,
+       A.IDNumber,
        A.SocietyNumber,
        A.TabellTrekk,
        A.ProsentTrekk as AP_ProsentTrekk
@@ -103,7 +104,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        '%s'
      );
      ", $head->SalaryID, $head->AccountName, $head->Address,
-                                       $head->City, $head->ZipCode, $head->SocietyNumber,
+                                       $head->City, $head->ZipCode, (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber),
                                        $head->TabellTrekk, $head->ProsentTrekk, $arb->Percent);
 
     $_lib['db']->db_query($query_update_presistent);
@@ -227,7 +228,22 @@ $formname = "salaryUpdate";
             ));
     ?>
   </th>
-    <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number">
+    <?
+      // if date is set just show it unless the user is admin in which case show the input
+      if (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00' || $_lib['sess']->get_person('AccessLevel') >= 4) {
+        // used to enable/disable the update altinndato button
+        // if the user is an admin he will always have it enabled
+        $altinndato_set = false;
+    ?>
+    <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number"></th>
+    <?
+      } else {
+        $altinndato_set = true;
+    ?>
+    <th class="sub"><? print $head->ActualPayDate ?></th>
+    <?
+      }
+    ?>
     <th class="sub"><? print getAltinnReportedDateTime($head->SalaryID); ?>
   </tr>
   <tr>
@@ -442,13 +458,16 @@ $formname = "salaryUpdate";
     <?
   }
   ?>
-<tr><td></td><td><b>Sum</b></td><td colspan="2"></td>
+<tr>
+  <td></td>
+  <td><b>Sum</b></td>
+  <td colspan="3"></td>
 <td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisPeriod, 'return'=>'value')) ?></b></td>
 <td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisYear, 'return'=>'value')) ?></b></td>
 </tr>
 
 <tr height="20">
-  <td colspan="4">
+  <td colspan="5">
   <td colspan="11">Skattetrekk trekkes bare med hele kroner
 </tr>
 
@@ -516,6 +535,7 @@ $formname = "salaryUpdate";
 
                   echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
                   echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
+                  echo '<input type="submit" name="action_altindato_update" value="Lagre altinndato" align="right" ' . (($altinndato_set) ? 'disabled' : '') . '/>';
             ?>
           </td>
         </tr>
@@ -561,7 +581,7 @@ $formname = "salaryUpdate";
   <td colspan = "7">
 
   <?
-    if($head->UpdatedBy) echo "Oppdatert " . $head->UpdatedAt . ", av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
+    if($head->UpdatedBy) echo $head->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
   ?>
   </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
@@ -570,7 +590,7 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($head->LockedBy) echo "L&aring;st " . $head->LockedDate . ", av " . $head->LockedBy;
+    if($head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
   ?>
   </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
@@ -579,10 +599,11 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
       <? if ($head->FakturabankPersonID) { ?>
-           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
+           <? print $head->FakturabankDateTime ?> fakturaBank <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
       <? } ?>
   </td>
-  <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
+  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
+  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>

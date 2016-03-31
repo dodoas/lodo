@@ -46,7 +46,7 @@ class lodo_fakturabank_fakturabanksalary {
 
         global $_lib;
 
-        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
+        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.IDNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
         #print "$query_head<br>";
         $result_head    = $_lib['db']->db_query($query_head);
         $head           = $_lib['db']->db_fetch_object($result_head);
@@ -218,7 +218,7 @@ class lodo_fakturabank_fakturabanksalary {
 		$xml_content .= "<last_name>" . $head->LastName . "</last_name>\n";
         $xml_content .= "<scheme>FAKTURABANK:EMAIL</scheme>\n";
         $xml_content .= "<identifier>" . $head->FakturabankEmail . "</identifier>\n";
-        $xml_content .= "<official_id_number>" . $head->SocietyNumber . "</official_id_number>\n";
+        $xml_content .= "<official_id_number>" . (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber) . "</official_id_number>\n";
         $xml_content .= "<email>" . $head->Email . "</email>\n";
 
 		$xml_content .= "<postal_address>\n";
