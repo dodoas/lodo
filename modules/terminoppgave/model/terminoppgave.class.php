@@ -21,7 +21,9 @@ class logic_terminoppgave_terminoppgave {
 
         ################
         #hente ut alle linjenummer med arbavgift
-        $query_arbavgift = "select distinct LineNumber, SalaryText from salaryline as sl, salary as s where (sl.EnableEmployeeTax=1 or sl.LineNumber=90 or sl.LineNumber=91 or sl.LineNumber=92) and s.Period >= '$this->FromPeriod' and s.Period <= '$this->ToPeriod' and sl.SalaryText != '' order by sl.LineNumber asc";
+        if ($this->altinn) $periode_part = "DATE_FORMAT(s.ActualPayDate, '%Y-%m') >= '$this->FromPeriod' and DATE_FORMAT(s.ActualPayDate, '%Y-%m') <= '$this->ToPeriod'";
+        else $periode_part = "s.Period >= '$this->FromPeriod' and s.Period <= '$this->ToPeriod'";
+        $query_arbavgift = "select distinct LineNumber, SalaryText from salaryline as sl, salary as s where (sl.EnableEmployeeTax=1 or sl.LineNumber=90 or sl.LineNumber=91 or sl.LineNumber=92) and $periode_part and sl.SalaryText != '' order by sl.LineNumber asc";
         #print "$query_arbavgift<br>";
         $result_arbavgift = $_lib['db']->db_query($query_arbavgift);
         while($row = $_lib['db']->db_fetch_object($result_arbavgift)) {   
@@ -57,7 +59,9 @@ class logic_terminoppgave_terminoppgave {
      
                 ################
                 #hente ut alle lønningshoder til denne kommunen
-                $query_salary = "select S.SalaryID, S.AccountPlanID, S.JournalID, S.Period, A.AccountName, A.SocialSecurityNumber from salary S, accountplan A where S.Period >= '$this->FromPeriod' and S.Period <= '$this->ToPeriod' and S.AccountPlanID=A.AccountPlanID and A.KommuneID=".$kommune->KommuneID." order by S.AccountPlanID asc, S.JournalID asc";
+                if ($this->altinn) $periode_part = "DATE_FORMAT(S.ActualPayDate, '%Y-%m') >= '$this->FromPeriod' and DATE_FORMAT(S.ActualPayDate, '%Y-%m') <= '$this->ToPeriod'";
+                else $periode_part = "S.Period >= '$this->FromPeriod' and S.Period <= '$this->ToPeriod'";
+                $query_salary = "select S.SalaryID, S.AccountPlanID, S.JournalID, S.Period, A.AccountName, A.SocialSecurityNumber from salary S, accountplan A where $periode_part and S.AccountPlanID=A.AccountPlanID and A.KommuneID=".$kommune->KommuneID." order by S.AccountPlanID asc, S.JournalID asc";
                 #print "$query_salary<br>";
                 $result_salary = $_lib['db']->db_query($query_salary);
  
