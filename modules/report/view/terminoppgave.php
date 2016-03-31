@@ -135,7 +135,7 @@ print $_lib['sess']->doctype;
         <tr>
           <th colspan="3">Sum totalt:</th>
         </tr>
-        <? foreach($termin->SumH as $LineID => $Amount) { ?>
+        <? if (!empty($termin->SumH)) foreach($termin->SumH as $LineID => $Amount) { ?>
           <tr>
             <td class="number"><b><? print $LineID ?></b></td>
             <td><b><? print $termin->LineIDToName($LineID) ?></b></td>
