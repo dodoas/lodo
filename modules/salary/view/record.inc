@@ -1039,7 +1039,7 @@ elseif($_lib['input']->getProperty('action_salary_update_extra')) {
 }
 elseif($_lib['input']->getProperty('action_altindato_update')) {
   if (isset($_POST['salary_ActualPayDate_'.$SalaryID])) {
-    $query_update_altinn_date = "UPDATE salary SET ActualPayDate = '". $_POST['salary_ActualPayDate_'.$SalaryID] ."'";
+    $query_update_altinn_date = "UPDATE salary SET ActualPayDate = '". $_POST['salary_ActualPayDate_'.$SalaryID] ."' where SalaryID = " . $SalaryID;
     $_lib['db']->db_query($query_update_altinn_date);
   }
 }
