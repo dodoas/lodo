@@ -223,6 +223,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table, 'field'=>'SubcompanyID', 'value'=>$account->SubcompanyID, 'class'=> 'lodoreqfelt')); ?></td>
   </tr>
   <tr>
+    <td class="menu">ID nummer</td>
+    <td></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'IDNumber', 'value'=>$account->IDNumber, 'class'=>'lodoreqfelt')) ?></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
     <td class="menu">Kommune</td>
     <td></td>
     <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table, 'field'=>'KommuneID', 'value'=>$account->KommuneID, 'class'=>'lodoreqfelt')) ?></td>
