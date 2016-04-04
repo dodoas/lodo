@@ -17,6 +17,18 @@ if (isset($_GET['AltinnReport4ID'])) {
   header('Location: '.$_lib['sess']->dispatchs.'t=altinnsalary.list');
 }
 
+$query_current_report = "
+  SELECT * FROM altinnReport1 ar1 WHERE ar1.ReceiptId IN (
+    SELECT ar2.req_ReceiptId FROM altinnReport2 ar2 WHERE ar2.res_ReceiversReference IN (
+      SELECT ar4.req_CorrespondenceID FROM altinnReport4 ar4 WHERE ar4.Altinnreport4ID = " . $_GET['AltinnReport4ID'] . "
+    )
+    ORDER BY ar2.altinnReport2ID DESC
+  )";
+$current_report_row = $_lib['db']->get_row(array('query' => $query_current_report));
+$query_last_report_for_period = "SELECT * FROM altinnReport1 ar1 WHERE ar1.Period = '" . $current_report_row->Period . "' ORDER BY ar1.altinnReport1ID DESC LIMIT 1";
+$last_report_for_period_row = $_lib['db']->get_row(array('query' => $query_last_report_for_period));
+$show_invoice_print_links = $last_report_for_period_row->AltinnReport1ID == $current_report_row->AltinnReport1ID;
+
 print $_lib['sess']->doctype ?>
 
 <head>
@@ -33,6 +45,16 @@ print $_lib['sess']->doctype ?>
       <td class="menu">AltinnReport4ID</td>
       <td><? print $row->AltinnReport4ID; ?></td>
     </tr>
+<? if ($show_invoice_print_links) { ?>
+    <tr>
+      <td class="menu">Arbeidsgiveravgift faktura</td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a></td>
+    </tr>
+    <tr>
+      <td class="menu">Forskuddstrekk faktura</td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a></td>
+    </tr>
+<? } ?>
     <tr>
       <td class="menu">Folder</td>
       <td><? print $row->Folder; ?></td>
