@@ -512,7 +512,7 @@ print $_lib['sess']->doctype ?>
 
 <table class="lodo_data" width="100%">
 <tr>
-	<th rowspan="5">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
+	<th rowspan="7">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
 	<td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID" target="_blank">Bilags, balanse, resultat, reskontro, dato og periode kontroll</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=auditorreport.list" target="_blank">Saldobalanse selvangivelse &aring;rsregnskap</a></td>
@@ -552,6 +552,19 @@ print $_lib['sess']->doctype ?>
     </td>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
+</form>
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.saldobalance_finale" method="post" target="_blank">
+  <tr>
+    <td rowspan="2">&Aring;rsoppgj&oslash;r eksport</td>
+    <td>Fra periode <? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'report', 'field' => 'FromPeriod', 'noaccess' => true, 'value'=>$firstPeriodThisYear)); ?></td>
+    <td>Til periode <? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'report', 'field' => 'ToPeriod', 'noaccess' => true, 'value'=>$lastPeriodThisYear)); ?></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Resultat fra <? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'report', 'field' => 'ResultFromPeriod', 'value' => $firstPeriodThisYear, 'noaccess' => true)); ?></td>
+    <td>Fjor&aring;rets tall  <? print $_lib['form3']->checkbox(array('table'=>'report', 'field'=>'EnableLastYear',  'value' => 1)) ?></td>
+    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+  </tr>
 </form>
 
 </table>
