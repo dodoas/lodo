@@ -1,4 +1,12 @@
 <?
+// always send SupplierAccountPlanID, needed for new line and delete line
+// actions, which are links and do not include other fields
+if($_lib['input']->getProperty('action_invoicein_linenew') || $_lib['input']->getProperty('action_invoicein_linedelete')) {
+  $ID = $_REQUEST['ID'];
+  $supplier_accountplan = $_lib['storage']->get_row(array('query' => "SELECT SupplierAccountPlanID FROM invoicein WHERE ID = " . $ID));
+  $_REQUEST['invoicein_SupplierAccountPlanID_' . $ID] = $supplier_accountplan->SupplierAccountPlanID;
+}
+
 if($_lib['input']->getProperty('action_invoicein_journal')) {
     print "bilagsf¿r<br>";
     $invoicein->journal();
@@ -21,6 +29,14 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
       $_POST['invoicein_Period_' . $invoicein->ID] = $Period;
     }
     $invoicein->update($_POST);
+
+} elseif($_lib['input']->getProperty('action_invoicein_linenew')) {
+    $invoicein->update($_REQUEST);
+    $invoicein->linenew($_REQUEST);
+
+} elseif($_lib['input']->getProperty('action_invoicein_linedelete')) {
+    $invoicein->update($_REQUEST);
+    $invoicein->linedelete($_REQUEST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_remittance')) {
 

@@ -226,7 +226,7 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
     </tr>
     <tr>
         <td><b>Betal (bel&oslash;p)</b></td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'TotalCustPrice', 'pk'=>$ID, 'value' => $_lib['format']->Amount($invoicein->TotalCustPrice), 'tabindex' => $tabindex++)) ?></td>
+        <td><? print $_lib['format']->Amount($invoicein->TotalCustPrice); ?></td>
         <td>Betalingsm&aring;te</td>
         <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'PaymentMeans', 'pk' => $ID, 'value' => $invoicein->PaymentMeans, 'query' => 'form.PaymentMeans', 'width' => 30, 'tabindex' => $tabindex++)) ?></td>
     </tr>
