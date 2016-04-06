@@ -489,10 +489,10 @@ class altinn_report {
         $inntekt['inntekt']['loennsinntekt'] = array();
         $inntekt['inntekt']['loennsinntekt']['beskrivelse'] = self::convertNorwegianLettersToASCII($salary_line->SalaryDescription);
         // TODO: Add other descriptions that need to have antall node in the check
-        if ($salary_line->SalaryDescription == 'timeloenn') {
+        if (in_array($salary_line->SalaryDescription, array('timeloenn', 'overtidsgodtgjoerelse'))) {
           // hours/quantity for the entry
-          // Error is: Salary line quantity for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
-          self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall");
+          // Error is: Salary line quantity for salary L' . $salary->JournalID . ' not set hours for line with text \'' . $salary_line->SalaryText . "'");
+          self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall timer");
           $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
         }
         elseif (in_array($salary_line->SalaryDescription, array('kilometergodtgjoerelseAndreFremkomstmidler', 'kilometergodtgjoerelseBil', 'kilometergodtgjoerelseElBil', 'kilometergodtgjoerelsePassasjertillegg'))) {
