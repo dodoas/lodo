@@ -299,19 +299,21 @@ class lodo_fakturabank_fakturabanksalary {
         $url  = "$this->protocol://$this->host$page";
 
         if (isset($_SESSION['oauth_paycheck_sent'])) {
-          $data = $_SESSION['oauth_resource']['result'];
+          $data = $_SESSION['oauth_resource'];
+          unset($_SESSION['oauth_resource']);
           unset($_SESSION['oauth_paycheck_sent']);
         }
         else {
           $_SESSION['oauth_action'] = 'send_paycheck';
           $_SESSION['oauth_paycheck_sent'] = true;
           $oauth_client = new lodo_oauth();
-          $data = $oauth_client->post_resources($url, array('xml' => $xml));
+          $oauth_client->post_resources($url, array('xml' => $xml));
+          $data = $_SESSION['oauth_resource'];
         }
 
         $_SESSION['oauth_paycheck_messages'][] = array();
-        $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
-        if ($_SESSION['oauth_resource']['code'] == 201) {
+        $import_paycheck_result = $this->parseResult(substr($data['result'], strpos($data['result'], "<?xml version")));
+        if ($data['code'] == 201) {
             if ($import_paycheck_result['omitted-paychecks'] == 1) {
                 $_SESSION['oauth_paycheck_messages'][] = "Error: L&oslash;nnslipp finnes allerede";
                 $ret = false;
@@ -326,8 +328,8 @@ class lodo_fakturabank_fakturabanksalary {
                 $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
-        elseif ($_SESSION['oauth_resource']['code'] == 400) $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
-        elseif ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+        elseif ($data['code'] == 400) $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
+        elseif ($data['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Error: Utilstrekkelige rettigheter i fakturabank!";
 
         if ($ret) {
           $dataH = array();
