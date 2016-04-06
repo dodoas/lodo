@@ -299,7 +299,7 @@ class invoice {
       $ready_to_send = true;
       # required fields
       $head_required_fields = array('InvoiceDate', 'SName', 'SCity', 'SZipCode', 'IName', 'ICity', 'IZipCode', array('Phone', 'IMobile', 'IFax', 'IEmail'), 'DueDate', 'SBankAccount');
-      $line_required_fields = array('QuantityDelivered', 'ProductName', 'UnitCustPrice');
+      $line_required_fields = array('ProductID', 'QuantityDelivered', 'ProductName', 'UnitCustPrice');
 
       # Translations for mandatory fields
       $translated_head_required_fields = array(
@@ -316,6 +316,7 @@ class invoice {
       );
 
       $translated_line_required_fields = array(
+        'ProductID' => "Produkt",
         'QuantityDelivered' => "Antall Levert",
         'ProductName' => "Produkt navn",
         'UnitCustPrice' => "Enhets pris"
