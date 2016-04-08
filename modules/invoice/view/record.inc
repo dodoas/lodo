@@ -11,7 +11,7 @@ if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getPr
     #print "Oppdaterer faktura";
     $updated = false;
     $InvoiceLineIDs = array();
-    for ($i = 1; $i <= $_POST['field_count']; $i++) $InvoiceLineIDs[] = $_POST[$i];
+    for ($i = 1; $i <= $_POST['field_count']; $i++) if (isset($_POST[$i])) $InvoiceLineIDs[] = $_POST[$i];
     if ($invoice->CheckIfAnythingChanged($InvoiceID, $InvoiceLineIDs, $_POST)) {
       // set who updated and when, since something was changed
       $_POST['invoiceout_UpdatedByPersonID_' . $InvoiceID] = $_lib['sess']->get_person('PersonID');
@@ -57,6 +57,7 @@ elseif($_lib['input']->getProperty('action_auto_save')) {
     exit();
 }
 
+// TODO: maybe remove since it is moved to ajax.php
 elseif($_lib['input']->getProperty('action_invoice_outlinedelete')) {
     $invoice->linedelete($_lib['input']->getProperty('LineID'));
     $invoice->init(array());
@@ -78,6 +79,7 @@ elseif($_lib['input']->getProperty('action_invoice_delete')) {
     #It is a problem that http host includes server port after the first deletion.
     header ($header);
 }
+// TODO: maybe remove since it is moved to ajax.php
 elseif($_lib['input']->getProperty('action_invoice_linenew')) {
     // set who updated and when, since we added an invoice line
     $_POST['invoiceout_UpdatedByPersonID_' . $InvoiceID] = $_lib['sess']->get_person('PersonID');
@@ -92,7 +94,10 @@ elseif($_lib['input']->getProperty('action_invoice_newonthis')) {
 }
 elseif($_lib['input']->getProperty('action_invoice_fakturabanksend')) {
     $invoice->init(array());
-    if ($invoice->fakturabank_send_precheck()) $invoice->fakturabank_send();
+    if ($invoice->fakturabank_send_precheck()) {
+      $_SESSION['oauth_action'] = 'send_invoice';
+      $invoice->fakturabank_send();
+    }
 }
 elseif($_lib['input']->getProperty('action_invoice_fakturabankjournal')) {
     $invoice->fakturabankjournal();

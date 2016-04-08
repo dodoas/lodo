@@ -589,7 +589,7 @@ function update_weeklysale($post, $pk){
             if(isset($post["weeklysaleday_Group".$i."Amount_".$sale->WeeklySaleDayID]) and $sale->Locked != 1)
                 $rowExist = 1;
     
-            if($post["weeklysaleday_Group".$i."Amount_".$sale->WeeklySaleDayID] > 0)
+            if($post["weeklysaleday_Group".$i."Amount_".$sale->WeeklySaleDayID] != 0)
                 $saleValuesExist = 1;
     
             if($i < 18)

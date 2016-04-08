@@ -1,4 +1,6 @@
 <?
+// needed to access session parameters for oauth
+session_start();
 /* $Id: edit.php,v 1.66 2005/10/28 17:59:41 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
 #########################################
 #This should be placed under firmaoppsett
@@ -12,9 +14,19 @@ $SalaryID       = (int) $_REQUEST['SalaryID'];
 $SalaryConfID   = (int) $_REQUEST['SalaryConfID'];
 $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 
+$tmp_redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// change only if full(with SalaryID) url
+if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+// and if missing in url, add SalaryID
+else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
+
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
+
+// get all saved messages and remove them
+if (isset($_SESSION['oauth_paycheck_messages']) && is_array($_SESSION['oauth_paycheck_messages'])) foreach ($_SESSION['oauth_paycheck_messages'] as $message) $_lib['message']->add($message);
+unset($_SESSION['oauth_paycheck_messages']);
 
 $query_head = sprintf("
 select
@@ -48,6 +60,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        A.Address,
        A.City,
        A.ZipCode,
+       A.IDNumber,
        A.SocietyNumber,
        A.TabellTrekk,
        A.ProsentTrekk as AP_ProsentTrekk
@@ -91,7 +104,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        '%s'
      );
      ", $head->SalaryID, $head->AccountName, $head->Address,
-                                       $head->City, $head->ZipCode, $head->SocietyNumber,
+                                       $head->City, $head->ZipCode, (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber),
                                        $head->TabellTrekk, $head->ProsentTrekk, $arb->Percent);
 
     $_lib['db']->db_query($query_update_presistent);
@@ -190,6 +203,7 @@ $formname = "salaryUpdate";
     <th>Konto for utbetaling
     <th>Skattekommune
     <th>Altinndato
+    <th>Rapportert til Altinn
   </tr>
   <tr>
     <th class="sub">L <a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$head->JournalID"; ?>&type=salary&view=1"><? print $head->JournalID ?></a>
@@ -214,7 +228,23 @@ $formname = "salaryUpdate";
             ));
     ?>
   </th>
-    <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number">
+    <?
+      // if date is set just show it unless the user is admin in which case show the input
+      if (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00' || $_lib['sess']->get_person('AccessLevel') >= 4) {
+        // used to enable/disable the update altinndato button
+        // if the user is an admin he will always have it enabled
+        $altinndato_set = false;
+    ?>
+    <th class="sub"><input type="text" name="salary.ActualPayDate.<? print $head->SalaryID ?>" value="<? print $head->ActualPayDate ?>" size="10" class="number"></th>
+    <?
+      } else {
+        $altinndato_set = true;
+    ?>
+    <th class="sub"><? print $head->ActualPayDate ?></th>
+    <?
+      }
+    ?>
+    <th class="sub"><? print getAltinnReportedDateTime($head->SalaryID); ?>
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
@@ -223,7 +253,7 @@ $formname = "salaryUpdate";
     <th class="salaryhead">Skifttype</th>
     <th class="salaryhead">Arbeidstid</th>
     <th class="salaryhead" colspan="3">Ansettelsestype</th>
-    <th class="salaryhead">Yrke</th>
+    <th class="salaryhead" colspan="2">Yrke</th>
     <th class="salaryhead">Ansatt ved</th>
   </tr>
   <tr>
@@ -240,7 +270,7 @@ $formname = "salaryUpdate";
     <th class="sub" colspan="3">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
-    <th class="sub">
+    <th class="sub" colspan="2">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
     </th>
     <th class="sub">
@@ -253,6 +283,7 @@ $formname = "salaryUpdate";
   <tr>
     <th class="line_number">Linje</th>
     <th>Tekst</th>
+    <th>Fordel</th>
     <th>Antall periode</th>
     <th>Sats</th>
     <th>Bel&oslash;p periode</th>
@@ -261,7 +292,9 @@ $formname = "salaryUpdate";
     <th>Bil</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>F</th>
+    <th>Skatt</th>
+    <th>Arb. giv.</th>
+    <th>Feriep.</th>
     <th>Altinn</th>
     <th>Kode</th>
     <th colspan="2"></th>
@@ -275,6 +308,9 @@ $formname = "salaryUpdate";
   while($line = $_lib['db']->db_fetch_object($result_salary))
   {
       $counter++;
+      if ($line->SalaryCode != 950 && (float)$line->NumberInPeriod * (float)$line->Rate != (float)$line->AmountThisPeriod) $WrongCalculation = "style='color: red'";
+      elseif ($line->SalaryCode == 950 && floor((float)$line->NumberInPeriod * (float)$line->Rate) != floor((float)$line->AmountThisPeriod)) $WrongCalculation = "style='color: red'";
+      else $WrongCalculation = "";
       ?>
       <tr>
         <? print $_lib['form3']->hidden(array('name'=>$counter, 'value'=>$line->SalaryLineID)) ?>
@@ -304,9 +340,18 @@ $formname = "salaryUpdate";
             }
         ?>
         </td>
-        <td><input type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
-        <td><input type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
-        <td class="number"><input type="text" name="salaryline.AmountThisPeriod.<? print $line->SalaryLineID ?>"   value="<? print $_lib['format']->Amount(array('value'=>$line->AmountThisPeriod, 'return'=>'value')) ?>" size="8" class="number"></td>
+        <td>
+          <?
+            if($ishovedmal == 1){
+                ?><input type="text" name="salaryline.Fordel.<? print $line->SalaryLineID ?>" value="<? print $line->Fordel ?>" size="30" class="number"><?
+            } else {
+              print $_lib['form3']->_ALTINN['Fordel'][$line->Fordel];
+            }
+          ?>
+        </td>
+        <td><input <? print $WrongCalculation; ?> type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
+        <td><input <? print $WrongCalculation; ?> type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
+        <td class="number"><input <? print $WrongCalculation; ?> type="text" name="salaryline.AmountThisPeriod.<? print $line->SalaryLineID ?>"   value="<? print $_lib['format']->Amount(array('value'=>$line->AmountThisPeriod, 'return'=>'value')) ?>" size="8" class="number"></td>
         <td class="number">
             <nobr>
             <?
@@ -387,14 +432,18 @@ $formname = "salaryUpdate";
         <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
         <td><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
 
+        <td><? print $line->MandatoryTaxSubtraction ? "ja" : "nei" ?></td>
+        <td><? print $line->EnableEmployeeTax ? "ja" : "nei" ?></td>
         <td>
-          <? if($line->EnableVacationPayment) { print "ja"; }; ?>
+          <? print $line->EnableVacationPayment ? "ja" : "nei" ?>
           <? print $_lib['form3']->hidden(array('name' => 'EnableVacationPayment_' . $line->SalaryLineID, 'value' => $line->EnableVacationPayment)); ?>
         </td>
         <td>
-          <? if($line->SendToAltinn) { print "ja"; }; ?>
+          <? print $line->SendToAltinn ? "ja" : "nei" ?>
         </td>
-        <td><? print $line->SalaryCode ?></td>
+        <td><?
+           if ($line->SalaryCode == 950) print $_lib['form3']->hidden(array('name' => 'floor_' . $line->SalaryLineID, 'value' => 1));
+           print $line->SalaryCode ?></td>
         <td>
         <? if($_lib['sess']->get_person('AccessLevel') >= 2  && $accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
             <a href="<? print $MY_SELF ?>&amp;SalaryLineID=<? print $line->SalaryLineID ?>&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryID=<? print $SalaryID ?>&amp;action_salaryline_delete=1" class="button">Slett</a>
@@ -409,32 +458,35 @@ $formname = "salaryUpdate";
     <?
   }
   ?>
-<tr><td></td><td><b>Sum</b></td><td colspan="2"></td>
+<tr>
+  <td></td>
+  <td><b>Sum</b></td>
+  <td colspan="3"></td>
 <td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisPeriod, 'return'=>'value')) ?></b></td>
 <td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisYear, 'return'=>'value')) ?></b></td>
 </tr>
 
 <tr height="20">
-  <td colspan="4">
-  <td colspan="9">Skattetrekk trekkes bare med hele kroner
+  <td colspan="5">
+  <td colspan="11">Skattetrekk trekkes bare med hele kroner
 </tr>
 
 <tr>
-<th colspan="13">Kommentar</th>
+<th colspan="15">Kommentar</th>
 </tr>
 
 <tr>
-<td colspan="13">
+<td colspan="15">
 <textarea name="salary.Comment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->Comment  ?></textarea>
 </td>
 </tr>
 
 <tr>
-<th colspan="13">Internkommentar</th>
+<th colspan="15">Internkommentar</th>
 </tr>
 
 <tr>
-<td colspan="13">
+<td colspan="15">
 <textarea name="salary.InternComment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->InternComment  ?></textarea>
 </td>
 </tr>
@@ -483,6 +535,7 @@ $formname = "salaryUpdate";
 
                   echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
                   echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
+                  echo '<input type="submit" name="action_altindato_update" value="Lagre altinndato" align="right" ' . (($altinndato_set) ? 'disabled' : '') . '/>';
             ?>
           </td>
         </tr>
@@ -528,7 +581,7 @@ $formname = "salaryUpdate";
   <td colspan = "7">
 
   <?
-    if($head->UpdatedBy) echo "Oppdatert " . $head->UpdatedAt . ", av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
+    if($head->UpdatedBy) echo $head->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
   ?>
   </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
@@ -537,7 +590,7 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($head->LockedBy) echo "L&aring;st " . $head->LockedDate . ", av " . $head->LockedBy;
+    if($head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
   ?>
   </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
@@ -546,10 +599,11 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
       <? if ($head->FakturabankPersonID) { ?>
-           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
+           <? print $head->FakturabankDateTime ?> fakturaBank <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
       <? } ?>
   </td>
-  <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
+  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
+  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>
@@ -565,14 +619,15 @@ $formname = "salaryUpdate";
 <tr>
 <td colspan="4"></td>
 <td colspan="7">
-<? if($_lib['message']->get()) {
+<?
+  if ($message) $_lib['message']->add($message);
+  if($_lib['message']->get()) {
     $msg = $_lib['message']->get();
-$mcolor = (strstr($msg, "rror")) ? "red" : "black";
+    $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 ?>
     <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
 <? } ?>
 
-<? print $message ?>
 </tr>
 </td>
 
@@ -628,6 +683,8 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryID=<? print $SalaryID ?>&amp;SalaryConfID=<? print $head->SalaryConfID ?>&amp;action_salary_updatesalarycode=1" class="button">Hent kode/feriepenger/arbeidsgiveravgift flagg fra ansatt mal</a><?}?>
 
 
-<? includeinc('bottom') ?>
+<? includeinc('bottom');
+unset($_SESSION['oauth_paycheck_sent']);
+?>
 </body>
 </html>

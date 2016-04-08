@@ -105,3 +105,10 @@ $_ALTINN['CalculationCodeForTaxTypes'] = array(
   'sektorunnattAktivitet'=>'Sektorunnatt aktivitet',
   'godstransportPaaVei'=>'Godstransport på vei'
 );
+
+$_ALTINN['Fordel'] = array(
+  'kontantytelse' => 'Kontantytelse',
+  'naturalytelse' => 'Naturalytelse',
+  'utgiftsgodtgjoerelse' => 'Utgiftsgodtgjoerelse'
+);
+

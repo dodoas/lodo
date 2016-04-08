@@ -135,7 +135,7 @@ class lodo_accountplan_scheme {
         includelogic("fakturabank/fakturabank");
         $fakturabank = new lodo_fakturabank_fakturabank();
 
-        $page = "identificators.json";
+        $page = "rest/identificators.json";
         $url = $fakturabank->construct_fakturabank_url($page);
         $ch = curl_init();
 

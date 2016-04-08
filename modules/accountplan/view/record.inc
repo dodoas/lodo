@@ -1,5 +1,6 @@
 <?
 includelogic('fakturabank/fakturabank');
+includelogic("accountplan/scheme");
 
 function clean_org_number($orgnr) {
     return preg_replace('/\s/', '', $orgnr);
@@ -239,6 +240,10 @@ elseif($_lib['input']->getProperty('action_del_scheme')) {
 }
 elseif($_lib['input']->getProperty('action_save_scheme')) {
     $_lib['storage']->db_update_multi_table($_POST, array('accountplanscheme' => 'AccountPlanSchemeID'));
+}
+elseif($_lib['input']->getProperty('action_refresh_sheme')) {
+  $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
+  $schemeControl->refreshSchemes();
 }
 
 ?>

@@ -12,6 +12,9 @@ require_once "record.inc";
 $fb         = new lodo_fakturabank_fakturabank();
 $InvoicesO  = $fb->outgoing();
 
+$tmp_redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+
 print $_lib['sess']->doctype; ?>
 <head>
         <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Invoice List</title>
@@ -112,5 +115,6 @@ if(is_array($InvoicesO->Invoice))
 ?>
 </body>
 </html>
-
-
+<?php
+unset($_SESSION['oauth_invoices_fetched']);
+?>

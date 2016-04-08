@@ -156,8 +156,8 @@ class altinn_report {
     }
     $leveranse['oppgave'] = array();
     $leveranse['oppgave']['betalingsinformasjon'] = array();
-    $leveranse['oppgave']['betalingsinformasjon']['sumForskuddstrekk'] = (int) round($sumForskuddstrekk);
-    $leveranse['oppgave']['betalingsinformasjon']['sumArbeidsgiveravgift'] = (int) round($sumArbeidsgiveravgift);
+    $leveranse['oppgave']['betalingsinformasjon']['sumForskuddstrekk'] = (int) floor($sumForskuddstrekk);
+    $leveranse['oppgave']['betalingsinformasjon']['sumArbeidsgiveravgift'] = (int) floor($sumArbeidsgiveravgift);
     foreach($virksomhet_array as $one_virksomhet) {
       $leveranse['oppgave'][] = $one_virksomhet;
     }
@@ -468,28 +468,37 @@ class altinn_report {
         // start and end date for this income, already checked once outside the foreach loop
         $inntekt['inntekt']['startdatoOpptjeningsperiode'] = $salary->ValidFrom;
         $inntekt['inntekt']['sluttdatoOpptjeningsperiode'] = $salary->ValidTo;
+
         // fordel = determines if the income entry is positive or negative
-        $inntekt['inntekt']['fordel'] = ($salary_line->LineNumber <= 69) ? 'kontantytelse' : 'utgiftsgodtgjoerelse';
+        self::checkIfEmpty($salary_line->Fordel, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt fordel");
+        $inntekt['inntekt']['fordel'] = $salary_line->Fordel;
+
         // boolean flags if the entry falls under some taxing regulation or not
-        // both utloeserArbeidsgiveravgift and inngaarIGrunnlagForTrekk fields
-        // first is true if the salary line code has -A in it
-        // the second is true if we have a salary code for this entry
-        $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = (strstr($salary_line->SalaryCode, '-A')) ? 'true' : 'false';
-        $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = (!empty($salary_line->SalaryCode)) ? 'true' : 'false';
+        $inntekt['inntekt']['utloeserArbeidsgiveravgift'] = $salary_line->EnableEmployeeTax ? 'true' : 'false';
+        $inntekt['inntekt']['inngaarIGrunnlagForTrekk'] = $salary_line->MandatoryTaxSubtraction ? 'true' : 'false';
         // amount for entry
         $inntekt['inntekt']['beloep'] = $salary_line->AmountThisPeriod;
-        // calculate total for arbeidsgiveravgift amount
-        $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] += $salary_line->AmountThisPeriod;
+        if ($salary_line->EnableEmployeeTax) {
+          // Only add this if this should have Employ tax(AGA)
+          // calculate total for arbeidsgiveravgift amount
+          $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse']['avgiftsgrunnlagBeloep'] += $salary_line->AmountThisPeriod;
+        }
         // description for the entry
         // Error is: Salary line description for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
         self::checkIfEmpty($salary_line->SalaryDescription, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt altinnbeskrivelse");
         $inntekt['inntekt']['loennsinntekt'] = array();
         $inntekt['inntekt']['loennsinntekt']['beskrivelse'] = self::convertNorwegianLettersToASCII($salary_line->SalaryDescription);
         // TODO: Add other descriptions that need to have antall node in the check
-        if ($salary_line->SalaryDescription == 'timeloenn') {
+        if (in_array($salary_line->SalaryDescription, array('timeloenn', 'overtidsgodtgjoerelse'))) {
           // hours/quantity for the entry
-          // Error is: Salary line quantity for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
-          self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall");
+          // Error is: Salary line quantity for salary L' . $salary->JournalID . ' not set hours for line with text \'' . $salary_line->SalaryText . "'");
+          self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall timer");
+          $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
+        }
+        elseif (in_array($salary_line->SalaryDescription, array('kilometergodtgjoerelseAndreFremkomstmidler', 'kilometergodtgjoerelseBil', 'kilometergodtgjoerelseElBil', 'kilometergodtgjoerelsePassasjertillegg'))) {
+          // kilometers/quantity for the entry
+          // Error is: Salary line quantity(in kilometers) for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
+          self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall kilometer");
           $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
         }
         // there can be multiple entries for one salary so we add to an array

@@ -161,20 +161,16 @@ $person = $_lib['storage']->get_row(array('query' => $query));
           )); ?>
 
         </td>
+    <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
     <tr>
         <td class="BGColorDark">Tilgang til Altinn L&oslash;nnslipper</td>
         <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'AltinnSalaryAccess', 'value'=>$person->AltinnSalaryAccess, 'tabindex'=>$tabindex++)) ?></td>
         <td colspan='2' class="BGColorDark"></td>
     </tr>
+    <? } ?>
     </tr>
     <tr>
         <th colspan="4" class="menu">Fakturabank tilgang</th>
-    </tr>
-    <tr>
-        <td class="BGColorDark">Brukernavn</td>
-        <td><input type="text" name="<? print $db_table ?>.FakturabankUsername" value="<? print $person->FakturabankUsername ?>" size="24" tabindex="<? echo $tabindex++; ?>"></td>
-        <td class="BGColorDark">Passord</td>
-        <td><input type="password" name="<? print $db_table ?>.FakturabankPassword" value="<? print $person->FakturabankPassword ?>" size="24" tabindex="<? echo $tabindex++; ?>"></td>
     </tr>
         <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
     <tr>
