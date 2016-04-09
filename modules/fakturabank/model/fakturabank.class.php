@@ -1707,7 +1707,7 @@ class lodo_fakturabank_fakturabank {
                     $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName));
                     $address->appendChild($cbc);
 
-                    $cbc = $doc->createElement('cbc:BuildingNumber', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber));
+                    $cbc = $doc->createElement('cbc:AdditionalStreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber));
                     $address->appendChild($cbc);
 
                     $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName));
@@ -1835,7 +1835,7 @@ class lodo_fakturabank_fakturabank {
                 $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
                 $address->appendChild($cbc);
 
-                $cbc = $doc->createElement('cbc:BuildingNumber', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber));
+                $cbc = $doc->createElement('cbc:AdditionalStreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber));
                 $address->appendChild($cbc);
 
                 $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
@@ -1944,32 +1944,27 @@ class lodo_fakturabank_fakturabank {
 
         $invoice->appendChild($customer);
 
+
         // Delivery (DeliveryAddress)
         $delivery = $doc->createElement('cac:Delivery');
+            $cac_delivery_location = $doc->createElement('cac:DeliveryLocation');
+                $cac_address = $doc->createElement('cac:Address');
+                    $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->DeliveryAddress->Address));
+                    $cac_address->appendChild($cbc);
 
-        $cacaddress = $doc->createElement('cac:DeliveryAddress');
+                    $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->DeliveryAddress->City));
+                    $cac_address->appendChild($cbc);
 
-        $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->DeliveryAddress->Address));
-        $cacaddress->appendChild($cbc);
+                    $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->DeliveryAddress->ZipCode));
+                    $cac_address->appendChild($cbc);
 
-        $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->DeliveryAddress->City));
-        $cacaddress->appendChild($cbc);
-
-        $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->DeliveryAddress->ZipCode));
-        $cacaddress->appendChild($cbc);
-
-        $cbcaddressline = $doc->createElement('cac:AddressLine');
-        $cbc = $doc->createElement('cbc:Line', utf8_encode($InvoiceO->DeliveryAddress->Address));
-        $cbcaddressline->appendChild($cbc);
-        $cacaddress->appendChild($cbcaddressline);
-
-        $cbccountry = $doc->createElement('cac:Country');
-        $cbc = $doc->createElement('cbc:IdentificationCode', utf8_encode($InvoiceO->DeliveryAddress->CountryCode));
-        $cbc->setAttribute('listID', 'ISO3166-1:Alpha2');
-        $cbccountry->appendChild($cbc);
-        $cacaddress->appendChild($cbccountry);
-
-        $delivery->appendChild($cacaddress);
+                    $cac_country = $doc->createElement('cac:Country');
+                        $cbc = $doc->createElement('cbc:IdentificationCode', utf8_encode($InvoiceO->DeliveryAddress->CountryCode));
+                        $cbc->setAttribute('listID', 'ISO3166-1:Alpha2');
+                    $cac_country->appendChild($cbc);
+                $cac_address->appendChild($cac_country);
+            $cac_delivery_location->appendChild($cac_address);
+        $delivery->appendChild($cac_delivery_location);
 
         $invoice->appendChild($delivery);
 
@@ -2019,6 +2014,14 @@ class lodo_fakturabank_fakturabank {
 
 
         $invoice->appendChild($paymentmeans);
+
+        ############################################################################################
+        $paymentterms = $doc->createElement('cac:PaymentTerms');
+
+        $cbc = $doc->createElement('cbc:Note', utf8_encode($InvoiceO->PaymentTerms->Note));
+            $paymentterms->appendChild($cbc);
+
+        $invoice->appendChild($paymentterms);
 
         ############################################################################################
         #TaxTotal
@@ -2089,43 +2092,21 @@ class lodo_fakturabank_fakturabank {
             foreach($InvoiceO->InvoiceLine as $id => $line) {
 
                 $invoiceline = $doc->createElement('cac:InvoiceLine');
-
                     $cbc = $doc->createElement('cbc:ID', utf8_encode($line->ID));
+                    $invoiceline->appendChild($cbc);
+
+                    $cbc = $doc->createElement('cbc:InvoicedQuantity', utf8_encode($line->Price->BaseQuantity));
                     $invoiceline->appendChild($cbc);
 
                     $cbc = $doc->createElement('cbc:LineExtensionAmount', utf8_encode($line->LineExtensionAmount));
                     $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                     $invoiceline->appendChild($cbc);
 
-                    $total = $doc->createElement('cac:TaxTotal');
-
+                    $cac_tax_total = $doc->createElement('cac:TaxTotal');
                         $cbc = $doc->createElement('cbc:TaxAmount', utf8_encode($line->TaxTotal->TaxAmount));
                         $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-
-                        $total->appendChild($cbc);
-
-                        $subtotal = $doc->createElement('cac:TaxSubtotal');
-                            $cbc  = $doc->createElement('cbc:TaxableAmount', utf8_encode($line->TaxTotal->TaxSubtotal->TaxableAmount));
-                            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                            $subtotal->appendChild($cbc);
-                            $cbc  = $doc->createElement('cbc:TaxAmount', utf8_encode($line->TaxTotal->TaxSubtotal->TaxAmount));
-                            $subtotal->appendChild($cbc);
-                            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                            $cbc  = $doc->createElement('cbc:Percent', utf8_encode($line->TaxTotal->TaxSubtotal->Percent));
-                            $subtotal->appendChild($cbc);
-
-                            $taxcategory = $doc->createElement('cac:TaxCategory');
-                                $taxscheme = $doc->createElement('cac:TaxScheme');
-                                    $cbc = $doc->createElement('cbc:ID', utf8_encode($line->TaxTotal->TaxSubtotal->TaxCategory->TaxScheme->ID));
-                                    $taxscheme->appendChild($cbc);
-
-                                $taxcategory->appendChild($taxscheme);
-
-                            $subtotal->appendChild($taxcategory);
-
-                        $total->appendChild($subtotal);
-
-                    $invoiceline->appendChild($total);
+                    $cac_tax_total->appendChild($cbc);
+                    $invoiceline->appendChild($cac_tax_total);
 
                     $item = $doc->createElement('cac:Item');
 
@@ -2138,22 +2119,31 @@ class lodo_fakturabank_fakturabank {
                         $item->appendChild($cbc);
 
                         #Productnumber
-                        $SellersItemIdentification = $doc->createElement('cac:SellersItemIdentification');
+                        $cac_sellers_item_identification = $doc->createElement('cac:SellersItemIdentification');
                             $cbc = $doc->createElement('cbc:ID', utf8_encode($line->Item->SellersItemIdentification->ID));
-                            $SellersItemIdentification->appendChild($cbc);
-                        $item->appendChild($SellersItemIdentification);
+                            $cac_sellers_item_identification->appendChild($cbc);
+                        $item->appendChild($cac_sellers_item_identification);
 
                         #Add UNSPSC
                         if($line->Item->CommodityClassification->UNSPSC->ItemClassificationCode) {
-                            $CommodityClassification = $doc->createElement('cac:CommodityClassification');
+                            $cac_commodity_classification = $doc->createElement('cac:CommodityClassification');
 
-                                $ItemClassificationCode = $doc->createElement('cbc:ItemClassificationCode', utf8_encode($line->Item->CommodityClassification->UNSPSC->ItemClassificationCode));
-                                $ItemClassificationCode->setAttribute('listName', 'UNSPSC');
-                                $ItemClassificationCode->setAttribute('listVersionID', '7.0401');
+                                $item_classification_code = $doc->createElement('cbc:ItemClassificationCode', utf8_encode($line->Item->CommodityClassification->UNSPSC->ItemClassificationCode));
+                                $item_classification_code->setAttribute('listName', 'UNSPSC');
+                                $item_classification_code->setAttribute('listVersionID', '7.0401');
 
-                                $CommodityClassification->appendChild($ItemClassificationCode);
-                            $item->appendChild($CommodityClassification);
+                                $cac_commodity_classification->appendChild($item_classification_code);
+                            $item->appendChild($cac_commodity_classification);
                         }
+
+                        $cac_classified_tax_category = $doc->createElement('cac:ClassifiedTaxCategory');
+                            $cbc = $doc->createElement('cbc:Percent', utf8_encode($line->TaxTotal->TaxSubtotal->Percent));
+                            $cac_classified_tax_category->appendChild($cbc);
+                            $cac_tax_scheme = $doc->createElement('cac:TaxScheme');
+                                $cbc = $doc->createElement('cbc:ID', "VAT");
+                            $cac_tax_scheme->appendChild($cbc);
+                            $cac_classified_tax_category->appendChild($cac_tax_scheme);
+                        $item->appendChild($cac_classified_tax_category);
 
                     $invoiceline->appendChild($item);
 
