@@ -19,7 +19,7 @@ function createSchemeOptions($selected, $country) {
         $schemeTypeOptions .= 
             sprintf("<option value='%d' class='%s' %s>%s</option>\n",
                     $type['FakturabankSchemeID'],
-                    ($country == $scheme_type_country || $scheme_type_country == 'FAKTURABANK' ? "active" : "inactive"),
+                    ($country == $scheme_type_country || $scheme_type_country == 'FAKTURABANK' || $type['FakturabankSchemeID'] == $selected ? "active" : "inactive"),
                     ($type['FakturabankSchemeID'] == $selected ? "selected" : ""),
                     $type['SchemeType']
                 );
@@ -40,13 +40,12 @@ function filterSchemesByCountryCode(country) {
   var ap_scheme_fbschemeid_select = document.getElementById('accountplanscheme.FakturabankSchemeID.'+ap_schemeid);
   options = ap_scheme_fbschemeid_select.options;
   for(i = 0; i < options.length; i++) {
-    if (options[i].text.match(selected_country_code) || options[i].text.match('FAKTURABANK')) {
+    if (options[i].text.match(selected_country_code) || options[i].text.match('FAKTURABANK') || options[i].selected) {
       options[i].setAttribute("class", "active");
     } else {
       options[i].setAttribute("class", "inactive");
     }
   }
-  console.log(country.value);
 }
 </script>
 <tr class="result">
