@@ -431,4 +431,27 @@ function allowOnlyCreditOrDebit(element, credit_or_debit) {
   onCurrencyRateChange(conv_rate);
 }
 
+/*
+ * OnClick action for locking salaries.
+ * Checks if all Altinn fields are punched in and warns user which ones aren't
+ * with the message that is passed as a parameter.
+ * Other params are inital values of fields on page load.
+ * Used in salary/edit view.
+ */
+function checkIfAltinnFieldsSetAndConfirm(message, shift_type, work_time_scheme, type_of_employment, occupation_id, subcompany_id, altinn_date_set) {
+
+  var errors = "";
+  // if any of the values are not set add to the warning message
+  if (shift_type == "") errors += "- Skifttype\n";
+  if (work_time_scheme == "") errors += "- Arbeidstid\n";
+  if (type_of_employment == "") errors += "- Ansettelsestype\n";
+  if (occupation_id == 0) errors += "- Yrke\n";
+  if (subcompany_id == 0) errors += "- Ansatt ved\n";
+  if (!altinn_date_set) errors += "- Altinndato\n";
+  if (errors != "") errors = "Ikke valgt:\n" + errors;
+  message = errors + message;
+
+  return confirm(message);
+}
+
 </script>

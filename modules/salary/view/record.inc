@@ -1043,6 +1043,16 @@ elseif($_lib['input']->getProperty('action_altindato_update')) {
     $_lib['db']->db_query($query_update_altinn_date);
   }
 }
+elseif($_lib['input']->getProperty('action_salary_update_altinn_fields')) {
+  $tables['salary'] = 'SalaryID';
+  $args['salary_ShiftType_' . $SalaryID]        = $_POST['salary_ShiftType_' . $SalaryID];
+  $args['salary_WorkTimeScheme_' . $SalaryID]   = $_POST['salary_WorkTimeScheme_' . $SalaryID];
+  $args['salary_TypeOfEmployment_' . $SalaryID] = $_POST['salary_TypeOfEmployment_' . $SalaryID];
+  $args['salary_OccupationID_' . $SalaryID]     = $_POST['salary_OccupationID_' . $SalaryID];
+  $args['salary_SubcompanyID_' . $SalaryID]     = $_POST['salary_SubcompanyID_' . $SalaryID];
+  $args['salary_ActualPayDate_' . $SalaryID]    = $_POST['salary_ActualPayDate_' . $SalaryID];
+  $_lib['storage']->db_update_multi_table($args, $tables);
+}
 
 function getAltinnReportedDateTime($SalaryID) {
   global $_lib;
