@@ -341,7 +341,7 @@ Ingen &aring;pne poster funnet
               var input = element.prev('input[type=text]');
               var kid = element.parent().next('td').children('input[type=text]');
               var match = kid.parent().next('td').children('input[type=text]');
-              if(element.attr('checked')) {
+              if(element[0].checked) {
                 makeajax("invoice", "invoice", e.target.name.split('.')[2]);
               }else{
                 // Legacy to set 0 if none is checked.
@@ -352,7 +352,7 @@ Ingen &aring;pne poster funnet
               var input = element.parent().prev('td').children('input[type=text]');
               var kid = element.prev('input[type=text]');
               var match = element.parent().next('td').children('input[type=text]');
-              if(element.attr('checked')) {
+              if(element[0].checked) {
                 makeajax("kid", "kid", e.target.name.split('.')[2]);
               }else{
                 makeajax("kid", "0", e.target.name.split('.')[2]);
@@ -362,7 +362,7 @@ Ingen &aring;pne poster funnet
               var kid = element.parent().prev('td').children('input[type=text]');
               var input = kid.parent().prev('td').children('input[type=text]');
               var match = element.prev('input[type=text]');
-              if(element.attr('checked')) {
+              if(element[0].checked) {
                 makeajax("match", "match", e.target.name.split('.')[2]);
               }else{
                 makeajax("match", "0", e.target.name.split('.')[2]);
