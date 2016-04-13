@@ -1882,7 +1882,8 @@ class lodo_fakturabank_fakturabank {
 
                   $cacparty->appendChild($legal_entity);
                 } else {
-                    $_lib['message']->add("hash_to_xml::invalid firma id. Firma ID " . $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble likevel sendt med kundenr som id.");
+                    $_lib['message']->add("Firma ID til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble ikke sendt.");
+                    return false; // stop from sending, crucial field missing
                 }
 
 
@@ -2189,6 +2190,7 @@ class lodo_fakturabank_fakturabank {
         #print_r($InvoiceH);
 
         $xml = $this->hash_to_xml($InvoiceO);
+        if ($xml == false) return;
 
         #$_lib['message']->add("FB->write1()");
 
