@@ -75,8 +75,10 @@ function filterSchemesByCountryCode(country) {
     <input type="submit" name="action_add_scheme" value="Legg til ny" />
   </td>
   <td>
-    <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
     <input type="submit" name="action_refresh_sheme" value="Oppdater schemetyper" />
+  </td>
+  <td>
+    <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
   </td>
 </tr>
 
