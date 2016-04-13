@@ -1875,16 +1875,15 @@ class lodo_fakturabank_fakturabank {
                 }
 
                 if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)){
-                    if (strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) == 9) { // has valid org nr, add it,
-                        $legal_entity = $doc->createElement('cac:PartyLegalEntity');
-                        $cbc = $doc->createElement('cbc:CompanyID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID));
-                        $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                        $legal_entity->appendChild($cbc);
+                  $legal_entity = $doc->createElement('cac:PartyLegalEntity');
+                  $cbc = $doc->createElement('cbc:CompanyID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID));
+                  $cbc->setAttribute('schemeID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID));
+                  $legal_entity->appendChild($cbc);
 
-                        $cacparty->appendChild($legal_entity);
-                    } else {
-                        $_lib['message']->add("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble likevel sendt med kundenr som id.");
-                    }
+                  $cacparty->appendChild($legal_entity);
+                } else {
+                    $_lib['message']->add("Firma ID til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble ikke sendt.");
+                    return false; // stop from sending, crucial field missing
                 }
 
 
@@ -2181,6 +2180,7 @@ class lodo_fakturabank_fakturabank {
         #print_r($InvoiceH);
 
         $xml = $this->hash_to_xml($InvoiceO);
+        if ($xml == false) return;
 
         #$_lib['message']->add("FB->write1()");
 

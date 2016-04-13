@@ -3,6 +3,7 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
+includelogic("accountplan/scheme");
 $db_table = "accountplan";
 require_once "record.inc";
 
@@ -136,7 +137,7 @@ if(isset($limitSet))
     <th class="menu">Prosjekt</th>
     <th class="menu">Motkontobalanse</th>
     <th class="menu">Motkontoresultat</th>
-    <th class="menu">Org nummer</th>
+    <th class="menu">Firma ID</th>
   </tr>
 </thead>
 
@@ -144,6 +145,9 @@ if(isset($limitSet))
 <?
 while($row = $_lib['db']->db_fetch_object($result_plan))
 {
+    $scheme = new lodo_accountplan_scheme($row->AccountPlanID);
+    $firstFirmaID = $scheme->getFirstFirmaID();
+    $firmaID = $firstFirmaID['type'] . " " . $firstFirmaID['value'];
     $i++;
     if (!($i % 2))
     {
@@ -194,7 +198,7 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           <td align="right"><? if($row->EnableProject)    { print $row->ProjectID; } ?></td>
           <td align="right"><? if($row->EnableMotkontoBalanse)    { print $row->MotkontoBalanse1; } ?></td>
           <td align="right"><? if($row->EnableMotkontoResultat)    { print $row->MotkontoResultat1; } ?></td>
-          <td><? print $row->OrgNumber ?></td>
+          <td><? print $firmaID ?></td>
     </tr>
     <?
 }
