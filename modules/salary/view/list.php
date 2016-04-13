@@ -245,12 +245,16 @@ function worker_line($row, $i) {
       {
         if($row->SalaryConfID != 1 && $checked)
         {
-            ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" class="button"><? if($row->SalaryConfID != 1) { print /* $row->AccountPlanID */ "Lage l&oslash;nnslipp"; } ?></a><?
+            ?>
+        <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" method="post">
+            <?
+          print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_new', 'value'=>'Lage l&oslash;nnslipp'));
         }
       } else {
         print "Stengt";
       }
       ?>
+        </form>
       </td>
 
       <td>
