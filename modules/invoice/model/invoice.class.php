@@ -121,8 +121,11 @@ class invoice {
 
         $headH['IName']                 = $accountplan->AccountName;
         $headH['DName']                 = $accountplan->AccountName;
-        $headH['DAddress']              = $args['invoiceout_DAddress_' . $this->InvoiceID];
-        $headH['DZipCode']              = $args['invoiceout_DZipCode_' . $this->InvoiceID];
+
+        $headH['DAddress']              = empty($args['invoiceout_DAddress_' . $this->InvoiceID]) ? $headH['DAddress'] : $args['invoiceout_DAddress_' . $this->InvoiceID];
+        $headH['DZipCode']              = empty($args['invoiceout_DZipCode_' . $this->InvoiceID]) ? $headH['DZipCode'] : $args['invoiceout_DZipCode_' . $this->InvoiceID];
+        $headH['DCity']                 = empty($args['invoiceout_DCity_' . $this->InvoiceID]) ? $headH['DCity'] : $args['invoiceout_DCity_' . $this->InvoiceID];
+        $headH['DCountryCode']          = empty($args['invoiceout_DCountryCode_' . $this->InvoiceID]) ? $headH['DCountryCode'] : $args['invoiceout_DCountryCode_' . $this->InvoiceID];
 
         if($accountplan->EnableInvoicePoBox) {
           $headH['IPoBox']              = $accountplan->IPoBox;
@@ -141,9 +144,7 @@ class invoice {
 
         $headH['IZipCode']              = $accountplan->ZipCode;
         $headH['ICity']                 = $accountplan->City;
-        $headH['DCity']                 = $args['invoiceout_DCity_' . $this->InvoiceID];
 
-        $headH['DCountryCode']              = $args['invoiceout_DCountryCode_' . $this->InvoiceID];
         $headH['ICountryCode']              = $accountplan->CountryCode;
         $headH['DEmail']                = $accountplan->Email;
         $headH['IEmail']                = $accountplan->Email;
@@ -298,7 +299,7 @@ class invoice {
 
       $ready_to_send = true;
       # required fields
-      $head_required_fields = array('InvoiceDate', 'SName', 'SCity', 'SZipCode', 'IName', 'ICity', 'IZipCode', array('Phone', 'IMobile', 'IFax', 'IEmail'), 'DueDate', 'SBankAccount');
+      $head_required_fields = array('InvoiceDate', 'SName', 'SCity', 'SZipCode', 'IName', 'ICity', 'IZipCode', array('Phone', 'IMobile', 'IFax', 'IEmail'), 'DueDate', 'SBankAccount', 'DAddress', 'DZipCode', 'DCity', 'DCountryCode');
       $line_required_fields = array('ProductID', 'QuantityDelivered', 'ProductName', 'UnitCustPrice');
 
       # Translations for mandatory fields
@@ -312,7 +313,11 @@ class invoice {
         'IZipCode' => "Kunde portnr",
         'CustomerAddressArray' => "Telefon, Mobil, Fax eller Email.",
         'DueDate' => "Forfallsdato",
-        'SBankAccount' => "Bankkonto"
+        'SBankAccount' => "Bankkonto",
+        'DAddress' => "Leveringsadresse(Adresse)",
+        'DZipCode' => "Leveringsadresse(Postnummer)",
+        'DCity' => "Leveringsadresse(Posted)",
+        'DCountryCode' => "Leveringsadresse(Land)"
       );
 
       $translated_line_required_fields = array(
@@ -333,6 +338,9 @@ class invoice {
           }
         }
         else $is_set = !empty($this->headH[$field_name]);
+        if (in_array($field_name, array('InvoiceDate', 'DueDate'))) {
+          $is_set = !($this->headH[$field_name] == '0000-00-00');
+        }
         if (!$is_set) {
           $ready_to_send = false;
           if ($is_array) $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray']));
