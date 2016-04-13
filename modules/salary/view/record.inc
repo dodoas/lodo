@@ -179,12 +179,6 @@ elseif($_lib['input']->getProperty('action_salary_new'))
     $query="select MAX(JournalID) as MaxJournalID from salary";
     $row_salary = $_lib['storage']->get_row(array('query' => $query));
     $JournalID = $row_salary->MaxJournalID + 1;
-    if(isset($row_salary->SalaryID) and strlen($row_salary->SalaryID)>0)
-    {
-        $SalaryID=$row_salary->SalaryID;
-    }
-    else
-    {
         $query_setup    = "select name, value from setup";
         $setup          = $_lib['storage']->get_hash(
             array('query' => $query_setup, 'key' => 'name', 'value' => 'value')
@@ -419,7 +413,6 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $_lib['storage']->db_new_hash($postsub, 'salaryline');
           }
         }
-    }
 }
 elseif($_lib['input']->getProperty('action_salary_delete'))
 {
