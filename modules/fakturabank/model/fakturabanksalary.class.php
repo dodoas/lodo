@@ -46,7 +46,7 @@ class lodo_fakturabank_fakturabanksalary {
 
         global $_lib;
 
-        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
+        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.IDNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
         #print "$query_head<br>";
         $result_head    = $_lib['db']->db_query($query_head);
         $head           = $_lib['db']->db_fetch_object($result_head);
@@ -218,7 +218,7 @@ class lodo_fakturabank_fakturabanksalary {
 		$xml_content .= "<last_name>" . $head->LastName . "</last_name>\n";
         $xml_content .= "<scheme>FAKTURABANK:EMAIL</scheme>\n";
         $xml_content .= "<identifier>" . $head->FakturabankEmail . "</identifier>\n";
-        $xml_content .= "<official_id_number>" . $head->SocietyNumber . "</official_id_number>\n";
+        $xml_content .= "<official_id_number>" . (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber) . "</official_id_number>\n";
         $xml_content .= "<email>" . $head->Email . "</email>\n";
 
 		$xml_content .= "<postal_address>\n";
@@ -299,20 +299,21 @@ class lodo_fakturabank_fakturabanksalary {
         $url  = "$this->protocol://$this->host$page";
 
         if (isset($_SESSION['oauth_paycheck_sent'])) {
-          $data = $_SESSION['oauth_resource']['result'];
-          unset($_SESSION['oauth_paycheck_sent']);
+          $data = $_SESSION['oauth_resource'];
           unset($_SESSION['oauth_resource']);
+          unset($_SESSION['oauth_paycheck_sent']);
         }
         else {
           $_SESSION['oauth_action'] = 'send_paycheck';
           $_SESSION['oauth_paycheck_sent'] = true;
           $oauth_client = new lodo_oauth();
-          $data = $oauth_client->post_resources($url, array('xml' => $xml));
+          $oauth_client->post_resources($url, array('xml' => $xml));
+          $data = $_SESSION['oauth_resource'];
         }
 
         $_SESSION['oauth_paycheck_messages'][] = array();
-        $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
-        if ($_SESSION['oauth_resource']['code'] == 201) {
+        $import_paycheck_result = $this->parseResult(substr($data['result'], strpos($data['result'], "<?xml version")));
+        if ($data['code'] == 201) {
             if ($import_paycheck_result['omitted-paychecks'] == 1) {
                 $_SESSION['oauth_paycheck_messages'][] = "Error: L&oslash;nnslipp finnes allerede";
                 $ret = false;
@@ -327,8 +328,8 @@ class lodo_fakturabank_fakturabanksalary {
                 $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
-        elseif ($_SESSION['oauth_resource']['code'] == 400) $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
-        elseif ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+        elseif ($data['code'] == 400) $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
+        elseif ($data['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Error: Utilstrekkelige rettigheter i fakturabank!";
 
         if ($ret) {
           $dataH = array();

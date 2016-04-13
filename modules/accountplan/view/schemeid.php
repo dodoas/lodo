@@ -9,14 +9,17 @@ $schemes = $schemeControl->listSchemes();
 
 
 $availableSchemeTypes = $schemeControl->listTypes();
-function createSchemeOptions($selected) {
+function createSchemeOptions($selected, $country) {
     global $availableSchemeTypes;
     $schemeTypeOptions = "<option value='0'></option>";
 
     foreach($availableSchemeTypes as $type) {
+        $tmp_str = explode(':', $type['SchemeType']);
+        $scheme_type_country = $tmp_str[0];
         $schemeTypeOptions .= 
-            sprintf("<option value='%d' %s>%s</option>\n",
+            sprintf("<option value='%d' class='%s' %s>%s</option>\n",
                     $type['FakturabankSchemeID'],
+                    ($country == $scheme_type_country || $scheme_type_country == 'FAKTURABANK' || $type['FakturabankSchemeID'] == $selected ? "active" : "inactive"),
                     ($type['FakturabankSchemeID'] == $selected ? "selected" : ""),
                     $type['SchemeType']
                 );
@@ -25,7 +28,26 @@ function createSchemeOptions($selected) {
     return $schemeTypeOptions;
 }
 ?>
-
+<style>
+option.inactive {
+  display: none;
+}
+</style>
+<script>
+function filterSchemesByCountryCode(country) {
+  var selected_country_code = country.value;
+  var ap_schemeid = country.id.split('.')[2];
+  var ap_scheme_fbschemeid_select = document.getElementById('accountplanscheme.FakturabankSchemeID.'+ap_schemeid);
+  options = ap_scheme_fbschemeid_select.options;
+  for(i = 0; i < options.length; i++) {
+    if (options[i].text.match(selected_country_code) || options[i].text.match('FAKTURABANK') || options[i].selected) {
+      options[i].setAttribute("class", "active");
+    } else {
+      options[i].setAttribute("class", "inactive");
+    }
+  }
+}
+</script>
 <tr class="result">
   <th colspan="5">Fakturabank Firma ID</th>
 </tr>
@@ -35,8 +57,11 @@ function createSchemeOptions($selected) {
   <td class="menu">
   </td>
   <td colspan=2>
-    <select name="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>">
-      <?= createSchemeOptions($scheme['FakturabankSchemeID']) ?>
+    <? print $_lib['form3']->Country_menu3(array('table'=>'accountplanscheme', 'field'=>'CountryCode', 'pk' => $scheme['AccountPlanSchemeID'], 'value'=>$scheme['CountryCode'], 'OnChange' => 'filterSchemesByCountryCode(this)')); ?>
+  </td>
+  <td>
+    <select id="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>" name="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>">
+      <?= createSchemeOptions($scheme['FakturabankSchemeID'], $scheme['CountryCode']) ?>
     </select>
     <input type="text" value="<?= $scheme['SchemeValue'] ?>" name="accountplanscheme.SchemeValue.<?= $scheme['AccountPlanSchemeID'] ?>" />
   </td>
@@ -50,8 +75,10 @@ function createSchemeOptions($selected) {
     <input type="submit" name="action_add_scheme" value="Legg til ny" />
   </td>
   <td>
-    <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
     <input type="submit" name="action_refresh_sheme" value="Oppdater schemetyper" />
+  </td>
+  <td>
+    <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
   </td>
 </tr>
 

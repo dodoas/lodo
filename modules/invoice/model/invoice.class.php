@@ -29,6 +29,7 @@
 includelogic('exchange/exchange');
 includelogic('fakturabank/fakturabank');
 includelogic('kid/kid');
+includelogic("accountplan/scheme");
 
 class invoice {
     public $InvoiceID       = 0;
@@ -1073,6 +1074,9 @@ class invoice {
         } else if (strstr(strtolower($invoice->SOrgNo), 'mva')) {
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo;
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
+        } else {
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo . ' MVA';
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $invoice->SName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $invoice->SAddress;
@@ -1114,7 +1118,15 @@ class invoice {
 
         ############################################################################################
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $invoice->IWeb;
-        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $invoice->IOrgNo);
+
+        if (!empty($invoice->IOrgNo)) {
+          $firstFirmaID = array('value' => preg_replace('/[^0-9]+/', '', $invoice->IOrgNo), 'type' => 'NO:ORGNR');
+        } else {
+          $schemeControl = new lodo_accountplan_scheme($invoice->CustomerAccountPlanID);
+          $firstFirmaID = $schemeControl->getFirstFirmaID();
+        }
+        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = $firstFirmaID['value'];
+        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = $firstFirmaID['type'];
 
         if (!empty($invoice->IVatNo)) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IVatNo;
@@ -1189,6 +1201,9 @@ class invoice {
             $this->invoiceO->PaymentMeans->InstructionID = $invoice->KID;
             $this->invoiceO->PaymentMeans->InstructionNote = "KID";
         }
+
+        // Payment Terms
+        $this->invoiceO->PaymentTerms->Note                          = $invoice->PaymentCondition;
         ############################################################################################
         $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN from invoiceoutline as il, product as p where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.ProductID=p.ProductID and il.Active <> 0 order by il.LineID asc";
         #print "$query_invoiceline\n";

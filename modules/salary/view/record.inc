@@ -180,19 +180,9 @@ elseif($_lib['input']->getProperty('action_defconf_save'))
 }
 elseif($_lib['input']->getProperty('action_salary_new'))
 {
-    list($JournalID, $tmp) = 
-        $accounting->get_next_available_journalid(
-            array('available'=>true, 'update'=>true, 'type' =>'L'));
-
-    $query="select SalaryID from salary where JournalID=$JournalID";
-    if($debug) print "$query<br>\n";
+    $query="select MAX(JournalID) as MaxJournalID from salary";
     $row_salary = $_lib['storage']->get_row(array('query' => $query));
-    if(isset($row_salary->SalaryID) and strlen($row_salary->SalaryID)>0)
-    {
-        $SalaryID=$row_salary->SalaryID;
-    }
-    else
-    {
+    $JournalID = $row_salary->MaxJournalID + 1;
         $query_setup    = "select name, value from setup";
         $setup          = $_lib['storage']->get_hash(
             array('query' => $query_setup, 'key' => 'name', 'value' => 'value')
@@ -439,7 +429,6 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $_lib['storage']->db_new_hash($postsub, 'salaryline');
           }
         }
-    }
 }
 elseif($_lib['input']->getProperty('action_salary_delete'))
 {
@@ -1036,6 +1025,12 @@ elseif($_lib['input']->getProperty('action_salary_update_extra')) {
                                                        $employee_info->SubcompanyID,
                                                        $SalaryID);
     $_lib['db']->db_query($query_update_salary_with_employee_info);
+}
+elseif($_lib['input']->getProperty('action_altindato_update')) {
+  if (isset($_POST['salary_ActualPayDate_'.$SalaryID])) {
+    $query_update_altinn_date = "UPDATE salary SET ActualPayDate = '". $_POST['salary_ActualPayDate_'.$SalaryID] ."' where SalaryID = " . $SalaryID;
+    $_lib['db']->db_query($query_update_altinn_date);
+  }
 }
 
 function getAltinnReportedDateTime($SalaryID) {

@@ -320,7 +320,22 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
         <td>Foretaksregisteret</td>
         <td><? print $row->SOrgNo ?></td>
         <td>Foretaksregisteret</td>
-        <td><? print $row->IOrgNo ?></td>
+        <?
+          $firma_id_missing = false;
+          if (!$row->IOrgNo) {
+            includelogic("accountplan/scheme");
+            $schemeControl = new lodo_accountplan_scheme($row->CustomerAccountPlanID);
+            $first_firma_id = $schemeControl->getFirstFirmaID();
+            if (!$first_firma_id) {
+              $firma_id_missing = true;
+            } else {
+              $firma_id = $first_firma_id['type'] . " " . $first_firma_id['value'];
+            }
+          } else {
+            $firma_id = $row->IOrgNo;
+          }
+        ?>
+        <td><? print $firma_id ?></td>
     </tr>
     <tr>
         <td><?php if (!empty($row->SVatNo)) echo 'MVA reg' ?></td>
@@ -404,10 +419,12 @@ foreach ($currencies as $currency) {
         <td>Utskriftsdato</td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($print_date_value, 0, 10), 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
+    <? if($row->Note){ ?>
     <tr>
       <td>Merk</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$InvoiceID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
+    <? } ?>
     <tr>
       <td>Total bel&oslash;p</td>
       <td id="invoiceout.TotalCustPrice"><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
@@ -434,8 +451,13 @@ foreach ($currencies as $currency) {
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$InvoiceID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Leveringsbetingelse</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$InvoiceID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
+      <? if($row->DeliveryCondition){ ?>
+        <td>Leveringsbetingelse</td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$InvoiceID, 'value'=>$row->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
+      <? } else{ ?>
+        <td></td>
+        <td></td>
+      <? } ?>
       <td>Betalingsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'PaymentCondition', 'pk'=>$InvoiceID, 'value'=>$row->PaymentCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
@@ -579,12 +601,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <?
 
         if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
-            echo "Orgnummer: ".  $row->IOrgNo . "<br />";
+            echo "Firma ID: ".  $firma_id . "<br />";
 
-            if($row->IOrgNo)
+            if(!$firma_id_missing)
                 print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 'tabindex' => $tabindex++,'value'=>'Fakturabank (F)', 'accesskey'=>'F', 'disabled' => !$ready_to_send_to_fb));
             else
-                print "Mangler orgnummer ";
+                print "Mangler firma id ";
         }
 
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
