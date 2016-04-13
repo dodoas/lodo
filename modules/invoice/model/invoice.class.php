@@ -298,6 +298,7 @@ class invoice {
       global $_lib;
 
       $ready_to_send = true;
+      $error_messages = array();
       # required fields
       $head_required_fields = array('InvoiceDate', 'SName', 'SCity', 'SZipCode', 'IName', 'ICity', 'IZipCode', array('Phone', 'IMobile', 'IFax', 'IEmail'), 'DueDate', 'SBankAccount', 'DAddress', 'DZipCode', 'DCity', 'DCountryCode');
       $line_required_fields = array('ProductID', 'QuantityDelivered', 'ProductName', 'UnitCustPrice');
@@ -343,28 +344,29 @@ class invoice {
         }
         if (!$is_set) {
           $ready_to_send = false;
-          if ($is_array) $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray']));
-          else $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name] . ' field.'));
+          if ($is_array) $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray'];
+          else $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name] . ' field.';
         }
       }
       # if no invoice lines
       if (!(count($this->lineH) > 0)) {
-        $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt!'));
-        return false;
+        $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt!';
+        return array(false, $error_messages);
       }
       # if any invoice lines, check each for required fields
       $line_count = 1;
       foreach($this->lineH as $line) {
         foreach($line_required_fields as $field_name) {
-          $is_set = !empty($line[$field_name]);
+          if (in_array($field_name, array('QuantityDelivered', 'UnitCustPrice'))) $is_set = $line[$field_name] != 0;
+          else $is_set = !empty($line[$field_name]);
           if (!$is_set) {
             $ready_to_send = false;
-            $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle: ' . $translated_line_required_fields[$field_name] . ' på faktura  linje ' . $line_count . '.'));
+            $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle: ' . $translated_line_required_fields[$field_name] . ' på faktura  linje ' . $line_count . '.';
           }
         }
         $line_count++;
       }
-      return $ready_to_send;
+      return array($ready_to_send, $error_messages);
     }
 
     function make_invoice()
