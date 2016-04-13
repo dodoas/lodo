@@ -320,7 +320,22 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
         <td>Foretaksregisteret</td>
         <td><? print $row->SOrgNo ?></td>
         <td>Foretaksregisteret</td>
-        <td><? print $row->IOrgNo ?></td>
+        <?
+          $firma_id_missing = false;
+          if (!$row->IOrgNo) {
+            includelogic("accountplan/scheme");
+            $schemeControl = new lodo_accountplan_scheme($row->CustomerAccountPlanID);
+            $first_firma_id = $schemeControl->getFirstFirmaID();
+            if (!$first_firma_id) {
+              $firma_id_missing = true;
+            } else {
+              $firma_id = $first_firma_id['type'] . " " . $first_firma_id['value'];
+            }
+          } else {
+            $firma_id = $row->IOrgNo;
+          }
+        ?>
+        <td><? print $firma_id ?></td>
     </tr>
     <tr>
         <td><?php if (!empty($row->SVatNo)) echo 'MVA reg' ?></td>
@@ -586,12 +601,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <?
 
         if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
-            echo "Orgnummer: ".  $row->IOrgNo . "<br />";
+            echo "Firma ID: ".  $firma_id . "<br />";
 
-            if($row->IOrgNo)
+            if(!$firma_id_missing)
                 print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 'tabindex' => $tabindex++,'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
             else
-                print "Mangler orgnummer ";
+                print "Mangler firma id ";
         }
 
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
