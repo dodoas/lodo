@@ -1,4 +1,5 @@
 <?
+session_start();
 # $Id: import.php,v 1.16 2005/10/24 11:50:24 svenn Exp $ account_import.php,v 1.3 2001/11/20 17:55:12 thomasek Exp $
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no

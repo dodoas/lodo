@@ -11,11 +11,12 @@ includelogic('orgnumberlookup/orgnumberlookup');
 $accounting = new accounting();
 
 require_once "record.inc";
-$fb         = new lodo_fakturabank_fakturabank();
-$InvoicesO  = $fb->incoming();
 
 $tmp_redirect_url = "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+
+$fb         = new lodo_fakturabank_fakturabank();
+$InvoicesO  = $fb->incoming();
 
 print $_lib['sess']->doctype; ?>
 <head>
