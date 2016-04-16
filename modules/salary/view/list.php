@@ -245,16 +245,19 @@ function worker_line($row, $i) {
       {
         if($row->SalaryConfID != 1 && $checked)
         {
-            ?>
-        <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" method="post">
+          ?>
+            <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" method="post">
+
             <?
-          print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_new', 'value'=>'Lage l&oslash;nnslipp'));
+            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_new', 'value'=>'Lage l&oslash;nnslipp'));
+            ?>
+          </form>
+          <?
         }
       } else {
         print "Stengt";
       }
       ?>
-        </form>
       </td>
 
       <td>
@@ -375,6 +378,8 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
       <input type="checkbox" disabled checked>
       <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn / Lagre opplysninger" />
       Valgt periode: <?= $period_row['Period'] ?>
+
+      <form name="nothing" action="#"></form>
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
     <th class="sub">L&oslash;nninger</th>
