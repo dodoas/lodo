@@ -21,6 +21,16 @@ print $_lib['sess']->doctype ?>
     <? includeinc('head') ?>
 </head>
 <body>
+  <script type="text/javascript">
+    // This is the first page we hit at login, so we save the selected
+    // db/company for the new session to local storage at this time.
+    $(document).ready(function(){
+      // console.log('\n\n--\nset db_name');
+      var db_name = '<?= $_SESSION['DB_NAME']; ?>';
+      localStorage.setItem('lodo_db_name', db_name);
+      // console.log('localStorage: ' + db_name);
+    });
+  </script>
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
