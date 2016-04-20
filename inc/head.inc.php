@@ -56,3 +56,23 @@ if ( $account_type == $DEFAULT_ACCOUNT_TYPE ) {
         }
     </script>
 <? endif ?>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // On each window focus, check if db changed by comparing the value we
+        // got on page load and the one saved to local storage on login are the same.
+        // If they are not we redirect to main page for the currently logged in company.
+        // NOTE! This happens on every page!
+        $(window).focus(function() {
+          // console.log('\n\n--\ncheck db_name');
+          var site_home_url = '<?= $_lib['sess']->dispatchs; ?>t=lodo.main';
+          var db_name_on_page_load = '<?= $_SESSION['DB_NAME']; ?>';
+          var db_name_local = localStorage.getItem('lodo_db_name');
+          // console.log('localStorage: ' + db_name_local);
+          // console.log('onpageload:' + db_name_on_page_load);
+          if (db_name_on_page_load != db_name_local) {
+            // console.log('redirect to ' + site_home_url);
+            window.location = site_home_url;
+          }
+        });
+      });
+    </script>
