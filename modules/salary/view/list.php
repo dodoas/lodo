@@ -442,7 +442,7 @@ else {
 <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>&view_old_workers" method="post">
 <table class="lodo_data">
 <tr>
-    <th colspan="12">Tidligere ansatte</th>
+    <th colspan="14">Tidligere ansatte</th>
 </tr>
 
 <tr>
@@ -454,7 +454,7 @@ else {
     <th class="sub" style="background-color: yellow; color: black;">
       <input type="checkbox" disabled checked>
       <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn / Lagre opplysninger" />
-
+      <form name="nothing" action="#"></form>
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
     <th class="sub">L&oslash;nninger</th>
@@ -463,6 +463,7 @@ else {
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
     <th class="sub">L&T</th>
+    <th class="sub"></th>
     <th class="sub"></th>
     <th class="sub"></th>
 </tr>
