@@ -26,11 +26,8 @@ foreach($car_milage as $milage_year => $milage) {
   $query_car = "SELECT SUM(Quantity) as sum_quantity, SUM(AmountIn) as sumin, SUM(AmountOut) as sumout FROM voucher WHERE CarID = $CarID and AccountPlanID=7000 and VoucherPeriod >= '$milage_year-01' and VoucherDate < '". ($milage_year + 1) ."-01-01'";
   $_car = $_lib['storage']->get_row(array('query' => $query_car));
   $distance = $milage->EndMilage - $milage->StartMilage;
-  $money_spent_on_fuel = 0;
   $money_spent_per_mile = 0;
-  if($_car->sum_quantity > 0) {
-    $money_spent_on_fuel = $_car->sumin - $_car->sumout;
-  }
+  $money_spent_on_fuel = $_car->sumin - $_car->sumout;
   if ($distance > 0) {
     $money_spent_per_mile = $money_spent_on_fuel / $distance;
   }
