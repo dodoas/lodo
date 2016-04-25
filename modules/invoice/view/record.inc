@@ -125,13 +125,11 @@ if($_lib['input']->getProperty('action_invoice_fakturabanksend') || $_lib['input
 }
 
 if($_lib['input']->getProperty('action_invoice_lock')) {
-    $invoice->init(array());
     if ($ready_to_send_to_fb) {
       $invoice->lock();
     }
 }
 elseif($_lib['input']->getProperty('action_invoice_fakturabanksend')) {
-    $invoice->init(array());
     if ($ready_to_send_to_fb) {
       $_SESSION['oauth_action'] = 'send_invoice';
       $invoice->fakturabank_send();
