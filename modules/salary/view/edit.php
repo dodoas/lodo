@@ -495,58 +495,35 @@ $formname = "salaryUpdate";
     if($_lib['sess']->get_person('AccessLevel') >= 2)
     {
         print $_lib['form3']->hidden(array('name'=>'fieldcount', 'value'=>$counter));
-        if(!$head->Period)
+        if(!$head->Period || $accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel')))
         {
             ?>
         <tr>
-          <td>
+          <td colspan='14'>
           <?php
             if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
             {
               echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" />';
+              echo '<input type="submit" name="action_salary_update_altinn_fields" value="Lagre altinn felter" align="right" />';
             }
 
             echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
             echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
+            echo '<input type="submit" name="action_altindato_update" value="Lagre altinndato" align="right" ' . (($altinndato_set) ? 'disabled' : '') . '/>';
           ?>
 
           </td>
+        </tr>
         <tr>
           <td>
           <?php
-            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
-            else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
+            $is_altinn_date_set = (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00') ? 'false' : 'true';
+            $altinn_arguments = "'$head->ShiftType', '$head->WorkTimeScheme', '$head->TypeOfEmployment', $head->OccupationID, $head->SubcompanyID, $is_altinn_date_set";
+            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" onclick="return checkIfAltinnFieldsSetAndConfirm(\'Er du siker?\', '.$altinn_arguments.');" />';
           ?>
           </td>
         </tr>
         <?
-        }
-        elseif($accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel')))
-        {
-          ?>
-        <tr>
-          <td colspan="14">
-                <?php
-
-                  if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
-                  {
-                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br />';
-                  }
-
-                  echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
-                  echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
-                  echo '<input type="submit" name="action_altindato_update" value="Lagre altinndato" align="right" ' . (($altinndato_set) ? 'disabled' : '') . '/>';
-            ?>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <?
-             if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
-          ?>
-          </td>
-        </tr>
-            <?
         }
         else
         {
