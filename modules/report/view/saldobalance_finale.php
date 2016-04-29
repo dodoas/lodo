@@ -81,8 +81,7 @@ while($account = $_lib['db']->db_fetch_object($accounts_result))
     if ($enable_last_year) array_push($row, $_lib['format']->Amount($sumrow_prev_new));
 
     // add an account to csv
-    // fputcsv(file,fields,seperator,enclosure)
-    fputcsv($output, $row, ";", "");
+    fputs($output, implode($row, ';')."\n");
 }
 fclose($output);
 ?>
