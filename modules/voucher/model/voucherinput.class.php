@@ -89,7 +89,7 @@ class framework_logic_voucherinput
         $this->AccountLineID      = $args['AccountLineID'];
         $this->Quantity           = $args['voucher_Quantity'];
 
-        $this->matched_by         = $args['voucher_matched_by'];
+        if(!is_null($args['voucher_matched_by'])) $this->matched_by = $args['voucher_matched_by'];
 
         $this->Currency = exchange::getLocalCurrency();
         $this->Currency           = strip_tags($args['voucher_Currency']);
@@ -703,7 +703,7 @@ class framework_logic_voucherinput
         $request['voucher_Quantity']            = $this->Quantity;
         $request['voucher_CarID']               = $this->CarID;
 
-        $request['voucher_matched_by']          = $this->matched_by;
+        if (!is_null($this->matched_by)) $request['voucher_matched_by'] = $this->matched_by;
 
         #Myst always be present. Both cannot contain a value
         if($this->AmountIn > 0) {

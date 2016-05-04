@@ -811,6 +811,21 @@ class postmotpost {
             $this->closedPosts[$hash2] = true;
 
             $this->closePostSQL($VoucherID, $VoucherID2);
+            switch ($info['Match']) {
+              case 'KID':
+                $ClosedWith = 'kid';
+                break;
+              case 'InvoiceID':
+                $ClosedWith = 'invoice';
+                break;
+              case 'MatchNumber':
+                $ClosedWith = 'match';
+                break;
+              default:
+                $ClosedWith = '0';
+                break;
+            }
+            $this->updateClosedWith($VoucherID, $VoucherID2, $ClosedWith);
         }
     }
 
@@ -1047,7 +1062,6 @@ class postmotpost {
         $args = array("voucher_matched_by_$VoucherID" => $ClosedWith, "voucher_matched_by_$VoucherID2" => $ClosedWith);
         $pk = array('voucher' => 'VoucherID');
         $_lib['db']->db_update_multi_table($args, $pk);
-
     }
 }
 ?>
