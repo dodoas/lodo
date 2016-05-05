@@ -2,6 +2,44 @@
 includelogic('fakturabank/fakturabank');
 includelogic("accountplan/scheme");
 
+function validate_employee($employee) {
+    global $_lib;
+
+    $errors = array();
+    if(empty($employee->FirstName)) {
+        $errors[] = "Fornavn kan ikke v&aelig;re blank.";
+    }
+
+    if(empty($employee->LastName)) {
+        $errors[] = "Etternavn kan ikke v&aelig;re blank.";
+    }
+
+    if(!filter_var($employee->Email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Ugyldig personlig epost.";
+    }
+
+    $fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $employee->AccountPlanID;
+    $fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
+
+    if(!filter_var($fakturabankemail->Email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Ugyldig fakturabank epost.";
+    }
+
+    if(empty($employee->SocietyNumber) && empty($employee->IDNumber)) {
+        $errors[] = "Enten Personnr eller ID nummer p&aring; v&aelig;re der.";
+    } else {
+        if(!empty($employee->SocietyNumber) && !preg_match('/^\d{11}$/', $employee->SocietyNumber)) {
+            $errors[] = "Personnr m&aring; v&aelig;re 11 siffer.";
+        }
+
+        if(!empty($employee->IDNumber) && !preg_match('/^\d{11}$/', $employee->IDNumber)) {
+            $errors[] = "ID nummer m&aring; v&aelig;re 11 siffer.";
+        }
+    }
+
+    return $errors;
+}
+
 function clean_org_number($orgnr) {
     return preg_replace('/\s/', '', $orgnr);
 }
