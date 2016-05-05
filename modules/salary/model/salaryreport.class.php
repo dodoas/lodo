@@ -37,14 +37,17 @@ class salaryreport
         $this->_query = "select a.AccountName, a.Address, a.ZipCode, a.City, a.SocietyNumber, k.KommuneNumber, k.KommuneName, a.WorkStart, a.WorkStop, a.WorkPercent from accountplan as a left join kommune as k on (a.KommuneID=k.KommuneID) where a.AccountPlanID='$this->_personID'";
         $this->_accountrow = $_lib['storage']->get_row(array('query' => $this->_query));
 
+        $CustomerCompanyMunicipalityID = $this->_comanyInfo->CustomerCompany->CompanyMunicipalityID;
+        $CustomerCompanyMunicipality = $_lib['db']->get_row(array('query' => "SELECT * FROM kommune WHERE KommuneID = $CustomerCompanyMunicipalityID"));
+
         #companyinfo
         $this->_reportHash['company']['VName']                   = $this->_comanyInfo->CustomerCompany->CompanyName;
         $this->_reportHash['company']['VAddress']                = $this->_comanyInfo->CustomerCompany->VAddress;
         $this->_reportHash['company']['VZipCode']                = $this->_comanyInfo->CustomerCompany->VZipCode;
         $this->_reportHash['company']['VCity']                   = $this->_comanyInfo->CustomerCompany->VCity;
         $this->_reportHash['company']['OrgNumber']               = $this->_comanyInfo->CustomerCompany->OrgNumber;
-        $this->_reportHash['company']['CompanyMunicipality']     = $this->_comanyInfo->CustomerCompany->CompanyMunicipality;
-        $this->_reportHash['company']['CompanyMunicipalityName'] = $this->_comanyInfo->CustomerCompany->CompanyMunicipalityName;
+        $this->_reportHash['company']['MunicipalityNumber']      = $CustomerCompanyMunicipality->KommuneNumber;
+        $this->_reportHash['company']['MunicipalityName']        = $CustomerCompanyMunicipality->KommuneName;
 
         #personinfo
         $this->_reportHash['account']['AccountName']   = $this->_accountrow->AccountName;

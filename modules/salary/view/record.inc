@@ -229,10 +229,6 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $head_employee        = $_lib['db']->db_fetch_object($result_head_employee);
         $accountplan = $accounting->get_accountplan_object($head_employee->AccountPlanID);
 
-        $query_kommune_id = "select * from kommune where KommuneNumber = '" . $_lib['sess']->get_companydef('CompanyMunicipality') . "'";
-        $result_kommune_id = $_lib['db']->db_query($query_kommune_id);
-        $kommune_id = $_lib['db']->db_fetch_object($result_kommune_id);
-
         //#Possible to extend or alter parameters here
         $postmain['salary_JournalID']           = $JournalID;
         $postmain['salary_SalaryConfID']        = $SalaryConfID;
@@ -241,7 +237,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $postmain['salary_ValidTo']             = $toDate;
         $postmain['salary_JournalDate']         = $journalDate;
         $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
-        $postmain['salary_KommuneID']           = $kommune_id->KommuneID;
+        $postmain['salary_KommuneID']           = $_lib['sess']->get_companydef('CompanyMunicipalityID');
         $postmain['salary_ShiftType']           = $accountplan->ShiftType;
         $postmain['salary_OccupationID']        = $accountplan->OccupationID;
         $postmain['salary_WorkTimeScheme']      = $accountplan->WorkTimeScheme;
