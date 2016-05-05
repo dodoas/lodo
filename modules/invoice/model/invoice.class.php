@@ -226,7 +226,13 @@ class invoice {
         self::enrichArgsWithAddressFields($args);
         #Update multi into db to support old format
         #print_r($args);
-        $_lib['db']->db_update_multi_table($args, array('invoiceout' => 'InvoiceID', 'invoiceoutline' => 'LineID', 'invoiceoutprint' => 'InvoiceID'));
+        $_lib['db']->db_update_multi_table($args, array('invoiceout' => 'InvoiceID', 'invoiceoutline' => 'LineID'));
+
+        // Since the line above only updates table columns, REPLACE INTO will create in case there is no record to update.
+        $invoice_id = $args['InvoiceID'];
+        $invoiceoutprint_date = $args["invoiceoutprint_InvoicePrintDate_". $invoice_id];
+        $replace_invoiceoutprint = sprintf("REPLACE INTO invoiceoutprint (InvoiceID, InvoicePrintDate) VALUES ('%d', '%s');", $invoice_id, $invoiceoutprint_date);
+        $_lib['db']->db_query($replace_invoiceoutprint);
 
         #Then read everything from disk and correct calculations
         $this->init($args);
