@@ -71,7 +71,7 @@ $factor = 4;
             </tr>
             <tr>
                 <td align="left" colspan="3">Kontorkommune (nummer og navn)</td>
-                <td align="left" colspan="2"><? print $salaryreport->_reportHash['company']['CompanyMunicipality']." ".$salaryreport->_reportHash['company']['CompanyMunicipalityName'] ?><br /></td>
+                <td align="left" colspan="2"><? print $salaryreport->_reportHash['company']['MunicipalityNumber']." ".$salaryreport->_reportHash['company']['MunicipalityName'] ?><br /></td>
             </tr>
         </tbody>
         <tbody>
