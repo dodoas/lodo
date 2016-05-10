@@ -15,9 +15,7 @@ if($_REQUEST['action_postmotpost_open']) {
 if($_REQUEST['report_selectedAccount'])
     $selectedAccount = $accounting->get_accountplan_object($_REQUEST['report_selectedAccount']);
 
-if ($selectedAccount->AccountPlanID == 1500) $_type = 'customer';
-elseif ($selectedAccount->AccountPlanID == 2400) $_type = 'supplier';
-elseif ($selectedAccount->AccountPlanID == 2930) $_type = 'employee';
+if ($selectedAccount) $_type = $selectedAccount->ReskontroAccountPlanType;
 else $_type = 'none';
 
 if($selectedAccount->AccountPlanType == 'balance')
@@ -58,12 +56,7 @@ if(strlen($_REQUEST['report_DepartmentID']) > 0)
     $whereouter .= " v.DepartmentID = " . $_REQUEST['report_DepartmentID'] . " and ";
 }
 
-if ( in_array($selectedAccount->AccountPlanID, array(1500, 2400, 2930)))
-{
-  if ($selectedAccount->AccountPlanID == 1500) $whereouter .= " a.AccountPlanType = 'customer' and ";
-  if ($selectedAccount->AccountPlanID == 2400) $whereouter .= " a.AccountPlanType = 'supplier' and ";
-  if ($selectedAccount->AccountPlanID == 2930) $whereouter .= " a.AccountPlanType = 'employee' and ";
-}
+if ($selectedAccount->AccountPlanID) $whereouter .= " a.AccountPlanType = '". $selectedAccount->ReskontroAccountPlanType ."' and ";
 
 if($_REQUEST['report_VoucherType'])
 {
