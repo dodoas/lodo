@@ -455,12 +455,15 @@ function checkIfAltinnFieldsSetAndConfirm(message, shift_type, work_time_scheme,
 }
 
 function changeMatchBy(obj) {
-  var isChecked = obj.checked; //this just changed, so it really is whether the box wasn't checked beforehand.
+  //this just changed, so it really is whether the box wasn't checked beforehand.
+  var isChecked = obj.checked;
   var cbs = obj.parentElement.parentElement.getElementsByClassName("match_checkbox");
   for (var i = 0; i < cbs.length; i++) {
     cbs[i].checked = false;
   }
-  if (isChecked) obj.checked = true; //if the original one wasn't checked, check it
+
+  // if the original one wasn't checked, check it
+  obj.checked = isChecked;
 }
 
 </script>

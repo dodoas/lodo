@@ -377,9 +377,8 @@ print $_lib['sess']->doctype ?>
                 <td><? print $foreign_currency; print substr($voucher->Description,0,20); if(strlen($voucher->Description) > 20) print "..."; ?></td>
                 <td><?
                     $is_closed = !is_null($_lib['db']->get_row(array("query" => "SELECT * FROM voucherstruct WHERE Closed = 1 AND (ParentVoucherID = " . $voucher->VoucherID . " OR ChildVoucherID = " . $voucher->VoucherID . ")"))->VoucherStructID);
+                    $match_number = $_lib['db']->get_row(array("query" => "SELECT MatchNumber FROM vouchermatch WHERE VoucherID = $voucher->VoucherID"))->MatchNumber;
                     if ($is_closed) {
-                      $match_number = $_lib['db']->get_row(array("query" => "SELECT MatchNumber FROM vouchermatch WHERE VoucherID = $voucher->VoucherID"))->MatchNumber;
-                      $amount_to_show = $postmotpost->getDiff($voucher->AccountPlanID, $voucher->KID, $voucher->InvoiceID, $match_number, $voucher);
                       if ($voucher->matched_by == 'invoice') print 'FAK ' . $voucher->InvoiceID . " ";
                       elseif ($voucher->matched_by == 'kid') print 'KID ' . $voucher->KID . " ";
                       elseif ($voucher->matched_by == 'match') print 'MAT ' . $match_number . " ";
@@ -389,11 +388,13 @@ print $_lib['sess']->doctype ?>
                       }
                     }
                     else {
-                      $amount_to_show = $voucher->AmountIn > 0 ? $voucher->AmountIn : -$voucher->AmountOut;
                       print "-";
                     }
                     ?></td>
-                <td class="noprint align-right"><nobr><? print $_lib['format']->Amount($amount_to_show) ?></nobr></td>
+                <td class="noprint align-right"><nobr><?
+                  $amount_to_show = $postmotpost->getDiff($voucher->AccountPlanID, $voucher->KID, $voucher->InvoiceID, $match_number, $voucher);
+                  print $_lib['format']->Amount($amount_to_show)
+                  ?></nobr></td>
                 <td class="noprint"><? if ($is_closed) { ?><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_postmotpost_open=1" title="&Aring;pne post">&Aring;pne post</a><? } ?></td>
             </tr>
         <?
@@ -435,11 +436,11 @@ print $_lib['sess']->doctype ?>
 </table>
 </form>
 
-<? #print $_lib['message']->get() ?>
   <script>
     var error_count = <? print $error_count; ?>;
     var error_links_div = document.getElementById("error_links");
-    if (error_count > 0) error_links_div.innerHTML += "<span style='color: red;'>mulig feil</span><br>"
+    if (error_count > 0) {
+      error_links_div.innerHTML += "<span style='color: red;'>mulig feil</span><br>"
       for(i = 0; i < error_count; i++) {
         var current_error = document.getElementById("error"+i);
         error_links_div.innerHTML += "<a href='#error"+i+"' style='color: red;'>"+(i+1)+"</a>";
@@ -451,6 +452,7 @@ print $_lib['sess']->doctype ?>
           current_error.innerHTML = "<a href='#error0' style='color: red;'>mulig feil</a>";
         }
       }
+    }
   </script>
 </body>
 </html>
