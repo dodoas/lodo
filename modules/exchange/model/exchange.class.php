@@ -90,7 +90,7 @@ class exchange {
 	/**
 	 * @return mixed array Array with currencies
 	 */
-	function getAllCurrencies() {
+	static function getAllCurrencies() {
 		global $_lib;
 
 		#Retrieve currencies
