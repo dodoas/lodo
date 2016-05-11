@@ -62,7 +62,18 @@ if($JournalID)
   ?><a href="<? print $_lib['sess']->dispatch ?>t=journal.edit&JournalID=<? print "$JournalID"; ?>">Tilbake til bilag <? print $JournalID ?></a><?
 }
 
-print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
+print '<h1>' . $_lib['message']->get() . '</h1>';
+
+$validation_errors = validate_employee($account);
+if(!empty($validation_errors)) {
+  print '<div class="warning">';
+  foreach ($validation_errors as $error) {
+    print $error ."<br>";
+  }
+  print '</div>';
+}
+
+?>
 
 <? require_once 'new.inc'; ?>
 

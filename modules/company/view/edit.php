@@ -99,10 +99,10 @@ if(!isset($row_comp->CompanyID))
     <td class="BGColorLight"><input type="text" name="company.VatNumber" value="<? print $row_comp->VatNumber ?>" size="24"></td>
   </tr>
   <tr>
-    <td class="BGColorDark">Kontorkommune nr</td>
-    <td class="BGColorLight"><input type="text" name="company.CompanyMunicipality" value="<? print $row_comp->CompanyMunicipality ?>" size="24"></td>
-    <td class="BGColorDark">Kontorkommune navn</td>
-    <td class="BGColorLight"><input type="text" name="company.CompanyMunicipalityName" value="<? print $row_comp->CompanyMunicipalityName ?>" size="24"></td>
+    <td class="BGColorDark">Kommune</td>
+    <td><? print $_lib['form3']->kommune_menu(array('table'=>'company', 'field'=>'CompanyMunicipalityID', 'value'=>$row_comp->CompanyMunicipalityID, 'class'=>'BGColorLight')) ?></td>
+    <td class="BGColorDark"></td>
+    <td class="BGColorLight"></td>
   </tr>
   <tr>
     <th colspan="4" class="menu">Fakturaadresse</th>

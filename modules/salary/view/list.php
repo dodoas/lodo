@@ -91,10 +91,7 @@ print $_lib['sess']->doctype;
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 <?
-$query_kommune_id = "select * from kommune where KommuneNumber = '" . $_lib['storage']->db_escape($_lib['sess']->get_companydef('CompanyMunicipality')) . "'";
-$result_kommune_id = $_lib['db']->db_query($query_kommune_id);
-$kommune_id = $_lib['db']->db_fetch_object($result_kommune_id);
-if($kommune_id->KommuneID){
+if($_lib['sess']->get_companydef('CompanyMunicipalityID')){
 ?>
 <?
 
