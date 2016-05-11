@@ -700,9 +700,16 @@ class postmotpost {
         global $_lib;
 
         if($VoucherID > 0) {
+            $voucher_ids = array();
+            $query_select_ids = "SELECT IF(ChildVoucherID = $VoucherID, ParentVoucherID, ChildVoucherID) as VoucherID FROM voucherstruct WHERE ChildVoucherID = $VoucherID OR ParentVoucherID = $VoucherID";
+            $result_select_ids = $_lib['db']->db_query($query_select_ids);
+            while($row = $_lib['db']->db_fetch_object($result_select_ids)) {
+              $voucher_ids[] = $row->VoucherID;
+            }
             $query_deleteclosed = "delete from voucherstruct where ParentVoucherID=" . $VoucherID . " or ChildVoucherID=" . $VoucherID;
             //print "$query_deleteclosed<br>\n";
             $_lib['db']->db_delete($query_deleteclosed);
+            while(!empty($voucher_ids)) $this->openPost(array_pop($voucher_ids));
         } else {
             #print "openPost linjenummer ikke angitt";
         }
@@ -804,6 +811,21 @@ class postmotpost {
             $this->closedPosts[$hash2] = true;
 
             $this->closePostSQL($VoucherID, $VoucherID2);
+            switch ($info['Match']) {
+              case 'KID':
+                $ClosedWith = 'kid';
+                break;
+              case 'InvoiceID':
+                $ClosedWith = 'invoice';
+                break;
+              case 'MatchNumber':
+                $ClosedWith = 'match';
+                break;
+              default:
+                $ClosedWith = '0';
+                break;
+            }
+            $this->updateClosedWith($VoucherID, $VoucherID2, $ClosedWith);
         }
     }
 
@@ -842,7 +864,7 @@ class postmotpost {
     private function closePostSQL($ParentVoucherID, $ChildVoucherID) {
         global $_lib;
 
-        $query  = "select * from voucherstruct where ParentVoucherID='$ParentVoucherID' and ChildVoucherID='$ChildVoucherID'";
+        $query  = "select * from voucherstruct where (ParentVoucherID='$ParentVoucherID' and ChildVoucherID='$ChildVoucherID') or (ChildVoucherID='$ParentVoucherID' and ParentVoucherID='$ChildVoucherID')";
         $closed   = $_lib['storage']->get_row(array('query' => $query));
 
         if(!$closed) {
@@ -1032,6 +1054,14 @@ class postmotpost {
         $r = $_lib['db']->db_query($q);
 
         return $_lib['db']->db_fetch_assoc($r);
+    }
+
+    private function updateClosedWith($VoucherID, $VoucherID2, $ClosedWith) {
+        global $_lib;
+
+        $args = array("voucher_matched_by_$VoucherID" => $ClosedWith, "voucher_matched_by_$VoucherID2" => $ClosedWith);
+        $pk = array('voucher' => 'VoucherID');
+        $_lib['db']->db_update_multi_table($args, $pk);
     }
 }
 ?>
