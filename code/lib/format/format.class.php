@@ -383,7 +383,7 @@ class format {
             return $hash;
     }
 
-    function codeToCountry($code) 
+    function codeToCountry($code)
     {
         global $_lib;
 
@@ -665,7 +665,7 @@ class format {
   function AccountPlanIDToName($args)
   {
     $args = $this->CheckInput($args);
-  
+
     $accountplanid  = $args['value'];
     $query_accountplan    = "select AccountName from accountplan where AccountPlanID='$accountplanid'";
     $row = $this->_dbh[$this->_dsn]->get_row(array('query' => $query_accountplan));
