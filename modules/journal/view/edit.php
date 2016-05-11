@@ -396,9 +396,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th><u>P</u>rosjekt</th>
     <th><u>F</u>orfallsdato</th>
     <th>Faktura</th>
-    <th></th>
     <th><u>K</u>ID.</th>
-    <th></th>
     <th colspan="2">Te<u>k</u>st</th>
     <th>&nbsp;</th>
   </tr>
@@ -463,9 +461,8 @@ if($accountplan->EnableProject)
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-<td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="invoice" onclick="changeMatchBy(this);" <? if ($voucherHead->matched_by == 'invoice') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.KID" value="<? print $voucher_input->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-<td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="kid" onclick="changeMatchBy(this);" <? if ($voucherHead->matched_by == 'kid') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
     <td><!-- <? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucherHead->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tmp, 'accesskey' => 'E')); ?> --></td>
 
@@ -634,10 +631,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.InvoiceID"   accesskey="R" value="<? print $voucher->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-      <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="invoice" onclick="changeMatchBy(this);" <? if ($voucher->matched_by == 'invoice') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.KID"   accesskey="R" value="<? print $voucher->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-      <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="kid" onclick="changeMatchBy(this);" <? if ($voucher->matched_by == 'kid') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><!-- <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucher->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tabindex++, 'accesskey' => 'E')); ?> </td>-->
       <td><input class="voucher" type="text" size="40" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
