@@ -57,7 +57,11 @@ class salaryreport
         $this->_reportHash['account']['City']          = $this->_accountrow->City;
         $this->CalculateWorkAmount();
 
-        $this->_query = "select sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.SalaryCode";
+        if ($args['altinn_only']) {
+          $this->_query = "select sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.ActualPayDate, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.SalaryCode";
+        } else {
+          $this->_query = "select sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.SalaryCode";
+        }
         #print "$this->_query<br>\n"; 
         $this->_salaryLineHash = $_lib['storage']->get_hashhash(array('query'=>$this->_query, 'key'=>'SalaryCode'));
 
