@@ -28,12 +28,17 @@ foreach($car_milage as $milage_year => $milage) {
   $distance = $milage->EndMilage - $milage->StartMilage;
   $distance_in_miles = $distance / 10;
   $money_spent_per_mile = 0;
+  $liter_per_mile = 0;
   $money_spent_on_fuel = $_car->sumin - $_car->sumout;
-  if ($distance > 0) {
+  $price_per_liter = $milage->PricePerLiter;
+  $total_liters = 0;
+  if($price_per_liter > 0) {
+    $total_liters = $money_spent_on_fuel / $milage->PricePerLiter;  
+  }  
+  if ($distance_in_miles > 0) {
     $money_spent_per_mile = $money_spent_on_fuel / $distance_in_miles;
+    $liter_per_mile = $total_liters / $distance_in_miles;
   }
-  $total_liters = $money_spent_on_fuel / $milage->PricePerLiter;
-  $liter_per_mile = $total_liters / $distance_in_miles;
   $car_calculations[$milage_year] = array("StartMilage" => $milage->StartMilage, "EndMilage" => $milage->EndMilage,
                                           "distance" => (int)$distance, "money_spent_on_fuel" => (float)$money_spent_on_fuel,
                                           "money_spent_per_mile" => (float)$money_spent_per_mile,
