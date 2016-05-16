@@ -60,6 +60,7 @@ case 'get_balance_report': // fetch balance report from FB
   unset($_SESSION['oauth_balance_period']);
   unset($_SESSION['oauth_balance_country']);
   $fbvoting->import_transactions($AccountID, $Period, $Country);
+  if (strpos($_SESSION['oauth_tmp_redirect_back_url'], 'Period') === false) $_SESSION['oauth_tmp_redirect_back_url'] .= "&Period=" . $Period;
   redirect();
   break;
 case 'get_car_info': // fetch car info from FB
