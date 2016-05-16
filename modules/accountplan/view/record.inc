@@ -263,9 +263,12 @@ elseif($_lib['input']->getProperty('action_accountplan_delete')) {
     $message = "Kontoen er deaktivert";
 }
 elseif($_lib['input']->getProperty('action_add_scheme')) {
-    $query = sprintf("insert into accountplanscheme (`AccountPlanID`, `FakturabankSchemeID`)
-                        VALUES (%d, 0);",
-                     $AccountPlanID);
+    $select_query = sprintf("SELECT * FROM accountplan WHERE AccountPlanID = %d;", $AccountPlanID);
+    $AccountPlan = $_lib['db']->db_fetch_assoc($_lib['db']->db_query($select_query));
+    $CountryCode = $AccountPlan["CountryCode"];
+    $query = sprintf("insert into accountplanscheme (`AccountPlanID`, `FakturabankSchemeID`, `CountryCode`)
+                        VALUES (%d, 0, '%s');",
+                     $AccountPlanID, $CountryCode);
     $_lib['db']->db_query($query);
 }
 elseif($_lib['input']->getProperty('action_del_scheme')) {
