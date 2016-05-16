@@ -15,7 +15,7 @@ include('reportcodes.php');
 $year = $_GET['year'];
 
 includemodel('salary/salaryreport');
-$salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$_GET['AccountPlanID']));
+$salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$_GET['AccountPlanID'], 'altinn_only' => true));
 
 ?>
 <h1>Innberetning</h1>
