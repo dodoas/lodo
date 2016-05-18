@@ -32,7 +32,7 @@ function validate_employee($employee) {
             if(!preg_match('/^\d{11}$/', $employee->SocietyNumber)) {
                 $errors[] = "Personnr m&aring; v&aelig;re 11 siffer.";
             } else if (!validate_id_number_with_mod11($employee->SocietyNumber)) {
-                $errors[] = "Personnr m&aring; v&aelig;re gyldig.";
+                $errors[] = "Personnr m&aring; v&aelig;re gyldig mod11.";
             }
         }
 
@@ -40,7 +40,7 @@ function validate_employee($employee) {
             if (!preg_match('/^\d{11}$/', $employee->IDNumber)) {
                 $errors[] = "ID nummer m&aring; v&aelig;re 11 siffer.";
             } else if (!validate_id_number_with_mod11($employee->IDNumber)) {
-                $errors[] = "ID nummer m&aring; v&aelig;re gyldig.";
+                $errors[] = "ID nummer m&aring; v&aelig;re gyldig mod11.";
             }
         }
     }
