@@ -18,7 +18,7 @@ if($_lib['input']->getProperty('action_car_update')) {
   #print_r($_POST);
   #print_r($primarykey);
   for($milage_year = $car_purchase_year; $milage_year <= $_year; $milage_year++) {
-    $post_values = array("carmilage_StartMilage" => $_POST["carmilage_StartMilage_$milage_year"], "carmilage_EndMilage" => $_POST["carmilage_EndMilage_$milage_year"]);
+    $post_values = array("carmilage_StartMilage" => $_POST["carmilage_StartMilage_$milage_year"], "carmilage_EndMilage" => $_POST["carmilage_EndMilage_$milage_year"], "carmilage_PricePerLiter" => $_POST["carmilage_PricePerLiter_$milage_year"]);
     $_lib['db']->db_update_hash($post_values, 'carmilage', array("CarID" => $CarID, "MilageYear" => $milage_year));
   }
   $_lib['db']->db_update_hash($_POST, $db_table, $primarykey);

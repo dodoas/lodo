@@ -76,6 +76,7 @@ includemodel('salary/salaryreport');
 include('reportcodes.php');
 
 printf("<h1>%s - L&oslash;nnsrapport for %d</h1>", $_lib['sess']->get_companydef('CompanyName'), $year);
+printf("<p>Utvalgskriterie er p&aring; grunnlag av altinndato p&aring; hver l&oslash;nnsslipp</p>");
 
 /*
  * Detaljetabellen
@@ -110,8 +111,8 @@ $employees_r = $_lib['db']->db_query($employees_q);
 while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     $salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$employee['AccountPlanID']));
 
-    $query = sprintf("SELECT VoucherID FROM voucher WHERE VoucherType = 'L' AND AccountPlanID = '%d' AND VoucherPeriod >= '%d-01' AND VoucherPeriod < '%d-01'",
-                     $employee['AccountPlanID'], $year, $year + 1);
+    $query = sprintf("SELECT VoucherID FROM voucher WHERE VoucherType = 'L' AND AccountPlanID = '%d' AND JournalID IN (SELECT JournalID FROM salary WHERE ActualPayDate LIKE '%d-%%')",
+                     $employee['AccountPlanID'], $year);
     if($_lib['db']->get_row(array('query' => $query)) == false) {
         continue;
     }
@@ -148,7 +149,7 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
         $all_reports[] = $report_line;
     }
 
-    $query = sprintf("SELECT SalaryID FROM salary WHERE PayDate >= '%d-01-01' AND PayDate < '%d-01-01'",
+    $query = sprintf("SELECT SalaryID FROM salary WHERE ActualPayDate >= '%d-01-01' AND ActualPayDate < '%d-01-01'",
                      $year, $year + 1);
     if($_lib['db']->get_row(array('query' => $query)) == false) {
         continue;
@@ -178,7 +179,7 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
             }
         }
         else {
-            printf("<td></td><td></td>");
+            printf("<td></td><td></td><td></td>");
         }
 
         if($i < $no_lines) {
