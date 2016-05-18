@@ -5,6 +5,8 @@ includelogic("accountplan/scheme");
 function validate_employee($employee) {
     global $_lib;
 
+    if(!$employee->AccountPlanID) return null;
+    
     $errors = array();
     if(empty($employee->FirstName)) {
         $errors[] = "Fornavn kan ikke v&aelig;re blank.";
