@@ -1,5 +1,8 @@
 <?
 $CustomerAccountPlanID  = (int) $_POST["invoiceout_CustomerAccountPlanID_$InvoiceID"];
+if ($CustomerAccountPlanID == 0 && $InvoiceID) {
+  $CustomerAccountPlanID = $_lib['storage']->get_row(array('query' => 'SELECT CustomerAccountPlanID FROM invoiceout WHERE InvoiceID = ' . $InvoiceID))->CustomerAccountPlanID;
+}
 $VoucherType            = 'S';
 
 #print_r($_SERVER);

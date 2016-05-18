@@ -312,7 +312,7 @@ class invoice {
         'SZipCode' => "Leverandør porstnr",
         'IName' => "Kunde navn",
         'ICity' => "Kunde by",
-        'IZipCode' => "Kunde portnr",
+        'IZipCode' => "Kunde postnr",
         'CustomerAddressArray' => "Telefon, Mobil, Fax eller Email.",
         'DueDate' => "Forfallsdato",
         'SBankAccount' => "Bankkonto",
@@ -346,7 +346,7 @@ class invoice {
         if (!$is_set) {
           $ready_to_send = false;
           if ($is_array) $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray'];
-          else $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name] . ' field.';
+          else $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name];
         }
       }
       # if no invoice lines
