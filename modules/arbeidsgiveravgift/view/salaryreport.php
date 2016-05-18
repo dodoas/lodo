@@ -1,7 +1,7 @@
 <?
 
 includemodel('salary/salaryreport');
-$salaryreport = new salaryreport(array('year'=>$_REQUEST['report_Year'], 'employeeID'=>$_REQUEST['report_Employee']));
+$salaryreport = new salaryreport(array('year'=>$_REQUEST['report_Year'], 'employeeID'=>$_REQUEST['report_Employee'], 'altinn_only'=>true));
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
