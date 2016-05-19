@@ -5,6 +5,8 @@
 
 class model_tablemetadata_tablemetadata {
 
+    private $system_dbs = array('lodo', 'LODO', 'mysql', 'test', 'information_schema', 'performance_schema', 'phpmyadmin');
+
     function __construct() {
     }
 
@@ -44,7 +46,7 @@ class model_tablemetadata_tablemetadata {
             $tablefilter = $args['tablefilter'];
         }
 
-        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
+        $system_dbs = $this->system_dbs;
 
         $query_show = "show databases";
         $result     = $_lib['db']->db_query($query_show);
@@ -71,7 +73,7 @@ class model_tablemetadata_tablemetadata {
 
         global $_lib;
 
-        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
+        $system_dbs = $this->system_dbs;
 
         if (!is_file($scriptpath)) {
             print "File $scriptpath not found.\n";
@@ -82,8 +84,19 @@ class model_tablemetadata_tablemetadata {
 
         $script = file_get_contents($scriptpath);
 
-        
-        $params['commands'] = explode(';', $script);
+        // separate full path by / and reverse to get script_name as first element
+        $tmp = array_reverse(explode('/', $scriptpath));
+        // separate script_name by _ and get script_number as first element
+        $tmp = explode('_', $tmp[0]);
+        $script_number = (int) $tmp[0];
+        $commands = explode(';', $script);
+        // replace next two lines with the comented out ones below after the
+        // migration 133_create_migrations_table.sql is run
+        $commands_before = array();
+        $commands_after = array();
+        // $commands_before = array("INSERT INTO migrations (MigrationID, MigrationName) VALUES ($script_number, '$scriptpath')");
+        // $commands_after = array("UPDATE migrations SET Status = 'OK', SucceededAt = NOW() WHERE MigrationID = $script_number AND MigrationName = '$scriptpath'");
+        $params['commands'] = array_merge($commands_before, $commands, $commands_after);
         # use default login values, assuming all dbs have same login values
         # in the future we might load setup files instead
         $params['db_server'] = $_SETUP['DB_SERVER_DEFAULT'];
@@ -151,7 +164,7 @@ class model_tablemetadata_tablemetadata {
     
                 $result = mysqli_query($db_link, $query);
                 if (!$result) {
-                    print "Dbname: $db_name, db_query: $query. <br>\nBad query: " . mysqli_error($db_link) . "<br />\n.\n";
+                    print "Dbname: $db_name, db_query: $query. \nBad query: " . mysqli_error($db_link) . "\n.\n";
                     return false;
                 } else {
                     print "Query successful.\n";
