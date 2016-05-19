@@ -5,6 +5,8 @@ includelogic("accountplan/scheme");
 function validate_employee($employee) {
     global $_lib;
 
+    if(!$employee->AccountPlanID) return null;
+    
     $errors = array();
     if(empty($employee->FirstName)) {
         $errors[] = "Fornavn kan ikke v&aelig;re blank.";
@@ -28,16 +30,43 @@ function validate_employee($employee) {
     if(empty($employee->SocietyNumber) && empty($employee->IDNumber)) {
         $errors[] = "Enten Personnr eller ID nummer p&aring; v&aelig;re der.";
     } else {
-        if(!empty($employee->SocietyNumber) && !preg_match('/^\d{11}$/', $employee->SocietyNumber)) {
-            $errors[] = "Personnr m&aring; v&aelig;re 11 siffer.";
+        if(!empty($employee->SocietyNumber)) {
+            if(!preg_match('/^\d{11}$/', $employee->SocietyNumber)) {
+                $errors[] = "Personnr m&aring; v&aelig;re 11 siffer.";
+            } else if (!validate_id_number_with_mod11($employee->SocietyNumber)) {
+                $errors[] = "Personnr m&aring; v&aelig;re gyldig mod11.";
+            }
         }
 
-        if(!empty($employee->IDNumber) && !preg_match('/^\d{11}$/', $employee->IDNumber)) {
-            $errors[] = "ID nummer m&aring; v&aelig;re 11 siffer.";
+        if(!empty($employee->IDNumber)) {
+            if (!preg_match('/^\d{11}$/', $employee->IDNumber)) {
+                $errors[] = "ID nummer m&aring; v&aelig;re 11 siffer.";
+            } else if (!validate_id_number_with_mod11($employee->IDNumber)) {
+                $errors[] = "ID nummer m&aring; v&aelig;re gyldig mod11.";
+            }
         }
     }
 
     return $errors;
+}
+
+function validate_id_number_with_mod11($number) { // must take a string
+    $digit_10_weights = array(3, 7, 6, 1, 8, 9, 4, 5, 2);
+    $digit_11_weights = array(5, 4, 3, 2, 7, 6, 5, 4, 3, 2);
+
+    $temp_sum = 0;
+    for($i=0; $i<9; $i++) {
+        $temp_sum += $number[$i] * $digit_10_weights[$i];
+    }
+    if($number[9] != (-$temp_sum)%11 + 11) return false;
+
+    $temp_sum = 0;
+    for($i=0; $i<10; $i++) {
+        $temp_sum += $number[$i] * $digit_11_weights[$i];
+    }
+    if($number[10] != (-$temp_sum)%11 + 11) return false;
+
+    return true;
 }
 
 function clean_org_number($orgnr) {
@@ -263,9 +292,12 @@ elseif($_lib['input']->getProperty('action_accountplan_delete')) {
     $message = "Kontoen er deaktivert";
 }
 elseif($_lib['input']->getProperty('action_add_scheme')) {
-    $query = sprintf("insert into accountplanscheme (`AccountPlanID`, `FakturabankSchemeID`)
-                        VALUES (%d, 0);",
-                     $AccountPlanID);
+    $select_query = sprintf("SELECT * FROM accountplan WHERE AccountPlanID = %d;", $AccountPlanID);
+    $AccountPlan = $_lib['db']->db_fetch_assoc($_lib['db']->db_query($select_query));
+    $CountryCode = $AccountPlan["CountryCode"];
+    $query = sprintf("insert into accountplanscheme (`AccountPlanID`, `FakturabankSchemeID`, `CountryCode`)
+                        VALUES (%d, 0, '%s');",
+                     $AccountPlanID, $CountryCode);
     $_lib['db']->db_query($query);
 }
 elseif($_lib['input']->getProperty('action_del_scheme')) {
