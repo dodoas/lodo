@@ -590,7 +590,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td>
         <?
 	if(!$row->Locked) {
-		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'tabindex' => $tabindex++, 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?'));
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'tabindex' => $tabindex++, 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?', 'disabled' => !$ready_to_send_to_fb));
 	};
 
         ?>
@@ -604,7 +604,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             echo "Firma ID: ".  $firma_id . "<br />";
 
             if(!$firma_id_missing)
-                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 'tabindex' => $tabindex++,'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 'tabindex' => $tabindex++,'value'=>'Fakturabank (F)', 'accesskey'=>'F', 'disabled' => !$ready_to_send_to_fb));
             else
                 print "Mangler firma id ";
         }
@@ -619,8 +619,18 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             print "Faktura l&aring;st";
         }
 
-
+        if (!empty($error_messages)) {
         ?>
+    <tr>
+      <td colspan='7'>
+        <div class='warning'>
+          <? foreach($error_messages as $error_message) print $error_message . '<br/>'; ?>
+        <div>
+      </td>
+    </tr>
+<?
+        }
+?>
 </form>
     <tr>
       <td></td>

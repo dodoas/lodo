@@ -15,7 +15,7 @@ class message
   function add($args) {
     if(!is_array($args)) { $args = array('message' => $args); }
   
-  	if ($args['message'] != "")
+    if ($args['message'] != "" && (strpos($this->_message, $args['message']) === false))
     	$this->_message .= $args['message'] . "<br />\n";
   }
 
