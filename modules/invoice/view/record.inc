@@ -1,5 +1,8 @@
 <?
 $CustomerAccountPlanID  = (int) $_POST["invoiceout_CustomerAccountPlanID_$InvoiceID"];
+if ($CustomerAccountPlanID == 0 && $InvoiceID) {
+  $CustomerAccountPlanID = $_lib['storage']->get_row(array('query' => 'SELECT CustomerAccountPlanID FROM invoiceout WHERE InvoiceID = ' . $InvoiceID))->CustomerAccountPlanID;
+}
 $VoucherType            = 'S';
 
 #print_r($_SERVER);
@@ -92,19 +95,8 @@ elseif($_lib['input']->getProperty('action_invoice_newonthis')) {
     $invoice->init(array());
     $InvoiceID = $invoice->copy($_POST);
 }
-elseif($_lib['input']->getProperty('action_invoice_fakturabanksend')) {
-    $invoice->init(array());
-    if ($invoice->fakturabank_send_precheck()) {
-      $_SESSION['oauth_action'] = 'send_invoice';
-      $invoice->fakturabank_send();
-    }
-}
 elseif($_lib['input']->getProperty('action_invoice_fakturabankjournal')) {
     $invoice->fakturabankjournal();
-}
-elseif($_lib['input']->getProperty('action_invoice_lock')) {
-    $invoice->init(array());
-    $invoice->lock();
 }
 elseif($_lib['input']->getProperty('action_save_internal')) {
     $comment = "";
@@ -122,6 +114,29 @@ elseif($_lib['input']->getProperty('action_save_internal')) {
     $_lib['db']->db_query($query);
     $header = "Location: lodo.php?t=invoice.edit&inline=show&InvoiceID=".$InvoiceID;
     header ($header);
+}
+
+$ready_to_send_to_fb = false;
+$error_messages = array();
+if($_lib['input']->getProperty('InvoiceID')) {
+  $invoice->init(array());
+  list($ready_to_send_to_fb, $error_messages) = $invoice->fakturabank_send_precheck();
+}
+
+if($_lib['input']->getProperty('action_invoice_fakturabanksend') || $_lib['input']->getProperty('action_invoice_lock')) {
+  foreach($error_messages as $error_message) $_lib['message']->add(array('message' => $error_message));
+}
+
+if($_lib['input']->getProperty('action_invoice_lock')) {
+    if ($ready_to_send_to_fb) {
+      $invoice->lock();
+    }
+}
+elseif($_lib['input']->getProperty('action_invoice_fakturabanksend')) {
+    if ($ready_to_send_to_fb) {
+      $_SESSION['oauth_action'] = 'send_invoice';
+      $invoice->fakturabank_send();
+    }
 }
 
 ?>

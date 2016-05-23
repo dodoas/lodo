@@ -405,7 +405,7 @@ print $_lib['sess']->doctype ?>
 <input type="hidden" name="report.Type" value="reskontro">
 <input type="hidden" name="report.Sort" value="VoucherDate">
 
-<tr>
+<tr class="r0">
     <td>Terminoppgave skattetrekk og arbeidsgiveravgift</td>
     <td>Fra periode</td>
     <td>
@@ -422,7 +422,7 @@ print $_lib['sess']->doctype ?>
 </tr>
 </form>
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.salaryreport" method="post" target="_blank">
-<tr class="r0">
+<tr>
     <td>L&oslash;nns- og trekkoppgave for</td>
     <td>Velg &aring;r</td>
     <td>
@@ -470,7 +470,7 @@ print $_lib['sess']->doctype ?>
 </form>
 
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=feriepenger.feriepenger" method="post" target="_blank">
-<tr>
+<tr class="r0">
     <td>Avsettning feriepenger og arbeidsgiver avgift</td>
     <td>Velg &aring;r</td>
     <td>
@@ -483,7 +483,7 @@ print $_lib['sess']->doctype ?>
 </form>
 
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=timesheets.report_proxy" method="post" target="_blank">
-<tr class="r0">
+<tr>
     <td>Prosjektsrapport</td>
     <td>Prosjekt</td>
     <td><?
