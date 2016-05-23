@@ -492,11 +492,11 @@ class postmotpost {
       $this->total['diff']->FAmountIn  = $this->total['account']->FAmountIn   - $this->total['total']->FAmountIn;
       $this->total['diff']->FAmountOut = $this->total['account']->FAmountOut  - $this->total['total']->FAmountOut;
 
-      $this->total['diff']->Diff       = $this->total['diff']->AmountIn    - $this->total['diff']->AmountOut;
-      $this->total['diff']->FDiff      = $this->total['diff']->FAmountIn   - $this->total['diff']->FAmountOut;
+      $this->total['diff']->Diff       = round($this->total['diff']->AmountIn    - $this->total['diff']->AmountOut, 2);
+      $this->total['diff']->FDiff      = round($this->total['diff']->FAmountIn   - $this->total['diff']->FAmountOut, 2);
 
-      $this->total['account']->Diff    = $this->total['account']->AmountIn    - $this->total['account']->AmountOut;
-      $this->total['account']->FDiff   = $this->total['account']->FAmountIn   - $this->total['account']->FAmountOut;
+      $this->total['account']->Diff    = round($this->total['account']->AmountIn    - $this->total['account']->AmountOut, 2);
+      $this->total['account']->FDiff   = round($this->total['account']->FAmountIn   - $this->total['account']->FAmountOut, 2);
     }
 
     function markAsUsed() {

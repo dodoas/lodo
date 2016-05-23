@@ -249,9 +249,9 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
             <tr>
                 <th class="sub" colspan="4">Sum for konto <? print $AccountPlanID ?></th>
                 <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
-                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  < 0)  { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
-                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn  > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn) ; } ?></th>
-                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountOut > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountOut); } ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  < 0 ) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FDiff); } ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->FDiff < 0 ) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FDiff); } ?></th>
                 <th class="sub" colspan="13"></th>
             </tr>
             <? } ?>
@@ -273,28 +273,28 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 <td colspan="19"></td>
             </tr>
             <tr class="voucher">
-                <th class="sub" colspan="6">Sum &aring;pne poster</th>
-                <th class="sub number"><nobr><? if($postmotpost->total['total']->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->total['total']->Diff);  }; ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['total']->Diff  < 0)  { print $_lib['format']->Amount($postmotpost->total['total']->Diff);  }; ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['total']->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->total['total']->FDiff); }; ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['total']->FDiff < 0)  { print $_lib['format']->Amount($postmotpost->total['total']->FDiff); }; ?></nobr></th>
-                <th class="sub" colspan="10"></th>
+                <th class="sub" colspan="4">Sum &aring;pne poster</th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['total']->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->total['total']->Diff);  }; ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['total']->Diff  < 0)  { print $_lib['format']->Amount($postmotpost->total['total']->Diff);  }; ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['total']->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->total['total']->FDiff); }; ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['total']->FDiff < 0)  { print $_lib['format']->Amount($postmotpost->total['total']->FDiff); }; ?></nobr></th>
+                <th class="sub" colspan="12"></th>
             </tr>
             <tr>
-                <th class="sub" colspan="6"><? print $postmotpost->total['account']->Name ?></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['account']->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->total['account']->Diff);       } ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['account']->Diff  < 0 ) { print $_lib['format']->Amount($postmotpost->total['account']->Diff);  } ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['account']->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->total['account']->FDiff);      } ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['account']->FDiff < 0 ) { print $_lib['format']->Amount($postmotpost->total['account']->FDiff); } ?></nobr></th>
-                <th class="sub" colspan="10"></th>
+                <th class="sub" colspan="4"><? print $postmotpost->total['account']->Name ?></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['account']->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->total['account']->Diff);  } ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['account']->Diff  < 0 ) { print $_lib['format']->Amount($postmotpost->total['account']->Diff);  } ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['account']->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->total['account']->FDiff); } ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['account']->FDiff < 0 ) { print $_lib['format']->Amount($postmotpost->total['account']->FDiff); } ?></nobr></th>
+                <th class="sub" colspan="12"></th>
             </tr>
             <tr>
-                <th class="sub" colspan="6"><? print $postmotpost->total['diff']->Name ?></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['diff']->Diff >= 0) { print $_lib['format']->Amount($postmotpost->total['diff']->Diff);      } ?></nobr></th>
-                <th class="sub number"><nobr><? if($postmotpost->total['diff']->Diff < 0 ) { print $_lib['format']->Amount($postmotpost->total['diff']->Diff); } ?></nobr></th>
+                <th class="sub" colspan="4"><? print $postmotpost->total['diff']->Name ?></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['diff']->Diff >= 0) { print $_lib['format']->Amount($postmotpost->total['diff']->Diff); } ?></nobr></th>
+                <th class="sub number align-right"><nobr><? if($postmotpost->total['diff']->Diff < 0 ) { print $_lib['format']->Amount($postmotpost->total['diff']->Diff); } ?></nobr></th>
                 <th class="sub"></th>
                 <th class="sub"></th>
-                <th class="sub" colspan="10"></th>
+                <th class="sub" colspan="12"></th>
             </tr>
             <tr class="voucher">
                 <th class="sub" colspan="17"></th>
