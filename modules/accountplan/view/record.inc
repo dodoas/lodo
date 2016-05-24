@@ -1,6 +1,7 @@
 <?
 includelogic('fakturabank/fakturabank');
 includelogic("accountplan/scheme");
+includelogic('workrelation/workrelation');
 
 function validate_employee($employee) {
     global $_lib;
@@ -295,6 +296,18 @@ elseif($_lib['input']->getProperty('action_save_scheme')) {
 elseif($_lib['input']->getProperty('action_refresh_sheme')) {
   $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
   $schemeControl->refreshSchemes();
+}
+elseif($_lib['input']->getProperty('action_work_relation_delete')) {
+  $workrelation_id = $_POST['workrelation_WorkRelationID'];
+  $query = sprintf("DELETE FROM workrelation WHERE WorkRelationID = %d", $workrelation_id);
+  $_lib['db']->db_query($query);
+}
+elseif($_lib['input']->getProperty('action_work_relation_add')) {
+  $query = "INSERT INTO workrelation(AccountPlanID) VALUES($AccountPlanID)";
+  $_lib['db']->db_update($query);
+}
+elseif($_lib['input']->getProperty('action_work_relation_save')) {
+    $_lib['storage']->db_update_multi_table($_POST, array('workrelation' => 'WorkRelationID'));
 }
 
 ?>

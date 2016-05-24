@@ -385,6 +385,82 @@ if(!empty($validation_errors)) {
   <? } ?>
 </table>
 </form>
+<br/><br/>
+
+<?
+$query_wr_ids = "SELECT WorkRelationID FROM workrelation WHERE AccountPlanID = $AccountPlanID";
+$wr_ids_hash = $_lib['db']->get_hash(array('query' => $query_wr_ids, 'key' => 'WorkRelationID', 'value' => 'WorkRelationID'));
+$wr_ids = array_keys($wr_ids_hash);
+for($i = 0; $i < count($wr_ids); $i++) {
+  for($j = $i + 1; $j < count($wr_ids); $j++) {
+    $FirstID = $wr_ids[$i];
+    $SecondID = $wr_ids[$j];
+    if (CheckIfWorkRelationsOverlap($_REQUEST, $FirstID, $SecondID)) $_lib['message']->add("Arbeidsforhold $FirstID og $SecondID overlapper!");
+  }
+}
+print $_lib['message']->get();
+$db_table2 = 'workrelation';
+?>
+<form name="work_relations" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
+<table class="lodo_data">
+  <tr class="result">
+    <th colspan="13">Arbeidsforhold</th>
+  </tr>
+  <tr>
+    <td class="menu">ID</td>
+    <td class="menu">Ansatt ved</td>
+    <td class="menu">Arbeid start</td>
+    <td class="menu">Arbeid slutt</td>
+    <td class="menu">Yrke</td>
+    <td class="menu">Samme posisjon siden</td>
+    <td class="menu">Arbeidstid</td>
+    <td class="menu">Skifttype</td>
+    <td class="menu">Ansettelsestype</td>
+    <td class="menu">Stillingsprosent</td>
+    <td class="menu">Timer hver uke ved full stilling</td>
+    <td class="menu">Kommune</td>
+    <td class="menu"></td>
+  </tr>
+<?
+$query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID";
+$result_work_relations = $_lib['db']->db_query($query_work_relations);
+while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
+  $WorkRelationID = $work_relation->WorkRelationID;
+?>
+  <tr>
+    <td><? print $work_relation->WorkRelationID; ?></td>
+    <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table2, 'field'=>'SubcompanyID', 'value'=>$work_relation->SubcompanyID, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkStart', 'value'=>$work_relation->WorkStart, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkStop', 'value'=>$work_relation->WorkStop, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table2, 'field'=>'OccupationID', 'value'=>$work_relation->OccupationID, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'InCurrentPositionSince', 'value'=>$work_relation->InCurrentPositionSince, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> $db_table2, 'field'=>'WorkTimeScheme', 'value'=>$work_relation->WorkTimeScheme, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> $db_table2, 'field'=>'ShiftType', 'value'=>$work_relation->ShiftType, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> $db_table2, 'field'=>'TypeOfEmployment', 'value'=>$work_relation->TypeOfEmployment, 'pk'=> $WorkRelationID, 'width' => 32, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkPercent', 'value'=>$work_relation->WorkPercent, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkMeasurement', 'value'=>$work_relation->WorkMeasurement, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table2, 'field'=>'KommuneID', 'value'=>$work_relation->KommuneID, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><input type="submit" value="Slett" name="action_work_relation_delete"></td>
+  </tr>
+<?
+}
+if($_lib['sess']->get_person('AccessLevel') >= 2) {
+?>
+  <tr>
+    <? print $_lib['form3']->hidden(array('name'=>'accountplan_AccountPlanID', 'value'=>$AccountPlanID)) ?>
+    <? print $_lib['form3']->hidden(array('name'=>'accountplan_AccountPlanType', 'value'=>$AccountPlanType)) ?>
+    <td>
+      <input type="submit" value="Lagre arbeidsforhold" name="action_work_relation_save">
+    </td>
+    <td colspan="12" align="right">
+      <input type="submit" value="Add work relation" name="action_work_relation_add">
+    </td>
+  </tr>
+<?
+}
+?>
+</table>
+</form>
 <? includeinc('bottom') ?>
 </body>
 </html>
