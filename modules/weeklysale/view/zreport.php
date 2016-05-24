@@ -92,16 +92,16 @@ $weeklysale->presentation();
             $diffsum      = $sumrevenue - $weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID];
             ?>
             <td class="menu">Kontant</td><td class="number"><? print $_lib['format']->Amount($weeklysale->revenuehead['sumcash'][$line->ParentWeeklySaleDayID]) ?></td></tr>
+            <tr><td class="menu">Sum</td><td class="number"><? print $_lib['format']->Amount($sumrevenue) ?></td></tr>
             <?
               if ($line->Locked) {
                 $locked_by_at =  $_lib['format']->PersonIDToName($line->PersonID) . ", " . $line->TS;
             ?>
-            <tr><td class="menu">Optelt</td><td class="number"><? print $line->ActuallyCashAmount; ?></td></tr>
+            <tr><td class="menu">Opptelt</td><td class="number"><? print $_lib['format']->Amount($line->ActuallyCashAmount); ?></td></tr>
             <tr><td class="menu">Telt av</td><td class="number"><? print $locked_by_at; ?></td></tr>
             <?
               }
-            ?>
-            <tr><td class="menu">Sum</td><td class="number"><? print $_lib['format']->Amount($sumrevenue) ?></td></tr>
+            ?>            
         <? } ?>            
     </table>
     </fieldset>
