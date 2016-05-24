@@ -1513,9 +1513,10 @@ class accounting {
             $this->postmotpost->openPost($VoucherID);
         }
 
-        ########################################
-        #Åpne postene hvis beløpet endrer seg
-        if($fields['voucher_AmountIn'] != $voucher->AmountIn || $fields['voucher_AmountOut'] != $voucher->AmountOut) {
+        // Open voucher/Unlock if anything of the following differs:
+        // Amounts(In/Out), InvoiceID, KID, matched_by
+        if(round($fields['voucher_AmountIn'], 2) != round($voucher->AmountIn, 2) || round($fields['voucher_AmountOut'], 2) != round($voucher->AmountOut, 2) ||
+          $fields['voucher_InvoiceID'] != $voucher->InvoiceID || $fields['voucher_KID'] != $voucher->KID || $fields['voucher_matched_by'] != $voucher->matched_by) {
             $this->postmotpost->openPost($VoucherID);
         }
 
