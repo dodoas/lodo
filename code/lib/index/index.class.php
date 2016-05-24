@@ -203,6 +203,9 @@ require_once($_SETUP['HOME_DIR'] . "/code/lib/form/form_elements3.class.php"); #
 require_once($_SETUP['HOME_DIR'] . "/code/lib/form/form.class.php");         #only hash parameters
 #require_once($_SETUP['HOME_DIR'] . "/code/lib/gui/list_procedures_2.3.inc");
 
+require_once($_SETUP['HOME_DIR'] . "/code/lib/validation/validation.class.php");
+$_lib['validation'] = $_validation = new validation();
+
 require_once($_SETUP['HOME_DIR'] . "/code/lib/message/message.class.php");
 $_lib['message']    = new message(array('dbserver'=> $_SETUP['DB_SERVER']['0'], 'dbname' => $_SESSION['DB_NAME']));
 $_lib['message']->add(array('message' => $_REQUEST['message']));
