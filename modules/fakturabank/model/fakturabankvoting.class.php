@@ -169,37 +169,46 @@ class lodo_fakturabank_fakturabankvoting {
 
     public function save_bank_statement($bank_statement, $account_id, $period) {
         global $_lib;
-        $result = $_lib['db']->db_query(sprintf("SELECT count(*) FROM accountextras WHERE AccountID = %d AND Period = '%s'",
-                                        $account_id, $period));
+        $query = sprintf("SELECT * FROM accountextras WHERE AccountID = %d AND Period = '%s'",
+                                        $account_id, $period);
 
-        $count = $_lib['db']->fetch_row($result);
+        $account_extra_row = $_lib['db']->get_row(array("query" => $query));
 
-        if ($count[0] == 0) {
-            $start_amount = $_lib['convert']->Amount($bank_statement->{"start-amount"});
-            $end_amount = $_lib['convert']->Amount($bank_statement->{"end-amount"});
+        $start_amount = $_lib['convert']->Amount($bank_statement->{"start-amount"});
+        $end_amount = $_lib['convert']->Amount($bank_statement->{"end-amount"});
 
-            if ($start_amount <= 0) {
-                $extra_entry_in = 0;
-                $extra_entry_out = abs($start_amount);
-            } else {
-                $extra_entry_in = abs($start_amount);
-                $extra_entry_out = 0;
-            }
+        if ($start_amount <= 0) {
+            $extra_entry_in = 0;
+            $extra_entry_out = abs($start_amount);
+        } else {
+            $extra_entry_in = abs($start_amount);
+            $extra_entry_out = 0;
+        }
 
-            if ($end_amount <= 0) {
-                $extra_last_in = 0;
-                $extra_last_out = abs($end_amount);
-            } else {
-                $extra_last_in = abs($end_amount);
-                $extra_last_out = 0;
-            }
+        if ($end_amount <= 0) {
+            $extra_last_in = 0;
+            $extra_last_out = abs($end_amount);
+        } else {
+            $extra_last_in = abs($end_amount);
+            $extra_last_out = 0;
+        }
 
+        if (!$account_extra_row) {            
             $q = sprintf("INSERT INTO accountextras
               (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`, `JournalID`)
             VALUES
               ('%d', '%s', '%s', '%s', '%s', '%s', '%d');
             ",
                  $account_id, $period, $extra_entry_in, $extra_entry_out, $extra_last_in, $extra_last_out, 0);
+
+            $_lib['db']->db_query($q);
+        } elseif ($account_extra_row->BankEntryIn == 0 && $account_extra_row->BankEntryOut == 0 && $account_extra_row->BankLastIn == 0 && $account_extra_row->BankLastOut == 0) {
+            $q = sprintf("REPLACE INTO accountextras
+              (`AccountExtrasID`, `AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`, `JournalID`)
+            VALUES
+              ('%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d');
+            ",
+                 $account_extra_row->AccountExtrasID, $account_id, $period, $extra_entry_in, $extra_entry_out, $extra_last_in, $extra_last_out, $account_extra_row->JournalID);
 
             $_lib['db']->db_query($q);
         }
