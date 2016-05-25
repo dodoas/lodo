@@ -68,6 +68,7 @@ class altinn_report {
  * org_number, name check based on the type
  */
   function checkIfEmpty($field, $error_message, $type = 'string') {
+    global $_lib;
     if ($type == 'string') $is_empty = empty($field);
     elseif ($type == 'date') $is_empty = strstr($field, '0000-00-00');
     elseif ($type == 'number') $is_empty = empty($field) || ($field == 0);
@@ -75,6 +76,7 @@ class altinn_report {
     elseif ($type == 'org_number') $is_empty = !preg_match('/^([0-9]{9})$/', $field);
     elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåäöÆØÅÄÖ\s]+)$/'), utf8_encode($field));
     elseif ($type == 'boolean') $is_empty = $field;
+    elseif ($type == 'personal_number') $is_empty = !$_lib['validation']->mod11_personal($field);
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -242,9 +244,12 @@ class altinn_report {
     $forskuddstrekk = 0.0;
 
     // norwegian id for the employee, personal id number
-    $society_number = $employee->SocietyNumber;
+    $society_number = $employee->SocietyNumber; // check personal id
     // Error is: Personal ID number(society number) not set for employee ' . self::fullNameForErrorMessage($employee)
-    self::checkIfEmpty($society_number, 'Ansatt: Mangler personnummer for ' . self::fullNameForErrorMessage($employee));
+    $society_number_is_empty = self::checkIfEmpty($society_number, 'Ansatt: Mangler personnummer for ' . self::fullNameForErrorMessage($employee));
+    // Error is: Personal ID must be valid by mod11
+    if(!$society_number_is_empty) self::checkIfEmpty($society_number, "Ansatt: Personnr m&aring; v&aelig;re gyldig mod11 for " . self::fullNameForErrorMessage($employee), 'personal_number');
+
     $inntektsmottaker['inntektsmottaker']['norskIdentifikator'] = $society_number;
     // name and birthdate
     $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon'] = array();
