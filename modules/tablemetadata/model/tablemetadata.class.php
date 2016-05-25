@@ -65,7 +65,7 @@ class model_tablemetadata_tablemetadata {
 
     function runscriptall($args) {
         if (empty($args['scriptpath'])) {
-            print "Missing scriptpath argument.\n";
+            print "Missing scriptpath argument.<br>";
             return false;
         }
 
@@ -76,13 +76,16 @@ class model_tablemetadata_tablemetadata {
         $system_dbs = $this->system_dbs;
 
         if (!is_file($scriptpath)) {
-            print "File $scriptpath not found.\n";
+            print "File $scriptpath not found.<br>";
             return false;
         }
 
         global $_SETUP;
 
         $script = file_get_contents($scriptpath);
+
+        // remove the home directory if there is any
+        $scriptpath = preg_replace('/.*db\/changes\//', 'db/changes/', $scriptpath);
 
         // separate full path by / and reverse to get script_name as first element
         $tmp = array_reverse(explode('/', $scriptpath));
@@ -94,7 +97,7 @@ class model_tablemetadata_tablemetadata {
         // migration 133_create_migrations_table.sql is run
         $commands_before = array();
         $commands_after = array();
-        // $commands_before = array("INSERT INTO migrations (MigrationID, MigrationName) VALUES ($script_number, '$scriptpath')");
+        // $commands_before = array("REPLACE INTO migrations (MigrationID, MigrationName) VALUES ($script_number, '$scriptpath')");
         // $commands_after = array("UPDATE migrations SET Status = 'OK', SucceededAt = NOW() WHERE MigrationID = $script_number AND MigrationName = '$scriptpath'");
         $params['commands'] = array_merge($commands_before, $commands, $commands_after);
         # use default login values, assuming all dbs have same login values
@@ -103,17 +106,23 @@ class model_tablemetadata_tablemetadata {
         $params['db_user'] = $_SETUP['DB_USER_DEFAULT']; 
         $params['db_password'] = $_SETUP['DB_PASSWORD_DEFAULT'];
 
-        $query_show = "show databases";
-        $result     = $_lib['db']->db_query($query_show);
-        $i = 0;
-        while ($row = $_lib['db']->db_fetch_object($result)) {
-            if (in_array($row->Database, $system_dbs)) {
-                continue;
-            }
+        if (!$args['db_name']) {
+            $query_show = "show databases";
+            $result     = $_lib['db']->db_query($query_show);
+            $i = 0;
+            while ($row = $_lib['db']->db_fetch_object($result)) {
+                if (in_array($row->Database, $system_dbs)) {
+                    continue;
+                }
 
-            print "Kjører script på: $row->Database\n";
-            $params['db_name'] = $row->Database;
-            $this->runscriptondb($params);
+                print "Kjører script på: $row->Database<br>";
+                $params['db_name'] = $row->Database;
+                $this->runscriptondb($params);
+            }
+        } else {
+            print "Kjører script på: ". $args['db_name'] ."<br>";
+            $params['db_name'] = $args['db_name'];
+            return $this->runscriptondb($params);
         }
     }
 
@@ -129,9 +138,8 @@ class model_tablemetadata_tablemetadata {
     }
 
     function runscriptondb($params) {
-
         if (empty($params['db_name'])) {
-            print "DB name missing.\n";
+            print "DB name missing.<br>";
             return false;
         }
 
@@ -140,17 +148,17 @@ class model_tablemetadata_tablemetadata {
         try {
             $db_link = @mysqli_connect($params['db_server'], $params['db_user'], $params['db_password'], $db_name);
         } catch (Exception $e) {
-            echo 'Caught exception when trying to login to $db_name: ',  $e->getMessage(), "\n";
+            echo 'Caught exception when trying to login to $db_name: ',  $e->getMessage(), "<br>";
             return false;
         }
 
         if (!$db_link) {
-            print "You are not authorized to login to this database: $db_name.\n";
+            print "You are not authorized to login to this database: $db_name.<br>";
             return false;
         }
 
         if (!$this->verifylododb($db_link)) {
-            print "Not a lodo database: $db_name.\n";
+            print "Not a lodo database: $db_name.<br>";
             return false;
         }
 
@@ -158,20 +166,20 @@ class model_tablemetadata_tablemetadata {
             if ($command == "" || trim($command) == "") {
                 continue;
             }
-            print "Kjører kommando: " . substr($command, 0, 40) . "...\n";
+            print "Kjører kommando: " . substr($command, 0, 40) . "...<br>";
 
                 $query = $command;
     
                 $result = mysqli_query($db_link, $query);
                 if (!$result) {
-                    print "Dbname: $db_name, db_query: $query. \nBad query: " . mysqli_error($db_link) . "\n.\n";
+                    print "Dbname: $db_name, db_query: $query. <br>Bad query: " . mysqli_error($db_link) . "<br>.<br>";
                     return false;
                 } else {
-                    print "Query successful.\n";
+                    print "Query successful.<br>";
                 }
         }
 
-        print "Dbname: $db_name, db script successfully executed.\n";
+        print "Dbname: $db_name, db script successfully executed.<br>";
 
         return true;
     }
@@ -233,7 +241,7 @@ class model_tablemetadata_tablemetadata {
     }
 
 
-    private function update_db($args) {
+    function update_db($args) {
         global $_SETUP, $_lib;
         
         #print_r($args);        
