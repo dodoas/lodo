@@ -387,20 +387,6 @@ if(!empty($validation_errors)) {
 </form>
 <br/><br/>
 
-<?
-$query_wr_ids = "SELECT WorkRelationID FROM workrelation WHERE AccountPlanID = $AccountPlanID";
-$wr_ids_hash = $_lib['db']->get_hash(array('query' => $query_wr_ids, 'key' => 'WorkRelationID', 'value' => 'WorkRelationID'));
-$wr_ids = array_keys($wr_ids_hash);
-for($i = 0; $i < count($wr_ids); $i++) {
-  for($j = $i + 1; $j < count($wr_ids); $j++) {
-    $FirstID = $wr_ids[$i];
-    $SecondID = $wr_ids[$j];
-    if (CheckIfWorkRelationsOverlap($_REQUEST, $FirstID, $SecondID)) $_lib['message']->add("Arbeidsforhold $FirstID og $SecondID overlapper!");
-  }
-}
-print $_lib['message']->get();
-$db_table2 = 'workrelation';
-?>
 <form name="work_relations" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
 <table class="lodo_data">
   <tr class="result">
@@ -422,9 +408,24 @@ $db_table2 = 'workrelation';
     <td class="menu"></td>
   </tr>
 <?
+$db_table2 = 'workrelation';
 $query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID";
 $result_work_relations = $_lib['db']->db_query($query_work_relations);
+$work_relations_array = array();
 while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
+  $work_relations_array[] = $work_relation;
+}
+
+$validation_errors = validate_work_relations($work_relations_array);
+if(!empty($validation_errors)) {
+  print '<div class="warning">';
+  foreach ($validation_errors as $error) {
+    print $error ."<br>";
+  }
+  print '</div><br>';
+}
+
+foreach ($work_relations_array as $work_relation) {
   $WorkRelationID = $work_relation->WorkRelationID;
 ?>
   <tr>
