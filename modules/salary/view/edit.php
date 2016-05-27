@@ -176,6 +176,40 @@ $formname = "salaryUpdate";
 ?>
 
 <? print $_lib['sess']->doctype ?>
+
+<? 
+  $wr_query = sprintf("SELECT
+                        w.AccountPlanID as AccountPlanID,
+                        w.WorkRelationID as WorkRelationID,
+                        w.SubcompanyID as SubcompanyID,
+                        sc.Name as SubcompanyName,
+                        w.KommuneID as KommuneID,
+                        w.WorkTimeScheme as WorkTimeScheme,
+                        w.ShiftType as ShiftType,
+                        w.TypeOfEmployment as TypeOfEmployment,
+                        w.OccupationID as OccupationID,
+                        w.WorkStart as WorkStart,
+                        w.WorkStop as WorkStop
+                      FROM 
+                        workrelation w
+                        INNER JOIN salary s ON w.AccountPlanID = s.AccountPlanID
+                        LEFT JOIN subcompany sc ON w.SubcompanyID = sc.SubcompanyID
+                      GROUP BY 
+                        WorkRelationID
+                      ");
+  $result_set = $_lib['db']->db_query($wr_query);
+  $work_relations = array();
+  $fetched_work_relations = array();
+  while($row = mysqli_fetch_assoc($result_set)) $fetched_work_relations[] = $row;
+  foreach ($fetched_work_relations as $fetched_work_relation) {
+    if($fetched_work_relation["KommuneID"] == 0) $fetched_work_relation["KommuneID"] = "";
+    if($fetched_work_relation["OccupationID"] == 0) $fetched_work_relation["OccupationID"] = "";
+    $fetched_work_relation["WorkStop"] != "0000-00-00" ? $work_stop = $fetched_work_relation["WorkStop"] : $work_stop = "";
+    $fetched_work_relation["WorkRelationName"] = $fetched_work_relation["WorkRelationID"] ." - ". $fetched_work_relation["SubcompanyName"] ." (". $fetched_work_relation["WorkStart"] ." - ". $work_stop .")";
+    $work_relations[$fetched_work_relation["AccountPlanID"]][$fetched_work_relation["WorkRelationID"]] = $fetched_work_relation;
+  }
+?>
+
 <head>
     <title>Empatix - customer</title>
     <meta name="cvs"                content="$Id: edit.php,v 1.66 2005/10/28 17:59:41 thomasek Exp $" />
@@ -186,6 +220,8 @@ $formname = "salaryUpdate";
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
+
+<div id='workRelationSelect'></div>
 
 <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="SalaryID" value="<? print $SalaryID ?>">
@@ -211,14 +247,17 @@ $formname = "salaryUpdate";
     <th class="sub"><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'salary', 'field' => 'Period', 'pk'=>$head->SalaryID, 'value' => $head->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'pk' => $head->SalaryID, 'required'=>'1')); ?>
     <th class="sub"><?
         $aconf = array('table'=>'salary', 'field'=>'AccountPlanID', 'value'=>$head->AccountPlanID,
-                       'tabindex'=>'', 'accesskey'=>'K', 'pk'=>$head->SalaryID, 'type'=> array('0' => 'employee'));
+                       'tabindex'=>'', 'accesskey'=>'K', 'pk'=>$head->SalaryID, 'type'=> array('0' => 'employee'),
+                       'onchange'=>"selected_employee = this.value; printWorkRelationsSelectForEmployee();");
         print $_lib['form3']->accountplan_number_menu($aconf);
         ?>
     <th class="sub"><input type="text" name="salary.ValidFrom.<? print $head->SalaryID ?>" value="<? print $head->ValidFrom ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.ValidTo.<? print $head->SalaryID ?>" value="<? print $head->ValidTo ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
-    <th class="sub"><?
+    <th class="sub">
+      <div style="display: none;">
+    <?
             print $_lib['form3']->kommune_menu(array(
                 'table' => 'salary',
                 'field' => 'KommuneID',
@@ -227,6 +266,8 @@ $formname = "salaryUpdate";
                 'pk' => $head->SalaryID,
             ));
     ?>
+    </div>
+    <div id="KommuneIDShowingValue"></div>
   </th>
     <?
       // if date is set just show it unless the user is admin in which case show the input
@@ -261,20 +302,35 @@ $formname = "salaryUpdate";
     <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
     <th class="sub">
+      <div style="display: none;">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 40)); ?>
+      </div>
+      <div id="ShiftTypeShowingValue"></div>
     </th>
 
     <th class="sub">
+      <div style="display: none;">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'salary', 'field'=>'WorkTimeScheme', 'pk'=>$head->SalaryID, 'value'=>$head->WorkTimeScheme, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
+      </div>
+      <div id="WorkTimeSchemeShowingValue"></div>
     </th>
     <th class="sub" colspan="3">
+      <div style="display: none;">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
+      </div>
+      <div id="TypeOfEmploymentShowingValue"></div>
     </th>
     <th class="sub" colspan="2">
+      <div style="display: none;">
       <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
+      </div>
+      <div id="OccupationIDShowingValue"></div>
     </th>
     <th class="sub">
+      <div style="display: none;">
       <? print $_lib['form3']->Subcompany_menu3(array('table'=>'salary', 'field'=>'SubcompanyID', 'pk'=>$head->SalaryID, 'value'=>$head->SubcompanyID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'width' => 40)); ?>
+      </div>
+      <div id="SubcompanyIDShowingValue"></div>
     </th>
   </tr>
 </table>
@@ -663,5 +719,56 @@ $formname = "salaryUpdate";
 <? includeinc('bottom');
 unset($_SESSION['oauth_paycheck_sent']);
 ?>
+
+<script type="text/javascript">
+  function changeSelectValueTo(id, value) {
+    var options = document.getElementById(id).options;
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == value) {              
+        options[i].selected = true;
+        break;
+      }
+    }
+  }
+
+  function printFieldWhereSelectShouldHaveBeen(id) {
+    var select = document.getElementById("salary." + id + ".<? print $SalaryID; ?>");
+    $("#" + id + "ShowingValue").html(select.options[select.selectedIndex].innerHTML);
+  }
+
+  var all_work_relations = <? print json_encode($work_relations); ?>;
+  var selected_employee = <? print $head->AccountPlanID; ?>;
+  var selected_work_relation;
+
+  function printWorkRelationsSelectForEmployee() {
+    var work_relations = all_work_relations[selected_employee];
+    var out = "";
+    out += "<select name='WorkRelationID' onchange='selected_work_relation = all_work_relations[selected_employee][this.value];'>"
+    out += "  <option value=''>Ikke valgt</option>";
+    for(var i in work_relations) {
+      out += "  <option value='" + work_relations[i]["WorkRelationID"] + "'>" + work_relations[i]["WorkRelationName"] + "</option>";
+    }
+    out += "</select>";
+    out += "<button onclick='updateInputValuesWithWorkRelationInfo();'>Update fields with WR info</button>";
+    $("#workRelationSelect").html(out);
+  }
+
+  function updateInputValuesWithWorkRelationInfo() {
+    var fields_to_change = ["WorkTimeScheme", "ShiftType", "TypeOfEmployment", "OccupationID", "SubcompanyID", "KommuneID"];
+    for(var i = 0; i < fields_to_change.length; i++) {
+      if(selected_work_relation) {
+        changeSelectValueTo("salary." + fields_to_change[i] + ".<? print $SalaryID; ?>", selected_work_relation[fields_to_change[i]]);
+      }
+      printFieldWhereSelectShouldHaveBeen(fields_to_change[i]);
+    }
+  }
+
+  $(document).ready(function() {
+    printWorkRelationsSelectForEmployee();
+    updateInputValuesWithWorkRelationInfo();
+  })
+
+</script>
+
 </body>
 </html>
