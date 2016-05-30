@@ -75,13 +75,13 @@ print $_lib['sess']->doctype
         }
         print count($included_salaries) . " l&oslash;nnslipp(er) og ";
 
-        $query_altin_employee = "SELECT ap.* FROM altinnReport1employee ar1e JOIN accountplan ap ON ap.AccountPlanID = ar1e.AccountPlanID WHERE ar1e.AltinnReport1ID = ".$report_id." ORDER BY ap.FirstName ASC";
+        $query_altin_employee = "SELECT wr.*, ap.* FROM altinnReport1WorkRelation ar1wr JOIN workrelation wr ON wr.WorkRelationID = ar1wr.WorkRelationID JOIN accountplan ap ON ap.AccountPlanID = wr.AccountPlanID WHERE ar1wr.AltinnReport1ID = ".$report_id." ORDER BY ap.FirstName ASC";
         $result_altin_employee  = $_lib['db']->db_query($query_altin_employee);
 
         $included_employees = array();
         while($_row = $_lib['db']->db_fetch_object($result_altin_employee)){
           $employee_ids[] = $_row->AccountPlanID;
-          $accountplan_name = $_row->FirstName . ' ' . $_row->LastName . '(' . $_row->AccountPlanID . ')';
+          $accountplan_name = $_row->FirstName . ' ' . $_row->LastName . '(' . $_row->AccountPlanID . ') (Arbeidsforhold id: ' . $_row->WorkRelationID . ')';
           $link = $_lib['sess']->dispatch . 't=accountplan.employee&accountplan_AccountPlanID=' . $_row->AccountPlanID;
           $included_employees[] = array('AccountPlanName'=>$accountplan_name, 'link'=>$link);
         }

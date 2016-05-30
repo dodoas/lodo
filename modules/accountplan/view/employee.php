@@ -390,7 +390,7 @@ if(!empty($validation_errors)) {
 <form name="work_relations" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
 <table class="lodo_data">
   <tr class="result">
-    <th colspan="13">Arbeidsforhold</th>
+    <th colspan="14">Arbeidsforhold</th>
   </tr>
   <tr>
     <td class="menu">ID</td>
@@ -403,6 +403,7 @@ if(!empty($validation_errors)) {
     <td class="menu">Skifttype</td>
     <td class="menu">Ansettelsestype</td>
     <td class="menu">Stillingsprosent</td>
+    <td class="menu">Stillingsprosent oppdatert</td>
     <td class="menu">Timer hver uke ved full stilling</td>
     <td class="menu">Kommune</td>
     <td class="menu"></td>
@@ -439,6 +440,7 @@ foreach ($work_relations_array as $work_relation) {
     <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> $db_table2, 'field'=>'ShiftType', 'value'=>$work_relation->ShiftType, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
     <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> $db_table2, 'field'=>'TypeOfEmployment', 'value'=>$work_relation->TypeOfEmployment, 'pk'=> $WorkRelationID, 'width' => 32, 'class'=> 'lodoreqfelt')); ?></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkPercent', 'value'=>$work_relation->WorkPercent, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkPercentUpdatedAt', 'value'=>$work_relation->WorkPercentUpdatedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkMeasurement', 'value'=>$work_relation->WorkMeasurement, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table2, 'field'=>'KommuneID', 'value'=>$work_relation->KommuneID, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><input type="submit" value="Slett" name="action_work_relation_delete"></td>
@@ -453,7 +455,7 @@ if($_lib['sess']->get_person('AccessLevel') >= 2) {
     <td>
       <input type="submit" value="Lagre arbeidsforhold" name="action_work_relation_save">
     </td>
-    <td colspan="12" align="right">
+    <td colspan="13" align="right">
       <input type="submit" value="Add work relation" name="action_work_relation_add">
     </td>
   </tr>

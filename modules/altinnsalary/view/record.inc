@@ -38,13 +38,13 @@ if (isset($_POST['use_salary'])) {
   }
 }
 // get the list of selected employees
-$employee_ids = array();
-if (isset($_REQUEST['use_employee'])) {
-  foreach($_REQUEST['use_employee'] as $employee_id => $selected) {
-    if ($selected) $employee_ids[] = $employee_id;
+$work_relation_ids = array();
+if (isset($_REQUEST['use_work_relation'])) {
+  foreach($_REQUEST['use_work_relation'] as $work_relation_id => $selected) {
+    if ($selected) $work_relation_ids[] = $work_relation_id;
   }
 }
-if (empty($salary_ids) && !empty($employee_ids)) $_REQUEST['only_register_employee'] = true;
+if (empty($salary_ids) && !empty($work_relation_ids)) $_REQUEST['only_register_employee'] = true;
 
 $error_msg = "";
 // Make sure user have set AltinnUserSSN
@@ -139,7 +139,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
   } else {
     $period = $_REQUEST['altinnReport1_periode'];
     // generate the altinn report object for the selected period
-    $report = new altinn_report($period, $salary_ids, $employee_ids, isset($_REQUEST['only_register_employee']));
+    $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
     if (isset($_POST['altinnReport1_MeldingsId'])) {
       $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
     }
@@ -251,7 +251,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
       // Save which salaries have been sent and which employees have been included in the report and notify
       $report->saveSalaryReportLinks($altinnReport1ID);
-      $report->saveEmployeeReportLinks($altinnReport1ID);
+      $report->saveWorkRelationReportLinks($altinnReport1ID);
       $_lib['message']->add('Rapport sendt');
 
       // Save xml we sent
@@ -508,7 +508,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     die();
   }
   // generate the altinn report object for the selected period
-  $report = new altinn_report($period, $salary_ids, $employee_ids, isset($_REQUEST['only_register_employee']));
+  $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
   $xml_generated = true;
 } elseif($_lib['input']->getProperty('action_confirm_authentication')) {
   $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
