@@ -58,7 +58,7 @@ class search_class {
                         if($args['EnableSingleChoose'])
                         {
                             //$_showresult .= "<td><a href=\"" . $_MY_SELF . '&amp;CustomerNumber=' . $CustomerNumber . '&amp;AmountOut=' . $row->AmountIn . '&amp;AmountIn=' . $row->AmountOut . '&amp;KID=' . $row->KID . '&amp;type=' . $type . "&amp;new=1\">Velg</a></td>";
-                            $_showresult .= "<td><a href=\"".$_MY_SELF.'&amp;voucher_VoucherID='.$args['VoucherID'].'&amp;VoucherType='.$args['VoucherType'].'&amp;voucher_JournalID='.$args['JournalID'].'&amp;voucher_AccountPlanID='.$args['AccountPlanID'].'&amp;voucher_AmountOut='.$row->AmountIn.'&amp;voucher_AmountIn='.$row->AmountOut.'&amp;voucher_KID='.$row->KID.'&amp;type='.$args['type']."&amp;action_voucher_update=1\">Velg</a></td>";
+                            $_showresult .= "<td><a href=\"".$_MY_SELF.'&amp;voucher_VoucherID='.$args['VoucherID'].'&amp;VoucherType='.$args['VoucherType'].'&amp;voucher_JournalID='.$args['JournalID'].'&amp;voucher_AccountPlanID='.$args['AccountPlanID'].'&amp;voucher_AmountOut='.$row->AmountIn.'&amp;voucher_AmountIn='.$row->AmountOut.'&amp;voucher_KID='.$row->KID.'&amp;voucher_InvoiceID='.$row->InvoiceID.'&amp;type='.$args['type']."&amp;action_voucher_update=1\">Velg</a></td>";
                         }
                         if($args['EnableMultiChoose'])
                         {
