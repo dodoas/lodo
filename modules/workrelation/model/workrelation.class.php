@@ -5,28 +5,28 @@ function validate_work_relations($array) {
 
   foreach ($array as $work_relation) {
     $id = $work_relation->WorkRelationID;
-    $error_prefix = "Work relation ". $id .": ";
+    $error_prefix = "Arbeidsforhold ". $id .": ";
 
     if(empty($work_relation->SubcompanyID) || $work_relation->SubcompanyID == "0") {
-      $errors[] = $error_prefix ."Subcompany must be selected.";
+      $errors[] = $error_prefix ."Virksomhet kan ikke v&aelig;re blank.";
     }
 
     if(empty_date($work_relation->WorkStart)) {
-      $errors[] = $error_prefix ."Start date must be picked.";
+      $errors[] = $error_prefix ."Start dato kan ikke v&aelig;re blank.";
     }
 
     if(!empty_date($work_relation->WorkStop) && $work_relation->WorkStop < $work_relation->WorkStart) {
-      $errors[] = $error_prefix ."End date cannot be before start date.";
+      $errors[] = $error_prefix ."Slutt dato kan ikke v&aelig;re f&oring;r start dato.";
     }
 
     if(empty_date($work_relation->InCurrentPositionSince)) {
-      $errors[] = $error_prefix ."Current position starting date must be picked."; 
+      $errors[] = $error_prefix ."Samme posisjon siden dato kan ikke v&aelig;re blank.";
     } else {
       if($work_relation->InCurrentPositionSince < $work_relation->WorkStart) {
-        $errors[] = $error_prefix ."Current position starting date cannot not be before start date.";
+        $errors[] = $error_prefix ."Samme posisjon siden dato kan ikke v&aelig;re f&oring;r start dato.";
       }
       if($work_relation->InCurrentPositionSince > $work_relation->WorkStop && !empty_date($work_relation->WorkStop)) {
-        $errors[] = $error_prefix ."Current position starting date cannot not be after end date.";
+        $errors[] = $error_prefix ."Samme posisjon siden dato kan ikke v&aelig;re etter slutt dato.";
       }
     }
 
@@ -48,36 +48,36 @@ function validate_work_relations($array) {
             else if(!empty_date($other_work_relation->WorkStop) && $other_work_relation->WorkStop > $work_relation->WorkStart)              $overlaps = true;
           }
         }
-        if($overlaps) $errors[] = $error_prefix ."Dates overlap with work relation ". $other_work_relation->WorkRelationID .".";
+        if($overlaps) $errors[] = $error_prefix ."Dato overlaper i arbeidsforhold ". $other_work_relation->WorkRelationID .".";
       }
     }
 
     if(empty($work_relation->OccupationID) || $work_relation->OccupationID == "0") {
-      $errors[] = $error_prefix ."Occupation must be selected.";
+      $errors[] = $error_prefix ."Yrke kan ikke v&aelig;re blank.";
     }
 
     if(empty($work_relation->KommuneID) || $work_relation->KommuneID == "0") {
-      $errors[] = $error_prefix ."Municipality must be selected.";
+      $errors[] = $error_prefix ."Kommune kan ikke v&aelig;re blank.";
     }
 
     if(empty($work_relation->WorkTimeScheme) || $work_relation->WorkTimeScheme == "0") {
-      $errors[] = $error_prefix ."Work time scheme must be selected.";
+      $errors[] = $error_prefix ."Arbeidstid kan ikke v&aelig;re blank.";
     }
 
     if(empty($work_relation->ShiftType) || $work_relation->ShiftType == "0") {
-      $errors[] = $error_prefix ."Shift type must be selected.";
+      $errors[] = $error_prefix ."Skifttype kan ikke v&aelig;re blank.";
     }
 
     if(empty($work_relation->TypeOfEmployment) || $work_relation->TypeOfEmployment == "0") {
-      $errors[] = $error_prefix ."Type of employment must be selected.";
+      $errors[] = $error_prefix ."Ansettelsestype kan ikke v&aelig;re blank.";
     }
 
     if(empty($work_relation->WorkPercent) || $work_relation->WorkPercent <= 0) {
-      $errors[] = $error_prefix ."Work percent must be greater than zero.";
+      $errors[] = $error_prefix ."Stillingsprosent m&aring; v&aelig;re st&oslash;rre enn 0.";
     }
 
     if(empty($work_relation->WorkMeasurement) || $work_relation->WorkMeasurement <= 0) {
-      $errors[] = $error_prefix ."Working hours must be greater than zero.";
+      $errors[] = $error_prefix ."Timer hver uke ved full stilling m&aring; v&aelig;re st&oslash;rre enn 0.";
     }
   }
   

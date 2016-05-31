@@ -1,4 +1,5 @@
 -- Create new table for Work relations
+DROP TABLE IF EXISTS workrelation;
 CREATE TABLE IF NOT EXISTS workrelation (
 WorkRelationID int(11) NOT NULL AUTO_INCREMENT,
 AccountPlanID int(11) NOT NULL,
@@ -19,8 +20,8 @@ PRIMARY KEY (WorkRelationID)
 );
 
 -- Migrate existing information to new table for work relations
-INSERT INTO workrelation(AccountPlanID, OccupationID, SubcompanyID, KommuneID, WorkStart, WorkStop, InCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkMeasurement)
-SELECT AccountPlanID, OccupationID, SubcompanyID, KommuneID, WorkStart, WorkStop, inCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, Workmeasurement
+INSERT INTO workrelation(AccountPlanID, OccupationID, SubcompanyID, KommuneID, WorkStart, WorkStop, InCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkPercentUpdatedAt, WorkMeasurement)
+SELECT AccountPlanID, OccupationID, SubcompanyID, KommuneID, WorkStart, WorkStop, inCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkPercentUpdatedAt, Workmeasurement
 FROM accountplan
 WHERE AccountPlanType = 'employee';
 
@@ -39,5 +40,11 @@ INSERT INTO altinnReport1WorkRelation(AltinnReport1ID, WorkRelationID)
 SELECT ar1e.AltinnReport1ID, wr.WorkRelationID
 FROM altinnReport1employee ar1e JOIN accountplan a ON ar1e.AccountPlanID = a.AccountPlanID JOIN workrelation wr ON wr.AccountPlanID = a.AccountPlanID ORDER BY wr.WorkRelationID LIMIT 1;
 
--- Remove no longer used table altinnReport1employee
-DROP TABLE IF EXISTS altinnReport1employee;
+-- Add work relartion foreign key to salary table
+ALTER TABLE salary
+ADD WorkRelationID int(11);
+
+-- Populate the newly created WorkRelationID field based on eployee for the salary
+UPDATE salary s
+INNER JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID INNER JOIN workrelation wr ON wr.AccountPlanID = ap.AccountPlanID
+SET s.WorkRelationID = wr.WorkRelationID;

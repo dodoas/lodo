@@ -344,9 +344,8 @@ class altinn_report {
 
     // get the occupation of the employee in the company
     if ($use_only_employee_info) {
-      // Error is: Occupation not set for salary employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($work_relation->OccupationID, 'Ansatt: Mangler yrke p&aring; ' . self::fullNameForErrorMessage($employee));
+      // Error is: Occupation not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_relation->OccupationID, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler yrke p&aring; ' . self::fullNameForErrorMessage($employee));
       $occupation_id = $work_relation->OccupationID;
     } else {
       // Error is: Occupation not set for salary L' . $salary->JournalID
@@ -365,9 +364,8 @@ class altinn_report {
     }
     // type of employment
     if ($use_only_employee_info) {
-      // Error is: Employment type not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($work_relation->TypeOfEmployment, 'Ansatt: Mangler ansettelsestype p&aring; ' . self::fullNameForErrorMessage($employee));
+      // Error is: Employment type not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_relation->TypeOfEmployment, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler ansettelsestype p&aring; ' . self::fullNameForErrorMessage($employee));
       $arbeidsforhold['typeArbeidsforhold'] = $work_relation->TypeOfEmployment;
     } else {
       // Error is: Employment type not set for salary L' . $salary->JournalID
@@ -378,9 +376,8 @@ class altinn_report {
     if (self::shouldWeHaveWorkPeriode($arbeidsforhold['typeArbeidsforhold'])){
       $work_start = $work_relation->WorkStart;
       $work_stop = $work_relation->WorkStop;
-      // Error is: Employment date not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($work_start, 'Ansatt: Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      // Error is: Employment date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_start, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
       // employment date
       $arbeidsforhold['startdato'] = strftime('%F', strtotime($work_start));
       // set end date only if the date is not 0000-00-00 otherwise set to null
@@ -389,18 +386,16 @@ class altinn_report {
 
     if (self::shouldWeHaveWorkmeasurement($arbeidsforhold['typeArbeidsforhold'])){
       // work measurement, ex. hours per week
-      // Error is: Work measurement not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($work_relation->WorkMeasurement, 'Ansatt: Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
+      // Error is: Work measurement not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_relation->WorkMeasurement, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
       $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $work_relation->WorkMeasurement;
     }
 
     if (self::shouldWeHaveWorkTimeScheme($arbeidsforhold['typeArbeidsforhold'])){
       // work measurement type
       if ($use_only_employee_info) {
-        // Error is: Work time scheme not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-        self::checkIfEmpty($work_relation->WorkTimeScheme, 'Ansatt: Mangler arbeidstid for ' . self::fullNameForErrorMessage($employee));
+        // Error is: Work time scheme not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_relation->WorkTimeScheme, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler arbeidstid for ' . self::fullNameForErrorMessage($employee));
         $arbeidsforhold['avloenningstype'] =  $work_relation->WorkTimeScheme;
       } else {
         // Error is: Work time scheme not set for salary L' . $salary->JournalID
@@ -417,9 +412,8 @@ class altinn_report {
     if (self::shouldWeHaveShift($arbeidsforhold['typeArbeidsforhold'])){
       // work time scheme, ex. no shifts
       if ($use_only_employee_info) {
-        // Error is: Shift type not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-        self::checkIfEmpty($work_relation->ShiftType, 'Ansatt: Mangler skifttype ' . self::fullNameForErrorMessage($employee));
+        // Error is: Shift type not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_relation->ShiftType, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler skifttype ' . self::fullNameForErrorMessage($employee));
         $arbeidsforhold['arbeidstidsordning'] = $work_relation->ShiftType;
       } else {
         // Error is: Shift type not set for salary L' . $salary->JournalID
@@ -430,9 +424,8 @@ class altinn_report {
 
     if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
       // employment percentage
-      // Error is: Work percent not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($work_relation->WorkPercent, 'Ansatt: Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
+      // Error is: Work percent not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_relation->WorkPercent, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
       $arbeidsforhold['stillingsprosent'] = (int) $work_relation->WorkPercent;
     }
 
@@ -447,18 +440,16 @@ class altinn_report {
     if (self::shouldWeHaveCurrentPositionSince($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for position in company
       $last_change_of_position_in_company = $work_relation->InCurrentPositionSince;
-      // Error is: Last change of position in company date not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($last_change_of_position_in_company, 'Ansatt: Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      // Error is: Last change of position in company date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($last_change_of_position_in_company, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
       $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
     }
 
     if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for work percentage
       $last_change_of_work_percentage = $work_relation->WorkPercentUpdatedAt;
-      // Error is: Last change of work percent date not set for employee ' . self::fullNameForErrorMessage($employee)
-      // TODO: Update error messages
-      self::checkIfEmpty($last_change_of_work_percentage, 'Ansatt: Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
+      // Error is: Last change of work percent date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($last_change_of_work_percentage, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
       $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
     }
     return $arbeidsforhold;

@@ -192,7 +192,6 @@ $formname = "salaryUpdate";
                         w.WorkStop as WorkStop
                       FROM 
                         workrelation w
-                        INNER JOIN salary s ON w.AccountPlanID = s.AccountPlanID
                         LEFT JOIN subcompany sc ON w.SubcompanyID = sc.SubcompanyID
                       GROUP BY 
                         WorkRelationID
@@ -221,8 +220,6 @@ $formname = "salaryUpdate";
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<div id='workRelationSelect'></div>
-
 <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="SalaryID" value="<? print $SalaryID ?>">
 <input type="hidden" name="AccountPlanID" value="<? print $head->AccountPlanID ?>">
@@ -240,6 +237,7 @@ $formname = "salaryUpdate";
     <th>Skattekommune
     <th>Altinndato
     <th>Rapportert til Altinn
+    <th>Arbeidsforhold
   </tr>
   <tr>
     <th class="sub">L <a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$head->JournalID"; ?>&type=salary&view=1"><? print $head->JournalID ?></a>
@@ -286,12 +284,13 @@ $formname = "salaryUpdate";
       }
     ?>
     <th class="sub"><? print getAltinnReportedDateTime($head->SalaryID); ?>
+    <th class="sub"><div id='workRelationSelect'></div>
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
     <th class="salaryhead">Prosenttrekk</th>
     <th class="salaryhead">Skatteetaten</th>
-    <th class="salaryhead">Skifttype</th>
+    <th class="salaryhead" colspan="2">Skifttype</th>
     <th class="salaryhead">Arbeidstid</th>
     <th class="salaryhead" colspan="3">Ansettelsestype</th>
     <th class="salaryhead" colspan="2">Yrke</th>
@@ -301,7 +300,7 @@ $formname = "salaryUpdate";
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
-    <th class="sub">
+    <th class="sub" colspan="2">
       <div style="display: none;">
       <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 40)); ?>
       </div>
@@ -742,14 +741,16 @@ unset($_SESSION['oauth_paycheck_sent']);
 
   function printWorkRelationsSelectForEmployee() {
     var work_relations = all_work_relations[selected_employee];
+    var selected_wr_id = <? print $head->WorkRelationID; ?>;
     var out = "";
-    out += "<select name='WorkRelationID' onchange='selected_work_relation = all_work_relations[selected_employee][this.value];'>"
+    out += "<select name='salary_WorkRelationID_<? print $SalaryID; ?>' onchange='selected_work_relation = all_work_relations[selected_employee][this.value];'>"
     out += "  <option value=''>Ikke valgt</option>";
     for(var i in work_relations) {
-      out += "  <option value='" + work_relations[i]["WorkRelationID"] + "'>" + work_relations[i]["WorkRelationName"] + "</option>";
+      is_selected = (work_relations[i]["WorkRelationID"] == selected_wr_id) ? ' selected ' : '';
+      out += "  <option value='" + work_relations[i]["WorkRelationID"] + "'" + is_selected + ">" + work_relations[i]["WorkRelationName"] + "</option>";
     }
     out += "</select>";
-    out += "<button onclick='updateInputValuesWithWorkRelationInfo();'>Update fields with WR info</button>";
+    out += "<button onclick='updateInputValuesWithWorkRelationInfo(); return false;'>Oppdater arbeidsforhold</button>";
     $("#workRelationSelect").html(out);
   }
 

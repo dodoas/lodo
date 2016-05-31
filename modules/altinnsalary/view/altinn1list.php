@@ -129,7 +129,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
-      <td><? print $work_relation->Name. " (" . $work_relation->OrgNumber . ") " . " (" . $work_relation->WorkStart . " - " . $work_relation->WorkStop . ") (" . $work_relation->WorkRelationID . ")"; ?></td>
+      <td><? print $work_relation->WorkRelationID . ' - ' . $work_relation->Name . ' (' . $work_relation->WorkStart . ' - ' . $work_relation->WorkStop . ') ' . $employee->FirstName . ' ' . $employee->LastName . '(' . $employee->AccountPlanID . ')'; ?></td>
 <?
   // last report for this period that included this employee
   $query_altin_employee = "SELECT ar1wr.*

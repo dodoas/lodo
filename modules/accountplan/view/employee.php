@@ -443,8 +443,11 @@ foreach ($work_relations_array as $work_relation) {
     <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkPercentUpdatedAt', 'value'=>$work_relation->WorkPercentUpdatedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkMeasurement', 'value'=>$work_relation->WorkMeasurement, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table2, 'field'=>'KommuneID', 'value'=>$work_relation->KommuneID, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
-    <td><input type="submit" value="Slett" name="action_work_relation_delete"></td>
-  </tr>
+    <td>
+      <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
+      <input type="checkbox" name="work_relations_to_delete[]" value="<? print $work_relation->WorkRelationID; ?>" /></td>
+      <? } ?>
+    </tr>
 <?
 }
 if($_lib['sess']->get_person('AccessLevel') >= 2) {
@@ -452,11 +455,14 @@ if($_lib['sess']->get_person('AccessLevel') >= 2) {
   <tr>
     <? print $_lib['form3']->hidden(array('name'=>'accountplan_AccountPlanID', 'value'=>$AccountPlanID)) ?>
     <? print $_lib['form3']->hidden(array('name'=>'accountplan_AccountPlanType', 'value'=>$AccountPlanType)) ?>
-    <td>
+    <td colspan="12" align='left'>
       <input type="submit" value="Lagre arbeidsforhold" name="action_work_relation_save">
+      <input type="submit" value="Legg til arbeidsforhold" name="action_work_relation_add">
     </td>
-    <td colspan="13" align="right">
-      <input type="submit" value="Add work relation" name="action_work_relation_add">
+    <td colspan="2" align="right">
+      <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
+      <input type="submit" name="action_work_relation_delete" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
+      <? } ?>
     </td>
   </tr>
 <?

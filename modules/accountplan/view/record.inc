@@ -298,9 +298,11 @@ elseif($_lib['input']->getProperty('action_refresh_sheme')) {
   $schemeControl->refreshSchemes();
 }
 elseif($_lib['input']->getProperty('action_work_relation_delete')) {
-  $workrelation_id = $_POST['workrelation_WorkRelationID'];
-  $query = sprintf("DELETE FROM workrelation WHERE WorkRelationID = %d", $workrelation_id);
-  $_lib['db']->db_query($query);
+  $workrelation_ids = $_POST['work_relations_to_delete'];
+  if (!empty($workrelation_ids)) {
+    $query = sprintf("DELETE FROM workrelation WHERE WorkRelationID IN (%s)", implode($workrelation_ids, ', '));
+    $_lib['db']->db_query($query);
+  }
 }
 elseif($_lib['input']->getProperty('action_work_relation_add')) {
   $query = "INSERT INTO workrelation(AccountPlanID) VALUES($AccountPlanID)";

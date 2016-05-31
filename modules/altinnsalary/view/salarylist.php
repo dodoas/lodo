@@ -133,7 +133,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       }
 ?>
     <tr>
-      <td><? print $_lib['form3']->checkbox(array('name' => "use_employee[" . $employee->AccountPlanID . "]")); ?></td>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
 <?
@@ -146,7 +146,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
       $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
 ?>
-      <td><? print $work_relation->Name. " (" . $work_relation->OrgNumber . ") " . " (" . $work_relation->WorkStart . " - " . $work_relation->WorkStop . ") (" . $work_relation->WorkRelationID . ")"; ?></td>
+      <td><? print $work_relation->WorkRelationID . ' - ' . $work_relation->Name . ' (' . $work_relation->WorkStart . ' - ' . $work_relation->WorkStop . ') ' . $employee->FirstName . ' ' . $employee->LastName . '(' . $employee->AccountPlanID . ')'; ?></td>
       <td>
         <?
           if ($employee_reported) {
@@ -167,7 +167,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
             print $ready_for_altinn_status;
           } else {
         ?>
-          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_employee[<? print $employee->AccountPlanID; ?>]=1&action_soap1=1">Register ansatte i Altinn</a>
+          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_work_relation[<? print $work_relation->WorkRelationID; ?>]=1&action_soap1=1">Register ansatte i Altinn</a>
         <?
           }
         ?>
