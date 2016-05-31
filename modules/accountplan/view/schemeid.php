@@ -49,7 +49,7 @@ function filterSchemesByCountryCode(country) {
 }
 </script>
 <tr class="result">
-  <th colspan="5">Fakturabank Firma ID</th>
+  <th colspan="6">Fakturabank Firma ID</th>
 </tr>
 
 <? foreach($schemes as $scheme) { ?>
@@ -65,17 +65,20 @@ function filterSchemesByCountryCode(country) {
     </select>
     <input type="text" value="<?= $scheme['SchemeValue'] ?>" name="accountplanscheme.SchemeValue.<?= $scheme['AccountPlanSchemeID'] ?>" />
   </td>
+  <td></td>
   <td><input type="checkbox" name="schemeid_to_delete[]" value="<?= $scheme['AccountPlanSchemeID'] ?>" /></td>
 </tr>
 <? } ?>
 <tr>
   <td class="menu"></td>
   <td colspan="2">
-    <input type="submit" name="action_save_scheme" value="Lagre firma id" />
-    <input type="submit" name="action_add_scheme" value="Legg til ny" />
+    <input type="submit" name="action_refresh_sheme" value="Hent ID fra fakturaBank" />
+    <input type="submit" name="action_add_scheme" value="Ny firma ID" />
   </td>
   <td>
-    <input type="submit" name="action_refresh_sheme" value="Oppdater schemetyper" />
+  </td>
+  <td>
+    <input type="submit" name="action_save_scheme" value="Lagre firma ID" />
   </td>
   <td>
     <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />

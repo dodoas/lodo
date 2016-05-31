@@ -2,11 +2,6 @@
 // var_dump($_POST);
 // die();
 if(isset($_REQUEST['action_postpost_update'])) {
-  foreach ($_POST as $entry_name => $entry_value) {
-    if (preg_match("/chk_invoice_/", $entry_name)) $_POST["voucher_matched_by_".substr($entry_name, 12)] = 'invoice';
-    if (preg_match("/chk_kid_/", $entry_name))     $_POST["voucher_matched_by_".substr($entry_name, 8)] = 'kid';
-    if (preg_match("/chk_match_/", $entry_name))   $_POST["voucher_matched_by_".substr($entry_name, 10)] = 'match';
-  }
   $primarykey = "VoucherID";
   $_lib['db']->db_update_multi_record($_POST, $db_table, $primarykey);
   $_lib['db']->db_update_multi_record($_POST, 'vouchermatch', 'VoucherMatchID');
