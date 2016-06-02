@@ -167,7 +167,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
             print $ready_for_altinn_status;
           } else {
         ?>
-          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_work_relation[<? print $work_relation->WorkRelationID; ?>]=1&action_soap1=1">Register ansatte i Altinn</a>
+          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_work_relation[<? print $work_relation->WorkRelationID; ?>]=1&action_soap1=1">Register arbeidsforhold i Altinn</a>
         <?
           }
         ?>

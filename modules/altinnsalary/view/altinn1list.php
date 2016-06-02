@@ -223,15 +223,22 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   <? } ?>
   </tbody>
 </table>
-
+<br/>
+ERRORS:<br/>
 <?
 if (isset($xml_generated)) {
   $xml = $report->generateXML();
-  echo "ERRORS:<br/>";
   if (!empty($report->errors)) foreach($report->errors as $error) echo '<p>' . $error . '</p>';
   else echo '<p>No errors.</p>';
-  echo "XML DATA:<br/>";
 ?>
+XML DATA:<br/>
+<textarea rows='100' cols='150'>
+<?
+echo $xml;
+?>
+</textarea>
+<br/><br/>
+DEBUG ARRAYS:<br/>
 <textarea rows='100' cols='150'>
 <?
 echo "Salaries array:\n";
@@ -240,7 +247,6 @@ echo "Employees array:\n";
 print_r($report->employees);
 echo "Message array:\n";
 print_r($report->melding);
-echo $xml;
 ?>
 </textarea>
 <?

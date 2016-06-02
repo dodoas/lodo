@@ -374,10 +374,17 @@ class altinn_report {
     }
 
     if (self::shouldWeHaveWorkPeriode($arbeidsforhold['typeArbeidsforhold'])){
-      $work_start = $work_relation->WorkStart;
-      $work_stop = $work_relation->WorkStop;
-      // Error is: Employment date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($work_start, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $work_start = $work_relation->WorkStart;
+        $work_stop = $work_relation->WorkStop;
+        // Error is: Employment date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_start, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $work_start = $salary->WorkStart;
+        $work_stop = $salary->WorkStop;
+        // Error is: Employment date not set for salary L ' . salary->JournalID
+        self::checkIfEmpty($work_start, 'L&oslash;nnslipp: Mangler Ansettelsesdato p&aring; L' . $salary->JournalID, 'date');
+      }
       // employment date
       $arbeidsforhold['startdato'] = strftime('%F', strtotime($work_start));
       // set end date only if the date is not 0000-00-00 otherwise set to null
@@ -386,9 +393,16 @@ class altinn_report {
 
     if (self::shouldWeHaveWorkmeasurement($arbeidsforhold['typeArbeidsforhold'])){
       // work measurement, ex. hours per week
-      // Error is: Work measurement not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($work_relation->WorkMeasurement, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
-      $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $work_relation->WorkMeasurement;
+      if ($use_only_employee_info) {
+        $work_measurement = $work_relation->WorkMeasurement;
+        // Error is: Work measurement not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_measurement, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
+      } else {
+        $work_measurement = $salary->WorkMeasurement;
+        // Error is: Work measurement not set for salary L' . salary->JournalID
+        self::checkIfEmpty($work_measurement, 'L&oslash;nnslipp: Mangler arbeidsdtimer hver uke p&aring; L' . $salary->JournalID, 'number');
+      }
+      $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $work_measurement;
     }
 
     if (self::shouldWeHaveWorkTimeScheme($arbeidsforhold['typeArbeidsforhold'])){
@@ -424,32 +438,57 @@ class altinn_report {
 
     if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
       // employment percentage
-      // Error is: Work percent not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($work_relation->WorkPercent, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
-      $arbeidsforhold['stillingsprosent'] = (int) $work_relation->WorkPercent;
+      if ($use_only_employee_info) {
+        $work_percent = $work_relation->WorkPercent;
+        // Error is: Work percent not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_percent, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
+      } else {
+        $work_percent = $salary->WorkPercent;
+        // Error is: Work percent not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_percent, 'L&oslash;nnslipp: Mangler stillingsprosent p&aring; L' . $salary->JournalID, 'number');
+      }
+      $arbeidsforhold['stillingsprosent'] = (int) $work_percent;
     }
 
     if (self::shouldWeHaveCreditDaysUpdatedAt($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for payment date for salary
-      $last_change_of_pay_date = $employee->CreditDaysUpdatedAt;
-      // Error is: Last change of salary pay date not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($last_change_of_pay_date, 'Ansatt: Mangler kredittid oppdatert for ' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $last_change_of_pay_date = $work_relation->SalaryDateChangedAt;
+        // Error is: Last change of salary pay date not set for work relation #id for employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_pay_date, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler siste l&oslash;nnsendrings dato for ' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_pay_date = $salary->SalaryDateChangedAt;
+        // Error is: Last change of salary pay date not set for salary L ' . salary->JournalID
+        self::checkIfEmpty($last_change_of_pay_date, 'L&oslash;nnslipp: Mangler siste l&oslash;nnsendrings dato p&aring; L' . $salary->JournalID, 'date');
+      }
       $arbeidsforhold['sisteLoennsendringsdato'] = strftime('%F', strtotime($last_change_of_pay_date));
     }
 
     if (self::shouldWeHaveCurrentPositionSince($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for position in company
-      $last_change_of_position_in_company = $work_relation->InCurrentPositionSince;
-      // Error is: Last change of position in company date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($last_change_of_position_in_company, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $last_change_of_position_in_company = $work_relation->InCurrentPositionSince;
+        // Error is: Last change of position in company date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_position_in_company, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_position_in_company = $salary->InCurrentPositionSince;
+        // Error is: Last change of position in company date not set for salary L' . salary->JournalID
+        self::checkIfEmpty($last_change_of_position_in_company, 'L&oslash;nnslipp: Mangler siste posisjonendringsdato p&aring; L' . $salary->JournalID, 'date');
+      }
       $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
     }
 
     if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for work percentage
-      $last_change_of_work_percentage = $work_relation->WorkPercentUpdatedAt;
-      // Error is: Last change of work percent date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($last_change_of_work_percentage, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $last_change_of_work_percentage = $work_relation->WorkPercentUpdatedAt;
+        // Error is: Last change of work percent date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_work_percentage, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_work_percentage = $salary->WorkPercentUpdatedAt;
+        // Error is: Last change of work percent date not set for salary L' . salary->JournalID
+        self::checkIfEmpty($last_change_of_work_percentage, 'L&oslash;nnslipp: Mangler stillingsprosentendret p&aring; L' . $salary->JournalID, 'date');
+      }
       $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
     }
     return $arbeidsforhold;
@@ -588,8 +627,12 @@ class altinn_report {
  */
   function queryStringForIncludedWorkRelations() {
     $query_work_relations = "SELECT wr.*
-                             FROM workrelation wr
-                             WHERE wr.WorkRelationID IN (" . implode($this->work_relation_ids, ', ') . ")";
+                             FROM workrelation wr";
+    if (!empty($this->work_relation_ids)) {
+      $query_work_relations .= " WHERE wr.WorkRelationID IN (" . implode($this->work_relation_ids, ', ') . ")";
+    } else {
+      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
+    }
     return $query_work_relations;
   }
 
@@ -603,8 +646,10 @@ class altinn_report {
                         FROM accountplan ap
                         WHERE AccountplanType LIKE '%employee%'";
     // add for selected employee ids also
-    if ($this->employee_ids) {
+    if (!empty($this->employee_ids)) {
       $query_employees .= ' AND ap.AccountPlanID IN (' . implode($this->employee_ids, ', ') . ')';
+    } else {
+      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
     }
     return $query_employees;
   }
@@ -618,8 +663,10 @@ class altinn_report {
                        FROM salary s
                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
     // and restrict further by ids
-    if ($this->salary_ids) {
+    if (!empty($this->salary_ids)) {
       $query_salaries .= ' AND SalaryID IN (' . implode($this->salary_ids, ', ') . ')';
+    } else {
+      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
     }
     return $query_salaries;
   }

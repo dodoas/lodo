@@ -5,7 +5,6 @@ WorkRelationID int(11) NOT NULL AUTO_INCREMENT,
 AccountPlanID int(11) NOT NULL,
 OccupationID int(11) NOT NULL,
 SubcompanyID int(11) NOT NULL,
-KommuneID int(11) NOT NULL,
 WorkStart date,
 WorkStop date,
 InCurrentPositionSince date,
@@ -15,13 +14,14 @@ TypeOfEmployment varchar(50) DEFAULT 'ordinaertArbeidsforhold',
 WorkPercent decimal(16,2) DEFAULT 0,
 WorkPercentUpdatedAt date,
 WorkMeasurement decimal(4,2) DEFAULT 0,
+SalaryDateChangedAt date,
 TS timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (WorkRelationID)
 );
 
 -- Migrate existing information to new table for work relations
-INSERT INTO workrelation(AccountPlanID, OccupationID, SubcompanyID, KommuneID, WorkStart, WorkStop, InCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkPercentUpdatedAt, WorkMeasurement)
-SELECT AccountPlanID, OccupationID, SubcompanyID, KommuneID, WorkStart, WorkStop, inCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkPercentUpdatedAt, Workmeasurement
+INSERT INTO workrelation(AccountPlanID, OccupationID, SubcompanyID, WorkStart, WorkStop, InCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkPercentUpdatedAt, WorkMeasurement, SalaryDateChangedAt)
+SELECT AccountPlanID, OccupationID, SubcompanyID, WorkStart, WorkStop, inCurrentPositionSince, WorkTimeScheme, ShiftType, TypeOfEmployment, WorkPercent, WorkPercentUpdatedAt, Workmeasurement, CreditDaysUpdatedAt
 FROM accountplan
 WHERE AccountPlanType = 'employee';
 
@@ -38,13 +38,20 @@ PRIMARY KEY (AltinnReport1ID, WorkRelationID)
 -- the employee it belongs to
 INSERT INTO altinnReport1WorkRelation(AltinnReport1ID, WorkRelationID)
 SELECT ar1e.AltinnReport1ID, wr.WorkRelationID
-FROM altinnReport1employee ar1e JOIN accountplan a ON ar1e.AccountPlanID = a.AccountPlanID JOIN workrelation wr ON wr.AccountPlanID = a.AccountPlanID ORDER BY wr.WorkRelationID LIMIT 1;
+FROM altinnReport1employee ar1e JOIN accountplan a ON ar1e.AccountPlanID = a.AccountPlanID JOIN workrelation wr ON wr.AccountPlanID = a.AccountPlanID ORDER BY wr.WorkRelationID;
 
 -- Add work relartion foreign key to salary table
 ALTER TABLE salary
-ADD WorkRelationID int(11);
+ADD WorkRelationID int(11),
+ADD WorkStart date,
+ADD WorkStop date,
+ADD InCurrentPositionSince date,
+ADD WorkPercent decimal(16,2),
+ADD WorkPercentUpdatedAt date,
+ADD WorkMeasurement decimal(4,2),
+ADD SalaryDateChangedAt date;
 
--- Populate the newly created WorkRelationID field based on eployee for the salary
+-- Populate the newly created WorkRelationID field based on employee for the salary
 UPDATE salary s
 INNER JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID INNER JOIN workrelation wr ON wr.AccountPlanID = ap.AccountPlanID
 SET s.WorkRelationID = wr.WorkRelationID;

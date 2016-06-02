@@ -170,6 +170,16 @@ if($SalaryperiodconfID)
 $SalaryperiodconfID_row = $_lib['db']->get_row( array( 'query' => sprintf("SELECT SalaryperiodconfID FROM salaryperiodconf WHERE Period = '%s'", $head->Period) ) );
 $SalaryperiodconfID = $SalaryperiodconfID_row->SalaryperiodconfID;
 
+$all_shift_types = $_lib['form3']->_ALTINN['ShiftTypes'];
+$all_work_time_scheme_types = $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'];
+$all_type_of_employement_types = $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'];
+$tmp_all_occupations = $_lib['db']->get_hashhash(array('query' => $_lib['form3']->_QUERY['form']['occupationmenu'], 'key' => 'OccupationID'));
+$all_occupations = array();
+foreach($tmp_all_occupations as $occupation) { $all_occupations[$occupation['OccupationID']] = $occupation['YNr'] . " " . $occupation['LNr'] . " " . htmlentities($occupation['Name']); }
+$tmp_all_subcompanies = $_lib['db']->get_hashhash(array('query' => $_lib['form3']->_QUERY['form'][subcompanymenu], 'key' => 'SubcompanyID'));
+$all_subcompanies = array();
+foreach($tmp_all_subcompanies as $subcompany) { $all_subcompanies[$subcompany['SubcompanyID']] = htmlentities($subcompany['Name']) . " " . $subcompany['OrgNumber']; }
+
 $kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommune WHERE KommuneID ='%d'", $head->KommuneID)  ) );
 
 $formname = "salaryUpdate";
@@ -178,33 +188,36 @@ $formname = "salaryUpdate";
 <? print $_lib['sess']->doctype ?>
 
 <? 
-  $wr_query = sprintf("SELECT
+  $work_relation_query = sprintf("SELECT
                         w.AccountPlanID as AccountPlanID,
                         w.WorkRelationID as WorkRelationID,
                         w.SubcompanyID as SubcompanyID,
                         sc.Name as SubcompanyName,
-                        w.KommuneID as KommuneID,
                         w.WorkTimeScheme as WorkTimeScheme,
                         w.ShiftType as ShiftType,
                         w.TypeOfEmployment as TypeOfEmployment,
                         w.OccupationID as OccupationID,
                         w.WorkStart as WorkStart,
-                        w.WorkStop as WorkStop
+                        w.WorkStop as WorkStop,
+                        w.InCurrentPositionSince as InCurrentPositionSince,
+                        w.WorkPercent as WorkPercent,
+                        w.WorkPercentUpdatedAt as WorkPercentUpdatedAt,
+                        w.WorkMeasurement as WorkMeasurement,
+                        w.SalaryDateChangedAt as SalaryDateChangedAt
                       FROM 
                         workrelation w
                         LEFT JOIN subcompany sc ON w.SubcompanyID = sc.SubcompanyID
                       GROUP BY 
                         WorkRelationID
                       ");
-  $result_set = $_lib['db']->db_query($wr_query);
+  $work_relation_result = $_lib['db']->db_query($work_relation_query);
   $work_relations = array();
   $fetched_work_relations = array();
-  while($row = mysqli_fetch_assoc($result_set)) $fetched_work_relations[] = $row;
+  while($row = mysqli_fetch_assoc($work_relation_result)) $fetched_work_relations[] = $row;
   foreach ($fetched_work_relations as $fetched_work_relation) {
-    if($fetched_work_relation["KommuneID"] == 0) $fetched_work_relation["KommuneID"] = "";
     if($fetched_work_relation["OccupationID"] == 0) $fetched_work_relation["OccupationID"] = "";
     $fetched_work_relation["WorkStop"] != "0000-00-00" ? $work_stop = $fetched_work_relation["WorkStop"] : $work_stop = "";
-    $fetched_work_relation["WorkRelationName"] = $fetched_work_relation["WorkRelationID"] ." - ". $fetched_work_relation["SubcompanyName"] ." (". $fetched_work_relation["WorkStart"] ." - ". $work_stop .")";
+    $fetched_work_relation["WorkRelationName"] = htmlentities($fetched_work_relation["WorkRelationID"] ." - ". $fetched_work_relation["SubcompanyName"] ." (". $fetched_work_relation["WorkStart"] ." - ". $work_stop .")");
     $work_relations[$fetched_work_relation["AccountPlanID"]][$fetched_work_relation["WorkRelationID"]] = $fetched_work_relation;
   }
 ?>
@@ -253,20 +266,9 @@ $formname = "salaryUpdate";
     <th class="sub"><input type="text" name="salary.ValidTo.<? print $head->SalaryID ?>" value="<? print $head->ValidTo ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
-    <th class="sub">
-      <div style="display: none;">
-    <?
-            print $_lib['form3']->kommune_menu(array(
-                'table' => 'salary',
-                'field' => 'KommuneID',
-                'value' => $head->KommuneID,
-                'accesskey' => 'K',
-                'pk' => $head->SalaryID,
-            ));
-    ?>
-    </div>
-    <div id="KommuneIDShowingValue"></div>
-  </th>
+    <input type="hidden" name="salary.KommuneID.<? print $head->SalaryID ?>" value="<? print $head->KommuneID ?>">
+    <th class="sub"><? print $kommune->KommuneNumber . " " . htmlentities($kommune->KommuneName); ?></th>
+
     <?
       // if date is set just show it unless the user is admin in which case show the input
       if (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00' || $_lib['sess']->get_person('AccessLevel') >= 4) {
@@ -287,50 +289,36 @@ $formname = "salaryUpdate";
     <th class="sub"><div id='workRelationSelect'></div>
   </tr>
   <tr>
-    <th class="salaryhead">Tabelltrekk</th>
-    <th class="salaryhead">Prosenttrekk</th>
-    <th class="salaryhead">Skatteetaten</th>
-    <th class="salaryhead" colspan="2">Skifttype</th>
-    <th class="salaryhead">Arbeidstid</th>
-    <th class="salaryhead" colspan="3">Ansettelsestype</th>
-    <th class="salaryhead" colspan="2">Yrke</th>
-    <th class="salaryhead">Ansatt ved</th>
+    <th>Tabelltrekk</th>
+    <th>Prosenttrekk</th>
+    <th>Skatteetaten</th>
+    <th colspan="2">Skifttype</th>
+    <th>Arbeidstid</th>
+    <th colspan="3">Ansettelsestype</th>
+    <th colspan="2">Yrke</th>
+    <th>Ansatt ved</th>
   </tr>
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
-    <th class="sub" colspan="2">
-      <div style="display: none;">
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'table'=> 'salary', 'field'=>'ShiftType', 'pk'=>$head->SalaryID, 'value' => $head->ShiftType, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 40)); ?>
-      </div>
-      <div id="ShiftTypeShowingValue"></div>
-    </th>
-
-    <th class="sub">
-      <div style="display: none;">
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> 'salary', 'field'=>'WorkTimeScheme', 'pk'=>$head->SalaryID, 'value'=>$head->WorkTimeScheme, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
-      </div>
-      <div id="WorkTimeSchemeShowingValue"></div>
-    </th>
-    <th class="sub" colspan="3">
-      <div style="display: none;">
-      <? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> 'salary', 'field'=>'TypeOfEmployment', 'pk'=>$head->SalaryID, 'value'=>$head->TypeOfEmployment, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
-      </div>
-      <div id="TypeOfEmploymentShowingValue"></div>
-    </th>
-    <th class="sub" colspan="2">
-      <div style="display: none;">
-      <? print $_lib['form3']->Occupation_menu3(array('table'=>'salary', 'field'=>'OccupationID', 'pk'=>$head->SalaryID, 'value'=>$head->OccupationID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'width' => 64)); ?>
-      </div>
-      <div id="OccupationIDShowingValue"></div>
-    </th>
-    <th class="sub">
-      <div style="display: none;">
-      <? print $_lib['form3']->Subcompany_menu3(array('table'=>'salary', 'field'=>'SubcompanyID', 'pk'=>$head->SalaryID, 'value'=>$head->SubcompanyID, 'access' => $_lib['sess']->get_person('AccessLevel'), 'width' => 40)); ?>
-      </div>
-      <div id="SubcompanyIDShowingValue"></div>
-    </th>
+    <input type="hidden" id="salary.ShiftType.<? print $head->SalaryID ?>" name="salary.ShiftType.<? print $head->SalaryID ?>" value="<? print $head->ShiftType ?>">
+    <th id="ShiftType_display_value" class="sub" colspan="2"><? print $all_shift_types[$head->ShiftType] ?></th>
+    <input type="hidden" id="salary.WorkTimeScheme.<? print $head->SalaryID ?>" name="salary.WorkTimeScheme.<? print $head->SalaryID ?>" value="<? print $head->WorkTimeScheme ?>">
+    <th id="WorkTimeScheme_display_value" class="sub"><? print $all_work_time_scheme_types[$head->WorkTimeScheme] ?></th>
+    <input type="hidden" id="salary.TypeOfEmployment.<? print $head->SalaryID ?>" name="salary.TypeOfEmployment.<? print $head->SalaryID ?>" value="<? print $head->TypeOfEmployment ?>">
+    <th id="TypeOfEmployment_display_value"class="sub" colspan="3"><? print $all_type_of_employement_types[$head->TypeOfEmployment] ?></th>
+    <input type="hidden" id="salary.OccupationID.<? print $head->SalaryID ?>" name="salary.OccupationID.<? print $head->SalaryID ?>" value="<? print $head->OccupationID ?>">
+    <th id="OccupationID_display_value" class="sub" colspan="2"><? print $all_occupations[$head->OccupationID] ?></th>
+    <input type="hidden" id="salary.SubcompanyID.<? print $head->SalaryID ?>" name="salary.SubcompanyID.<? print $head->SalaryID ?>" value="<? print $head->SubcompanyID ?>">
+    <th id="SubcompanyID_display_value" class="sub"><? print $all_subcompanies[$head->SubcompanyID] ?></th>
+    <input type="hidden" id="salary.WorkStart.<? print $head->SalaryID ?>" name="salary.WorkStart.<? print $head->SalaryID ?>" value="<? print $head->WorkStart ?>">
+    <input type="hidden" id="salary.WorkStop.<? print $head->SalaryID ?>" name="salary.WorkStop.<? print $head->SalaryID ?>" value="<? print $head->WorkStop ?>">
+    <input type="hidden" id="salary.InCurrentPositionSince.<? print $head->SalaryID ?>" name="salary.InCurrentPositionSince.<? print $head->SalaryID ?>" value="<? print $head->InCurrentPositionSince ?>">
+    <input type="hidden" id="salary.WorkPercent.<? print $head->SalaryID ?>" name="salary.WorkPercent.<? print $head->SalaryID ?>" value="<? print $head->WorkPercent ?>">
+    <input type="hidden" id="salary.WorkPercentUpdatedAt.<? print $head->SalaryID ?>" name="salary.WorkPercentUpdatedAt.<? print $head->SalaryID ?>" value="<? print $head->WorkPercentUpdatedAt ?>">
+    <input type="hidden" id="salary.WorkMeasurement.<? print $head->SalaryID ?>" name="salary.WorkMeasurement.<? print $head->SalaryID ?>" value="<? print $head->WorkMeasurement ?>">
+    <input type="hidden" id="salary.SalaryDateChangedAt.<? print $head->SalaryID ?>" name="salary.SalaryDateChangedAt.<? print $head->SalaryID ?>" value="<? print $head->SalaryDateChangedAt ?>">
   </tr>
 </table>
 <br>
@@ -720,53 +708,62 @@ unset($_SESSION['oauth_paycheck_sent']);
 ?>
 
 <script type="text/javascript">
-  function changeSelectValueTo(id, value) {
-    var options = document.getElementById(id).options;
-    for (var i = 0; i < options.length; i++) {
-      if (options[i].value == value) {              
-        options[i].selected = true;
-        break;
-      }
-    }
-  }
-
-  function printFieldWhereSelectShouldHaveBeen(id) {
-    var select = document.getElementById("salary." + id + ".<? print $SalaryID; ?>");
-    $("#" + id + "ShowingValue").html(select.options[select.selectedIndex].innerHTML);
-  }
-
   var all_work_relations = <? print json_encode($work_relations); ?>;
   var selected_employee = <? print $head->AccountPlanID; ?>;
-  var selected_work_relation;
+  var selected_work_relation_id = <? print $head->WorkRelationID; ?>;
+  var selected_work_relation = all_work_relations[selected_employee][selected_work_relation_id];
+
+  var fields_to_change = { WorkTimeScheme: <? print json_encode($all_work_time_scheme_types); ?>,
+                           ShiftType: <? print json_encode($all_shift_types); ?>,
+                           TypeOfEmployment: <? print json_encode($all_type_of_employement_types); ?>,
+                           OccupationID: <? print json_encode($all_occupations); ?>,
+                           SubcompanyID: <? print json_encode($all_subcompanies); ?> };
+
+  var hidden_fields_to_change = { WorkStart: '0000-00-00',
+                                  WorkStop: '0000-00-00',
+                                  InCurrentPositionSince: '0000-00-00',
+                                  WorkPercent: 0.0,
+                                  WorkPercentUpdatedAt: '0000-00-00',
+                                  WorkMeasurement: 0.0,
+                                  SalaryDateChangedAt: '0000-00-00' };
+
+  function changeDisplayValueTo(id, value, text) {
+    document.getElementById(id + "_display_value").innerHTML = text;
+    changeHiddenValueTo(id, value);
+  }
+
+  function changeHiddenValueTo(id, value) {
+    document.getElementById('salary.'+id+'.<? print $head->SalaryID; ?>').value = value;
+  }
 
   function printWorkRelationsSelectForEmployee() {
     var work_relations = all_work_relations[selected_employee];
-    var selected_wr_id = <? print $head->WorkRelationID; ?>;
     var out = "";
     out += "<select name='salary_WorkRelationID_<? print $SalaryID; ?>' onchange='selected_work_relation = all_work_relations[selected_employee][this.value];'>"
     out += "  <option value=''>Ikke valgt</option>";
     for(var i in work_relations) {
-      is_selected = (work_relations[i]["WorkRelationID"] == selected_wr_id) ? ' selected ' : '';
+      is_selected = (work_relations[i]["WorkRelationID"] == selected_work_relation_id) ? ' selected ' : '';
       out += "  <option value='" + work_relations[i]["WorkRelationID"] + "'" + is_selected + ">" + work_relations[i]["WorkRelationName"] + "</option>";
     }
     out += "</select>";
-    out += "<button onclick='updateInputValuesWithWorkRelationInfo(); return false;'>Oppdater arbeidsforhold</button>";
+    out += "<button onclick='updateValuesWithWorkRelationInfo(); return false;'>Endre arbeidsforhold</button>";
     $("#workRelationSelect").html(out);
   }
 
-  function updateInputValuesWithWorkRelationInfo() {
-    var fields_to_change = ["WorkTimeScheme", "ShiftType", "TypeOfEmployment", "OccupationID", "SubcompanyID", "KommuneID"];
-    for(var i = 0; i < fields_to_change.length; i++) {
-      if(selected_work_relation) {
-        changeSelectValueTo("salary." + fields_to_change[i] + ".<? print $SalaryID; ?>", selected_work_relation[fields_to_change[i]]);
+  function updateValuesWithWorkRelationInfo() {
+    if(selected_work_relation) {
+      for(field_name in fields_to_change) {
+        field_value = selected_work_relation[field_name];
+        changeDisplayValueTo(field_name, field_value, fields_to_change[field_name][field_value]);
       }
-      printFieldWhereSelectShouldHaveBeen(fields_to_change[i]);
+      for(hidden_field_name in hidden_fields_to_change) {
+        changeHiddenValueTo(hidden_field_name, selected_work_relation[hidden_field_name]);
+      }
     }
   }
 
   $(document).ready(function() {
     printWorkRelationsSelectForEmployee();
-    updateInputValuesWithWorkRelationInfo();
   })
 
 </script>

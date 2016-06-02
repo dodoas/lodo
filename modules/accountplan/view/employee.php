@@ -188,7 +188,7 @@ if(!empty($validation_errors)) {
 
 </td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
-    <td>Kredittid oppdatert:</td>
+    <td>Siste l&oslash;nnsendrings dato:</td>
     <td>
       <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'CreditDaysUpdatedAt', 'value'=>$account->CreditDaysUpdatedAt, 'class'=>'lodoreqfelt')) ?>
     </td>
@@ -405,7 +405,7 @@ if(!empty($validation_errors)) {
     <td class="menu">Stillingsprosent</td>
     <td class="menu">Stillingsprosent oppdatert</td>
     <td class="menu">Timer hver uke ved full stilling</td>
-    <td class="menu">Kommune</td>
+    <td class="menu">Siste l&oslash;nnsendrings dato</td>
     <td class="menu"></td>
   </tr>
 <?
@@ -417,7 +417,7 @@ while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
   $work_relations_array[] = $work_relation;
 }
 
-$validation_errors = validate_work_relations($work_relations_array);
+$validation_errors = work_relation::validate_work_relations($work_relations_array);
 if(!empty($validation_errors)) {
   print '<div class="warning">';
   foreach ($validation_errors as $error) {
@@ -442,7 +442,7 @@ foreach ($work_relations_array as $work_relation) {
     <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkPercent', 'value'=>$work_relation->WorkPercent, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkPercentUpdatedAt', 'value'=>$work_relation->WorkPercentUpdatedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkMeasurement', 'value'=>$work_relation->WorkMeasurement, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
-    <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table2, 'field'=>'KommuneID', 'value'=>$work_relation->KommuneID, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'SalaryDateChangedAt', 'value'=>$work_relation->SalaryDateChangedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td>
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
       <input type="checkbox" name="work_relations_to_delete[]" value="<? print $work_relation->WorkRelationID; ?>" /></td>

@@ -1132,12 +1132,12 @@ class form3
         }
 
         if(isset($args['onchange'])) {
-            $onchange = $args['onchange'];
+            $onchange = "onchange=\"" . $args['onchange'] . "\"";
         } else {
             $onchange = "";
         }
 
-        $element = "<select onchange=\"".$onchange."\" $disabled $selectedcolor name=\"".$name."\" tabindex=\"".$args['tabindex']."\" accesskey=\"".$args['accesskey']."\" class=\"".$args['class']."\" " . $element;
+        $element = "<select $onchange $disabled $selectedcolor name=\"".$name."\" tabindex=\"".$args['tabindex']."\" accesskey=\"".$args['accesskey']."\" class=\"".$args['class']."\" " . $element;
 
         #$_lib['db']->db_free_result($result);
         return $element;
