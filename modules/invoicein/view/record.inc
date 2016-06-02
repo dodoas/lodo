@@ -49,6 +49,12 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
     $ID = $invoicein->add();
     header("Location: " . $_lib['sess']->dispatchs . "t=invoicein.edit&ID=" . $ID . "&inline=edit");
     die();
+} elseif($_lib['input']->getProperty('action_invoicein_delete')) {
+    $deleted = $invoicein->delete();
+    if ($deleted) {
+      header("Location: " . $_lib['sess']->dispatchs . "t=invoicein.list");
+      die();
+    }
 }
 // Remove an allowance/charge from invoice line
 if($_lib['input']->getProperty('action_invoicein_line_allowance_charge_delete')) {

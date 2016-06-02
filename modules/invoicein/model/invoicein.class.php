@@ -407,6 +407,11 @@ class logic_invoicein_invoicein implements Iterator {
 
         #print_r($accountplan);
         #print_r($args);
+        foreach (range(1, $args['field_count']) as $i) {
+          $invoiceinline_id = $args[$i];
+          $invoiceinline_accountplan = $accounting->get_accountplan_object($args['invoiceinline_AccountPlanID_'.$invoiceinline_id]);
+          if (!$invoiceinline_accountplan->EnableCar && !empty($args['invoiceinline_CarID_'.$invoiceinline_id])) $args['invoiceinline_CarID_'.$invoiceinline_id] = 0;
+        }
 
         $tables_to_update = array(
           'invoicein'                        => 'ID',
@@ -506,6 +511,17 @@ class logic_invoicein_invoicein implements Iterator {
         return $_lib['db']->db_insert_id();
     }
 
+    /***************************************************************************
+     * Delete incoming invoice
+     */
+    public function delete() {
+        global $_lib;
+        $delete_invoiceinlines = "DELETE FROM invoiceinline WHERE ID = " . $this->ID . " AND ID IN (SELECT DISTINCT(ID) FROM invoicein WHERE JournalID IS NULL)";
+        $_lib['db']->db_delete($delete_invoiceinlines);
+        $delete_invoicein = "DELETE FROM invoicein WHERE ID = " . $this->ID . " AND JournalID IS NULL";
+        $_lib['db']->db_delete($delete_invoicein);
+        return true;
+    }
     ################################################################################################
     #Journal the invoices automatically.
     #Set the invoices as registered in fakturabank

@@ -126,6 +126,7 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Fakturabank</th>
     <th class="number">Remittering</th>
     <th class="number">Status</th>
+    <th>Opprettet som</th>
 </tr>
 </thead>
 <tbody>
@@ -201,6 +202,7 @@ foreach($invoicein as $InvoiceO) {
       <td class="number"><? if($InvoiceO->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $InvoiceO->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
       <td class="number"><? print $InvoiceO->RemittanceStatus ?></td>
       <td class="number"><? print $InvoiceO->Status ?></td>
+      <td><? print ($InvoiceO->Imported) ? 'importert' : 'manuelt'; ?></td>
   </tr>
 <? } ?>
 </tbody>

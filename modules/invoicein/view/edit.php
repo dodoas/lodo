@@ -191,21 +191,16 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
 
 <table class="lodo_data">
 <thead>
-<? if ($invoicein->Imported) { ?>
     <tr>
         <td>Bilagsnummer</td>
-        <td><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$invoicein->VoucherType&amp;voucher_JournalID=$invoicein->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $invoicein->VoucherType ?><? print $invoicein->JournalID ?></a></td>
-        <td>Bilagsnummer</td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'JournalID', 'pk' => $ID, 'value'=>$invoicein->JournalID, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
-    </tr>
-<? } else { ?>
-    <tr>
-        <td>Bilagsnummer</td>
-        <td><? print $invoicein->JournalID ?></td>
+        <td>
+          <? if ($invoicein->JournalID) { ?>
+          <a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$invoicein->VoucherType&amp;voucher_JournalID=$invoicein->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $invoicein->VoucherType ?><? print $invoicein->JournalID ?></a></td>
+        <? } ?>
+        </td>
         <td></td>
         <td></td>
     </tr>
-<? } ?>
     <tr>
         <td>Fakturanummer</td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceNumber', 'pk' => $ID, 'value'=>$invoicein->InvoiceNumber, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
@@ -283,8 +278,13 @@ foreach ($currencies as $currency) {
     <tr>
         <td>Forfalls dato</td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$ID, 'value'=>substr($invoicein->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+<? if (!$invoicein->Imported) { ?>
         <td>Er med i reisegarantifondet</td>
         <td><? print $_lib['form3']->Checkbox(array('table'=>$db_table, 'field'=>'isReisegarantifond', 'pk'=>$ID, 'value'=>$invoicein->isReisegarantifond, 'tabindex' => $tabindex++)) ?></td>
+<? } else { ?>
+        <td></td>
+        <td></td>
+<? } ?>
     </tr>
     <tr>
       <td>V&aring;r ref.</td>
@@ -308,6 +308,8 @@ foreach ($currencies as $currency) {
       <td valign="top">Kommentar (intern)</td>
       <td colspan="3"><? print $_lib['form3']->TextArea(array('table'=>$db_table, 'field'=>'CommentInternal', 'pk'=>$ID, 'value'=>$invoicein->CommentInternal, 'tabindex'=>$tabindex++, 'height'=>'5', 'width'=>'80')) ?></td>
     </tr>
+<?
+/* Commented out per Arnt's instructions
     <tr>
       <td>Remitteringsstatus</td>
       <td><? print $invoicein->RemittanceStatus ?></td>
@@ -333,6 +335,8 @@ foreach ($currencies as $currency) {
       <td>RemittanceDaySequence</td>
       <td><? print $invoicein->RemittanceDaySequence ?></td>
     </tr>
+*/
+?>
 <? if (!$invoicein->Imported) { ?>
     <tr>
       <td>Opprettet p&aring;</td>
@@ -669,8 +673,19 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 			}
 		} else {
 			print "Faktura l&aring;st";
-		}
+    }
+    ?>
+        </td>
+    </tr>
+    <tr>
+      <td>
+        <?
+          if (($_lib['sess']->get_person('AccessLevel') >= 4) && (!$invoicein->Imported) && (!$invoicein->JournalID)) {
+            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicein_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'tabindex' => $tabindex++));
+          }
         ?>
+      </td>
+    </tr>
     </form>
     <tr>
         <td colspan="5" align="right">Linje sum</td>

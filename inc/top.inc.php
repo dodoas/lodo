@@ -103,7 +103,11 @@ $topclass = 'topclass';
                                   <a href="<? print $_lib['sess']->dispatch ?>t=journal.edit&new=1&type=bank_out&voucher_AccountPlanID=<? print $setup['bankut']; ?>" class="group_buy">Ut</a>
                                   <a href="<? print $_lib['sess']->dispatch ?>t=ocr.list">Innbetaling (OCR/KID)</a>
                                   <a href="<? print $_lib['sess']->dispatch ?>t=bank.list">Bank</a>
+<?
+/* Commented out per Arnt's instructions
                                   <a href="<? print $_lib['sess']->dispatch ?>t=remittance.listincoming">Betaling/Remittering</a>
+ */
+?>
                                 </fieldset>
                                 </td>
                                 <td>
