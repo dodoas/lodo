@@ -10,13 +10,21 @@ class validation {
         for($i=0; $i<9; $i++) {
             $temp_sum += $number[$i] * $digit_10_weights[$i];
         }
-        if($number[9] != (-$temp_sum)%11 + 11) return false;
+
+        $left_overs = $temp_sum % 11;
+        $check = 11 - $left_overs;
+        if($left_overs == 0) $check = 0;
+        if($number[9] != $check) return false;
 
         $temp_sum = 0;
         for($i=0; $i<10; $i++) {
             $temp_sum += $number[$i] * $digit_11_weights[$i];
         }
-        if($number[10] != (-$temp_sum)%11 + 11) return false;
+
+        $left_overs = $temp_sum % 11;
+        $check = 11 - $left_overs;
+        if($left_overs == 0) $check = 0;
+        if($number[10] != $check) return false;
 
         return true;
     }
