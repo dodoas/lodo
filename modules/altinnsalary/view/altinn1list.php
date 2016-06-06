@@ -103,12 +103,13 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 <table class="lodo_data">
   <thead>
     <tr>
-      <th colspan="4">Ansatte</th>
+      <th colspan="5">Ansatte</th>
     </tr>
     <tr>
       <th class="sub">Velg</th>
       <th class="sub">ID</th>
       <th class="sub">Navn</th>
+      <th class="sub">Arbeidsforhold</th>
       <th class="sub">Rapportert i denne perioden</th>
     </tr>
   </thead>
@@ -120,17 +121,21 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   $query_employees = $report_->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);
   while($employee = $_lib['db']->db_fetch_object($result_employees)) {
+    $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID;
+    $result_work_relations = $_lib['db']->db_query($query_work_relations);
+    while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
 ?>
     <tr>
-      <td><? print $_lib['form3']->checkbox(array('name' => "use_employee[" . $employee->AccountPlanID . "]")); ?></td>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
+      <td><? print $work_relation->WorkRelationID . ' - ' . $work_relation->Name . ' (' . $work_relation->WorkStart . ' - ' . $work_relation->WorkStop . ') ' . $employee->FirstName . ' ' . $employee->LastName . '(' . $employee->AccountPlanID . ')'; ?></td>
 <?
   // last report for this period that included this employee
-  $query_altin_employee = "SELECT ar1e.*
-                           FROM altinnReport1employee ar1e JOIN
-                                altinnReport1 ar1 ON ar1e.AltinnReport1ID = ar1.AltinnReport1ID
-                          WHERE ar1.Period = '" . $_periode . "' AND ar1e.AccountPlanID = " . $employee->AccountPlanID . "
+  $query_altin_employee = "SELECT ar1wr.*
+                           FROM altinnReport1WorkRelation ar1wr JOIN
+                                altinnReport1 ar1 ON ar1wr.AltinnReport1ID = ar1.AltinnReport1ID
+                          WHERE ar1.Period = '" . $_periode . "' AND ar1wr.WorkRelationID = " . $work_relation->WorkRelationID . "
                           ORDER BY ar1.AltinnReport1ID";
   $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
   $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
@@ -151,6 +156,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       </td>
     </tr>
 <?
+    }
   }
 ?>
   </tbody>
@@ -217,15 +223,22 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   <? } ?>
   </tbody>
 </table>
-
+<br/>
+ERRORS:<br/>
 <?
 if (isset($xml_generated)) {
   $xml = $report->generateXML();
-  echo "ERRORS:<br/>";
   if (!empty($report->errors)) foreach($report->errors as $error) echo '<p>' . $error . '</p>';
   else echo '<p>No errors.</p>';
-  echo "XML DATA:<br/>";
 ?>
+XML DATA:<br/>
+<textarea rows='100' cols='150'>
+<?
+echo $xml;
+?>
+</textarea>
+<br/><br/>
+DEBUG ARRAYS:<br/>
 <textarea rows='100' cols='150'>
 <?
 echo "Salaries array:\n";
@@ -234,7 +247,6 @@ echo "Employees array:\n";
 print_r($report->employees);
 echo "Message array:\n";
 print_r($report->melding);
-echo $xml;
 ?>
 </textarea>
 <?

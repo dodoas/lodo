@@ -9,7 +9,8 @@ class altinn_report {
   public $salary_ids             = array();
   public $salary_lines           = array();
   public $employees              = array();
-  public $employee_ids           = array();
+  public $work_relations         = array();
+  public $work_relation_ids      = array();
   public $only_register_employee = false;
   public $period                 = '';
   public $melding                = null; // structured object that contains the report
@@ -18,11 +19,11 @@ class altinn_report {
   public $errors                 = null; // to be populated if errors occur
 
 /* Constructor accepts the accounting period(year-month)
- * salary, employee ids, and flag if we are sending for only
+ * salary, work relation ids, and flag if we are sending for only
  * one employee.
  * It automatically loads all the salaries and employees.
  */
-  function __construct($period, $salary_ids = array(), $employee_ids = array(), $only_register_employee = false) {
+  function __construct($period, $salary_ids = array(), $work_relation_ids = array(), $only_register_employee = false) {
     // if no period selected, exit
     if (empty($period)) return;
     else $this->period = $period;
@@ -30,19 +31,19 @@ class altinn_report {
     // TODO: Use and update initialize method and remove this below
     $this->only_register_employee = $only_register_employee;
     $this->salary_ids = $salary_ids;
-    $this->employee_ids = $employee_ids;
+    $this->work_relation_ids = $work_relation_ids;
     // fetch the salaries
     self::fetchSalaries($this->salary_ids);
     // fetch the employees
-    self::fetchEmployees($this->employee_ids);
+    self::fetchEmployeesAndWorkRelations($this->work_relation_ids);
   }
 
 /* Helper function to initialize all the needed parameters
- * both salary_ids and employee_ids
+ * both salary_ids and work_relation_ids
  */
-  function initialize($salary_ids, $employee_ids) {
+  function initialize($salary_ids, $work_relation_ids) {
     self::setSalaryIDs($salary_ids);
-    self::setEmployeeIDs($employee_ids);
+    self::setWorkRelationsIDs($work_relation_ids);
   }
 
 /* Helper function to set which salaries to be included
@@ -51,10 +52,10 @@ class altinn_report {
     $this->salary_ids = $salary_ids;
   }
 
-/* Helper function to set which employees to be included
+/* Helper function to set which work relations to be included
  */
-  function setEmployeeIDs($employee_ids) {
-    $this->employee_ids = $employee_ids;
+  function setWorkRelationIDs($work_relation_ids) {
+    $this->work_relation_ids = $work_relation_ids;
   }
 
 /* Helper function to add replacement message id
@@ -152,7 +153,7 @@ class altinn_report {
     foreach($this->employees as $key_subcompany => $employees) {
       // generate subcompany array with all the salaries for that company
       // sumForskuddstrekk and sumArbeidsgiveravgift are sent by reference and are affected outsude the function as well
-      $virksomhet = self::generateVirksomhetArray($key_subcompany, $this->salaries[$key_subcompany], $code_for_tax_calculation, $sumForskuddstrekk, $sumArbeidsgiveravgift);
+      $virksomhet = self::generateVirksomhetArray($key_subcompany, $this->salaries[$key_subcompany], $this->work_relations[$key_subcompany], $code_for_tax_calculation, $sumForskuddstrekk, $sumArbeidsgiveravgift);
 
       if ($virksomhet) $virksomhet_array[]['virksomhet'] = $virksomhet;
     }
@@ -170,7 +171,7 @@ class altinn_report {
 /* Helper function to generate a subcompany array
  * Affects $sumForskuddstrekk and $sumArbeidsgiveravgift vars.
  */
-  function generateVirksomhetArray($key_subcompany, $salaries, $code_for_tax_calculation, &$sumForskuddstrekk, &$sumArbeidsgiveravgift) {
+  function generateVirksomhetArray($key_subcompany, $salaries, $work_relations, $code_for_tax_calculation, &$sumForskuddstrekk, &$sumArbeidsgiveravgift) {
     // used for arbeidsgiveravgift node
     $loennOgGodtgjoerelse = array();
     $virksomhet = array();
@@ -178,13 +179,14 @@ class altinn_report {
     foreach($this->employees[$key_subcompany] as $key_employee => $employee) {
       // if there is no salaries for current subcompany and current employee, just generate work relation
       // because we do not want to try to loop over a null value
+      $work_relation = $work_relations[$key_employee];
       if (empty($salaries[$employee->AccountPlanID])) {
-        $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk, true);
+        $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, NULL, $employee, $work_relation, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk, true);
         // income receiver
         $virksomhet[] = $inntektsmottaker;
       } else {
         if (count($salaries[$employee->AccountPlanID]) > 1) {
-          // Error is: There is more then 1 salary<L 1, L 3> for <name> in this report
+          // Error is: There is more than 1 salary<L 1, L 3> for <name> in this report
           $l_names = array_map(function($salary) {
             return "L ". $salary->JournalID;
           }, $salaries[$employee->AccountPlanID]);
@@ -196,7 +198,7 @@ class altinn_report {
         foreach($salaries[$employee->AccountPlanID] as $key_salary => $salary) {
           // generate income receiver array
           // virksomhet, loennOgGodtgjoerelse and sumForskuddstrekk are affected in this function because they are sent by reference
-          $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk);
+          $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $work_relation, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk);
           $use_loennOgGodtgjoerelse = true;
 
           $virksomhet[] = $inntektsmottaker;
@@ -214,11 +216,11 @@ class altinn_report {
     return $virksomhet;
   }
 
-/* Helper function to generate a subcompany array
+/* Helper function to generate an incomereciever array
  * Affects $virksomhet, $loennOgGodtgjoerelse and $sumForskuddstrekk vars.
  * use_only_employee_info is set if we only want the work relation and not the incomes
  */
-  function generateInntektsmottakerArray($key_subcompany, $salary, $employee, $code_for_tax_calculation, &$virksomhet, &$loennOgGodtgjoerelse, &$sumForskuddstrekk, $use_only_employee_info = false) {
+  function generateInntektsmottakerArray($key_subcompany, $salary, $employee, $work_relation, $code_for_tax_calculation, &$virksomhet, &$loennOgGodtgjoerelse, &$sumForskuddstrekk, $use_only_employee_info = false) {
     global $_lib;
     // subcompany is the virksomhet for which we report this salary
     if ($use_only_employee_info) {
@@ -266,9 +268,9 @@ class altinn_report {
 
     // generate work relation array
     if ($use_only_employee_info) {
-      $arbeidsforhold = self::generateArbeidsforholdArray($salary, $employee, true);
+      $arbeidsforhold = self::generateArbeidsforholdArray($salary, $employee, $work_relation, true);
     } else {
-      $arbeidsforhold = self::generateArbeidsforholdArray($salary, $employee);
+      $arbeidsforhold = self::generateArbeidsforholdArray($salary, $employee, $work_relation);
     }
 
     // work relation
@@ -337,14 +339,14 @@ class altinn_report {
  * Returns the arbeidsforhold array that is to be included in the report array.
  * use_only_employee_info is set if we only want the work relation and not the incomes
  */
-  function generateArbeidsforholdArray($salary, $employee, $use_only_employee_info = false) {
+  function generateArbeidsforholdArray($salary, $employee, $work_relation, $use_only_employee_info = false) {
     global $_lib;
 
     // get the occupation of the employee in the company
     if ($use_only_employee_info) {
-      // Error is: Occupation not set for salary employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($employee->OccupationID, 'Ansatt: Mangler yrke p&aring; ' . self::fullNameForErrorMessage($employee));
-      $occupation_id = $employee->OccupationID;
+      // Error is: Occupation not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_relation->OccupationID, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler yrke p&aring; ' . self::fullNameForErrorMessage($employee));
+      $occupation_id = $work_relation->OccupationID;
     } else {
       // Error is: Occupation not set for salary L' . $salary->JournalID
       self::checkIfEmpty($salary->OccupationID, 'L&oslash;nnslipp: Mangler yrke p&aring; L' . $salary->JournalID);
@@ -362,9 +364,9 @@ class altinn_report {
     }
     // type of employment
     if ($use_only_employee_info) {
-      // Error is: Employment type not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($employee->TypeOfEmployment, 'Ansatt: Mangler ansettelsestype p&aring; ' . self::fullNameForErrorMessage($employee));
-      $arbeidsforhold['typeArbeidsforhold'] = $employee->TypeOfEmployment;
+      // Error is: Employment type not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+      self::checkIfEmpty($work_relation->TypeOfEmployment, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler ansettelsestype p&aring; ' . self::fullNameForErrorMessage($employee));
+      $arbeidsforhold['typeArbeidsforhold'] = $work_relation->TypeOfEmployment;
     } else {
       // Error is: Employment type not set for salary L' . $salary->JournalID
       self::checkIfEmpty($salary->TypeOfEmployment, 'L&oslash;nnslipp: Mangler ansettelsestype p&aring; L' . $salary->JournalID);
@@ -372,10 +374,17 @@ class altinn_report {
     }
 
     if (self::shouldWeHaveWorkPeriode($arbeidsforhold['typeArbeidsforhold'])){
-      $work_start = $employee->WorkStart;
-      $work_stop = $employee->WorkStop;
-      // Error is: Employment date not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($work_start, 'Ansatt: Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $work_start = $work_relation->WorkStart;
+        $work_stop = $work_relation->WorkStop;
+        // Error is: Employment date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_start, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler Ansettelsesdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $work_start = $salary->WorkStart;
+        $work_stop = $salary->WorkStop;
+        // Error is: Employment date not set for salary L ' . salary->JournalID
+        self::checkIfEmpty($work_start, 'L&oslash;nnslipp: Mangler Ansettelsesdato p&aring; L' . $salary->JournalID, 'date');
+      }
       // employment date
       $arbeidsforhold['startdato'] = strftime('%F', strtotime($work_start));
       // set end date only if the date is not 0000-00-00 otherwise set to null
@@ -384,17 +393,24 @@ class altinn_report {
 
     if (self::shouldWeHaveWorkmeasurement($arbeidsforhold['typeArbeidsforhold'])){
       // work measurement, ex. hours per week
-      // Error is: Work measurement not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($employee->Workmeasurement, 'Ansatt: Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
-      $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $employee->Workmeasurement;
+      if ($use_only_employee_info) {
+        $work_measurement = $work_relation->WorkMeasurement;
+        // Error is: Work measurement not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_measurement, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler arbeidsdtimer hver uke for ' . self::fullNameForErrorMessage($employee), 'number');
+      } else {
+        $work_measurement = $salary->WorkMeasurement;
+        // Error is: Work measurement not set for salary L' . salary->JournalID
+        self::checkIfEmpty($work_measurement, 'L&oslash;nnslipp: Mangler arbeidsdtimer hver uke p&aring; L' . $salary->JournalID, 'number');
+      }
+      $arbeidsforhold['antallTimerPerUkeSomEnFullStillingTilsvarer'] = $work_measurement;
     }
 
     if (self::shouldWeHaveWorkTimeScheme($arbeidsforhold['typeArbeidsforhold'])){
       // work measurement type
       if ($use_only_employee_info) {
-        // Error is: Work time scheme not set for employee ' . self::fullNameForErrorMessage($employee)
-        self::checkIfEmpty($employee->WorkTimeScheme, 'Ansatt: Mangler arbeidstid for ' . self::fullNameForErrorMessage($employee));
-        $arbeidsforhold['avloenningstype'] =  $employee->WorkTimeScheme;
+        // Error is: Work time scheme not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_relation->WorkTimeScheme, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler arbeidstid for ' . self::fullNameForErrorMessage($employee));
+        $arbeidsforhold['avloenningstype'] =  $work_relation->WorkTimeScheme;
       } else {
         // Error is: Work time scheme not set for salary L' . $salary->JournalID
         self::checkIfEmpty($salary->WorkTimeScheme, 'L&oslash;nnslipp: Mangler arbeidstid for L' . $salary->JournalID);
@@ -410,9 +426,9 @@ class altinn_report {
     if (self::shouldWeHaveShift($arbeidsforhold['typeArbeidsforhold'])){
       // work time scheme, ex. no shifts
       if ($use_only_employee_info) {
-        // Error is: Shift type not set for employee ' . self::fullNameForErrorMessage($employee)
-        self::checkIfEmpty($employee->ShiftType, 'Ansatt: Mangler skifttype ' . self::fullNameForErrorMessage($employee));
-        $arbeidsforhold['arbeidstidsordning'] = $employee->ShiftType;
+        // Error is: Shift type not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_relation->ShiftType, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler skifttype ' . self::fullNameForErrorMessage($employee));
+        $arbeidsforhold['arbeidstidsordning'] = $work_relation->ShiftType;
       } else {
         // Error is: Shift type not set for salary L' . $salary->JournalID
         self::checkIfEmpty($salary->ShiftType, 'L&oslash;nnslipp: Mangler skifttype L' . $salary->JournalID);
@@ -422,32 +438,57 @@ class altinn_report {
 
     if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
       // employment percentage
-      // Error is: Work percent not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($employee->WorkPercent, 'Ansatt: Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
-      $arbeidsforhold['stillingsprosent'] = (int) $employee->WorkPercent;
+      if ($use_only_employee_info) {
+        $work_percent = $work_relation->WorkPercent;
+        // Error is: Work percent not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_percent, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosent for ' . self::fullNameForErrorMessage($employee), 'number');
+      } else {
+        $work_percent = $salary->WorkPercent;
+        // Error is: Work percent not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($work_percent, 'L&oslash;nnslipp: Mangler stillingsprosent p&aring; L' . $salary->JournalID, 'number');
+      }
+      $arbeidsforhold['stillingsprosent'] = (int) $work_percent;
     }
 
     if (self::shouldWeHaveCreditDaysUpdatedAt($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for payment date for salary
-      $last_change_of_pay_date = $employee->CreditDaysUpdatedAt;
-      // Error is: Last change of salary pay date not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($last_change_of_pay_date, 'Ansatt: Mangler kredittid oppdatert for ' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $last_change_of_pay_date = $work_relation->SalaryDateChangedAt;
+        // Error is: Last change of salary pay date not set for work relation #id for employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_pay_date, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler siste l&oslash;nnsendrings dato for ' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_pay_date = $salary->SalaryDateChangedAt;
+        // Error is: Last change of salary pay date not set for salary L ' . salary->JournalID
+        self::checkIfEmpty($last_change_of_pay_date, 'L&oslash;nnslipp: Mangler siste l&oslash;nnsendrings dato p&aring; L' . $salary->JournalID, 'date');
+      }
       $arbeidsforhold['sisteLoennsendringsdato'] = strftime('%F', strtotime($last_change_of_pay_date));
     }
 
     if (self::shouldWeHaveCurrentPositionSince($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for position in company
-      $last_change_of_position_in_company = $employee->inCurrentPositionSince;
-      // Error is: Last change of position in company date not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($last_change_of_position_in_company, 'Ansatt: Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $last_change_of_position_in_company = $work_relation->InCurrentPositionSince;
+        // Error is: Last change of position in company date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_position_in_company, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler siste posisjonendringsdato for ' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_position_in_company = $salary->InCurrentPositionSince;
+        // Error is: Last change of position in company date not set for salary L' . salary->JournalID
+        self::checkIfEmpty($last_change_of_position_in_company, 'L&oslash;nnslipp: Mangler siste posisjonendringsdato p&aring; L' . $salary->JournalID, 'date');
+      }
       $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
     }
 
     if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
       // date of last change for work percentage
-      $last_change_of_work_percentage = $employee->WorkPercentUpdatedAt;
-      // Error is: Last change of work percent date not set for employee ' . self::fullNameForErrorMessage($employee)
-      self::checkIfEmpty($last_change_of_work_percentage, 'Ansatt: Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
+      if ($use_only_employee_info) {
+        $last_change_of_work_percentage = $work_relation->WorkPercentUpdatedAt;
+        // Error is: Last change of work percent date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_work_percentage, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_work_percentage = $salary->WorkPercentUpdatedAt;
+        // Error is: Last change of work percent date not set for salary L' . salary->JournalID
+        self::checkIfEmpty($last_change_of_work_percentage, 'L&oslash;nnslipp: Mangler stillingsprosentendret p&aring; L' . $salary->JournalID, 'date');
+      }
       $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
     }
     return $arbeidsforhold;
@@ -546,15 +587,15 @@ class altinn_report {
     return true;
   }
 
-/* Helper function to save a relation which employees were included
+/* Helper function to save a relation which work relations were included
  * in this report.
  */
-  function saveEmployeeReportLinks($altinn_report_id) {
+  function saveWorkRelationReportLinks($altinn_report_id) {
     global $_lib;
-    if (empty($this->employee_ids)) return false;
-    $insert_query = 'INSERT INTO altinnReport1employee (AltinnReport1ID, AccountPlanID) VALUES ';
-    foreach ($this->employee_ids as $employee_id) {
-      $insert_query .= "('" . $altinn_report_id . "', '" . $employee_id . "'),";
+    if (empty($this->work_relation_ids)) return false;
+    $insert_query = 'INSERT INTO altinnReport1WorkRelation (AltinnReport1ID, WorkRelationID) VALUES ';
+    foreach ($this->work_relation_ids as $work_relation_id) {
+      $insert_query .= "('" . $altinn_report_id . "', '" . $work_relation_id . "'),";
     }
     $insert_query = substr($insert_query, 0, -1);
     $_lib['db']->db_query($insert_query);
@@ -582,6 +623,20 @@ class altinn_report {
   }
 
 /* Helper function that generates the query to get
+ * the included work relations
+ */
+  function queryStringForIncludedWorkRelations() {
+    $query_work_relations = "SELECT wr.*
+                             FROM workrelation wr";
+    if (!empty($this->work_relation_ids)) {
+      $query_work_relations .= " WHERE wr.WorkRelationID IN (" . implode($this->work_relation_ids, ', ') . ")";
+    } else {
+      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
+    }
+    return $query_work_relations;
+  }
+
+/* Helper function that generates the query to get
  * the included employees
  */
   function queryStringForIncludedEmployees() {
@@ -591,13 +646,10 @@ class altinn_report {
                         FROM accountplan ap
                         WHERE AccountplanType LIKE '%employee%'";
     // add for selected employee ids also
-    if ($this->employee_ids) {
-      $query_employees .= ' AND ap.AccountPlanID IN (';
-      foreach($this->employee_ids as $employee_id) {
-        $query_employees .= (string) $employee_id . ', ';
-      }
-      $query_employees = substr($query_employees, 0, -2);
-      $query_employees .= ')';
+    if (!empty($this->employee_ids)) {
+      $query_employees .= ' AND ap.AccountPlanID IN (' . implode($this->employee_ids, ', ') . ')';
+    } else {
+      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
     }
     return $query_employees;
   }
@@ -611,13 +663,10 @@ class altinn_report {
                        FROM salary s
                        WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
     // and restrict further by ids
-    if ($this->salary_ids) {
-      $query_salaries .= ' AND SalaryID IN (';
-      foreach($this->salary_ids as $salary_id) {
-        $query_salaries .= (string) $salary_id . ', ';
-      }
-      $query_salaries = substr($query_salaries, 0, -2);
-      $query_salaries .= ')';
+    if (!empty($this->salary_ids)) {
+      $query_salaries .= ' AND SalaryID IN (' . implode($this->salary_ids, ', ') . ')';
+    } else {
+      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
     }
     return $query_salaries;
   }
@@ -632,11 +681,9 @@ class altinn_report {
     if (!$this->only_register_employee) {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
         $this->salaries[(int)$salary->SubcompanyID][$salary->AccountPlanID][] = $salary;
-        $this->employees_subcompany[$salary->AccountPlanID] = (int)$salary->SubcompanyID;
-
         // array_search will return the index so if it is 0 it should still be true
-        if (array_search((int) $salary->AccountPlanID, $this->employee_ids) === false){
-          $this->employee_ids[] = (int) $salary->AccountPlanID;
+        if (array_search((int) $salary->WorkRelationID, $this->work_relation_ids) === false){
+          $this->work_relation_ids[] = (int) $salary->WorkRelationID;
         }
         self::fetchSalaryLines($salary);
       }
@@ -660,20 +707,30 @@ class altinn_report {
     }
   }
 
-/* Helper function that populates the employees array
+/* Helper function that populates the employees and work_relations array
  */
-  function fetchEmployees() {
+  function fetchEmployeesAndWorkRelations() {
     global $_lib;
+
+    $work_relations_by_employee = array();
+    $query_work_relations = self::queryStringForIncludedWorkRelations();
+    $result_work_relations  = $_lib['db']->db_query($query_work_relations);
+    while ($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
+      $this->work_relations[$work_relation->SubcompanyID][$work_relation->AccountPlanID] = $work_relation;
+      if (array_search($work_relation, $work_relations_by_employee) === false){
+        $work_relations_by_employee[$work_relation->AccountPlanID][] = $work_relation;
+      }
+    }
+
     // only the ones whose salaries have the altinn/actual pay date set
     $query_employees = self::queryStringForIncludedEmployees();
     $result_employees  = $_lib['db']->db_query($query_employees);
     while ($employee = $_lib['db']->db_fetch_object($result_employees)) {
-      if (isset($this->employees_subcompany[$employee->AccountPlanID])) {
-        $subcompany_id = $this->employees_subcompany[$employee->AccountPlanID];
-      } else {
-        $subcompany_id = $employee->SubcompanyID;
+      if (!empty($work_relations_by_employee[$employee->AccountPlanID])) {
+        foreach ($work_relations_by_employee[$employee->AccountPlanID] as $work_relation) {
+          $this->employees[$work_relation->SubcompanyID][$employee->AccountPlanID] = $employee;
+        }
       }
-      $this->employees[$subcompany_id][$employee->AccountPlanID] = $employee;
     }
   }
 
