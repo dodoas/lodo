@@ -188,7 +188,7 @@ if(!empty($validation_errors)) {
 
 </td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
-    <td>Kredittid oppdatert:</td>
+    <td>Siste l&oslash;nnsendrings dato:</td>
     <td>
       <? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'CreditDaysUpdatedAt', 'value'=>$account->CreditDaysUpdatedAt, 'class'=>'lodoreqfelt')) ?>
     </td>
@@ -383,6 +383,91 @@ if(!empty($validation_errors)) {
   </tr>
 
   <? } ?>
+</table>
+</form>
+<br/><br/>
+
+<form name="work_relations" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
+<table class="lodo_data">
+  <tr class="result">
+    <th colspan="14">Arbeidsforhold</th>
+  </tr>
+  <tr>
+    <td class="menu">ID</td>
+    <td class="menu">Ansatt ved</td>
+    <td class="menu">Arbeid start</td>
+    <td class="menu">Arbeid slutt</td>
+    <td class="menu">Yrke</td>
+    <td class="menu">Samme posisjon siden</td>
+    <td class="menu">Arbeidstid</td>
+    <td class="menu">Skifttype</td>
+    <td class="menu">Ansettelsestype</td>
+    <td class="menu">Stillingsprosent</td>
+    <td class="menu">Stillingsprosent oppdatert</td>
+    <td class="menu">Timer hver uke ved full stilling</td>
+    <td class="menu">Siste l&oslash;nnsendrings dato</td>
+    <td class="menu"></td>
+  </tr>
+<?
+$db_table2 = 'workrelation';
+$query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID";
+$result_work_relations = $_lib['db']->db_query($query_work_relations);
+$work_relations_array = array();
+while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
+  $work_relations_array[] = $work_relation;
+}
+
+$validation_errors = work_relation::validate_work_relations($work_relations_array);
+if(!empty($validation_errors)) {
+  print '<div class="warning">';
+  foreach ($validation_errors as $error) {
+    print $error ."<br>";
+  }
+  print '</div><br>';
+}
+
+foreach ($work_relations_array as $work_relation) {
+  $WorkRelationID = $work_relation->WorkRelationID;
+?>
+  <tr>
+    <td><? print $work_relation->WorkRelationID; ?></td>
+    <td><? print $_lib['form3']->Subcompany_menu3(array('table'=>$db_table2, 'field'=>'SubcompanyID', 'value'=>$work_relation->SubcompanyID, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkStart', 'value'=>$work_relation->WorkStart, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkStop', 'value'=>$work_relation->WorkStop, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->Occupation_menu3(array('table'=>$db_table2, 'field'=>'OccupationID', 'value'=>$work_relation->OccupationID, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'InCurrentPositionSince', 'value'=>$work_relation->InCurrentPositionSince, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['WorkTimeSchemeTypes'], 'table'=> $db_table2, 'field'=>'WorkTimeScheme', 'value'=>$work_relation->WorkTimeScheme, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['ShiftTypes'], 'width'=>100, 'table'=> $db_table2, 'field'=>'ShiftType', 'value'=>$work_relation->ShiftType, 'pk'=> $WorkRelationID, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $_lib['form3']->_ALTINN['TypeOfEmploymentTypes'], 'table'=> $db_table2, 'field'=>'TypeOfEmployment', 'value'=>$work_relation->TypeOfEmployment, 'pk'=> $WorkRelationID, 'width' => 32, 'class'=> 'lodoreqfelt')); ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkPercent', 'value'=>$work_relation->WorkPercent, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'WorkPercentUpdatedAt', 'value'=>$work_relation->WorkPercentUpdatedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkMeasurement', 'value'=>$work_relation->WorkMeasurement, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'SalaryDateChangedAt', 'value'=>$work_relation->SalaryDateChangedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
+    <td>
+      <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
+      <input type="checkbox" name="work_relations_to_delete[]" value="<? print $work_relation->WorkRelationID; ?>" /></td>
+      <? } ?>
+    </tr>
+<?
+}
+if($_lib['sess']->get_person('AccessLevel') >= 2) {
+?>
+  <tr>
+    <? print $_lib['form3']->hidden(array('name'=>'accountplan_AccountPlanID', 'value'=>$AccountPlanID)) ?>
+    <? print $_lib['form3']->hidden(array('name'=>'accountplan_AccountPlanType', 'value'=>$AccountPlanType)) ?>
+    <td colspan="12" align='left'>
+      <input type="submit" value="Lagre arbeidsforhold" name="action_work_relation_save">
+      <input type="submit" value="Legg til arbeidsforhold" name="action_work_relation_add">
+    </td>
+    <td colspan="2" align="right">
+      <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
+      <input type="submit" name="action_work_relation_delete" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
+      <? } ?>
+    </td>
+  </tr>
+<?
+}
+?>
 </table>
 </form>
 <? includeinc('bottom') ?>

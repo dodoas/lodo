@@ -101,12 +101,13 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 <table class="lodo_data">
   <thead>
     <tr>
-      <th colspan="5">Ansatte</th>
+      <th colspan="6">Ansatte</th>
     </tr>
     <tr>
       <th class="sub">Velg</th>
       <th class="sub">ID</th>
       <th class="sub">Navn</th>
+      <th class="sub">Arbeidsforhold</th>
       <th class="sub">Rapportert i denne perioden</th>
       <th class="sub"></th>
     </tr>
@@ -118,30 +119,34 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);
   while($employee = $_lib['db']->db_fetch_object($result_employees)) {
-    $report_for_employee = new altinn_report($report->period, array(), array($employee->AccountPlanID), true);
-    $employee_names_list[$employee->AccountPlanID] = $report_for_employee->fullNameForErrorMessage($employee);
-    $report_for_employee->populateReportArray();
-    if (empty($report_for_employee->errors)) {
-      $ready_for_altinn_status = false;
-    } else {
-      $employee_errors[$employee->AccountPlanID] = $report_for_employee->errors;
-      $ready_for_altinn_status = 'Ikke klar';
-    }
+    $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID;
+    $result_work_relations = $_lib['db']->db_query($query_work_relations);
+    while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
+      $report_for_employee = new altinn_report($report->period, array(), array($work_relation->WorkRelationID), true);
+      $employee_names_list[$employee->AccountPlanID] = $report_for_employee->fullNameForErrorMessage($employee);
+      $report_for_employee->populateReportArray();
+      if (empty($report_for_employee->errors)) {
+        $ready_for_altinn_status = false;
+      } else {
+        $employee_errors[$employee->AccountPlanID] = $report_for_employee->errors;
+        $ready_for_altinn_status = 'Ikke klar';
+      }
 ?>
     <tr>
-      <td><? print $_lib['form3']->checkbox(array('name' => "use_employee[" . $employee->AccountPlanID . "]")); ?></td>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
 <?
-  // last report for this period that included this employee
-  $query_altin_employee = "SELECT ar1e.*
-                           FROM altinnReport1employee ar1e JOIN
-                                altinnReport1 ar1 ON ar1e.AltinnReport1ID = ar1.AltinnReport1ID
-                          WHERE ar1.Period = '" . $_periode . "' AND ar1e.AccountPlanID = " . $employee->AccountPlanID . "
-                          ORDER BY ar1.AltinnReport1ID";
-  $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
-  $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
+      // last report for this period that included this employee
+      $query_altin_employee = "SELECT ar1wr.*
+                              FROM altinnReport1WorkRelation ar1wr JOIN
+                                    altinnReport1 ar1 ON ar1wr.AltinnReport1ID = ar1.AltinnReport1ID
+                              WHERE ar1.Period = '" . $_periode . "' AND ar1wr.WorkRelationID = " . $work_relation->WorkRelationID . "
+                              ORDER BY ar1.AltinnReport1ID";
+      $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
+      $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
 ?>
+      <td><? print $work_relation->WorkRelationID . ' - ' . $work_relation->Name . ' (' . $work_relation->WorkStart . ' - ' . $work_relation->WorkStop . ') ' . $employee->FirstName . ' ' . $employee->LastName . '(' . $employee->AccountPlanID . ')'; ?></td>
       <td>
         <?
           if ($employee_reported) {
@@ -162,13 +167,14 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
             print $ready_for_altinn_status;
           } else {
         ?>
-          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_employee[<? print $employee->AccountPlanID; ?>]=1&action_soap1=1">Register ansatte i Altinn</a>
+          <a class='button' href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list&altinnReport1_periode=<? print $_periode; ?>&only_register_employee=1&use_work_relation[<? print $work_relation->WorkRelationID; ?>]=1&action_soap1=1">Register arbeidsforhold i Altinn</a>
         <?
           }
         ?>
       </td>
     </tr>
 <?
+    }
   }
 ?>
   </tbody>

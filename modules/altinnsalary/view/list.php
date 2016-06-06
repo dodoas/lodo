@@ -44,7 +44,7 @@ print $_lib['sess']->doctype
   while($so1row = $_lib['db']->db_fetch_object($so1)) {
     $line_color = (!($report_count % 3)) ? "BGColorDark" : "r1";
     $salary_ids = array();
-    $employee_ids = array();
+    $work_relation_ids = array();
     $report_id = $so1row->AltinnReport1ID;
   ?>
     <?
@@ -75,17 +75,17 @@ print $_lib['sess']->doctype
         }
         print count($included_salaries) . " l&oslash;nnslipp(er) og ";
 
-        $query_altin_employee = "SELECT ap.* FROM altinnReport1employee ar1e JOIN accountplan ap ON ap.AccountPlanID = ar1e.AccountPlanID WHERE ar1e.AltinnReport1ID = ".$report_id." ORDER BY ap.FirstName ASC";
-        $result_altin_employee  = $_lib['db']->db_query($query_altin_employee);
+        $query_altinn_wr = "SELECT wr.*, ap.*, sc.* FROM altinnReport1WorkRelation ar1wr JOIN workrelation wr ON wr.WorkRelationID = ar1wr.WorkRelationID JOIN accountplan ap ON ap.AccountPlanID = wr.AccountPlanID JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE ar1wr.AltinnReport1ID = ".$report_id." ORDER BY ap.FirstName ASC";
+        $result_altinn_wr  = $_lib['db']->db_query($query_altinn_wr);
 
-        $included_employees = array();
-        while($_row = $_lib['db']->db_fetch_object($result_altin_employee)){
-          $employee_ids[] = $_row->AccountPlanID;
-          $accountplan_name = $_row->FirstName . ' ' . $_row->LastName . '(' . $_row->AccountPlanID . ')';
+        $included_work_relations = array();
+        while($_row = $_lib['db']->db_fetch_object($result_altinn_wr)){
+          $work_relation_ids[] = $_row->WorkRelationID;
+          $work_relation_name = $_row->WorkRelationID . ' - ' . $_row->Name . ' (' . $_row->WorkStart . ' - ' . $_row->WorkStop . ') ' . $_row->FirstName . ' ' . $_row->LastName . '(' . $_row->AccountPlanID . ')';
           $link = $_lib['sess']->dispatch . 't=accountplan.employee&accountplan_AccountPlanID=' . $_row->AccountPlanID;
-          $included_employees[] = array('AccountPlanName'=>$accountplan_name, 'link'=>$link);
+          $included_work_relations[] = array('AccountPlanName'=>$work_relation_name, 'link'=>$link);
         }
-        print count($included_employees) . " ansatt(e) ";
+        print count($included_work_relations) . " arbeidsforhold ";
         ?>
           <button id="report_extra_info_button_<? print $report_id; ?>" onclick="toggleReportDetails(<? print $report_id; ?>)">Vis</button>
       </td>
@@ -128,8 +128,8 @@ print $_lib['sess']->doctype
           <? foreach($salary_ids as $salary_id) { ?>
             <input type="hidden" name="use_salary[<? print $salary_id; ?>]" value='1'>
           <? } ?>
-          <? foreach($employee_ids as $employee_id) { ?>
-            <input type="hidden" name="use_employee[<? print $employee_id; ?>]" value='1'>
+          <? foreach($work_relation_ids as $work_relation_id) { ?>
+            <input type="hidden" name="use_work_relation[<? print $work_relation_id; ?>]" value='1'>
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? print $_lib['form3']->submit(array(
@@ -163,7 +163,7 @@ print $_lib['sess']->doctype
         $employee_detail_columns = 3;
       ?>
       <td class="menu" colspan="<? print $salary_detail_columns; ?>">L&oslash;nnslipper</td>
-      <td class="menu" colspan="<? print $employee_detail_columns; ?>">Ansatte</td>
+      <td class="menu" colspan="<? print $employee_detail_columns; ?>">Arbeidsforhold</td>
     </tr>
     <tr id="report_extra_info_<? print $report_id; ?>" class="<? print $line_color; ?>" style="display: none">
       <td>
@@ -185,10 +185,10 @@ print $_lib['sess']->doctype
       </td>
       <td>
         <?
-        if (!empty($included_employees)) {
+        if (!empty($included_work_relations)) {
           $employee_print_count = 1;
-          $new_column_every = ceil(count($included_employees)/$employee_detail_columns);
-          foreach($included_employees as $included_employee) {
+          $new_column_every = ceil(count($included_work_relations)/$employee_detail_columns);
+          foreach($included_work_relations as $included_employee) {
         ?>
           <a href="<? print $included_employee['link']; ?>"><? print $included_employee['AccountPlanName']; ?></a><br/>
         <?
