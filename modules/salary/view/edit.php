@@ -710,7 +710,7 @@ unset($_SESSION['oauth_paycheck_sent']);
 <script type="text/javascript">
   var all_work_relations = <? print json_encode($work_relations); ?>;
   var selected_employee = <? print $head->AccountPlanID; ?>;
-  var selected_work_relation_id = <? print $head->WorkRelationID; ?>;
+  var selected_work_relation_id = <? print ($head->WorkRelationID ? $head->WorkRelationID : 0); ?>;
   var selected_work_relation = all_work_relations[selected_employee][selected_work_relation_id];
 
   var fields_to_change = { WorkTimeScheme: <? print json_encode($all_work_time_scheme_types); ?>,
