@@ -128,7 +128,9 @@ if($_lib['input']->getProperty('action_invoice_fakturabanksend') || $_lib['input
 }
 
 if($_lib['input']->getProperty('action_invoice_lock')) {
-    if ($ready_to_send_to_fb) {
+    $get_invoice = "select I.* from $db_table as I where InvoiceID='$InvoiceID'";
+    $row = $_lib['storage']->get_row(array('query' => $get_invoice));
+    if ($ready_to_send_to_fb && $row->Locked == "0") {
       $invoice->lock();
     }
 }
