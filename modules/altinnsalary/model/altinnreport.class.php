@@ -247,12 +247,14 @@ class altinn_report {
 
     // norwegian id for the employee, personal id number
     $society_number = $employee->SocietyNumber; // check personal id
+    $id_number = $employee->IDNumber;
     // Error is: Personal ID number(society number) not set for employee ' . self::fullNameForErrorMessage($employee)
-    $society_number_is_empty = self::checkIfEmpty($society_number, 'Ansatt: Mangler personnummer for ' . self::fullNameForErrorMessage($employee));
+    $society_and_id_number_are_empty = self::checkIfEmpty($society_number.$id_number, 'Ansatt: Mangler personnummer og ID nummer for ' . self::fullNameForErrorMessage($employee));
     // Error is: Personal ID must be valid by mod11
-    if(!$society_number_is_empty) self::checkIfEmpty($society_number, "Ansatt: Personnr m&aring; v&aelig;re gyldig mod11 for " . self::fullNameForErrorMessage($employee), 'personal_number');
+    if(!$society_and_id_number_are_empty && !empty($society_number)) self::checkIfEmpty($society_number, "Ansatt: Personnr m&aring; v&aelig;re gyldig mod11 for " . self::fullNameForErrorMessage($employee), 'personal_number');
+    else if(!$society_and_id_number_are_empty && !empty($id_number)) self::checkIfEmpty($id_number, "Ansatt: ID nummer m&aring; v&aelig;re gyldig mod11 for " . self::fullNameForErrorMessage($employee), 'personal_number');
 
-    $inntektsmottaker['inntektsmottaker']['norskIdentifikator'] = $society_number;
+    $inntektsmottaker['inntektsmottaker']['norskIdentifikator'] = !empty($society_number) ? $society_number : $id_number;
     // name and birthdate
     $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon'] = array();
     $full_name = self::fullName($employee);
