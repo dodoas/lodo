@@ -1250,10 +1250,18 @@ class timesheet_user_page
                 $format = "<tr><td></td><td>%s</td><td style='text-align: right;'>%d</td></tr>";
             }
 
+            $subcompany_names = array();
+            foreach ($a as $key => $value) {
+                $subcompany_names[$key] = $fields[$f]["options"][$key];
+            }
+            $subcompany_names[0] = "Diverse";
+            asort($subcompany_names);
+            
             $o = $fields[$f]['options'];
             $sum = 0;
-            foreach($a as $c => $v) 
+            foreach($subcompany_names as $c => $v) 
             {
+                $v = $a[$c];
                 if($v <= 0.001) continue;
                 if(!isset($o[$c])) $o[$c] = 'Diverse';
 
