@@ -14,16 +14,17 @@ class search_class {
             //print_r($args);
             #Find all open posts defined on this customer
 
-            $accountplan = $accounting->get_accountplan_object($args['AccountPlanID']);
+            $AccountPlanID = $args['AccountPlanID'];
+            $accountplan = $accounting->get_accountplan_object($AccountPlanID);
             #print_r($account);
 
-            $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID)  where v.AccountPlanID = " . $args['AccountPlanID'] . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID";
+            $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID, m.MatchNumber from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID) left join vouchermatch as m on v.VoucherID=m.VoucherID where v.AccountPlanID = " . $AccountPlanID . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID and v.Active = 1";
             #print "$query<br>";
             $result = $_lib['db']->db_query($query);
             if($_lib['db']->db_numrows($result) > 0)
             {
-                $_showresult  = "<br /><br /><fieldset><legend>&Aring;pne poster p&aring; konto: $AccountPlanID</legend><table class=\"lodo_journal\">";
-                $_showresult .= "<tr><th>Type</th><th>Bilag</th><th>Dato</th><th>Konto</th><th>Kontonavn</th><th>" . $accountplan->debittext . "</th><th>" . $accountplan->credittext . "</th><th>KID</th>";
+                $_showresult  = "<br /><br /><fieldset><legend>&Aring;pne poster p&aring; konto: $accountplan->AccountName ($AccountPlanID)</legend><table class=\"lodo_journal\">";
+                $_showresult .= "<tr><th>Type</th><th>Bilag</th><th>Dato</th><th>Konto</th><th>Kontonavn</th><th>" . $accountplan->debittext . "</th><th>" . $accountplan->credittext . "<th>Faktura</th></th><th>KID</th><th>MatchNummer</th>";
                 if($args['EnableSingleChoose'])
                 {
                     $_showresult .= "<th></th>";
@@ -50,11 +51,14 @@ class search_class {
                         if($row->AmountIn > 0) $_showresult .= $_lib['format']->Amount($row->AmountIn);
                         $_showresult .= "</td>\n<td class=\"" . $accountplan->DebitColor . " number\">";
                         if($row->AmountOut > 0) $_showresult .= $_lib['format']->Amount($row->AmountOut);
-                        $_showresult .= "</td><td>$row->KID</td>";
+                        $_showresult .= "</td>";
+                        $_showresult .= "<td>$row->InvoiceID</td>";
+                        $_showresult .= "<td>$row->KID</td>";
+                        $_showresult .= "<td>$row->MatchNumber</td>";
                         if($args['EnableSingleChoose'])
                         {
                             //$_showresult .= "<td><a href=\"" . $_MY_SELF . '&amp;CustomerNumber=' . $CustomerNumber . '&amp;AmountOut=' . $row->AmountIn . '&amp;AmountIn=' . $row->AmountOut . '&amp;KID=' . $row->KID . '&amp;type=' . $type . "&amp;new=1\">Velg</a></td>";
-                            $_showresult .= "<td><a href=\"".$_MY_SELF.'&amp;voucher_VoucherID='.$args['VoucherID'].'&amp;VoucherType='.$args['VoucherType'].'&amp;voucher_JournalID='.$args['JournalID'].'&amp;voucher_AccountPlanID='.$args['AccountPlanID'].'&amp;voucher_AmountOut='.$row->AmountIn.'&amp;voucher_AmountIn='.$row->AmountOut.'&amp;voucher_KID='.$row->KID.'&amp;type='.$args['type']."&amp;action_voucher_update=1\">Velg</a></td>";
+                            $_showresult .= "<td><a href=\"".$_MY_SELF.'&amp;voucher_VoucherID='.$args['VoucherID'].'&amp;VoucherType='.$args['VoucherType'].'&amp;voucher_JournalID='.$args['JournalID'].'&amp;voucher_AccountPlanID='.$args['AccountPlanID'].'&amp;voucher_AmountOut='.$row->AmountIn.'&amp;voucher_AmountIn='.$row->AmountOut.'&amp;voucher_KID='.$row->KID.'&amp;voucher_InvoiceID='.$row->InvoiceID.'&amp;type='.$args['type']."&amp;action_voucher_update=1\">Velg</a></td>";
                         }
                         if($args['EnableMultiChoose'])
                         {
