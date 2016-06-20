@@ -65,9 +65,12 @@ if(isset($_REQUEST['send_mail_copy']) && (bool)$_REQUEST['send_mail_copy'])
 $get_invoicefrom = "SELECT * FROM company WHERE CompanyID='" . $_lib['sess']->get_companydef('CompanyID') . "'";
 $row_from = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
+$additional_params = "";
+if($_lib["input"]->getProperty("action_send_email2_lock")) $additional_params = "&action_invoice_lock=1";
+
 send_invoice($recipient, $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf);
 echo $recipient;
 echo '<h2>Email sent</h2>';
-echo '<META HTTP-EQUIV="Refresh" CONTENT="1; URL='. $_lib['sess']->dispatch . 't=invoice.edit&InvoiceID=' . $InvoiceID . '">';
+echo '<META HTTP-EQUIV="Refresh" CONTENT="1; URL='. $_lib['sess']->dispatch . 't=invoice.edit&InvoiceID=' . $InvoiceID . $additional_params .'">';
 
 ?>
