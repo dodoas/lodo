@@ -284,7 +284,6 @@ foreach ($currencies as $currency) {
 <? } else { ?>
         <td></td>
         <td></td>
-<? } ?>
     </tr>
     <tr>
       <td>V&aring;r ref.</td>
@@ -680,7 +679,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
       <td>
         <?
-          if (($_lib['sess']->get_person('AccessLevel') >= 4) && (!$invoicein->Imported) && (!$invoicein->JournalID)) {
+          if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($invoicein->Period), $_lib['sess']->get_person('AccessLevel')) && ($_lib['sess']->get_person('AccessLevel') >= 4) && (!$invoicein->Imported) && (!$invoicein->JournalID)) {
             print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicein_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'tabindex' => $tabindex++));
           }
         ?>
