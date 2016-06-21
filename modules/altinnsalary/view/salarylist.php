@@ -118,6 +118,8 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   // all employees employed in this period
   $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
   $result_employees = $_lib['db']->db_query($query_employees);
+  $employee_data = array();
+  $subcompany_names = array();
   while($employee = $_lib['db']->db_fetch_object($result_employees)) {
     $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID;
     $result_work_relations = $_lib['db']->db_query($query_work_relations);
@@ -131,12 +133,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
         $employee_errors[$employee->AccountPlanID] = $report_for_employee->errors;
         $ready_for_altinn_status = 'Ikke klar';
       }
-?>
-    <tr>
-      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
-<?
+
       // last report for this period that included this employee
       $query_altin_employee = "SELECT ar1wr.*
                               FROM altinnReport1WorkRelation ar1wr JOIN
@@ -145,21 +142,47 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
                               ORDER BY ar1.AltinnReport1ID";
       $result_altin_employee = $_lib['db']->db_query($query_altin_employee);
       $employee_reported = $_lib['db']->db_numrows($result_altin_employee) != 0;
+
+      if ($employee_reported) {
+        $list_of_reports = "Sendt i rapporter ";
+        while($altinn_employee = $_lib['db']->db_fetch_object($result_altin_employee)) {
+          $list_of_reports .= "<a href='" . $_lib['sess']->dispatch . "t=altinnsalary.show&AltinnReport1ID=" . $altinn_employee->AltinnReport1ID . "'>" . $altinn_employee->AltinnReport1ID . "</a>, ";
+        }
+        $list_of_reports = substr($list_of_reports, 0, -2);
+      } else {
+        $list_of_reports = "Ikke rapportert";
+      }
+      $subcompany_names[$work_relation->SubcompanyID] = $work_relation->Name;
+      $employee_data[$work_relation->SubcompanyID][$work_relation->WorkRelationID]["employee"] = $employee;
+      $employee_data[$work_relation->SubcompanyID][$work_relation->WorkRelationID]["work_relation"] = $work_relation;
+      $employee_data[$work_relation->SubcompanyID][$work_relation->WorkRelationID]["report_for_employee"] = $report_for_employee;
+      $employee_data[$work_relation->SubcompanyID][$work_relation->WorkRelationID]["ready_for_altinn_status"] = $ready_for_altinn_status;
+      $employee_data[$work_relation->SubcompanyID][$work_relation->WorkRelationID]["employee_reported"] = $employee_reported;
+      $employee_data[$work_relation->SubcompanyID][$work_relation->WorkRelationID]["list_of_reports"] = $list_of_reports;
+    }
+  }
+  
+  foreach ($employee_data as $SubCompanyID => $work_relations) {
+    ?>
+    <tr>
+      <th colspan="6"><? print $subcompany_names[$SubCompanyID]; ?></th>
+    </tr>
+    <?
+    foreach ($work_relations as $big_row) {
+      $employee = $big_row["employee"];
+      $work_relation = $big_row["work_relation"];
+      $report_for_employee = $big_row["report_for_employee"];
+      $ready_for_altinn_status = $big_row["ready_for_altinn_status"];
+      $employee_reported = $big_row["employee_reported"];
+      $list_of_reports = $big_row["list_of_reports"];
 ?>
+    <tr>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
       <td><? print $work_relation->WorkRelationID . ' - ' . $work_relation->Name . ' (' . $work_relation->WorkStart . ' - ' . $work_relation->WorkStop . ') ' . $employee->FirstName . ' ' . $employee->LastName . '(' . $employee->AccountPlanID . ')'; ?></td>
       <td>
-        <?
-          if ($employee_reported) {
-            $list_of_reports = "Sendt i rapporter ";
-            while($altinn_employee = $_lib['db']->db_fetch_object($result_altin_employee)) {
-              $list_of_reports .= "<a href='" . $_lib['sess']->dispatch . "t=altinnsalary.show&AltinnReport1ID=" . $altinn_employee->AltinnReport1ID . "'>" . $altinn_employee->AltinnReport1ID . "</a>, ";
-            }
-            $list_of_reports = substr($list_of_reports, 0, -2);
-            print $list_of_reports;
-          } else {
-            print "Ikke rapportert";
-          }
-        ?>
+        <? print $list_of_reports; ?>
       </td>
       <td>
         <?
