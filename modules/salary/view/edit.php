@@ -21,6 +21,7 @@ if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redire
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
 
 includelogic('accounting/accounting');
+includelogic('altinnsalary/altinnreport');
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -562,7 +563,11 @@ $formname = "salaryUpdate";
           <?php
             $is_altinn_date_set = (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00') ? 'false' : 'true';
             $altinn_arguments = "'$head->ShiftType', '$head->WorkTimeScheme', '$head->TypeOfEmployment', $head->OccupationID, $head->SubcompanyID, $is_altinn_date_set";
-            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" onclick="return checkIfAltinnFieldsSetAndConfirm(\'Er du siker?\', '.$altinn_arguments.');" />';
+            $report_for_salary = new altinn_report($head->Period, array($head->SalaryID), array($head->WorkRelationID), false);
+            $report_for_salary->populateReportArray();
+            $no_altinn_validation_errors = empty($report_for_salary->errors);
+            if (!$no_altinn_validation_errors) echo "<div class='warning'>" . implode($report_for_salary->errors, "<br/>") . "</div>";
+            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" onclick="return checkIfAltinnFieldsSetAndConfirm(\'Er du siker?\', '.$altinn_arguments.');" ' . (($no_altinn_validation_errors) ? '' : 'disabled') . ' />';
           ?>
           </td>
         </tr>
