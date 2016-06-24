@@ -18,7 +18,7 @@ class search_class {
             $accountplan = $accounting->get_accountplan_object($AccountPlanID);
             #print_r($account);
 
-            $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID, m.MatchNumber from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID) left join vouchermatch as m on v.VoucherID=m.VoucherID where v.AccountPlanID = " . $AccountPlanID . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID and v.Active = 1";
+            $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID, m.MatchNumber from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID) left join vouchermatch as m on v.VoucherID=m.VoucherID where v.AccountPlanID = " . $AccountPlanID . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID and v.Active = 1 ORDER BY v.VoucherDate DESC";
             #print "$query<br>";
             $result = $_lib['db']->db_query($query);
             if($_lib['db']->db_numrows($result) > 0)
