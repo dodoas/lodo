@@ -262,11 +262,11 @@ class postmotpost {
 
                 $AccountPlanID = $voucher->AccountPlanID;
 
-                if($voucher->KID && !$this->matchH[$AccountPlanID]['KID'][$voucher->KID]) {
+                if($voucher->KID && !isset($this->matchH[$AccountPlanID]['KID'][$voucher->KID])) {
                     $this->matchH[$AccountPlanID]['KID'][$voucher->KID] = 0;
                     $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID] = array();
                 }
-                if($voucher->InvoiceID && !$this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID]) {
+                if($voucher->InvoiceID && !isset($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID])) {
                     $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] = 0;
                     $this->matchH[$AccountPlanID]['InvoiceIDJournals'][$voucher->InvoiceID] = array();
                 }
@@ -281,7 +281,7 @@ class postmotpost {
                     $voucher->MatchNumber = 0;
                 }
 
-                if($voucher->MatchNumber && !$this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber]) {
+                if($voucher->MatchNumber && !isset($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber])) {
                     $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] = 0;
                     $this->matchH[$AccountPlanID]['MatchNumberJournals'][$voucher->MatchNumber] = array();
                 }
