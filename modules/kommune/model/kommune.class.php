@@ -12,6 +12,9 @@ class kommune {
   private $kommunes_in_db_by_number = array();
   private $kommune_data_for_select = array();
 
+  // a list of columns allowed to search by
+  public $permitted_columns = array('KommuneID', 'KommuneNumber', 'KommuneName', 'County', 'Sone', 'BankAccountNumber', 'OrgNumber', 'OrgName', 'OrganisationForm', 'Comments');
+
   // Table columns
   public $KommuneID         = NULL;
   public $KommuneNumber     = NULL;
@@ -123,6 +126,26 @@ class kommune {
     $this->Comments          = $kommune->Comments;
 
     $this->TaxPercent        = $this->tax_percents[$kommune->Sone];
+  }
+
+  // Sets the properties of this object to the columns from the database for column value
+  // Sets to the first occurance where all given columns are the same as the given ones
+  public function load_by_field_value($args) {
+    $matched_id = NULL;
+    foreach ($this->kommunes_in_db_by_id as $kommune_id => $kommune_object) {
+      $matches = true;
+      foreach ($args as $column_name => $column_value) {
+        if (in_array($column_name, $this->permitted_columns) && $kommune_object->{$column_name} != $args[$column_name]) {
+          $matches = false;
+          break;
+        }
+      }
+      if ($matches) {
+        $matched_id = $kommune_id;
+        break;
+      }
+    }
+    if ($matched_id != NULL) $this->load($matched_id);
   }
 
   public function import($kommune_number) {

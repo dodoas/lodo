@@ -17,6 +17,8 @@ if (isset($_GET['AltinnReport4ID'])) {
   header('Location: '.$_lib['sess']->dispatchs.'t=altinnsalary.list');
 }
 
+$_SESSION['oauth_tmp_redirect_back_url'] = str_replace("action_invoice_fakturabanksend_altinn_aga_ftr=1", "", "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+
 $query_current_report = "
   SELECT * FROM altinnReport1 ar1 WHERE ar1.ReceiptId IN (
     SELECT ar2.req_ReceiptId FROM altinnReport2 ar2 WHERE ar2.res_ReceiversReference IN (
@@ -48,11 +50,17 @@ print $_lib['sess']->doctype ?>
 <? if ($show_invoice_print_links) { ?>
     <tr>
       <td class="menu">Arbeidsgiveravgift faktura</td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a></td>
+      <td>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&action_invoice_fakturabanksend_altinn_aga_ftr=1&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Send til Fakturabank</a>
+      </td>
     </tr>
     <tr>
       <td class="menu">Forskuddstrekk faktura</td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a></td>
+      <td>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&action_invoice_fakturabanksend_altinn_aga_ftr=1&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Send til Fakturabank</a>
+      </td>
     </tr>
 <? } ?>
     <tr>
@@ -238,3 +246,4 @@ print $_lib['sess']->doctype ?>
   </table>
 </body>
 </html>
+<? unset($_SESSION['oauth_invoice_sent']); ?>
