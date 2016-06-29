@@ -80,7 +80,8 @@ class migration_system {
   }
 
   function migrate_db($db_name, $migration_name) {
-    $model_tablemetadata_tablemetadata = new model_tablemetadata_tablemetadata();
+    // use line break html element as new line separator
+    $model_tablemetadata_tablemetadata = new model_tablemetadata_tablemetadata("<br/>");
     $args = array();
     $args["scriptpath"] = $migration_name;
     $args["db_name"] = $db_name;
@@ -88,7 +89,7 @@ class migration_system {
   }
 
   function update_db($db_name = null) {
-    $model_tablemetadata_tablemetadata = new model_tablemetadata_tablemetadata();
+    $model_tablemetadata_tablemetadata = new model_tablemetadata_tablemetadata("<br/>");
     if(!$db_name) {
       $model_tablemetadata_tablemetadata->updateall();
     } else {

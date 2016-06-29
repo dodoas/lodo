@@ -5,10 +5,18 @@ global $_lib;
 
 $migration_system = new migration_system();
 
+$db_name = (isset($_REQUEST['db_name'])) ? $_REQUEST['db_name'] : NULL;
+$show_only_failed = isset($_REQUEST['show_only_failed']);
+
 require_once "record.inc";
 
-$all_migrations = $migration_system->get_migrations_for_all_databases();
-
+if (is_null($db_name)) $all_migrations = $migration_system->get_migrations_for_all_databases();
+else $all_migrations[$db_name] = $migration_system->get_migrations_for_database($db_name); 
+?>
+<form action="<? print $MY_SELF ?>" method="post">
+  <input type="submit" name="action_update_schema" value="Update schema information on all DBs"/>
+</form>
+<?
 foreach ($all_migrations as $database => $migrations) {
   print "<h2>". $database ."</h2>";
   ?>
@@ -27,23 +35,28 @@ foreach ($all_migrations as $database => $migrations) {
     if($finished) $row_style = " style='color: green;'";
     if($not_finished) $row_style = " style='color: red;'";
 
-    print "<tr". $row_style .">";
+    if (($show_only_failed && $not_finished) || !$show_only_failed) {
+      print "<tr". $row_style .">";
 
-    print "<td>". $migration["MigrationName"] ."</span></td>";
-    print "<td>". $migration["StartedAt"] ." - </span></td>";
-    print "<td>". $migration["SucceededAt"] ."</span></td>";
-    
-    if($not_started || $not_finished) { ?>
-      <form action="<? print $MY_SELF ?>" method="post">
-        <input type="hidden" name="migration_MigrationName" value="<? print $migration['MigrationName']; ?>">
-        <input type="hidden" name="migration_Database" value="<? print $database; ?>">
+      print "<td>". $migration["MigrationName"] ."</span></td>";
+      print "<td>". $migration["StartedAt"] ." - </span></td>";
+      print "<td>". $migration["SucceededAt"] ."</span></td>";
 
-        <td><input type="submit" name="action_run_migration" value="Run migration"/></td>
-      </form>
-    <? }
+   ?>
+        <form action="<? print $MY_SELF ?>" method="post">
+          <input type="hidden" name="migration_MigrationName" value="<? print $migration['MigrationName']; ?>">
+          <input type="hidden" name="migration_Database" value="<? print $database; ?>">
+          <td><input type="submit" name="action_run_migration" value="Run migration"/></td>
+        </form>
+        <form action="<? print $MY_SELF ?>" method="post">
+          <input type="hidden" name="migration_MigrationName" value="<? print $migration['MigrationName']; ?>">
+          <td><input type="submit" name="action_run_migration" value="Run migration on all DBs"/></td>
+        </form>
+   <?
 
 
-    print "</tr>";
+      print "</tr>";
+    }
   }
   print "</table>";
 }

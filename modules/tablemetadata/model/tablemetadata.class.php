@@ -6,8 +6,10 @@
 class model_tablemetadata_tablemetadata {
 
     private $system_dbs = array('lodo', 'LODO', 'mysql', 'test', 'information_schema', 'performance_schema', 'phpmyadmin');
+    private $nl_separator = "\n";
 
-    function __construct() {
+    function __construct($nl_separator = NULL) {
+      if (!is_null($nl_separator)) $this->nl_separator = $nl_separator;
     }
 
     function updateselected($args) {
@@ -31,7 +33,7 @@ class model_tablemetadata_tablemetadata {
         $result     = $_lib['db']->db_query($query_show);
         $i = 0;
         while ($row = $_lib['db']->db_fetch_object($result)) {
-            print "Oppdaterer: $row->Database\n";
+            print "Updating: $row->Database" . $this->nl_separator;
             $params['db_name'] = $row->Database;
             $this->update_db($params);
         }
@@ -56,7 +58,7 @@ class model_tablemetadata_tablemetadata {
                 continue;
             }
 
-            print "Oppdaterer: $row->Database\n";
+            print "Update: $row->Database\n";
             $params['db_name'] = $row->Database;
             $params['tablefilter'] = $tablefilter;
             $this->update_db($params);
@@ -65,7 +67,7 @@ class model_tablemetadata_tablemetadata {
 
     function runscriptall($args) {
         if (empty($args['scriptpath'])) {
-            print "Missing scriptpath argument.<br>";
+            print "Missing scriptpath argument." . $this->nl_separator;
             return false;
         }
 
@@ -76,7 +78,7 @@ class model_tablemetadata_tablemetadata {
         $system_dbs = $this->system_dbs;
 
         if (!is_file($scriptpath)) {
-            print "File $scriptpath not found.<br>";
+            print "File $scriptpath not found." . $this->nl_separator;
             return false;
         }
 
@@ -115,12 +117,12 @@ class model_tablemetadata_tablemetadata {
                     continue;
                 }
 
-                print "Kjører script på: $row->Database<br>";
+                print "Running script on: $row->Database" . $this->nl_separator;
                 $params['db_name'] = $row->Database;
                 $this->runscriptondb($params);
             }
         } else {
-            print "Kjører script på: ". $args['db_name'] ."<br>";
+            print "Running script on: ". $args['db_name'] . $this->nl_separator;
             $params['db_name'] = $args['db_name'];
             return $this->runscriptondb($params);
         }
@@ -139,7 +141,7 @@ class model_tablemetadata_tablemetadata {
 
     function runscriptondb($params) {
         if (empty($params['db_name'])) {
-            print "DB name missing.<br>";
+            print "Database name missing." . $this->nl_separator;
             return false;
         }
 
@@ -148,17 +150,17 @@ class model_tablemetadata_tablemetadata {
         try {
             $db_link = @mysqli_connect($params['db_server'], $params['db_user'], $params['db_password'], $db_name);
         } catch (Exception $e) {
-            echo 'Caught exception when trying to login to $db_name: ',  $e->getMessage(), "<br>";
+            echo 'Caught exception when trying to connect to $db_name: '.  $e->getMessage() . $this->nl_separator;
             return false;
         }
 
         if (!$db_link) {
-            print "You are not authorized to login to this database: $db_name.<br>";
+            print "You are not authorized to connect to this database: $db_name." . $this->nl_separator;
             return false;
         }
 
         if (!$this->verifylododb($db_link)) {
-            print "Not a lodo database: $db_name.<br>";
+            print "Not a LODO database: $db_name." . $this->nl_separator;
             return false;
         }
 
@@ -166,20 +168,20 @@ class model_tablemetadata_tablemetadata {
             if ($command == "" || trim($command) == "") {
                 continue;
             }
-            print "Kjører kommando: " . substr($command, 0, 40) . "...<br>";
+            print "Running command: " . substr($command, 0, 40) . "..." . $this->nl_separator;
 
                 $query = $command;
     
                 $result = mysqli_query($db_link, $query);
                 if (!$result) {
-                    print "Dbname: $db_name, db_query: $query. <br>Bad query: " . mysqli_error($db_link) . "<br>.<br>";
+                    print "db_name: $db_name, db_query: $query." . $this->nl_separator . "Bad query: " . mysqli_error($db_link) . $this->nl_separator . $this->nl_separator;
                     return false;
                 } else {
-                    print "Query successful.<br>";
+                    print "Query successful." . $this->nl_separator;
                 }
         }
 
-        print "Dbname: $db_name, db script successfully executed.<br>";
+        print "db_name: $db_name, script successfully executed." . $this->nl_separator;
 
         return true;
     }
@@ -254,7 +256,7 @@ class model_tablemetadata_tablemetadata {
         $query_is_lodo = "SHOW TABLES LIKE 'confdbfields'";
         $result_is_lodo = $dbh[$dsn]->db_query($query_is_lodo);
         if (!$result_is_lodo ||  mysqli_num_rows($result_is_lodo) != 1) {
-            $_lib['message']->add("<b>Database: $databaseName er ikke en Lodo database\n");
+            $_lib['message']->add("Database: $databaseName is not a LODO database" . $this->nl_separator);
             return false;
         }
     
@@ -514,7 +516,7 @@ class model_tablemetadata_tablemetadata {
                     }
                     else
                     {
-                        $_lib['message']->add("Finnes ikke type: $type");
+                        $_lib['message']->add("Type not found: $type");
                         $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
                     }
     
@@ -1004,7 +1006,7 @@ class model_tablemetadata_tablemetadata {
         #print "$query<br>";
     
         $dbh[$dsn]->db_delete($query);
-        $_lib['message']->add("<b>Database: $databaseName,  Antall felt: $total, oppdaterte. $updated, nye: $new<br>$new_fields</b>\n");
+        $_lib['message']->add("Database: $databaseName,  Field number: $total, updated: $updated, new: $new" . $this->nl_separator . $new_fields . $this->nl_separator);
     
         #mysql_free_result($result);
     }
