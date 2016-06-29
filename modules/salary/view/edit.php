@@ -739,14 +739,13 @@ unset($_SESSION['oauth_paycheck_sent']);
   function printWorkRelationsSelectForEmployee() {
     var work_relations = all_work_relations[selected_employee];
     var out = "";
-    out += "<select name='salary_WorkRelationID_<? print $SalaryID; ?>' onchange='selected_work_relation = all_work_relations[selected_employee][this.value];'>"
+    out += "<select name='salary_WorkRelationID_<? print $SalaryID; ?>' onchange='selected_work_relation = all_work_relations[selected_employee][this.value]; updateValuesWithWorkRelationInfo();'>"
     out += "  <option value=''>Ikke valgt</option>";
     for(var i in work_relations) {
       is_selected = (work_relations[i]["WorkRelationID"] == selected_work_relation_id) ? ' selected ' : '';
       out += "  <option value='" + work_relations[i]["WorkRelationID"] + "'" + is_selected + ">" + work_relations[i]["WorkRelationName"] + "</option>";
     }
     out += "</select>";
-    out += "<button onclick='updateValuesWithWorkRelationInfo(); return false;'>Endre arbeidsforhold</button>";
     $("#workRelationSelect").html(out);
   }
 
