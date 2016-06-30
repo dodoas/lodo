@@ -9,7 +9,7 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
                             "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false,
                             "VacationPayment" => false, "ActualPayDate" => false, "ShiftType" => false,
                             "WorkTimeScheme" => false, "TypeOfEmployment" => false, "OccupationID" => false,
-                            "SubcompanyID" => false);
+                            "WorkRelationID" => false);
   foreach ($SalaryFieldNames as $FieldName => $IsAmount) {
     $ArgName = "salary_".$FieldName."_".$SalaryID;
     if ($IsAmount) {
@@ -725,6 +725,22 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
     $salaryConf = $_lib['storage']->get_row(array('query' => $q));
     $_POST["salary_SalaryConfID_". $SalaryID] = $salaryConf->SalaryConfID;
   }
+
+  $_SalaryID = $_REQUEST['SalaryID'];
+  $work_relation_query = "SELECT * FROM workrelation WHERE WorkRelationID = '".$_POST['salary_WorkRelationID_'.$_SalaryID]."'";
+  $work_relation = $_lib['storage']->get_row(array('query' => $work_relation_query));
+  $_POST['salary_ShiftType_'.$_SalaryID] = $work_relation->ShiftType;
+  $_POST['salary_WorkTimeScheme_'.$_SalaryID] = $work_relation->WorkTimeScheme;
+  $_POST['salary_TypeOfEmployment_'.$_SalaryID] = $work_relation->TypeOfEmployment;
+  $_POST['salary_OccupationID_'.$_SalaryID] = $work_relation->OccupationID;
+  $_POST['salary_SubcompanyID_'.$_SalaryID] = $work_relation->SubcompanyID;
+  $_POST['salary_WorkStart_'.$_SalaryID] = $work_relation->WorkStart;
+  $_POST['salary_WorkStop_'.$_SalaryID] = $work_relation->WorkStop;
+  $_POST['salary_InCurrentPositionSince_'.$_SalaryID] = $work_relation->InCurrentPositionSince;
+  $_POST['salary_WorkPercent_'.$_SalaryID] = $work_relation->WorkPercent;
+  $_POST['salary_WorkPercentUpdatedAt_'.$_SalaryID] = $work_relation->WorkPercentUpdatedAt;
+  $_POST['salary_WorkMeasurement_'.$_SalaryID] = $work_relation->WorkMeasurement;
+  $_POST['salary_SalaryDateChangedAt_'.$_SalaryID] = $work_relation->SalaryDateChangedAt;
 
   #print_r($_POST);
   $_lib['storage']->db_update_multi_table($_POST, $tables);
