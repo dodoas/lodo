@@ -1,17 +1,30 @@
+<html>
+<head>
+<style type='text/css'>
+  * {
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
 <?php
+if ($_lib['sess']->get_person('AccessLevel') < 4) {
+  header('Location: ' . $_lib['sess']->dispatchs . "t=lodo.main");
+  die();
+}
 
 includelogic("migration/migration");
 global $_lib;
 
 $migration_system = new migration_system();
 
-$db_name = (isset($_REQUEST['db_name'])) ? $_REQUEST['db_name'] : NULL;
+$db_name_restriction = (isset($_REQUEST['db_name'])) ? $_REQUEST['db_name'] : NULL;
 $show_only_failed = isset($_REQUEST['show_only_failed']);
 
 require_once "record.inc";
 
-if (is_null($db_name)) $all_migrations = $migration_system->get_migrations_for_all_databases();
-else $all_migrations[$db_name] = $migration_system->get_migrations_for_database($db_name); 
+if (is_null($db_name_restriction)) $all_migrations = $migration_system->get_migrations_for_all_databases();
+else $all_migrations[$db_name_restriction] = $migration_system->get_migrations_for_database($db_name_restriction); 
 ?>
 <form action="<? print $MY_SELF ?>" method="post">
   <input type="submit" name="action_update_schema" value="Update schema information on all DBs"/>
@@ -60,3 +73,6 @@ foreach ($all_migrations as $database => $migrations) {
   }
   print "</table>";
 }
+?>
+</body>
+</html>

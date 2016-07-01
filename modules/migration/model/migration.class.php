@@ -91,7 +91,7 @@ class migration_system {
   function update_db($db_name = null) {
     $model_tablemetadata_tablemetadata = new model_tablemetadata_tablemetadata("<br/>");
     if(!$db_name) {
-      $model_tablemetadata_tablemetadata->updateall();
+      $model_tablemetadata_tablemetadata->updateallskipsystemdbs(array());
     } else {
       echo '<p>Updating schema information for: <b>'. $db_name .'</b></p>';
       $params["db_name"] = $db_name;

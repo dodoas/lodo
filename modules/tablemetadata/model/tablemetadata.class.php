@@ -58,7 +58,7 @@ class model_tablemetadata_tablemetadata {
                 continue;
             }
 
-            print "Update: $row->Database\n";
+            print "Updating: $row->Database" . $this->nl_separator;
             $params['db_name'] = $row->Database;
             $params['tablefilter'] = $tablefilter;
             $this->update_db($params);
@@ -99,7 +99,7 @@ class model_tablemetadata_tablemetadata {
         // migration 133_create_migrations_table.sql is run
         $commands_before = array();
         $commands_after = array();
-        // $commands_before = array("REPLACE INTO migrations (MigrationID, MigrationName) VALUES ($script_number, '$scriptpath')");
+        // $commands_before = array("REPLACE INTO migrations (MigrationID, MigrationName, Status, StartedAt, SucceededAt) VALUES ($script_number, '$scriptpath', 'STARTED', NOW(), 0)");
         // $commands_after = array("UPDATE migrations SET Status = 'OK', SucceededAt = NOW() WHERE MigrationID = $script_number AND MigrationName = '$scriptpath'");
         $params['commands'] = array_merge($commands_before, $commands, $commands_after);
         # use default login values, assuming all dbs have same login values
@@ -108,10 +108,9 @@ class model_tablemetadata_tablemetadata {
         $params['db_user'] = $_SETUP['DB_USER_DEFAULT']; 
         $params['db_password'] = $_SETUP['DB_PASSWORD_DEFAULT'];
 
-        if (!$args['db_name']) {
+        if (!isset($args['db_name'])) {
             $query_show = "show databases";
             $result     = $_lib['db']->db_query($query_show);
-            $i = 0;
             while ($row = $_lib['db']->db_fetch_object($result)) {
                 if (in_array($row->Database, $system_dbs)) {
                     continue;
@@ -249,14 +248,14 @@ class model_tablemetadata_tablemetadata {
         #print_r($args);        
 
         $databaseName = $args['db_name'];
-        $tableFilter = $args['tablefilter'];
+        $tableFilter = isset($args['tablefilter']) ? $args['tablefilter'] : '';
         $dsn = $_SETUP['DB_SERVER_DEFAULT'] . $databaseName . $_SETUP['DB_TYPE_DEFAULT'];
         $dbh[$dsn] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $databaseName, 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
 
         $query_is_lodo = "SHOW TABLES LIKE 'confdbfields'";
         $result_is_lodo = $dbh[$dsn]->db_query($query_is_lodo);
         if (!$result_is_lodo ||  mysqli_num_rows($result_is_lodo) != 1) {
-            $_lib['message']->add("Database: $databaseName is not a LODO database" . $this->nl_separator);
+            print "Database: $databaseName is not a LODO database" . $this->nl_separator;
             return false;
         }
     
@@ -516,8 +515,10 @@ class model_tablemetadata_tablemetadata {
                     }
                     else
                     {
-                        $_lib['message']->add("Type not found: $type");
-                        $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
+                        // Commented out just so it does not dispaly warnings on the update function for each db and clutter the output
+                        // with a lot of unnecessary warnings(not necessary since the form builder helper is not implemented fully).
+                        // $_lib['message']->add("Type not found: $type");
+                        // $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
                     }
     
                     if($key == 'PRI')
@@ -1006,7 +1007,7 @@ class model_tablemetadata_tablemetadata {
         #print "$query<br>";
     
         $dbh[$dsn]->db_delete($query);
-        $_lib['message']->add("Database: $databaseName,  Field number: $total, updated: $updated, new: $new" . $this->nl_separator . $new_fields . $this->nl_separator);
+        print "Database: $databaseName,  Field number: $total, updated: $updated, new: $new" . $this->nl_separator . $new_fields . $this->nl_separator;
     
         #mysql_free_result($result);
     }
