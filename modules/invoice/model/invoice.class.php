@@ -1346,17 +1346,13 @@ class invoice {
       }
 
       $altinn_invoice = new stdClass();
-      $taxH     = array();
+      $taxH = array();
 
       $altinn_reference = $altinn_report4_row->res_ArchiveReference;
       $recieved_messages = $xml->Mottak->mottattLeveranse;
       // get the issue date from recieved messages
       // max date from all messages
-      $issue_date = 0;
-      foreach ($recieved_messages as $message) {
-        $issue_date = max($issue_date, strtotime($message->leveringstidspunkt));
-      }
-      $issue_date = strftime('%F', $issue_date);
+      $issue_date = (string) $xml->Mottak->kalendermaaned . '-01';
       $bank_account_number = (string) $xml->Mottak->innbetalingsinformasjon->kontonummer;
       $kommune = new kommune();
       $kommune->load_by_field_value(array('BankAccountNumber' => $bank_account_number));
@@ -1364,10 +1360,7 @@ class invoice {
       $kommune_name = $kommune->OrgName;
       $customer_orgno = (string) $xml->Mottak->innsender->norskIdentifikator;
       $customer_orgno = preg_replace('/[^0-9]+/', '', $customer_orgno);
-      $subcompany_query = "SELECT * FROM subcompany WHERE OrgNumber = '$customer_orgno'";
-      $result_subcompany = $_lib['db']->db_query($subcompany_query);
-      $subcompany = $_lib['db']->db_fetch_object($result_subcompany);
-      $customer_name = $subcompany->Name; // Subcompany name
+      $customer_name = $_lib['sess']->get_companydef('CompanyName');
       $due_date = (string) $xml->Mottak->innbetalingsinformasjon->forfallsdato;
       if ($invoice_type == "AGA") {
         $kid = (string) $xml->Mottak->innbetalingsinformasjon->kidForArbeidsgiveravgift;
@@ -1379,7 +1372,7 @@ class invoice {
 
       $altinn_invoice->ID = $invoice_type . '-' . $altinn_reference;
       $altinn_invoice->IssueDate = $issue_date;
-      $altinn_invoice->Note = $invoice_type . ' ' . strftime('%Y-%m');
+      $altinn_invoice->Note = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
       $altinn_invoice->DocumentCurrencyCode = exchange::getLocalCurrency();
 
       // Invoice supplier
@@ -1445,8 +1438,7 @@ class invoice {
       $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->Percent = 0;
       $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
 
-      $altinn_invoice->InvoiceLine[0]->Item->Name = $invoice_type . " TAX";
-      $altinn_invoice->InvoiceLine[0]->Item->Description = $invoice_type . " TAX for " . $periode;
+      $altinn_invoice->InvoiceLine[0]->Item->Name = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
 
       $altinn_invoice->InvoiceLine[0]->Price->PriceAmount = $amount;
       $altinn_invoice->InvoiceLine[0]->Price->BaseQuantity = 1;
