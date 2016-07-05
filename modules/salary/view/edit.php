@@ -602,24 +602,30 @@ $formname = "salaryUpdate";
   </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
 </tr>
-
+<tr>
+  <td colspan = "7">
+  <?
+    if($head->AltinnFieldsUpdatedAt) echo $head->AltinnFieldsUpdatedAt . " altinn felter lagret av " . $_lib['format']->PersonIDToName($head->AltinnFieldsUpdatedBy);
+  ?>
+  </td>
+  <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
+</tr>
 <tr>
   <td colspan = "7">
   <?
     if($head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
   ?>
   </td>
-  <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
+  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
+  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>
-  <td colspan = "7">
+  <td colspan = "11">
       <? if ($head->FakturabankPersonID) { ?>
            <? print $head->FakturabankDateTime ?> fakturaBank <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
       <? } ?>
   </td>
-  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
-  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>
