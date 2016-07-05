@@ -485,7 +485,7 @@ class pdfInvoice
             $this->pdf->SetXY($this->{$myLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * $this->invoiceLineCurrentLine));
             if ($i == 2) {
                 $params[$myText] = $this->korriger($params[$myText]);
-                $prodTekstArray = $this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft} + 5);
+                $prodTekstArray = $this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft} - 24);
                 for($j = 0; $j < count($prodTekstArray); $j++)
                 {
                     $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize);
@@ -879,55 +879,17 @@ function SplitByLength($string, $chunkLength=1){
         return $d . "." . $m . "." . $y;
     }
 /**
- * Deler opp en string ved en gitt lengde og legger hver av dem i en tabell.
+ * Splits a string into an array of string by whole words and if one of them is
+ * more than given length it devides it to equal parts.
  *
  * @param string $str
  * @param int $maxLength
  * @return array of strings
  */
     function splitString($str, $maxLength)
-{
-    $words = explode(" ", $str);
-    // Split extra long words to two separate words
-    $split_one_word = false;
-    for($i=0;$i<count($words);$i++) {
-      $word = $words[$i];
-      if (($str_pxl_len = $this->pdf->GetStringWidth($word)) > $maxLength) {
-        $split_one_word = true;
-        $str_char_count = strlen($word);
-        $percent_fits = $maxLength/$str_pxl_len;
-        $chars_fit = (int)($percent_fits*$str_char_count) - 3;
-        $words[$i] = array(substr($word, 0, $chars_fit), substr($word, $chars_fit+1));
-      }
-    }
-    if ($split_one_word) $words = iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($words)), FALSE); // the php way to flatten an array
-    $wordCounter = 0;
-    $lineCounter = 0;
-    $fromWord = 0;
-    $retStr = "";
-    while($wordCounter < count($words))
     {
-        $myStr = "";
-        $retStr = "";
-        $makeLine = true;
-        while ($makeLine)
-        {
-            $myStr .= $words[$wordCounter];
-            if ($this->pdf->GetStringWidth($myStr) > $maxLength || $wordCounter >= count($words))
-            {
-                $makeLine = false;
-            }
-            else
-            {
-                $retStr .= $words[$wordCounter] . " ";
-                $wordCounter++;
-            }
-        }
-        $retArr[$lineCounter] = $retStr;
-        $lineCounter++;
+      return explode("\n", wordwrap($str, $maxLength, "\n", true));
     }
-    return $retArr;
-}
 function korriger($input)
 {
     return $input;
