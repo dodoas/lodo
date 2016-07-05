@@ -3,7 +3,7 @@ $primarykey['OccupationID'] = $OccupationID;
 $occupation_OccupationID = (int) $_lib['input']->getProperty('occupation_OccupationID');
 $occupation_Import = (string) $_lib['input']->getProperty('occupation_Import');
 
-if($_lib['input']->getProperty('action_occupation_import')) {
+if($_lib['input']->getProperty('action_occupation_import') && !empty($occupation_Import)) {
     $selected_value = array();
     // here we split selected value by ' ' and we pass 3 to explode function because $selected_name should contain blanks if any.
     $selected_value = explode(' ', $occupation_Import, 3);

@@ -79,7 +79,7 @@ print $_lib['sess']->doctype ?>
             </td>
             <td>
                 <a href="<? print $_lib['sess']->dispatch ?>t=vat.edit">Merverdiavgift</a>
-                <a href="<? print $_lib['sess']->dispatch ?>t=kommune.edit">Kommune</a>
+                <a href="<? print $_lib['sess']->dispatch ?>t=kommune.list">Kommune</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.edit">Arbeidsgiveravgift</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=exchange.edit">Valuta</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=accountperiod.edit">Periode</a>
