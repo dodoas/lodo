@@ -21,6 +21,7 @@ if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redire
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
 
 includelogic('accounting/accounting');
+includelogic('altinnsalary/altinnreport');
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -558,11 +559,18 @@ $formname = "salaryUpdate";
           </td>
         </tr>
         <tr>
-          <td>
+          <td colspan='14'>
           <?php
             $is_altinn_date_set = (is_null($head->ActualPayDate) || $head->ActualPayDate == '' || $head->ActualPayDate == '0000-00-00') ? 'false' : 'true';
             $altinn_arguments = "'$head->ShiftType', '$head->WorkTimeScheme', '$head->TypeOfEmployment', $head->OccupationID, $head->SubcompanyID, $is_altinn_date_set";
-            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" onclick="return checkIfAltinnFieldsSetAndConfirm(\'Er du siker?\', '.$altinn_arguments.');" />';
+            $report_for_salary = new altinn_report($head->Period, array($head->SalaryID), array($head->WorkRelationID), false, true);
+            $report_for_salary->populateReportArray();
+            $no_altinn_validation_errors = empty($report_for_salary->errors);
+            $altinn_validations_error_array = (($no_altinn_validation_errors) ? array() : $report_for_salary->errors);
+            $altinndate_missing_error_array = ($head->ActualPayDate == '0000-00-00' || empty($head->ActualPayDate)) ? array("Altinndato er ikke satt") : array();
+            $errors = array_merge($altinndate_missing_error_array, $altinn_validations_error_array);
+            if ($errors) echo "<div class='warning'>" . implode($errors, "<br/>") . "</div>";
+            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" onclick="return checkIfAltinnFieldsSetAndConfirm(\'Er du sikker?\', '.$altinn_arguments.');" ' . (($no_altinn_validation_errors) ? '' : 'disabled') . ' />';
           ?>
           </td>
         </tr>
@@ -588,7 +596,7 @@ $formname = "salaryUpdate";
       <?
 		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
                     if($head->FEmail)
-                        print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+                        print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F', 'disabled' => !$no_altinn_validation_errors));
                     else
                         print "Mangler fakturabankepost";
 		}

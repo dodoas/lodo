@@ -2,11 +2,10 @@
 # $Id: list.php,v 1.38 2005/10/28 17:59:40 thomasek Exp $ invoice_list.php,v 1.4 2001/11/20 17:55:12 thomasek Exp $
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
-
-require_once "record.inc";
-
 includelogic('accounting/accounting');
 $accounting = new accounting();
+$SearchInvoiceID = $_POST["SearchInvoiceID"];
+require_once "record.inc";
 
 $FromDate       = $_lib['input']->getProperty('FromDate');
 $ToDate         = $_lib['input']->getProperty('ToDate');
@@ -64,8 +63,8 @@ $query  = "select i.* from invoiceout as i where ";
      $query .= " i.InvoiceDate <= '$ToDate' and ";
  }
 
- if($InvoiceID) {
-     $query .= " i.InvoiceID='$InvoiceID' and ";
+ if($SearchInvoiceID) {
+     $query .= " i.InvoiceID='$SearchInvoiceID' and ";
  }
 
 if($searchstring){
@@ -116,7 +115,7 @@ $db_sum   = $row->sum;
      <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
      <td>
         Kundenavn:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
-        Fakturanummer: <? print $_lib['form3']->text(array('name' => 'InvoiceID',   'value' => $InvoiceID)) ?>
+        Fakturanummer: <? print $_lib['form3']->text(array('name' => 'SearchInvoiceID',   'value' => $SearchInvoiceID)) ?>
         Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
         Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>

@@ -23,7 +23,7 @@ class altinn_report {
  * one employee.
  * It automatically loads all the salaries and employees.
  */
-  function __construct($period, $salary_ids = array(), $work_relation_ids = array(), $only_register_employee = false) {
+  function __construct($period, $salary_ids = array(), $work_relation_ids = array(), $only_register_employee = false, $just_test_if_ready = false) {
     // if no period selected, exit
     if (empty($period)) return;
     else $this->period = $period;
@@ -33,9 +33,9 @@ class altinn_report {
     $this->salary_ids = $salary_ids;
     $this->work_relation_ids = $work_relation_ids;
     // fetch the salaries
-    self::fetchSalaries($this->salary_ids);
+    self::fetchSalaries($just_test_if_ready);
     // fetch the employees
-    self::fetchEmployeesAndWorkRelations($this->work_relation_ids);
+    self::fetchEmployeesAndWorkRelations();
   }
 
 /* Helper function to initialize all the needed parameters
@@ -324,7 +324,7 @@ class altinn_report {
     self::checkIfEmpty($kommune_tax, 'L&oslash;nnslipp: Mangler komune p&aring; L' . $salary->JournalID . ', er ikke valgt eller komunen har ikke valgt kode');
     // Code property covered by the above check since it is the id for arbeidsgiveravggift table
     // Error is: Municipality selected for the salary L' . $salary->JournalID . ' does not have a tax percent set', 'percent
-    self::checkIfEmpty($kommune_tax->Percent, 'L&oslash;nnslipp: Mangler prosent for komune valgt p$aring;  L' . $salary->JournalID, 'percent');
+    self::checkIfEmpty($kommune_tax->Percent, 'L&oslash;nnslipp: Mangler prosent for komune valgt p&aring;  L' . $salary->JournalID, 'percent');
     $zone_code = $kommune_tax->Code;
     if (!isset($loennOgGodtgjoerelse[$zone_code])) {
       $loennOgGodtgjoerelse[$zone_code]['loennOgGodtgjoerelse'] = array();
@@ -651,7 +651,7 @@ class altinn_report {
     if (!empty($this->employee_ids)) {
       $query_employees .= ' AND ap.AccountPlanID IN (' . implode($this->employee_ids, ', ') . ')';
     } else {
-      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
+      $query_employees .= " AND 1 = 0"; // returns an empty result set
     }
     return $query_employees;
   }
@@ -659,16 +659,22 @@ class altinn_report {
 /* Helper function that generates the query to get
  * the included salaries
  */
-  function queryStringForSelectedSalaries() {
+  function queryStringForSelectedSalaries($just_test_if_ready) {
     // only the ones that have the altinn/actual pay date set
     $query_salaries = "SELECT s.*
                        FROM salary s
-                       WHERE s.ActualPayDate LIKE  '" . $this->period . "%'";
+                       WHERE ";
+    if (!$just_test_if_ready) {
+      $query_salaries .= "s.ActualPayDate LIKE  '" . $this->period . "%'";
+    }
+    else {
+      $query_salaries .= "s.ActualPayDate LIKE  '%'";
+    }
     // and restrict further by ids
     if (!empty($this->salary_ids)) {
       $query_salaries .= ' AND SalaryID IN (' . implode($this->salary_ids, ', ') . ')';
     } else {
-      $query_work_relations .= " WHERE 1 = 0"; // returns an empty result set
+      $query_salaries .= " AND 1 = 0"; // returns an empty result set
     }
     return $query_salaries;
   }
@@ -676,9 +682,9 @@ class altinn_report {
 /* Helper function that populates the salaries array
  * for the selected period
  */
-  function fetchSalaries() {
+  function fetchSalaries($just_test_if_ready = false) {
     global $_lib;
-    $query_salaries = self::queryStringForSelectedSalaries();
+    $query_salaries = self::queryStringForSelectedSalaries($just_test_if_ready);
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     if (!$this->only_register_employee) {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
@@ -720,6 +726,7 @@ class altinn_report {
     while ($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
       $this->work_relations[$work_relation->SubcompanyID][$work_relation->AccountPlanID] = $work_relation;
       if (array_search($work_relation, $work_relations_by_employee) === false){
+        $this->employee_ids[] = $work_relation->AccountPlanID;
         $work_relations_by_employee[$work_relation->AccountPlanID][] = $work_relation;
       }
     }

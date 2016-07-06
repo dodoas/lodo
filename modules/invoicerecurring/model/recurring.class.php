@@ -628,6 +628,7 @@ class recurring {
         $sql = sprintf("SELECT * FROM invoiceout WHERE InvoiceID = %d", $invoice->InvoiceID);
         $r = $_lib['db']->db_query($sql);
         $head = $_lib['db']->db_fetch_assoc($r);
+        $head["PrintInterval"] = $row["PrintInterval"];
         $invoice->update($head);
 
         return true;
