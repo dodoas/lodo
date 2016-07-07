@@ -1349,11 +1349,10 @@ class invoice {
       $taxH = array();
 
       $altinn_reference = $altinn_report4_row->res_ArchiveReference;
-      $recieved_messages = $xml->Mottak->mottattLeveranse;
-      // get the issue date from recieved messages
-      // max date from all messages
-      $issue_date = (string) $xml->Mottak->kalendermaaned . '-01';
+      $issue_date = strtotime((string) $xml->Mottak->kalendermaaned . '-01');
+      $issue_date = strftime("%F", strtotime('next month -1 hour', $issue_date));
       $bank_account_number = (string) $xml->Mottak->innbetalingsinformasjon->kontonummer;
+      $customer_bank_account_number = preg_replace('/[^0-9]/', '', $_lib['sess']->get_companydef('BankAccount'));
       $kommune = new kommune();
       $kommune->load_by_field_value(array('BankAccountNumber' => $bank_account_number));
       $kommune_orgno = preg_replace('/[^0-9]/', '', $kommune->OrgNumber);
@@ -1377,33 +1376,26 @@ class invoice {
 
       // Invoice supplier
       $altinn_invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID = $kommune_orgno;
-      $altinn_invoice->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID = $kommune_orgno . ' MVA';
-      $altinn_invoice->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
 
       $altinn_invoice->AccountingSupplierParty->Party->PartyName->Name = $kommune_name;
-/*
-      Missing info! Can't find a way to have the address and contact info.
-      Maybe add the kommune as a supplier and link it to a kommune or add more columns to kommune table.
 
-      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->StreetName = '';
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->StreetName = trim($kommune->Address1 . "\n" . $kommune->Address2 . "\n" . $kommune->Address3);
       $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->BuildingNumber = '';
-      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->CityName = '';
-      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->PostalZone = ''; // ZipCode
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->CityName = $kommune->City;
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->PostalZone = $kommune->ZipCode;
       $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode = 'NO';
 
-      $altinn_invoice->AccountingSupplierParty->Party->Contact->Telephone = '';
-      $altinn_invoice->AccountingSupplierParty->Party->Contact->Mobile = '';
-      $altinn_invoice->AccountingSupplierParty->Party->Contact->Telefax = '';
-      $altinn_invoice->AccountingSupplierParty->Party->Contact->ElectronicMail = '';
-
- */
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Telephone = $kommune->Telephone;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Mobile = $kommune->Mobile;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Telefax = $kommune->Telefax;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->ElectronicMail = $kommune->Email;
 
       // Invoice customer
       $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID = $customer_orgno;
       $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = 'NO:ORGNR';
       $altinn_invoice->AccountingCustomerParty->Party->PartyName->Name = $customer_name;
 
-      // Missing info! Using company's address and contact info.
+      // Using company's address and contact info.
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->StreetName = $_lib['sess']->get_companydef('IAddress');
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->BuildingNumber = '';
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->CityName = $_lib['sess']->get_companydef('ICity');
@@ -1419,9 +1411,8 @@ class invoice {
       $altinn_invoice->PaymentMeans->PaymentDueDate = $due_date;
       $altinn_invoice->PaymentMeans->PayeeFinancialAccount->ID = $bank_account_number;
       $altinn_invoice->PaymentMeans->PayeeFinancialAccount->Name = 'Bank';
-      // Missing info! No way to determine which of the accounts is the bank account used for tax. 
-      // $altinn_invoice->PaymentMeans->PayerFinancialAccount->ID = $invoice->BankAccount;
-      // $altinn_invoice->PaymentMeans->PayerFinancialAccount->Name  = 'Bank';
+      $altinn_invoice->PaymentMeans->PayerFinancialAccount->ID = $customer_bank_account_number;
+      $altinn_invoice->PaymentMeans->PayerFinancialAccount->Name  = 'Bank';
 
       $altinn_invoice->PaymentMeans->InstructionID = $kid;
       $altinn_invoice->PaymentMeans->InstructionNote = "KID";

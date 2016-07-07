@@ -13,7 +13,8 @@ class kommune {
   private $kommune_data_for_select = array();
 
   // a list of columns allowed to search by
-  public $permitted_columns = array('KommuneID', 'KommuneNumber', 'KommuneName', 'County', 'Sone', 'BankAccountNumber', 'OrgNumber', 'OrgName', 'OrganisationForm', 'Comments');
+  public $permitted_columns = array('KommuneID', 'KommuneNumber', 'KommuneName', 'County', 'Sone', 'BankAccountNumber', 'OrgNumber', 'OrgName', 'OrganisationForm', 'Comments',
+                                    'Telephone', 'Telefax', 'Email', 'Mobile', 'Webpage', 'Address1', 'Address2', 'Address3', 'ZipCode', 'City');
 
   // Table columns
   public $KommuneID         = NULL;
@@ -26,6 +27,16 @@ class kommune {
   public $OrgName           = NULL;
   public $OrganisationForm  = NULL;
   public $Comments          = NULL;
+  public $Telephone         = NULL;
+  public $Telefax           = NULL;
+  public $Email             = NULL;
+  public $Mobile            = NULL;
+  public $Webpage           = NULL;
+  public $Address1          = NULL;
+  public $Address2          = NULL;
+  public $Address3          = NULL;
+  public $ZipCode           = NULL;
+  public $City              = NULL;
 
   // Linked to the AGA table by Sone code
   public $TaxPercent        = NULL;
@@ -55,7 +66,7 @@ class kommune {
       while (($csvdata = fgetcsv($kommune_cvs_file)) !== FALSE) {
         $kommune_object = self::kommune_object_from_csvdata($csvdata);
         $this->all_kommunes[$kommune_object->KommuneNumber] = $kommune_object;
-        $this->kommune_data_for_select[$kommune_object->KommuneNumber] = implode($csvdata, ", ");
+        $this->kommune_data_for_select[$kommune_object->KommuneNumber] = implode(array_slice($csvdata, 0, 9), ", ");
       }
       fclose($kommune_cvs_file);
     }
@@ -80,6 +91,16 @@ class kommune {
     $this->OrgName           = NULL;
     $this->OrganisationForm  = NULL;
     $this->Comments          = NULL;
+    $this->Telephone         = NULL;
+    $this->Telefax           = NULL;
+    $this->Email             = NULL;
+    $this->Mobile            = NULL;
+    $this->Webpage           = NULL;
+    $this->Address1          = NULL;
+    $this->Address2          = NULL;
+    $this->Address3          = NULL;
+    $this->ZipCode           = NULL;
+    $this->City              = NULL;
 
     $this->TaxPercent        = NULL;
   }
@@ -106,6 +127,16 @@ class kommune {
     $kommune->OrgName           = $kommune_data[6];
     $kommune->OrganisationForm  = $kommune_data[7];
     $kommune->Comments          = $kommune_data[8];
+    $kommune->Telephone         = $kommune_data[9];
+    $kommune->Telefax           = $kommune_data[10];
+    $kommune->Email             = $kommune_data[11];
+    $kommune->Mobile            = $kommune_data[12];
+    $kommune->Webpage           = $kommune_data[13];
+    $kommune->Address1          = $kommune_data[14];
+    $kommune->Address2          = $kommune_data[15];
+    $kommune->Address3          = $kommune_data[16];
+    $kommune->ZipCode           = $kommune_data[17];
+    $kommune->City              = $kommune_data[18];
 
     $kommune->TaxPercent        = $this->tax_percents[$kommune->Sone];
     return $kommune;
@@ -124,6 +155,16 @@ class kommune {
     $this->OrgName           = $kommune->OrgName;
     $this->OrganisationForm  = $kommune->OrganisationForm;
     $this->Comments          = $kommune->Comments;
+    $this->Telephone         = $kommune->Telephone;
+    $this->Telefax           = $kommune->Telefax;
+    $this->Email             = $kommune->Email;
+    $this->Mobile            = $kommune->Mobile;
+    $this->Webpage           = $kommune->Webpage;
+    $this->Address1          = $kommune->Address1;
+    $this->Address2          = $kommune->Address2;
+    $this->Address3          = $kommune->Address3;
+    $this->ZipCode           = $kommune->ZipCode;
+    $this->City              = $kommune->City;
 
     $this->TaxPercent        = $this->tax_percents[$kommune->Sone];
   }
@@ -135,7 +176,7 @@ class kommune {
     foreach ($this->kommunes_in_db_by_id as $kommune_id => $kommune_object) {
       $matches = true;
       foreach ($args as $column_name => $column_value) {
-        if (in_array($column_name, $this->permitted_columns) && $kommune_object->{$column_name} != $args[$column_name]) {
+        if (in_array($column_name, $this->permitted_columns) && $kommune_object->{$column_name} != $column_value) {
           $matches = false;
           break;
         }
@@ -167,6 +208,16 @@ class kommune {
     $this->OrgName           = $kommune->OrgName;
     $this->OrganisationForm  = $kommune->OrganisationForm;
     $this->Comments          = $kommune->Comments;
+    $this->Telephone         = $kommune->Telephone;
+    $this->Telefax           = $kommune->Telefax;
+    $this->Email             = $kommune->Email;
+    $this->Mobile            = $kommune->Mobile;
+    $this->Webpage           = $kommune->Webpage;
+    $this->Address1          = $kommune->Address1;
+    $this->Address2          = $kommune->Address2;
+    $this->Address3          = $kommune->Address3;
+    $this->ZipCode           = $kommune->ZipCode;
+    $this->City              = $kommune->City;
 
     $this->TaxPercent        = $this->tax_percents[$kommune->Sone];
   }
@@ -183,8 +234,16 @@ class kommune {
       $kommune_id_column_name = "";
       $kommunes_id_value = "";
     }
-    $save_query = "REPLACE INTO kommune ($kommune_id_column_name KommuneNumber, KommuneName, Sone, County, BankAccountNumber, OrgNumber, OrgName, OrganisationForm, Comments)
-                   VALUES ($kommunes_id_value '$this->KommuneNumber', '$this->KommuneName', '$this->Sone', '$this->County', '$this->BankAccountNumber', '$this->OrgNumber', '$this->OrgName', '$this->OrganisationForm', '$this->Comments')";
+    $save_query = "REPLACE INTO kommune
+                   ($kommune_id_column_name KommuneNumber, KommuneName, Sone, County,
+                   BankAccountNumber, OrgNumber, OrgName, OrganisationForm, Comments,
+                   Telephone, Telefax, Email, Mobile, Webpage, Address1, Address2,
+                   Address3, ZipCode, City)
+                   VALUES
+                   ($kommunes_id_value '$this->KommuneNumber', '$this->KommuneName', '$this->Sone', '$this->County',
+                   '$this->BankAccountNumber', '$this->OrgNumber', '$this->OrgName', '$this->OrganisationForm', '$this->Comments',
+                   '$this->Telephone', '$this->Telefax', '$this->Email', '$this->Mobile', '$this->Webpage', '$this->Address1', '$this->Address2',
+                   '$this->Address3', '$this->ZipCode', '$this->City')";
     $_lib['db']->db_query($save_query);
     self::init();
     self::unload();

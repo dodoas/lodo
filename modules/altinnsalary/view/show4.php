@@ -1,6 +1,11 @@
 <?
 $db_table = "altinnReport4";
 require_once "record.inc";
+
+if (isset($_SESSION['oauth_invoice_error'])) {
+  $_lib['message']->add($_SESSION['oauth_invoice_error']);
+  unset($_SESSION['oauth_invoice_error']);
+}
 ?>
 
 <?
@@ -38,10 +43,15 @@ print $_lib['sess']->doctype ?>
   <? includeinc('head') ?>
   <? includeinc('top') ?>
   <? includeinc('left') ?>
-  <? print $_lib['message']->get() ?>
 </head>
 
 <body>
+<?
+$message = $_lib['message']->get();
+if(strstr($message, "Success")) $class = 'user';
+else $class = 'warning';
+if($message) { print "<div class='$class'>$message</div><br>"; }
+?>
   <table class="lodo_data">
     <tr>
       <td class="menu">AltinnReport4ID</td>
@@ -52,14 +62,18 @@ print $_lib['sess']->doctype ?>
       <td class="menu">Arbeidsgiveravgift faktura</td>
       <td>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
-        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&action_invoice_fakturabanksend_altinn_aga_ftr=1&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Send til Fakturabank</a>
+        <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
+          <input type='submit' name="action_invoice_fakturabanksend_altinn_aga_ftr" value='Send til Fakturabank' />
+        </form>
       </td>
     </tr>
     <tr>
       <td class="menu">Forskuddstrekk faktura</td>
       <td>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
-        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&action_invoice_fakturabanksend_altinn_aga_ftr=1&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Send til Fakturabank</a>
+        <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
+          <input type='submit' name="action_invoice_fakturabanksend_altinn_aga_ftr" value='Send til Fakturabank' />
+        </form>
       </td>
     </tr>
 <? } ?>
