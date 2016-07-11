@@ -20,8 +20,6 @@ class model_log_log extends model_invoicerecurring_recurring
         {
             $name = $db->Database;
 
-            if($name == "phpmyadmin" || $name == "LODO") continue;
-
             $_lib['storage'] = $_lib['db'] =
                 new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'],
                                    'database' => $name,

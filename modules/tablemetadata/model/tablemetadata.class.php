@@ -5,7 +5,11 @@
 
 class model_tablemetadata_tablemetadata {
 
-    function __construct() {
+    private $system_dbs = array('lodo', 'LODO', 'mysql', 'test', 'information_schema', 'performance_schema', 'phpmyadmin');
+    private $nl_separator = "\n";
+
+    function __construct($nl_separator = NULL) {
+      if (!is_null($nl_separator)) $this->nl_separator = $nl_separator;
     }
 
     function updateselected($args) {
@@ -29,7 +33,7 @@ class model_tablemetadata_tablemetadata {
         $result     = $_lib['db']->db_query($query_show);
         $i = 0;
         while ($row = $_lib['db']->db_fetch_object($result)) {
-            print "Oppdaterer: $row->Database\n";
+            print "Updating: $row->Database" . $this->nl_separator;
             $params['db_name'] = $row->Database;
             $this->update_db($params);
         }
@@ -44,7 +48,7 @@ class model_tablemetadata_tablemetadata {
             $tablefilter = $args['tablefilter'];
         }
 
-        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
+        $system_dbs = $this->system_dbs;
 
         $query_show = "show databases";
         $result     = $_lib['db']->db_query($query_show);
@@ -54,7 +58,7 @@ class model_tablemetadata_tablemetadata {
                 continue;
             }
 
-            print "Oppdaterer: $row->Database\n";
+            print "Updating: $row->Database" . $this->nl_separator;
             $params['db_name'] = $row->Database;
             $params['tablefilter'] = $tablefilter;
             $this->update_db($params);
@@ -63,7 +67,7 @@ class model_tablemetadata_tablemetadata {
 
     function runscriptall($args) {
         if (empty($args['scriptpath'])) {
-            print "Missing scriptpath argument.\n";
+            print "Missing scriptpath argument." . $this->nl_separator;
             return false;
         }
 
@@ -71,10 +75,10 @@ class model_tablemetadata_tablemetadata {
 
         global $_lib;
 
-        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
+        $system_dbs = $this->system_dbs;
 
         if (!is_file($scriptpath)) {
-            print "File $scriptpath not found.\n";
+            print "File $scriptpath not found." . $this->nl_separator;
             return false;
         }
 
@@ -82,25 +86,44 @@ class model_tablemetadata_tablemetadata {
 
         $script = file_get_contents($scriptpath);
 
-        
-        $params['commands'] = explode(';', $script);
+        // remove the home directory if there is any
+        $scriptpath = preg_replace('/.*db\/changes\//', 'db/changes/', $scriptpath);
+
+        // separate full path by / and reverse to get script_name as first element
+        $tmp = array_reverse(explode('/', $scriptpath));
+        // separate script_name by _ and get script_number as first element
+        $tmp = explode('_', $tmp[0]);
+        $script_number = (int) $tmp[0];
+        $commands = explode(';', $script);
+        // replace next two lines with the comented out ones below after the
+        // migration 133_create_migrations_table.sql is run
+        $commands_before = array();
+        $commands_after = array();
+        // $commands_before = array("REPLACE INTO migrations (MigrationID, MigrationName, Status, StartedAt, SucceededAt) VALUES ($script_number, '$scriptpath', 'STARTED', NOW(), 0)");
+        // $commands_after = array("UPDATE migrations SET Status = 'OK', SucceededAt = NOW() WHERE MigrationID = $script_number AND MigrationName = '$scriptpath'");
+        $params['commands'] = array_merge($commands_before, $commands, $commands_after);
         # use default login values, assuming all dbs have same login values
         # in the future we might load setup files instead
         $params['db_server'] = $_SETUP['DB_SERVER_DEFAULT'];
         $params['db_user'] = $_SETUP['DB_USER_DEFAULT']; 
         $params['db_password'] = $_SETUP['DB_PASSWORD_DEFAULT'];
 
-        $query_show = "show databases";
-        $result     = $_lib['db']->db_query($query_show);
-        $i = 0;
-        while ($row = $_lib['db']->db_fetch_object($result)) {
-            if (in_array($row->Database, $system_dbs)) {
-                continue;
-            }
+        if (!isset($args['db_name'])) {
+            $query_show = "show databases";
+            $result     = $_lib['db']->db_query($query_show);
+            while ($row = $_lib['db']->db_fetch_object($result)) {
+                if (in_array($row->Database, $system_dbs)) {
+                    continue;
+                }
 
-            print "Kjører script på: $row->Database\n";
-            $params['db_name'] = $row->Database;
-            $this->runscriptondb($params);
+                print "Running script on: $row->Database" . $this->nl_separator;
+                $params['db_name'] = $row->Database;
+                $this->runscriptondb($params);
+            }
+        } else {
+            print "Running script on: ". $args['db_name'] . $this->nl_separator;
+            $params['db_name'] = $args['db_name'];
+            return $this->runscriptondb($params);
         }
     }
 
@@ -116,9 +139,8 @@ class model_tablemetadata_tablemetadata {
     }
 
     function runscriptondb($params) {
-
         if (empty($params['db_name'])) {
-            print "DB name missing.\n";
+            print "Database name missing." . $this->nl_separator;
             return false;
         }
 
@@ -127,17 +149,17 @@ class model_tablemetadata_tablemetadata {
         try {
             $db_link = @mysqli_connect($params['db_server'], $params['db_user'], $params['db_password'], $db_name);
         } catch (Exception $e) {
-            echo 'Caught exception when trying to login to $db_name: ',  $e->getMessage(), "\n";
+            echo 'Caught exception when trying to connect to $db_name: '.  $e->getMessage() . $this->nl_separator;
             return false;
         }
 
         if (!$db_link) {
-            print "You are not authorized to login to this database: $db_name.\n";
+            print "You are not authorized to connect to this database: $db_name." . $this->nl_separator;
             return false;
         }
 
         if (!$this->verifylododb($db_link)) {
-            print "Not a lodo database: $db_name.\n";
+            print "Not a LODO database: $db_name." . $this->nl_separator;
             return false;
         }
 
@@ -145,20 +167,20 @@ class model_tablemetadata_tablemetadata {
             if ($command == "" || trim($command) == "") {
                 continue;
             }
-            print "Kjører kommando: " . substr($command, 0, 40) . "...\n";
+            print "Running command: " . substr($command, 0, 40) . "..." . $this->nl_separator;
 
                 $query = $command;
     
                 $result = mysqli_query($db_link, $query);
                 if (!$result) {
-                    print "Dbname: $db_name, db_query: $query. <br>\nBad query: " . mysqli_error($db_link) . "<br />\n.\n";
+                    print "db_name: $db_name, db_query: $query." . $this->nl_separator . "Bad query: " . mysqli_error($db_link) . $this->nl_separator . $this->nl_separator;
                     return false;
                 } else {
-                    print "Query successful.\n";
+                    print "Query successful." . $this->nl_separator;
                 }
         }
 
-        print "Dbname: $db_name, db script successfully executed.\n";
+        print "db_name: $db_name, script successfully executed." . $this->nl_separator;
 
         return true;
     }
@@ -220,20 +242,20 @@ class model_tablemetadata_tablemetadata {
     }
 
 
-    private function update_db($args) {
+    function update_db($args) {
         global $_SETUP, $_lib;
         
         #print_r($args);        
 
         $databaseName = $args['db_name'];
-        $tableFilter = $args['tablefilter'];
+        $tableFilter = isset($args['tablefilter']) ? $args['tablefilter'] : '';
         $dsn = $_SETUP['DB_SERVER_DEFAULT'] . $databaseName . $_SETUP['DB_TYPE_DEFAULT'];
         $dbh[$dsn] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $databaseName, 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
 
         $query_is_lodo = "SHOW TABLES LIKE 'confdbfields'";
         $result_is_lodo = $dbh[$dsn]->db_query($query_is_lodo);
         if (!$result_is_lodo ||  mysqli_num_rows($result_is_lodo) != 1) {
-            $_lib['message']->add("<b>Database: $databaseName er ikke en Lodo database\n");
+            print "Database: $databaseName is not a LODO database" . $this->nl_separator;
             return false;
         }
     
@@ -493,8 +515,10 @@ class model_tablemetadata_tablemetadata {
                     }
                     else
                     {
-                        $_lib['message']->add("Finnes ikke type: $type");
-                        $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
+                        // Commented out just so it does not dispaly warnings on the update function for each db and clutter the output
+                        // with a lot of unnecessary warnings(not necessary since the form builder helper is not implemented fully).
+                        // $_lib['message']->add("Type not found: $type");
+                        // $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
                     }
     
                     if($key == 'PRI')
@@ -983,7 +1007,7 @@ class model_tablemetadata_tablemetadata {
         #print "$query<br>";
     
         $dbh[$dsn]->db_delete($query);
-        $_lib['message']->add("<b>Database: $databaseName,  Antall felt: $total, oppdaterte. $updated, nye: $new<br>$new_fields</b>\n");
+        print "Database: $databaseName,  Field number: $total, updated: $updated, new: $new" . $this->nl_separator . $new_fields . $this->nl_separator;
     
         #mysql_free_result($result);
     }
