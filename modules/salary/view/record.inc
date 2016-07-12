@@ -1,5 +1,23 @@
 <?
 
+function CheckIfWorkRelationChanged($SalaryID, $WorkRelationID) {
+  global $_lib;
+  $Changed = false;
+  $Salary = $_lib['storage']->get_row(array('query' => "SELECT * FROM salary WHERE SalaryID = " . $SalaryID));
+  $WorkRelation = $_lib['storage']->get_row(array('query' => "SELECT * FROM workrelation WHERE WorkRelationID = '" . $WorkRelationID . "'"));
+  // Check if anything work relation related changed
+  $SalaryFieldNames = array('WorkRelationID', 'OccupationID', 'SubcompanyID', 'WorkStart',
+                            'WorkStop', 'InCurrentPositionSince', 'WorkTimeScheme', 'ShiftType',
+                            'TypeOfEmployment', 'WorkPercent', 'WorkPercentUpdatedAt',
+                            'WorkMeasurement', 'SalaryDateChangedAt');
+  foreach ($SalaryFieldNames as $FieldName) {
+    if ($WorkRelation->{$FieldName} != $Salary->{$FieldName}) {
+      $Changed = true;
+      return $Changed;
+    }
+  }
+  return $Changed;
+}
 function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
   global $_lib;
   $Changed = false;
@@ -9,7 +27,7 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
                             "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false,
                             "VacationPayment" => false, "ActualPayDate" => false, "ShiftType" => false,
                             "WorkTimeScheme" => false, "TypeOfEmployment" => false, "OccupationID" => false,
-                            "SubcompanyID" => false);
+                            "WorkRelationID" => false);
   foreach ($SalaryFieldNames as $FieldName => $IsAmount) {
     $ArgName = "salary_".$FieldName."_".$SalaryID;
     if ($IsAmount) {
@@ -228,21 +246,31 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $result_head_employee = $_lib['db']->db_query($query_head_employee);
         $head_employee        = $_lib['db']->db_fetch_object($result_head_employee);
         $accountplan = $accounting->get_accountplan_object($head_employee->AccountPlanID);
+        $work_relation_query = "SELECT * FROM workrelation WHERE AccountPlanID = '".$head_employee->AccountPlanID."' ORDER BY WorkRelationID DESC LIMIT 1";
+        $work_relation = $_lib['storage']->get_row(array('query' => $work_relation_query));
 
         //#Possible to extend or alter parameters here
-        $postmain['salary_JournalID']           = $JournalID;
-        $postmain['salary_SalaryConfID']        = $SalaryConfID;
-        $postmain['salary_AccountPlanID']       = $head_employee->AccountPlanID;
-        $postmain['salary_ValidFrom']           = $fromDate;
-        $postmain['salary_ValidTo']             = $toDate;
-        $postmain['salary_JournalDate']         = $journalDate;
-        $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
-        $postmain['salary_KommuneID']           = $_lib['sess']->get_companydef('CompanyMunicipalityID');
-        $postmain['salary_ShiftType']           = $accountplan->ShiftType;
-        $postmain['salary_OccupationID']        = $accountplan->OccupationID;
-        $postmain['salary_WorkTimeScheme']      = $accountplan->WorkTimeScheme;
-        $postmain['salary_TypeOfEmployment']    = $accountplan->TypeOfEmployment;
-        $postmain['salary_SubcompanyID']        = $accountplan->SubcompanyID;
+        $postmain['salary_JournalID']              = $JournalID;
+        $postmain['salary_SalaryConfID']           = $SalaryConfID;
+        $postmain['salary_AccountPlanID']          = $head_employee->AccountPlanID;
+        $postmain['salary_ValidFrom']              = $fromDate;
+        $postmain['salary_ValidTo']                = $toDate;
+        $postmain['salary_JournalDate']            = $journalDate;
+        $postmain['salary_Period']                 = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
+        $postmain['salary_KommuneID']              = $_lib['sess']->get_companydef('CompanyMunicipalityID');
+        $postmain['salary_WorkRelationID']         = $work_relation->WorkRelationID;
+        $postmain['salary_ShiftType']              = $work_relation->ShiftType;
+        $postmain['salary_OccupationID']           = $work_relation->OccupationID;
+        $postmain['salary_WorkTimeScheme']         = $work_relation->WorkTimeScheme;
+        $postmain['salary_TypeOfEmployment']       = $work_relation->TypeOfEmployment;
+        $postmain['salary_SubcompanyID']           = $work_relation->SubcompanyID;
+        $postmain['salary_WorkStart']              = $work_relation->WorkStart;
+        $postmain['salary_WorkStop']               = $work_relation->WorkStop;
+        $postmain['salary_InCurrentPositionSince'] = $work_relation->InCurrentPositionSince;
+        $postmain['salary_WorkPercent']            = $work_relation->WorkPercent;
+        $postmain['salary_WorkPercentUpdatedAt']   = $work_relation->WorkPercentUpdatedAt;
+        $postmain['salary_WorkMeasurement']        = $work_relation->WorkMeasurement;
+        $postmain['salary_SalaryDateChangedAt']    = $work_relation->SalaryDateChangedAt;
 
         if($accountplan->EnableCredit == 1)
             $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
@@ -600,6 +628,11 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
       SalaryId = '".$SalaryID."';";
     $_lib['db']->db_query($update_query);
   }
+  if ($_lib['input']->getProperty('action_salary_new') || ($_lib['input']->getProperty('action_salary_journal') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'. $SalaryID]))) {
+    // set who updated altinn fields
+    $_POST["salary_AltinnFieldsUpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_AltinnFieldsUpdatedAt_".$SalaryID] = strftime("%F %T");
+  }
 
   // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
   if ($_lib['input']->getProperty('action_salary_new')) {
@@ -617,6 +650,9 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
     $_POST['salary_Comment_'.$SalaryID] = $row->Comment;
     $_POST['salary_InternComment_'.$SalaryID] = $row->InternComment;
     $_POST['salary_VacationPayment_'.$SalaryID] = $row->VacationPayment;
+    // set who updated salary
+    $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
 
     $query="select count(*) as fieldcount from salaryline where SalaryID=".$_POST['SalaryID'];
     $row = $_lib['storage']->get_row(array('query' => $query));
@@ -724,6 +760,23 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
     $q = "SELECT * FROM salaryconf WHERE AccountPlanID = ". $_POST["salary_AccountPlanID_". $SalaryID]." LIMIT 1";
     $salaryConf = $_lib['storage']->get_row(array('query' => $q));
     $_POST["salary_SalaryConfID_". $SalaryID] = $salaryConf->SalaryConfID;
+  }
+
+  if (!$_lib['input']->getProperty('action_salary_new') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'.$SalaryID])) {
+    $work_relation_query = "SELECT * FROM workrelation WHERE WorkRelationID = '".$_POST['salary_WorkRelationID_'.$SalaryID]."'";
+    $work_relation = $_lib['storage']->get_row(array('query' => $work_relation_query));
+    $_POST['salary_ShiftType_'.$SalaryID]              = $work_relation->ShiftType;
+    $_POST['salary_WorkTimeScheme_'.$SalaryID]         = $work_relation->WorkTimeScheme;
+    $_POST['salary_TypeOfEmployment_'.$SalaryID]       = $work_relation->TypeOfEmployment;
+    $_POST['salary_OccupationID_'.$SalaryID]           = $work_relation->OccupationID;
+    $_POST['salary_SubcompanyID_'.$SalaryID]           = $work_relation->SubcompanyID;
+    $_POST['salary_WorkStart_'.$SalaryID]              = $work_relation->WorkStart;
+    $_POST['salary_WorkStop_'.$SalaryID]               = $work_relation->WorkStop;
+    $_POST['salary_InCurrentPositionSince_'.$SalaryID] = $work_relation->InCurrentPositionSince;
+    $_POST['salary_WorkPercent_'.$SalaryID]            = $work_relation->WorkPercent;
+    $_POST['salary_WorkPercentUpdatedAt_'.$SalaryID]   = $work_relation->WorkPercentUpdatedAt;
+    $_POST['salary_WorkMeasurement_'.$SalaryID]        = $work_relation->WorkMeasurement;
+    $_POST['salary_SalaryDateChangedAt_'.$SalaryID]    = $work_relation->SalaryDateChangedAt;
   }
 
   #print_r($_POST);
@@ -1028,14 +1081,29 @@ elseif($_lib['input']->getProperty('action_altindato_update')) {
     $_lib['db']->db_query($query_update_altinn_date);
   }
 }
-elseif($_lib['input']->getProperty('action_salary_update_altinn_fields')) {
+elseif($_lib['input']->getProperty('action_salary_update_altinn_fields') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'.$SalaryID])) {
   $tables['salary'] = 'SalaryID';
-  $args['salary_ShiftType_' . $SalaryID]        = $_POST['salary_ShiftType_' . $SalaryID];
-  $args['salary_WorkTimeScheme_' . $SalaryID]   = $_POST['salary_WorkTimeScheme_' . $SalaryID];
-  $args['salary_TypeOfEmployment_' . $SalaryID] = $_POST['salary_TypeOfEmployment_' . $SalaryID];
-  $args['salary_OccupationID_' . $SalaryID]     = $_POST['salary_OccupationID_' . $SalaryID];
-  $args['salary_SubcompanyID_' . $SalaryID]     = $_POST['salary_SubcompanyID_' . $SalaryID];
-  $args['salary_ActualPayDate_' . $SalaryID]    = $_POST['salary_ActualPayDate_' . $SalaryID];
+
+  $work_relation_query = "SELECT * FROM workrelation WHERE WorkRelationID = '".$_POST['salary_WorkRelationID_'.$SalaryID]."'";
+  $work_relation = $_lib['storage']->get_row(array('query' => $work_relation_query));
+  $args['salary_WorkRelationID_'.$SalaryID]         = $work_relation->WorkRelationID;
+  $args['salary_ShiftType_'.$SalaryID]              = $work_relation->ShiftType;
+  $args['salary_WorkTimeScheme_'.$SalaryID]         = $work_relation->WorkTimeScheme;
+  $args['salary_TypeOfEmployment_'.$SalaryID]       = $work_relation->TypeOfEmployment;
+  $args['salary_OccupationID_'.$SalaryID]           = $work_relation->OccupationID;
+  $args['salary_SubcompanyID_'.$SalaryID]           = $work_relation->SubcompanyID;
+  $args['salary_WorkStart_'.$SalaryID]              = $work_relation->WorkStart;
+  $args['salary_WorkStop_'.$SalaryID]               = $work_relation->WorkStop;
+  $args['salary_InCurrentPositionSince_'.$SalaryID] = $work_relation->InCurrentPositionSince;
+  $args['salary_WorkPercent_'.$SalaryID]            = $work_relation->WorkPercent;
+  $args['salary_WorkPercentUpdatedAt_'.$SalaryID]   = $work_relation->WorkPercentUpdatedAt;
+  $args['salary_WorkMeasurement_'.$SalaryID]        = $work_relation->WorkMeasurement;
+  $args['salary_SalaryDateChangedAt_'.$SalaryID]    = $work_relation->SalaryDateChangedAt;
+
+  // set who updated altinn fields and when
+  $args["salary_AltinnFieldsUpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+  $args["salary_AltinnFieldsUpdatedAt_".$SalaryID] = strftime("%F %T");
+
   $_lib['storage']->db_update_multi_table($args, $tables);
 }
 

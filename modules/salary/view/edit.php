@@ -303,23 +303,11 @@ $formname = "salaryUpdate";
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
-    <input type="hidden" id="salary.ShiftType.<? print $head->SalaryID ?>" name="salary.ShiftType.<? print $head->SalaryID ?>" value="<? print $head->ShiftType ?>">
     <th id="ShiftType_display_value" class="sub" colspan="2"><? print $all_shift_types[$head->ShiftType] ?></th>
-    <input type="hidden" id="salary.WorkTimeScheme.<? print $head->SalaryID ?>" name="salary.WorkTimeScheme.<? print $head->SalaryID ?>" value="<? print $head->WorkTimeScheme ?>">
     <th id="WorkTimeScheme_display_value" class="sub"><? print $all_work_time_scheme_types[$head->WorkTimeScheme] ?></th>
-    <input type="hidden" id="salary.TypeOfEmployment.<? print $head->SalaryID ?>" name="salary.TypeOfEmployment.<? print $head->SalaryID ?>" value="<? print $head->TypeOfEmployment ?>">
     <th id="TypeOfEmployment_display_value"class="sub" colspan="3"><? print $all_type_of_employement_types[$head->TypeOfEmployment] ?></th>
-    <input type="hidden" id="salary.OccupationID.<? print $head->SalaryID ?>" name="salary.OccupationID.<? print $head->SalaryID ?>" value="<? print $head->OccupationID ?>">
     <th id="OccupationID_display_value" class="sub" colspan="2"><? print $all_occupations[$head->OccupationID] ?></th>
-    <input type="hidden" id="salary.SubcompanyID.<? print $head->SalaryID ?>" name="salary.SubcompanyID.<? print $head->SalaryID ?>" value="<? print $head->SubcompanyID ?>">
     <th id="SubcompanyID_display_value" class="sub"><? print $all_subcompanies[$head->SubcompanyID] ?></th>
-    <input type="hidden" id="salary.WorkStart.<? print $head->SalaryID ?>" name="salary.WorkStart.<? print $head->SalaryID ?>" value="<? print $head->WorkStart ?>">
-    <input type="hidden" id="salary.WorkStop.<? print $head->SalaryID ?>" name="salary.WorkStop.<? print $head->SalaryID ?>" value="<? print $head->WorkStop ?>">
-    <input type="hidden" id="salary.InCurrentPositionSince.<? print $head->SalaryID ?>" name="salary.InCurrentPositionSince.<? print $head->SalaryID ?>" value="<? print $head->InCurrentPositionSince ?>">
-    <input type="hidden" id="salary.WorkPercent.<? print $head->SalaryID ?>" name="salary.WorkPercent.<? print $head->SalaryID ?>" value="<? print $head->WorkPercent ?>">
-    <input type="hidden" id="salary.WorkPercentUpdatedAt.<? print $head->SalaryID ?>" name="salary.WorkPercentUpdatedAt.<? print $head->SalaryID ?>" value="<? print $head->WorkPercentUpdatedAt ?>">
-    <input type="hidden" id="salary.WorkMeasurement.<? print $head->SalaryID ?>" name="salary.WorkMeasurement.<? print $head->SalaryID ?>" value="<? print $head->WorkMeasurement ?>">
-    <input type="hidden" id="salary.SalaryDateChangedAt.<? print $head->SalaryID ?>" name="salary.SalaryDateChangedAt.<? print $head->SalaryID ?>" value="<? print $head->SalaryDateChangedAt ?>">
   </tr>
 </table>
 <br>
@@ -548,7 +536,7 @@ $formname = "salaryUpdate";
             if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
             {
               echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" />';
-              echo '<input type="submit" name="action_salary_update_altinn_fields" value="Lagre altinn felter" align="right" />';
+              echo '<input type="submit" name="action_salary_update_altinn_fields" value="Lagre altinnfelter" align="right" />';
             }
 
             echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
@@ -614,24 +602,30 @@ $formname = "salaryUpdate";
   </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
 </tr>
-
+<tr>
+  <td colspan = "7">
+  <?
+    if($head->AltinnFieldsUpdatedBy) echo $head->AltinnFieldsUpdatedAt . " altinnfelter lagret av " . $_lib['format']->PersonIDToName($head->AltinnFieldsUpdatedBy);
+  ?>
+  </td>
+  <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
+</tr>
 <tr>
   <td colspan = "7">
   <?
     if($head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
   ?>
   </td>
-  <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
+  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
+  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>
-  <td colspan = "7">
+  <td colspan = "11">
       <? if ($head->FakturabankPersonID) { ?>
            <? print $head->FakturabankDateTime ?> fakturaBank <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
       <? } ?>
   </td>
-  <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
-  <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
 </tr>
 
 <tr>
@@ -727,21 +721,8 @@ unset($_SESSION['oauth_paycheck_sent']);
                            OccupationID: <? print json_encode($all_occupations); ?>,
                            SubcompanyID: <? print json_encode($all_subcompanies); ?> };
 
-  var hidden_fields_to_change = { WorkStart: '0000-00-00',
-                                  WorkStop: '0000-00-00',
-                                  InCurrentPositionSince: '0000-00-00',
-                                  WorkPercent: 0.0,
-                                  WorkPercentUpdatedAt: '0000-00-00',
-                                  WorkMeasurement: 0.0,
-                                  SalaryDateChangedAt: '0000-00-00' };
-
-  function changeDisplayValueTo(id, value, text) {
+  function changeDisplayValueTo(id, text) {
     document.getElementById(id + "_display_value").innerHTML = text;
-    changeHiddenValueTo(id, value);
-  }
-
-  function changeHiddenValueTo(id, value) {
-    document.getElementById('salary.'+id+'.<? print $head->SalaryID; ?>').value = value;
   }
 
   function printWorkRelationsSelectForEmployee() {
@@ -761,10 +742,7 @@ unset($_SESSION['oauth_paycheck_sent']);
     if(selected_work_relation) {
       for(field_name in fields_to_change) {
         field_value = selected_work_relation[field_name];
-        changeDisplayValueTo(field_name, field_value, fields_to_change[field_name][field_value]);
-      }
-      for(hidden_field_name in hidden_fields_to_change) {
-        changeHiddenValueTo(hidden_field_name, selected_work_relation[hidden_field_name]);
+        changeDisplayValueTo(field_name, fields_to_change[field_name][field_value]);
       }
     }
   }
