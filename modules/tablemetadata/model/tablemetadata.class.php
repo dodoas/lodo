@@ -95,12 +95,8 @@ class model_tablemetadata_tablemetadata {
         $tmp = explode('_', $tmp[0]);
         $script_number = (int) $tmp[0];
         $commands = explode(';', $script);
-        // replace next two lines with the comented out ones below after the
-        // migration 133_create_migrations_table.sql is run
-        $commands_before = array();
-        $commands_after = array();
-        // $commands_before = array("REPLACE INTO migrations (MigrationID, MigrationName, Status, StartedAt, SucceededAt) VALUES ($script_number, '$scriptpath', 'STARTED', NOW(), 0)");
-        // $commands_after = array("UPDATE migrations SET Status = 'OK', SucceededAt = NOW() WHERE MigrationID = $script_number AND MigrationName = '$scriptpath'");
+        $commands_before = array("REPLACE INTO migrations (MigrationID, MigrationName, Status, StartedAt, SucceededAt) VALUES ($script_number, '$scriptpath', 'STARTED', NOW(), 0)");
+        $commands_after = array("UPDATE migrations SET Status = 'OK', SucceededAt = NOW() WHERE MigrationID = $script_number AND MigrationName = '$scriptpath'");
         $params['commands'] = array_merge($commands_before, $commands, $commands_after);
         # use default login values, assuming all dbs have same login values
         # in the future we might load setup files instead
