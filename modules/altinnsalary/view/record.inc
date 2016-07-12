@@ -2,6 +2,8 @@
 session_start();
 includelogic('altinnsalary/files');
 includelogic('altinnsalary/altinnreport');
+includelogic('invoice/invoice');
+includelogic('fakturabank/fakturabank');
 
 class LocalSoapClient extends SoapClient {
   function __doRequest($request, $location, $action, $version, $one_way = 0) {
@@ -563,6 +565,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
                      WHERE s.AccountPlanID = a.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%'
                      ORDER BY s.JournalID DESC";
   $result_salary  = $_lib['db']->db_query($query_salary);
+} elseif($_lib['input']->getProperty('action_invoice_fakturabanksend_altinn_aga_ftr')) {
+  $invoice_type = $_REQUEST['type'];
+  $AltinnReport4ID = $_REQUEST['AltinnReport4ID'];
+  $altinn_invoice = invoice::populateAltinnInvoiceObject($AltinnReport4ID, $invoice_type);
+  $fb = new lodo_fakturabank_fakturabank();
+  $fb->write($altinn_invoice);
 }
 
 ?>

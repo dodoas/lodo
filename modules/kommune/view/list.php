@@ -19,7 +19,7 @@ print $_lib['sess']->doctype ?>
 <thead>
   <tr>
     <th>Kommune:</th>
-    <th colspan="11"></th>
+    <th colspan="18"></th>
   </tr>
   <tr>
     <td class="menu">ID</td>
@@ -33,6 +33,14 @@ print $_lib['sess']->doctype ?>
     <td class="menu">Navn</td>
     <td class="menu">Organisjasjonsform</td>
     <td class="menu">Kommentar</td>
+    <td class="menu">Telephone</td>
+    <td class="menu">Telefax</td>
+    <td class="menu">Email</td>
+    <td class="menu">Mobile</td>
+    <td class="menu">Webpage</td>
+    <td class="menu">Address</td>
+    <td class="menu">ZipCode</td>
+    <td class="menu">City</td>
   </tr>
 </thead>
 
@@ -55,6 +63,14 @@ print $_lib['sess']->doctype ?>
     <td><? print $kommune_object->OrgName; ?></td>
     <td><? print $kommune_object->OrganisationForm; ?></td>
     <td><? print $kommune_object->Comments; ?></td>
+    <td><? print $kommune_object->Telephone; ?></td>
+    <td><? print $kommune_object->Telefax; ?></td>
+    <td><? print $kommune_object->Email; ?></td>
+    <td><? print $kommune_object->Mobile; ?></td>
+    <td><? print $kommune_object->Webpage; ?></td>
+    <td><? print $kommune_object->Address1 . " " . $kommune_object->Address2 . " " . $kommune_object->Address3; ?></td>
+    <td><? print $kommune_object->ZipCode; ?></td>
+    <td><? print $kommune_object->City; ?></td>
   </tr>
 <?
   }
