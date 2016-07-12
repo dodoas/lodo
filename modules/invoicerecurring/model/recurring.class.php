@@ -844,7 +844,7 @@ class model_invoicerecurring_recurring
         global $_lib;
 
         $ret = array();
-        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema', 'performance_schema');
+        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema', 'performance_schema', "phpmyadmin", "LODO");
 
         $query_show = "show databases";
         $result     = $_lib['db']->db_query($query_show);
