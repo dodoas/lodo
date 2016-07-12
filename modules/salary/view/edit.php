@@ -536,7 +536,7 @@ $formname = "salaryUpdate";
             if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
             {
               echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" />';
-              echo '<input type="submit" name="action_salary_update_altinn_fields" value="Lagre altinn felter" align="right" />';
+              echo '<input type="submit" name="action_salary_update_altinn_fields" value="Lagre altinnfelter" align="right" />';
             }
 
             echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
@@ -605,7 +605,7 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($head->AltinnFieldsUpdatedAt) echo $head->AltinnFieldsUpdatedAt . " altinn felter lagret av " . $_lib['format']->PersonIDToName($head->AltinnFieldsUpdatedBy);
+    if($head->AltinnFieldsUpdatedBy) echo $head->AltinnFieldsUpdatedAt . " altinnfelter lagret av " . $_lib['format']->PersonIDToName($head->AltinnFieldsUpdatedBy);
   ?>
   </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
