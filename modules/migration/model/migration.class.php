@@ -48,7 +48,7 @@ class migration_system {
     // find all the migrations you wish to skip
     $migrations_to_skip = array();
 
-    $skipping_regex = '/\/0\d\d_|\/1[0-2]\d_|\/13[0-3]_/';
+    $skipping_regex = '/\/(0\d\d|1[0-2]\d|13[0-4])_/';
     foreach ($all_migrations as $migration) {
       if(preg_match($skipping_regex, $migration["MigrationName"])) {
         $migrations_to_skip[] = $migration;
