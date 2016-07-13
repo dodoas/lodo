@@ -1340,6 +1340,7 @@ class invoice {
       $altinn_file = new altinn_file($altinn_report4_row->Folder);
       $file_contents = $altinn_file->readFile("tilbakemelding" . $altinn_report4_row->AltinnReport4ID . ".xml");
       if (!$file_contents) {
+        $_lib['message']->add('Tilbakemeldingen kan ikke leses');
         return false; // File can't be read
       } else {
         $xml = simplexml_load_string($file_contents);
@@ -1355,6 +1356,10 @@ class invoice {
       $customer_bank_account_number = preg_replace('/[^0-9]/', '', $_lib['sess']->get_companydef('BankAccount'));
       $kommune = new kommune();
       $kommune->load_by_field_value(array('BankAccountNumber' => $bank_account_number));
+      if (is_null($kommune->KommuneNumber)) {
+        $_lib['message']->add('Finner ikke bankkonto in kommunelisten, ta kontakt med administrator før du kan sende til fakturaBank');
+        return false;
+      }
       $kommune_orgno = preg_replace('/[^0-9]/', '', $kommune->OrgNumber);
       $kommune_name = $kommune->OrgName;
       $customer_orgno = (string) $xml->Mottak->innsender->norskIdentifikator;
