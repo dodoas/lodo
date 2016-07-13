@@ -31,13 +31,13 @@ print $_lib['sess']->doctype ?>
     <td class="menu">Bank kontonr</td>
     <td class="menu">Orgnummer</td>
     <td class="menu">Navn</td>
-    <td class="menu">Organisjasjonsform</td>
+    <td class="menu">Organisasjonsform</td>
     <td class="menu">Kommentar</td>
     <td class="menu">Telefon</td>
     <td class="menu">Telefax</td>
     <td class="menu">Epost</td>
     <td class="menu">Mobil</td>
-    <td class="menu">Hjemmside</td>
+    <td class="menu">Hjemmeside</td>
     <td class="menu">Adresse</td>
     <td class="menu">Postnummer</td>
     <td class="menu">By</td>
