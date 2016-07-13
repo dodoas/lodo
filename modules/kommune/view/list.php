@@ -23,7 +23,7 @@ print $_lib['sess']->doctype ?>
   </tr>
   <tr>
     <td class="menu">ID</td>
-    <td class="menu">Postnummer</td>
+    <td class="menu">Kommunenummer</td>
     <td class="menu">Kommune</td>
     <td class="menu">Fylke</td>
     <td class="menu">Sone</td>
@@ -33,14 +33,14 @@ print $_lib['sess']->doctype ?>
     <td class="menu">Navn</td>
     <td class="menu">Organisjasjonsform</td>
     <td class="menu">Kommentar</td>
-    <td class="menu">Telephone</td>
+    <td class="menu">Telefon</td>
     <td class="menu">Telefax</td>
-    <td class="menu">Email</td>
-    <td class="menu">Mobile</td>
-    <td class="menu">Webpage</td>
-    <td class="menu">Address</td>
-    <td class="menu">ZipCode</td>
-    <td class="menu">City</td>
+    <td class="menu">Epost</td>
+    <td class="menu">Mobil</td>
+    <td class="menu">Hjemmside</td>
+    <td class="menu">Adresse</td>
+    <td class="menu">Postnummer</td>
+    <td class="menu">By</td>
   </tr>
 </thead>
 
