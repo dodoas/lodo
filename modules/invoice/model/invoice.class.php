@@ -28,8 +28,10 @@
 
 includelogic('exchange/exchange');
 includelogic('fakturabank/fakturabank');
+includelogic('altinnsalary/files');
 includelogic('kid/kid');
 includelogic("accountplan/scheme");
+includelogic("kommune/kommune");
 
 class invoice {
     public $InvoiceID       = 0;
@@ -1327,5 +1329,126 @@ class invoice {
       }
       return $Changed;
     }
+
+    function populateAltinnInvoiceObject($AltinnReport4ID, $invoice_type) {
+      global $_lib;
+
+      $query_altinn_report4 = "select * from altinnReport4 where AltinnReport4ID = " . $AltinnReport4ID;
+      $result_altinn_report4 = $_lib['db']->db_query($query_altinn_report4);
+      $altinn_report4_row = $_lib['db']->db_fetch_object($result_altinn_report4);
+
+      $altinn_file = new altinn_file($altinn_report4_row->Folder);
+      $file_contents = $altinn_file->readFile("tilbakemelding" . $altinn_report4_row->AltinnReport4ID . ".xml");
+      if (!$file_contents) {
+        return false; // File can't be read
+      } else {
+        $xml = simplexml_load_string($file_contents);
+      }
+
+      $altinn_invoice = new stdClass();
+      $taxH = array();
+
+      $altinn_reference = $altinn_report4_row->res_ArchiveReference;
+      $issue_date = strtotime((string) $xml->Mottak->kalendermaaned . '-01');
+      $issue_date = strftime("%F", strtotime('next month -1 hour', $issue_date));
+      $bank_account_number = (string) $xml->Mottak->innbetalingsinformasjon->kontonummer;
+      $customer_bank_account_number = preg_replace('/[^0-9]/', '', $_lib['sess']->get_companydef('BankAccount'));
+      $kommune = new kommune();
+      $kommune->load_by_field_value(array('BankAccountNumber' => $bank_account_number));
+      $kommune_orgno = preg_replace('/[^0-9]/', '', $kommune->OrgNumber);
+      $kommune_name = $kommune->OrgName;
+      $customer_orgno = (string) $xml->Mottak->innsender->norskIdentifikator;
+      $customer_orgno = preg_replace('/[^0-9]+/', '', $customer_orgno);
+      $customer_name = $_lib['sess']->get_companydef('CompanyName');
+      $due_date = (string) $xml->Mottak->innbetalingsinformasjon->forfallsdato;
+      if ($invoice_type == "AGA") {
+        $kid = (string) $xml->Mottak->innbetalingsinformasjon->kidForArbeidsgiveravgift;
+        $amount = (float) $xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumArbeidsgiveravgift;
+      } else {
+        $kid = (string) $xml->Mottak->innbetalingsinformasjon->kidForForskuddstrekk;
+        $amount = (float) $xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumForskuddstrekk;
+      }
+
+      $altinn_invoice->ID = $invoice_type . '-' . $altinn_reference;
+      $altinn_invoice->IssueDate = $issue_date;
+      $altinn_invoice->Note = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
+      $altinn_invoice->DocumentCurrencyCode = exchange::getLocalCurrency();
+
+      // Invoice supplier
+      $altinn_invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID = $kommune_orgno;
+
+      $altinn_invoice->AccountingSupplierParty->Party->PartyName->Name = $kommune_name;
+
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->StreetName = trim($kommune->Address1 . "\n" . $kommune->Address2 . "\n" . $kommune->Address3);
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->BuildingNumber = '';
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->CityName = $kommune->City;
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->PostalZone = $kommune->ZipCode;
+      $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode = 'NO';
+
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Telephone = $kommune->Telephone;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Mobile = $kommune->Mobile;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Telefax = $kommune->Telefax;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->ElectronicMail = $kommune->Email;
+
+      // Invoice customer
+      $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID = $customer_orgno;
+      $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = 'NO:ORGNR';
+      $altinn_invoice->AccountingCustomerParty->Party->PartyName->Name = $customer_name;
+
+      // Using company's address and contact info.
+      $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->StreetName = $_lib['sess']->get_companydef('IAddress');
+      $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->BuildingNumber = '';
+      $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->CityName = $_lib['sess']->get_companydef('ICity');
+      $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->PostalZone = $_lib['sess']->get_companydef('IZipCode'); // ZipCode
+      $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode = $_lib['sess']->get_companydef('ICountryCode');
+      $altinn_invoice->AccountingCustomerParty->Party->Contact->Telephone = $_lib['sess']->get_companydef('Phone');
+      $altinn_invoice->AccountingCustomerParty->Party->Contact->Mobile = $_lib['sess']->get_companydef('Mobile');
+      $altinn_invoice->AccountingCustomerParty->Party->Contact->Telefax = $_lib['sess']->get_companydef('Fax');
+      $altinn_invoice->AccountingCustomerParty->Party->Contact->ElectronicMail = $_lib['sess']->get_companydef('Email');
+
+      // Invoice payment means
+      $altinn_invoice->PaymentMeans->PaymentMeansCode = 42;
+      $altinn_invoice->PaymentMeans->PaymentDueDate = $due_date;
+      $altinn_invoice->PaymentMeans->PayeeFinancialAccount->ID = $bank_account_number;
+      $altinn_invoice->PaymentMeans->PayeeFinancialAccount->Name = 'Bank';
+      $altinn_invoice->PaymentMeans->PayerFinancialAccount->ID = $customer_bank_account_number;
+      $altinn_invoice->PaymentMeans->PayerFinancialAccount->Name  = 'Bank';
+
+      $altinn_invoice->PaymentMeans->InstructionID = $kid;
+      $altinn_invoice->PaymentMeans->InstructionNote = "KID";
+
+      // Invoice lines
+      $taxH[0]->TaxableAmount = $amount;
+      $taxH[0]->TaxAmount = 0;
+
+      $altinn_invoice->InvoiceLine[0]->ID = 0;
+      $altinn_invoice->InvoiceLine[0]->LineExtensionAmount = $amount;
+      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxAmount = 0;
+      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxableAmount = $amount;
+      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxAmount = 0;
+      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->Percent = 0;
+      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
+
+      $altinn_invoice->InvoiceLine[0]->Item->Name = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
+
+      $altinn_invoice->InvoiceLine[0]->Price->PriceAmount = $amount;
+      $altinn_invoice->InvoiceLine[0]->Price->BaseQuantity = 1;
+
+      $altinn_invoice->TaxTotal['TaxAmount'] = 0;
+
+      foreach($taxH as $VatPercent => $vat) {
+        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxableAmount = $vat->TaxableAmount;
+        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxAmount = $vat->TaxAmount;
+        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->ID = 'VAT';
+        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->Percent = $VatPercent;
+        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
+      }
+
+      $altinn_invoice->LegalMonetaryTotal->PayableAmount = $amount;
+      $altinn_invoice->LegalMonetaryTotal->TaxExclusiveAmount = $amount;
+
+      return $altinn_invoice;
+    }
+
 }
 ?>
