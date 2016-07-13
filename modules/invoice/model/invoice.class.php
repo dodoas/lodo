@@ -1350,6 +1350,12 @@ class invoice {
       $taxH = array();
 
       $altinn_reference = $altinn_report4_row->res_ArchiveReference;
+      $recieved_messages = $xml->Mottak->mottattLeveranse;
+      $publishing_date = 0;
+      foreach ($recieved_messages as $message) {
+        $publishing_date = max($publishing_date, strtotime((string)$message->leveringstidspunkt));
+      }
+      $publishing_date = strftime("%F", $publishing_date);
       $issue_date = strtotime((string) $xml->Mottak->kalendermaaned . '-01');
       $issue_date = strftime("%F", strtotime('next month -1 hour', $issue_date));
       $bank_account_number = (string) $xml->Mottak->innbetalingsinformasjon->kontonummer;
@@ -1376,6 +1382,7 @@ class invoice {
 
       $altinn_invoice->ID = $invoice_type . '-' . $altinn_reference;
       $altinn_invoice->IssueDate = $issue_date;
+      $altinn_invoice->DateOfIssue = $publishing_date;
       $altinn_invoice->Note = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
       $altinn_invoice->DocumentCurrencyCode = exchange::getLocalCurrency();
 

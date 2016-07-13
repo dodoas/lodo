@@ -1645,6 +1645,11 @@ class lodo_fakturabank_fakturabank {
         $cbc = $doc->createElement('cbc:IssueDate', $InvoiceO->IssueDate);
         $invoice->appendChild($cbc);
 
+        if (!is_null($InvoiceO->DateOfIssue)) {
+          $cbc = $doc->createElement('cbc:DateOfIssue', $InvoiceO->DateOfIssue);
+          $invoice->appendChild($cbc);
+        }
+
         $cbc = $doc->createElement('cbc:Note');
         $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->Note)); // handle ampersand in text
         $cbc->appendChild($cdata);
