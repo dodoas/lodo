@@ -328,7 +328,10 @@ class lodo_fakturabank_fakturabanksalary {
                 $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
-        elseif ($data['code'] == 400) $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
+        elseif ($data['code'] == 400) {
+            $_SESSION['oauth_paycheck_messages'][] = "Error: " . $import_paycheck_result['message'];
+            $_SESSION['oauth_paycheck_messages'][] = $import_paycheck_result['error'];
+        }
         elseif ($data['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Error: Utilstrekkelige rettigheter i fakturabank!";
 
         if ($ret) {
