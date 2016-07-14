@@ -28,12 +28,14 @@ class altinn_report {
     if (empty($period)) return;
     else $this->period = $period;
 
+    $this->just_test_if_ready = $just_test_if_ready;
+
     // TODO: Use and update initialize method and remove this below
     $this->only_register_employee = $only_register_employee;
     $this->salary_ids = $salary_ids;
     $this->work_relation_ids = $work_relation_ids;
     // fetch the salaries
-    self::fetchSalaries($just_test_if_ready);
+    self::fetchSalaries();
     // fetch the employees
     self::fetchEmployeesAndWorkRelations();
   }
@@ -146,8 +148,12 @@ class altinn_report {
 
     $virksomhet_array = array();
     // select salary and the employee connected to it
-    // Error is: No employees for this period
-    self::checkIfEmpty($this->employees, 'Det er ingen ansatte i perioden');
+    if ($this->just_test_if_ready && empty($this->employees)) {
+      $this->errors[] = 'Arbeidsforhold er ikke valgt';
+    } else {
+      // Error is: No employees for this period
+      self::checkIfEmpty($this->employees, 'Det er ingen ansatte i perioden');
+    }
     // Error is: No salaries for this period
     if (!$this->only_register_employee) self::checkIfEmpty($this->salaries, 'Det er ingen l&oslash;nnslipper  i perioden');
     foreach($this->employees as $key_subcompany => $employees) {
@@ -196,6 +202,9 @@ class altinn_report {
         }
 
         foreach($salaries[$employee->AccountPlanID] as $key_salary => $salary) {
+          if (!$salary->LockedBy && !$this->just_test_if_ready) {
+            $this->errors[] = "L&oslash;nnslipp L" . $salary->JournalID . " er ikke l&aring;st. L&oslash;nslippen m&aring; l&aring;ses f&oslash;r du kan sende den til Altinn.";
+          }
           // generate income receiver array
           // virksomhet, loennOgGodtgjoerelse and sumForskuddstrekk are affected in this function because they are sent by reference
           $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $work_relation, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk);
@@ -659,12 +668,12 @@ class altinn_report {
 /* Helper function that generates the query to get
  * the included salaries
  */
-  function queryStringForSelectedSalaries($just_test_if_ready) {
+  function queryStringForSelectedSalaries() {
     // only the ones that have the altinn/actual pay date set
     $query_salaries = "SELECT s.*
                        FROM salary s
                        WHERE ";
-    if (!$just_test_if_ready) {
+    if (!$this->just_test_if_ready) {
       $query_salaries .= "s.ActualPayDate LIKE  '" . $this->period . "%'";
     }
     else {
@@ -682,9 +691,9 @@ class altinn_report {
 /* Helper function that populates the salaries array
  * for the selected period
  */
-  function fetchSalaries($just_test_if_ready = false) {
+  function fetchSalaries() {
     global $_lib;
-    $query_salaries = self::queryStringForSelectedSalaries($just_test_if_ready);
+    $query_salaries = self::queryStringForSelectedSalaries();
     $result_salaries  = $_lib['db']->db_query($query_salaries);
     if (!$this->only_register_employee) {
       while ($salary = $_lib['db']->db_fetch_object($result_salaries)) {
