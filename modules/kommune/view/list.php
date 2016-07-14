@@ -52,7 +52,17 @@ print $_lib['sess']->doctype ?>
     if (!($i++ % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 ?>
   <tr class="<? print "$sec_color"; ?>">
-    <td><? print $kommune_object->KommuneID; ?></td>
+    <td><? print $kommune_object->KommuneID; ?>
+      <form name="kommune_import" action="<? print $_lib['sess']->dispatch ?>t=kommune.list" method="post">
+      <?
+        print $_lib['form3']->hidden(array( 'name'=>'kommune.Import',
+                                            'tabindex'=>$tabindex++,
+                                            'value' => $kommune_object->KommuneNumber
+                                            ));
+        print $_lib['form3']->submit(array('name'=>'action_kommune_import', 'value'=>'Oppdater'));
+      ?>
+      </form>
+    </td>
     <td><? print $kommune_object->KommuneNumber; ?></td>
     <td><? print $kommune_object->KommuneName; ?></td>
     <td><? print $kommune_object->County; ?></td>
