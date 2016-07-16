@@ -121,8 +121,8 @@ $db_sum   = $row->sum;
         <form name="invoicerecurring_list" action="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.list" method="post">
         Kundenavn:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
         Fakturanummer: <? print $_lib['form3']->text(array('name' => 'RecurringID',   'value' => $RecurringID)) ?>
-        Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
-        Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
+        Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate', 'field' => 'FromDate', 'form_name' => 'invoicerecurring_list', 'value' => $FromDate)) ?>
+        Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',  'field' => 'ToDate', 'form_name' => 'invoicerecurring_list', 'value' => $ToDate)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
         </form>
         <form name="invoicerecurring_edit" action="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.edit" method="post">

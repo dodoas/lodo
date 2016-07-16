@@ -466,4 +466,23 @@ function changeMatchBy(obj) {
   obj.checked = isChecked;
 }
 
+function validDate(date_string) {
+  date             = new Date(date_string);
+  parsed_day       = date.getDate();
+  parsed_month     = date.getMonth()+1;
+  parsed_year      = date.getFullYear();
+  date_from_string = date_string.split('-');
+  string_year      = date_from_string[0];
+  string_month     = date_from_string[1];
+  string_day       = date_from_string[2];
+  return (parsed_year == string_year && parsed_month == string_month && parsed_day == string_day);
+}
+
+// Enable or disable element depending on the status
+function enableOrDisable(status, element_id) {
+  var element = document.getElementById(element_id);
+  if (status) element.disabled = false;
+  else element.disabled = true;
+}
+
 </script>

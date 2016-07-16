@@ -7,6 +7,7 @@ $VatID = $_REQUEST['VatID'];
 assert(!is_int($VatID)); #All main input should be int
 
 $db_table = "vat";
+$form_name = 'vat_edit';
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
@@ -67,7 +68,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
             }
             ?>
             <tr>
-                <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
+                <form name="<? print $form_name.$vat->ID; ?>" action="<? print $MY_SELF ?>" method="post">
                     <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
                     <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
                     <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
@@ -116,8 +117,8 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         ?>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'Active',           'value' => $vat->Active)) ?></td>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'EnableVatOverride',    'value' => $vat->EnableVatOverride)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom',            'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo',          'value' => $vat->ValidTo, 'width' => 10)) ?></td>
+                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
+                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?></td>
                         <?
                     }
                     else
@@ -149,7 +150,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
         {
             ?>
             <tr>
-                <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
+                <form name="<? print $form_name.$vat->ID; ?>" action="<? print $MY_SELF ?>" method="post">
                     <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
                     <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
                     <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
@@ -180,8 +181,8 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         ?>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'Active',               'value' => $vat->Active)) ?></td>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'EnableVatOverride',    'value' => $vat->EnableVatOverride)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom',            'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo',          'value' => $vat->ValidTo, 'width' => 10)) ?></td>
+                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
+                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?></td>
                         <?
                     }
                     else
