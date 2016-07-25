@@ -26,11 +26,14 @@ list($interface, $module, $class) = split('_', $object_name);
 include('conf/default.inc');
 
 require_once("code/lib/db/db_" . $_SETUP['DB_TYPE_DEFAULT'] . ".class.php");
+require_once("code/lib/session/session.class.php");
 require_once("code/lib/message/message.class.php");
 require_once("code/lib/convert/convert.class.php");
 require_once("code/lib/date/date.class.php");
 
 $_lib['message']    = new message(array('dbserver'=> $_SETUP['DB_SERVER_DEFAULT'], 'dbname' => $_SETUP['DB_NAME_DEFAULT']));
+# Session is needed for creating recurring invoices
+$_lib['sess']       = new SessionNew(array('database' =>  $_SETUP['DB_NAME_DEFAULT'], 'company_id' => $_SETUP['COMPANY_ID'], 'interface' => $_SETUP['ACTIVE_INTERFACE']));
 $_lib['storage']    = $_lib['db'] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $_SETUP['DB_NAME_DEFAULT'], 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
 if (empty($_DF)) { $_DF = null; }
 if (empty($_NF)) { $_NF = null; }
