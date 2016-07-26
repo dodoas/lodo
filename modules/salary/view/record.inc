@@ -257,7 +257,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $postmain['salary_ValidTo']                = $toDate;
         $postmain['salary_JournalDate']            = $journalDate;
         $postmain['salary_Period']                 = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
-        $postmain['salary_KommuneID']              = $_lib['sess']->get_companydef('CompanyMunicipalityID');
+        $postmain['salary_KommuneID']              = $accountplan->KommuneID;
         $postmain['salary_WorkRelationID']         = $work_relation->WorkRelationID;
         $postmain['salary_ShiftType']              = $work_relation->ShiftType;
         $postmain['salary_OccupationID']           = $work_relation->OccupationID;
