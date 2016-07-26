@@ -237,7 +237,7 @@ class invoice {
 
         // Since the line above only updates table columns, REPLACE INTO will create in case there is no record to update.
         $invoice_id = $args['InvoiceID'];
-        if ($args["PrintInterval"]) $invoiceoutprint_date = date('Y-m-d', strtotime($this->headH["InvoiceDate"]. ' + '.$args["PrintInterval"].' days'));
+        if ($args["PrintInterval"]) $invoiceoutprint_date = date('Y-m-d', strtotime($this->headH["InvoiceDate"]. ' - '.$args["PrintInterval"].' days'));
         else $invoiceoutprint_date = $args["invoiceoutprint_InvoicePrintDate_". $invoice_id];
         $replace_invoiceoutprint = sprintf("REPLACE INTO invoiceoutprint (InvoiceID, InvoicePrintDate) VALUES ('%d', '%s');", $invoice_id, $invoiceoutprint_date);
         $_lib['db']->db_query($replace_invoiceoutprint);
@@ -663,7 +663,7 @@ class invoice {
         # What about default values? More flexible with hashes but slower.
         foreach($head as $key => $value)
         {
-            if($key != action_invoice_new)
+            if($key != 'action_invoice_new')
                 $this->headH[$key] = $value; #Could be a hash loop to preserve default values
             #print "$key = $value<br>\n";
         }
