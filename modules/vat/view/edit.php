@@ -142,7 +142,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
             <th colspan="10" class="sub">MVA satser med annet gyldighetsomr&aring;de enn i forhold til dato innlogget</th>
         </tr>
         <?
-        $query_vat  = "select * from vat where VatID <= 62 and ('$date' < ValidFrom  or '$date' > ValidTo) order by VatID, PairID asc";
+        $query_vat  = "select * from vat where VatID <= 62 and ('$date' < ValidFrom or '$date' > ValidTo) order by VatID asc, ValidFrom desc, ValidTo desc";
         #print "$query_vat<br>\n";
         $result_vat = $_lib['db']->db_query($query_vat);
         while($vat = $_lib['db']->db_fetch_object($result_vat))
