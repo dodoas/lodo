@@ -529,6 +529,8 @@ class logic_invoicein_invoicein implements Iterator {
     public function journal() {
         global $_lib, $accounting;
 
+        $countjournaled = 0;
+
         if(is_array($this->iteratorH)) {
             $this->Journaled = 1; //#So that we immideately list the journaled vouchers
 
@@ -869,7 +871,7 @@ class logic_invoicein_invoicein implements Iterator {
                 }
                 else {
                     # Invoice is bookkept
-                    print "Fakturaen er bilagsf¿rt<br>";
+                    print "Fakturaen er bilagsf&oslash;rt<br>";
                 }
             }
 

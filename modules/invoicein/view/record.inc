@@ -8,7 +8,6 @@ if($_lib['input']->getProperty('action_invoicein_linenew') || $_lib['input']->ge
 }
 
 if($_lib['input']->getProperty('action_invoicein_journal')) {
-    print "bilagsf¿r<br>";
     $invoicein->journal();
 
 } elseif($_lib['input']->getProperty('action_invoicein_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
