@@ -226,9 +226,9 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
         <td><? print $_lib['form3']->select(array('table'=>$db_table, 'field'=>'PaymentMeans', 'pk' => $ID, 'value' => $invoicein->PaymentMeans, 'query' => 'form.PaymentMeans', 'width' => 30, 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
-        <td>Org nr</td>
+        <td>Orgnr</td>
         <td><? print $invoicein->from->OrgNumber ?></td>
-        <td>Org nr</td>
+        <td>Orgnr</td>
         <td><? print $invoicein->to->OrgNumber ?></td>
     </tr>
     <tr height="5">
@@ -298,9 +298,9 @@ foreach ($currencies as $currency) {
       <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$ID, 'value' => $invoicein->DepartmentID, 'unset' => true)); ?></td>
     </tr>
     <tr>
-      <td>Leverings betingelse</td>
+      <td>Leveringsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DeliveryCondition', 'pk'=>$ID, 'value'=>$invoicein->DeliveryCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
-      <td>Betalings betingelse</td>
+      <td>Betalingsbetingelse</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'PaymentCondition', 'pk'=>$ID, 'value'=>$invoicein->PaymentCondition, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
@@ -338,7 +338,7 @@ foreach ($currencies as $currency) {
 ?>
 <? if (!$invoicein->Imported) { ?>
     <tr>
-      <td>Opprettet p&aring;</td>
+      <td>Opprettet</td>
       <td><? print $invoicein->InsertedDateTime ?></td>
       <td>Opprettet av</td>
       <td><? print $_lib['format']->PersonIDToName($invoicein->InsertedByPersonID) ?></td>
@@ -392,11 +392,11 @@ foreach ($currencies as $currency) {
   <tr>
     <td>Konto</td>
     <td>ProduktNr</td>
-    <td>Produkt navn</td>
+    <td>Produktnavn</td>
     <td>Bil</td>
     <td>Antall</td>
     <td>Enhetspris</td>
-    <td>Enhetspris inklusiv MVA</td>
+    <td>Enhetspris inkl. MVA</td>
     <td>MVA</td>
     <td>MVA bel&oslash;p</td>
     <td>Bel&oslash;p U/MVA</td>
