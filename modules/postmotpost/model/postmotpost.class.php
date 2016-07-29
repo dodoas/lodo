@@ -188,34 +188,43 @@ class postmotpost {
             $where .= " A.AccountPlanType='" . $accountplan->ReskontroAccountPlanType . "' and ";
 
             $query_voucher      =
-                "select V.*, M.VoucherMatchID, M.MatchNumber from
-                   accountplan A,
-                   voucher V
-                   left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID
-                   left join vouchermatch as M on M.VoucherID = V.VoucherID
-                 where
-                   V.Active=1
-                   and V.AccountPlanID=A.AccountPlanID
-                   and A.EnablePostPost=1
-                   and $where $whereextra (VS.Closed is NULL or VS.Closed=0)
-                   order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
+                  "select V.*, M.VoucherMatchID, M.MatchNumber from
+                  accountplan A,
+                  ( select * from voucher where Active=1 AND VoucherID NOT IN (SELECT ParentVoucherID from voucherstruct) AND VoucherID NOT IN (SELECT ChildVoucherID from voucherstruct)) V
+                  left join vouchermatch as M on M.VoucherID = V.VoucherID
+                  where
+                  V.AccountPlanID=A.AccountPlanID
+                  and $where $whereextra A.EnablePostPost=1
+                  order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
 
-
+            // building voucher query, the most time consuming part starts here, tested with benchmark
 
             if($onlyAccountPlanID) {
                 // Run a modified version of the original query where it groups by AccountPlan, then
                 // replace the original with a query which only ask for the given accountplan
                 $query_voucher      =
-                "select A.AccountName, V.AccountPlanID from
-                   accountplan A,
-                   voucher V
-                   left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID
-                 where
-                   V.Active=1
-                   and V.AccountPlanID=A.AccountPlanID
-                   and A.EnablePostPost=1
-                   and $where $whereextra (VS.Closed is NULL or VS.Closed=0)
-                   group by V.AccountPlanID";
+                  "SELECT A.AccountName, V.AccountPlanID
+                  FROM accountplan A, (
+
+                    SELECT AccountPlanID, VoucherID
+                    FROM voucher
+                    WHERE Active =1
+                    AND VoucherID NOT
+                    IN (
+
+                      SELECT ParentVoucherID
+                      FROM voucherstruct
+                    )
+                    AND VoucherID NOT
+                    IN (
+
+                      SELECT ChildVoucherID
+                      FROM voucherstruct
+                    )
+                  )V
+                  WHERE V.AccountPlanID = A.AccountPlanID
+                  AND $where $whereextra A.EnablePostPost =1
+                  GROUP BY V.AccountPlanID";
 
                 $r = $_lib['db']->db_query($query_voucher);
                 while(($row = $_lib['db']->db_fetch_assoc($r))) {
@@ -224,16 +233,13 @@ class postmotpost {
 
                 $query_voucher      =
                   "select V.*, M.VoucherMatchID, M.MatchNumber from
-                   accountplan A,
-                   voucher V
-                   left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID
-                   left join vouchermatch as M on M.VoucherID = V.VoucherID
-                 where
-                   V.Active=1
-                   and V.AccountPlanID=A.AccountPlanID AND V.AccountPlanID = $onlyAccountPlanID
-                   and A.EnablePostPost=1
-                   and $where $whereextra (VS.Closed is NULL or VS.Closed=0)
-                   order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
+                  accountplan A,
+                  ( select * from voucher where Active=1 AND VoucherID NOT IN (SELECT ParentVoucherID from voucherstruct) AND VoucherID NOT IN (SELECT ChildVoucherID from voucherstruct)) V
+                  left join vouchermatch as M on M.VoucherID = V.VoucherID
+                  where
+                  V.AccountPlanID=A.AccountPlanID AND V.AccountPlanID = $onlyAccountPlanID
+                  and $where $whereextra A.EnablePostPost=1
+                  order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
 
             }
 
@@ -241,13 +247,14 @@ class postmotpost {
             #print "$query_voucher<br>\n";
 
             $result2            = $_lib['db']->db_query($query_voucher);
+
+            // after query exec, the most time consumig part stops here, tested with benchmark
+
             #exit;
             $CountOpenVoucher   = $_lib['db']->db_numrows($result2);
 
-
             /* cache ALL accountplans */
             $accounting->cache_all_accountplans();
-
 
             /*******************************************************************
             * Loop and calculate all data
@@ -915,7 +922,7 @@ class postmotpost {
     public function openAllPostsForOpenPeriods() {
         global $_lib;
 
-        $voucher_query = "select VoucherID from voucher where VoucherPeriod in (select Period from accountperiod where Status < 4)";
+        $voucher_query = "select VoucherID from voucher where VoucherPeriod in (select Period from accountperiod where Status < 4) and Active = 1";
         $r = $_lib['db']->db_query($voucher_query);
 
         while($voucher = $_lib['db']->db_fetch_assoc($r)) {
