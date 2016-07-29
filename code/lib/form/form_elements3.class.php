@@ -423,7 +423,9 @@ class form3
         //print_r($args);
         if(isset($args['validation']) && $args['validation'] == 'Date' or $args['validation'] == 'Datetime')
         {
-            $obj =  $args['field'].$args['pk'];
+            if (!empty($args['pk'])) $_number = $args['pk'];
+            else $_number = $args['_number'];
+            $obj =  $args['field'].$_number;
             $element .= "<script type=\"text/javascript\">\n";
             $element .= "var $obj = new calendar1(document.forms['".$args['form_name']."'].elements['".$name."']);\n";
             $element .= "$obj.year_scroll = true;\n";

@@ -33,11 +33,11 @@ Her listes bare fakturaer som skal betales (ikke kredittnotaer). Fakturaer som e
 <table>
 <tr>
     <td>Fra:</td>
-    <td><? print $_lib['form3']->date(array('name' => 'FromDate',                  'value' => $rem->FromDate)) ?></td>
+    <td><? print $_lib['form3']->date(array('name' => 'FromDate', 'field' => 'FromDate', 'form_name' => 'invoice_edit', 'value' => $rem->FromDate)) ?></td>
 </tr>
 <tr>
     <td>Til:</td> 
-    <td><? print $_lib['form3']->date(array('name' => 'ToDate',                    'value' => $rem->ToDate)) ?></td>
+    <td><? print $_lib['form3']->date(array('name' => 'ToDate', 'field' => 'ToDate', 'form_name' => 'invoice_edit', 'value' => $rem->ToDate)) ?></td>
 </tr>
 <tr>
     <td>Status: </td>
