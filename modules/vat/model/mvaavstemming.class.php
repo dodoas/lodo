@@ -12,7 +12,7 @@ class mva_avstemming
     var $_row;
     var $_tables;
     var $_retval;
-    var $undefinedVatAccountPLanID = 0;
+    var $undefinedVatAccountPlanID = 0;
 
     var $_year;
     var $_mvaAvstemmingID;
@@ -41,29 +41,34 @@ class mva_avstemming
         $this->_date    = $args['_date'];
         $this->year     = $args['year'];
 
-        $this->_query = "select distinct Vat from voucher where VoucherPeriod like '$this->year%' and Vat > 0 and Active=1 order by Vat desc";
-        $this->vathash = $this->_dbh[$this->_dsn]->get_hash(array('query' => $this->_query, 'key' => 'Vat', 'value' => 'Vat'));
-
         $sql_undefinedVatAccount            = "select * from vat where VatID=40"; #FInd the account with vat code 10, no time limit
         $row_undefinedVatAccount            = $this->_dbh[$this->_dsn]->get_row(array('query' => $sql_undefinedVatAccount));
         #print_r($row_undefinedVatAccount);
         $this->undefinedVatAccountPlanID    = $row_undefinedVatAccount->AccountPlanID;
         #print "<br>Undef: $this->undefinedVatAccountPlanID<br>\n";
 
-        foreach($this->vathash as $vatpercent => $tmp)
-        {
-            #$this->_query   = "select AccountPlanID from vat where Percent='$vatpercent' order by VatID asc";
-            $this->_query    = "select c.AccountPlanID from voucher as c, voucher as m where m.VoucherPeriod like '" . $this->year . "%' and m.AutomaticVatVoucherID=c.VoucherID and m.Vat='" . $vatpercent . "' and m.VatID >= 10 and m.VatID <= 39 and m.Active=1 and c.Active=1 group by c.AccountPlanID"; # and AmountOut > 0
-            //print "XXXX: $this->_query<br>";
-
-            $this->_row     = $this->_dbh[$this->_dsn]->get_row(array('query' => $this->_query));
-            $this->_outAccountPlanID[$vatpercent] = $this->_row->AccountPlanID;
-
-            #$this->_query   = "select AccountPlanID from vat where Percent='$vatpercent' order by VatID desc";
-            $this->_query    = "select c.AccountPlanID from voucher as c, voucher as m where m.VoucherPeriod like '" . $this->year . "%' and m.AutomaticVatVoucherID=c.VoucherID and m.Vat='" . $vatpercent . "' and m.VatID >= 40 and m.VatID <= 60 and m.Active=1 and c.Active=1 group by c.AccountPlanID"; # and AmountOut > 0
-
-            $this->_row     = $this->_dbh[$this->_dsn]->get_row(array('query' => $this->_query));
-            $this->_inAccountPlanID[$vatpercent] = $this->_row->AccountPlanID;
+        $vat_rates_query = "SELECT * FROM vat WHERE Percent != 0 AND Percent IS NOT NULL ORDER BY VatID";
+        $vat_accounts_used_in_vouchers_query = "SELECT DISTINCT(AccountPlanID) AS AccountPlanID FROM voucher WHERE VoucherPeriod LIKE '{$this->year}%' AND AutomaticVatVoucherID != 0 AND Active = 1 AND DisableAutoVat = 1";
+        $vat_rates = $this->_dbh[$this->_dsn]->get_hashhash(array('query' => $vat_rates_query, 'key' => 'ID'));
+        $vat_accounts_used_in_vouchers = $this->_dbh[$this->_dsn]->get_hashhash(array('query' => $vat_accounts_used_in_vouchers_query, 'key' => 'AccountPlanID'));
+        foreach ($vat_rates as $vat_rate) {
+          $report_time = strtotime($this->year.'-12-31'); // Compare with the last day of the selected report's year
+          $valid_to_time = strtotime($vat_rate['ValidTo']);
+          $valid_from_time = strtotime($vat_rate['ValidFrom']);
+          if ($report_time > $valid_to_time || $report_time < $valid_from_time) {
+            continue;
+          }
+          // needs to be a string with float foramted to two decimal places in
+          // order for the correct fields to be picked up in the report
+          $vat_percent = number_format((float)$vat_rate['Percent'], 2, '.', '');
+          if ($vat_rate['Active'] || !empty($vat_accounts_used_in_vouchers[$vat_rate['AccountPlanID']])) {
+            if ($vat_rate['VatID'] <= 39) {
+              $this->_outAccountPlanID[$vat_percent] = $vat_rate['AccountPlanID'];
+            } elseif ($vat_rate['VatID'] > 39) {
+              $this->_inAccountPlanID[$vat_percent] = $vat_rate['AccountPlanID'];
+            }
+            $this->vathash[$vat_percent] = $vat_percent;
+          }
         }
 
         /***********************************************************************
