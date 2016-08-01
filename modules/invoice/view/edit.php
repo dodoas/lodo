@@ -229,6 +229,7 @@ $(document).ready(function() {
 <body>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
+<? includeinc('javascript') ?>
 
 <?
 $message = $_lib['message']->get();
@@ -400,7 +401,7 @@ foreach ($currencies as $currency) {
     </tr>
     <tr>
       <td>Fakturadato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$InvoiceID, 'value'=>substr($row->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$InvoiceID, 'value'=>substr($row->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++, 'OnKeyUp' => "enableOrDisable(validDate(this.value), 'action_invoice_update');")) ?></td>
       <td>Forfallsdato</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$InvoiceID, 'value'=>substr($row->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
     </tr>

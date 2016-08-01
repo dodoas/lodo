@@ -104,7 +104,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
         <tr>
             <? $account_sums = array(); ?>
 
-            <td class="number">SUM</td>
+            <td>SUM</td>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['NoVatOmsettning'])?></td>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['TotalOmsettning'])?></td>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['FreeOmsettning'])?></td>
@@ -167,7 +167,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             <th colspan="15">I f&oslash;lge innsendte oppgaver - Det som faktisk er rapportert til staten (Altinn)</th>
         </tr>
         <tr>
-            <td class="number">Mnd/Termin</td>
+            <td>Mnd/Termin</td>
             <td class="number">Salg utenfor avg. omr.</td>
             <td class="number">Total</td>
             <td class="number">Fri</td>
@@ -213,7 +213,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 
                     <td class="number"><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'FreeOmsettning',  'pk'=>$avst->reported[$monthly]['LineID'], 'value'=>$_lib['format']->Amount($avst->reported[$monthly]['FreeOmsettning']),  'width'=>'11', 'class'=>'number')); ?></td>
                     <?
-                    foreach($avst->_inAccountPlanID as $Vat => $Account)
+                    foreach($avst->_outAccountPlanID as $Vat => $Account)
                     {
                         ?>
                         <td class="number"><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'Value', 'pk'=>$avst->reported[$monthly]['LineFieldID']['Grunnlag'.$Vat.'Mva'], 'value'=>$_lib['format']->Amount($avst->reported[$monthly]['Grunnlag'.$Vat.'Mva']), 'width'=>'11', 'class'=>'number')); ?></td>
@@ -246,7 +246,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             <td class="number"><? print $_lib['format']->Amount($avst->reported['total']['TotalOmsettning']) ?></td>
             <td class="number"><? print $_lib['format']->Amount($avst->reported['total']['FreeOmsettning']) ?></td>
             <?
-            foreach($avst->_inAccountPlanID as $Vat => $Account)
+            foreach($avst->_outAccountPlanID as $Vat => $Account)
             {
                 ?>
                 <td class="number"><? print $_lib['format']->Amount($avst->reported['total']['Grunnlag'.$Vat.'Mva']) ?></td>

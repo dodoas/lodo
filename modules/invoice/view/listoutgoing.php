@@ -116,8 +116,8 @@ $db_sum   = $row->sum;
      <td>
         Kundenavn:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
         Fakturanummer: <? print $_lib['form3']->text(array('name' => 'SearchInvoiceID',   'value' => $SearchInvoiceID)) ?>
-        Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
-        Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
+        Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate', 'field' => 'FromDate', 'form_name' => 'invoice_list', 'value' => $FromDate)) ?>
+        Til:    <? print $_lib['form3']->date(array('name' => 'ToDate', 'field' => 'ToDate', 'form_name' => 'invoice_list', 'value' => $ToDate)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -140,7 +140,7 @@ $db_sum   = $row->sum;
           else
             $invoice_period = date("Y-m");    
 	?>
-  <? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>
+  <? print $_lib['form3']->date(array('name' => 'voucher_date', 'field' => 'voucher_date', 'form_name' => 'invoice_edit', 'value' => $voucher_date)) ?>
   Periode:
   <?
   print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $invoice_period,
@@ -150,15 +150,22 @@ $db_sum   = $row->sum;
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <? print $_lib['form3']->submit(array('name' => 'action_auto_save','value' => "Lagre dato")) ?>
         <?
-	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
-            list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true));
-
-            echo ' fakturanummer: ' . $nextJournalID;
-      print $_lib['form3']->submit(array('name' => 'action_invoice_new', 'value' => "Ny faktura (N)", 'accesskey'=>"N"));
-        }
-        else {
-            echo '<i>Du m&aring; velge en &aring;pen periode for &aring; lage ny faktura</i>';
-        }
+  $valid_accountperiod = $accounting->is_valid_accountperiod($invoice_period, $_lib['sess']->get_person('AccessLevel'));
+  $valid_date = validDate($voucher_date);
+  if ($valid_accountperiod && $valid_date) {
+    list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true));
+    echo ' fakturanummer: ' . $nextJournalID;
+    print $_lib['form3']->submit(array('name' => 'action_invoice_new', 'value' => "Ny faktura (N)", 'accesskey'=>"N"));
+  }
+  if (!$valid_accountperiod && !$valid_date) {
+    echo '<i>Du m&aring; velge en &aring;pen periode og skrive en gyldig fakturadato for &aring; lage ny faktura</i>';
+  }
+  elseif (!$valid_accountperiod) {
+    echo '<i>Du m&aring; velge en &aring;pen periode for &aring; lage ny faktura</i>';
+  }
+  elseif (!$valid_date) {
+    echo '<i>Du m&aring; skrive en gyldig fakturadato for &aring; lage ny faktura</i>';
+  }
         ?>
 
     </td>

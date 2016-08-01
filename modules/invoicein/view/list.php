@@ -53,7 +53,7 @@ print $_lib['sess']->doctype; ?>
 </form>
 
 
-<form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoicein.list" method="post">
+<form name="invoice_edit1" action="<? print $_lib['sess']->dispatch ?>t=invoicein.list" method="post">
 <table>
 <tr>
     <td></td>
@@ -70,12 +70,12 @@ print $_lib['sess']->doctype; ?>
 </tr>
 <tr>
     <td>Fra:</td>
-    <td><? print $_lib['form3']->date(array('name' => 'FromDate',              'value' => $invoicein->FromDate)) ?></td>
+    <td><? print $_lib['form3']->date(array('name' => 'FromDate', 'field' => 'FromDate', 'form_name' => 'invoice_edit1', 'value' => $invoicein->FromDate)) ?></td>
     <td></td>
 </tr>
 <tr>
     <td>Til:</td>
-    <td><? print $_lib['form3']->date(array('name' => 'ToDate',                'value' => $invoicein->ToDate)) ?></td>
+    <td><? print $_lib['form3']->date(array('name' => 'ToDate', 'field' => 'ToDate', 'form_name' => 'invoice_edit1', 'value' => $invoicein->ToDate)) ?></td>
 </tr>
 <tr>
     <td>Status:</td>
