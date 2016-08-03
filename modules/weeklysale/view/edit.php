@@ -21,7 +21,7 @@ $weekly_sales_groups_result_set = $_lib['db']->db_query($query_sale);
 $sales_group_conf_object = $_lib['db']->db_fetch_object($weekly_sales_groups_result_set);
 $credit_group_conf_object = $_lib['db']->db_fetch_object($weekly_sales_groups_result_set);
 
-$car_query = "select * from car";
+$car_query = "select * from car where Active=1";
 $cars_result_set = $_lib["db"]->db_query($car_query);
 $cars = array();
 
@@ -373,7 +373,8 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="3">Bil</td>
                 <td></td>
                 <? foreach($weeklysale->salehead['groups'] as $name => $id) { ?>
-                    <td><? print $cars[$sales_group_conf_object->{"Group".$id."CarID"}]->CarCode ?></td>
+                    <? $car = $cars[$sales_group_conf_object->{"Group".$id."CarID"}] ?>
+                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
                 <? } ?>
                 <td></td>
                 <td colspan="4"></td>
@@ -511,7 +512,8 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="2">Bil</td>
                 <td></td>
                 <? foreach($weeklysale->revenuehead['project'] as $i => $name) { ?>
-                    <td align="right"><? print $cars[$credit_group_conf_object->{"Group".$i."CarID"}]->CarCode ?></td>
+                    <? $car = $cars[$credit_group_conf_object->{"Group".$i."CarID"}] ?>
+                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
                 <? } ?>
                 <td></td>
                 <td colspan="4"></td>
