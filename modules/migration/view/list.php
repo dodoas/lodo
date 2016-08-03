@@ -44,7 +44,7 @@ $current_page = $MY_SELF . ($show_all ? "show_all=1&" : "") . ($db_name_restrict
    - <a href="<? print $MY_SELF ?>">Back to list</a>
 <? } else { ?>
   <? if(!$show_only_failed) { ?>
-     - <a href="<? print $MY_SELF . "show_all=1&" . ($db_name_restriction ? "db_name=".$db_name_restriction."&" : "") ?>show_only_failed=1">Show only failed migrations for all databases</a><br>  
+     - <a href="<? print $MY_SELF . "show_all=1&show_only_failed=1"?>">Show only failed migrations for all databases</a><br>  
   <? } ?>
 <? } ?>
 
