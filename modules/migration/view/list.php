@@ -25,15 +25,15 @@ $show_only_database_names = !$show_all && !$db_name_restriction;
 
 require_once "record.inc";
 
-if (is_null($db_name_restriction)) $all_migrations = $migration_system->get_migrations_for_all_databases();
+if (is_null($db_name_restriction)) $all_migrations = $migration_system->get_databases();
 else if($db_name_restriction) $all_migrations[$db_name_restriction] = $migration_system->get_migrations_for_database($db_name_restriction);
-else if($show_only_database_names) $all_migrations = $migration_system->get_database_names();
+else if($show_only_database_names) $all_migrations = $migration_system->get_databases(false);
 
 $current_page = $MY_SELF . ($show_all ? "show_all=1&" : "") . ($db_name_restriction ? "db_name=". $db_name_restriction ."&" : "") . ($show_only_failed ? "show_only_failed=1&" : "");
 ?>
 
 <? if(!$show_all) { ?>
-   - <a href="<? print $MY_SELF ?>show_all=1">Show all databases</a><br>  
+   - <a href="<? print $MY_SELF .'show_all=1&'. ($show_only_failed ? "show_only_failed=1&" : "") ?>">Show all databases</a><br>  
 <? } ?>
 <? if(!$show_only_database_names) { ?>
   <? if(!$show_only_failed) { ?>
@@ -42,6 +42,10 @@ $current_page = $MY_SELF . ($show_all ? "show_all=1&" : "") . ($db_name_restrict
      - <a href="<? print $MY_SELF . ($show_all ? "show_all=1&" : "") . ($db_name_restriction ? "db_name=".$db_name_restriction."&" : "") ?>">Show all migrations</a><br>  
   <? } ?>
    - <a href="<? print $MY_SELF ?>">Back to list</a>
+<? } else { ?>
+  <? if(!$show_only_failed) { ?>
+     - <a href="<? print $MY_SELF . "show_all=1&" . ($db_name_restriction ? "db_name=".$db_name_restriction."&" : "") ?>show_only_failed=1">Show only failed migrations for all databases</a><br>  
+  <? } ?>
 <? } ?>
 
 <? if(!$show_only_database_names) { ?>
@@ -52,7 +56,7 @@ $current_page = $MY_SELF . ($show_all ? "show_all=1&" : "") . ($db_name_restrict
 <? } ?>
 <?
 foreach ($all_migrations as $database => $migrations) {
-  print "<h2><a href='". $MY_SELF ."db_name=". $database."'>". $database ."</a></h2>";
+  print "<h2><a href='". $MY_SELF ."db_name=". $database."&". ($show_only_failed ? "show_only_failed=1&" : "") ."'>". $database ."</a></h2>";
   if(!$show_only_database_names) {
   ?>
     <form action="<? print $current_page ?>" method="post">

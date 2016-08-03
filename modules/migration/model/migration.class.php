@@ -53,27 +53,20 @@ class migration_system {
     return $all_migrations;
   }
 
-  function get_migrations_for_all_databases() {
+  function get_databases($with_migrations = true) {
     $model_invoicerecurring_recurring = new model_invoicerecurring_recurring();
     $dbs = $model_invoicerecurring_recurring->database_list();
 
     $all_migrations = array();
 
-    foreach ($dbs as $db) {
-      $all_migrations[$db->Database] = $this->get_migrations_for_database($db->Database);
-    }
-
-    return $all_migrations;
-  }
-
-  function get_database_names() {
-    $model_invoicerecurring_recurring = new model_invoicerecurring_recurring();
-    $dbs = $model_invoicerecurring_recurring->database_list();
-
-    $all_migrations = array();
-
-    foreach ($dbs as $db) {
-      $all_migrations[$db->Database] = array();
+    if($with_migrations) {
+      foreach ($dbs as $db) {
+        $all_migrations[$db->Database] = $this->get_migrations_for_database($db->Database);
+      }
+    } else {
+      foreach ($dbs as $db) {
+        $all_migrations[$db->Database] = array();
+      }
     }
 
     return $all_migrations;
