@@ -289,7 +289,7 @@ class model_tablemetadata_tablemetadata {
         $total = 0;
         $updated = 0;
         $new = 0;
-        $new_fields = 0;
+        $new_fields = "";
 
         while ($table_obj = $dbh[$dsn]->db_fetch_object($result_table))
         {
@@ -976,7 +976,7 @@ class model_tablemetadata_tablemetadata {
                         #print "$query<br>";
                         $result = $dbh[$dsn]->db_insert($query);
                         $new++;
-                        $new_fields .= "$table.$field<br>";
+                        $new_fields .= "$table.$field$this->nl_separator";
                     }
                     else
                     {
