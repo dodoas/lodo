@@ -13,6 +13,22 @@ require_once "record.inc";
 $weeklysale = new weeklysale($WeeklySaleID, $WeeklySaleConfID);
 $weeklysale->presentation();
 
+$query_sale = "select * from weeklysalegroupconf where WeeklySaleConfID = '".$weeklysale->head->WeeklySaleConfID."' order by Type";
+$weekly_sales_groups_result_set = $_lib['db']->db_query($query_sale);
+
+// The query above selects two rows with configurations for all 20 groups
+// where first row is for sales and the second row is for credit
+$sales_group_conf_object = $_lib['db']->db_fetch_object($weekly_sales_groups_result_set);
+$credit_group_conf_object = $_lib['db']->db_fetch_object($weekly_sales_groups_result_set);
+
+$car_query = "select * from car where Active=1";
+$cars_result_set = $_lib["db"]->db_query($car_query);
+$cars = array();
+
+while($row = $_lib["db"]->db_fetch_object($cars_result_set)) {
+    $cars[$row->CarID] = $row;
+}
+
 if(isset($_POST['init_bilagsnummer'])) {
     $weeklysale->head->Week        = (int)$_POST['init_week'];	
 }
@@ -353,6 +369,16 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td></td>
                 <td colspan="4"></td>
             </tr>
+            <tr>
+                <td colspan="3">Bil</td>
+                <td></td>
+                <? foreach($weeklysale->salehead['groups'] as $name => $id) { ?>
+                    <? $car = $cars[$sales_group_conf_object->{"Group".$id."CarID"}] ?>
+                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
+                <? } ?>
+                <td></td>
+                <td colspan="4"></td>
+            </tr>
             <? } ?>
             <tr>
                 <td colspan="15">&nbsp;</td>
@@ -481,6 +507,16 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <? }
                 } ?>
                 <td colspan="10"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Bil</td>
+                <td></td>
+                <? foreach($weeklysale->revenuehead['project'] as $i => $name) { ?>
+                    <? $car = $cars[$credit_group_conf_object->{"Group".$i."CarID"}] ?>
+                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
+                <? } ?>
+                <td></td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <td class="menu" colspan="3">Kontant inn</td>
