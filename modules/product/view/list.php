@@ -64,7 +64,8 @@ $result2 = $_lib['db']->db_query($query);
                 while($row = $_lib['db']->db_fetch_object($result2))
                 {
                     if($row->AccountPlanID) {
-                        $vat_query = "select Percent from vat as v, accountplan as a where a.AccountPlanID=$row->AccountPlanID and a.VatID=v.VatID";
+                        $date = $_lib['sess']->get_session('LoginFormDate');
+                        $vat_query = "select v.Percent from vat as v, accountplan as a where v.Active=1 and a.AccountPlanID=$row->AccountPlanID and a.VatID=v.VatID and v.ValidFrom <= '$date' and v.ValidTo >= '$date'";
                         $vatRow = $_lib['storage']->get_row(array('query' => $vat_query));
                     } else {
                         unset($vatRow);
