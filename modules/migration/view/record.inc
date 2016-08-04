@@ -10,7 +10,8 @@ if($_lib['input']->getProperty('action_run_migration')) {
   $migration_system->migrate_db($db_name, $scriptpath);
 } 
 elseif ($_lib['input']->getProperty('action_update_schema')) {
-  $migration_system->update_db($db_name);
+  $table_filter = $_POST["migration_tablefilter"];
+  $migration_system->update_db($table_filter, $db_name);
   print $_lib['message']->get();
 }
 
