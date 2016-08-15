@@ -138,7 +138,7 @@ $db_sum   = $row->sum;
         <? print $_lib['form3']->submit(array('name' => 'action_auto_save','value' => "Lagre dato")) ?>
         <?
   $valid_accountperiod = $accounting->is_valid_accountperiod($invoice_period, $_lib['sess']->get_person('AccessLevel'));
-  $valid_date = validDate($voucher_date);
+  $valid_date = $_lib['validation']->date($voucher_date);
   if ($valid_accountperiod && $valid_date) {
     list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true));
     echo ' fakturanummer: ' . $nextJournalID;

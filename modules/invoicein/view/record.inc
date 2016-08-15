@@ -7,6 +7,10 @@ if($_lib['input']->getProperty('action_invoicein_linenew') || $_lib['input']->ge
   $_REQUEST['invoicein_SupplierAccountPlanID_' . $ID] = $supplier_accountplan->SupplierAccountPlanID;
 }
 
+if (isset($_POST['invoicein_InvoiceDate_'.$ID]) && !$_lib['validation']->date($_POST['invoicein_InvoiceDate_'.$ID])) {
+  $_lib['message']->add('Ugyldig fakturadato '.$_POST['invoicein_InvoiceDate_'.$ID].'!');
+}
+
 if($_lib['input']->getProperty('action_invoicein_journal')) {
     $invoicein->journal();
 
