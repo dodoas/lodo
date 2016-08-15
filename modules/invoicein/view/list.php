@@ -17,6 +17,9 @@ $all_inv = $invoicein->getAllReadyInvoices();
 
 require_once "record.inc";
 
+// get text for each of the payment means codes
+$PaymentMeansCodes = $_lib['db']->get_hashhash(array('query' => "select MenuValue, MenuChoice from confmenues where MenuName='PaymentMeans' and LanguageID='no' order by MenuChoice", 'key' => 'MenuValue', 'value' => 'MenuChoice'));
+foreach($PaymentMeansCodes as &$PaymentMeansCode) $PaymentMeansCode = $PaymentMeansCode['MenuChoice'];
 
 print $_lib['sess']->doctype; ?>
 <head>
@@ -121,7 +124,7 @@ print $_lib['sess']->doctype; ?>
     <th>Avdeling</th>
     <th>&Aring;rsaksinformasjon</th>
     <th class="number">Bankkonto</th>
-    <th class="number">Betaling</th>
+    <th>Betaling</th>
     <th class="number">KID</th>
     <th class="number">Fakturabank</th>
     <th class="number">Remittering</th>
@@ -197,7 +200,7 @@ foreach($invoicein as $InvoiceO) {
           print $ReasonsInfo;
         } ?></td>
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
-      <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
+      <td><? print $PaymentMeansCodes[$InvoiceO->PaymentMeans]; ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>
       <td class="number"><? if($InvoiceO->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $InvoiceO->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
       <td class="number"><? print $InvoiceO->RemittanceStatus ?></td>
