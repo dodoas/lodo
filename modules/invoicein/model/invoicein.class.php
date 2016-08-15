@@ -407,7 +407,7 @@ class logic_invoicein_invoicein implements Iterator {
 
         #print_r($accountplan);
         #print_r($args);
-        for ($i = 0; $i < $args['field_count']; $i++) {
+        for ($i = 1; $i <= $args['field_count']; $i++) {
           $invoiceinline_id = $args[$i];
           $invoiceinline_accountplan = $accounting->get_accountplan_object($args['invoiceinline_AccountPlanID_'.$invoiceinline_id]);
           if (!$invoiceinline_accountplan->EnableCar && !empty($args['invoiceinline_CarID_'.$invoiceinline_id])) $args['invoiceinline_CarID_'.$invoiceinline_id] = 0;
