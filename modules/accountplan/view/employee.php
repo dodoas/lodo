@@ -411,7 +411,7 @@ if(!empty($validation_errors)) {
   </tr>
 <?
 $db_table2 = 'workrelation';
-$query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID";
+$query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID order by WorkRelationID";
 $result_work_relations = $_lib['db']->db_query($query_work_relations);
 $work_relations_array = array();
 while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
@@ -445,10 +445,89 @@ foreach ($work_relations_array as $work_relation) {
     <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'WorkMeasurement', 'value'=>$work_relation->WorkMeasurement, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td><? print $_lib['form3']->date(array('table'=>$db_table2, 'field'=>'SalaryDateChangedAt', 'form_name' => 'work_relations', 'value'=>$work_relation->SalaryDateChangedAt, 'pk'=> $WorkRelationID, 'class'=>'lodoreqfelt')) ?></td>
     <td>
+
+
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
       <input type="checkbox" name="work_relations_to_delete[]" value="<? print $work_relation->WorkRelationID; ?>" /></td>
       <? } ?>
     </tr>
+
+    <tr>
+
+      <td></td>
+      <td></td>
+      <td class="menu">ID</td>
+      <td class="menu">tekst</td>
+      <td class="menu">Start dato</td>
+      <td class="menu">Slutt dato</td>
+      <td class="menu">Prosent</td>
+      <td class="menu">Type</td>
+    </tr>
+
+  <?
+    $db_table3 = 'workrelationfurlough';
+    $query_work_relation_furloghs = "SELECT * FROM $db_table3 WHERE WorkRelationID = $work_relation->WorkRelationID";
+    $result_work_relation_forloghs = $_lib['db']->db_query($query_work_relation_furloghs);
+    while($forlogh = $_lib['db']->db_fetch_object($result_work_relation_forloghs)) {
+    ?>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>
+          <? echo $forlogh->FurloughID ?>
+        </td>
+        <td>
+        Make CRUD
+        <? print $_lib['form3']->text(array(
+          'table'=>$db_table3,
+          'field'=>'FurloughText',
+          'value'=>$forlogh->FurloughText,
+          'pk'=> $forlogh->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+
+        <td><? print $_lib['form3']->date(array(
+          'table'=>$db_table3,
+          'field'=>'FurloughStart',
+          'form_name' => 'work_relations',
+          'value'=>$forlogh->FurloughStart,
+          'pk'=> $forlogh->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+        <td><? print $_lib['form3']->date(array(
+          'table'=>$db_table3,
+          'field'=>'FurloughStop',
+          'form_name' => 'work_relations',
+          'value'=>$forlogh->FurloughStop,
+          'pk'=> $forlogh->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+
+        <td><? print $_lib['form3']->text(array(
+          'table'=>$db_table3,
+          'field'=>'FurloughPercent',
+          'value'=>$forlogh->FurloughPercent,
+          'pk'=> $forlogh->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+
+        <td>
+          <? print $_lib['form3']->Generic_menu3(array(
+            'data' => $_lib['form3']->_ALTINN['PermisjonsOgPermitteringsBeskrivelse'],
+            'table'=>$db_table3,
+            'field'=>'FurloughDescription',
+            'value'=>$forlogh->FurloughDescription,
+            'pk'=> $forlogh->FurloughID,
+            'class'=>'lodoreqfelt')) ?>
+        </td>
+
+      </tr>
+
+    <?
+    }
+  ?>
+
+  <tr>
+    <td colspan="2"></td>
+    <td class="menu" colspan="6"></td>
+  </tr>
+
 <?
 }
 if($_lib['sess']->get_person('AccessLevel') >= 2) {
@@ -459,6 +538,7 @@ if($_lib['sess']->get_person('AccessLevel') >= 2) {
     <td colspan="12" align='left'>
       <input type="submit" value="Lagre arbeidsforhold" name="action_work_relation_save">
       <input type="submit" value="Legg til arbeidsforhold" name="action_work_relation_add">
+      <input type="submit" value="Legg til permisjon p&aring; markerte" name="action_work_relation_furlough_add">
     </td>
     <td colspan="2" align="right">
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>

@@ -112,3 +112,8 @@ $_ALTINN['Fordel'] = array(
   'utgiftsgodtgjoerelse' => 'Utgiftsgodtgjoerelse'
 );
 
+$_ALTINN['PermisjonsOgPermitteringsBeskrivelse'] = array(
+  'permisjon' => 'Permisjon', # Leave
+  'permittering' => 'Permittering' # Layoffs
+);
+

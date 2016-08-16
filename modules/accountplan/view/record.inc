@@ -301,6 +301,7 @@ elseif($_lib['input']->getProperty('action_work_relation_delete')) {
   $workrelation_ids = $_POST['work_relations_to_delete'];
   if (!empty($workrelation_ids)) {
     $query = sprintf("DELETE FROM workrelation WHERE WorkRelationID IN (%s)", implode($workrelation_ids, ', '));
+    # TODO delete workrelationfurlough
     $_lib['db']->db_query($query);
   }
 }
@@ -308,8 +309,20 @@ elseif($_lib['input']->getProperty('action_work_relation_add')) {
   $query = "INSERT INTO workrelation(AccountPlanID) VALUES($AccountPlanID)";
   $_lib['db']->db_update($query);
 }
+elseif($_lib['input']->getProperty('action_work_relation_furlough_add')) {
+  # We use the same checkboxs as for delete
+  $workrelation_ids = $_POST['work_relations_to_delete'];
+
+  if (!empty($workrelation_ids)) {
+    $query = sprintf("INSERT INTO workrelationfurlough(WorkRelationID) VALUES (%s)", implode($workrelation_ids, '),('));
+    $_lib['db']->db_query($query);
+  }
+}
 elseif($_lib['input']->getProperty('action_work_relation_save')) {
-    $_lib['storage']->db_update_multi_table($_POST, array('workrelation' => 'WorkRelationID'));
+  $tables = array();
+  $tables['workrelation'] = 'WorkRelationID';
+  $tables['workrelationfurlough'] = 'FurloughID';
+  $_lib['storage']->db_update_multi_table($_POST, $tables);
 }
 
 ?>

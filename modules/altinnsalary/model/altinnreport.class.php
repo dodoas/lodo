@@ -73,7 +73,7 @@ class altinn_report {
   function checkIfEmpty($field, $error_message, $type = 'string') {
     global $_lib;
     if ($type == 'string') $is_empty = empty($field);
-    elseif ($type == 'date') $is_empty = strstr($field, '0000-00-00');
+    elseif ($type == 'date') $is_empty = strstr($field, '0000-00-00') || empty($field);
     elseif ($type == 'number') $is_empty = empty($field) || ($field == 0);
     elseif ($type == 'percent') $is_empty = is_null($field);
     elseif ($type == 'org_number') $is_empty = !preg_match('/^([0-9]{9})$/', $field);
@@ -501,7 +501,33 @@ class altinn_report {
         self::checkIfEmpty($last_change_of_work_percentage, 'L&oslash;nnslipp: Mangler stillingsprosentendret p&aring; L' . $salary->JournalID, 'date');
       }
       $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
+
+      # Check if ther is any furlough and stuff
     }
+
+    $query_furlough = "SELECT * FROM workrelationfurlough WHERE WorkRelationID = " . $work_relation->WorkRelationID;
+    $result_furlough = $_lib['db']->db_query($query_furlough);
+    while($forlogh = $_lib['db']->db_fetch_object($result_furlough)) {
+      $permisjon = array();
+      // Error is: Last change of position in company date not set for salary L' . salary->JournalID
+      $forlogh->FurloughStart = '';
+      self::checkIfEmpty($forlogh->FurloughStart,
+        'Permisjon: Mangler siste startdato for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$forlogh->WorkRelationID.')'.
+        ' permisjon('.$forlogh->FurloughID.')', 'date');
+      $permisjon['startdato'] = $forlogh->FurloughStart;
+
+      $permisjon['stuttdato'] = $forlogh->FurloughStop;
+      $permisjon['permisjonsprosent'] = $forlogh->FurloughPercent;
+      $permisjon['permisjonId'] = $forlogh->FurloughText;
+      $permisjon['beskrivelse'] = $forlogh->FurloughDescription;
+
+      // Error is: furlough does not exist in the furlough list self::fullNameForErrorMessage($employee)
+      // self::checkIfEmpty($furlough_code, 'Ansatt: Yrket finnes ikke i listen over yrker ' . self::fullNameForErrorMessage($employee));
+      $arbeidsforhold[]['permisjon'] = $permisjon;
+    }
+
     return $arbeidsforhold;
   }
 
