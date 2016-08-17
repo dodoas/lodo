@@ -1016,15 +1016,15 @@ class invoice {
         $this->invoiceO = new stdClass();
         $this->taxH     = array();
 
-        $sql_invoice    = "select * from invoiceout where InvoiceID='$this->InvoiceID'";
+        $sql_invoice    = "select invoiceout.*, P.FakturabankUsername as SavedByInLodo from invoiceout, person P where invoiceout.InvoiceID='$this->InvoiceID' and invoiceout.CreatedByPersonID = P.PersonID";
         #print "$sql_invoice<br>\n";
         $invoice        = $_lib['storage']->get_row(array('query' => $sql_invoice));
 
         ############################################################################################
         $this->invoiceO->ID                   = $invoice->InvoiceID;
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
-        $this->invoiceO->Note            = $invoice->CommentCustomer;
-
+        $this->invoiceO->Note                 = $invoice->CommentCustomer;
+        $this->invoiceO->LodoSavedBy          = $invoice->SavedByInLodo;
         $this->invoiceO->DocumentCurrencyCode = exchange::getLocalCurrency();
 
         if ($invoice->DepartmentID != "" || $invoice->DepartmentID === 0) { // "0" is valid
