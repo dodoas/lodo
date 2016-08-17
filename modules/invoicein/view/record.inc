@@ -34,11 +34,9 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
     $invoicein->update($_POST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_linenew')) {
-    $invoicein->update($_REQUEST);
     $invoicein->linenew($_REQUEST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_linedelete')) {
-    $invoicein->update($_REQUEST);
     $invoicein->linedelete($_REQUEST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_remittance')) {

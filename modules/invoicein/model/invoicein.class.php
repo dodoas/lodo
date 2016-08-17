@@ -286,7 +286,12 @@ class logic_invoicein_invoicein implements Iterator {
 
         $ID             = $args['ID'];
         $AccountPlanID  = $args['invoicein_SupplierAccountPlanID_' . $ID];
-        $accountplan    = $accounting->get_accountplan_object($AccountPlanID);
+        if (!is_numeric($AccountPlanID)) {
+          $_lib['message']->add('Leverand&oslash;r ikke valgt!');
+          $accountplan = NULL;
+        } else {
+          $accountplan    = $accounting->get_accountplan_object($AccountPlanID);
+        }
         $invoicein      = $_lib['storage']->get_row(array('query' => "select * from invoicein where ID='$ID'"));
 
         self::addVATPercentToAllowanceCharge($args);
@@ -339,7 +344,7 @@ class logic_invoicein_invoicein implements Iterator {
           $args['invoicein_IName_' . $ID] = $accountplan->AccountName;
           if(!$accountplan->AccountName) $_lib['message']->add('Navn mangler p&aring; leverand&oslash;r kontoplan');
           $args['invoicein_IAddress_' . $ID] = $accountplan->Address;
-          if($accountplan->Address) $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
+          if(!$accountplan->Address) $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
           $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
           if(!$accountplan->DomesticBankAccount) $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
         }
@@ -384,19 +389,10 @@ class logic_invoicein_invoicein implements Iterator {
           }
         }
         // set the period as the period the invoice date belongs to
-        if ($args['invoicein_InvoiceDate_'.$ID] && !empty($args['invoicein_InvoiceDate_'.$ID])) $args['invoicein_Period_'.$ID] = strftime("%Y-%m", strtotime($args['invoicein_InvoiceDate_'.$ID]));
-        // if manually created invoice(not imported from Fakturabank)
-        if (!$invoicein->Imported) {
-          // calculate total cost for invoice
-          $TotalCustPrice = 0;
-          for($i = 1; $i <= $args['field_count']; $i++) {
-            if (!isset($args['invoiceinline_UnitCostPrice_'.$line_id])) continue;
-            $line_id = $args[$i];
-            $UnitCostPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCostPrice_'.$line_id], 'return' => 'value'));
-            $QuantityDelivered = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_QuantityDelivered_'.$line_id], 'return' => 'value'));
-            $TotalCustPrice += $UnitCostPrice * $QuantityDelivered;
-          }
-          $args['invoicein_TotalCustPrice_'.$ID] = $TotalCustPrice;
+        // and set due date if not set to X days after where X is credit days set for supplier
+        if ($args['invoicein_InvoiceDate_'.$ID] && !empty($args['invoicein_InvoiceDate_'.$ID])) {
+          $args['invoicein_Period_'.$ID] = strftime("%Y-%m", strtotime($args['invoicein_InvoiceDate_'.$ID]));
+          if ($args['invoicein_DueDate_'.$ID] == '0000-00-00' || $args['invoicein_DueDate_'.$ID] == '') $args['invoicein_DueDate_'.$ID] = strftime("%Y-%m-%d", strtotime($args['invoicein_InvoiceDate_'.$ID] . ' + ' . $accountplan->CreditDays . ' days'));
         }
 
         if(($args['invoicein_DepartmentID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
@@ -420,6 +416,28 @@ class logic_invoicein_invoicein implements Iterator {
           $this->line_allowance_charge_table => 'InvoiceLineAllowanceChargeID');
         $_lib['db']->db_update_multi_table($args, $tables_to_update);
 
+        // if manually created invoice(not imported from Fakturabank)
+        // calculate total cost for invoice
+        if (!$invoicein->Imported) {
+          $TotalCustPrice = self::recalculate_total_cust_price($ID);
+          $_lib['db']->db_update_multi_table(array('invoicein_TotalCustPrice_'.$ID => $TotalCustPrice), array('invoicein' => 'ID'));
+        }
+    }
+
+    // calculate total cost for invoice
+    function recalculate_total_cust_price($id) {
+        global $_lib;
+
+        $total_cust_price = 0;
+
+        $query_invoicelines = "select * from invoiceinline where ID='$id' and Active <> 0 order by LineID asc";
+        $result_invoicelines = $_lib['db']->db_query($query_invoicelines);
+        while($invoicein_line = $_lib['db']->db_fetch_object($result_invoicelines)) {
+          $unit_cost_price = $invoicein_line->UnitCostPrice;
+          $quantity_delivered = $invoicein_line->QuantityDelivered;
+          $total_cust_price += $unit_cost_price * $quantity_delivered;
+        }
+        return $total_cust_price;
     }
 
     function linenew($args) {
@@ -492,7 +510,19 @@ class logic_invoicein_invoicein implements Iterator {
         $_lib['db']->db_delete($query);
         $invoicelineH['Active']   = 0;
         $invoicelineH['LineID']   = $args['LineID'];
-        return $_lib['storage']->store_record(array('table' => 'invoiceinline', 'data' => $invoicelineH, 'debug' => false));
+
+        $ret = $_lib['storage']->store_record(array('table' => 'invoiceinline', 'data' => $invoicelineH, 'debug' => false));
+
+        $ID = $args['ID'];
+        $invoicein = $_lib['storage']->get_row(array('query' => "select * from invoicein where ID='$ID'"));
+        // if manually created invoice(not imported from Fakturabank)
+        // calculate total cost for invoice
+        if (!$invoicein->Imported) {
+          $TotalCustPrice = self::recalculate_total_cust_price($ID);
+          $_lib['db']->db_update_multi_table(array('invoicein_TotalCustPrice_'.$ID => $TotalCustPrice), array('invoicein' => 'ID'));
+        }
+
+        return $ret;
     }
 
     /***************************************************************************
