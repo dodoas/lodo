@@ -9,6 +9,7 @@ $inline     = $_REQUEST['inline'];
 
 includelogic('invoicein/invoicein');
 $invoicein  = new logic_invoicein_invoicein($_lib['input']->request);
+$invoicein_status  = new logic_invoicein_invoicein($_lib['input']->request);
 
 $tax_categories = array();
 
@@ -28,6 +29,11 @@ $tabindex = 1;
 $get_invoice            = "select I.* from $db_table as I where ID='$ID'";
 #print "Get invoice " . $get_invoice . "<br>\n";
 $invoicein              = $_lib['storage']->get_row(array('query' => $get_invoice));
+
+// invoice with the specified id and fill its status
+$invoicein_status->fill(array());
+$invoicein_status = $invoicein_status->current();
+if (!empty($invoicein_status->Status)) $_lib['message']->add($invoicein_status->Status);
 
 $get_invoicefrom        = "select * from accountplan where AccountPlanID=" . (int) $invoicein->SupplierAccountPlanID;
 #print "get_invoicefrom " . $get_invoicefrom . "<br>\n";

@@ -90,6 +90,9 @@ class logic_invoicein_invoicein implements Iterator {
         if($this->ToDate) {
             $query .= " i.InvoiceDate <= '$this->ToDate' and ";
         }
+        if($this->ID) {
+            $query .= " i.ID = '$this->ID' and ";
+        }
         if($this->PaymentMeans) {
             $query .= " i.PaymentMeans = '$this->PaymentMeans' and ";
         }
