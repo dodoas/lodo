@@ -81,11 +81,6 @@ print $_lib['sess']->doctype; ?>
     <td><? print $_lib['form3']->date(array('name' => 'ToDate', 'field' => 'ToDate', 'form_name' => 'invoice_edit1', 'value' => $invoicein->ToDate)) ?></td>
 </tr>
 <tr>
-    <td>Status:</td>
-    <td><? print $_lib['form3']->text(array('name' => 'RemittanceStatus',   'value' => $invoicein->RemittanceStatus)) ?></td>
-    <td></td>
-</tr>
-<tr>
     <td>Fakturanummer:</td>
     <td><? print $_lib['form3']->text(array('name' => 'InvoiceNumber',   'value' => $invoicein->InvoiceNumber)) ?></td>
     <td></td>
@@ -127,7 +122,6 @@ print $_lib['sess']->doctype; ?>
     <th>Betaling</th>
     <th class="number">KID</th>
     <th class="number">Fakturabank</th>
-    <th class="number">Remittering</th>
     <th class="number">Status</th>
     <th>Opprettet som</th>
 </tr>
@@ -203,7 +197,6 @@ foreach($invoicein as $InvoiceO) {
       <td><? print $PaymentMeansCodes[$InvoiceO->PaymentMeans]; ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>
       <td class="number"><? if($InvoiceO->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $InvoiceO->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
-      <td class="number"><? print $InvoiceO->RemittanceStatus ?></td>
       <td class="number"><? print $InvoiceO->Status ?></td>
       <td><? print ($InvoiceO->Imported) ? 'importert' : 'manuelt'; ?></td>
   </tr>
