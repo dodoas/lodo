@@ -4,6 +4,9 @@
  * needed for the report.
  */
 
+// include validation class
+includecodelib('validation/validation');
+
 class altinn_report {
   public $salaries               = array();
   public $salary_ids             = array();
@@ -64,6 +67,26 @@ class altinn_report {
  */
   function addReplacementMessageID($message_id) {
     $this->erstatterMeldingsId = $message_id;
+  }
+
+/* Helper function to check if the variable is a valid date
+ */
+  function isValidFurloughPercent($field) {
+    return is_numeric($field) && $field > 0 && $field <= 100;
+  }
+
+/* Helper function to check if the variable is valid
+ * calls a sub function for for date, percent, ...
+ */
+  function checkIfValid($field, $error_message, $type = '') {
+    if ($type == 'date') $is_valid = validation::date($field);
+    elseif ($type == 'furlough_percent') $is_valid = self::isValidFurloughPercent($field);
+    else {
+      $error_message = 'Unknown type ' . $type;
+      $is_valid = false;
+    }
+    if (!$is_valid) $this->errors[] = $error_message;
+    return $is_valid;
   }
 
 /* Helper function to check if the variable is empty
@@ -501,33 +524,82 @@ class altinn_report {
         self::checkIfEmpty($last_change_of_work_percentage, 'L&oslash;nnslipp: Mangler stillingsprosentendret p&aring; L' . $salary->JournalID, 'date');
       }
       $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
-
-      # Check if ther is any furlough and stuff
     }
 
-    $query_furlough = "SELECT * FROM workrelationfurlough WHERE WorkRelationID = " . $work_relation->WorkRelationID;
+    // select all furlough active in the report period
+    $query_furlough = "SELECT * FROM workrelationfurlough WHERE WorkRelationID = " . $work_relation->WorkRelationID . " AND (('" . $this->period . "-01' BETWEEN Start AND Stop) OR ('" . $this->period . "-01' > Start AND (Stop = '0000-00-00' OR Stop IS NULL)) OR ((YEAR(Start) = YEAR('" . $this->period . "-01') AND MONTH(Start) = MONTH('" . $this->period . "-01')) OR (YEAR(Stop) = YEAR('" . $this->period . "-01') AND MONTH(Stop) = MONTH('" . $this->period . "-01'))))";
     $result_furlough = $_lib['db']->db_query($query_furlough);
-    while($forlogh = $_lib['db']->db_fetch_object($result_furlough)) {
+    while($furlough = $_lib['db']->db_fetch_object($result_furlough)) {
       $permisjon = array();
-      // Error is: Last change of position in company date not set for salary L' . salary->JournalID
-      $forlogh->FurloughStart = '';
-      self::checkIfEmpty($forlogh->FurloughStart,
-        'Permisjon: Mangler siste startdato for ' .
+      // Error is: Furlough: Start date is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      $furlough_start_empty = self::checkIfEmpty($furlough->Start,
+        'Permisjon: Mangler startdato for ' .
         self::fullNameForErrorMessage($employee) .
-        ' p&aring; arbeidsforhold('.$forlogh->WorkRelationID.')'.
-        ' permisjon('.$forlogh->FurloughID.')', 'date');
-      $permisjon['startdato'] = $forlogh->FurloughStart;
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')', 'date');
+      if (!$furlough_start_empty) {
+        // Error is: Furlough: Start date is not valid on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+        self::checkIfValid($furlough->Start,
+          'Permisjon: Startdato(' . $furlough->Start . ') er ikke gyldig for ' .
+          self::fullNameForErrorMessage($employee) .
+          ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+          ' permisjon('.$furlough->FurloughID.')', 'date');
+      }
+      $permisjon['startdato'] = $furlough->Start;
 
-      $permisjon['stuttdato'] = $forlogh->FurloughStop;
-      $permisjon['permisjonsprosent'] = $forlogh->FurloughPercent;
-      $permisjon['permisjonId'] = $forlogh->FurloughText;
-      $permisjon['beskrivelse'] = $forlogh->FurloughDescription;
+      // Error is: Furlough: End date is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      $furlough_end_empty = strstr($furlough->Stop, '0000-00-00') || empty($furlough->Stop);
+      if (!$furlough_end_empty) {
+        // Error is: Furlough: End date is not valid on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+        self::checkIfValid($furlough->Stop,
+          'Permisjon: Sluttdato(' . $furlough->Stop . ') er ikke gyldig for ' .
+          self::fullNameForErrorMessage($employee) .
+          ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+          ' permisjon('.$furlough->FurloughID.')', 'date');
+        $permisjon['stuttdato'] = $furlough->Stop;
+      }
 
-      // Error is: furlough does not exist in the furlough list self::fullNameForErrorMessage($employee)
-      // self::checkIfEmpty($furlough_code, 'Ansatt: Yrket finnes ikke i listen over yrker ' . self::fullNameForErrorMessage($employee));
+      if (!$furlough_start_empty && !$furlough_end_empty && ($furlough->Stop < $furlough->Start)) {
+        $this->errors[] = 'Permisjon: Sluttdato kan ikke v&aelig;re f&oslash;r startdato for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')';
+      }
+
+      // Error is: Furlough: Percent is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      $percentage_empty = self::checkIfEmpty($furlough->Percent,
+        'Permisjon: Mangler prosent for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')', 'percent');
+      if (!$percentage_empty) {
+        // Error is: Furlough: Percent is not valid on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+        self::checkIfValid($furlough->Percent,
+          'Permisjon: Prosent(' . $furlough->Percent . ') er ikke gyldig for ' .
+          self::fullNameForErrorMessage($employee) .
+          ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+          ' permisjon('.$furlough->FurloughID.')', 'furlough_percent');
+      }
+      $permisjon['permisjonsprosent'] = $furlough->Percent;
+
+      // Error is: Furlough: Text is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      self::checkIfEmpty($furlough->Text,
+        'Permisjon: Mangler text for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')');
+      $permisjon['permisjonId'] = $furlough->Text;
+
+      // Error is: Furlough: Description is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      self::checkIfEmpty($furlough->Description,
+        'Permisjon: Mangler beskrivelse for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')');
+      $permisjon['beskrivelse'] = $furlough->Description;
+
       $arbeidsforhold[]['permisjon'] = $permisjon;
     }
-
     return $arbeidsforhold;
   }
 

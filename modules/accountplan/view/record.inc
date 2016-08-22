@@ -300,8 +300,9 @@ elseif($_lib['input']->getProperty('action_refresh_sheme')) {
 elseif($_lib['input']->getProperty('action_work_relation_delete')) {
   $workrelation_ids = $_POST['work_relations_to_delete'];
   if (!empty($workrelation_ids)) {
+    $query = sprintf("DELETE FROM workrelationfurlough WHERE WorkRelationID IN (%s)", implode($workrelation_ids, ', '));
+    $_lib['db']->db_query($query);
     $query = sprintf("DELETE FROM workrelation WHERE WorkRelationID IN (%s)", implode($workrelation_ids, ', '));
-    # TODO delete workrelationfurlough
     $_lib['db']->db_query($query);
   }
 }
