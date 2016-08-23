@@ -570,6 +570,8 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $AltinnReport4ID = $_REQUEST['AltinnReport4ID'];
   $altinn_invoice = invoice::populateAltinnInvoiceObject($AltinnReport4ID, $invoice_type);
   if ($altinn_invoice !== false) {
+    $_SESSION['altinn_invoice_sending'] = true;
+    $_SESSION['altinn_invoice_reference'] = $AltinnReport4ID;
     $fb = new lodo_fakturabank_fakturabank();
     $fb->write($altinn_invoice);
   }

@@ -207,6 +207,8 @@ print $_lib['sess']->doctype
     }
     ?>
 </table>
+<br/>
+<a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.log">Altinn log</a>
 
 </body>
 </html>

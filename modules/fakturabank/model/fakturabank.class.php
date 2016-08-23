@@ -2214,6 +2214,16 @@ class lodo_fakturabank_fakturabank {
     public function save_invoice_export_data($data) {
       global $_lib;
       if ($data['code'] != 201) { // not created
+        if (isset($_SESSION['altinn_invoice_sending']) && $_SESSION['altinn_invoice_sending']) {
+          $result = simplexml_load_string($data['result']);
+          $insert_query = "INSERT INTO altinnlog
+            (Type, Class, Message, PersonID, AltinnReference)
+            VALUES
+            ('ERROR', 'Failed AGA or FTR export to fakturabank', '" . $result->message . "', " . $_lib['sess']->get_person('PersonID') . ", " . $_SESSION['altinn_invoice_reference'] . ")";
+          $_lib['db']->db_query($insert_query);
+          unset($_SESSION['altinn_invoice_reference']);
+          unset($_SESSION['altinn_invoice_sending']);
+        }
         $_SESSION['oauth_invoice_error'] = "Error: " . $data['result'];
         if ($data['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
       }
