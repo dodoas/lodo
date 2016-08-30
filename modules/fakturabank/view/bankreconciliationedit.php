@@ -45,7 +45,17 @@ $fakturabankbankreconciliationreason = $_lib['storage']->get_row(array('query' =
         <td><? print $_lib['form3']->AccountTypeMenu('fakturabankbankreconciliationreason.LedgerType', $fakturabankbankreconciliationreason->LedgerType) ?>
     <tr>
         <td class="menu">Konto
-        <td><input type="text" name="fakturabankbankreconciliationreason.AccountPlanID" value="<? print $fakturabankbankreconciliationreason->AccountPlanID  ?>" size="60">
+        <td><?
+                $aconf = array();
+                $aconf['table']         = 'fakturabankbankreconciliationreason';
+                $aconf['field']         = 'AccountPlanID';
+                $aconf['value']         = $fakturabankbankreconciliationreason->AccountPlanID;
+                if(!$fakturabankbankreconciliationreason->AccountPlanID) $aconf['class'] = 'redbackground';
+                $aconf['type'][]        = 'reskontro';
+                $aconf['type'][]        = 'hovedbok';
+                $aconf['type'][]        = 'employee';
+                echo $_lib['form3']->accountplan_number_menu($aconf);
+            ?>
     <tr>
         <td colspan="4" align="right"><input type="submit" name="action_fakturabankbankreconciliationreason_update" value="Lagre kobling (S)" accesskey="S" />
 </form>
