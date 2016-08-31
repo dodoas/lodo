@@ -71,6 +71,35 @@ print $_lib['sess']->doctype ?>
     <meta name="cvs"                content="$Id: list.php,v 1.26 2005/11/03 15:33:11 thomasek Exp $" />
     <? includeinc('head') ?>
     <? includeinc('javascript') ?>
+    <script type='text/javascript'>
+
+      // scroll to the same position as previously saved on action click
+      function goBack() {
+        var element_id = popCookie('scroll_element_id')
+          console.log(element_id);
+        if (element_id != '') {
+          var new_scroll_top = $('#'+element_id).offset().top;
+          var old_scroll_top = popCookie('scroll_top');
+          console.log(old_scroll_top);
+          $(window).scrollTop(new_scroll_top - old_scroll_top);
+        }
+      }
+
+      function saveScrollCookies() {
+        setCookie('scroll_top', $(this).parents('table').offset().top - $(window).scrollTop(), 1000);
+        setCookie('scroll_element_id', $(this).parents('table').attr('id'), 1000);
+      }
+
+      $(document).ready(
+        function () {
+          $('input[type="submit"], button').click(
+            saveScrollCookies
+          );
+          goBack();
+        }
+      );
+
+    </script>
 </head>
 <body  onload="window.focus();">
 
@@ -98,7 +127,7 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
     <? print $_lib['form3']->hidden(array('name'=>'ReskontroToAccount',     'value' => $postmotpost->ReskontroToAccount)) ?>
     <? print $_lib['form3']->hidden(array('name'=>'report_DepartmentID',    'value' => $postmotpost->DepartmentID)) ?>
     <? print $_lib['form3']->hidden(array('name'=>'report_ProjectID',       'value' => $postmotpost->ProjectID)) ?>
-    <table  class="lodo_data">
+    <table id="pmp_table" class="lodo_data">
         <thead>
             <tr class="voucher">
                 <th class="sub"></th>
