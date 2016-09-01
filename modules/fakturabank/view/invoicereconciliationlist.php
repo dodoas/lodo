@@ -51,10 +51,10 @@ includeinc('left') ?>
 <table class="lodo_data">
 <thead>
   <tr>
-    <th align="left" colspan="6">Koblinger mellom Fakturabank banktransaksjonsavstemmings&aring;rsaker og bokf&oslash;ringskontoer
+    <th align="left" colspan="7">Koblinger mellom Fakturabank banktransaksjonsavstemmings&aring;rsaker og bokf&oslash;ringskontoer
   <tr>
     <th>
-    <th colspan="5">
+    <th colspan="6">
         <form name="fakturabankinvoicereconciliationreason_search" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationedit" method="post">
 Ny kobling (skriv fb id):
             <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'FakturabankInvoiceReconciliationReasonID', 'width'=>'10')) ?>
@@ -92,8 +92,6 @@ while($row = $_lib['db']->db_fetch_object($result_fakturabankinvoicereconciliati
         case 'main':
             $correct_account = $check->AccountPlanType == 'balance' || $check->AccountPlanType == 'result'; break;
         }
-
-        echo $row->LedgerType;
 
         if($correct_account) {
             $found = true;

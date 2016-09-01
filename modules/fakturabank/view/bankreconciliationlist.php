@@ -50,10 +50,10 @@ includeinc('left') ?>
 <table class="lodo_data">
 <thead>
   <tr>
-    <th align="left" colspan="6">Koblinger mellom Fakturabank banktransaksjonsavstemmings&aring;rsaker og bokf&oslash;ringskontoer
+    <th align="left" colspan="7">Koblinger mellom Fakturabank banktransaksjonsavstemmings&aring;rsaker og bokf&oslash;ringskontoer
   <tr>
     <th>
-    <th colspan="5">
+    <th colspan="6">
         <form name="fakturabankbankreconciliationreason_search" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit" method="post">
 Ny kobling (skriv fb id):
             <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'FakturabankBankReconciliationReasonID', 'width'=>'10')) ?>
