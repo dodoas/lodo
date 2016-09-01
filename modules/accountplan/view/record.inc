@@ -291,6 +291,9 @@ elseif($_lib['input']->getProperty('action_del_scheme')) {
     }
 }
 elseif($_lib['input']->getProperty('action_save_scheme')) {
+    foreach($_POST as $key => $value) {
+      if (strpos($key, 'accountplanscheme_SchemeValue') !== false) $_POST[$key] = str_replace(' ', '', $_POST[$key]);
+    }
     $_lib['storage']->db_update_multi_table($_POST, array('accountplanscheme' => 'AccountPlanSchemeID'));
 }
 elseif($_lib['input']->getProperty('action_refresh_sheme')) {

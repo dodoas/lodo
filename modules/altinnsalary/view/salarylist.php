@@ -31,7 +31,7 @@ print $_lib['message']->get();
   </p>
 </form>
 
-<? if ($result_salary && $_lib['db']->db_numrows($result_salary)) { ?>
+
 <form name="altinnsalary_send_report" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
 <table class="lodo_data">
 <thead>
@@ -257,12 +257,6 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   </table>
 <?
   }
-}
-else {
-?>
-<h4>Ingen l&oslash;nnslipper funnet</h4>
-<?
-}
 ?>
 
 </body>
