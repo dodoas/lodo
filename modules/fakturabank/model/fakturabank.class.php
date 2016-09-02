@@ -764,7 +764,8 @@ class lodo_fakturabank_fakturabank {
 
         #Estimate which journal ids will be used
         list($JournalID, $tmp) = $accounting->get_next_available_journalid(array('available' => true, 'update' => false, 'type' => $VoucherType, 'reuse' => false, 'from' => 'Fakturabank estimate'));
-
+        $starting_id = 100000001;
+        $used_accounts_hash = $_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplan where AccountPlanType = 'supplier' and AccountPlanID >= $starting_id order by AccountPlanID"));
 	/* Cleanup error message -eirhje 29.01.10 */
        if(isset($invoicesO->Invoice))
         foreach($invoicesO->Invoice as &$InvoiceO) {
@@ -920,23 +921,28 @@ class lodo_fakturabank_fakturabank {
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " .
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
 
-                // add if NO:ORGNR
                 if ($scheme_type == 'NO:ORGNR') {
-                  $InvoiceO->Status   .= sprintf(
-                    '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier" target="_blank">Opprett</a>',
-                    $_lib['sess']->dispatch,
-                    $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID,
-                    $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID
-                  );
+                    $TemporaryAccountPlanID = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                } else {
+                    // find the first available account plan id
+                    $org = new lodo_orgnumberlookup_orgnumberlookup();
+                    $org->getOrgNumberByScheme($scheme_value, $scheme_type);
+                    $starting_id = 100000001;
+                    
+                    if ($_lib['sess']->get_companydef('BaseAccountIDOnMotkonto')) $starting_id += $org->MotkontoResultat1 * 10000;
+                    
+                    for ($i = $starting_id; $i <= 999999999; $i++) {
+                      if (!isset($used_accounts_hash[$i])) break;
+                    }
+
+                    $TemporaryAccountPlanID = $i;
+                    $used_accounts_hash[$TemporaryAccountPlanID] = $TemporaryAccountPlanID;
                 }
-                else { // add based on scheme
-                  $InvoiceO->Status   .= sprintf(
-                    '<a href="%s&t=fakturabank.createaccount&amp;not_noorgno=1&scheme_type=%s&scheme_value=%s&type=supplier" target="_blank">Opprett</a>',
-                    $_lib['sess']->dispatch,
-                    $scheme_type,
-                    $scheme_value
-                  );
-                }
+
+                $InvoiceO->Status   .= sprintf(
+                    '<input type="submit" value="Opprett" name="action_fakturabank_addmissingaccountplan" onclick="chooseOnlyOneAccountPlanID(event, %s); ">',
+                    $TemporaryAccountPlanID
+                );
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
