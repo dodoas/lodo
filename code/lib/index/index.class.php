@@ -47,6 +47,12 @@ function includealogic($inc) {
     require_once($fil);
 }
 
+function includecodelib($file) {
+    global $_SETUP;
+    list($module, $class) = explode('/', $file);
+    require_once($_SETUP['HOME_DIR'] . "/code/lib/" . $module . "/" . $class . ".class.php");
+}
+
 if(0)
 {
     #print_r($_REQUEST);

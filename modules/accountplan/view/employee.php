@@ -411,7 +411,7 @@ if(!empty($validation_errors)) {
   </tr>
 <?
 $db_table2 = 'workrelation';
-$query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID";
+$query_work_relations = "SELECT * FROM workrelation WHERE AccountPlanID = $AccountPlanID order by WorkRelationID";
 $result_work_relations = $_lib['db']->db_query($query_work_relations);
 $work_relations_array = array();
 while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
@@ -449,7 +449,104 @@ foreach ($work_relations_array as $work_relation) {
       <input type="checkbox" name="work_relations_to_delete[]" value="<? print $work_relation->WorkRelationID; ?>" /></td>
       <? } ?>
     </tr>
-<?
+  <?
+    $db_table3 = 'workrelationfurlough';
+    $query_work_relation_furloghs = "SELECT * FROM $db_table3 WHERE WorkRelationID = $work_relation->WorkRelationID ORDER BY FurloughID";
+    $result_work_relation_furloughs = $_lib['db']->db_query($query_work_relation_furloghs);
+    if ($_lib['db']->db_numrows($result_work_relation_furloughs)) {
+  ?>
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="menu">ID</td>
+      <td class="menu">tekst</td>
+      <td class="menu">Start dato</td>
+      <td class="menu">Slutt dato</td>
+      <td class="menu">Prosent</td>
+      <td class="menu">Type</td>
+    </tr>
+    <?
+      $furloughs_array = array();
+      while($furlough = $_lib['db']->db_fetch_object($result_work_relation_furloughs)) {
+        $furloughs_array[] = $furlough;
+    ?>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>
+          <? echo $furlough->FurloughID ?>
+        </td>
+        <td>
+          <? print $_lib['form3']->Generic_menu3(array(
+            'query' => 'select Text from furloughtext',
+            'table'=>$db_table3,
+            'field'=>'Text',
+            'value'=>$furlough->Text,
+            'pk'=> $furlough->FurloughID,
+            'class'=>'lodoreqfelt')) ?>
+        </td>
+
+        <td><? print $_lib['form3']->date(array(
+          'table'=>$db_table3,
+          'field'=>'Start',
+          'form_name' => 'work_relations',
+          'value'=>$furlough->Start,
+          'pk'=> $furlough->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+        <td><? print $_lib['form3']->date(array(
+          'table'=>$db_table3,
+          'field'=>'Stop',
+          'form_name' => 'work_relations',
+          'value'=>$furlough->Stop,
+          'pk'=> $furlough->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+
+        <td><? print $_lib['form3']->text(array(
+          'table'=>$db_table3,
+          'field'=>'Percent',
+          'value'=>$furlough->Percent,
+          'pk'=> $furlough->FurloughID,
+          'class'=>'lodoreqfelt')) ?></td>
+
+        <td>
+          <? print $_lib['form3']->Generic_menu3(array(
+            'data' => $_lib['form3']->_ALTINN['PermisjonsOgPermitteringsBeskrivelse'],
+            'table'=>$db_table3,
+            'field'=>'Description',
+            'value'=>$furlough->Description,
+            'pk'=> $furlough->FurloughID,
+            'class'=>'lodoreqfelt')) ?>
+        </td>
+
+      </tr>
+
+    <?
+      }
+      $validation_errors = work_relation::validate_furloughs($furloughs_array);
+      if(!empty($validation_errors)) {
+    ?>
+      <tr>
+        <td colspan="2"></td>
+        <td colspan="6">
+          <div class="warning">
+    <?
+        foreach ($validation_errors as $error) {
+          print $error ."<br>";
+        }
+    ?>
+          </div>
+        </td>
+      </tr>
+  <?
+      }
+  ?>
+
+  <tr>
+    <td colspan="2"></td>
+    <td class="menu" colspan="6"></td>
+  </tr>
+  <?
+    }
 }
 if($_lib['sess']->get_person('AccessLevel') >= 2) {
 ?>
@@ -459,6 +556,7 @@ if($_lib['sess']->get_person('AccessLevel') >= 2) {
     <td colspan="12" align='left'>
       <input type="submit" value="Lagre arbeidsforhold" name="action_work_relation_save">
       <input type="submit" value="Legg til arbeidsforhold" name="action_work_relation_add">
+      <input type="submit" value="Legg til permisjon p&aring; markerte" name="action_work_relation_furlough_add">
     </td>
     <td colspan="2" align="right">
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
@@ -470,6 +568,7 @@ if($_lib['sess']->get_person('AccessLevel') >= 2) {
 }
 ?>
 </table>
+<a href="<? print $_lib['sess']->dispatch ?>t=furlough.textlist">Legg til ny permisjon og permittering tekst</a>
 </form>
 <? includeinc('bottom') ?>
 </body>

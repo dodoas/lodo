@@ -2,8 +2,53 @@
 /* Work relation class
  */
 
+// include validation class
+includecodelib('validation/validation');
+
 class work_relation {
 
+  public static function validate_furloughs($furloughs) {
+    $errors = array();
+
+    foreach ($furloughs as $furlough) {
+      $id = $furlough->FurloughID;
+      # Leave and layoff
+      $error_prefix = "Permisjon og permittering ". $id .": ";
+
+      if(self::empty_field($furlough->Text)) {
+        # Text can not be blank
+        $errors[] = $error_prefix . "Tekst kan ikke v&aelig;re blank.";
+      }
+
+      if(self::empty_date($furlough->Start) || !self::valid_date($furlough->Start)) {
+        # Starting date may not be blank and must be a valid date
+        $errors[] = $error_prefix . "Start dato kan ikke v&aelig;re blank og m&aring; v&aelig;re en gyldig dato.";
+      }
+
+      if(!self::empty_date($furlough->Stop) && !self::valid_date($furlough->Stop)) {
+        # Ending date must be a valid date
+        $errors[] = $error_prefix . "Slutt dato m&aring; v&aelig;re en gyldig dato.";
+      }
+
+      if(!self::empty_date($furlough->Start) && !self::empty_date($furlough->Stop) && $furlough->Stop < $furlough->Start) {
+        # Ending date may not be before the start date
+        $errors[] = $error_prefix . "Slutt dato kan ikke v&aelig;re f&oslash;r start dato.";
+      }
+
+      if(self::empty_percent($furlough->Percent) || !self::valid_furlough_percent($furlough->Percent)) {
+        # Percent can not be empty and must be between 0 and 100
+        $errors[] = $error_prefix . "Prosent kan ikke v&aelig;re tom og m&aring; v&aelig;re mellom 0 og 100.";
+      }
+
+      if(self::empty_field($furlough->Description)) {
+        # Type con not be blank
+        $errors[] = $error_prefix . "Type kan ikke v&aelig;re blank.";
+      }
+
+    }
+
+    return $errors;
+  }
   public static function validate_work_relations($work_relations) {
     $errors = array();
 
@@ -90,6 +135,18 @@ class work_relation {
 
   public static function empty_field($value) {
     return empty($value) || $value == "0";
+  }
+
+  public static function empty_percent($value) {
+    return empty($value);
+  }
+
+  public static function valid_furlough_percent($value) {
+    return is_numeric($value) && $value > 0 && $value <= 100;
+  }
+
+  public static function valid_date($value) {
+    return validation::date($value);
   }
 
 }

@@ -1,5 +1,12 @@
 <?
 class validation {
+
+    // recieves date as string 'YYYY-MM-DD' and returns bool if date is valid
+    function date($date) {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        return $d && $d->format('Y-m-d') === $date;
+    }
+
     function mod11_personal($number) { // must take a string
         if(!preg_match('/^\d{11}$/', $number)) return false;
 
