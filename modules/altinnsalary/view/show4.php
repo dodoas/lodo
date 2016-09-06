@@ -64,6 +64,9 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
         <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
           <input type='submit' name="action_invoice_fakturabanksend_altinn_aga_ftr" value='Send til Fakturabank' />
+        <?
+          if ($row->SentAGAToFakturabankBy) echo $row->SentAGAToFakturabankAt . " fakturaBank " . $_lib['format']->PersonIDToName($row->SentAGAToFakturabankBy);
+        ?>
         </form>
       </td>
     </tr>
@@ -73,6 +76,9 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
         <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
           <input type='submit' name="action_invoice_fakturabanksend_altinn_aga_ftr" value='Send til Fakturabank' />
+        <?
+          if ($row->SentFTRToFakturabankBy) echo $row->SentFTRToFakturabankAt . " fakturaBank " . $_lib['format']->PersonIDToName($row->SentFTRToFakturabankBy);
+        ?>
         </form>
       </td>
     </tr>

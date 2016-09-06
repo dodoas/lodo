@@ -2231,6 +2231,23 @@ class lodo_fakturabank_fakturabank {
         if ($data['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
       }
       else {
+        if (isset($_SESSION['altinn_invoice_sending']) && $_SESSION['altinn_invoice_sending']) {
+          $AltinnReport4ID = $_SESSION['altinn_invoice_reference'];
+          $invoice_type = $_SESSION['altinn_invoice_type'];
+          $dataH = array();
+          $dataH['AltinnReport4ID'] = $AltinnReport4ID;
+          if ($invoice_type == "AGA") {
+            $dataH['SentAGAToFakturabankBy'] = $_lib['sess']->get_person('PersonID');
+            $dataH['SentAGAToFakturabankAt'] = strftime("%F %T");
+          } elseif ($invoice_type == "FTR") {
+            $dataH['SentFTRToFakturabankBy'] = $_lib['sess']->get_person('PersonID');
+            $dataH['SentFTRToFakturabankAt'] = strftime("%F %T");
+          }
+          unset($_SESSION['altinn_invoice_reference']);
+          unset($_SESSION['altinn_invoice_sending']);
+          unset($_SESSION['altinn_invoice_type']);
+          $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'altinnReport4', 'debug' => false));
+        }
         $dataH = array();
         $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
         $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
