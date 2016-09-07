@@ -531,6 +531,15 @@ class altinn_report {
     $result_furlough = $_lib['db']->db_query($query_furlough);
     while($furlough = $_lib['db']->db_fetch_object($result_furlough)) {
       $permisjon = array();
+
+      // Error is: Furlough: Text is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      self::checkIfEmpty($furlough->Text,
+        'Permisjon: Mangler text for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')');
+      $permisjon['permisjonId'] = $furlough->Text;
+
       // Error is: Furlough: Start date is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
       $furlough_start_empty = self::checkIfEmpty($furlough->Start,
         'Permisjon: Mangler startdato for ' .
@@ -556,7 +565,7 @@ class altinn_report {
           self::fullNameForErrorMessage($employee) .
           ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
           ' permisjon('.$furlough->FurloughID.')', 'date');
-        $permisjon['stuttdato'] = $furlough->Stop;
+        $permisjon['sluttdato'] = $furlough->Stop;
       }
 
       if (!$furlough_start_empty && !$furlough_end_empty && ($furlough->Stop < $furlough->Start)) {
@@ -581,14 +590,6 @@ class altinn_report {
           ' permisjon('.$furlough->FurloughID.')', 'furlough_percent');
       }
       $permisjon['permisjonsprosent'] = $furlough->Percent;
-
-      // Error is: Furlough: Text is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
-      self::checkIfEmpty($furlough->Text,
-        'Permisjon: Mangler text for ' .
-        self::fullNameForErrorMessage($employee) .
-        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
-        ' permisjon('.$furlough->FurloughID.')');
-      $permisjon['permisjonId'] = $furlough->Text;
 
       // Error is: Furlough: Description is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
       self::checkIfEmpty($furlough->Description,

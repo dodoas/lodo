@@ -485,4 +485,36 @@ function enableOrDisable(status, element_id) {
   else element.disabled = true;
 }
 
+function setCookie(cookie_name, cookie_value, expires_in_seconds) {
+  var d = new Date();
+  d.setTime(d.getTime() + (expires_in_seconds*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cookie_name + "=" + cookie_value + "; " + expires;
+}
+
+function unsetCookie(cookie_name) {
+  setCookie(cookie_name, '', -1);
+}
+
+function popCookie(cookie_name) {
+  var value = getCookie(cookie_name);
+  unsetCookie(cookie_name);
+  return value;
+}
+
+function getCookie(cookie_name) {
+  var name = cookie_name + "=";
+  var cookie_array = document.cookie.split(';');
+  for(var i = 0; i <cookie_array.length; i++) {
+    var cookie = cookie_array[i];
+    while (cookie.charAt(0) == ' ') {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) == 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
+
 </script>
