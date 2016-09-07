@@ -540,8 +540,7 @@ FROM
 WHERE
   V1.Active = 1
   AND
-
-  (V1.VatID != 0
+  ((V1.VatID != 0
   AND V1.Vat > 0.0
   AND V1.AmountIn + V1.AmountOut > 0.1
   AND (
@@ -555,7 +554,7 @@ WHERE
       OR V2.AmountOut != V3.AmountIn)
   ))
   OR
-  (VAT.Percent != V1.Vat)
+  (VAT.Percent != V1.Vat))
 ";
 
          $res = $_lib['db']->db_query($query);
