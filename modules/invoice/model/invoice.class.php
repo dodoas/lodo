@@ -1016,7 +1016,7 @@ class invoice {
         $this->invoiceO = new stdClass();
         $this->taxH     = array();
 
-        $sql_invoice    = "select invoiceout.*, P.Email as SavedByInLodo from invoiceout, person P where invoiceout.InvoiceID='$this->InvoiceID' and invoiceout.CreatedByPersonID = P.PersonID";
+        $sql_invoice    = "select invoiceout.*, P.Email as SavedByInLodo from invoiceout, person P where invoiceout.InvoiceID='$this->InvoiceID' and invoiceout.UpdatedByPersonID = P.PersonID";
         #print "$sql_invoice<br>\n";
         $invoice        = $_lib['storage']->get_row(array('query' => $sql_invoice));
 
