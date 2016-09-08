@@ -123,7 +123,6 @@ class logic_invoicein_invoicein implements Iterator {
                 $row->Status .= "Er allerede bilagsf&oslash;rt";
 
             } else {
-                $row->JournalID = $NextAvailableJournalID++;
                 $row->Journal = true;
                 $row->Class   = 'green';
             }
@@ -170,6 +169,12 @@ class logic_invoicein_invoicein implements Iterator {
                 $row->Class   = 'red';
             }
 
+            if ($row->TotalCustPrice == 0) {
+                $row->Status .= "Faktura med bel&oslash;p 0";
+                $row->Journal = false;
+            }
+
+            if (!$row->Journaled && $row->Journal) $row->JournalID = $NextAvailableJournalID++;
             $row->VoucherType  = $this->VoucherType;
             $this->iteratorH[] = $row;
         }
@@ -350,6 +355,10 @@ class logic_invoicein_invoicein implements Iterator {
           if(!$accountplan->Address) $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
           $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
           if(!$accountplan->DomesticBankAccount) $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_DZipCode_' . $ID] = $accountplan->ZipCode;
+          $args['invoicein_DName_' . $ID] = $accountplan->AccountName;
+          $args['invoicein_DCity_' . $ID] = $accountplan->City;
+          $args['invoicein_DAddress_' . $ID] = $accountplan->Address;
         }
         if(!$invoicein->DZipCode) {
                 $args['invoicein_DZipCode_' . $ID] = $accountplan->ZipCode;
@@ -377,6 +386,7 @@ class logic_invoicein_invoicein implements Iterator {
           $args['invoicein_CustomerAccountPlanID_' . $ID] =  $_lib['sess']->get_companydef('OrgNumber');
         }
         $args['invoicein_RemittanceAmount_'.$ID] = $args['invoicein_TotalCustPrice_'.$ID];
+
         // update UnitCustPrice(unit price without tax) from UnitCostPrice(unit price with tax) if it is set
         for($i = 1; $i <= $args['field_count']; $i++) {
           $line_id = $args[$i];
@@ -539,7 +549,7 @@ class logic_invoicein_invoicein implements Iterator {
         $old_pattern                        = array("/[^0-9]/");
         $new_pattern                        = array("");
         $dataH['CustomerAccountPlanID']     = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
-        $add_invoicein = "INSERT INTO invoicein(ID, VoucherType, InsertedByPersonID, InsertedDateTime, Imported) VALUES(NULL, 'U',". $_lib['sess']->get_person('PersonID') .", NOW(), 0)";
+        $add_invoicein = "INSERT INTO invoicein(ID, VoucherType, InvoiceDate, InsertedByPersonID, InsertedDateTime, Imported) VALUES(NULL, 'U', '" . $_lib['sess']->get_session('LoginFormDate') . "', " . $_lib['sess']->get_person('PersonID') . ", NOW(), 0)";
         $_lib['db']->db_insert($add_invoicein);
         return $_lib['db']->db_insert_id();
     }

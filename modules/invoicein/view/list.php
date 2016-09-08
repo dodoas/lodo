@@ -160,7 +160,7 @@ foreach($invoicein as $InvoiceO) {
       <?} else {?>
       <td></td>
       <? } ?>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? print $InvoiceO->InvoiceNumber ?></a></td>
+      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? if ($InvoiceO->InvoiceNumber) print $InvoiceO->InvoiceNumber; else print '-'; ?></a></td>
       <td class="number"><? print $InvoiceO->InvoiceDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
       <td class="number"><? print $InvoiceO->FirmaID ?></td>

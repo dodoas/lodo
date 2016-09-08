@@ -39,13 +39,6 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
 } elseif($_lib['input']->getProperty('action_invoicein_linedelete')) {
     $invoicein->linedelete($_REQUEST);
 
-} elseif($_lib['input']->getProperty('action_invoicein_remittance')) {
-
-    includelogic('remittance/remittance');
-
-    $rem = new logic_remittance_remittance($_POST);
-    print $rem->fill();
-    print $rem->pay();
 } elseif($_lib['input']->getProperty('action_invoicein_add')) {
     $ID = $invoicein->add();
     header("Location: " . $_lib['sess']->dispatchs . "t=invoicein.edit&ID=" . $ID . "&inline=edit");
