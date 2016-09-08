@@ -46,7 +46,7 @@ class lodo_fakturabank_fakturabanksalary {
 
         global $_lib;
 
-        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.IDNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount, P.Email as SavedByInLodo from salary as S, accountplan as A, fakturabankemail as F, person P where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID and S.CreatedByPersonId = P.PersonID";
+        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.IDNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount, P.Email as SavedByInLodo from salary as S, accountplan as A, fakturabankemail as F, person P where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID and S.UpdatedBy = P.PersonID";
         #print "$query_head<br>";
         $result_head    = $_lib['db']->db_query($query_head);
         $head           = $_lib['db']->db_fetch_object($result_head);
