@@ -403,7 +403,7 @@ class format {
             return strtoupper($country);
         }
 
-        $query = "select Code from country where LocalName = '" . $_lib['storage']->db_escape($country) . "'";
+        $query = "select Code from country where LocalName = '" . $_lib['storage']->db_escape($country) . "' or Name = '" . $_lib['storage']->db_escape($country) . "'";
         $row = $_lib['storage']->get_row(array('query' => $query));
         return $row->Code;
     }
