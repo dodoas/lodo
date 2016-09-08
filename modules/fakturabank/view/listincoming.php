@@ -23,6 +23,17 @@ print $_lib['sess']->doctype; ?>
         <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Invoice List</title>
         <meta name="cvs"                content="$Id: list.php,v 1.38 2005/10/28 17:59:40 thomasek Exp $" />
         <? includeinc('head') ?>
+        <script>
+          var done = false;
+          function chooseOnlyOneAccountPlanID(event, TempAccountPlanID) {
+            if (!done) {
+              event.preventDefault();
+              $("#add_only_one_missing_accountplan").val(TempAccountPlanID)
+              done = true;
+            } 
+            event.currentTarget.click();
+          }
+        </script>
     </head>
 <body>
 
@@ -54,6 +65,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming" method="post">
 <input type="submit" value="Last ned fakturaer (L)" name="action_fakturabank_registerincoming" accesskey="B">
 <input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
+<input type="hidden" value="" name="add_only_one_missing_accountplan" id="add_only_one_missing_accountplan">
 
 <table class="lodo_data">
 <thead>
@@ -187,10 +199,15 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><? print $InvoiceO->IssueDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
       <td class="number">
-        <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>&inline=show" target="_new">
-          <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID ?>
-          <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>
-        </a>
+        <? if (!$InvoiceO->MissingAccountPlan) { // if account exists print link to it ?>
+          <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new">
+            <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID ?>
+            <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>
+          </a>
+        <? } else { // print text only ?>
+            <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID ?>
+            <? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>
+        <? } ?>
       </td>
       <td class="number">
         <? if (!$InvoiceO->MissingAccountPlan) { // if account exists print link to it ?>

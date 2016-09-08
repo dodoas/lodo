@@ -11,8 +11,12 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
     $fakturabank->registeroutgoing();
 
 } elseif($_lib['input']->getProperty('action_fakturabank_addmissingaccountplan')) {
-    // get ids from tmp table
-    $new_tmp_accounts_hash = array_keys($_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplantemp order by AccountPlanID")));
+    if($_REQUEST["add_only_one_missing_accountplan"] != "") {
+      $new_tmp_accounts_hash = array($_REQUEST["add_only_one_missing_accountplan"]);
+    } else {
+      // get ids from tmp table
+      $new_tmp_accounts_hash = array_keys($_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplantemp order by AccountPlanID")));
+    }
     // update temporary table and create(copy to main account plan table) if possible for each missing account plan
     foreach ($new_tmp_accounts_hash as $tmp_acc_id) {
       $update_query = "";
@@ -33,6 +37,12 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
         $new_accountplan_data = $_lib['db']->get_row(array('query' => "select * from accountplantemp where AccountPlanID = $tmp_acc_id"));
         // check if there is a conflicting id in the account plan table
         $acc_already_exists = $_lib['db']->get_row(array('query' => "select AccountPlanID from accountplan where AccountPlanID = $new_id_value"));
+        if($new_id_value != $tmp_acc_id) {
+          $temp_acc_already_exists = $_lib['db']->get_row(array('query' => "select AccountPlanID from accountplantemp where AccountPlanID = $new_id_value"));
+        } else {
+          $temp_acc_already_exists = false;
+        } 
+        $acc_already_exists = $acc_already_exists || $temp_acc_already_exists;
         // if no conflict in the main table, build query
         if (!$acc_already_exists) {
           // get new value for motkonto
@@ -69,10 +79,10 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
                                         EnableMotkontoResultat, City, OrgNumber, Phone, Mobile, EnableInvoiceAddress, AccountPlanType,
                                         UpdatedByPersonID, CountryCode, Web, ParentName, ParentOrgNumber, 1
                                  FROM accountplantemp WHERE AccountPlanID = $new_id_value");
-          // add schemes to account plan if not NO:ORGNR
-          if ($new_accountplan_data->FBSchemeType != 'NO:ORGNR') {
-            $_lib['db']->db_query("INSERT INTO accountplanscheme(AccountPlanID, FakturabankSchemeID, SchemeValue)
-                                   SELECT AccountPlanID, FBSchemeLodoID, FBSchemeValue
+          // add schemes to account plan
+          if ($new_accountplan_data->FBSchemeType) {
+            $_lib['db']->db_query("INSERT INTO accountplanscheme(AccountPlanID, FakturabankSchemeID, SchemeValue, CountryCode)
+                                   SELECT AccountPlanID, FBSchemeLodoID, FBSchemeValue, CountryCode
                                    FROM accountplantemp WHERE AccountPlanID = $new_id_value");
           }
         }
