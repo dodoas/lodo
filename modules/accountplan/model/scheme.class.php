@@ -130,9 +130,8 @@ class lodo_accountplan_scheme {
             return null;
     }
 
-    function refreshSchemes() {
-        global $_lib;
-        includelogic("fakturabank/fakturabank");
+    function fetchSchemesFromFakturaBank(){
+      includelogic("fakturabank/fakturabank");
         $fakturabank = new lodo_fakturabank_fakturabank();
 
         $page = "rest/identificators.json";
@@ -146,9 +145,13 @@ class lodo_accountplan_scheme {
 
         $result = curl_exec($ch);
 
-        $decoded_json = json_decode($result);
+        return json_decode($result);
+    }
 
-        foreach($decoded_json as $json_node) {
+    function refreshSchemes($json) {
+        global $_lib;
+
+        foreach($json as $json_node) {
             $found = false;
             foreach($this->globalSchemes as $existing) {
                 if($existing["FakturabankRemoteSchemeID"] == $json_node->identificator->id) {
@@ -158,7 +161,7 @@ class lodo_accountplan_scheme {
             }
 
             if(!$found) {
-                $q = sprintf("INSERT INTO fakturabankscheme 
+                $q = sprintf("INSERT INTO fakturabankscheme
                               (`FakturabankRemoteSchemeID`, `SchemeType`)
                               VALUES (%d, '%s');", $json_node->identificator->id, $json_node->identificator->name);
             }
@@ -231,7 +234,7 @@ class lodo_accountplan_scheme {
 
     function findScheme($fakturabankId) {
       global $_lib;
-      $q = sprintf("SELECT * FROM fakturabankscheme WHERE FakturabankRemoteSchemeID = %d LIMIT 1",
+      $q = sprintf("SELECT * FROM fakturabankscheme WHERE FakturabankSchemeID = %d LIMIT 1",
                    $fakturabankId);
       $db_obj = $_lib['db']->db_query($q);
       $row = $_lib['db']->db_fetch_assoc($db_obj);
