@@ -512,33 +512,11 @@ class altinn_report {
       $arbeidsforhold['loennsansiennitet'] = strftime('%F', strtotime($last_change_of_position_in_company));
     }
 
-    if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
-      // date of last change for work percentage
-      if ($use_only_employee_info) {
-        $last_change_of_work_percentage = $work_relation->WorkPercentUpdatedAt;
-        // Error is: Last change of work percent date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
-        self::checkIfEmpty($last_change_of_work_percentage, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
-      } else {
-        $last_change_of_work_percentage = $salary->WorkPercentUpdatedAt;
-        // Error is: Last change of work percent date not set for salary L' . salary->JournalID
-        self::checkIfEmpty($last_change_of_work_percentage, 'L&oslash;nnslipp: Mangler stillingsprosentendret p&aring; L' . $salary->JournalID, 'date');
-      }
-      $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
-    }
-
     // select all furlough active in the report period
     $query_furlough = "SELECT * FROM workrelationfurlough WHERE WorkRelationID = " . $work_relation->WorkRelationID . " AND (('" . $this->period . "-01' BETWEEN Start AND Stop) OR ('" . $this->period . "-01' > Start AND (Stop = '0000-00-00' OR Stop IS NULL)) OR ((YEAR(Start) = YEAR('" . $this->period . "-01') AND MONTH(Start) = MONTH('" . $this->period . "-01')) OR (YEAR(Stop) = YEAR('" . $this->period . "-01') AND MONTH(Stop) = MONTH('" . $this->period . "-01'))))";
     $result_furlough = $_lib['db']->db_query($query_furlough);
     while($furlough = $_lib['db']->db_fetch_object($result_furlough)) {
       $permisjon = array();
-
-      // Error is: Furlough: Text is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
-      self::checkIfEmpty($furlough->Text,
-        'Permisjon: Mangler text for ' .
-        self::fullNameForErrorMessage($employee) .
-        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
-        ' permisjon('.$furlough->FurloughID.')');
-      $permisjon['permisjonId'] = $furlough->Text;
 
       // Error is: Furlough: Start date is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
       $furlough_start_empty = self::checkIfEmpty($furlough->Start,
@@ -591,6 +569,14 @@ class altinn_report {
       }
       $permisjon['permisjonsprosent'] = $furlough->Percent;
 
+      // Error is: Furlough: Text is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
+      self::checkIfEmpty($furlough->Text,
+        'Permisjon: Mangler text for ' .
+        self::fullNameForErrorMessage($employee) .
+        ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
+        ' permisjon('.$furlough->FurloughID.')');
+      $permisjon['permisjonId'] = $furlough->FurloughID;
+
       // Error is: Furlough: Description is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
       self::checkIfEmpty($furlough->Description,
         'Permisjon: Mangler beskrivelse for ' .
@@ -601,6 +587,21 @@ class altinn_report {
 
       $arbeidsforhold[]['permisjon'] = $permisjon;
     }
+
+    if (self::shouldWeHaveWorkPercent($arbeidsforhold['typeArbeidsforhold'])){
+      // date of last change for work percentage
+      if ($use_only_employee_info) {
+        $last_change_of_work_percentage = $work_relation->WorkPercentUpdatedAt;
+        // Error is: Last change of work percent date not set for work relation #id on employee ' . self::fullNameForErrorMessage($employee)
+        self::checkIfEmpty($last_change_of_work_percentage, 'Arbeidsforhold ' . $work_relation->WorkRelationID . ': Mangler stillingsprosentendret for' . self::fullNameForErrorMessage($employee), 'date');
+      } else {
+        $last_change_of_work_percentage = $salary->WorkPercentUpdatedAt;
+        // Error is: Last change of work percent date not set for salary L' . salary->JournalID
+        self::checkIfEmpty($last_change_of_work_percentage, 'L&oslash;nnslipp: Mangler stillingsprosentendret p&aring; L' . $salary->JournalID, 'date');
+      }
+      $arbeidsforhold['sisteDatoForStillingsprosentendring'] = strftime('%F', strtotime($last_change_of_work_percentage));
+    }
+
     return $arbeidsforhold;
   }
 
