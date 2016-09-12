@@ -145,23 +145,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
     if (isset($_POST['altinnReport1_MeldingsId'])) {
       $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
     }
-
     $xml = $report->generateXML();
-    $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<melding
- xmlns=\"urn:ske:fastsetting:innsamling:a-meldingen:v2_0\">
-  <Leveranse>
-    <leveringstidspunkt>2016-08-02T12:51:29Z</leveringstidspunkt>
-    <kalendermaaned>2016-07</kalendermaaned>
-    <erstatterMeldingsId>report_for_999338011_at_1470135089</erstatterMeldingsId>
-    <meldingsId>report_for_999338011_at_1470135089_annulering</meldingsId>
-    <opplysningspliktig>
-      <norskIdentifikator>999338011</norskIdentifikator>
-    </opplysningspliktig>
-    <spraakForTilbakemelding>bokmaal</spraakForTilbakemelding>
-  </Leveranse>
-</melding>";
-
     if (!empty($report->errors)) {
       // Message is: Report not sent, there were some errors.
       $_lib['message']->add('Rapporten er ikke sendt, det er noen mangler.');
@@ -211,7 +195,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
                     </InformasjonOmInnsender>
                     <InnsendtInformasjon>
                       <innsending>
-                        <meldingsId>report_for_999338011_at_1470135089_annulering</meldingsId>
+                        <meldingsId>'.$report->meldingsId.'</meldingsId>
                         <kalendermaaned>'.$_REQUEST['altinnReport1_periode'].'</kalendermaaned>
                       </innsending>
                     </InnsendtInformasjon>
