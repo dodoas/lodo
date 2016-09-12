@@ -55,12 +55,19 @@ class mva_avstemming
           $report_time = strtotime($this->year.'-12-31'); // Compare with the last day of the selected report's year
           $valid_to_time = strtotime($vat_rate['ValidTo']);
           $valid_from_time = strtotime($vat_rate['ValidFrom']);
-          if ($report_time > $valid_to_time || $report_time < $valid_from_time) {
-            continue;
-          }
           // needs to be a string with float foramted to two decimal places in
           // order for the correct fields to be picked up in the report
           $vat_percent = number_format((float)$vat_rate['Percent'], 2, '.', '');
+
+          if ($report_time > $valid_to_time || $report_time < $valid_from_time) {            
+            $query_exists = "select * from voucher as c, voucher as m where c.VoucherPeriod >= '". $this->year ."-01' and c.VoucherPeriod <= '". $this->year ."-12' ".
+                            "and c.AccountPlanID='". $vat_rate["AccountPlanID"] ."' and m.AutomaticVatVoucherID=c.VoucherID and m.Vat='". $vat_percent ."' and c.Active=1";
+            $exists = $this->_dbh[$this->_dsn]->get_row(array('query' => $query_exists));
+            if(!$exists) {
+                continue;
+            }
+          }
+                    
           if ($vat_rate['Active'] || !empty($vat_accounts_used_in_vouchers[$vat_rate['AccountPlanID']])) {
             if ($vat_rate['VatID'] <= 39) {
               $this->_outAccountPlanID[$vat_percent] = $vat_rate['AccountPlanID'];
