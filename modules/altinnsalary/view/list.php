@@ -135,7 +135,7 @@ print $_lib['sess']->doctype
           <? print $_lib['form3']->submit(array(
             'name'=>'action_soap1',
             'value'=>'Send p&aring; nytt',
-            'disabled' => false
+            'disabled' => !($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID))
           )); ?>
         </form>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4" method="post">
