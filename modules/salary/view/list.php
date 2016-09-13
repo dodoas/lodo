@@ -44,9 +44,6 @@ $result_salary  = $_lib['db']->db_query($query_salary);
 $query_conf_head= "select * from salaryconf as S where S.SalaryConfID=1";
 $row_head = $_lib['storage']->get_row(array('query' => $query_conf_head));
 
-$query_conf     = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
-$result_conf    = $_lib['db']->db_query($query_conf);
-
 $current_period = null;
 if($SalaryperiodconfID)
 {
@@ -349,8 +346,38 @@ function worker_line($row, $i) {
 $current_workers = array();
 $old_workers = array();
 
+$query_conf = "
+select 
+  A.AccountPlanID,
+  A.AccountName,
+  A.KommuneID as NoKommune,
+  S.SalaryConfID,
+  case
+    when ActiveWR.WorkRelationID is not null then ActiveWR.WorkStart
+    when LastWR.WorkRelationID is not null then LastWR.WorkStart
+    else '0000-00-00'
+  end as WorkStart,
+  case
+    when ActiveWR.WorkRelationID is not null then ActiveWR.WorkStop
+    when LastWR.WorkRelationID is not null then LastWR.WorkStop
+    else '0000-00-00'
+  end as WorkStop
+from
+  salaryconf as S,
+  accountplan as A
+  left join workrelation as ActiveWR on ActiveWR.AccountPlanID = A.AccountPlanID and ActiveWR.WorkRelationID = (select WorkRelationID from workrelation where AccountPlanID = A.AccountPlanID and WorkStart <= '". $current_period ."-01' and (WorkStop >= '". $current_period ."-01' or WorkStop = '0000-00-00') order by WorkRelationID desc limit 1)
+  left join workrelation as LastWR on LastWR.AccountPlanID = A.AccountPlanID and LastWR.WorkRelationID = (select WorkRelationID from workrelation where AccountPlanID = A.AccountPlanID order by WorkStart desc limit 1),
+  kommune as K
+where
+  S.AccountPlanID=A.AccountPlanID and
+  (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and
+  S.SalaryConfID!=1
+order by
+  AccountName asc";
+$result_conf = $_lib['db']->db_query($query_conf);
+
 while($row = $_lib['db']->db_fetch_object($result_conf)) {
-  if($row->WorkStop == '0000-00-00' || strtotime($row->WorkStop) >= strtotime($current_period . "-01")) {
+  if(($row->WorkStop == '0000-00-00' || strtotime($row->WorkStop) >= strtotime($current_period . "-01")) && strtotime($row->WorkStart) <= strtotime($current_period . "-01")) {
     $current_workers[] = $row;
   }
   else {
