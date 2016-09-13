@@ -30,7 +30,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 
 <table width="100%"  class="lodo_data">
 	<tr>
-		<th colspan="15">MVA Avstemming i f&oslash;lge bokf&oslash;rt regnskap - p&aring; grunnlag av MVA koden</th>
+		<th colspan="100">MVA Avstemming i f&oslash;lge bokf&oslash;rt regnskap - p&aring; grunnlag av MVA koden</th>
 	</tr>
 	<tr>
 		<td>Mnd/Termin</td>
@@ -134,18 +134,12 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
         <tr>
             <td colspan="5"></td>
             <?
-            $tdCounter = 0;
-            foreach($avst->_inAccountPlanID as $Vat => $Account)
+            foreach($avst->_outAccountPlanID as $Vat => $Account)
             {
-                if(tdCounter > 0)
-                {
-                    ?><td></td><?
-                }
                 ?>
                 <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['Grunnlag'.$Vat.'Mva'] * ($Vat / 100)) ?></td>
                 <td></td>
                 <?
-                $tdCounter++;
             }
             ?>
             <td colspan="4"></td>
@@ -164,7 +158,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
         </tr>
 
         <tr>
-            <th colspan="15">I f&oslash;lge innsendte oppgaver - Det som faktisk er rapportert til staten (Altinn)</th>
+            <th colspan="100">I f&oslash;lge innsendte oppgaver - Det som faktisk er rapportert til staten (Altinn)</th>
         </tr>
         <tr>
             <td>Mnd/Termin</td>
@@ -267,18 +261,12 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
         <tr>
             <td colspan="5"></td>
             <?
-            $tdCounter = 0;
-            foreach($avst->_inAccountPlanID as $Vat => $Account)
+            foreach($avst->_outAccountPlanID as $Vat => $Account)
             {
-                if(tdCounter > 0)
-                {
-                    ?><td></td><?
-                }
                 ?>
                 <td class="number"><? print $_lib['format']->Amount($avst->reported['percent']['Grunnlag'.$Vat.'Mva']) ?></td>
                 <td></td>
                 <?
-                $tdCounter++;
             }
             ?>
             <td colspan="4"></td>
