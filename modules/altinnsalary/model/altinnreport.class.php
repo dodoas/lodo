@@ -575,7 +575,7 @@ class altinn_report {
         self::fullNameForErrorMessage($employee) .
         ' p&aring; arbeidsforhold('.$furlough->WorkRelationID.')'.
         ' permisjon('.$furlough->FurloughID.')');
-      $permisjon['permisjonId'] = $furlough->FurloughID;
+      $permisjon['permisjonId'] = $furlough->Text;
 
       // Error is: Furlough: Description is missing on self::fullNameForErrorMessage($employee) on work relation($furlough->WorkRelationID ) furlough( $furlough->FurloughID )
       self::checkIfEmpty($furlough->Description,
