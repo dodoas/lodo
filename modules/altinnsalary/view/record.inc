@@ -154,19 +154,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     else {
       $xml_generated = true;
 
-      if (isset($_POST['altinnReport1_MeldingsId'])) {
-        // update the old altinnReport one
-        $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
-        $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
-        if($record_exist) {
-          $_lib['storage']->db_update_hash(
-            array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId),
-            'altinnReport1',
-            array('AltinnReport1ID' => $record_exist->AltinnReport1ID));
-
-        }
+      try {
+        $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('exceptions' => 1, 'trace' => 1, 'encoding'=>'UTF-8'));
+      } catch (Exception $e) {
+        $message = urlencode('Altinn ikke tilgjengelig for &oslash;yeblikket, pr&oslash;v igjen senere.');
+        header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=". $message);
+        die();
       }
-      $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/IntermediaryInboundBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
       $params = array(
         'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
         'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
@@ -223,6 +217,19 @@ if ($_lib['input']->getProperty('action_soap1')) {
         die();
       }
 
+      if (isset($_POST['altinnReport1_MeldingsId'])) {
+        // update the old altinnReport one
+        $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
+        $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
+        if($record_exist) {
+          $_lib['storage']->db_update_hash(
+            array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId),
+            'altinnReport1',
+            array('AltinnReport1ID' => $record_exist->AltinnReport1ID));
+
+        }
+      }
+
       $values = array();
       $values['Period']  = $_REQUEST['altinnReport1_periode'];
       $values['MeldingsId']  = $report->meldingsId;
@@ -265,7 +272,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
   if(empty($_POST['receiptId'])){
     $_lib['message']->add('Noe gikk galt, fikk ikke receiptId som vi skulle');
   } else {
-    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/ReceiptExternalBasic.svc?wsdl");
+    try {
+      $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/IntermediaryExternal/ReceiptExternalBasic.svc?wsdl");
+    } catch (Exception $e) {
+      $message = urlencode('Altinn ikke tilgjengelig for &oslash;yeblikket, pr&oslash;v igjen senere.');
+      header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=". $message);
+      die();
+    }
     $params = array(
       'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
       'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
@@ -317,7 +330,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $_lib['storage']->store_record(array('table' => 'altinnReport2', 'data' => $values, 'debug' => false));
   }
 } elseif($_lib['input']->getProperty('action_soap3')) {
-  $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
+  try {
+    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
+  } catch (Exception $e) {
+    $message = urlencode('Altinn ikke tilgjengelig for &oslash;yeblikket, pr&oslash;v igjen senere.');
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=". $message);
+    die();
+  }
   $params = array(
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
@@ -367,7 +386,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $values = array();
   $values["req_CorrespondenceID"] = $_POST['request_receivers_reference'];
-  $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
+  try {
+    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl", array('trace' => 1, 'encoding'=>'UTF-8'));
+  } catch (Exception $e) {
+    $message = urlencode('Altinn ikke tilgjengelig for &oslash;yeblikket, pr&oslash;v igjen senere.');
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=". $message);
+    die();
+  }
   $params = array(
     'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
     'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
@@ -459,7 +484,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
 
   $values = array();
   $values['req_CorrespondenceID'] = $_POST['request_receivers_reference'];
-  $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl");
+  try {
+    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/ServiceEngineExternal/CorrespondenceExternalBasic.svc?wsdl");
+  } catch (Exception $e) {
+    $message = urlencode('Altinn ikke tilgjengelig for &oslash;yeblikket, pr&oslash;v igjen senere.');
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=". $message);
+    die();
+  }
   $params = array(
     'systemUserName' => $_lib['sess']->get_companydef('AltinnSystemUsername'),
     'systemPassword' => $_lib['sess']->get_companydef('AltinnSystemPassword'),
@@ -513,7 +544,13 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
   $xml_generated = true;
 } elseif($_lib['input']->getProperty('action_confirm_authentication')) {
-  $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
+  try {
+    $sc = new LocalSoapClient($_SETUP['ALTINN_URL'] . "/AuthenticationExternal/SystemAuthentication.svc?wsdl");
+  } catch (Exception $e) {
+    $message = urlencode('Altinn ikke tilgjengelig for &oslash;yeblikket, pr&oslash;v igjen senere.');
+    header('Location: ' . $_lib['sess']->dispatchs . "t=altinnsalary.list&message=". $message);
+    die();
+  }
   $params = array(
     'challengeRequest' => array(
       'AuthMethod' => $_lib['sess']->get_person('AltinnAuthMethod'),
