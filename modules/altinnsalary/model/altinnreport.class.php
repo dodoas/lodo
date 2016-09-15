@@ -722,8 +722,9 @@ class altinn_report {
     $query_employees = "SELECT ap_merged.* FROM (
                         SELECT ap.*
                         FROM accountplan ap
-                        WHERE (WorkStart <= '" . $this->period . "-01' OR WorkStart LIKE '" . $this->period . "%') AND
-                        (WorkStop >= '" . $this->period . "-01' OR WorkStop LIKE '0000-00-00') AND
+                        INNER JOIN workrelation wr ON wr.AccountPlanID = ap.AccountPlanID
+                        WHERE (wr.WorkStart <= '" . $this->period . "-01' OR wr.WorkStart LIKE '" . $this->period . "%') AND
+                        (wr.WorkStop >= '" . $this->period . "-01' OR wr.WorkStop LIKE '0000-00-00') AND
                         AccountplanType LIKE '%employee%'
                         UNION
                         SELECT ap.*
