@@ -125,6 +125,29 @@ header("Pragma: no-cache");
 \$_SETUP['MYSQL']        = "/usr/bin/mysql";
 \$_SETUP['MYSQLDUMP']        = "/usr/bin/mysqldump";
 
+\$_SETUP['FB_SERVER'] = 'fb2016.fakturabank.no';
+\$_SETUP['FB_SERVER_PROTOCOL'] = 'https';
+\$_SETUP['FB_INVOICE_DOWNLOAD_STATUS'] = 'for_bookkeeping';
+\$_SETUP['FB_INVOICE_UPDATE_STATUS'] = 'accounted';
+\$_SETUP['DEBUG_FOR_ALL_PERSONS'] = false;
+
+##################################################################
+#OAuth
+\$_SETUP['OAUTH_PROTOCOL']  = 'http';
+\$_SETUP['OAUTH_REDIRECT_URL']  = 'http://lodo2016.fakturabank.no/callback.php';
+\$_SETUP['OAUTH_CLIENT_ID']     = '';
+\$_SETUP['OAUTH_CLIENT_SECRET'] = '';
+
+##################################################################
+#Altinn government Salary (A-ordningen), A02 A03 A06 A07
+\$_SETUP['ALTINN_SYSTEM_USER_NAME'] = '7587';
+\$_SETUP['ALTINN_USER_PASSWORD'] = 'ajhhs';
+
+\$_SETUP['ALTINN_URL'] = 'https://tt02.altinn.basefarm.net';
+// \$_SETUP['ALTINN_URL'] = 'https://www.altinn.no';
+
+\$_SETUP['YRKE_CSV'] = '/yrke.csv';
+\$_SETUP['KOMMUNE_CSV'] = '/kommuner.csv';
 ?>
 EOF
 
