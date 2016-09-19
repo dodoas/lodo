@@ -121,7 +121,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   $employee_data = array();
   $subcompany_names = array();
   while($employee = $_lib['db']->db_fetch_object($result_employees)) {
-    $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID;
+    $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID ." AND (wr.WorkStart <= '". $_periode ."-01' OR wr.WorkStart LIKE '". $_periode ."%') AND (wr.WorkStop >= '". $_periode ."-01' OR wr.WorkStop = '0000-00-00')";
     $result_work_relations = $_lib['db']->db_query($query_work_relations);
     while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
       $report_for_employee = new altinn_report($report->period, array(), array($work_relation->WorkRelationID), true);
