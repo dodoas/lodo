@@ -723,6 +723,7 @@ class accounting {
 
         #print "sub_AutoVat args[voucher]\n"; print_r($args['voucher']); print "\n###############################\n";
         $voucher = $args['voucher'];
+        if (!$voucher->AccountPlanID) return;
 
         #print "<h2>sub_AutoVat: VoucherID: $voucher->VoucherID, comment: " . $args['comment'] . "</h2><br>\n";
         #print "<h2>sub_AutoVat args[voucher]</h2>\n"; print_r($args); print "\n###############################\n";
@@ -2043,7 +2044,7 @@ class accounting {
                 $this->set_journal_motkonto(array('post'=> array('voucher_VoucherPeriod' => $voucher->VoucherPeriod)));
 
             } else {
-                $_lib['message']->add(array('message' => 'Prøver å slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
+                $_lib['message']->add(array('message' => 'Pr&oslash;ver &aring; slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
             }
         } else {
             #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));
@@ -2109,7 +2110,7 @@ class accounting {
                 $this->update_voucher_line(array('voucher_Active' => 0), $VoucherID, 'delete_voucher_line', $voucher->VoucherPeriod); #Inactivate instead
             } else {
                 #print "Sletter ikke2<br>\n";
-                $_lib['message']->add(array('message' => 'Prøver å slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
+                $_lib['message']->add(array('message' => 'Pr&oslash;ver &aring; slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
             }
         } else {
             #print "Sletter ikke1 : VoucherID: $VoucherID, Periode: $voucher->VoucherPeriod<br>\n";

@@ -40,6 +40,8 @@ class invoice {
     public $VoucherType     = 'S';
     public $table_head      = 'invoiceout';
     public $table_line      = 'invoiceoutline';
+    public $allowance_charge_table      = 'invoiceallowancecharge';
+    public $line_allowance_charge_table = 'invoicelineallowancecharge';
     private $headH          = array();
     private $lineH          = array();
     private $debug          = false;
@@ -229,7 +231,13 @@ class invoice {
         self::enrichArgsWithAddressFields($args);
         #Update multi into db to support old format
         #print_r($args);
-        $_lib['db']->db_update_multi_table($args, array('invoiceout' => 'InvoiceID', 'invoiceoutline' => 'LineID'));
+        self::addVATPercentToAllowanceCharge($args);
+        $tables_to_update = array(
+          'invoiceout'                 => 'InvoiceID',
+          'invoiceoutline'             => 'LineID',
+          'invoiceallowancecharge'     => 'InvoiceAllowanceChargeID',
+          'invoicelineallowancecharge' => 'InvoiceLineAllowanceChargeID');
+        $_lib['db']->db_update_multi_table($args, $tables_to_update);
         
         #Then read everything from disk and correct calculations
         $this->init($args);
@@ -241,6 +249,24 @@ class invoice {
         else $invoiceoutprint_date = $args["invoiceoutprint_InvoicePrintDate_". $invoice_id];
         $replace_invoiceoutprint = sprintf("REPLACE INTO invoiceoutprint (InvoiceID, InvoicePrintDate) VALUES ('%d', '%s');", $invoice_id, $invoiceoutprint_date);
         $_lib['db']->db_query($replace_invoiceoutprint);
+    }
+
+    function addVATPercentToAllowanceCharge(&$args) {
+        if (!is_numeric($args['InvoiceID'])) {
+            return;
+        }
+
+        global $_lib;
+
+        $InvoiceID = $args['InvoiceID'];
+        $InvoiceDate = $args['invoiceout_InvoiceDate_'.$InvoiceID];
+        foreach ($args as $arg_key => $arg_val) {
+          if (strpos($arg_key, 'invoiceallowancecharge_VatID_') !== false) {
+            $select_vat = "select * from vat where VatID = '" . $arg_val . "' and Type = 'sale' and ValidFrom <= '" . $InvoiceDate . "' and ValidTo >= '" . $InvoiceDate . "'";
+            $vat = $_lib['db']->get_row(array('query' => $select_vat));
+            $args[preg_replace('/VatID/', 'VatPercent', $arg_key)] = $vat->Percent;
+          }
+        }
     }
 
     function enrichArgsWithAddressFields(&$args) {
@@ -618,6 +644,36 @@ class invoice {
     }
 
     /*******************************************************************************
+    * Delete invoice line's allowance/charge
+    * @param
+    * @return
+    */
+    function line_allowance_charge_delete($InvoiceLineAllowanceChargeID)
+    {
+        global $_lib;
+        $query = "delete from $this->line_allowance_charge_table where InvoiceLineAllowanceChargeID = " . $InvoiceLineAllowanceChargeID;
+        $ret = $_lib['db']->db_delete($query);
+
+        $this->init(array());
+        $this->make_invoice();
+    }
+
+    /*******************************************************************************
+    * Delete invoice's allowance charge
+    * @param
+    * @return
+    */
+    function allowance_charge_delete($InvoiceAllowanceChargeID)
+    {
+        global $_lib;
+        $query = "delete from $this->allowance_charge_table where InvoiceAllowanceChargeID = " . $InvoiceAllowanceChargeID;
+        $ret = $_lib['db']->db_delete($query);
+
+        $this->init(array());
+        $this->make_invoice();
+    }
+
+    /*******************************************************************************
     * Delete invoiceline
     * @param
     * @return
@@ -625,6 +681,11 @@ class invoice {
     function linedelete($LineID)
     {
         global $_lib;
+
+        // Dependent destroy of all allowances/charges connected to this line
+        $query="delete from $this->line_allowance_charge_table where InvoiceType = 'out' and InvoiceLineID = " . $LineID;
+        $_lib['db']->db_delete($query);
+
         $query="update $this->table_line set Active=0 where LineID=" . $LineID;
         $ret = $_lib['db']->db_update($query);
 
@@ -714,7 +775,7 @@ class invoice {
         if($line['QuantityDelivered'] == 0) #Rettet av Geir. Maa vare mulig aa lage kreditnota med minus i antall.
             $lineH['QuantityDelivered'] = 0;
 
-        if($line['UnitCustPrice'] <= 0)
+        if($line['UnitCustPrice'] == 0)
             $lineH['UnitCustPrice'] = $product->UnitCustPrice;
 
         #if($line['Vat'] <= 0)
@@ -737,16 +798,34 @@ class invoice {
         $tmpquant   = $lineH['QuantityDelivered'];
         $custprice  = $_lib['convert']->Amount($lineH['UnitCustPrice']);
 
-        $this->totalSum += round($tmpquant * $custprice, 2);
-        $this->totalVat += round($tmpquant * $custprice * ($lineH['Vat']/100), 2);
+        if (!empty($line['LineID']) && is_numeric($line['LineID'])) {
+          $query = "select sum(if(ChargeIndicator = 1, Amount, -Amount)) as sum from invoicelineallowancecharge where InvoiceType = 'out' and AllowanceChargeType = 'line' and InvoiceLineID = " . $line['LineID'];
+          $result = $_lib['storage']->get_row(array('query' => $query));
+          $sum_line_allowance_charge = $result->sum;;
+        } else {
+          $sum_line_allowance_charge = 0.0;
+        }
+
+        $this->totalSum += round($tmpquant * $custprice + $sum_line_allowance_charge, 2);
+        $this->totalVat += round(($tmpquant * $custprice + $sum_line_allowance_charge) * ($lineH['Vat']/100), 2);
 
         $this->lineH[] = $lineH;
 
-        $this->TotalCustPrice = $this->totalSum + $this->totalVat;
+        if (!empty($line['InvoiceID']) && is_numeric($line['InvoiceID'])) {
+          $query = "select sum(if(ChargeIndicator = 1, Amount*(100+VatPercent)/100.0, -(Amount*(100+VatPercent)/100.0))) as sum, sum(if(ChargeIndicator = 1, Amount*VatPercent/100.0, -(Amount*VatPercent/100.0))) as vat_sum from invoiceallowancecharge where InvoiceType = 'out' and InvoiceID = " . $line['InvoiceID'];
+          $result = $_lib['storage']->get_row(array('query' => $query));
+          $sum_invoice_allowance_charge = $result->sum;
+          $vat_sum_invoice_allowance_charge = $result->vat_sum;
+        } else {
+          $sum_invoice_allowance_charge = 0.0;
+          $vat_sum_invoice_allowance_charge = 0.0;
+        }
+
+        $this->TotalCustPrice = $this->totalSum + $this->totalVat + $sum_invoice_allowance_charge;
         #print "<b>TotalCustPrice: $this->TotalCustPrice</b><br>";
         #$this->headH[] = 199; #$this->TotalCustPrice;
         $this->set_head(array('TotalCustPrice' => $this->TotalCustPrice));
-        $this->set_head(array('TotalVat' => $this->totalVat));
+        $this->set_head(array('TotalVat' => $this->totalVat + $vat_sum_invoice_allowance_charge));
     }
 
     /*******************************************************************************
@@ -757,6 +836,14 @@ class invoice {
     function delete_invoice()
     {
         global $_lib, $accounting;
+
+        # Dependent destroy of all things connected to invoice we are destroying
+        $sql_delete_invoiceline_allowance_charge = "delete from $this->line_allowance_charge_table where InvoiceType = 'out' and InvoiceLineID in ( select LineID from invoiceoutline where InvoiceID = " . $this->InvoiceID .")";
+        $_lib['db']->db_delete($sql_delete_invoiceline_allowance_charge);
+
+        $sql_delete_invoice_allowance_charge = "delete from $this->allowance_charge_table where InvoiceType = 'out' and InvoiceID = " . $this->InvoiceID;
+        $_lib['db']->db_delete($sql_delete_invoice_allowance_charge);
+
         $sql_delete_invoiceline = "delete from invoiceoutline where InvoiceID=" . $this->InvoiceID;
         $_lib['db']->db_delete($sql_delete_invoiceline);
 
@@ -772,6 +859,33 @@ class invoice {
         $_lib['message']->add(array('message' => "Faktura $this->InvoiceID er slettet"));
 
         return true;
+    }
+
+    /*******************************************************************************
+    * Add a new invoice line allowance/charge
+    * @param
+    * @return
+    */
+    function line_allowance_charge_new($InvoiceLineID)
+    {
+        global $_lib;
+        $allowance_chargeH['invoicelineallowancecharge_InvoiceType']         = 'out';
+        $allowance_chargeH['invoicelineallowancecharge_InvoiceLineID']       = $InvoiceLineID;
+        $allowance_chargeH['invoicelineallowancecharge_AllowanceChargeType'] = 'line';
+        return $_lib['db']->db_new_hash($allowance_chargeH, $this->line_allowance_charge_table);
+    }
+
+    /*******************************************************************************
+    * Add a new invoice allowance/charge
+    * @param
+    * @return
+    */
+    function allowance_charge_new()
+    {
+        global $_lib;
+        $allowance_chargeH['invoiceallowancecharge_InvoiceType'] = 'out';
+        $allowance_chargeH['invoiceallowancecharge_InvoiceID']   = $this->InvoiceID;
+        return $_lib['db']->db_new_hash($allowance_chargeH, $this->allowance_charge_table);
     }
 
     /*******************************************************************************
@@ -820,7 +934,6 @@ class invoice {
         $fields['voucher_DueDate']        = $this->headH['DueDate'];
         $fields['voucher_Active']         = 1;
         $fields['voucher_AutomaticReason']          = "Faktura: $this->JournalID";
-        $fields['voucher_CustomerAccountPlanID']    = $this->headH['CustomerAccountPlanID'];
         $fields['voucher_Description']              = $this->headH['CommentCustomer']; # Take the description from the head to each line. $row->Comment;
 
         #print_r($this->headH);
@@ -862,9 +975,15 @@ class invoice {
             $fieldsline['voucher_AutomaticReason']  = "Faktura: $this->JournalID";
 
             $sumprice = round($row->UnitCustPrice * $row->QuantityDelivered, 2);
-            if($row->Discount) {
-                $sumprice = $sumprice * (1-$row->Discount/100);
-            }
+            // if($row->Discount) {
+            //     $sumprice = $sumprice * (1-$row->Discount/100);
+            // }
+            $query = "select sum(if(ChargeIndicator = 1, Amount, -Amount)) as sum from invoicelineallowancecharge where InvoiceType = 'out' and AllowanceChargeType = 'line' and InvoiceLineID = " . $row->LineID;
+            $result = $_lib['storage']->get_row(array('query' => $query));
+            $sum_line_allowance_charge = $result->sum;
+
+            $sumprice += $sum_line_allowance_charge;
+
             $fieldsline['voucher_AmountOut']        = round($sumprice * (1 + ($row->Vat/100)), 2 );
 
             #print "verdi: " . $fieldsline['voucher_AmountOut'] . "<br>";
@@ -912,7 +1031,47 @@ class invoice {
             $accounting->insert_voucher_line(array('post'=>$fieldsline, 'accountplanid'=>$line_accountplanid, 'type'=>'result1', 'VoucherType'=>$this->VoucherType, 'invoice'=>'1', 'debug' => true));
         }
 
+        $query_invoice_allowance_charge = "select * from invoiceallowancecharge where InvoiceType = 'out' and InvoiceID = '$this->InvoiceID'";
 
+        $result_allowance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
+
+        // Generate vouchers for invoice allowances/charges
+        while($row = $_lib['db']->db_fetch_object($result_allowance_charge))
+        {
+            $fieldsline = array();
+            $fieldsline['voucher_AmountOut'] = 0;
+            $fieldsline['voucher_AmountIn'] = 0;
+
+            $query = "select ac.OutAccountPlanID from invoiceallowancecharge iac left join allowancecharge ac on iac.AllowanceChargeID = ac.AllowanceChargeID where iac.InvoiceAllowanceChargeID = " . $row->InvoiceAllowanceChargeID;
+            $invoiceallowancecharge = $_lib['storage']->get_row(array('query' => $query));
+
+            $fieldsline['voucher_AccountPlanID']    = $invoiceallowancecharge->OutAccountPlanID;
+            $fieldsline['voucher_AutomaticReason']  = "Faktura rabatt/kostnad : $row->InvoiceAllowanceChargeID";
+
+            $sumprice = round($row->Amount, 2);
+            $sumprice *= ($row->ChargeIndicator == 1)? 1 : -1;
+
+            $fieldsline['voucher_AmountOut'] = round($sumprice * (1 + ($row->VatPercent/100)), 2);
+
+            if($fieldsline['voucher_AmountOut'] < 0)
+            {
+                $fieldsline['voucher_AmountIn'] = abs($fieldsline['voucher_AmountOut']);
+                unset($fieldsline['voucher_AmountOut']);
+            }
+
+            $fieldsline['voucher_JournalID']        = $this->JournalID;
+            $fieldsline['voucher_VatID']            = $row->VatID;
+            $fieldsline['voucher_Vat']              = $row->VatPercent;
+
+            $fieldsline['voucher_Description']      = $row->AllowanceChargeReason;
+            $fieldsline['voucher_VoucherPeriod']    = $this->headH['Period'];
+            $fieldsline['voucher_VoucherDate']      = $this->headH['InvoiceDate'];
+            $fieldsline['voucher_VoucherType']      = $this->VoucherType;
+            $fieldsline['voucher_DueDate']          = $this->headH['DueDate'];
+            $fieldsline['voucher_Active']           = 1;
+
+            $accounting->insert_voucher_line(array('post'=>$fieldsline, 'accountplanid'=>$fieldsline['voucher_AccountPlanID'], 'type'=>'result1', 'VoucherType'=>$this->VoucherType, 'invoice'=>'1', 'debug' => true));
+        }
 
         // Generate vouchers for reconciliation reasons
         $VoucherH = array();
@@ -1016,13 +1175,14 @@ class invoice {
         $this->invoiceO = new stdClass();
         $this->taxH     = array();
 
-        $sql_invoice    = "select invoiceout.*, P.Email as SavedByInLodo from invoiceout, person P where invoiceout.InvoiceID='$this->InvoiceID' and invoiceout.UpdatedByPersonID = P.PersonID";
+        $sql_invoice    = "select invoiceout.*, P.Email as SavedByInLodo from invoiceout left outer join person P ON invoiceout.UpdatedByPersonID = P.PersonID where invoiceout.InvoiceID='$this->InvoiceID'";
         #print "$sql_invoice<br>\n";
         $invoice        = $_lib['storage']->get_row(array('query' => $sql_invoice));
 
         ############################################################################################
         $this->invoiceO->ID                   = $invoice->InvoiceID;
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
+        $this->invoiceO->InvoiceTypeCode      = '380';
         $this->invoiceO->Note                 = $invoice->CommentCustomer;
         $this->invoiceO->LodoSavedBy          = $invoice->SavedByInLodo;
         $this->invoiceO->DocumentCurrencyCode = exchange::getLocalCurrency();
@@ -1070,21 +1230,17 @@ class invoice {
 
         ############################################################################################
 
-        $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $invoice->SWeb;
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $invoice->SOrgNo);
 
         if (!empty($invoice->SVatNo)) {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SVatNo;
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = preg_replace('/ /', '', $invoice->SVatNo);
             if ($invoice->SCountryCode == 'SE') {
                 $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
             } else if ($invoice->SCountryCode == 'NO') {
                 $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
-        } else if (strstr(strtolower($invoice->SOrgNo), 'mva')) {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo;
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         } else {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo . ' MVA';
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = preg_replace('/[^0-9]/', '', $invoice->SOrgNo) . 'MVA';
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $invoice->SName;
@@ -1114,19 +1270,10 @@ class invoice {
 
         if (!empty($invoice->RefCustomer)) {
             // We should use RefSupplier but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefSupplier
-            $ref_names = explode(" ", $invoice->RefCustomer, 2); // max two segments
-            $this->invoiceO->AccountingSupplierParty->Party->Person->FirstName = $ref_names[0];
-            if (count($ref_names) > 1) {
-                $this->invoiceO->AccountingSupplierParty->Party->Person->FamilyName = $ref_names[1];
-            } else {
-                $this->invoiceO->AccountingSupplierParty->Party->Person->FamilyName = "";
-            }
-            $this->invoiceO->AccountingSupplierParty->Party->Person->MiddleName = "";
-            $this->invoiceO->AccountingSupplierParty->Party->Person->JobTitle = "";
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Name = $invoice->RefCustomer;
         }
 
         ############################################################################################
-        $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $invoice->IWeb;
 
         if (!empty($invoice->IOrgNo)) {
           $firstFirmaID = array('value' => preg_replace('/[^0-9]+/', '', $invoice->IOrgNo), 'type' => 'NO:ORGNR');
@@ -1161,6 +1308,7 @@ class invoice {
             $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= $invoice->ICountryCode;
         }
 
+        $this->invoiceO->AccountingCustomerParty->Party->Contact->ID = $_lib['sess']->get_person('PersonID');
         if (!empty($invoice->Phone)) {
             $this->invoiceO->AccountingCustomerParty->Party->Contact->Telephone = $invoice->Phone;
         }
@@ -1177,15 +1325,7 @@ class invoice {
 
         if (!empty($invoice->RefInternal)) {
             // We should use RefCustomer but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefCustomer
-            $ref_names = explode(" ", $invoice->RefInternal, 2); // max two segments
-            $this->invoiceO->AccountingCustomerParty->Party->Person->FirstName = $ref_names[0];
-            if (count($ref_names) > 1) {
-                $this->invoiceO->AccountingCustomerParty->Party->Person->FamilyName = $ref_names[1];
-            } else {
-                $this->invoiceO->AccountingCustomerParty->Party->Person->FamilyName = "";
-            }
-            $this->invoiceO->AccountingCustomerParty->Party->Person->MiddleName = "";
-            $this->invoiceO->AccountingCustomerParty->Party->Person->JobTitle = "";
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Name = $invoice->RefInternal;
         }
 
 
@@ -1198,66 +1338,137 @@ class invoice {
         ############################################################################################
         $this->invoiceO->PaymentMeans->PaymentMeansCode             = 42;
         $this->invoiceO->PaymentMeans->PaymentDueDate               = $invoice->DueDate;
-        $this->invoiceO->PaymentMeans->PayeeFinancialAccount->ID    = $invoice->SBankAccount;
+        $this->invoiceO->PaymentMeans->PayeeFinancialAccount->ID    = preg_replace('/ /', '', $invoice->SBankAccount);
         $this->invoiceO->PaymentMeans->PayeeFinancialAccount->Name  = 'Bank';
 
         if (!empty($invoice->BankAccount)) {
             $this->invoiceO->PaymentMeans->PayerFinancialAccount->ID = $invoice->BankAccount;
-            $this->invoiceO->PaymentMeans->PayerFinancialAccount->Name  = 'Bank';
         }
 
         if (!empty($invoice->KID)) {
-            $this->invoiceO->PaymentMeans->InstructionID = $invoice->KID;
-            $this->invoiceO->PaymentMeans->InstructionNote = "KID";
+            $this->invoiceO->PaymentMeans->PaymentID = $invoice->KID;
         }
 
         // Payment Terms
         $this->invoiceO->PaymentTerms->Note                          = $invoice->PaymentCondition;
+
+        // Allowance/Charge on invoice
+        $query_invoice_allowance_charge = "select * from $this->allowance_charge_table where InvoiceID = '" . (int) $this->InvoiceID . "' and InvoiceType = 'out'";
+        $result_allwance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
+
+        $invoice_allowance_total     = 0;
+        $invoice_charge_total        = 0;
+        $invoice_allowance_tax_total = 0;
+        $invoice_charge_tax_total    = 0;
+        while($acrow = $_lib['db']->db_fetch_object($result_allwance_charge)) {
+          $allowance_charge = new StdClass();
+          $allowance_charge->ChargeIndicator            = (int) $acrow->ChargeIndicator;
+          $allowance_charge->AllowanceChargeReason      = $acrow->AllowanceChargeReason;
+          $allowance_charge->Amount                     = (float) $acrow->Amount;
+          // Select category based on VatID and date
+          $category_from_vat_id = "select Category from vat where VatID = '" . $acrow->VatID . "' and Type = 'sale' and ValidFrom <= '" . $invoice->InvoiceDate . "' and ValidTo >= '" . $invoice->InvoiceDate . "'";
+          $vat = $_lib['db']->get_row(array('query' => $category_from_vat_id));
+          $allowance_charge->TaxCategory->ID            = $vat->Category;
+          $allowance_charge->TaxCategory->Percent       = (float) $acrow->VatPercent;
+          $allowance_charge->TaxCategory->TaxScheme->ID = 'VAT'; // Hardcoded to VAT
+          $this->invoiceO->AllowanceCharge[] = $allowance_charge;
+
+          # Calculate AllowanceTotalAmount and ChargeTotalAmount
+          $invoice_allowance_total += ($acrow->ChargeIndicator) ? 0 : $acrow->Amount;
+          $invoice_charge_total    += ($acrow->ChargeIndicator) ? $acrow->Amount : 0;
+
+          $taxable_amount = $acrow->Amount;
+          $tax_amount = $acrow->Amount * ($acrow->VatPercent/100.0);
+          if ($allowance_charge->ChargeIndicator == 1) {
+            $this->taxH[$acrow->VatPercent]->TaxableAmount += $taxable_amount;
+            $invoice_charge_tax_total += $tax_amount;
+            $this->taxH[$acrow->VatPercent]->TaxAmount += $tax_amount;
+          }
+          else {
+            $this->taxH[$acrow->VatPercent]->TaxableAmount -= $taxable_amount;
+            $invoice_allowance_tax_total += $tax_amount;
+            $this->taxH[$acrow->VatPercent]->TaxAmount -= $tax_amount;
+          }
+        }
+
+
         ############################################################################################
-        $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN from invoiceoutline as il, product as p where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.ProductID=p.ProductID and il.Active <> 0 order by il.LineID asc";
+        $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN, p.ProductNumber, v.Category from invoiceoutline as il left outer join product as p on il.ProductID=p.ProductID left outer join vat as v on il.VatID=v.VatID and il.Vat=v.Percent where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.Active <> 0 order by il.LineID asc";
         #print "$query_invoiceline\n";
         $result2                = $_lib['db']->db_query($query_invoiceline);
 
         while($line = $_lib['db']->db_fetch_object($result2)) {
+            // Allowance/Charge on invoice line
+            $allowances = 0;
+            $charges    = 0;
+            $query_invoiceline_allowance_charge = "select * from $this->line_allowance_charge_table where InvoiceLineID = '" . (int) $line->LineID . "' and InvoiceType = 'out' and AllowanceChargeType = 'line'";
+            $result_allwance_charge = $_lib['db']->db_query($query_invoiceline_allowance_charge);
+
+            while($acrow = $_lib['db']->db_fetch_object($result_allwance_charge)) {
+              $allowance_charge = new StdClass();
+              $allowance_charge->ChargeIndicator       = (int) $acrow->ChargeIndicator;
+              $allowance_charge->AllowanceChargeReason = $acrow->AllowanceChargeReason;
+              $allowance_charge->Amount                = (float) $acrow->Amount;
+              $this->invoiceO->InvoiceLine[$line->LineID]->AllowanceCharge[] = $allowance_charge;
+              $allowances += ($acrow->ChargeIndicator == 0) ? $acrow->Amount : 0;
+              $charges    += ($acrow->ChargeIndicator == 1) ? $acrow->Amount : 0;
+            }
+
             #print_r($line);
-            $linetotal      = $line->UnitCustPrice * $line->QuantityDelivered;
+            $linetotal      = $line->UnitCustPrice * $line->QuantityDelivered + $charges - $allowances;
             $linetaxamount  = $linetotal * ($line->Vat / 100);
             $taxtotal      += $linetaxamount;
             $total         += $linetotal;
             $this->taxH[$line->Vat]->TaxableAmount    += $linetotal;
             $this->taxH[$line->Vat]->TaxAmount        += $linetaxamount;
+            $this->taxH[$line->Vat]->Category          = $line->Category;
 
             $this->invoiceO->InvoiceLine[$line->LineID]->ID                                     = $line->LineID;
+            $this->invoiceO->InvoiceLine[$line->LineID]->InvoicedQuantity                       = $line->QuantityDelivered;
             $this->invoiceO->InvoiceLine[$line->LineID]->LineExtensionAmount                    = $linetotal;
             $this->invoiceO->InvoiceLine[$line->LineID]->TaxTotal->TaxAmount                    = $linetaxamount;
-            $this->invoiceO->InvoiceLine[$line->LineID]->TaxTotal->TaxSubtotal->TaxableAmount   = $linetotal;
-            $this->invoiceO->InvoiceLine[$line->LineID]->TaxTotal->TaxSubtotal->TaxAmount       = $linetaxamount;
-            $this->invoiceO->InvoiceLine[$line->LineID]->TaxTotal->TaxSubtotal->Percent         = $line->Vat;
-            $this->invoiceO->InvoiceLine[$line->LineID]->TaxTotal->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
 
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->Name                             = $line->ProductName;
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->Description                      = $line->Comment;
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->SellersItemIdentification->ID    = $line->ProductNumber;
             $this->invoiceO->InvoiceLine[$line->LineID]->Item->CommodityClassification->UNSPSC->ItemClassificationCode = $line->UNSPSC;
+            $this->invoiceO->InvoiceLine[$line->LineID]->Item->ClassifiedTaxCategory->ID        = $line->Category;
+            $this->invoiceO->InvoiceLine[$line->LineID]->Item->ClassifiedTaxCategory->Percent   = $line->Vat;
 
             $this->invoiceO->InvoiceLine[$line->LineID]->Price->PriceAmount                     = $line->UnitCustPrice;
-            $this->invoiceO->InvoiceLine[$line->LineID]->Price->BaseQuantity                    = $line->QuantityDelivered;
+
+            // Allowance/Charge on invoice line price
+            $query_lineprice_allowance_charge = "select * from $this->line_allowance_charge_table where InvoiceLineID = '" . (int) $line->LineID . "' and InvoiceType = 'out' and AllowanceChargeType = 'price'";
+            $result_allwance_charge = $_lib['db']->db_query($query_lineprice_allowance_charge);
+
+            while($acrow = $_lib['db']->db_fetch_object($result_allwance_charge)) {
+              $allowance_charge = new StdClass();
+              $allowance_charge->ChargeIndicator       = (int) $acrow->ChargeIndicator;
+              $allowance_charge->AllowanceChargeReason = $acrow->AllowanceChargeReason;
+              $allowance_charge->Amount                = (float) $acrow->Amount;
+              $this->invoiceO->InvoiceLine[$line->LineID]->Price->AllowanceCharge[] = $allowance_charge;
+            }
+
         }
 
         ############################################################################################
-        $this->invoiceO->TaxTotal['TaxAmount'] = $taxtotal;
+        $this->invoiceO->TaxTotal['TaxAmount'] = $taxtotal + $invoice_charge_tax_total - $invoice_allowance_tax_total;
 
         #TODO: Subtotal should be repeated for each tax amount - forach - and function
         foreach($this->taxH as $VatPercent => $vat) {
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxableAmount                = $vat->TaxableAmount;
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxAmount                    = $vat->TaxAmount;
-            $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->ID              = 'VAT';
+            $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->ID              = $vat->Category;
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->Percent         = $VatPercent;
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->TaxScheme->ID   = 'VAT';
         }
 
-        $this->invoiceO->LegalMonetaryTotal->PayableAmount      = $total + $taxtotal;
-        $this->invoiceO->LegalMonetaryTotal->TaxExclusiveAmount = $total;
+        $this->invoiceO->LegalMonetaryTotal->AllowanceTotalAmount = $invoice_allowance_total;
+        $this->invoiceO->LegalMonetaryTotal->ChargeTotalAmount    = $invoice_charge_total;
+        $this->invoiceO->LegalMonetaryTotal->LineExtensionAmount  = $total;
+        $this->invoiceO->LegalMonetaryTotal->TaxExclusiveAmount   = $total + $invoice_charge_total - $invoice_allowance_total;
+        $this->invoiceO->LegalMonetaryTotal->TaxInclusiveAmount   = $total + $taxtotal + $invoice_charge_tax_total - $invoice_allowance_tax_total + $invoice_charge_total - $invoice_allowance_total;
+        $this->invoiceO->LegalMonetaryTotal->PayableAmount        = $total + $taxtotal + $invoice_charge_tax_total - $invoice_allowance_tax_total + $invoice_charge_total - $invoice_allowance_total;
 
         #print_r($this->invoiceO);
 
@@ -1382,12 +1593,15 @@ class invoice {
 
       $altinn_invoice->ID = $invoice_type . '-' . $altinn_reference;
       $altinn_invoice->IssueDate = $issue_date;
+      $altinn_invoice->InvoiceTypeCode = '380';
+      // Not by EHF, is used in fakturaBank
       $altinn_invoice->DateOfIssue = $publishing_date;
       $altinn_invoice->Note = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
       $altinn_invoice->DocumentCurrencyCode = exchange::getLocalCurrency();
 
       // Invoice supplier
       $altinn_invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID = $kommune_orgno;
+      $altinn_invoice->AccountingSupplierParty->Party->PartyLegalEntity->RegistrationName = $kommune_name;
 
       $altinn_invoice->AccountingSupplierParty->Party->PartyName->Name = $kommune_name;
 
@@ -1398,23 +1612,24 @@ class invoice {
       $altinn_invoice->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode = 'NO';
 
       $altinn_invoice->AccountingSupplierParty->Party->Contact->Telephone = $kommune->Telephone;
-      $altinn_invoice->AccountingSupplierParty->Party->Contact->Mobile = $kommune->Mobile;
+      $altinn_invoice->AccountingSupplierParty->Party->Contact->Note = "Mobile: ". $kommune->Mobile;
       $altinn_invoice->AccountingSupplierParty->Party->Contact->Telefax = $kommune->Telefax;
       $altinn_invoice->AccountingSupplierParty->Party->Contact->ElectronicMail = $kommune->Email;
 
       // Invoice customer
       $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID = $customer_orgno;
+      $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->RegistrationName = $customer_name;
       $altinn_invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = 'NO:ORGNR';
       $altinn_invoice->AccountingCustomerParty->Party->PartyName->Name = $customer_name;
 
       // Using company's address and contact info.
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->StreetName = $_lib['sess']->get_companydef('IAddress');
-      $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->BuildingNumber = '';
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->CityName = $_lib['sess']->get_companydef('ICity');
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->PostalZone = $_lib['sess']->get_companydef('IZipCode'); // ZipCode
       $altinn_invoice->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode = $_lib['sess']->get_companydef('ICountryCode');
+      $altinn_invoice->AccountingCustomerParty->Party->Contact->ID = $_lib['sess']->get_person('PersonID');
       $altinn_invoice->AccountingCustomerParty->Party->Contact->Telephone = $_lib['sess']->get_companydef('Phone');
-      $altinn_invoice->AccountingCustomerParty->Party->Contact->Mobile = $_lib['sess']->get_companydef('Mobile');
+      $altinn_invoice->AccountingCustomerParty->Party->Contact->Note = "Mobile: ". $_lib['sess']->get_companydef('Mobile');
       $altinn_invoice->AccountingCustomerParty->Party->Contact->Telefax = $_lib['sess']->get_companydef('Fax');
       $altinn_invoice->AccountingCustomerParty->Party->Contact->ElectronicMail = $_lib['sess']->get_companydef('Email');
 
@@ -1422,42 +1637,37 @@ class invoice {
       $altinn_invoice->PaymentMeans->PaymentMeansCode = 42;
       $altinn_invoice->PaymentMeans->PaymentDueDate = $due_date;
       $altinn_invoice->PaymentMeans->PayeeFinancialAccount->ID = $bank_account_number;
-      $altinn_invoice->PaymentMeans->PayeeFinancialAccount->Name = 'Bank';
-      $altinn_invoice->PaymentMeans->PayerFinancialAccount->ID = $customer_bank_account_number;
-      $altinn_invoice->PaymentMeans->PayerFinancialAccount->Name  = 'Bank';
 
-      $altinn_invoice->PaymentMeans->InstructionID = $kid;
-      $altinn_invoice->PaymentMeans->InstructionNote = "KID";
+      $altinn_invoice->PaymentMeans->PaymentID = $kid;
 
       // Invoice lines
-      $taxH[0]->TaxableAmount = $amount;
-      $taxH[0]->TaxAmount = 0;
-
       $altinn_invoice->InvoiceLine[0]->ID = 0;
+      $altinn_invoice->InvoiceLine[0]->InvoicedQuantity = 1;
       $altinn_invoice->InvoiceLine[0]->LineExtensionAmount = $amount;
       $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxAmount = 0;
-      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxableAmount = $amount;
-      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxAmount = 0;
-      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->Percent = 0;
-      $altinn_invoice->InvoiceLine[0]->TaxTotal->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
 
       $altinn_invoice->InvoiceLine[0]->Item->Name = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
+      $altinn_invoice->InvoiceLine[0]->Item->ClassifiedTaxCategory->ID = 'E';
+      $altinn_invoice->InvoiceLine[0]->Item->ClassifiedTaxCategory->TaxExemptionReason = 'Skattefritt, 0%';
+      $altinn_invoice->InvoiceLine[0]->Item->ClassifiedTaxCategory->Percent = 0;
+      $altinn_invoice->InvoiceLine[0]->Item->ClassifiedTaxCategory->TaxScheme->ID = 'VAT';
 
       $altinn_invoice->InvoiceLine[0]->Price->PriceAmount = $amount;
-      $altinn_invoice->InvoiceLine[0]->Price->BaseQuantity = 1;
 
       $altinn_invoice->TaxTotal['TaxAmount'] = 0;
 
-      foreach($taxH as $VatPercent => $vat) {
-        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxableAmount = $vat->TaxableAmount;
-        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxAmount = $vat->TaxAmount;
-        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->ID = 'VAT';
-        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->Percent = $VatPercent;
-        $altinn_invoice->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
-      }
+      $altinn_invoice->TaxTotal['TaxAmount'] = $vat->TaxAmount;
+      $altinn_invoice->TaxTotal[0]->TaxSubtotal->TaxableAmount = $amount;
+      $altinn_invoice->TaxTotal[0]->TaxSubtotal->TaxAmount = 0;
+      $altinn_invoice->TaxTotal[0]->TaxSubtotal->TaxCategory->ID = 'E'; // Tax exempt, 0%
+      $altinn_invoice->TaxTotal[0]->TaxSubtotal->TaxCategory->TaxExemptionReason = 'Skattefritt, 0%';
+      $altinn_invoice->TaxTotal[0]->TaxSubtotal->TaxCategory->Percent = 0;
+      $altinn_invoice->TaxTotal[0]->TaxSubtotal->TaxCategory->TaxScheme->ID = 'VAT';
 
       $altinn_invoice->LegalMonetaryTotal->PayableAmount = $amount;
       $altinn_invoice->LegalMonetaryTotal->TaxExclusiveAmount = $amount;
+      $altinn_invoice->LegalMonetaryTotal->TaxInclusiveAmount = $amount;
+      $altinn_invoice->LegalMonetaryTotal->LineExtensionAmount = $amount;
 
       return $altinn_invoice;
     }

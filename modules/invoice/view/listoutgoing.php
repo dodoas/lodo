@@ -222,93 +222,148 @@ $db_sum   = $row->sum;
 <tbody>
 
 <?
-// The query below creates the voucher lines that should exist based on the invoice lines.
-// Then we do the same thing from the voucher lines and concatenate the two results.
-// Group them and count the duplicates.
-// If the count is an odd number then we either have some extra lines or some of the lines are missing.
-// That is why we restrict the result to the lines having an odd count(or
-// other than 2 for the total line), so we get left with the ones that are wrong.
-// If everything is correct, this query should return an empty result, if not - we have an error.
-
+  // The query below creates the voucher lines that should exist based on the invoice lines.
+  // Then we do the same thing from the voucher lines and concatenate the two results.
+  // Group them and count the duplicates.
+  // If the count is an odd number then we either have some extra lines or some of the lines are missing.
+  // That is why we restrict the result to the lines having an odd count(or
+  // other than 2 for the total line), so we get left with the ones that are wrong.
+  // If everything is correct, this query should return an empty result, if not - we have an error.
 
 $query_line_control = "
 SELECT DISTINCT(JournalID) FROM (
   SELECT *, COUNT(*) AS count
-     FROM (
-       SELECT *
-       FROM (
-         -- Create voucher lines for invoice lines in invoiceoutline table
-         SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
-         -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
-         ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)) * -1), 2) AS AmountIn,
-         ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, ROUND(il.QuantityDelivered * il.UnitCustPrice, 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut,
-         il.InvoiceID AS JournalID
-         FROM invoiceoutline il
-         WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+  FROM (
+    SELECT *
+    FROM (
+      -- Create voucher lines for invoice lines in invoiceoutline table
+      SELECT 'Regular' AS Type, il.LineID, il.Vat AS tmpVat,
+      -- Calculate TotalAmount for each line of the invoice, and take in account if it is a credit note to switch the amounts
+      ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, ROUND(il.QuantityDelivered * il.UnitCustPrice + (
+        SELECT IFNULL(SUM(IF(ilac.ChargeIndicator = 1, ilac.Amount, -ilac.Amount)), 0)
+        FROM invoicelineallowancecharge ilac
+        WHERE ilac.AllowanceChargeType = 'line' AND ilac.InvoiceType = 'out' AND ilac.InvoiceLineID = il.LineID
+      ), 2) * (1 + (il.Vat/100)) * -1), 2) AS AmountIn,
+      ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, ROUND(il.QuantityDelivered * il.UnitCustPrice + (
+        SELECT IFNULL(SUM(IF(ilac.ChargeIndicator = 1, ilac.Amount, -ilac.Amount)), 0)
+        FROM invoicelineallowancecharge ilac
+        WHERE ilac.AllowanceChargeType = 'line' AND ilac.InvoiceType = 'out' AND ilac.InvoiceLineID = il.LineID
+      ), 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut,
+      il.InvoiceID AS JournalID
+      FROM invoiceoutline il
+      WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
 
-         UNION
+      UNION
 
-         -- Create Vat voucher lines for invoice lines from invoiceoutline table once for the vat line and once more for the counterpart line
-         SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
-         -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
-         ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountIn,
-         ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountOut,
-         il.InvoiceID AS JournalID
-         FROM invoiceoutline il
-         WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+      -- Create voucher lines for invoice allowances/charges in invoiceallowancecharge table
+      SELECT 'Allowance/Charge' AS Type, '' AS LineID, iac.VatPercent AS tmpVat,
+      -- Calculate Amount with VAT for each allowance/charge, Allowance is AmountIn, Charge is AmountOut
+      ROUND(IF(iac.ChargeIndicator = 1, 0, iac.Amount) * (100.0 + iac.VatPercent) / 100.0, 2) AS AmountIn,
+        ROUND(IF(iac.ChargeIndicator = 1, iac.Amount, 0) * (100.0 + iac.VatPercent) / 100.0, 2) AS AmountOut,
+        iac.InvoiceID AS JournalID
+        FROM invoiceallowancecharge iac
+        WHERE InvoiceType = 'out' AND InvoiceID in ($query_for_ids)
 
-         UNION
+        UNION
 
-         SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
-         -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
-         ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100, 0), 2) AS AmountIn,
-         ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, il.QuantityDelivered * il.UnitCustPrice * il.Vat / 100 * -1), 2) AS AmountOut,
-         il.InvoiceID AS JournalID
-         FROM invoiceoutline il
-         WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+        -- Create voucher lines for invoice allowances/charges VAT in invoiceallowancecharge table and once more for the counterpart line
+        SELECT 'VAT' AS Type, '' AS LineID, 0 AS tmpVat,
+        -- Calculate VAT for each allowance/charge, Allowance is AmountIn, Charge is AmountOut
+        ROUND(IF(iac.ChargeIndicator = 1, 0, iac.Amount) * iac.VatPercent / 100.0, 2) AS AmountIn,
+          ROUND(IF(iac.ChargeIndicator = 1, iac.Amount, 0) * iac.VatPercent / 100.0, 2) AS AmountOut,
+          iac.InvoiceID AS JournalID
+          FROM invoiceallowancecharge iac
+          WHERE InvoiceType = 'out' AND InvoiceID in ($query_for_ids)
 
-         UNION
+          UNION
 
-         -- Total amount line for invoice
-         SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
-         -- Take in account amount for credit note
-         IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
-         IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut,
-         i.InvoiceID AS JournalID
+          SELECT 'VAT' AS Type, '' AS LineID, 0 AS tmpVat,
+          -- Calculate VAT for each allowance/charge, Allowance is AmountIn, Charge is AmountOut
+          ROUND(IF(iac.ChargeIndicator = 1, iac.Amount, 0) * iac.VatPercent / 100.0, 2) AS AmountIn,
+            ROUND(IF(iac.ChargeIndicator = 1, 0, iac.Amount) * iac.VatPercent / 100.0, 2) AS AmountOut,
+            iac.InvoiceID AS JournalID
+            FROM invoiceallowancecharge iac
+            WHERE InvoiceType = 'out' AND  InvoiceID in ($query_for_ids)
 
-         FROM invoiceout i
-         WHERE i.TotalCustPrice <> 0 AND i.InvoiceID in ($query_for_ids)
-       ) li
+            UNION
 
-       UNION ALL
+            -- Create Vat voucher lines for invoice lines from invoiceoutline table once for the vat line and once more for the counterpart line
+            SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
+            -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
+            ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, (il.QuantityDelivered * il.UnitCustPrice + (
+              SELECT IFNULL(SUM(IF(ilac.ChargeIndicator = 1, ilac.Amount, -ilac.Amount)), 0)
+              FROM invoicelineallowancecharge ilac
+              WHERE ilac.AllowanceChargeType = 'line' AND ilac.InvoiceType = 'out' AND ilac.InvoiceLineID = il.LineID
+            )) * il.Vat / 100 * -1), 2) AS AmountIn,
+            ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, (il.QuantityDelivered * il.UnitCustPrice + (
+              SELECT IFNULL(SUM(IF(ilac.ChargeIndicator = 1, ilac.Amount, -ilac.Amount)), 0)
+              FROM invoicelineallowancecharge ilac
+              WHERE ilac.AllowanceChargeType = 'line' AND ilac.InvoiceType = 'out' AND ilac.InvoiceLineID = il.LineID
+            )) * il.Vat / 100, 0), 2) AS AmountOut,
+            il.InvoiceID AS JournalID
+            FROM invoiceoutline il
+            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
 
-       -- Create the same as above only from lines in the voucher table
-       SELECT
-       -- Determine type from the voucher line data
-       CASE
-         WHEN ta.AutomaticReason LIKE 'Automatisk % MVA%' THEN 'VAT'
-         WHEN ta.AccountPlanType = 'customer' THEN 'Total'
-         WHEN ta.AutomaticReason LIKE 'Faktura%' AND ta.AccountPlanID >= 3000 && ta.AccountPlanID <= 3999 THEN 'Regular'
-         ELSE 'SOMETHING_IS_WRONG'
-       END AS Type,
-       '' AS LineID,
-       ta.vat AS tmpVat,
-       ta.AmountIn AS AmountIn,
-       ta.AmountOut AS AmountOut,
-       ta.JournalID AS JournalID
-       FROM (
-         SELECT v.VoucherID, v.JournalID, v.VoucherType, v.AmountIn, v.AmountOut, v.AccountPlanID, v.Vat, v.Description, v.Active, v.AutomaticFromVoucherID, v.AutomaticReason, v.AutomaticVatVoucherID, v.InvoiceID, ap.AccountPlanType
-         FROM voucher v
-         JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
-         WHERE
-         -- Exclude the hovedbok lines
-         ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID in ($query_for_ids)
-       ) ta
-     ) taa
-     -- Group the same so we can count the duplicates
-     GROUP BY Type, tmpVat, AmountIn, AmountOut, JournalID
-     -- Leave only the ones that were oddly paired, and the total line that has other than count of 2
-     HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')
+            UNION
+
+            SELECT 'VAT' AS Type, il.LineID, 0 AS tmpVat,
+            -- Calculate TaxAmount since it is not available for all entries in the invoiceoutline table, also taking in account for credit note
+            ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, (il.QuantityDelivered * il.UnitCustPrice + (
+              SELECT IFNULL(SUM(IF(ilac.ChargeIndicator = 1, ilac.Amount, -ilac.Amount)), 0)
+              FROM invoicelineallowancecharge ilac
+              WHERE ilac.AllowanceChargeType = 'line' AND ilac.InvoiceType = 'out' AND ilac.InvoiceLineID = il.LineID
+            )) * il.Vat / 100, 0), 2) AS AmountIn,
+            ROUND(IF(il.QuantityDelivered * il.UnitCustPrice > 0, 0, (il.QuantityDelivered * il.UnitCustPrice + (
+              SELECT IFNULL(SUM(IF(ilac.ChargeIndicator = 1, ilac.Amount, -ilac.Amount)), 0)
+              FROM invoicelineallowancecharge ilac
+              WHERE ilac.AllowanceChargeType = 'line' AND ilac.InvoiceType = 'out' AND ilac.InvoiceLineID = il.LineID
+            )) * il.Vat / 100 * -1), 2) AS AmountOut,
+            il.InvoiceID AS JournalID
+            FROM invoiceoutline il
+            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+
+            UNION
+
+            -- Total amount line for invoice
+            SELECT 'Total' AS Type, 0 AS LineID, 0 AS tmpVat,
+            -- Take in account amount for credit note
+            IF(i.TotalCustPrice > 0, i.TotalCustPrice, 0) AS AmountIn,
+              IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut,
+              i.InvoiceID AS JournalID
+              FROM invoiceout i
+              WHERE i.TotalCustPrice <> 0 AND i.InvoiceID in ($query_for_ids)
+            ) li
+
+            UNION ALL
+
+            -- Create the same as above only from lines in the voucher table
+            SELECT
+            -- Determine type from the voucher line data
+            CASE
+            WHEN ta.AutomaticReason LIKE 'Automatisk % MVA%' THEN 'VAT'
+            WHEN ta.AutomaticReason LIKE 'Faktura rabatt/kostnad%' THEN 'Allowance/Charge'
+            WHEN ta.AccountPlanType = 'customer' THEN 'Total'
+            WHEN ta.AutomaticReason LIKE 'Faktura%' AND ta.AccountPlanID >= 3000 && ta.AccountPlanID <= 3999 THEN 'Regular'
+            ELSE 'SOMETHING_IS_WRONG'
+            END AS Type,
+            '' AS LineID,
+            ta.vat AS tmpVat,
+            ta.AmountIn AS AmountIn,
+            ta.AmountOut AS AmountOut,
+            ta.JournalID AS JournalID
+            FROM (
+              SELECT v.VoucherID, v.JournalID, v.VoucherType, v.AmountIn, v.AmountOut, v.AccountPlanID, v.Vat, v.Description, v.Active, v.AutomaticFromVoucherID, v.AutomaticReason, v.AutomaticVatVoucherID, v.InvoiceID, ap.AccountPlanType
+              FROM voucher v
+              JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+              WHERE
+              -- Exclude the hovedbok lines
+              ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID in ($query_for_ids)
+            ) ta
+          ) taa
+          -- Group the same so we can count the duplicates
+          GROUP BY Type, tmpVat, AmountIn, AmountOut
+          -- Leave only the ones that were oddly paired, and the total line that has other than count of 2
+          HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')
      ORDER BY JournalID
   ) as ids";
 

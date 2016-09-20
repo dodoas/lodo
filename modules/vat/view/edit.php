@@ -39,6 +39,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
             <th>Overst</th>
             <th>Gyldig fra</th>
             <th>Gyldig til</th>
+            <th>Kategori</th>
             <th></th>
             <th></th>
             <th>Endret</th>
@@ -53,7 +54,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                 $edit = false;
                 ?>
                 <tr>
-                    <th colspan="10" class="sub">Kj&oslash;p</th>
+                    <th colspan="11" class="sub">Kj&oslash;p</th>
                 </tr>
                 <?
             }
@@ -62,7 +63,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                 $edit = true;
                 ?>
                 <tr>
-                    <th colspan="10" class="sub">Salg</th>
+                    <th colspan="11" class="sub">Salg</th>
                 </tr>
                 <?
             }
@@ -131,6 +132,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
+                    <td><? print $_lib['form3']->text(array('table'=>'vat', 'field'=>'Category', 'value'=>$vat->Category, 'width'=>'5')); ?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
@@ -140,7 +142,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
         }
         ?>
         <tr>
-            <th colspan="10" class="sub">MVA satser med annet gyldighetsomr&aring;de enn i forhold til dato innlogget</th>
+            <th colspan="11" class="sub">MVA satser med annet gyldighetsomr&aring;de enn i forhold til dato innlogget</th>
         </tr>
         <?
         $query_vat  = "select * from vat where VatID <= 62 and ('$date' < ValidFrom or '$date' > ValidTo) order by VatID asc, ValidFrom desc, ValidTo desc";
@@ -195,6 +197,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
+                    <td><? print $_lib['form3']->text(array('table'=>'vat', 'field'=>'Category', 'value'=>$vat->Category, 'width'=>'5')); ?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
@@ -212,6 +215,9 @@ $result_vat = $_lib['db']->db_query($query_vat);
 <? if($_lib['sess']->get_person('AccessLevel') > 1){ ?>
 <a href="<? print $MY_SELF ?>&amp;action_vataccount_update=1">Oppdater oppgj&oslash;rskonto</a>
 <?}?>
+
+<br/>
+  <a href="https://vefa.difi.no/ehf/guide/invoice-and-creditnote/2.0/no/index.html#_merverdiavgift" target="blank">Om MVA kategorier</a>
 <? includeinc('bottom') ?>
 </body>
 </html>
