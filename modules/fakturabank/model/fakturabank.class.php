@@ -2253,20 +2253,21 @@ class lodo_fakturabank_fakturabank {
           unset($_SESSION['altinn_invoice_sending']);
           unset($_SESSION['altinn_invoice_type']);
           $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'altinnReport4', 'debug' => false));
-        }
-        $dataH = array();
-        $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
-        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-        $dataH['FakturabankDateTime']   = strftime("%F %T");
-        $result_invoice = $_lib['db']->db_query("select * from invoiceout where InvoiceID=" . (int) $dataH['InvoiceID']);
-        $invoice = $_lib['db']->db_fetch_object($result_invoice);
-        if (!$invoice->Locked) {
-          $dataH['Locked']   = 1;
-          $dataH['LockedAt'] = strftime("%F %T");
-          $dataH['LockedBy'] = $_lib['sess']->get_person('PersonID');
+        } else {
+          $dataH = array();
+          $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
+          $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+          $dataH['FakturabankDateTime']   = strftime("%F %T");
+          $result_invoice = $_lib['db']->db_query("select * from invoiceout where InvoiceID=" . (int) $dataH['InvoiceID']);
+          $invoice = $_lib['db']->db_fetch_object($result_invoice);
+          if (!$invoice->Locked) {
+            $dataH['Locked']   = 1;
+            $dataH['LockedAt'] = strftime("%F %T");
+            $dataH['LockedBy'] = $_lib['sess']->get_person('PersonID');
+          }
+          $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
         }
         $_SESSION['oauth_invoice_error'] = "Success";
-        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
       }
     }
 
