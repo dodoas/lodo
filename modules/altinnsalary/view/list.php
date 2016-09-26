@@ -36,6 +36,9 @@ print $_lib['sess']->doctype
       <th class='menu'>Arkivert kl</th>
       <th class='menu'>Status</th>
       <th class='menu'>Handlinger</th>
+      <th class='menu'></th>
+      <th class='menu'></th>
+      <th class='menu'></th>
     </tr>
   <?
   $so1_query = "select * from altinnReport1 order by AltinnReport1ID";
@@ -132,12 +135,20 @@ print $_lib['sess']->doctype
             <input type="hidden" name="use_work_relation[<? print $work_relation_id; ?>]" value='1'>
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
-          <? print $_lib['form3']->submit(array(
-            'name'=>'action_soap1',
-            'value'=>'Send p&aring; nytt',
-            'disabled' => !($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID))
-          )); ?>
+          <? 
+            $resend_enabled = $so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus));
+            print $_lib['form3']->submit(array(
+              'name'=>'action_soap1',
+              'value'=>'Send p&aring; nytt',
+              'disabled' => !$resend_enabled
+            )); ?>
         </form>
+        <?
+          $so4query = "SELECT ar4.* FROM altinnReport1 ar1 JOIN altinnReport2 ar2 ON ar1.ReceiptId = ar2.res_ReceiptId JOIN altinnReport4 ar4 ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID WHERE ar1.ReceiptId = " . $so1row->ReceiptId . " ORDER BY AltinnReport4ID DESC LIMIT 1";
+          $so4 = $_lib['db']->db_query($so4query);
+          $so4row = $_lib['db']->db_fetch_object($so4);
+          if (!$so4row) {
+        ?>
         <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4" method="post">
           <input type="hidden" name="request_type" value='feedback'>
           <input type="hidden" name="request_receivers_reference" value='<?print $so2row->res_ReceiversReference; ?>'>
@@ -147,14 +158,35 @@ print $_lib['sess']->doctype
             'disabled' => $so2row->res_ReceiversReference ? false : true
             )) ?>
         </form>
-        <?
-          $so4query = "SELECT ar4.* FROM altinnReport1 ar1 JOIN altinnReport2 ar2 ON ar1.ReceiptId = ar2.res_ReceiptId JOIN altinnReport4 ar4 ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID WHERE ar1.ReceiptId = " . $so1row->ReceiptId . " ORDER BY AltinnReport4ID DESC LIMIT 1";
-          $so4 = $_lib['db']->db_query($so4query);
-          $so4row = $_lib['db']->db_fetch_object($so4);
-          if ($so4row) {
-        ?>
+        <? } else { ?>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&AltinnReport4ID=<? print $so4row->AltinnReport4ID ?>">Se tilbakemelding</a>
         <? } ?>
+      </td>
+      <td>
+        <?
+          if($so1row->ReceivedStatus == "sent") print "sendt";
+          if($so1row->ReceivedStatus == "received") print "<b style='color: green;'>mottatt</b>";
+          if($so1row->ReceivedStatus == "replaced") print "<span style='color: orange;'>erstattet</span>";
+          if($so1row->ReceivedStatus == "rejected") print "<b style='color: red;'>avvist</b>";
+        ?>
+      </td>
+      <td>
+        <?
+          if($so1row->ErstatterMeldingsId) {
+            $replaced_so1row = $_lib['db']->get_row(array("query" => "SELECT * FROM altinnReport1 WHERE MeldingsId = '". $so1row->ErstatterMeldingsId ."';"));
+            print "Erstatter <a href=\"". $_lib['sess']->dispatch ."t=altinnsalary.show&AltinnReport1ID=". $replaced_so1row->AltinnReport1ID ."\">". $replaced_so1row->AltinnReport1ID ."</a>";
+          }
+        ?>
+      </td>
+      <td> 
+        <?
+          if($so1row->ReplacedByMeldindsID && $so1row->ReceivedStatus == "replaced") {
+            $replaced_by_so1row = $_lib['db']->get_row(array("query" => "SELECT * FROM altinnReport1 WHERE MeldingsId = '". $so1row->ReplacedByMeldindsID ."';"));
+            if($replaced_by_so1row->ReceivedStatus != "rejected") {
+              print "Erstattet med <a href=\"". $_lib['sess']->dispatch ."t=altinnsalary.show&AltinnReport1ID=". $replaced_by_so1row->AltinnReport1ID ."\">". $replaced_by_so1row->AltinnReport1ID ."</a>";  
+            }            
+          }
+        ?>
       </td>
     </tr>
     <tr id="report_extra_info_header_<? print $report_id; ?>" class="r0" style="display: none">
