@@ -1089,36 +1089,36 @@ class lodo_fakturabank_fakturabank {
           $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
 
           // Only update if the fields contains a value
-          if($org->OrgNumber)   $_POST['accountplan_OrgNumber']   = $dataH['OrgNumber'] = $org->OrgNumber;
-          if($org->AccountName) $_POST['accountplan_AccountName'] = $dataH['AccountName'] = $org->AccountName;
-          if($org->Email)       $_POST['accountplan_Email']       = $dataH['Email'] = $org->Email;
-          if($org->Mobile)      $_POST['accountplan_Mobile']      = $dataH['Mobile'] = $org->Mobile;
-          if($org->Phone)       $_POST['accountplan_Phone']       = $dataH['Phone'] = $org->Phone;
+          if(!empty($org->OrgNumber))   $_POST['accountplan_OrgNumber']   = $dataH['OrgNumber'] = $org->OrgNumber;
+          if(!empty($org->AccountName)) $_POST['accountplan_AccountName'] = $dataH['AccountName'] = $org->AccountName;
+          if(!empty($org->Email))       $_POST['accountplan_Email']       = $dataH['Email'] = $org->Email;
+          if(!empty($org->Mobile))      $_POST['accountplan_Mobile']      = $dataH['Mobile'] = $org->Mobile;
+          if(!empty($org->Phone))       $_POST['accountplan_Phone']       = $dataH['Phone'] = $org->Phone;
           if(!empty($org->ParentCompanyName))    $_POST['accountplan_ParentName']   = $dataH['ParentName'] = $org->ParentCompanyName;
           if(!empty($org->ParentCompanyNumber))  $_POST['accountplan_ParentOrgNumber']   = $dataH['ParentOrgNumber'] = $org->ParentCompanyNumber;
 
           $_POST['accountplan_EnableInvoiceAddress'] = $dataH['EnableInvoiceAddress'] = 1;
-          if($org->IAdress->Address1) $_POST['accountplan_Address'] = $dataH['Address'] = $org->IAdress->Address1;
-          if($org->IAdress->City)     $_POST['accountplan_City']    = $dataH['City'] = $org->IAdress->City;
-          if($org->IAdress->ZipCode)  $_POST['accountplan_ZipCode'] = $dataH['ZipCode'] = $org->IAdress->ZipCode;
+          if(!empty($org->IAdress->Address1)) $_POST['accountplan_Address'] = $dataH['Address'] = $org->IAdress->Address1;
+          if(!empty($org->IAdress->City))     $_POST['accountplan_City']    = $dataH['City'] = $org->IAdress->City;
+          if(!empty($org->IAdress->ZipCode))  $_POST['accountplan_ZipCode'] = $dataH['ZipCode'] = $org->IAdress->ZipCode;
 
-          if($org->IAdress->Country)  $_POST['accountplan_CountryCode'] = $dataH['CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
+          if(!empty($org->IAdress->Country))  $_POST['accountplan_CountryCode'] = $dataH['CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
 
-          if($org->DomesticBankAccount) $_POST['accountplan_DomesticBankAccount'] = $dataH['DomesticBankAccount'] = $org->DomesticBankAccount;
+          if(!empty($org->DomesticBankAccount)) $_POST['accountplan_DomesticBankAccount'] = $dataH['DomesticBankAccount'] = $org->DomesticBankAccount;
 
-          if($org->CreditDays) {
+          if(!empty($org->CreditDays)) {
             $_POST['accountplan_EnableCredit'] = $dataH['EnableCredit'] = 1;
             $_POST['accountplan_CreditDays'] = $dataH['CreditDays'] = $org->CreditDays;
           }
-          if($org->MotkontoResultat1)	{
+          if(!empty($org->MotkontoResultat1))	{
             $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
             $_POST['accountplan_MotkontoResultat1'] = $dataH['MotkontoResultat1'] = $org->MotkontoResultat1;
           }
-          if($org->MotkontoResultat2)	{
+          if(!empty($org->MotkontoResultat2))	{
             $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
             $_POST['accountplan_MotkontoResultat2'] = $dataH['MotkontoResultat2'] = $org->MotkontoResultat2;
           }
-          if($org->MotkontoBalanse1) {
+          if(!empty($org->MotkontoBalanse1)) {
             $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
             $_POST['accountplan_MotkontoBalanse1'] = $dataH['MotkontoBalanse1'] = $org->MotkontoBalanse1;
           }
