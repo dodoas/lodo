@@ -365,7 +365,7 @@ select
 from
   salaryconf as S,
   accountplan as A
-  left join workrelation as ActiveWR on ActiveWR.AccountPlanID = A.AccountPlanID and ActiveWR.WorkRelationID = (select WorkRelationID from workrelation where AccountPlanID = A.AccountPlanID and WorkStart <= '". $current_period ."-01' and (WorkStop >= '". $current_period ."-01' or WorkStop = '0000-00-00') order by WorkRelationID desc limit 1)
+  left join workrelation as ActiveWR on ActiveWR.AccountPlanID = A.AccountPlanID and ActiveWR.WorkRelationID = (select WorkRelationID from workrelation where AccountPlanID = A.AccountPlanID and (WorkStart <= '". $current_period ."-01' or WorkStart like '". $current_period ."%') and (WorkStop >= '". $current_period ."-01' or WorkStop = '0000-00-00') order by WorkRelationID desc limit 1)
   left join workrelation as LastWR on LastWR.AccountPlanID = A.AccountPlanID and LastWR.WorkRelationID = (select WorkRelationID from workrelation where AccountPlanID = A.AccountPlanID order by WorkStart desc limit 1),
   kommune as K
 where
@@ -377,7 +377,7 @@ order by
 $result_conf = $_lib['db']->db_query($query_conf);
 
 while($row = $_lib['db']->db_fetch_object($result_conf)) {
-  if(($row->WorkStop == '0000-00-00' || strtotime($row->WorkStop) >= strtotime($current_period . "-01")) && strtotime($row->WorkStart) <= strtotime($current_period . "-01")) {
+  if(($row->WorkStop == '0000-00-00' || strtotime($row->WorkStop) >= strtotime($current_period . "-01")) && (strtotime($row->WorkStart) <= strtotime($current_period . "-01") || preg_match("/^". $current_period ."/", $row->WorkStart))) {
     $current_workers[] = $row;
   }
   else {
