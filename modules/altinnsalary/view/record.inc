@@ -62,6 +62,7 @@ if ($_lib['input']->getProperty('action_soap3') ||
 }
 // Make sure user have set AltinnSystemUsername and AltinnSystemPassword
 if ($_lib['input']->getProperty('action_soap1') ||
+    $_lib['input']->getProperty('action_soap1_cancel') ||
     $_lib['input']->getProperty('action_soap2') ||
     $_lib['input']->getProperty('action_soap3') ||
     $_lib['input']->getProperty('action_soap4') ||
@@ -125,7 +126,7 @@ if ($_lib['input']->getProperty('action_soap4') || $_lib['input']->getProperty('
   }
 }
 
-if ($_lib['input']->getProperty('action_soap1')) {
+if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('action_soap1_cancel')) {
   // redirect to salary list page if no salaries are selected for the report
   if (empty($salary_ids) && !isset($_REQUEST[only_register_employee])) {
     $message = urlencode('Ingen l&oslash;nnslipper eller ansatte valgt.');
@@ -140,8 +141,9 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $_lib['message']->add('Legg inn: periode');
   } else {
     $period = $_REQUEST['altinnReport1_periode'];
+    $is_cancellation = $_lib['input']->getProperty('action_soap1_cancel') || false;
     // generate the altinn report object for the selected period
-    $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
+    $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']), false, $is_cancellation);
     if (isset($_POST['altinnReport1_MeldingsId'])) {
       $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
     }
@@ -222,8 +224,12 @@ if ($_lib['input']->getProperty('action_soap1')) {
         $queryFindOld    = "select AltinnReport1ID from altinnReport1 where MeldingsId='" . $_lib['storage']->db_escape($_POST['altinnReport1_MeldingsId'])."';";
         $record_exist   = $_lib['storage']->get_row(array('query' => $queryFindOld));
         if($record_exist) {
+          $update = array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId);
+          if($is_cancellation) {
+            $update['altinnReport1_CancellationStatus'] = "pending";
+          }
           $_lib['storage']->db_update_hash(
-            array('altinnReport1_ReplacedByMeldindsID' => $report->meldingsId),
+            $update,
             'altinnReport1',
             array('AltinnReport1ID' => $record_exist->AltinnReport1ID));
 
@@ -242,6 +248,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $values['ReceiptStatusCode']  = $result->SubmitFormTaskBasicResult->ReceiptStatusCode;
       $values['ParentReceiptId']  = $result->SubmitFormTaskBasicResult->ParentReceiptId;
       $values['ReceivedStatus'] = 'sent';
+      $is_cancellation ? $values['CancellationStatus'] = 'is_cancellation' : NULL;
 
       for ($i=0; $i < count($result->SubmitFormTaskBasicResult->References->ReferenceBE); $i++) {
         $element = $result->SubmitFormTaskBasicResult->References->ReferenceBE[$i];
@@ -485,6 +492,17 @@ if ($_lib['input']->getProperty('action_soap1')) {
     $received_delivery->mottakstatus == "erstattet" ? $status = "replaced" : null;
 
     if(!isset($status)) continue;
+
+    $query_find_ar1 = "SELECT * from altinnReport1 WHERE MeldingsId = '". $received_delivery->meldingsId ."';";
+    $altinnReport1 = $_lib['db']->get_row(array('query' => $query_find_ar1));
+
+    if($altinnReport1->CancellationStatus == "is_cancellation") {
+      if($status == "received" || $status == "replaced") {
+        $_lib['db']->db_query("UPDATE altinnReport1 SET CancellationStatus = 'cancelled' WHERE MeldingsID = '". $altinnReport1->ErstatterMeldingsId ."';");
+      } else if($status == "rejected") {
+        $_lib['db']->db_query("UPDATE altinnReport1 SET CancellationStatus = 'not_cancelled' WHERE MeldingsID = '". $altinnReport1->ErstatterMeldingsId ."';");
+      }
+    }
 
     $query = "UPDATE altinnReport1 SET ReceivedStatus = '".$status."' WHERE MeldingsId = '". $received_delivery->meldingsId ."';";
     $_lib['db']->db_query($query);
