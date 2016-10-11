@@ -6,6 +6,11 @@ print $_lib['sess']->doctype
 <head>
   <title>Empatix - Altinn lønnslipper</title>
   <? includeinc('head') ?>
+  <style>
+    tr.highlighted td {
+      background-color: rgba(255, 182, 0, 0.6) !important;
+    }
+  </style>
   <script>
     function toggleReportDetails(id) {
       $('#report_extra_info_'+id).toggle();
@@ -14,6 +19,21 @@ print $_lib['sess']->doctype
       var new_name = (name == 'Vis') ? 'Skjull' : 'Vis';
       $('#report_extra_info_button_'+id).html(new_name);
     }
+
+    $(document).ready(function() {
+      $('.navigate.to').click(function(e) {
+        var element = $(e.target);
+        var targetID = element.attr('id');
+        highlight('#row_' + targetID);
+      });
+
+      function highlight(elementid){
+        $(elementid).addClass("highlighted");
+        setTimeout(function() { 
+          $(elementid).removeClass("highlighted");
+        } , 2500);
+      }
+    });
   </script>
 </head>
 <body>
@@ -55,7 +75,7 @@ print $_lib['sess']->doctype
     $so2 = $_lib['db']->db_query($so2query);
     $so2row = $_lib['db']->db_fetch_object($so2);
     ?>
-    <tr class="<? print $line_color; ?>">
+    <tr id="row_<? print $report_id ?>" class="<? print $line_color; ?>">
       <td>
         <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.show&AltinnReport1ID=<? print $report_id ?>">
           <? print $report_id; ?>
@@ -174,7 +194,7 @@ print $_lib['sess']->doctype
         <?
           if($so1row->ErstatterMeldingsId) {
             $replaced_so1row = $_lib['db']->get_row(array("query" => "SELECT * FROM altinnReport1 WHERE MeldingsId = '". $so1row->ErstatterMeldingsId ."';"));
-            print "Erstatter <a href=\"". $_lib['sess']->dispatch ."t=altinnsalary.show&AltinnReport1ID=". $replaced_so1row->AltinnReport1ID ."\">". $replaced_so1row->AltinnReport1ID ."</a>";
+            print "Erstatter <span class=\"navigate to\" id=\"". $replaced_so1row->AltinnReport1ID ."\">". $replaced_so1row->AltinnReport1ID ."</span>";
           }
         ?>
       </td>
@@ -183,7 +203,7 @@ print $_lib['sess']->doctype
           if($so1row->ReplacedByMeldindsID && $so1row->ReceivedStatus == "replaced") {
             $replaced_by_so1row = $_lib['db']->get_row(array("query" => "SELECT * FROM altinnReport1 WHERE MeldingsId = '". $so1row->ReplacedByMeldindsID ."';"));
             if($replaced_by_so1row->ReceivedStatus != "rejected") {
-              print "Erstattet med <a href=\"". $_lib['sess']->dispatch ."t=altinnsalary.show&AltinnReport1ID=". $replaced_by_so1row->AltinnReport1ID ."\">". $replaced_by_so1row->AltinnReport1ID ."</a>";  
+              print "Erstattet med <span class=\"navigate to\" id=\"". $replaced_by_so1row->AltinnReport1ID ."\">". $replaced_by_so1row->AltinnReport1ID ."</span>";  
             }            
           }
         ?>
