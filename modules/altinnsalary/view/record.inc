@@ -241,6 +241,7 @@ if ($_lib['input']->getProperty('action_soap1')) {
       $values['ReceiptTypeName']  = $result->SubmitFormTaskBasicResult->ReceiptTypeName;
       $values['ReceiptStatusCode']  = $result->SubmitFormTaskBasicResult->ReceiptStatusCode;
       $values['ParentReceiptId']  = $result->SubmitFormTaskBasicResult->ParentReceiptId;
+      $values['ReceivedStatus'] = 'sent';
 
       for ($i=0; $i < count($result->SubmitFormTaskBasicResult->References->ReferenceBE); $i++) {
         $element = $result->SubmitFormTaskBasicResult->References->ReferenceBE[$i];
@@ -474,7 +475,20 @@ if ($_lib['input']->getProperty('action_soap1')) {
   $row = $_lib['db']->db_fetch_object($res);
   $altinnReport4ID = $row->AltinnReport4ID;
   $altinnFile = new altinn_file($values['Folder']);
-  $altinnFile->extract($zipContent, $altinnReport4ID);
+  $xml_content = $altinnFile->extract($zipContent, $altinnReport4ID);
+
+  $xml = simplexml_load_string($xml_content);
+
+  foreach($xml->Mottak->mottattLeveranse as $received_delivery) {
+    $received_delivery->mottakstatus == "avvist" ? $status = "rejected" : null;
+    $received_delivery->mottakstatus == "mottatt" ? $status = "received" : null;
+    $received_delivery->mottakstatus == "erstattet" ? $status = "replaced" : null;
+
+    if(!isset($status)) continue;
+
+    $query = "UPDATE altinnReport1 SET ReceivedStatus = '".$status."' WHERE MeldingsId = '". $received_delivery->meldingsId ."';";
+    $_lib['db']->db_query($query);
+  }
 } elseif($_lib['input']->getProperty('action_soap5')) {
   // $query = 'SELECT * FROM altinnReport2 where res_ReceiversReference IS NOT NULL order by AltinnReport2Id desc limit 1';
   // $_rowB = $_lib['db']->get_row(array('query' => $query));

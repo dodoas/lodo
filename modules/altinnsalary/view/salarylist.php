@@ -71,7 +71,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
     <?
-    $query_report_id  = "SELECT * FROM altinnReport1salary AS ars JOIN altinnReport1 AS ar ON ars.AltinnReport1ID = ar.AltinnReport1ID WHERE ars.SalaryId =  " . $row->SalaryID . " ORDER BY UpdatedAt desc LIMIT 1";
+    $query_report_id  = "SELECT * FROM altinnReport1salary AS ars JOIN altinnReport1 AS ar ON ars.AltinnReport1ID = ar.AltinnReport1ID WHERE ars.SalaryId =  " . $row->SalaryID . " AND IFNULL(ReceivedStatus, '') != 'rejected' AND IFNULL(ReceivedStatus, '') != 'replaced' ORDER BY UpdatedAt desc LIMIT 1";
     $result_report_id = $_lib['db']->db_query($query_report_id);
     $report_id = $_lib['db']->db_fetch_object($result_report_id);
     ?>
