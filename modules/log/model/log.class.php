@@ -38,7 +38,7 @@ class model_log_log extends model_invoicerecurring_recurring
                 continue;
             }
 
-            $query = "SELECT l.IPAdress, p.Email, l.TS FROM logusage l JOIN person p ON l.PersonID=p.PersonID ORDER BY TS DESC LIMIT 20";
+            $query = "SELECT l.IPAdress, p.Email, l.TS, l.SessionID FROM logusage l JOIN person p ON l.PersonID=p.PersonID ORDER BY TS DESC LIMIT 20";
             $r = $_lib['db']->db_query($query);
 
             $logging[$name] = array();
