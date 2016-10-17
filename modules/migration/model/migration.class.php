@@ -54,8 +54,7 @@ class migration_system {
   }
 
   function get_databases($with_migrations = true) {
-    $model_invoicerecurring_recurring = new model_invoicerecurring_recurring();
-    $dbs = $model_invoicerecurring_recurring->database_list();
+    $dbs = self::database_list();
 
     $all_migrations = array();
 
@@ -72,10 +71,14 @@ class migration_system {
     return $all_migrations;
   }
 
-  function run_script_on_all_db($script) {
+  function database_list() {
     $model_invoicerecurring_recurring = new model_invoicerecurring_recurring();
     $dbs = $model_invoicerecurring_recurring->database_list();
+    return $dbs;
+  }
 
+  function run_script_on_all_db($script) {
+    $dbs = self::database_list();
     $query_results = array();
 
     foreach ($dbs as $db) {
