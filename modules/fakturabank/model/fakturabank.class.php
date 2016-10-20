@@ -21,10 +21,11 @@ class lodo_fakturabank_fakturabank {
     public  $success        = false;
     private $ArrayTag       = array(
                                  'Invoice'                     => true,
+                                 'CreditNote'                  => true,
                                  'AdditionalDocumentReference' => true,
                                  'AllowanceCharge'             => true,
-                                 'cac:InvoiceLine'             => true,
                                  'InvoiceLine'                 => true,
+                                 'CreditNoteLine'              => true,
                                  'TaxSubtotal'                 => true
                                 );
     private $attributesOfInterest = array(
@@ -617,6 +618,17 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
 
+                // We are changing an incomig EHF CreditNote to a negative invoice so this amount needs to be
+                // negated to be saved in LODO correctly as a negative invoice
+                if ($InvoiceO->CreditNote) {
+                    $InvoiceO->LegalMonetaryTotal->PayableAmount = -$InvoiceO->LegalMonetaryTotal->PayableAmount;
+                    $InvoiceO->TaxTotal->TaxAmount = -$InvoiceO->TaxTotal->TaxAmount;
+                    foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
+                    }
+                }
+
                 #Check that we have not journaled the same invoices earlier.
                 #JournalID = Invoice number on outgoing invoices.
                 $query          = "select * from invoiceout where InvoiceID='" . $InvoiceO->ID . "'";
@@ -632,6 +644,21 @@ class lodo_fakturabank_fakturabank {
                     foreach($InvoiceO->InvoiceLine as &$line) {
 
                         if($line->LineExtensionAmount != 0) {
+                            // We are changing an incomig EHF CreditNote to a negative invoice so these amounts need to be
+                            // negated to be saved in LODO correctly as a negative invoice
+                            if ($InvoiceO->CreditNote) {
+                              $line->InvoicedQuantity = -$line->InvoicedQuantity;
+                              $line->LineExtensionAmount = -$line->LineExtensionAmount;
+                              $line->TaxTotal->TaxAmount = -$line->TaxTotal->TaxAmount;
+                              foreach ($line->AllowanceCharge as &$allowance_charge) {
+                                $allowance_charge->Amount = -$allowance_charge->Amount;
+                                unset($allowance_charge); // because of problem with references
+                              }
+                              foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
+                                $allowance_charge->Amount = -$allowance_charge->Amount;
+                                unset($allowance_charge); // because of problem with references
+                              }
+                            }
                             #It has to be an amount to be checked - all zero lines will not be imported later.
                             $query          = "select * from product where ProductNumber='" . $line->Item->SellersItemIdentification->ID . "' and Active=1";
                             #print "$query<br>\n";
@@ -819,6 +846,17 @@ class lodo_fakturabank_fakturabank {
 
             //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
 
+            // We are changing an incomig EHF CreditNote to a negative invoice so this amount needs to be
+            // negated to be saved in LODO correctly as a negative invoice
+            if ($InvoiceO->CreditNote) {
+                $InvoiceO->LegalMonetaryTotal->PayableAmount = -$InvoiceO->LegalMonetaryTotal->PayableAmount;
+                $InvoiceO->TaxTotal->TaxAmount = -$InvoiceO->TaxTotal->TaxAmount;
+                foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
+                    $allowance_charge->Amount = -$allowance_charge->Amount;
+                    unset($allowance_charge); // because of problem with references
+                }
+            }
+
             $_CompanyID = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
             $_SchemeID  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
             list($account, $SchemeID)  = $this->find_reskontro($_CompanyID, 'supplier', $_SchemeID);
@@ -924,6 +962,21 @@ class lodo_fakturabank_fakturabank {
 
                 # validate invoice lines
                 foreach($InvoiceO->InvoiceLine as &$line) {
+                  // We are changing an incomig EHF CreditNote to a negative invoice so these amounts need to be
+                  // negated to be saved in LODO correctly as a negative invoice
+                  if ($InvoiceO->CreditNote) {
+                    $line->InvoicedQuantity = -$line->InvoicedQuantity;
+                    $line->LineExtensionAmount = -$line->LineExtensionAmount;
+                    $line->TaxTotal->TaxAmount = -$line->TaxTotal->TaxAmount;
+                    foreach ($line->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
+                    }
+                    foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
+                    }
+                  }
                   if ($line->Item->AdditionalItemProperty->Name == 'Car') {
                     includelogic("car/car");
                     $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
