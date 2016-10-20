@@ -866,12 +866,16 @@ foreach ($currencies as $currency) {
     <tr>
       <td colspan="4">
         <?
-          print $_lib['form3']->Input(array(
-            'type'     => 'submit',
-            'name'     => 'action_invoice_allowance_charge_new',
-            'tabindex' => $tabindex++,
-            'value'    => 'Ny rabatt/kostnad',
-            'OnClick'  => "newInvoiceAllowanceCharge(" . $InvoiceID . ", " . $row->CustomerAccountPlanID . "); return false;"));
+        if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))) {
+          if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
+            print $_lib['form3']->Input(array(
+              'type'     => 'submit',
+              'name'     => 'action_invoice_allowance_charge_new',
+              'tabindex' => $tabindex++,
+              'value'    => 'Ny rabatt/kostnad',
+              'OnClick'  => "newInvoiceAllowanceCharge(" . $InvoiceID . ", " . $row->CustomerAccountPlanID . "); return false;"));
+          }
+        }
         ?>
         <?
           print $_lib['form3']->Input(array(
@@ -974,7 +978,15 @@ foreach ($currencies as $currency) {
         ?>
       </td>
       <td>
-        <input type="button" class="button" onclick="deleteInvoiceAllowanceCharge(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $acrow->InvoiceAllowanceChargeID; ?>); return false;" value="Slett" />
+        <?
+          if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))) {
+            if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
+        ?>
+              <input type="button" class="button" onclick="deleteInvoiceAllowanceCharge(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $acrow->InvoiceAllowanceChargeID; ?>); return false;" value="Slett" />
+        <?
+            }
+          }
+        ?>
       </td>
     </tr>
   <?
@@ -1040,12 +1052,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td align="right" id="<? print $db_table2 . ".VatAmount." . $LineID; ?>"><? print $_lib['format']->Amount($vatline) ?></td>
         <td align="right" id="<? print $db_table2 . ".AmountExcludingVat." . $LineID; ?>"><? print $_lib['format']->Amount($sumline) ?></td>
         <td>
-          <input type="submit" name="action_invoiceline_allowance_charge_new" id="action_invoiceline_allowance_charge_new" value="Ny linje rabatt/kostnad" size="20" tabindex="<? print $tabindex++; ?>" onclick="newInvoiceLineAllowanceCharge(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $LineID; ?>); return false;" />
         <? if(
                (!$row->Locked &&
                    $_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))
                ||
                 ($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))) { ?>
+                <input type="submit" name="action_invoiceline_allowance_charge_new" id="action_invoiceline_allowance_charge_new" value="Ny linje rabatt/kostnad" size="20" tabindex="<? print $tabindex++; ?>" onclick="newInvoiceLineAllowanceCharge(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $LineID; ?>); return false;" />
         <input type="button" class="button" onclick="deleteInvoiceLine(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $LineID; ?>); return false;" value="Slett" />
         <? } ?>
     <tr id='invoiceline_comment_<? print $LineID; ?>'>
@@ -1116,7 +1128,15 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       </td>
       <td id="<? print "$db_table5.AmountPaddingForPriceType.$acrow->InvoiceLineAllowanceChargeID"; ?>" colspan="3" <? if ($acrow->AllowanceChargeType == 'line') print 'hidden'; ?>></td>
       <td>
-        <input type="button" class="button" onclick="deleteInvoiceLineAllowanceCharge(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $acrow->InvoiceLineAllowanceChargeID . ", " . $LineID; ?>); return false;" value="Slett" />
+        <? 
+          if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))) {
+            if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) { 
+        ?>
+              <input type="button" class="button" onclick="deleteInvoiceLineAllowanceCharge(<? print $InvoiceID . ", " . $row->CustomerAccountPlanID . ", " . $acrow->InvoiceLineAllowanceChargeID . ", " . $LineID; ?>); return false;" value="Slett" />
+        <?
+            }
+          }
+        ?>
       </td>
     </tr>
   <?
