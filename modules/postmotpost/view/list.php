@@ -107,7 +107,7 @@ print $_lib['sess']->doctype ?>
 
 <? print $_lib['message']->get() ?>
 
-<h2>&Aring;pne poster - dvs bilag summert på kid, hvor sum ikke g&aring;r i 0</h2>
+<h2>&Aring;pne poster - dvs bilag summert p&aring; kid, hvor sum ikke g&aring;r i 0</h2>
 <b>Trykk p&aring; lagre for &aring; lagre eventuelle endringer du har gjort i KID referansene - og se om postene g&aring;r mot hverandre</b><br />
 <b>Trykk p&aring; lukk alle for &aring; lukke alle &aring;pne poster som g&aring;r i null og som det er mulig &aring; lukke</b><br />
 <b>Trykk p&aring; &aring;pne alle for &aring; &aring;pne alle poster for alle kunder i alle perioder</b><br />
