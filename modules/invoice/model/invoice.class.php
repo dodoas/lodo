@@ -380,13 +380,13 @@ class invoice {
         }
         if (!$is_set) {
           $ready_to_send = false;
-          if ($is_array) $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray'];
-          else $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name];
+          if ($is_array) $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut ett av f&oslash;lgene felt: ' . $translated_head_required_fields['CustomerAddressArray'];
+          else $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut ett av f&oslash;lgene felt: ' . $translated_head_required_fields[$field_name];
         }
       }
       # if no invoice lines
       if (!(count($this->lineH) > 0)) {
-        $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt!';
+        $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut ett av f&oslash;lgene felt!';
         return array(false, $error_messages);
       }
       # if any invoice lines, check each for required fields
@@ -397,7 +397,7 @@ class invoice {
           else $is_set = !empty($line[$field_name]);
           if (!$is_set) {
             $ready_to_send = false;
-            $error_messages[] = 'Før du kan sende til Fakturabank er du nøtt til å fylle: ' . $translated_line_required_fields[$field_name] . ' på faktura  linje ' . $line_count . '.';
+            $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle: ' . $translated_line_required_fields[$field_name] . ' p&aring; faktura  linje ' . $line_count . '.';
           }
         }
         $line_count++;

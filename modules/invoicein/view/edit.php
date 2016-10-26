@@ -119,6 +119,13 @@ function updateInvoiceAllowanceChargeLineData(element, update_amount) {
   var vat_amount = amount * (vat_percent / 100.0);
   vat_amount_element.innerHTML = toAmountString(vat_amount, 2);
 }
+
+function updateAndPerformAction(link_button) {
+  var link_button_location = $(link_button).attr('href');
+  var form = $(link_button).parents('form');
+  $(form).attr('action', link_button_location+'&action_invoicein_update=1');
+  form.submit();
+}
 </script>
 </head>
 
@@ -352,7 +359,7 @@ function updateInvoiceAllowanceChargeLineData(element, update_amount) {
         ?>
       </td>
       <td>
-        <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_delete=1&amp;InvoiceAllowanceChargeID=$acrow->InvoiceAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
+        <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_delete=1&amp;InvoiceAllowanceChargeID=$acrow->InvoiceAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
       </td>
     </tr>
 <?
@@ -364,7 +371,7 @@ function updateInvoiceAllowanceChargeLineData(element, update_amount) {
 </tfoot>
 </table>
 <br>
-<table width="775">
+<table width="875">
 <thead>
   <tr>
     <td>Konto</td>
@@ -437,8 +444,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td align="right"><nobr><? print $_lib['format']->Amount($sumline) ?></nobr></td>
         <td>
         <? if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($invoicein->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
-          <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_line_allowance_charge_new=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Ny linje rabatt/kostnad</a>
-          <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_linedelete=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Slett</a>
+          <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_line_allowance_charge_new=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Ny linje rabatt/kostnad</a>
+          <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_linedelete=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Slett</a>
         <? } ?>
     <tr>
         <td colspan="8"><? print $_lib['form3']->textarea(array('table'=>$db_table2, 'field'=>'Comment', 'pk'=>$LineID, 'value'=>$row2->Comment, 'tabindex'=>$tabindex++, 'min_height'=>'1', 'height'=>'1', 'width'=>'80')) ?>
@@ -505,7 +512,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       </td>
       <? if ($acrow->AllowanceChargeType == 'price') print '<td colspan="3"></td>'; ?>
       <td>
-        <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_line_allowance_charge_delete=1&amp;InvoiceLineAllowanceChargeID=$acrow->InvoiceLineAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
+        <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_line_allowance_charge_delete=1&amp;InvoiceLineAllowanceChargeID=$acrow->InvoiceLineAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
       </td>
     </tr>
 <?
@@ -525,7 +532,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         if(!$invoicein->Locked) {
 			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($invoicein->Period), $_lib['sess']->get_person('AccessLevel')))
 			{ ?>
-                <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&amp;ID=$ID&amp;action_invoicein_linenew=1&amp;AccountPlanID=$AccountPlanID&amp;inline=edit" ?>" class="button" accesskey="N">Ny linje (N)</a>
+                <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&amp;ID=$ID&amp;action_invoicein_linenew=1&amp;AccountPlanID=$AccountPlanID&amp;inline=edit" ?>" class="button" accesskey="N">Ny linje (N)</a>
             <?
 			}
         }
@@ -588,7 +595,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td colspan="4"></td>
         <td>Prosent</td>
         <td></td>
-        <td>Bel&oslash;p</td>
+        <td class="number">Bel&oslash;p</td>
     </tr>
 
 <?
