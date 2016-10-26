@@ -159,6 +159,7 @@ class model_tablemetadata_tablemetadata {
             return false;
         }
 
+        $return_result = array();
         foreach ($params['commands'] as $command) {
             if ($command == "" || trim($command) == "") {
                 continue;
@@ -172,13 +173,14 @@ class model_tablemetadata_tablemetadata {
                     print "db_name: $db_name, db_query: $query." . $this->nl_separator . "Bad query: " . mysqli_error($db_link) . $this->nl_separator . $this->nl_separator;
                     return false;
                 } else {
+                    $return_result[$query] = $result;
                     print "Query successful." . $this->nl_separator;
                 }
         }
 
         print "db_name: $db_name, script successfully executed." . $this->nl_separator;
 
-        return true;
+        return $return_result;
     }
 
     function newlang($args) {

@@ -54,8 +54,7 @@ class migration_system {
   }
 
   function get_databases($with_migrations = true) {
-    $model_invoicerecurring_recurring = new model_invoicerecurring_recurring();
-    $dbs = $model_invoicerecurring_recurring->database_list();
+    $dbs = self::database_list();
 
     $all_migrations = array();
 
@@ -70,6 +69,35 @@ class migration_system {
     }
 
     return $all_migrations;
+  }
+
+  function database_list() {
+    $model_invoicerecurring_recurring = new model_invoicerecurring_recurring();
+    $dbs = $model_invoicerecurring_recurring->database_list();
+    return $dbs;
+  }
+
+  function run_script_on_all_db($script) {
+    $dbs = self::database_list();
+    $query_results = array();
+
+    foreach ($dbs as $db) {
+      $query_results[$db->Database] = $this->run_script_on_db($db->Database, $script);
+    }
+    return $query_results;
+  }
+
+  function run_script_on_db($db_name, $script) {
+    global $_SETUP;
+    // use line break html element as new line separator
+    $model_tablemetadata_tablemetadata = new model_tablemetadata_tablemetadata("<br/>");
+    $args = array();
+    $args["commands"] = explode(';', $script);
+    $args['db_server'] = $_SETUP['DB_SERVER_DEFAULT'];
+    $args['db_user'] = $_SETUP['DB_USER_DEFAULT'];
+    $args['db_password'] = $_SETUP['DB_PASSWORD_DEFAULT'];
+    $args["db_name"] = $db_name;
+    return $model_tablemetadata_tablemetadata->runscriptondb($args);
   }
 
   function migrate_db($db_name, $migration_name) {
