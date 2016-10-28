@@ -2,10 +2,6 @@
 $db_table = "altinnReport4";
 require_once "record.inc";
 
-if (isset($_SESSION['oauth_invoice_error'])) {
-  $_lib['message']->add($_SESSION['oauth_invoice_error']);
-  unset($_SESSION['oauth_invoice_error']);
-}
 ?>
 
 <?
@@ -22,7 +18,7 @@ if (isset($_GET['AltinnReport4ID'])) {
   header('Location: '.$_lib['sess']->dispatchs.'t=altinnsalary.list');
 }
 
-$_SESSION['oauth_tmp_redirect_back_url'] = str_replace("action_invoice_fakturabanksend_altinn_aga_ftr=1", "", "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+$_SESSION['oauth_tmp_redirect_back_url'] = str_replace("action_invoice_fakturabanksend_altinn_aga=1", "", "$_SETUP[OAUTH_PROTOCOL]://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 
 $query_current_report = "
   SELECT * FROM altinnReport1 ar1 WHERE ar1.ReceiptId IN (
@@ -47,10 +43,18 @@ print $_lib['sess']->doctype ?>
 
 <body>
 <?
-$message = $_lib['message']->get();
-if(strstr($message, "Success")) $class = 'user';
-else $class = 'warning';
-if($message) { print "<div class='$class'>$message</div><br>"; }
+if (isset($_SESSION['oauth_invoice_error'])) {
+  if(!is_array($_SESSION['oauth_invoice_error'])) {
+    $_SESSION['oauth_invoice_error'] = array($_SESSION['oauth_invoice_error']);
+  }
+  foreach ($_SESSION['oauth_invoice_error'] as $message) {
+    if(strstr($message, "Success")) $class = 'user';
+    else $class = 'warning';
+    print "<div class='$class' style='margin: 0;'>$message</div>";
+  }
+  print "<br>";
+  unset($_SESSION['oauth_invoice_error']);
+}
 ?>
   <table class="lodo_data">
     <tr>
@@ -59,25 +63,14 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
     </tr>
 <? if ($show_invoice_print_links) { ?>
     <tr>
-      <td class="menu">Arbeidsgiveravgift faktura</td>
+      <td class="menu">Arbeidsgiveravgift / Forskuddstrekk faktura</td>
       <td>
-        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
-        <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
-          <input type='submit' name="action_invoice_fakturabanksend_altinn_aga_ftr" value='Send til Fakturabank' />
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=AGA&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift AGA</a>
+        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift FTR</a>
+        <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
+          <input type='submit' name="action_invoice_fakturabanksend_altinn_aga" value='Send til Fakturabank' />
         <?
-          if ($row->SentAGAToFakturabankBy) echo $row->SentAGAToFakturabankAt . " fakturaBank " . $_lib['format']->PersonIDToName($row->SentAGAToFakturabankBy);
-        ?>
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td class="menu">Forskuddstrekk faktura</td>
-      <td>
-        <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.invoice_print&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>">Utskrift</a>
-        <form action='<? print $_lib['sess']->dispatch ?>t=altinnsalary.show4&type=FTR&AltinnReport4ID=<? print $row->AltinnReport4ID; ?>' method='post'>
-          <input type='submit' name="action_invoice_fakturabanksend_altinn_aga_ftr" value='Send til Fakturabank' />
-        <?
-          if ($row->SentFTRToFakturabankBy) echo $row->SentFTRToFakturabankAt . " fakturaBank " . $_lib['format']->PersonIDToName($row->SentFTRToFakturabankBy);
+          if ($row->SentToFakturabankBy) echo $row->SentToFakturabankAt . " fakturaBank " . $_lib['format']->PersonIDToName($row->SentToFakturabankBy);
         ?>
         </form>
       </td>
