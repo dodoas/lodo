@@ -11,6 +11,7 @@ class moneyflow {
     public $StartAmountBalance  = 0;
     public $result_saldo     = 0;
     public $result_account   = 0;
+    public $expected         = 0;
 
     function __construct($args) {
         global $_lib;
@@ -28,6 +29,7 @@ class moneyflow {
         $expected_query = "select voucher.*, accountplan.AccountName, accountplan.OrgNumber from voucher, accountplan where voucher.AccountPlanID=accountplan.AccountPlanID and accountplan.EnableMoneyFlow=1 and voucher.DueDate > '" . $this->StartDate . "' and accountplan.EnableReskontro != 1 and (VoucherType='U' or VoucherType='S' or VoucherType='L') and voucher.Active=1 order by voucher.DueDate asc ";
         #print "expected: $expected_query<br>\n";
         $result = $_lib['db']->db_query($expected_query);
+        $this->expected = $result;
         #VoucherType = U og S
         
         $saldo_query = "select voucher.AccountPlanID, accountplan.AccountName, sum(voucher.AmountIn) as sumin, sum(voucher.AmountOut) as sumout from voucher, accountplan where voucher.AccountPlanID=accountplan.AccountPlanID and accountplan.EnableSaldo=1 and voucher.VoucherDate <= '" . $this->StartDate . "' and voucher.Active=1  group by voucher.AccountPlanID"; #Where start saldo er satt.
@@ -69,7 +71,8 @@ class moneyflow {
         $this->detailH[$this->StartDate][] = $startsaldo;
 
         #Gruppering pŒ datoer og summering    
-        while($expected = $_lib['db']->db_fetch_object($result)) {
+        if ($this->pengeflyt_page) {
+          while($expected = $_lib['db']->db_fetch_object($result)) {
             $expected->AmountBalance = $expected->AmountIn - $expected->AmountOut;
             $this->sumBalance       += $expected->AmountBalance;
             $expected->sumBalance    = $this->sumBalance;
@@ -84,12 +87,16 @@ class moneyflow {
             $this->dateH[$expected->DueDate]->AmountOut   += $expected->AmountOut;
             $this->dateH[$expected->DueDate]->AmountSaldo += $this->dateH[$expected->DueDate]->AmountIn - $this->dateH[$expected->DueDate]->AmountOut;                
 
-            $this->amountH[$expected->AmountBalance][] = $expected;
+            // Moved to separate function to conserve memory and not build array of array of objects
+            // now we have similar logic in find match and we return only the objects needed
+            // $this->amountH[$expected->AmountBalance][] = $expected;
+          }
         }
     }
     
     #Return value changed to return one ore more matches. All recieving functions has to be changed accordingly.
     function findmatch($args) {
+        global $_lib;
         $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
     
         $balance = $args['AmountIn'] - $args['AmountOut'];
@@ -100,8 +107,22 @@ class moneyflow {
         #    print_r($this->amountH);
         #}
 
-        if(isset($this->amountH[$balance])) {
-            return $this->amountH[$balance];
+        $return_array = array();
+        while($expected = $_lib['db']->db_fetch_object($this->expected)) {
+          $expected->AmountBalance = $expected->AmountIn - $expected->AmountOut;
+          $this->sumBalance       += $expected->AmountBalance;
+          $expected->sumBalance    = $this->sumBalance;
+
+          if($expected->sumBalance >= 0)
+            $expected->color = "blue";
+          else
+            $expected->color = "red";
+
+          if ($balance == $expected->AmountBalance) $return_array[] = $expected;
+        }
+
+        if(!empty($return_array)) {
+            return $return_array;
         } else {
             return 0;
         }
