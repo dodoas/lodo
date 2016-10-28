@@ -160,7 +160,8 @@ class altinn_report {
     // save for future use in creation of SOAP request
     $meldings_id = 'report_for_' . $org_number . '_at_' . time();
     if ($this->is_cancellation) {
-      $meldings_id = $this->erstatterMeldingsId ."_annulering";
+      $cancelled_report_timestamp = substr($this->erstatterMeldingsId, 24);
+      $meldings_id .= "_annulering_for_". $cancelled_report_timestamp;
     }
 
     $leveranse['meldingsId'] = $meldings_id;
