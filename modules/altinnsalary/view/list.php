@@ -59,6 +59,7 @@ print $_lib['sess']->doctype
       <th class='menu'></th>
       <th class='menu'></th>
       <th class='menu'></th>
+      <th class='menu'></th>
     </tr>
   <?
   $so1_query = "select * from altinnReport1 order by AltinnReport1ID";
@@ -156,11 +157,19 @@ print $_lib['sess']->doctype
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? 
-            $resend_enabled = $so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus));
+            $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled");
             print $_lib['form3']->submit(array(
               'name'=>'action_soap1',
               'value'=>'Send p&aring; nytt',
               'disabled' => !$resend_enabled
+            )); ?>
+
+          <?
+            $cancel_enabled = $so1row->ReceivedStatus == "received" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "is_cancellation";
+            print $_lib['form3']->submit(array(
+              'name'=>'action_soap1_cancel',
+              'value'=>'Kansellere',
+              'disabled' => !$cancel_enabled
             )); ?>
         </form>
         <?
@@ -184,15 +193,18 @@ print $_lib['sess']->doctype
       </td>
       <td>
         <?
-          if($so1row->ReceivedStatus == "sent") print "sendt";
-          if($so1row->ReceivedStatus == "received") print "<b style='color: green;'>mottatt</b>";
-          if($so1row->ReceivedStatus == "replaced") print "<span style='color: orange;'>erstattet</span>";
-          if($so1row->ReceivedStatus == "rejected") print "<b style='color: red;'>avvist</b>";
+          if($so1row->CancellationStatus == "cancelled") print "<b style='color: red;'>kansellert</b>";
+          else {
+            if($so1row->ReceivedStatus == "sent") print "sendt";
+            if($so1row->ReceivedStatus == "received") print "<b style='color: green;'>mottatt</b>";
+            if($so1row->ReceivedStatus == "replaced") print "<span style='color: orange;'>erstattet</span>";
+            if($so1row->ReceivedStatus == "rejected") print "<b style='color: red;'>avvist</b>";
+          }
         ?>
       </td>
       <td>
         <?
-          if($so1row->ErstatterMeldingsId) {
+          if($so1row->ErstatterMeldingsId && $so1row->CancellationStatus != "is_cancellation") {
             $replaced_so1row = $_lib['db']->get_row(array("query" => "SELECT * FROM altinnReport1 WHERE MeldingsId = '". $so1row->ErstatterMeldingsId ."';"));
             print "Erstatter <span class=\"navigate to\" id=\"". $replaced_so1row->AltinnReport1ID ."\">". $replaced_so1row->AltinnReport1ID ."</span>";
           }
@@ -205,6 +217,14 @@ print $_lib['sess']->doctype
             if($replaced_by_so1row->ReceivedStatus != "rejected") {
               print "Erstattet med <span class=\"navigate to\" id=\"". $replaced_by_so1row->AltinnReport1ID ."\">". $replaced_by_so1row->AltinnReport1ID ."</span>";  
             }            
+          }
+        ?>
+      </td>
+      <td> 
+        <?
+          if($so1row->CancellationStatus == "is_cancellation") {
+            $cancelled_so1row = $_lib['db']->get_row(array("query" => "SELECT * FROM altinnReport1 WHERE MeldingsId = '". $so1row->ErstatterMeldingsId ."';"));
+            print "Kansellerer <span class=\"navigate to\" id=\"". $cancelled_so1row->AltinnReport1ID ."\">". $cancelled_so1row->AltinnReport1ID ."</span>";
           }
         ?>
       </td>

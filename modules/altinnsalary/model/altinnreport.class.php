@@ -21,17 +21,20 @@ class altinn_report {
   public $erstatterMeldingsId    = null; // replacement message id
   public $errors                 = null; // to be populated if errors occur
 
+  public $is_cancellation        = false;
+
 /* Constructor accepts the accounting period(year-month)
  * salary, work relation ids, and flag if we are sending for only
  * one employee.
  * It automatically loads all the salaries and employees.
  */
-  function __construct($period, $salary_ids = array(), $work_relation_ids = array(), $only_register_employee = false, $just_test_if_ready = false) {
+  function __construct($period, $salary_ids = array(), $work_relation_ids = array(), $only_register_employee = false, $just_test_if_ready = false, $is_cancellation = false) {
     // if no period selected, exit
     if (empty($period)) return;
     else $this->period = $period;
 
     $this->just_test_if_ready = $just_test_if_ready;
+    $this->is_cancellation = $is_cancellation;
 
     // TODO: Use and update initialize method and remove this below
     $this->only_register_employee = $only_register_employee;
@@ -156,6 +159,11 @@ class altinn_report {
     if ($this->erstatterMeldingsId) $leveranse['erstatterMeldingsId'] = $this->erstatterMeldingsId;
     // save for future use in creation of SOAP request
     $meldings_id = 'report_for_' . $org_number . '_at_' . time();
+    if ($this->is_cancellation) {
+      $cancelled_report_timestamp = substr($this->erstatterMeldingsId, 24);
+      $meldings_id .= "_annulering_for_". $cancelled_report_timestamp;
+    }
+
     $leveranse['meldingsId'] = $meldings_id;
     $this->meldingsId = $meldings_id;
 
@@ -212,7 +220,7 @@ class altinn_report {
       if (empty($salaries[$employee->AccountPlanID])) {
         $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, NULL, $employee, $work_relation, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk, true);
         // income receiver
-        $virksomhet[] = $inntektsmottaker;
+        $inntektsmottaker ? $virksomhet[] = $inntektsmottaker : NULL;
       } else {
         if (count($salaries[$employee->AccountPlanID]) > 1) {
           // Error is: There is more than 1 salary<L 1, L 3> for <name> in this report
@@ -233,7 +241,7 @@ class altinn_report {
           $inntektsmottaker = self::generateInntektsmottakerArray($key_subcompany, $salary, $employee, $work_relation, $code_for_tax_calculation, $virksomhet, $loennOgGodtgjoerelse, $sumForskuddstrekk);
           $use_loennOgGodtgjoerelse = true;
 
-          $virksomhet[] = $inntektsmottaker;
+          $inntektsmottaker ? $virksomhet[] = $inntektsmottaker : NULL;
         }
       }
     }
@@ -274,6 +282,13 @@ class altinn_report {
     $virksomhet['norskIdentifikator'] = $subcompany_org_number;
     $inntektsmottaker = array();
     $inntektsmottaker['inntektsmottaker'] = array();
+
+    if($this->is_cancellation) {
+      $zone_code = null; // will be changed in the function below
+      self::setLoennOgGodtgjoerelse($salary, $code_for_tax_calculation, $loennOgGodtgjoerelse, $zone_code);
+      return array();
+    }
+
     // forskuddstrekk = tax that is taken from the employee
     $forskuddstrekk = 0.0;
 

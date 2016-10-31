@@ -4,7 +4,7 @@
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
 includelogic('moneyflow/moneyflow');
-$moneyflow = new moneyflow(array('StartDate' => $_lib['input']->getProperty('StartDate')));
+$moneyflow = new moneyflow(array('StartDate' => $_lib['input']->getProperty('StartDate'), 'pengeflyt_page' => true));
 
 $_lib['sess']->debug($expected_query_accounts);
 print $_lib['sess']->doctype; ?>
