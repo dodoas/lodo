@@ -57,7 +57,7 @@ $tabindex = 1;
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Amount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->Amount))) ?>
     </tr>
     <tr>
-        <td>Resultat konto inn</td>
+        <td>Resultat konto inng&aring;ende</td>
         <td colspan="2"><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'InAccountPlanID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->InAccountPlanID, 'type' => array(0 => 'result', 1 => 'balance'), 'required' => 1)) ?></td>
     </tr>
     <tr>
@@ -65,7 +65,7 @@ $tabindex = 1;
         <td colspan="2"><? if($vat_in->Percent) { print "$vat_in->Percent%"; } ?></td>
     </tr>
     <tr>
-        <td>Resultat konto ut</td>
+        <td>Resultat konto utg&aring;ende</td>
         <td colspan="2"><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'OutAccountPlanID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->OutAccountPlanID, 'type' => array(0 => 'result', 1 => 'balance'), 'required' => 1)) ?></td>
     </tr>
     <tr>

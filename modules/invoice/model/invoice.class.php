@@ -380,8 +380,8 @@ class invoice {
         }
         if (!$is_set) {
           $ready_to_send = false;
-          if ($is_array) $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut ett av f&oslash;lgene felt: ' . $translated_head_required_fields['CustomerAddressArray'];
-          else $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut ett av f&oslash;lgene felt: ' . $translated_head_required_fields[$field_name];
+          if ($is_array) $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut f&oslash;lgene felt: ' . $translated_head_required_fields['CustomerAddressArray'];
+          else $error_messages[] = 'F&oslash;r du kan sende til Fakturabank er du n&oslash;dt til &aring; fylle ut f&oslash;lgene felt: ' . $translated_head_required_fields[$field_name];
         }
       }
       # if no invoice lines
@@ -1389,11 +1389,13 @@ class invoice {
             $invoice_allowance_tax_total += $tax_amount;
             $this->taxH[$acrow->VatPercent]->TaxAmount -= $tax_amount;
           }
+          $this->taxH[$acrow->VatPercent]->Category = $vat->Category;
         }
 
 
         ############################################################################################
-        $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN, p.ProductNumber, v.Category from invoiceoutline as il left outer join product as p on il.ProductID=p.ProductID left outer join vat as v on il.VatID=v.VatID and il.Vat=v.Percent where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.Active <> 0 order by il.LineID asc";
+        $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN, p.ProductNumber, v.Category from invoiceoutline as il left outer join product as p on il.ProductID=p.ProductID left outer join vat as v on il.VatID=v.VatID and (
+          il.Vat = v.Percent or (il.Vat = 0 and v.Percent is null)) where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.Active <> 0 order by il.LineID asc";
         #print "$query_invoiceline\n";
         $result2                = $_lib['db']->db_query($query_invoiceline);
 
