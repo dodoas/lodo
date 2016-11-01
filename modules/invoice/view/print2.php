@@ -164,6 +164,26 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 {
     $LineID=$row2->LineID;
     $sumline = round($row2->QuantityDelivered * $row2->UnitCustPrice, 2);
+
+    $params2["allowancecharges"] = array();
+
+    // Find allowances and charges
+    $query = "SELECT * FROM invoicelineallowancecharge WHERE InvoiceLineID = ". $LineID .";";
+    $rs = $_lib["db"]->db_query($query);
+    while($line_ac = $_lib["db"]->db_fetch_object($rs)) {
+        $line_ac_array = array();
+        $line_ac_array["type"] = $line_ac->AllowanceChargeType;
+        $line_ac_array["ChargeIndicator"] = $line_ac->ChargeIndicator;
+        $line_ac_array["AllowanceChargeReason"] = $line_ac->AllowanceChargeReason;
+        $line_ac_array["Amount"] = $line_ac->Amount;
+        $params2["allowancecharges"][] = $line_ac_array;
+
+        if($line_ac_array["type"] == "line") {
+            $multiplicator = $line_ac_array["ChargeIndicator"] == 0 ? -1 : 1;
+            $sumline += $multiplicator * $line_ac_array["Amount"];
+        }
+    }
+
     $vatline = round(($row2->Vat/100) * $sumline, 2);
     $sumlines += $sumline;
     $vatlines += $vatline;
@@ -177,6 +197,25 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $params2["linjesum"] = $sumline;
 
     $myFakutraLines[] = array($row2->Comment, $params2);
+}
+
+$params["allowancecharges"] = array();
+
+// Find invoice level allowances and charges
+$query = "SELECT * FROM invoiceallowancecharge WHERE InvoiceID = ". $InvoiceID .";";
+$rs = $_lib["db"]->db_query($query);
+while($invoice_ac = $_lib["db"]->db_fetch_object($rs)) {
+    $invoice_ac_array = array();
+    $invoice_ac_array["ChargeIndicator"] = $invoice_ac->ChargeIndicator;
+    $invoice_ac_array["AllowanceChargeReason"] = $invoice_ac->AllowanceChargeReason;
+    $invoice_ac_array["Amount"] = $invoice_ac->Amount;
+    $invoice_ac_array["VatPercent"] = $invoice_ac->VatPercent;
+    $invoice_ac_array["VatID"] = $invoice_ac->VatID;
+    $params["allowancecharges"][] = $invoice_ac_array;
+
+    $multiplicator = $invoice_ac_array["ChargeIndicator"] == 0 ? -1 : 1;
+    $sumlines += $multiplicator * $invoice_ac_array["Amount"];
+    $vatlines += $multiplicator * round($invoice_ac_array["Amount"] * ($invoice_ac_array["VatPercent"]/100), 2);
 }
 
 // setting up params for SumLine

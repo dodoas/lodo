@@ -257,12 +257,27 @@ print $_lib['sess']->doctype ?>
 <tbody>
 <?
 $sumlines = 0;
+$sumallowances = 0;
+$sumcharges = 0;
 $vatlines = 0;
 $rowCounter = 0;
 while($row2 = $_lib['db']->db_fetch_object($result2))
 {
     $LineID=$row2->LineID;
     $sumline = round($row2->QuantityDelivered * $row2->UnitCustPrice, 2);
+
+    // Find allowances and charges
+    $line_allowancecharges = array();
+    $query = "SELECT * FROM invoicelineallowancecharge WHERE InvoiceLineID = ". $LineID ." AND InvoiceType = 'out';";
+    $rs = $_lib["db"]->db_query($query);
+    while($line_ac = $_lib["db"]->db_fetch_object($rs)) {
+        $line_allowancecharges[] = $line_ac;
+        if($line_ac->AllowanceChargeType == "line") {
+            $multiplicator = $line_ac->ChargeIndicator == 0 ? -1 : 1;
+            $sumline += $multiplicator * $line_ac->Amount;
+        }
+    }
+
     $vatline = round(($row2->Vat/100) * $sumline, 2);
     $sumlines += $sumline;
     $vatlines += $vatline;
@@ -276,7 +291,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <?
     }
     ?>
-    <tr>
+    <tr style="background-color: #E1E1E1;">
         <td class="number"><? print $row2->ProductID ?></td>
         <td widht="5"></td>
         <td><? print $row2->ProductName ?></td>
@@ -287,6 +302,19 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td class="number"><? print $_lib['format']->Amount($sumline) ?></td>
     </tr>
     <?
+
+    foreach ($line_allowancecharges as $allowance_charge) {
+        ?>
+        <tr>
+            <td colspan="2"></td>
+            <td colspan="2"><? print $allowance_charge->ChargeIndicator ? "Kostnad" : "Rabatt"; ?> (<? print $allowance_charge->AllowanceChargeType == "line" ? "linje" : "pris" ?>) - <? print $allowance_charge->AllowanceChargeReason ?></td>
+            <td class="number"><? $allowance_charge->AllowanceChargeType == "price" ? print $_lib['format']->Amount(($allowance_charge->ChargeIndicator == 0 ? -1 : 1) * $allowance_charge->Amount) : null ?></td>
+            <td colspan="2"></td>
+            <td class="number"><? $allowance_charge->AllowanceChargeType == "line" ? print $_lib['format']->Amount(($allowance_charge->ChargeIndicator == 0 ? -1 : 1) * $allowance_charge->Amount) : null ?></td>
+        </tr>
+        <?
+    }
+
     if($row_company->InvoiceLineCommentPosition == 'bottom' and strlen($row2->Comment) > 0)
     {
         ?>
@@ -298,6 +326,23 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 
     $rowCounter++;
 }
+
+// Find all invoice level allowance charges
+$allowancecharges = array();
+$query = "SELECT * FROM invoiceallowancecharge WHERE InvoiceID = ". $InvoiceID ." and InvoiceType = 'out';";
+$rs = $_lib["db"]->db_query($query);
+while($invoice_ac = $_lib["db"]->db_fetch_object($rs)) {
+    $allowancecharges[] = $invoice_ac;
+    if($invoice_ac->ChargeIndicator == 0) {
+        $multiplicator = -1;
+        $sumallowances += $invoice_ac->Amount;
+    } else {
+        $multiplicator = 1;
+        $sumcharges = $invoice_ac->Amount;
+    }
+    $vatlines += $multiplicator * round($invoice_ac->Amount * ($invoice_ac->VatPercent/100), 2);
+}
+
 ?>
     <?
     if($row_company->InvoiceCommentCustomerPosition == 'bottom' and strlen($row->CommentCustomer) > 0) //byttet fra $row til $row_company
@@ -313,20 +358,56 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <?
     }
     ?>
+
+    <tr height="20"><td colspan="8"></td></tr>
+
+    <tr>
+        <th colspan="2"></th>
+        <th colspan="3"><nobr>Årsak</nobr></th>
+        <th class="number">MVA %</th>
+        <th class="number"><nobr>MVA beløp</nobr></th>
+        <th class="number"><nobr>Beløp u/MVA</nobr></th>
+    </tr>
+    <?
+    foreach ($allowancecharges as $allowance_charge) {
+    ?>
+    <tr>
+        <td colspan="2"><? print $allowance_charge->ChargeIndicator == 0 ? "Rabatt" : "Kostnad" ?></td>
+        <td colspan="3"><nobr><? print $allowance_charge->AllowanceChargeReason ?></nobr></td>
+        <td class="number"><? print $allowance_charge->VatPercent ?>%</td>
+        <td class="number"><nobr><? print $_lib['format']->Amount(($allowance_charge->ChargeIndicator == 0 ? -1 : 1) * $allowance_charge->Amount * ($allowance_charge->VatPercent / 100)) ?></nobr></td>
+        <td class="number"><nobr><? print $_lib['format']->Amount(($allowance_charge->ChargeIndicator == 0 ? -1 : 1) * $allowance_charge->Amount) ?></nobr></td>
+    </tr>
+    <?
+    }
+    ?>
+
     <tr height="20">
         <td></td>
     </tr>
     <tr>
-        <td colspan="7" class="number">Sum linjer</td>
+        <td colspan="7" class="number">Linje sum</td>
         <td class="number"><? print $_lib['format']->Amount($sumlines) ?></td>
     </tr>
     <tr>
-        <td colspan="7" align="right">Sum MVA</td>
+        <td colspan="7" class="number">Rabatt sum</td>
+        <td class="number"><? print $_lib['format']->Amount(-$sumallowances) ?></td>
+    </tr>
+    <tr>
+        <td colspan="7" class="number">Sum kostnad</td>
+        <td class="number"><? print $_lib['format']->Amount($sumcharges) ?></td>
+    </tr>
+    <tr>
+        <td colspan="7" class="number">Totalt U/MVA</td>
+        <td class="number"><? print $_lib['format']->Amount($sumlines - $sumallowances + $sumcharges) ?></td>
+    </tr>
+    <tr>
+        <td colspan="7" align="right">Total MVA</td>
         <td class="number"><? print $_lib['format']->Amount($vatlines) ?></td>
     </tr>
     <tr>
-        <td colspan="7" align="right"><b>Total med MVA</b></td>
-        <td class="number"><h2><? print $_lib['format']->Amount($vatlines + $sumlines) ?></h2></td>
+        <td colspan="7" align="right"><b>Totalt M/MVA</b></td>
+        <td class="number"><h2><? print $_lib['format']->Amount($vatlines + $sumlines - $sumallowances + $sumcharges) ?></h2></td>
     </tr>
 </tbody>
 
