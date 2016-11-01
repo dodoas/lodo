@@ -115,7 +115,7 @@ function newInvoiceLine(InvoiceID, CustomerAccountPlanID, LineNumber) {
   $.post('<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax', params,
          function(data, status) {
            var InvoiceLineID = $($.parseHTML(data)).filter("#line_id").text();
-           var newInvoiceLineHTML='<tr id="invoiceline_fields_'+InvoiceLineID+'" class="invoiceline_fields"><td><? print str_replace("\n", '', $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>'placeholder_id', 'width'=>'35', 'tabindex'=> 0, 'class' => 'combobox product', 'required' => false, 'notChoosenText' => 'Velg produkt'))); ?></td> <td class="red"><input type="text" class="product" name="invoiceoutline.ProductName.'+InvoiceLineID+'" id="invoiceoutline.ProductName.'+InvoiceLineID+'" value="" size="20" tabindex="0" maxlength="80" onchange="validateBeforeSave();"> </td> <td align="center" class="red"><input type="text" name="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" id="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" value="0.00" size="8" tabindex="0" maxlength="8" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td class="red"><input type="text" name="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" id="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" value="0,00" size="15" tabindex="0" maxlength="15" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td id="invoiceoutline.VatPercent.'+InvoiceLineID+'">0.00%</td> <td align="right" id="invoiceoutline.VatAmount.'+InvoiceLineID+'">0,00</td> <td align="right" id="invoiceoutline.AmountExcludingVat.'+InvoiceLineID+'">0,00</td> <td><input type="submit" name="action_invoiceline_allowance_charge_new" id="action_invoiceline_allowance_charge_new" value="Ny linje rabatt/kostnad" size="20" tabindex="0" onclick="newInvoiceLineAllowanceCharge('+InvoiceID+', <? print ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0); ?>, '+InvoiceLineID+'); return false;" /> <input type="button" class="button" onclick="deleteInvoiceLine('+InvoiceID+', '+ (CustomerAccountPlanID ? CustomerAccountPlanID : 0) +', '+InvoiceLineID+'); return false;", value="Slett" /></td></tr><tr id="invoiceline_comment_'+InvoiceLineID+'"> <td colspan="8"><textarea name="invoiceoutline.Comment.'+InvoiceLineID+'" id="invoiceoutline.Comment.'+InvoiceLineID+'" cols="80" rows="1" tabindex="0"></textarea> <input type="hidden" name="'+LineNumber+'" id="'+LineNumber+'" value="'+InvoiceLineID+'"> </td></tr> <tr id="allowance_placeholder_'+InvoiceLineID+'"><td colspan="8"><hr/></td></tr>';
+           var newInvoiceLineHTML='<tr id="invoiceline_fields_'+InvoiceLineID+'" class="invoiceline_fields"><td><? print str_replace("\n", '', $_lib['form3']->Product_menu3(array('table'=>$db_table2, 'field'=>'ProductID', 'pk'=>'placeholder_id', 'width'=>'35', 'tabindex'=> 0, 'class' => 'combobox product', 'required' => false, 'notChoosenText' => 'Velg produkt'))); ?></td> <td class="red"><input type="text" class="product" name="invoiceoutline.ProductName.'+InvoiceLineID+'" id="invoiceoutline.ProductName.'+InvoiceLineID+'" value="" size="20" tabindex="0" maxlength="80" onchange="validateBeforeSave();"> </td> <td align="center" class="red"><input type="text" name="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" id="invoiceoutline.QuantityDelivered.'+InvoiceLineID+'" value="0,00" size="8" tabindex="0" maxlength="8" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td class="red"><input type="text" name="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" id="invoiceoutline.UnitCustPrice.'+InvoiceLineID+'" value="0,00" size="15" tabindex="0" maxlength="15" class="number" onchange="updateInvoiceLineData(this, false);"> </td> <td id="invoiceoutline.VatPercent.'+InvoiceLineID+'">0,00%</td> <td align="right" id="invoiceoutline.VatAmount.'+InvoiceLineID+'">0,00</td> <td align="right" id="invoiceoutline.AmountExcludingVat.'+InvoiceLineID+'">0,00</td> <td><input type="submit" name="action_invoiceline_allowance_charge_new" id="action_invoiceline_allowance_charge_new" value="Ny linje rabatt/kostnad" size="20" tabindex="0" onclick="newInvoiceLineAllowanceCharge('+InvoiceID+', <? print ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0); ?>, '+InvoiceLineID+'); return false;" /> <input type="button" class="button" onclick="deleteInvoiceLine('+InvoiceID+', '+ (CustomerAccountPlanID ? CustomerAccountPlanID : 0) +', '+InvoiceLineID+'); return false;", value="Slett" /></td></tr><tr id="invoiceline_comment_'+InvoiceLineID+'"> <td colspan="8"><textarea name="invoiceoutline.Comment.'+InvoiceLineID+'" id="invoiceoutline.Comment.'+InvoiceLineID+'" cols="80" rows="1" tabindex="0"></textarea> <input type="hidden" name="'+LineNumber+'" id="'+LineNumber+'" value="'+InvoiceLineID+'"> </td></tr> <tr id="allowance_placeholder_'+InvoiceLineID+'"><td colspan="8"><hr/></td></tr>';
            newInvoiceLineHTML = newInvoiceLineHTML.replace(/placeholder_id/g, InvoiceLineID);
            $(newInvoiceLineHTML).insertBefore($('#placeholder'));
            $("#field_count").val(LineNumber);
@@ -176,7 +176,7 @@ function newInvoiceAllowanceCharge(InvoiceID, CustomerAccountPlanID) {
              $(allowancesHeaderHTML).insertBefore($('#allowance_placeholder'));
            }
 
-           var newInvoiceAllowanceChargeHTML='<tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_'+InvoiceAllowanceChargeID+'"><td><? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('query' => "select AllowanceChargeID, CONCAT(IF(ChargeIndicator, 'Kostnad - ', 'Rabatt - '), Reason) from allowancecharge where Active = 1", 'table' => $db_table4, 'field' => 'AllowanceChargeID', 'width' => 40, 'value' => $acrow->AllowanceChargeID, 'tabindex' => '0', 'pk' => 'placeholder_id', 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this, true)'))); print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'ChargeIndicator', 'pk' => 'placeholder_id', 'value' => 0))); ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'AllowanceChargeReason', 'pk' => 'placeholder_id', 'value' => '', 'width' => '40', 'maxlength' => '255', 'tabindex' => '0'))); ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'Amount', 'pk' => 'placeholder_id', 'value' => $_lib['format']->Amount(0), 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this)', 'class' => 'number', 'tabindex' => '0'))); ?></td> <td class="number"><? print '<span id="' . $db_table4 . '.VatAmount.' . 'placeholder_id" >' . $_lib['format']->Amount(0) . '</span>'; ?></td> <td><? print '<span id="' . $db_table4 . '.VatPercent.placeholder_id" >' . $_lib['format']->Percent('0.00') . '</span>'; print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'VatID', 'pk' => 'placeholder_id', 'value' => null))); ?> </td><td><input type="button" class="button" onclick="deleteInvoiceAllowanceCharge(<? print $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . ", "; ?>'+InvoiceAllowanceChargeID+'); return false;" value="Slett" /></td></tr>';
+           var newInvoiceAllowanceChargeHTML='<tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_'+InvoiceAllowanceChargeID+'"><td><? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('query' => "select AllowanceChargeID, CONCAT(IF(ChargeIndicator, 'Kostnad - ', 'Rabatt - '), Reason) from allowancecharge where Active = 1", 'table' => $db_table4, 'field' => 'AllowanceChargeID', 'width' => 40, 'value' => $acrow->AllowanceChargeID, 'tabindex' => '0', 'pk' => 'placeholder_id', 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this, true)'))); print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'ChargeIndicator', 'pk' => 'placeholder_id', 'value' => 0))); ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'AllowanceChargeReason', 'pk' => 'placeholder_id', 'value' => '', 'width' => '40', 'maxlength' => '255', 'tabindex' => '0'))); ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'Amount', 'pk' => 'placeholder_id', 'value' => $_lib['format']->Amount(0), 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this)', 'class' => 'number', 'tabindex' => '0'))); ?></td> <td class="number"><? print '<span id="' . $db_table4 . '.VatAmount.' . 'placeholder_id" >' . $_lib['format']->Amount(0) . '</span>'; ?></td> <td><? print '<span id="' . $db_table4 . '.VatPercent.placeholder_id" >' . $_lib['format']->Percent('0,00') . '</span>'; print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'VatID', 'pk' => 'placeholder_id', 'value' => null))); ?> </td><td><input type="button" class="button" onclick="deleteInvoiceAllowanceCharge(<? print $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . ", "; ?>'+InvoiceAllowanceChargeID+'); return false;" value="Slett" /></td></tr>';
            newInvoiceAllowanceChargeHTML = newInvoiceAllowanceChargeHTML.replace(/placeholder_id/g, InvoiceAllowanceChargeID);
            $(newInvoiceAllowanceChargeHTML).insertBefore($('#allowance_placeholder'));
            validateBeforeSave();
@@ -551,54 +551,33 @@ function refreshComboboxOnPage() {
 
 function validateBeforeSave() {
   var all_valid = true;
+  var allowance_charges = $(".global_invoice_allowancecharge select");
+  all_valid = markRed(allowance_charges) && all_valid;
 
-  var allowance_charges = $(".global_invoice_allowancecharge");
-  for(var i=0; i<allowance_charges.length; i++) {
-    var allowance_charge = $(allowance_charges[i]);
-    var select = allowance_charge.find("select");
-    if(select.val() == "") {
-      all_valid = false;
-      select.parent("td").addClass("red");
-    } else {
-      select.parent("td").removeClass("red");
-    }
-  }
-
-  var invoice_lines = $(".invoiceline_fields");
-  for(var i=0; i<invoice_lines.length; i++) {
-    var invoice_line = $(invoice_lines[i]);
-    var select = invoice_line.find("select.product");
-    if(select.val() == "") {
-      all_valid = false;
-      select.parent("td").addClass("red");
-    } else {
-      select.parent("td").removeClass("red");
-    }
-  }
+  var invoice_lines = $(".invoiceline_fields select.product");
+  all_valid = markRed(invoice_lines) && all_valid;
 
   var number_inputs = $("input.number");
-  for(var i=0; i<number_inputs.length; i++) {
-    var input = $(number_inputs[i]);
-    if(input.val() == "" || input.val() == "0" || input.val() == "0,00") {
-      all_valid = false;
-      input.parent("td").addClass("red");
-    } else {
-      input.parent("td").removeClass("red");
-    }
-  }
+  all_valid = markRed(number_inputs) && all_valid;
 
   var product_names = $("input.product");
-  for(var i=0; i<product_names.length; i++) {
-    var input = $(product_names[i]);
-    if(input.val() == "") {
-      all_valid = false;
-      input.parent("td").addClass("red");
-    } else {
-      input.parent("td").removeClass("red");
-    }
-  }
+  all_valid = markRed(product_names) && all_valid;
 
   enableOrDisable(all_valid, 'action_invoice_update');
+}
+
+function markRed(elements) {
+  var all_valid = true;
+  for(var i=0; i<elements.length; i++) {
+    var element = $(elements[i]);
+    if(element.val() == "" || element.val() == "0" || element.val() == "0,00") {
+      all_valid = false;
+      element.parent("td").addClass("red");
+    } else {
+      element.parent("td").removeClass("red");
+    }
+  }
+  return all_valid;
 }
 
 $(document).ready(function() {

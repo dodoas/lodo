@@ -1701,7 +1701,7 @@ class lodo_fakturabank_fakturabank {
                     foreach($InvoiceO->InvoiceLine as $line) {
 
                         #preprocess price/quantity - because inconsistent data can appear
-                        if($line->InvoicedQuantity && $line->Price->PriceAmount) {
+                        if($line->InvoicedQuantity != 0 && $line->Price->PriceAmount != 0) {
                             $Quantity   = $line->InvoicedQuantity;
                             $CustPrice  = $line->Price->PriceAmount;
                         } else {
