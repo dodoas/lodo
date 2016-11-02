@@ -284,8 +284,10 @@ class altinn_report {
     $inntektsmottaker['inntektsmottaker'] = array();
 
     if($this->is_cancellation) {
-      $zone_code = null; // will be changed in the function below
-      self::setLoennOgGodtgjoerelse($salary, $code_for_tax_calculation, $loennOgGodtgjoerelse, $zone_code);
+      if(!$use_only_employee_info) {
+        $zone_code = null; // will be changed in the function below
+        self::setLoennOgGodtgjoerelse($salary, $code_for_tax_calculation, $loennOgGodtgjoerelse, $zone_code);
+      }
       return array();
     }
 
