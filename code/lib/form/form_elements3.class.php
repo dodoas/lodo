@@ -80,6 +80,7 @@ class form3
         $element .= " onchange='submit()'";
       }
       if($args[value]) $element = " $element checked ";
+      if($args["class"]) $element = " $element class=\"". $args["class"] ."\" ";
       $element = " $element />\n";
       return $element;
     }
