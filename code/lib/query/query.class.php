@@ -1,4 +1,5 @@
 <?
+includelogic('car/car');
 $_QUERY['form']['companycontact']           = "select P.PersonID, P.FirstName, P.LastName from person as P, companypersonstruct as S where S.CompanyID='" . $args['company_id'] . "' and P.PersonID=S.PersonID order by FirstName";
 $_QUERY['form']['typeclassificationmenu']   = "select MenuValue, MenuChoice from confmenues where MenuName='ClassificationID' order by MenuChoice";
 $_QUERY['form']['typeaccesslevelmenu']      = "select MenuValue, MenuChoice from confmenues where MenuName='AccessLevel'      order by MenuChoice";
@@ -44,7 +45,7 @@ $_QUERY['form']['PaymentMeans']             = "select MenuValue, MenuChoice from
 $_QUERY['form']['BankAccount']              = "select AccountNumber, concat(AccountNumber, ' - ' , AccountDescription) from account where Active=1 order by Sort";
 
 
-$_QUERY['form']['carmenu']                  = "select CarID, CarName from car where Active=1";
+$_QUERY['form']['carmenu']                  = "select CarID, CarName from car where ". car::car_active_sql("car.CarID") ."=1";
 $_QUERY['form']['avdmenu']                  = "select CompanyDepartmentID, DepartmentName from companydepartment where Active=1";
 $_QUERY['form']['sonemenu']                 = "select Code, concat('Kode: ', Code, ' - ',Percent, '%') from arbeidsgiveravgift";
 $_QUERY['form']['kommunemenu']              = "select KommuneID, KommuneNumber, KommuneName from kommune";

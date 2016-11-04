@@ -52,10 +52,6 @@ foreach($car_milage as $milage_year => $milage) {
     <title>Empatix - car</title>
     <? includeinc('head') ?>
     <script type="text/javascript">
-      $(document).ready(function() {
-        setCarActiveCheckbox();
-      });
-
       function setCarEnableVatCheckbox(type) {
         var mva_active = "not_selected";
         switch(type) {
@@ -91,7 +87,6 @@ foreach($car_milage as $milage_year => $milage) {
         var checkbox = $(".carActiveCheckbox")[0];
         var active = (current_date >= buy_date - difference_needed) && (current_date <= sell_date + difference_needed);
         checkbox.checked = active;
-        $(checkbox).next().val(active ? "1" : "0");
       }
 
       // takes date as string ('YYYY-MM-DD'), returns true if valid, false if not.
@@ -135,7 +130,7 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Aktiv</td>
-    <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>$car->Active, 'disabled'=>true, 'class'=>'carActiveCheckbox')) ?><input name="car.Active" type="hidden" value="<?print $car->Active ?>"></td>
+    <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>car::is_active($car->CarID), 'disabled'=>true, 'class'=>'carActiveCheckbox')) ?></td>
 </tr>
 <tr>
     <td class="menu">Registreringsnummer</td>

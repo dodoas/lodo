@@ -1,0 +1,2 @@
+ALTER TABLE car
+DROP Active;

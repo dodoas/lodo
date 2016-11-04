@@ -569,10 +569,10 @@ class form2 {
 
   function car_menu2($args) {
       global $_lib;
-
+      includelogic("car/car");
       $restrict_car = "";
       if ($args['value']) $restrict_car = " OR CarID = ". $args['value'];
-      $query = "SELECT CarID, CarName, CarCode, Active FROM car WHERE Active = 1 " . $restrict_car . " ORDER BY CarID";
+      $query = "SELECT CarID, CarName, CarCode, 1 as Active FROM car WHERE ". car::car_active_sql("car.CarID") ." = 1 " . $restrict_car . " ORDER BY CarID";
       $result = $_lib['db']->db_query($query);
       if($args['num_letters']) {
         $num_letters = $args['num_letters'];
