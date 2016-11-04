@@ -160,32 +160,40 @@ $vatlines = 0;
 $rowCounter = 0;
 $myFakutraLines = array();
 // Find and sum all the lines first
+$first_line = true;
 while($row2 = $_lib['db']->db_fetch_object($result2))
 {
+    $sum_ac = 0;
+    $sum_ac_vat = 0;
     $LineID=$row2->LineID;
     $sumline = round($row2->QuantityDelivered * $row2->UnitCustPrice, 2);
+
+    $params2["first_line"] = $first_line;
+    if ($first_line) $first_line = false;
 
     $params2["allowancecharges"] = array();
 
     // Find allowances and charges
-    $query = "SELECT * FROM invoicelineallowancecharge WHERE InvoiceLineID = ". $LineID .";";
-    $rs = $_lib["db"]->db_query($query);
-    while($line_ac = $_lib["db"]->db_fetch_object($rs)) {
+    $query = "SELECT * FROM invoicelineallowancecharge WHERE InvoiceLineID = ". $LineID ." AND InvoiceType = 'out';";
+    $line_allowancecharges_result = $_lib["db"]->db_query($query);
+    while($line_ac = $_lib["db"]->db_fetch_object($line_allowancecharges_result)) {
         $line_ac_array = array();
-        $line_ac_array["type"] = $line_ac->AllowanceChargeType;
+        $line_ac_array["AllowanceChargeType"] = $line_ac->AllowanceChargeType;
         $line_ac_array["ChargeIndicator"] = $line_ac->ChargeIndicator;
         $line_ac_array["AllowanceChargeReason"] = $line_ac->AllowanceChargeReason;
-        $line_ac_array["Amount"] = $line_ac->Amount;
-        $params2["allowancecharges"][] = $line_ac_array;
-
-        if($line_ac_array["type"] == "line") {
-            $multiplicator = $line_ac_array["ChargeIndicator"] == 0 ? -1 : 1;
-            $sumline += $multiplicator * $line_ac_array["Amount"];
+        $line_ac_array["Amount"] = ($line_ac->ChargeIndicator == 0 ? -1 : 1) * $line_ac->Amount;
+        if($line_ac_array["AllowanceChargeType"] == "line") {
+            $line_ac_array["VatPercent"] = $row2->Vat;
+            $line_ac_array["VatAmount"] = $line_ac_array["Amount"] * ($row2->Vat/100);
+            $sum_ac += $line_ac_array["Amount"];
+            $sum_ac_vat += $line_ac_array["VatAmount"];
         }
+        $params2["allowancecharges"][] = $line_ac_array;
     }
 
-    $vatline = round(($row2->Vat/100) * $sumline, 2);
-    $sumlines += $sumline;
+    $vatline_without_ac = round(($row2->Vat/100) * $sumline, 2);
+    $vatline = round(($row2->Vat/100) * $sumline + $sum_ac_vat, 2);
+    $sumlines += $sumline + $sum_ac;
     $vatlines += $vatline;
 
     $params2["produktnr"] = $row2->ProductID;
@@ -193,7 +201,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $params2["antall"] = $row2->QuantityDelivered;
     $params2["enhetspris"] = $row2->UnitCustPrice;
     $params2["mva"] = $row2->Vat;
-    $params2["mvabelop"] = $vatline;
+    $params2["mvabelop"] = $vatline_without_ac;
     $params2["linjesum"] = $sumline;
 
     $myFakutraLines[] = array($row2->Comment, $params2);
@@ -202,20 +210,20 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 $params["allowancecharges"] = array();
 
 // Find invoice level allowances and charges
-$query = "SELECT * FROM invoiceallowancecharge WHERE InvoiceID = ". $InvoiceID .";";
-$rs = $_lib["db"]->db_query($query);
-while($invoice_ac = $_lib["db"]->db_fetch_object($rs)) {
+$query = "SELECT * FROM invoiceallowancecharge WHERE InvoiceID = ". $InvoiceID ." AND InvoiceType = 'out';";
+$invoice_allowancescharges_result = $_lib["db"]->db_query($query);
+while($invoice_ac = $_lib["db"]->db_fetch_object($invoice_allowancescharges_result)) {
     $invoice_ac_array = array();
     $invoice_ac_array["ChargeIndicator"] = $invoice_ac->ChargeIndicator;
     $invoice_ac_array["AllowanceChargeReason"] = $invoice_ac->AllowanceChargeReason;
-    $invoice_ac_array["Amount"] = $invoice_ac->Amount;
+    $multiplicator = $invoice_ac->ChargeIndicator == 0 ? -1 : 1;
+    $invoice_ac_array["Amount"] = $multiplicator * $invoice_ac->Amount;
     $invoice_ac_array["VatPercent"] = $invoice_ac->VatPercent;
-    $invoice_ac_array["VatID"] = $invoice_ac->VatID;
+    $invoice_ac_array["VatAmount"] = $invoice_ac_array['Amount'] * $invoice_ac->VatPercent / 100.0;
     $params["allowancecharges"][] = $invoice_ac_array;
 
-    $multiplicator = $invoice_ac_array["ChargeIndicator"] == 0 ? -1 : 1;
-    $sumlines += $multiplicator * $invoice_ac_array["Amount"];
-    $vatlines += $multiplicator * round($invoice_ac_array["Amount"] * ($invoice_ac_array["VatPercent"]/100), 2);
+    $sumlines += $invoice_ac_array["Amount"];
+    $vatlines += round($invoice_ac_array["VatAmount"], 2);
 }
 
 // setting up params for SumLine
@@ -237,8 +245,10 @@ foreach ($myFakutraLines as $params2) {
         $myFakutra->addLongTextLine(array('tekst' =>$params2[0]));
     if($row_company->InvoiceLineCommentPosition == 'top' || !$row_company->InvoiceLineCommentPosition)
         $myFakutra->addInvoiceLine ($params2[1]);
+    $myFakutra->addInvoiceLineAllowanceCharge ($params2[1]['allowancecharges']);
     $rowCounter++;
 }
+$myFakutra->addInvoiceLineAllowanceCharge ($params['allowancecharges']);
 
 if($_lib['sess']->get_companydef('ShowInvoiceAmountThisYear') == 1 && 1 == 0)
 {
