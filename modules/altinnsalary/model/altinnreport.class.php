@@ -675,6 +675,12 @@ class altinn_report {
           self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall kilometer");
           $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
         }
+        elseif (in_array($salary_line->SalaryDescription, array('reiseKostMedOvernattingPaaHybelBrakkePrivat'))) {
+          // days /quantity for the entry
+          // Error is: Salary line quantity(in days) for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
+          self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall dager");
+          $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
+        }
         // there can be multiple entries for one salary so we add to an array
         $inntekt_tmp[] = $inntekt;
       }
