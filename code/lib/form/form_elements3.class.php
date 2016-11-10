@@ -766,9 +766,13 @@ class form3
 
 ###########################################################
   function AccountPeriod_menu3($args) {
-      global $_QUERY;
+      global $_QUERY, $_lib;
       if(isset($args['noaccess'])) {
-        $args['query'] = $_QUERY['form']['periodallmenu'];
+        if ($_lib['sess']->get_person('AccessLevel') == 1) {
+          $args['query'] = $_QUERY['form']['periodmenuforreadonly'];
+        } else {
+          $args['query'] = $_QUERY['form']['periodallmenu'];
+        }
       }
       elseif($args['access'] > 2) {
         $args['query'] = $_QUERY['form']['periodaccess2menu'];

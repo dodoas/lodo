@@ -56,6 +56,7 @@ $_QUERY['form']['vatmenu']                  = "select * from vat where Active=1 
 $_QUERY['form']['vatSalesMenu']             = "select * from vat where Percent>=0 and VatID<20 and Active=1 ";
 $_QUERY['form']['vatBuyMenu']               = "select * from vat where Percent>=0 and VatID>=20 and Active=1 ";
 $_QUERY['form']['periodallmenu']            = "select Period from accountperiod order by Period desc";
+$_QUERY['form']['periodmenuforreadonly']    = "select Period from accountperiod where ShowForReadOnly = 1 order by Period desc";
 $_QUERY['form']['periodaccess2menu']        = "select Period from accountperiod where (Status=2 or Status=3) order by Period desc";
 $_QUERY['form']['periodaccessmenu']         = "select Period from accountperiod where Status=2 order by Period desc";
 $_QUERY['form']['PosibleSalaryYears']       = "select distinct substring(Period, 1, 4) from accountperiod where Period is not null order by Period";
