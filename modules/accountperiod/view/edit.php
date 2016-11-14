@@ -24,6 +24,7 @@ $result_period = $_lib['db']->db_query($sql_period);
 <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
 
 <table class="lodo_data">
+  <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
   <tr>
     <td><h2>Periode</h2></td>
     <td colspan="5" align="right">
@@ -42,13 +43,14 @@ $result_period = $_lib['db']->db_query($sql_period);
     <tr>
       <td colspan="<? print (($_lib['sess']->get_person('AccessLevel') > 1) ? 7 : 6); ?>" align="right"><? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_accountperiod_update', 'value'=>'Lagre periode (S)', 'accesskey' => 'S')) ?></td>
     </tr>
+  <? } ?>
   <tr>
     <th>Periode</th>
     <th>Lukket</th>
     <th>Åpen</th>
     <th>Ferdig</th>
     <th>Stengt</th>
-    <? if ($_lib['sess']->get_person('AccessLevel') > 1) { print '<th>F&oslash;r lese</th>'; } ?>
+    <? if ($_lib['sess']->get_person('AccessLevel') > 1) { print '<th>F&aring;r lese</th>'; } ?>
   </tr>
     <?
     while($row = $_lib['db']->db_fetch_object($result_period)) {

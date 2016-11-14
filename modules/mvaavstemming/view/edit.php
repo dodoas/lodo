@@ -517,7 +517,15 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 </table>
 <table>
     <tr>
-        <td width="500" class="number"><? print $_lib['form3']->submit(array('name'=>'action_avstemming_update', 'value'=>'Lagre siden (S)', 'accesskey'=>'S')) ?>   <? global $_sess; if($_lib['sess']->get_person('AccessLevel') >= 3) { ?> <a href="<? print $_lib['sess']->dispatch."t=mvaavstemming.fix_mva_avst"; ?>">oppdater MVA Kode</a>   <? } ?> </td>
+        <td width="500" class="number">
+            <? if($_lib['sess']->get_person('AccessLevel') >= 3) {
+                print $_lib['form3']->submit(array('name'=>'action_avstemming_update', 'value'=>'Lagre siden (S)', 'accesskey'=>'S'));
+            } ?>
+            <? global $_sess;
+            if($_lib['sess']->get_person('AccessLevel') >= 3) {
+                ?> <a href="<? print $_lib['sess']->dispatch."t=mvaavstemming.fix_mva_avst"; ?>">oppdater MVA Kode</a> <?
+            } ?>
+        </td>
     </tr>
 </table>
 </form>

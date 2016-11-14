@@ -44,9 +44,11 @@ includeinc('left') ?>
 
 
 <p>
+<? if($_lib['sess']->get_person('AccessLevel') > 1){?>
 <form action="<? print $MY_SELF ?>" method="post">
 <input type="submit" name="action_fakturabankinvoicereconciliationreason_import" value="Importer fra Fakturabank" />
 </form>
+<? }?>
 </p>
 <table class="lodo_data">
 <thead>
@@ -56,9 +58,11 @@ includeinc('left') ?>
     <th>
     <th colspan="6">
         <form name="fakturabankinvoicereconciliationreason_search" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationedit" method="post">
+        <? if($_lib['sess']->get_person('AccessLevel') > 1){ ?>
 Ny kobling (skriv fb id):
             <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'FakturabankInvoiceReconciliationReasonID', 'width'=>'10')) ?>
             <? print $_lib['form3']->submit(array('name'=>'action_fakturabankinvoicereconciliationreason_new', 'value'=>'Ny kobling')) ?>
+        <? } ?>
         </form>
   <tr>
     <th class="menu">Fakturabank Avstemmings ID

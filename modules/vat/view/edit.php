@@ -209,7 +209,9 @@ $result_vat = $_lib['db']->db_query($query_vat);
    <td>
 
 </table>
+<? if($_lib['sess']->get_person('AccessLevel') > 1){ ?>
 <a href="<? print $MY_SELF ?>&amp;action_vataccount_update=1">Oppdater oppgj&oslash;rskonto</a>
+<?}?>
 <? includeinc('bottom') ?>
 </body>
 </html>
