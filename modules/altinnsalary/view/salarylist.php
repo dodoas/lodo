@@ -58,6 +58,8 @@ print $_lib['message']->get();
 <tbody>
 <?
 $errors = array();
+$employee_errors = array();
+$employee_names_list = array();
 while($row = $_lib['db']->db_fetch_object($result_salary))
 {
     $report_for_salary = new altinn_report($_periode, array($row->SalaryID), array(), false);
@@ -98,6 +100,11 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 
 <br/>
 
+<? function print_work_relation_table($report, $employees, $active) { 
+  global $_lib; 
+  global $_periode; 
+  global $employee_errors; 
+  global $employee_names_list; ?>
 <table class="lodo_data">
   <thead>
     <tr>
@@ -114,13 +121,9 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   </thead>
   <tbody>
 <?
-  $report = new altinn_report($_periode, array(), array(), false);
-  // all employees employed in this period
-  $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
-  $result_employees = $_lib['db']->db_query($query_employees);
   $employee_data = array();
   $subcompany_names = array();
-  while($employee = $_lib['db']->db_fetch_object($result_employees)) {
+  foreach ($employees as $employee) {
     $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID ." AND (wr.WorkStart <= '". $_periode ."-01' OR wr.WorkStart LIKE '". $_periode ."%') AND (wr.WorkStop >= '". $_periode ."-01' OR wr.WorkStop = '0000-00-00')";
     $result_work_relations = $_lib['db']->db_query($query_work_relations);
     while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
@@ -202,6 +205,20 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 ?>
   </tbody>
 </table>
+<? } ?>
+
+<?
+  $report = new altinn_report($_periode, array(), array(), false);
+  // all employees employed in this period
+  $query_employees = $report->queryStringForCurrentlyEmployedEmployees();
+  $result_employees = $_lib['db']->db_query($query_employees);
+  $active_employees = array();
+  while($employee = $_lib['db']->db_fetch_object($result_employees)) {
+    $active_employees[] = $employee;
+  }
+
+  print_work_relation_table($report, $active_employees, true);
+?>
 
 <br/>
   <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
