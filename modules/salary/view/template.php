@@ -208,7 +208,7 @@ print $_lib['sess']->doctype ?>
             print "<td>";
         if($accountplan->EnableCar == 1)
         {
-            print $_lib['form3']->Car_menu3(array('table'=>$db_table2, 'field'=>'CarID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->CarID));
+            print $_lib['form3']->Car_menu3(array('table'=>$db_table2, 'field'=>'CarID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->CarID, 'active_reference_date'=>$_lib['sess']->get_session('LoginFormDate')));
         }
     ?>
     </td>

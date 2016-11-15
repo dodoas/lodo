@@ -898,7 +898,7 @@ class lodo_fakturabank_fakturabank {
                 foreach($InvoiceO->InvoiceLine as &$line) {
                   if ($line->Item->AdditionalItemProperty->Name == 'Car') {
                     includelogic("car/car");
-                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and ". car::car_active_sql("car.CarID") ."=1";
+                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
                     $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                     if($carexists) {
                       $line->Item->CarID   = $carexists->CarID;

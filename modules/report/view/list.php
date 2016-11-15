@@ -67,6 +67,8 @@ print $_lib['sess']->doctype ?>
             $aconf = array();
             $aconf['table']         = 'report';
             $aconf['field']         = 'CarID';
+            $aconf['all_cars']      = true;
+            $aconf['active_reference_date'] = $thisDate;
             $_lib['form2']->car_menu2($aconf);
             ?>
         </td>
@@ -151,6 +153,8 @@ print $_lib['sess']->doctype ?>
             $aconf = array();
             $aconf['table']         = 'report';
             $aconf['field']         = 'CarID';
+            $aconf['all_cars']      = true;
+            $aconf['active_reference_date'] = $thisDate;
             $_lib['form2']->car_menu2($aconf);
             ?>
         </td>
@@ -634,6 +638,8 @@ print $_lib['sess']->doctype ?>
       $aconf = array();
       $aconf['table']         = 'report';
       $aconf['field']         = 'CarID';
+      $aconf['all_cars']      = true;
+      $aconf['active_reference_date'] = $thisDate;
       $_lib['form2']->car_menu2($aconf);
         ?>
     </td>

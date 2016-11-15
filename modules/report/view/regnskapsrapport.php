@@ -52,6 +52,8 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
                     $aconf['table']         = 'report';
                     $aconf['field']         = 'CarID';
                     $aconf['value']         = $CarID;
+                    $aconf['all_cars']      = true;
+                    $aconf['active_reference_date'] = $thisDate;
                     $_lib['form2']->car_menu2($aconf);
                     ?>
                 </th>
