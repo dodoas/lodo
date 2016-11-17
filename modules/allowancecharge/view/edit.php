@@ -6,11 +6,13 @@ $query = "select * from $db_table where AllowanceChargeID='$AllowanceChargeID'";
 $row = $_lib['storage']->get_row(array('query' => $query));
 
 $date = $_lib['sess']->get_session('LoginFormDate');
-$vat_query = "select Percent from vat where Active = 1 and VatID = " . (int) $row->OutVatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
+$vat_query = "select Percent from vat where Type = 'sale' and Active = 1 and VatID = " . (int) $row->OutVatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
 $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
-$vat_query = "select Percent from vat where Active = 1 and VatID = " . (int) $row->InVatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
+$vat_query = "select Percent from vat where Type = 'buy' and Active = 1 and VatID = " . (int) $row->InVatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
 $vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
 $tabindex = 1;
+if(!$vat_in) $_lib['message']->add("Feil inng&aring;ende konto valg");
+if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <? print $_lib['sess']->doctype ?>
@@ -23,6 +25,12 @@ $tabindex = 1;
 <?
     includeinc('top');
     includeinc('left');
+?>
+
+<?
+    if ($message = $_lib['message']->get()) {
+      print "<div class='warning'>" . $_lib['message']->get() . "</div><br>";
+    }
 ?>
 
 <form name="allowancecharge" action="<? print $MY_SELF ?>" method="post">

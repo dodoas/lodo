@@ -37,6 +37,7 @@ $db_total = $_lib['db']->db_numrows($result2);
             </tr>
          </thead>
     </table>
+    <br>
 
     <table class="lodo_data" width="700px">
             <tr>
@@ -54,10 +55,12 @@ $db_total = $_lib['db']->db_numrows($result2);
                 while($row = $_lib['db']->db_fetch_object($result2))
                 {
                     $date = $_lib['sess']->get_session('LoginFormDate');
-                    $vat_query = "select Percent from vat where Active = 1 and VatID = ".(int)$row->OutVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
+                    $vat_query = "select Percent from vat where Type = 'sale' and Active = 1 and VatID = ".(int)$row->OutVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
                     $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
-                    $vat_query = "select Percent from vat where Active = 1 and VatID = ".(int)$row->InVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
+                    $vat_query = "select Percent from vat where Type = 'buy' and Active = 1 and VatID = ".(int)$row->InVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
                     $vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
+                    if(!$vat_in) print "<div class='warning'>Rabatt/Kostnad $row->AllowanceChargeID: Feil inng&aring;ende konto valg</div>";
+                    if(!$vat_out) print "<div class='warning'>Rabatt/Kostnad $row->AllowanceChargeID: Feil utg&aring;ende konto valg</div>";
                     ?>
                     <tr>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=allowancecharge.edit&AllowanceChargeID=<? print $row->AllowanceChargeID ?>"><? print $row->AllowanceChargeID ?></a></td>
@@ -72,6 +75,7 @@ $db_total = $_lib['db']->db_numrows($result2);
                     </tr>
                     <?
                 }
+                print "<br>";
             ?>
     </table>
 </body>

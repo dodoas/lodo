@@ -93,9 +93,9 @@ products['<? print $product['ProductID']; ?>'] = {ProductName: '<? print $produc
 // needed so we can update invoice allowance/charge line without reloading the page
 var allowances_charges = [];
 <?
-$allowancecharge_query = 'SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, OutVatPercent, OutVatID
+$allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, OutVatPercent, OutVatID
                   FROM allowancecharge
-                  WHERE Active = 1';
+                  WHERE Active = 1";
 $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
 while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
 ?>
@@ -283,8 +283,14 @@ function updateInvoiceData() {
     }
   }
   var invoice_allowances_charges = document.getElementsByClassName('global_invoice_allowancecharge');
+
+  document.getElementById('invoice_errors').innerHTML = "";
+  var allowance_charge_errors = "";
+
   for(i = 0; i < invoice_allowances_charges.length; i++) {
     var allowance_charge_id = invoice_allowances_charges[i].id.split('_')[3];
+    var allowance_charge_id_id = document.getElementById('<? print $db_table4 ?>.AllowanceChargeID.'+allowance_charge_id).value;
+    var allowance_charge_vat_id = document.getElementById('<? print $db_table4 ?>.VatID.'+allowance_charge_id).value;
     var allowance_charge_vat_percent_string = document.getElementById('<? print $db_table4 ?>.VatPercent.'+allowance_charge_id).innerHTML;
     var allowance_charge_charge_indicator = document.getElementById('<? print $db_table4 ?>.ChargeIndicator.'+allowance_charge_id).value == 1;
     allowance_charge_vat_percent_string = allowance_charge_vat_percent_string.replace('%', '');
@@ -299,6 +305,14 @@ function updateInvoiceData() {
     } else {
       amount_allowance_sum += allowance_charge_amount;
     }
+
+    if (!allowance_charge_vat_id) {
+      allowance_charge_errors += "Feil utg&aring;ende konto valg f&oslash;r " + (allowance_charge_charge_indicator?"kostnad":"rabatt") + " <a href='<? print $_lib['sess']->dispatch . "t=allowancecharge.edit&AllowanceChargeID="; ?>" + allowance_charge_id_id + "'>" + allowance_charge_id_id + "</a><br/>";
+    }
+
+  }
+  if (allowance_charge_errors !== "") {
+    document.getElementById('invoice_errors').innerHTML += "<div class='warning'>" + allowance_charge_errors + "</div>";
   }
   var amount_excluding_vat_sum = amount_line_extension_sum + amount_charge_sum - amount_allowance_sum;
   var amount_including_vat_sum = amount_excluding_vat_sum + vat_amount_sum;
@@ -885,10 +899,20 @@ foreach ($currencies as $currency) {
       <td class="menu"></td>
     </tr>
   <?
+      $allowances_charges = array();
+      $allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, OutVatPercent, OutVatID
+                                FROM allowancecharge
+                                WHERE Active = 1";
+      $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
+      while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
+        $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
+      }      
+
       $vat_allowance = 0;
       $vat_charge    = 0;
       $sum_allowance = 0;
       $sum_charge    = 0;
+      $ac_errors = array();
       while($acrow = $_lib['db']->db_fetch_object($result3)) {
         $vat_allowance_tax_amount     = ($acrow->ChargeIndicator) ? 0 : $acrow->Amount * ($acrow->VatPercent/100);
         $vat_charge_tax_amount        = ($acrow->ChargeIndicator) ? $acrow->Amount * ($acrow->VatPercent/100) : 0;
@@ -900,6 +924,10 @@ foreach ($currencies as $currency) {
         $sum_charge    += $sum_charge_taxable_amount;
         $tax_categories[$acrow->VatPercent]->TaxableAmount += $sum_charge_taxable_amount - $sum_allowance_taxable_amount;
         $tax_categories[$acrow->VatPercent]->TaxAmount     += $vat_charge_tax_amount - $vat_allowance_tax_amount;
+
+        if(is_null($allowances_charges[$acrow->AllowanceChargeID]["OutVatID"])) {
+          $ac_errors[] = "Feil utg&aring;ende konto valg f&oslash;r ". ($allowances_charges[$acrow->AllowanceChargeID]["charge_indicator"]?"kostnad":"rabatt") ." <a href='". $_lib['sess']->dispatch ."t=allowancecharge.edit&AllowanceChargeID=". $acrow->AllowanceChargeID ."'>". $acrow->AllowanceChargeID ."</a>";
+        }
   ?>
     <tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_<? print $acrow->InvoiceAllowanceChargeID; ?>">
       <td>
@@ -979,6 +1007,13 @@ foreach ($currencies as $currency) {
 </tbody>
 
 </table>
+
+<div id="invoice_errors" class="allowance_charge">
+  <? foreach ($ac_errors as $message) {
+    print "<div class='warning'>". $message ."<br/></div>";
+  } ?>
+</div>
+
 <br>
 <table border="0" cellspacing="0" width="875">
 <thead>

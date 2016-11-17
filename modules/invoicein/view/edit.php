@@ -284,10 +284,20 @@ function updateAndPerformAction(link_button) {
       <td class="menu"></td>
     </tr>
   <?
+      $allowances_charges = array();
+      $allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, InVatPercent, InVatID
+                                FROM allowancecharge
+                                WHERE Active = 1";
+      $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
+      while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
+        $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
+      }
+
       $vat_allowance = 0;
       $vat_charge    = 0;
       $sum_allowance = 0;
       $sum_charge    = 0;
+      $ac_errors = array();
       while($acrow = $_lib['db']->db_fetch_object($result3)) {
         $vat_allowance_tax_amount     = ($acrow->ChargeIndicator) ? 0 : $acrow->Amount * ($acrow->VatPercent/100);
         $vat_charge_tax_amount        = ($acrow->ChargeIndicator) ? $acrow->Amount * ($acrow->VatPercent/100) : 0;
@@ -299,6 +309,9 @@ function updateAndPerformAction(link_button) {
         $sum_charge    += $sum_charge_taxable_amount;
         $tax_categories[$acrow->VatPercent]->TaxableAmount += $sum_charge_taxable_amount - $sum_allowance_taxable_amount;
         $tax_categories[$acrow->VatPercent]->TaxAmount     += $vat_charge_tax_amount - $vat_allowance_tax_amount;
+        if(is_null($allowances_charges[$acrow->AllowanceChargeID]["InVatID"])) {
+          $ac_errors[] = "Feil inng&aring;ende konto valg f&oslash;r ". ($allowances_charges[$acrow->AllowanceChargeID]["charge_indicator"]?"kostnad":"rabatt") ." <a href='". $_lib['sess']->dispatch ."t=allowancecharge.edit&AllowanceChargeID=". $acrow->AllowanceChargeID ."'>". $acrow->AllowanceChargeID ."</a>";
+        }
   ?>
     <tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_<? print $acrow->InvoiceAllowanceChargeID; ?>">
       <td>
@@ -370,6 +383,13 @@ function updateAndPerformAction(link_button) {
 
 </tfoot>
 </table>
+
+<div id="invoice_errors" class="allowance_charge">
+  <? foreach ($ac_errors as $message) {
+    print "<div class='warning'>". $message ."<br/></div>";
+  } ?>
+</div>
+
 <br>
 <table width="875">
 <thead>
