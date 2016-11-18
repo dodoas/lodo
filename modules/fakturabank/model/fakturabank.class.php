@@ -178,6 +178,21 @@ class lodo_fakturabank_fakturabank {
         }
     }
 
+    private function find_car_by_code($CarCode) {
+        global $_lib;
+
+        $query = "SELECT `CarID`, `CarCode` FROM car WHERE `CarCode` = '$CarCode'";
+        $result = $_lib['storage']->db_query3(array('query' => $query));
+        if (!$result) {
+            return false;
+        }
+        if ($obj = $_lib['storage']->db_fetch_object($result)) {
+            return $obj->CarID;
+        } else {
+            return false;
+        }
+    }
+
     private function find_department_by_id($CompanyDepartmentID) {
         global $_lib;
 
@@ -735,6 +750,17 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Department = $DepartmentID;
                 } else {
                     $InvoiceO->Status     .= "Fant ikke intern avdeling for kode $DepartmentID (customerdepartmentcode does not match any internal departments)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+            }
+
+            if (($CarCode = $acc_cost_params['carcode']) != '') {
+                if ($CarID = $this->find_car_by_code($CarCode)) {
+                    $InvoiceO->CarID = $CarID;
+                } else {
+                    $InvoiceO->Status     .= "Fant ikke intern bil for kode " . $CarCode . " (carcode does not match any internal cars)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
