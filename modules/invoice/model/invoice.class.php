@@ -1240,9 +1240,6 @@ class invoice {
             } else if ($invoice->SCountryCode == 'NO') {
                 $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
-        } else {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = preg_replace('/[^0-9]/', '', $invoice->SOrgNo) . 'MVA';
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $invoice->SName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $invoice->SAddress;
@@ -1292,11 +1289,7 @@ class invoice {
             } else if ($invoice->ICountryCode == 'NO') {
                 $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
-        } else if (strstr(strtolower($invoice->IOrgNo), 'mva')) {
-            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IOrgNo;
-            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
-
         $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $invoice->CustomerAccountPlanID;
         $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $invoice->IName;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $invoice->IAddress;
