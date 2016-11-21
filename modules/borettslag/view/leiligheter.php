@@ -74,10 +74,11 @@ $result_e = $_dbh[$_dsn]->db_query($selectEier);
         &nbsp;
     </td>
     <td align="right" colspan="3">
+        <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
         <!-- <a href="<? print $_SETUP['DISPATCH'] ?>t=borettslag.leilighet&new=1&">Ny leilighet</a> -->
         <input type="button" value="Ny leilighet" name="action_leiligheter_new" tabindex="2" onClick="document.location='<? print $_SETUP['DISPATCH'] ?>t=borettslag.leilighet';">
+        <? } ?>
     </td>
-
 </tfoot>
 </table>
 

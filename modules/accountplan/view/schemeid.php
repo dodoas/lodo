@@ -78,10 +78,14 @@ function filterSchemesByCountryCode(country) {
   <td>
   </td>
   <td>
-    <input type="submit" name="action_save_scheme" value="Lagre firma ID" />
+    <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
+      <input type="submit" name="action_save_scheme" value="Lagre firma ID" />
+    <? } ?>
   </td>
   <td>
-    <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
+    <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
+      <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
+    <? } ?>
   </td>
 </tr>
 
