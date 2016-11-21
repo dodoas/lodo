@@ -78,7 +78,7 @@ foreach($car_milage as $milage_year => $milage) {
         var buy_date_string = $("#buy_date").val();
         var sell_date_string = $("#sell_date").val();
 
-        var current_date = Date.parse(new Date());
+        var current_date = Date.parse('<? print $_lib['sess']->get_session('LoginFormDate'); ?>');
         var buy_date = validateDate(buy_date_string) ? Date.parse(buy_date_string) : current_date;
         var sell_date = validateDate(sell_date_string) ? Date.parse(sell_date_string) : current_date;
 
@@ -130,7 +130,7 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Aktiv</td>
-    <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>car::is_active($car->CarID), 'disabled'=>true, 'class'=>'carActiveCheckbox')) ?></td>
+    <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>car::is_active($car->CarID, $_lib['sess']->get_session('LoginFormDate')), 'disabled'=>true, 'class'=>'carActiveCheckbox')) ?></td>
 </tr>
 <tr>
     <td class="menu">Registreringsnummer</td>
