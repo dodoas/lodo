@@ -54,11 +54,13 @@ print $_lib['sess']->doctype ?>
 // needed so we can update invoice allowance/charge line without reloading the page
 var allowances_charges = [];
 <?
+$allowances_charges = array();
 $allowancecharge_query = 'SELECT AllowanceChargeID, ChargeIndicator, InAccountPlanID, Reason, Amount, InVatPercent, InVatID
                   FROM allowancecharge
                   WHERE Active = 1';
 $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
 while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
+  $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
 ?>
 allowances_charges['<? print $allowance_charge['AllowanceChargeID']; ?>'] = {ChargeIndicator: '<? print $allowance_charge['ChargeIndicator']; ?>', Reason: '<? print $allowance_charge['Reason']; ?>', AccountPlanID: '<? print $allowance_charge['InAccountPlanID']; ?>', Amount: parseFloat('<? print $allowance_charge['Amount']; ?>'), VatPercent: parseFloat('<? print $allowance_charge['InVatPercent']; ?>'), VatID: '<? print $allowance_charge['InVatID']; ?>'};
 <?
@@ -284,15 +286,6 @@ function updateAndPerformAction(link_button) {
       <td class="menu"></td>
     </tr>
   <?
-      $allowances_charges = array();
-      $allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, InVatPercent, InVatID
-                                FROM allowancecharge
-                                WHERE Active = 1";
-      $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
-      while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
-        $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
-      }
-
       $vat_allowance = 0;
       $vat_charge    = 0;
       $sum_allowance = 0;
@@ -385,8 +378,8 @@ function updateAndPerformAction(link_button) {
 </table>
 
 <div id="invoice_errors" class="allowance_charge">
-  <? foreach ($ac_errors as $message) {
-    print "<div class='warning'>". $message ."<br/></div>";
+  <? if(!empty($ac_errors)) {
+      print "<div class='warning'>". implode("<br>", $ac_errors) ."</div>";
   } ?>
 </div>
 

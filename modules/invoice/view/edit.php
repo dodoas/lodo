@@ -97,7 +97,9 @@ $allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountP
                   FROM allowancecharge
                   WHERE Active = 1";
 $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
+$allowances_charges = array();
 while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
+  $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
 ?>
 allowances_charges['<? print $allowance_charge['AllowanceChargeID']; ?>'] = {ChargeIndicator: '<? print $allowance_charge['ChargeIndicator']; ?>', Reason: '<? print $allowance_charge['Reason']; ?>', AccountPlanID: '<? print $allowance_charge['OutAccountPlanID']; ?>', Amount: parseFloat('<? print $allowance_charge['Amount']; ?>'), VatPercent: parseFloat('<? print $allowance_charge['OutVatPercent']; ?>'), VatID: '<? print $allowance_charge['OutVatID']; ?>'};
 <?
@@ -577,6 +579,9 @@ function validateBeforeSave() {
   var product_names = $("input.product");
   all_valid = markRed(product_names) && all_valid;
 
+  var allowance_charge_errors = document.getElementById('invoice_errors').innerHTML;
+  all_valid = (allowance_charge_errors.trim() == "") && all_valid;
+
   enableOrDisable(all_valid, 'action_invoice_update');
 }
 
@@ -899,14 +904,6 @@ foreach ($currencies as $currency) {
       <td class="menu"></td>
     </tr>
   <?
-      $allowances_charges = array();
-      $allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, OutVatPercent, OutVatID
-                                FROM allowancecharge
-                                WHERE Active = 1";
-      $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
-      while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
-        $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
-      }      
 
       $vat_allowance = 0;
       $vat_charge    = 0;
@@ -1009,9 +1006,9 @@ foreach ($currencies as $currency) {
 </table>
 
 <div id="invoice_errors" class="allowance_charge">
-  <? foreach ($ac_errors as $message) {
-    print "<div class='warning'>". $message ."<br/></div>";
-  } ?>
+  <? if(!empty($ac_errors)) {    
+      print "<div class='warning'>". implode("<br>", $ac_errors) ."</div>";
+    } ?>
 </div>
 
 <br>
