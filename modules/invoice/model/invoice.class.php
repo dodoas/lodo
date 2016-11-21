@@ -768,7 +768,8 @@ class invoice {
         $accountplan = $accounting->get_accountplan_object($product->AccountPlanID);
         #print_r($accountplan);
 
-        $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $this->headH['InvoiceDate']));
+        $VATID = (!is_null($accountplan->VatID) && $accountplan->VatID != 0) ? $accountplan->VatID : 10; // If no VAT category select VAT undefined = 0%
+        $VAT = $accounting->get_vataccount_object(array('VatID' => $VATID, 'date' => $this->headH['InvoiceDate']));
 
         #print_r($product);
 
@@ -780,7 +781,7 @@ class invoice {
 
         #if($line['Vat'] <= 0)
         $lineH['Vat']   = $VAT->Percent;
-        $lineH['VatID'] = $VAT->VatID;
+        $lineH['VatID'] = $VATID;
 
         if(!$line['ProductName'])
             $lineH['ProductName'] = $product->ProductName;

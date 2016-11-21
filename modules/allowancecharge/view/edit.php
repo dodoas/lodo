@@ -70,7 +70,7 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
     </tr>
     <tr>
         <td>MVA inn</td>
-        <td colspan="2"><? if($vat_in->Percent) { print "$vat_in->Percent%"; } ?></td>
+        <td colspan="2"><? if(!is_null($vat_in->Percent)) { print "$vat_in->Percent%"; } ?></td>
     </tr>
     <tr>
         <td>Resultat konto utg&aring;ende</td>
@@ -78,7 +78,7 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
     </tr>
     <tr>
         <td>MVA ut</td>
-        <td colspan="2"><? if($vat_out->Percent) { print "$vat_out->Percent%"; } ?></td>
+        <td colspan="2"><? if(!is_null($vat_out->Percent)) { print "$vat_out->Percent%"; } ?></td>
     </tr>
 </tbody>
 <tfoot>
