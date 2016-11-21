@@ -134,7 +134,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   </tr>
   <tr>
     <td class="menu">Bil</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableCar",$account->EnableCar,'') ?> Default: <? $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $account->CarID, 'tabindex' => $tabindex++)) ?></td>
+    <td><? $_lib['form2']->checkbox2($db_table, "EnableCar",$account->EnableCar,'') ?> Default: <? $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $account->CarID, 'tabindex' => $tabindex++, 'all_cars' => true)) ?></td>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>

@@ -80,6 +80,7 @@ class form3
         $element .= " onchange='submit()'";
       }
       if($args[value]) $element = " $element checked ";
+      if($args["class"]) $element = " $element class=\"". $args["class"] ."\" ";
       $element = " $element />\n";
       return $element;
     }
@@ -111,7 +112,7 @@ class form3
 
     function Car_menu3($args)
     {
-        $args['query'] = $this->_QUERY['form']['carmenu'];
+        $args['query'] = "select CarID, CarName from car where ". car::car_active_sql("car.CarID", $args['active_reference_date']) ."=1";
         return $this->_MakeSelect($args);
     }
 

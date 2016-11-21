@@ -51,6 +51,66 @@ foreach($car_milage as $milage_year => $milage) {
 <head>
     <title>Empatix - car</title>
     <? includeinc('head') ?>
+    <script type="text/javascript">
+      function setCarEnableVatCheckbox(type) {
+        var mva_active = "not_selected";
+        switch(type) {
+          case 'Personbil':
+            mva_active = false;
+          break
+          case 'Varebil(klasse 2)':
+            mva_active = true;
+          break
+          case 'Lastebil':
+            mva_active = true;
+          break
+          case 'Slepvogn':
+            mva_active = true;
+          break
+        }
+
+        if(mva_active != "not_selected") {
+          $(".carEnableVatCheckbox")[0].checked = mva_active;
+        }
+      }
+
+      function setCarActiveCheckbox() {
+        var buy_date_string = $("#buy_date").val();
+        var sell_date_string = $("#sell_date").val();
+
+        var current_date = Date.parse('<? print $_lib['sess']->get_session('LoginFormDate'); ?>');
+        var buy_date = validateDate(buy_date_string) ? Date.parse(buy_date_string) : current_date;
+        var sell_date = validateDate(sell_date_string) ? Date.parse(sell_date_string) : current_date;
+
+        var difference_needed = 30 * 24 * 60 * 60 * 1000;
+
+        var checkbox = $(".carActiveCheckbox")[0];
+        var active = (current_date >= buy_date - difference_needed) && (current_date <= sell_date + difference_needed);
+        checkbox.checked = active;
+      }
+
+      // takes date as string ('YYYY-MM-DD'), returns true if valid, false if not.
+      function validateDate(date) {
+        // regex check
+        date = date.trim();
+        if (!date.match(/^\d{4}-\d{1,2}-\d{1,2}$/)) return false;
+
+        // check with Date object
+        var date_obj = new Date(date);
+        if (!date_obj) return false;
+
+        // compare with Date object string
+        var dd = date_obj.getDate();
+        var mm = date_obj.getMonth() + 1;
+        var yyyy = date_obj.getFullYear();
+
+        var date_ints = date.split("-");
+        if (yyyy != parseInt(date_ints[0]) || mm != parseInt(date_ints[1]) || dd != parseInt(date_ints[2])) return false;
+
+        return true;
+      }
+
+    </script>
 </head>
 <body>
 
@@ -70,7 +130,7 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Aktiv</td>
-    <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>$car->Active)) ?></td>
+    <td colspan="3"><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>car::is_active($car->CarID, $_lib['sess']->get_session('LoginFormDate')), 'disabled'=>true, 'class'=>'carActiveCheckbox')) ?></td>
 </tr>
 <tr>
     <td class="menu">Registreringsnummer</td>
@@ -80,17 +140,37 @@ foreach($car_milage as $milage_year => $milage) {
     <td class="menu">Merke og modell</td>
     <td><input type="text" name="car.BrandAndModel" value="<? print $car->BrandAndModel ?>" size="60"></td>
 </tr>
+<tr> <!-- leave or remove? -->
+    <td class="menu">Bilnavn</td>
+    <td><input type="text" name="car.CarName" value="<? print $car->CarName ?>" size="60"></td>
+</tr>
+<tr>
+    <td class="menu">Type</td>
+    <?
+      $VehicleTypes = array(
+        'Personbil'         => 'Personbil',
+        'Varebil(klasse 2)' => 'Varebil(klasse 2)',
+        'Lastebil'          => 'Lastebil',
+        'Slepvogn'          => 'Slepvogn'
+      );
+    ?>
+    <td><? print $_lib['form3']->Generic_menu3(array('data' => $VehicleTypes, 'table'=> 'car', 'field'=>'VehicleType', 'value'=>$car->VehicleType, 'notChoosenText' => ' ', 'OnChange'=>'setCarEnableVatCheckbox(this.value);')); ?></td>
+</tr>
+<tr>
+    <td class="menu">Aktiver MVA</td>
+    <td><? print $_lib['form3']->checkbox(array('table'=>'car', 'field'=>'EnableVAT', 'value'=>$car->EnableVAT, 'class'=>'carEnableVatCheckbox')) ?></td>
+</tr>
+<tr>
+    <td class="menu">Registrerings&aring;r</td>
+    <td colspan="3"><input type="text" name="car.RegistrationYear" value="<? print "$car->RegistrationYear";  ?>" size="60"></td>
+</tr>
 <tr>
     <td class="menu">Antall seter</td>
     <td><input type="text" name="car.NumberOfSeats" value="<? print $car->NumberOfSeats ?>" size="60"></td>
 </tr>
 <tr>
-    <td class="menu">Bilnavn</td>
-    <td><input type="text" name="car.CarName" value="<? print $car->CarName ?>" size="60"></td>
-</tr>
-<tr>
     <td class="menu">Kj&oslash;psdato</td>
-    <td><input type="text" name="car.ValidFrom" value="<? if ((int)($car->ValidFrom) != 0) print strftime("%F", strtotime($car->ValidFrom)) ?>" size="60"></td>
+    <td><input type="text" name="car.ValidFrom" value="<? if ((int)($car->ValidFrom) != 0) print strftime("%F", strtotime($car->ValidFrom)) ?>" size="60" id="buy_date" onchange="setCarActiveCheckbox();"></td>
 </tr>
 <tr>
     <td class="menu">Kj&oslash;pepris</td>
@@ -98,31 +178,11 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Salgsdato</td>
-    <td><input type="text" name="car.ValidTo" value="<? if ((int)($car->ValidTo) != 0) print strftime("%F", strtotime($car->ValidTo)) ?>" size="60"></td>
+    <td><input type="text" name="car.ValidTo" value="<? if ((int)($car->ValidTo) != 0) print strftime("%F", strtotime($car->ValidTo)) ?>" size="60" id="sell_date" onchange="setCarActiveCheckbox();"></td>
 </tr>
 <tr>
     <td class="menu">Salgspris</td>
     <td><input type="text" name="car.SalePrice" value="<? if ($car->SalePrice > 0) print $_lib['format']->Amount($car->SalePrice) ?>" size="60"></td>
-</tr>
-<tr>
-    <td class="menu">Type</td>
-    <?
-      $VehicleTypes = array(
-        'Varebil(klasse 2)' => 'Varebil(klasse 2)',
-        'Personbil'         => 'Personbil',
-        'Lastebil(tankbil)' => 'Lastebil(tankbil)',
-        'Slepvogn'          => 'Slepvogn'
-      );
-    ?>
-    <td><? print $_lib['form3']->Generic_menu3(array('data' => $VehicleTypes, 'table'=> 'car', 'field'=>'VehicleType', 'value'=>$car->VehicleType, 'notChoosenText' => ' ')); ?></td>
-</tr>
-<tr>
-    <td class="menu">Aktiver MVA</td>
-    <td><? print $_lib['form3']->Generic_menu3(array('data' => array('nei', 'ja'), 'table'=> 'car', 'field'=>'EnableVAT', 'value'=>$car->EnableVAT, 'required' => true)); ?></td>
-</tr>
-<tr>
-    <td class="menu">Registrerings&aring;r</td>
-    <td colspan="3"><input type="text" name="car.RegistrationYear" value="<? print "$car->RegistrationYear";  ?>" size="60"></td>
 </tr>
 <tr>
     <td class="menu">Drivstoff</td>
@@ -130,7 +190,7 @@ foreach($car_milage as $milage_year => $milage) {
       $FuelTypes = array(
         'Diesel' => 'Diesel',
         'Bensin' => 'Bensin',
-        'Elektrisk' => 'Elektrisk'
+        'Elektrisk' => 'Elbil'
       );
     ?>
     <td><? print $_lib['form3']->Generic_menu3(array('data' => $FuelTypes, 'table'=> 'car', 'field'=>'Fuel', 'value'=>$car->Fuel, 'notChoosenText' => ' ')); ?></td>
