@@ -281,7 +281,7 @@ SELECT DISTINCT(JournalID) FROM (
           ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * iac.VatPercent / 100.0), 2) AS AmountOut,
           iac.InvoiceID AS JournalID
           FROM invoiceallowancecharge iac
-          WHERE InvoiceType = 'out' AND InvoiceID in ($query_for_ids) AND Amount <> 0
+          WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($query_for_ids) AND Amount <> 0
 
           UNION
 
@@ -291,7 +291,7 @@ SELECT DISTINCT(JournalID) FROM (
             ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * iac.VatPercent / 100.0 * -1, 0), 2) AS AmountOut,
             iac.InvoiceID AS JournalID
             FROM invoiceallowancecharge iac
-            WHERE InvoiceType = 'out' AND  InvoiceID in ($query_for_ids) AND Amount <> 0
+            WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($query_for_ids) AND Amount <> 0
 
             UNION
 
