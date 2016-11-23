@@ -29,10 +29,12 @@ elseif($_lib['input']->getProperty('action_allowancecharge_update'))
   $date = $_lib['sess']->get_session('LoginFormDate');
   $accountplan_query = "select * from accountplan where AccountPlanID = " . (int) $_POST['allowancecharge_OutAccountPlanID_' . $AllowanceChargeID];
   $accountplan_out = $_lib['storage']->get_row(array('query' => $accountplan_query));
+  if (!is_null($accountplan_out) && (!$accountplan_out->EnableVAT || is_null($accountplan_out->VatID))) $accountplan_out->VatID = 10; // TODO: 10, 30 or 32? Fix when answered by Hildegunn
   $vat_query = "select Percent, VatID from vat where Type = 'sale' AND Active = 1 and VatID = " . (int) $accountplan_out->VatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
   $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
   $accountplan_query = "select * from accountplan where AccountPlanID = " . (int) $_POST['allowancecharge_InAccountPlanID_' . $AllowanceChargeID];
   $accountplan_in = $_lib['storage']->get_row(array('query' => $accountplan_query));
+  if (!is_null($accountplan_in) && (!$accountplan_in->EnableVAT || is_null($accountplan_in->VatID))) $accountplan_in->VatID = 40; // TODO: 40, 60 or 62? Fix when answered by Hildegunn
   $vat_query = "select Percent, VatID from vat where Type = 'buy' AND Active = 1 and VatID = " . (int) $accountplan_in->VatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
   $vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
 

@@ -6,6 +6,18 @@ $query = "select ac.*, a1.AccountName as OutAccountName, a2.AccountName as InAcc
 $result2 = $_lib['db']->db_query($query);
 $db_total = $_lib['db']->db_numrows($result2);
 
+while($row = $_lib['db']->db_fetch_object($result2)) {
+  $date = $_lib['sess']->get_session('LoginFormDate');
+  $vat_query = "select Percent from vat where Type = 'sale' and Active = 1 and VatID = ".(int)$row->OutVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
+  $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
+  $vat_query = "select Percent from vat where Type = 'buy' and Active = 1 and VatID = ".(int)$row->InVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
+  $vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
+  if(!$vat_in) $_lib['message']->add(($row->ChargeIndicator != 1 ? "Rabatt ":"Kostnad ") . $row->AllowanceChargeID . ": Feil inng&aring;ende konto valg");
+  else $row->InPercent = $vat_in->Percent;
+  if(!$vat_out) $_lib['message']->add(($row->ChargeIndicator != 1 ? "Rabatt ":"Kostnad ") . $row->AllowanceChargeID . ": Feil utg&aring;ende konto valg");
+  else $row->OutPercent = $vat_in->Percent;
+  $allowances_charges[] = $row;
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <? print $_lib['sess']->doctype ?>
@@ -18,6 +30,12 @@ $db_total = $_lib['db']->db_numrows($result2);
 <?
     includeinc('top');
     includeinc('left');
+    if ($messages = $_lib['message']->get()) {
+?>
+    <div class="warning"><? print $messages; ?></div>
+    <br>
+<?
+    }
 ?>
 
     <table class="lodo_data" width="700px">
@@ -37,7 +55,6 @@ $db_total = $_lib['db']->db_numrows($result2);
             </tr>
          </thead>
     </table>
-    <br>
 
     <table class="lodo_data" width="700px">
             <tr>
@@ -52,16 +69,8 @@ $db_total = $_lib['db']->db_numrows($result2);
               <th class="sub" align="right">MVA ut</th>
             </tr>
             <?
-                while($row = $_lib['db']->db_fetch_object($result2))
-                {
-                    $date = $_lib['sess']->get_session('LoginFormDate');
-                    $vat_query = "select Percent from vat where Type = 'sale' and Active = 1 and VatID = ".(int)$row->OutVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
-                    $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
-                    $vat_query = "select Percent from vat where Type = 'buy' and Active = 1 and VatID = ".(int)$row->InVatID." and ValidFrom <= '$date' and ValidTo >= '$date'";
-                    $vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
-                    if(!$vat_in) print "<div class='warning'>Rabatt/Kostnad $row->AllowanceChargeID: Feil inng&aring;ende konto valg</div>";
-                    if(!$vat_out) print "<div class='warning'>Rabatt/Kostnad $row->AllowanceChargeID: Feil utg&aring;ende konto valg</div>";
-                    ?>
+                foreach($allowances_charges as $row) {
+            ?>
                     <tr>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=allowancecharge.edit&AllowanceChargeID=<? print $row->AllowanceChargeID ?>"><? print $row->AllowanceChargeID ?></a></td>
                         <td> <? print $_lib['form3']->checkbox(array('table'=>'allowancecharge', 'value'=>$row->Active, 'disabled'=>'1')) ?> </td>
@@ -69,13 +78,12 @@ $db_total = $_lib['db']->db_numrows($result2);
                         <td><a href="<? print $_lib['sess']->dispatch ?>t=allowancecharge.edit&AllowanceChargeID=<? print $row->AllowanceChargeID ?>"><? print $row->Reason ?></a></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->Amount, 'return'=>'value')) ?></td>
                         <td align="left"><? if($row->InAccountName) print $row->InAccountPlanID." ".$row->InAccountName; ?></td>
-                        <td align="right"><? print $_lib['format']->Percent(array('value'=>$vat_in->Percent*1, 'return'=>'value')) ?></td>
+                        <td align="right"><? if (!is_null($row->InPercent)) print $_lib['format']->Percent(array('value'=>$row->InPercent*1, 'return'=>'value')); ?></td>
                         <td align="left"><? if($row->OutAccountName) print $row->OutAccountPlanID." ".$row->OutAccountName; ?></td>
-                        <td align="right"><? print $_lib['format']->Percent(array('value'=>$vat_out->Percent*1, 'return'=>'value')) ?></td>
+                        <td align="right"><? if (!is_null($row->OutPercent)) print $_lib['format']->Percent(array('value'=>$row->OutPercent*1, 'return'=>'value')); ?></td>
                     </tr>
                     <?
                 }
-                print "<br>";
             ?>
     </table>
 </body>

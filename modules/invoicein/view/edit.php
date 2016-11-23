@@ -263,7 +263,7 @@ function updateAndPerformAction(link_button) {
     </tr>
     <tr>
       <td>
-        <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_new=1&amp;inline=edit" ?>" class="button">Ny rabatt/kostnad</a>
+        <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_new=1&amp;inline=edit" ?>" class="button">Ny rabatt-/kostnadslinje</a>
       </td>
       <td>
         <a href="#" onclick="showHideAllowanceCharge(); return false;" class="button">Vis/Skjul rabatt/kostnad info</a>

@@ -873,7 +873,7 @@ foreach ($currencies as $currency) {
               'type'     => 'submit',
               'name'     => 'action_invoice_allowance_charge_new',
               'tabindex' => $tabindex++,
-              'value'    => 'Ny rabatt/kostnad',
+              'value'    => 'Ny rabatt-/kostnadslinje',
               'OnClick'  => "newInvoiceAllowanceCharge(" . $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . "); return false;"));
           }
         }

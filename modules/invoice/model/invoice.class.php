@@ -451,6 +451,9 @@ class invoice {
             #Slett billag hvis det ikke har noen linjer
             $accounting->delete_journal($this->JournalID, $this->VoucherType);
 
+            // update Total sums for invoice to 0
+            $this->InvoiceID = $_lib['storage']->store_record(array('data' => $this->headH, 'table' => $this->table_head, 'debug' => false));
+
             $_lib['message']->add(array('message' => 'Ingen fakturalinjer registrert, fakturabilag ikke opprettet'));
             $this->success = true;
         }

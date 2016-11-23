@@ -29,13 +29,12 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
 
 <?
     if ($message = $_lib['message']->get()) {
-      print "<div class='warning'>" . $_lib['message']->get() . "</div><br>";
+      print "<div class='warning'>" . $message . "</div><br>";
     }
 ?>
 
 <form name="allowancecharge" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="AllowanceChargeID" value="<? print $row->AllowanceChargeID ?>">
-<? print $message ?>
 <table cellspacing="0">
 <thead>
     <tr>
