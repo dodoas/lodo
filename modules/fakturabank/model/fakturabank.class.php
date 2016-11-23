@@ -1003,20 +1003,29 @@ class lodo_fakturabank_fakturabank {
                         unset($allowance_charge); // because of problem with references
                     }
                   }
-                  if ($line->Item->AdditionalItemProperty->Name == 'Car') {
-                    includelogic("car/car");
-                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
-                    $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
-                    if($carexists) {
-                      $line->Item->CarID   = $carexists->CarID;
-                      $line->Item->CarCode = $carexists->CarCode;
+
+                  if ($line->Item->AdditionalItemProperty) {
+                    if(!is_array($line->Item->AdditionalItemProperty)) {
+                      $line->Item->AdditionalItemProperty = array($line->Item->AdditionalItemProperty);
                     }
-                    else {
-                      $InvoiceO->Status .= "Bil: " . $line->Item->AdditionalItemProperty->Value . " eksisterer ikke. ";
-                      $InvoiceO->Journal = false;
-                      $InvoiceO->Class   = 'red';
+                    foreach($line->Item->AdditionalItemProperty as $additional_item_property) {
+                      if ($additional_item_property->Name == 'Car') {
+                        includelogic("car/car");
+                        $query = "select * from car where CarCode='" . $additional_item_property->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
+                        $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                        if($carexists) {
+                          $line->Item->CarID   = $carexists->CarID;
+                          $line->Item->CarCode = $carexists->CarCode;
+                        }
+                        else {
+                          $InvoiceO->Status .= "Bil: " . $additional_item_property->Value . " eksisterer ikke. ";
+                          $InvoiceO->Journal = false;
+                          $InvoiceO->Class   = 'red';
+                        }
+                      }
                     }
                   }
+
                 }
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";

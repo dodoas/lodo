@@ -1,7 +1,7 @@
 ALTER TABLE vat
 ADD Category varchar(5);
 
-UPDATE vat SET Category = 'E' WHERE VatID IN (10, 40);
+UPDATE vat SET Category = 'Z' WHERE VatID IN (10, 30, 32, 40, 60, 62);
 UPDATE vat SET Category = 'S' WHERE VatID IN (11, 41);
 UPDATE vat SET Category = 'H' WHERE VatID IN (12, 42);
 UPDATE vat SET Category = 'AA' WHERE VatID IN (13, 43);
