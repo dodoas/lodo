@@ -119,8 +119,10 @@ if($_lib['sess']->get_companydef('CompanyMunicipalityID')){
   </select>
   <input type="submit" value="Velg periode" />
   </form>
+  <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
   <a href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a>
   <a href="<?= $_lib['sess']->dispatch ?>t=salary.listunpaid">Ubetalte l&oslash;nninger</a>
+  <? }?>
 </div>
 
 <? 
@@ -389,6 +391,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 <br><br>
 <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>" method="post">
 <table class="lodo_data">
+<? if($_lib['sess']->get_person('AccessLevel') > 1){ ?>
 <tr>
     <th colspan="14">Hovedmal hele firma</th>
 </tr>
@@ -528,6 +531,7 @@ else {
 ?>
 
 <br />
+<? } ?>
 <table class="lodo_data">
 <thead>
    <tr>

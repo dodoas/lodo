@@ -155,6 +155,14 @@ function do_bank_update($AccountID, $Period) {
 
                     //#Speedier to have it here? Could we throw away the inner loop?
                     if($table_name == 'accountline') { //#We are just working on accountline?
+                        $CarID = $DataH[$server_name][$database_name][$table_name][$pk_name]['CarID'];
+                        $car_active_ref_date = $Period."-".$DataH[$server_name][$database_name][$table_name][$pk_name]['Day'];
+                        includelogic("car/car");
+                        if ($CarID != "" && !car::is_active($CarID, $car_active_ref_date)) {
+                            print "<div class='warning'>Linje ".$DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'].": Bil $CarID ikke er aktiv i $car_active_ref_date, s&aring; det ble fjernet.</div>";
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['CarID'] = 0;
+                        }
+
                         //# Allow unsetting a reskontro
                         //# We do this via a flag to ignore auto-matching of the account
                         if (!isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'])) {

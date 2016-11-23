@@ -44,7 +44,6 @@ $_QUERY['form']['PaymentMeans']             = "select MenuValue, MenuChoice from
 $_QUERY['form']['BankAccount']              = "select AccountNumber, concat(AccountNumber, ' - ' , AccountDescription) from account where Active=1 order by Sort";
 
 
-$_QUERY['form']['carmenu']                  = "select CarID, CarName from car where Active=1";
 $_QUERY['form']['avdmenu']                  = "select CompanyDepartmentID, DepartmentName from companydepartment where Active=1";
 $_QUERY['form']['sonemenu']                 = "select Code, concat('Kode: ', Code, ' - ',Percent, '%') from arbeidsgiveravgift";
 $_QUERY['form']['kommunemenu']              = "select KommuneID, KommuneNumber, KommuneName from kommune";
@@ -56,6 +55,7 @@ $_QUERY['form']['vatmenu']                  = "select * from vat where Active=1 
 $_QUERY['form']['vatSalesMenu']             = "select * from vat where Percent>=0 and VatID<20 and Active=1 ";
 $_QUERY['form']['vatBuyMenu']               = "select * from vat where Percent>=0 and VatID>=20 and Active=1 ";
 $_QUERY['form']['periodallmenu']            = "select Period from accountperiod order by Period desc";
+$_QUERY['form']['periodmenuforreadonly']    = "select Period from accountperiod where ShowForReadOnly = 1 order by Period desc";
 $_QUERY['form']['periodaccess2menu']        = "select Period from accountperiod where (Status=2 or Status=3) order by Period desc";
 $_QUERY['form']['periodaccessmenu']         = "select Period from accountperiod where Status=2 order by Period desc";
 $_QUERY['form']['PosibleSalaryYears']       = "select distinct substring(Period, 1, 4) from accountperiod where Period is not null order by Period";

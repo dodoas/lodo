@@ -24,6 +24,7 @@ $result_period = $_lib['db']->db_query($sql_period);
 <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
 
 <table class="lodo_data">
+  <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
   <tr>
     <td><h2>Periode</h2></td>
     <td colspan="5" align="right">
@@ -40,14 +41,16 @@ $result_period = $_lib['db']->db_query($sql_period);
     </td>
   </tr>
     <tr>
-      <td colspan="6" align="right"><? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_accountperiod_update', 'value'=>'Lagre periode (S)', 'accesskey' => 'S')) ?></td>
+      <td colspan="<? print (($_lib['sess']->get_person('AccessLevel') > 1) ? 7 : 6); ?>" align="right"><? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_accountperiod_update', 'value'=>'Lagre periode (S)', 'accesskey' => 'S')) ?></td>
     </tr>
+  <? } ?>
   <tr>
     <th>Periode</th>
     <th>Lukket</th>
     <th>Åpen</th>
     <th>Ferdig</th>
     <th>Stengt</th>
+    <? if ($_lib['sess']->get_person('AccessLevel') > 1) { print '<th>F&aring;r lese</th>'; } ?>
   </tr>
     <?
     while($row = $_lib['db']->db_fetch_object($result_period)) {
@@ -60,6 +63,7 @@ $result_period = $_lib['db']->db_query($sql_period);
         <td><? if(($row->Status <= 2 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'2')); } elseif($row->Status == 2) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
         <td><? if(($row->Status <= 3 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'3')); } elseif($row->Status == 3) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
         <td><? if(($row->Status <= 4 and $_lib['sess']->get_person('AccessLevel') > 1) or $_lib['sess']->get_person('AccessLevel') >= 4) { print $_lib['form3']->radiobutton(array('table'=>$db_table, 'field'=>'Status', 'pk'=>$row->AccountPeriodID, 'choice'=>$row->Status, 'value'=>'4', 'disabled'=>($_lib['sess']->get_person('AccessLevel') <= 2))); } elseif($row->Status == 4) { print "<input type=\"checkbox\" checked disabled>"; } ?></td>
+        <? if($_lib['sess']->get_person('AccessLevel') > 1) { print '<td>' . $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'ShowForReadOnly', 'pk'=>$row->AccountPeriodID, 'value'=>$row->ShowForReadOnly)) . '</td>'; } ?>
       </tr>
     <? }
     if($_lib['sess']->get_person('AccessLevel') > 1)

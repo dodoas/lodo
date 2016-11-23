@@ -41,7 +41,9 @@ $update_url = $_lib['sess']->dispatch."t=shelf.list&ShelfID=" . $id;
   <tr>
   <tr> 
     <td></td>
+    <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
     <td><input type="submit" value="Save" name="<?= $update_submit ?>" /></td>
+    <? } ?>
   </tr>
 </table>
 </form>

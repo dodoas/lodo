@@ -59,7 +59,9 @@ print $_lib['sess']->doctype ?>
                                             'tabindex'=>$tabindex++,
                                             'value' => $kommune_object->KommuneNumber
                                             ));
+        if($_lib['sess']->get_person('AccessLevel') > 1) {
         print $_lib['form3']->submit(array('name'=>'action_kommune_import', 'value'=>'Oppdater'));
+        }
       ?>
       </form>
     </td>
@@ -89,6 +91,7 @@ print $_lib['sess']->doctype ?>
 </table>
 <form name="kommune_import" action="<? print $_lib['sess']->dispatch ?>t=kommune.list" method="post">
 <?
+  if($_lib['sess']->get_person('AccessLevel') > 1) {
   $kommune_list_from_csv_args = array( 'name'=>'kommune.Import',
                                        'width'=>175,
                                        'data'=>$kommune->kommune_data_for_select(),
@@ -100,6 +103,7 @@ print $_lib['sess']->doctype ?>
                                      );
   print $_lib['form3']->Generic_menu3($kommune_list_from_csv_args);
   print $_lib['form3']->submit(array('name'=>'action_kommune_import', 'value'=>'Importer', 'style'=>'margin-left:70px'));
+  }
 ?>
 </form>
 </body>

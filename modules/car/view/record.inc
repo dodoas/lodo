@@ -1,4 +1,5 @@
 <?
+includelogic('car/car');
 $primarykey['CarID'] = $CarID;
 $car_CarID = $_lib['input']->getProperty('car_CarID');
 
@@ -33,9 +34,8 @@ elseif($_lib['input']->getProperty('action_car_new'))
     if($_lib['db']->db_numrows($result) == 0) {
       $post = $_POST;
       $post['car_ValidFrom'] = "NOW()";
-      $post['car_Active']  = 1;
 
-      $query  = "insert into car (CarID, ValidFrom, Active) values (". (int) $post['car_CarID'].", ". $post['car_ValidFrom'] .", '". (int) $post['car_Active']."')";
+      $query  = "insert into car (CarID, ValidFrom) values (". (int) $post['car_CarID'].", ". $post['car_ValidFrom'] .")";
       $_lib['db']->db_insert2(array('query'=>$query));
     }
     $CarID = $_POST['car_CarID'];

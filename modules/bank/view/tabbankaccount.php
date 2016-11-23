@@ -219,12 +219,13 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_next_period($bank->ThisPeriod), 'description' => '>>', 'title' => 'Next')) ?>
 
         <? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
-        <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
+        <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?>
+        <? if ($_lib['sess']->get_person('AccessLevel') > 1) { ?> |
         <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
-        <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> <? if($_lib['sess']->get_person('FakturabankImportBankTransactionAccess')) { ?> |
-        <? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> <? } ?>
-
+        <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)); if($_lib['sess']->get_person('FakturabankImportBankTransactionAccess')) { ?> |
+        <? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod));} ?>
+        <? } ?>
         <h2>Kasse/bank-avstemming for periode: <? print $bank->ThisPeriod ?> med bilag av type <? print $bank->VoucherType ?> p&aring; konto <? print $bank->AccountNumber ?> <? print $bank->AccountName ?></h2>
         </th>
     </tr>
@@ -293,7 +294,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
                      value="<?= $extraStartAtJournalID ?>">
   <? } ?>
   </td>
-  <td><input type="submit" name="action_save_extras" value="Lagre bank" /></td>
+  <td><? if($_lib['sess']->get_person('AccessLevel') > 1) { ?><input type="submit" name="action_save_extras" value="Lagre bank" /><? } ?></td>
 
 </tr>
 
@@ -578,7 +579,7 @@ if(is_array($bank->bankaccount)) {
             }
             ?>
         </td>
-        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID', 'pk' => $row->AccountLineID, 'value' => $row->CarID)); } ?></td>
+        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID', 'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
         <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
         <td>

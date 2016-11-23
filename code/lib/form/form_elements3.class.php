@@ -80,6 +80,7 @@ class form3
         $element .= " onchange='submit()'";
       }
       if($args[value]) $element = " $element checked ";
+      if($args["class"]) $element = " $element class=\"". $args["class"] ."\" ";
       $element = " $element />\n";
       return $element;
     }
@@ -111,7 +112,7 @@ class form3
 
     function Car_menu3($args)
     {
-        $args['query'] = $this->_QUERY['form']['carmenu'];
+        $args['query'] = "select CarID, CarName from car where ". car::car_active_sql("car.CarID", $args['active_reference_date']) ."=1";
         return $this->_MakeSelect($args);
     }
 
@@ -766,9 +767,13 @@ class form3
 
 ###########################################################
   function AccountPeriod_menu3($args) {
-      global $_QUERY;
+      global $_QUERY, $_lib;
       if(isset($args['noaccess'])) {
-        $args['query'] = $_QUERY['form']['periodallmenu'];
+        if ($_lib['sess']->get_person('AccessLevel') == 1) {
+          $args['query'] = $_QUERY['form']['periodmenuforreadonly'];
+        } else {
+          $args['query'] = $_QUERY['form']['periodallmenu'];
+        }
       }
       elseif($args['access'] > 2) {
         $args['query'] = $_QUERY['form']['periodaccess2menu'];

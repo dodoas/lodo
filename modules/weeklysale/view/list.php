@@ -268,7 +268,7 @@ while($row = $_lib['db']->db_fetch_object($result_week))
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalCash)); print $hash['value']; ?>
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalAmount)); print $hash['value']; ?>
       <td>
-      <? if( ($_lib['sess']->get_person('AccessLevel') >= 1 && !(int)$row->TotalCash) ||
+      <? if( ($_lib['sess']->get_person('AccessLevel') >= 2 && !(int)$row->TotalCash) ||
               $_lib['sess']->get_person('AccessLevel') >= 4) {
         if($accounting->is_valid_accountperiod($week->Period, $_lib['sess']->get_person('AccessLevel')))
         {

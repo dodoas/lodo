@@ -569,10 +569,13 @@ class form2 {
 
   function car_menu2($args) {
       global $_lib;
-
+      includelogic("car/car");
       $restrict_car = "";
       if ($args['value']) $restrict_car = " OR CarID = ". $args['value'];
-      $query = "SELECT CarID, CarName, CarCode, Active FROM car WHERE Active = 1 " . $restrict_car . " ORDER BY CarID";
+      $reference_date = $args['active_reference_date'] ? $args['active_reference_date'] : date("Y-m-d");
+      $active_sql = car::car_active_sql("car.CarID", $reference_date);
+      $active_restriction = !$args['all_cars'] ? " AND ". $active_sql ." = 1 " : "";
+      $query = "SELECT CarID, CarName, CarCode, ". $active_sql ." as Active FROM car WHERE 1 = 1 ". $active_restriction . $restrict_car . " ORDER BY CarID";
       $result = $_lib['db']->db_query($query);
       if($args['num_letters']) {
         $num_letters = $args['num_letters'];
@@ -593,9 +596,16 @@ class form2 {
           print "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
         }
       }
-      print "Greit<br>";
-      if($conf['value']) {
-        print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
+
+      if($args['value']) {        
+        $car_exists_query = "SELECT * FROM car WHERE CarID = ".$args['value'];
+        $rs = $_lib['db']->db_query($car_exists_query);
+        $car_exists = $_lib['db']->db_fetch_object($rs) != null;
+        if(!$car_exists) {
+          print "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
+        } else {
+          print "<option value=\"\">" . substr('Velg bil',0, $num_letters);
+        }
       } else {
         print "<option value=\"\">" . substr('Velg bil',0, $num_letters);
       }

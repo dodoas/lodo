@@ -121,8 +121,10 @@
       </tbody>
       <tfoot>
         <tr>
+        <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
           <td><input class="new-button" type="submit" name="action_lines_save" value="Lagre <? echo $year ?>" onclick="disable_multiple_submit(this, 'action_lines_save')"/></td>
           <td><input onclick="addline();" type="button" class="new-button" value="+" /></td>
+        <? } ?>
         </tr>
       </tfoot>
     </table>
@@ -219,7 +221,9 @@
       </tbody>
       <tfoot>
         <tr>
+          <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
           <td><input class="new-button" type="submit" name="action_groups_save" value="Lagre <? echo $year ?>" onclick="disable_multiple_submit(this, 'action_groups_save')"/></td>
+         <? } ?>
         </tr>
       </tfoot>
     </table>
@@ -317,7 +321,9 @@
           <?php endforeach; ?>
         </tr>
         <tr>
+          <? if($_lib['sess']->get_person('AccessLevel') > 1) {?>
           <td><input class="new-button" type="submit" name="action_projects_save" value="Lagre <? echo $year ?>" onclick="disable_multiple_submit(this, 'action_projects_save')"/></td>
+          <? } ?>
         </tr>
       </tfoot>
     </table>
