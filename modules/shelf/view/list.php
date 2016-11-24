@@ -47,9 +47,11 @@ foreach($shelfs->listAll() as $id => $v) {
 <form action="<?= $new_url ?>" method="post">
   <table>
     <tr>
+    <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
       <td>New</td>
       <td><input type="text" name="<?= $new_name ?>" /></td>
       <td><input type="submit" name="<?= $new_submit ?>" value="Insert" /></td>
+    <? } ?>
     </tr>   
   </table>
 </form>

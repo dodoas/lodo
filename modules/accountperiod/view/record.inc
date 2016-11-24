@@ -48,7 +48,7 @@ if($_REQUEST['action_accountperiod_update'])
             }
          }
 
-         elseif(preg_match("/payed/i", $key))
+         elseif(preg_match("/payed/i", $key) || preg_match("/ShowForReadOnly/i", $key))
          {
             $_lib['storage']->db_update_hash($newinput, $db_table, $pk);
          }

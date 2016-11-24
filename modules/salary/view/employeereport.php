@@ -52,7 +52,7 @@ function print_sums($employee_id, $codes, $report) {
         printf("<td style='text-align: right'><b>%s</b></td>", $_lib['format']->Amount($sums[$code]));
     }
 
-    if($employee_id)
+    if($employee_id && $_lib['sess']->get_person('AccessLevel') > 1)
         printf("<td><a href='%st=salary.addreport&AccountPlanID=%d&year=%d'>+</td>", $_lib['sess']->dispatch, $employee_id, $year);
 }
 
@@ -321,9 +321,12 @@ foreach($codes as $c) {
 
     printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
 }
-printf('
-<td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
-', $_lib['sess']->dispatch, $year);
+
+if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
+    printf('
+    <td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
+    ', $_lib['sess']->dispatch, $year);
+}
 
 
 print('<tr><td>diff</td>');

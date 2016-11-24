@@ -57,12 +57,16 @@ $fakturabankinvoicereconciliationreason = $_lib['storage']->get_row(array('query
                 echo $_lib['form3']->accountplan_number_menu($aconf);
             ?>
     <tr>
+        <? if($_lib['sess']->get_person('AccessLevel') > 1){ ?>
         <td colspan="4" align="right"><input type="submit" name="action_fakturabankinvoicereconciliationreason_update" value="Lagre kobling (S)" accesskey="S" />
+        <? } ?>
 </form>
 <form name="delete" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationlist" method="post">
   <tr>
     <? print $_lib['form3']->hidden(array('name'=>'FakturabankInvoiceReconciliationReasonID', 'value'=>$FakturabankInvoiceReconciliationReasonID)) ?>
-    <td colspan="4" align="right"><input type="submit" name="action_fakturabankinvoicereconciliationreason_delete" value="Slett kobling" />
+    <? if($_lib['sess']->get_person('AccessLevel') > 1){ ?>
+        <td colspan="4" align="right"><input type="submit" name="action_fakturabankinvoicereconciliationreason_delete" value="Slett kobling" />
+    <? } ?>
 </form>
 </table>
 <? includeinc('bottom') ?>

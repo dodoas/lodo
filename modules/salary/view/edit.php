@@ -460,7 +460,7 @@ $formname = "salaryUpdate";
             $accountplan = $accounting->get_accountplan_object($line->AccountPlanID);
         ?>
         </td>
-        <td><? if($accountplan->EnableCar)     { $_lib['form2']->car_menu2(array('table' => 'salaryline', 'field' => 'CarID', 'value' => $line->CarID, 'tabindex' => $tabindex++, 'pk' => $line->SalaryLineID)); } ?></td>
+        <td><? if($accountplan->EnableCar)     { $_lib['form2']->car_menu2(array('table' => 'salaryline', 'field' => 'CarID', 'value' => $line->CarID, 'tabindex' => $tabindex++, 'pk' => $line->SalaryLineID, 'active_reference_date' => $head->JournalDate)); } ?></td>
         <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
         <td><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
 
@@ -597,7 +597,7 @@ $formname = "salaryUpdate";
   <td colspan = "7">
 
   <?
-    if($head->UpdatedBy) echo $head->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
+    if($_lib['sess']->get_person('AccessLevel') > 1 && $head->UpdatedBy) echo $head->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
   ?>
   </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
@@ -605,7 +605,7 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($head->AltinnFieldsUpdatedBy) echo $head->AltinnFieldsUpdatedAt . " altinnfelter lagret av " . $_lib['format']->PersonIDToName($head->AltinnFieldsUpdatedBy);
+    if($_lib['sess']->get_person('AccessLevel') > 1 && $head->AltinnFieldsUpdatedBy) echo $head->AltinnFieldsUpdatedAt . " altinnfelter lagret av " . $_lib['format']->PersonIDToName($head->AltinnFieldsUpdatedBy);
   ?>
   </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
@@ -613,7 +613,7 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
+    if($_lib['sess']->get_person('AccessLevel') > 1 && $head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
   ?>
   </td>
   <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
@@ -622,7 +622,7 @@ $formname = "salaryUpdate";
 
 <tr>
   <td colspan = "11">
-      <? if ($head->FakturabankPersonID) { ?>
+      <? if ($_lib['sess']->get_person('AccessLevel') > 1 && $head->FakturabankPersonID) { ?>
            <? print $head->FakturabankDateTime ?> fakturaBank <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
       <? } ?>
   </td>

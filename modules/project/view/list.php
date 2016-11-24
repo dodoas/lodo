@@ -35,9 +35,11 @@ $result_project = $_lib['db']->db_query($query);
     <th>
     <th colspan="2">
         <form name="project_search" action="<? print $_lib['sess']->dispatch ?>t=project.edit" method="post">
+            <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
             Nytt nr:
             <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectID', 'width'=>'10')) ?>
             <? print $_lib['form3']->submit(array('name'=>'action_project_new', 'value'=>'Nytt prosjekt')) ?>
+            <? } ?>
         </form>
   <tr>
     <th class="menu">Prosjekt

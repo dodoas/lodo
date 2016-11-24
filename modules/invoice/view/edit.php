@@ -637,12 +637,14 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       <td></td>
     </tr>
         <?
-          if ($row->UpdatedByPersonID) echo "<tr><td>" . $row->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($row->UpdatedByPersonID) . "</td></tr>";
-          if ($row->Locked) {
-            if ($row->LockedBy) echo "<tr><td>" . $row->LockedAt . " l&aring;st av " . $_lib['format']->PersonIDToName($row->LockedBy) . "</td></tr>";
-            else echo "<tr><td>L&aring;st: Ja </td></tr>";
+          if ($_lib['sess']->get_person('AccessLevel') > 1) {
+            if ($row->UpdatedByPersonID) echo "<tr><td>" . $row->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($row->UpdatedByPersonID) . "</td></tr>";
+            if ($row->Locked) {
+              if ($row->LockedBy) echo "<tr><td>" . $row->LockedAt . " l&aring;st av " . $_lib['format']->PersonIDToName($row->LockedBy) . "</td></tr>";
+              else echo "<tr><td>L&aring;st: Ja </td></tr>";
+            }
+            if ($row->FakturabankPersonID) echo "<tr><td>" . $row->FakturabankDateTime . " fakturaBank " . $_lib['format']->PersonIDToName($row->FakturabankPersonID) . "</td></tr>";
           }
-          if ($row->FakturabankPersonID) echo "<tr><td>" . $row->FakturabankDateTime . " fakturaBank " . $_lib['format']->PersonIDToName($row->FakturabankPersonID) . "</td></tr>";
         ?>
         <td colspan="7" align="right">
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">

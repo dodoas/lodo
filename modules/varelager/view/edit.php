@@ -223,6 +223,7 @@ print $_lib['sess']->doctype
               ?>
 
               <?php
+            if($_lib['sess']->get_person('AccessLevel') > 1) {
               if(!$locked) {
                   ?>
                  <tr>
@@ -263,6 +264,7 @@ print $_lib['sess']->doctype
                 <td colspan="10" align="right"><input type="button" name="name" value=" Lukk "/ onClick="window.close();">
   </td>
             </tr>
+          <? } ?>
     </table>
 
     </form>

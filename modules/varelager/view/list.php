@@ -29,6 +29,7 @@ print $_lib['sess']->doctype ?>
       <th align="left">Varetelling
       <th colspan="3">
   </tr>
+  <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
   <tr>
       <th>Dato</th>
       <th>Beskrivelse</th>
@@ -50,6 +51,7 @@ print $_lib['sess']->doctype ?>
         </th>
       </form>
   </tr>
+  <? } ?>
   <tr>
     <th class="menu">Dato</th>
     <th class="menu">Beskrivelse</th>

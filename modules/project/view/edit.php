@@ -57,13 +57,17 @@ $project = $_lib['storage']->get_row(array('query' => $query));
         <td colspan="3"><input type="text" name="project.Description" value="<? print $project->Description  ?>" size="60">
     
     <tr>
+      <? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
         <td colspan="4" align="right"><input type="submit" name="action_project_update" value="Lagre prosjekt (S)" accesskey="S" />
+      <? }?>
 </form>
+<? if($_lib['sess']->get_person('AccessLevel') > 1) { ?>
 <form name="delete" action="<? print $_lib['sess']->dispatch ?>t=project.list" method="post">
   <tr>
     <? print $_lib['form3']->hidden(array('name'=>'ProjectID', 'value'=>$ProjectID)) ?>
     <td colspan="4" align="right"><input type="submit" name="action_project_delete" value="Slett prosjekt" onclick='return confirm("Er du sikker?")' />
 </form>
+<? } ?>
 </table>
 <? includeinc('bottom') ?>
 </body>

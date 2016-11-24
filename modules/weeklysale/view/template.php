@@ -157,7 +157,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableCar == 1)
-                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID));
+                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
                 }
             ?></td>
         <?
@@ -260,7 +260,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableCar == 1)
-                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID));
+                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
                 }
             ?></td>
         <?

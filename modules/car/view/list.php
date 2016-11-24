@@ -60,9 +60,9 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
       <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarName; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarCode; ?></a></td>
       <td><? print strftime("%F", strtotime($row->ValidFrom)); ?></td>
-      <td><? if ((int)($car->ValidTo) != 0) print strftime("%F", strtotime($row->ValidTo));
+      <td><? if ((int)($row->ValidTo) != 0) print strftime("%F", strtotime($row->ValidTo));
              else print "0000-00-00"; ?></td>
-      <td><? print $_lib['form3']->checkbox(array('table'=>'project', 'value'=>$row->Active, 'disabled'=>'1')) ?></td>
+      <td><? print $_lib['form3']->checkbox(array('table'=>'project', 'value'=>car::is_active($row->CarID, $_lib['sess']->get_session('LoginFormDate')), 'disabled'=>'1')) ?></td>
   </tr>
 <? } ?>
 </tbody>

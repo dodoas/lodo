@@ -59,8 +59,12 @@ foreach ($csvFile as $line) {
 }
 ?>
 <form name="occupation_import" action="<? print $_lib['sess']->dispatch ?>t=occupation.list" method="post">
-    <? print $_lib['form3']->Occupation_menu3(array('name'=>'occupation.Import', 'width'=>75, 'data'=>$data, 'same_key_value'=>true, 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg yrke', 'show_all'=>true)) ?>
-    <? print $_lib['form3']->submit(array('name'=>'action_occupation_import', 'value'=>'Importer', 'style'=>'margin-left:70px')) ?>
+    <?
+      if($_lib['sess']->get_person('AccessLevel') > 1) {
+        print $_lib['form3']->Occupation_menu3(array('name'=>'occupation.Import', 'width'=>75, 'data'=>$data, 'same_key_value'=>true, 'tabindex'=>$tabindex++, 'class' => 'combobox', 'required' => false, 'notChoosenText' => 'Velg yrke', 'show_all'=>true));
+        print $_lib['form3']->submit(array('name'=>'action_occupation_import', 'value'=>'Importer', 'style'=>'margin-left:70px'));
+      }
+    ?>
 </form>
 </body>
 </html>
