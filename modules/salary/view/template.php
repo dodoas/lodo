@@ -6,6 +6,7 @@ $db_table = 'salaryconf';
 $db_table2 = 'salaryconfline';
 
 includelogic('accounting/accounting');
+includelogic('car/car');
 $accounting = new accounting();
 
 require_once "record.inc";
