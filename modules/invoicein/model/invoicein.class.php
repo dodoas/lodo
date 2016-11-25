@@ -173,6 +173,19 @@ class logic_invoicein_invoicein implements Iterator {
         }
     }
 
+    // Since it is then simpler to load for XML, and we only show it inverted in view/edit page
+    function invertAllAllowanceAmounts(&$args) {
+        global $_lib;
+
+        foreach ($args as $arg_key => $arg_val) {
+          if ((strpos($arg_key, 'invoiceallowancecharge_Amount_') !== false) || (strpos($arg_key, 'invoicelineallowancecharge_Amount_') !== false)) {
+            $charge_indicator = $args[preg_replace('/Amount/', 'ChargeIndicator', $arg_key)];
+            $amount = $_lib['convert']->Amount($args[$arg_key]);
+            if ($charge_indicator == 0) $args[$arg_key] = -$amount;
+          }
+        }
+    }
+
     function addVATPercentToAllowanceCharge(&$args) {
         if (!is_numeric($args['ID'])) {
             return;
@@ -200,6 +213,7 @@ class logic_invoicein_invoicein implements Iterator {
         $invoicein      = $_lib['storage']->get_row(array('query' => "select * from invoicein where ID='$ID'"));
 
         self::addVATPercentToAllowanceCharge($args);
+        self::invertAllAllowanceAmounts($args);
         if(!$invoicein->IZipCode) {
             if($accountplan->ZipCode) {
                 $args['invoicein_IZipCode_' . $ID] = $accountplan->ZipCode;
@@ -407,11 +421,11 @@ class logic_invoicein_invoicein implements Iterator {
                     $invoice_line_sum = 0;
 
                     // Allowances/Charges on invoice
-                    $query_invoice_allowance_charge = "select * from invoiceallowancecharge where InvoiceID = '$InvoiceO->ID' and InvoiceType = 'in'";
+                    $query_invoice_allowance_charge = "select iac.*, ac.DepartmentID, ac.ProjectID from invoiceallowancecharge iac left join allowancecharge ac on iac.AllowanceChargeID=ac.AllowanceChargeID where InvoiceID = '$InvoiceO->ID' and InvoiceType = 'in'";
                     $result_invoice_allowance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
 
                     while ($acrow = $_lib['db']->db_fetch_object($result_invoice_allowance_charge)) {
-                        $query = "select ac.InAccountPlanID from invoiceallowancecharge iac left join allowancecharge ac on iac.AllowanceChargeID = ac.AllowanceChargeID where iac.InvoiceAllowanceChargeID = " . $acrow->InvoiceAllowanceChargeID;
+                        $query = "select a.MotkontoResultat1 as InAccountPlanID from accountplan a where a.AccountPlanID = " . $InvoiceO->SupplierAccountPlanID;
                         $invoiceallowancecharge = $_lib['storage']->get_row(array('query' => $query));
 
                         $VoucherH['voucher_AccountPlanID']  = $invoiceallowancecharge->InAccountPlanID;
@@ -420,6 +434,8 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_Vat']            = $acrow->VatPercent;
                         $VoucherH['voucher_VatID']          = $acrow->VatID;
                         $VoucherH['voucher_Description']    = $acrow->AllowanceChargeReason;
+                        $VoucherH['voucher_DepartmentID']   = $acrow->DepartmentID;
+                        $VoucherH['voucher_ProjectID']      = $acrow->ProjectID;
 
                         $TotalPrice = $acrow->Amount * ((100 + $acrow->VatPercent) / 100);
                         $TotalPrice = $TotalPrice * (($acrow->ChargeIndicator == 1) ? 1 : -1);

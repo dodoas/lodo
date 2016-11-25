@@ -55,9 +55,11 @@ print $_lib['sess']->doctype ?>
 var allowances_charges = [];
 <?
 $allowances_charges = array();
-$allowancecharge_query = 'SELECT AllowanceChargeID, ChargeIndicator, InAccountPlanID, Reason, Amount, InVatPercent, InVatID
-                  FROM allowancecharge
-                  WHERE Active = 1';
+$date = $_lib['sess']->get_session('LoginFormDate');
+$supplier_accountplan = $accounting->get_accountplan_object($invoicein->SupplierAccountPlanID);
+$allowancecharge_query = "SELECT ac.AllowanceChargeID, ac.ChargeIndicator, a.AccountPlanID as InAccountPlanID, ac.Reason, ac.Amount, v.Percent as InVatPercent, case when a.VatID < 40 THEN a.VatID + 30 ELSE a.VatID END as InVatID
+                  FROM allowancecharge ac LEFT JOIN accountplan a ON a.AccountPlanID = " . $supplier_accountplan->MotkontoResultat1 . " LEFT JOIN vat v ON v.VatID = a.VatID AND v.Active = 1 AND v.ValidFrom <= '" . $date . "' AND v.ValidTo >= '" . $date . "'
+                  WHERE ac.Active = 1";
 $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
 while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
   $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
@@ -261,121 +263,34 @@ function updateAndPerformAction(link_button) {
       <td>Hentet fra fakturabank av</td>
       <td><? print $_lib['format']->PersonIDToName($invoicein->FakturabankPersonID) ?></td>
     </tr>
-    <tr>
-      <td>
-        <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_new=1&amp;inline=edit" ?>" class="button">Ny rabatt-/kostnadslinje</a>
-      </td>
-      <td>
-        <a href="#" onclick="showHideAllowanceCharge(); return false;" class="button">Vis/Skjul rabatt/kostnad info</a>
-      </td>
-      <td colspan="2"></td>
-    </tr>
 </tbody>
 </table>
-<table class="lodo_data allowance_charge">
-<tbody>
   <?
     if ($_lib['db']->db_numrows($result3) > 0) {
-  ?>
-    <tr class="allowance_charge" id="invoice_global_allowancecharge_fields">
-      <td class="menu">Type</td>
-      <td class="menu">&Aring;rsak</td>
-      <td class="menu">Bel&oslash;p</td>
-      <td class="menu">MVA bel&oslash;p</td>
-      <td class="menu">MVA</td>
-      <td class="menu"></td>
-    </tr>
-  <?
       $vat_allowance = 0;
       $vat_charge    = 0;
       $sum_allowance = 0;
       $sum_charge    = 0;
       $ac_errors = array();
+      $invoice_allowances_charges = array();
       while($acrow = $_lib['db']->db_fetch_object($result3)) {
-        $vat_allowance_tax_amount     = ($acrow->ChargeIndicator) ? 0 : $acrow->Amount * ($acrow->VatPercent/100);
+        $invoice_allowances_charges[] = $acrow;
+        $vat_allowance_tax_amount     = ($acrow->ChargeIndicator) ? 0 : -$acrow->Amount * ($acrow->VatPercent/100);
         $vat_charge_tax_amount        = ($acrow->ChargeIndicator) ? $acrow->Amount * ($acrow->VatPercent/100) : 0;
-        $sum_allowance_taxable_amount = ($acrow->ChargeIndicator) ? 0 : $acrow->Amount;
+        $sum_allowance_taxable_amount = ($acrow->ChargeIndicator) ? 0 : -$acrow->Amount;
         $sum_charge_taxable_amount    = ($acrow->ChargeIndicator) ? $acrow->Amount : 0;
         $vat_allowance += $vat_allowance_tax_amount;
         $vat_charge    += $vat_charge_tax_amount;
         $sum_allowance += $sum_allowance_taxable_amount;
         $sum_charge    += $sum_charge_taxable_amount;
-        $tax_categories[$acrow->VatPercent]->TaxableAmount += $sum_charge_taxable_amount - $sum_allowance_taxable_amount;
-        $tax_categories[$acrow->VatPercent]->TaxAmount     += $vat_charge_tax_amount - $vat_allowance_tax_amount;
-        if(is_null($allowances_charges[$acrow->AllowanceChargeID]["InVatID"])) {
-          $ac_errors[] = "Feil inng&aring;ende konto valg f&oslash;r ". ($allowances_charges[$acrow->AllowanceChargeID]["charge_indicator"]?"kostnad":"rabatt") ." <a href='". $_lib['sess']->dispatch ."t=allowancecharge.edit&AllowanceChargeID=". $acrow->AllowanceChargeID ."'>". $acrow->AllowanceChargeID ."</a>";
+        $tax_categories[$acrow->VatPercent]->TaxableAmount += $sum_charge_taxable_amount + $sum_allowance_taxable_amount;
+        $tax_categories[$acrow->VatPercent]->TaxAmount     += $vat_charge_tax_amount + $vat_allowance_tax_amount;
+        if($acrow->AllowanceChargeID && is_null($allowances_charges[$acrow->AllowanceChargeID]["InVatID"])) {
+          $ac_errors[] = "Leverand&oslash;rs resultat konto har ikke valgt Mva kode";
         }
-  ?>
-    <tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_<? print $acrow->InvoiceAllowanceChargeID; ?>">
-      <td>
-        <?
-          print $_lib['form3']->Generic_menu3(array(
-            'query'    => "select AllowanceChargeID, CONCAT(IF(ChargeIndicator, 'Kostnad - ', 'Rabatt - '), Reason) from allowancecharge where Active = 1",
-            'table'    => $db_table3,
-            'field'    => 'AllowanceChargeID',
-            'width'    => 40,
-            'value'    => $acrow->AllowanceChargeID,
-            'tabindex' => $tabindex++,
-            'OnChange' => 'updateInvoiceAllowanceChargeLineData(this, true)',
-            'pk'       => $acrow->InvoiceAllowanceChargeID));
-          print $_lib['form3']->hidden(array(
-            'table'    => $db_table3,
-            'field'    => 'ChargeIndicator',
-            'pk'       => $acrow->InvoiceAllowanceChargeID,
-            'value'    => $acrow->ChargeIndicator));
-        ?>
-      </td>
-      <td>
-        <?
-          print $_lib['form3']->text(array(
-            'table'     => $db_table3,
-            'field'     => 'AllowanceChargeReason',
-            'pk'        => $acrow->InvoiceAllowanceChargeID,
-            'value'     => $acrow->AllowanceChargeReason,
-            'width'     => '40',
-            'maxlength' => '255',
-            'tabindex'  => $tabindex++));
-        ?>
-      </td>
-      <td>
-        <?
-          print $_lib['form3']->text(array(
-            'table'    => $db_table3,
-            'field'    => 'Amount',
-            'OnChange' => 'updateInvoiceAllowanceChargeLineData(this)',
-            'pk'       => $acrow->InvoiceAllowanceChargeID,
-            'value'    => $_lib['format']->Amount($acrow->Amount),
-            'class'    => 'number',
-            'tabindex' => $tabindex++));
-        ?>
-      </td>
-      <td class="number">
-        <?
-          print '<span id="' . $db_table3 . '.VatAmount.' . $acrow->InvoiceAllowanceChargeID . '" >' . $_lib['format']->Amount($acrow->Amount * ($acrow->VatPercent / 100.0)) . '</span>';
-        ?>
-      </td>
-      <td>
-        <?
-          print '<span id="' . $db_table3 . '.VatPercent.' . $acrow->InvoiceAllowanceChargeID . '" >' . $_lib['format']->Percent($acrow->VatPercent) . '</span>';
-          print $_lib['form3']->hidden(array(
-            'table'    => $db_table3,
-            'field'    => 'VatID',
-            'pk'       => $acrow->InvoiceAllowanceChargeID,
-            'value'    => $acrow->VatID));
-        ?>
-      </td>
-      <td>
-        <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_delete=1&amp;InvoiceAllowanceChargeID=$acrow->InvoiceAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
-      </td>
-    </tr>
-<?
       }
     }
 ?>
-</tbody>
-
-</tfoot>
-</table>
 
 <div id="invoice_errors" class="allowance_charge">
   <? if(!empty($ac_errors)) {
@@ -468,16 +383,6 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     print $_lib['form3']->Input(array('type'=>'hidden', 'name'=>$rowCounter, 'value'=>$LineID));
 
     if (count($line_allowancecharges) > 0) {
-    ?>
-      <tr class="allowance_charge" id="invoiceline_allowancecharge_header_<? print $LineID; ?>">
-        <td>Type</td>
-        <td colspan="4">&Aring;rsak</td>
-        <td></td>
-        <td colspan="2"></td>
-        <td></td>
-        <td></td>
-      </tr>
-    <?
       foreach($line_allowancecharges as $acrow) {
     ?>
     <tr class="allowance_charge line_invoice_allowancecharge_<? print $LineID; ?>" id="invoiceline_allowancecharge_fields_<? print $acrow->InvoiceLineAllowanceChargeID; ?>">
@@ -499,18 +404,19 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'pk'       => $acrow->InvoiceLineAllowanceChargeID));
         ?>
       </td>
-      <td colspan="4">
+      <td>
         <?
           print $_lib['form3']->text(array(
             'table'     => $db_table4,
             'field'     => 'AllowanceChargeReason',
             'pk'        => $acrow->InvoiceLineAllowanceChargeID,
             'value'     => $acrow->AllowanceChargeReason,
-            'width'     => '40',
+            'width'     => '20',
             'maxlength' => '255',
             'tabindex'  => $tabindex++));
         ?>
       </td>
+      <td colspan="3"></td>
       <? if ($acrow->AllowanceChargeType == 'line') print '<td colspan="3"></td>'; ?>
       <td>
         <?
@@ -518,7 +424,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'table'    => $db_table4,
             'field'    => 'Amount',
             'pk'       => $acrow->InvoiceLineAllowanceChargeID,
-            'value'    => $_lib['format']->Amount($acrow->Amount),
+            'value'    => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->Amount),
             'class'    => 'number',
             'tabindex' => $tabindex++));
         ?>
@@ -535,7 +441,77 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr><td colspan="10"><hr/></td></tr>
 <?
 }
+    if (!empty($invoice_allowances_charges)) {
+      foreach ($invoice_allowances_charges as $acrow) {
 ?>
+    <tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_<? print $acrow->InvoiceAllowanceChargeID; ?>">
+      <td>
+        <?
+          print $_lib['form3']->Generic_menu3(array(
+            'query'    => "select AllowanceChargeID, CONCAT(IF(ChargeIndicator, 'Kostnad - ', 'Rabatt - '), Reason) from allowancecharge where Active = 1",
+            'table'    => $db_table3,
+            'field'    => 'AllowanceChargeID',
+            'width'    => 40,
+            'value'    => $acrow->AllowanceChargeID,
+            'tabindex' => $tabindex++,
+            'OnChange' => 'updateInvoiceAllowanceChargeLineData(this, true)',
+            'pk'       => $acrow->InvoiceAllowanceChargeID));
+          print $_lib['form3']->hidden(array(
+            'table'    => $db_table3,
+            'field'    => 'ChargeIndicator',
+            'pk'       => $acrow->InvoiceAllowanceChargeID,
+            'value'    => $acrow->ChargeIndicator));
+        ?>
+      </td>
+      <td>
+        <?
+          print $_lib['form3']->text(array(
+            'table'     => $db_table3,
+            'field'     => 'AllowanceChargeReason',
+            'pk'        => $acrow->InvoiceAllowanceChargeID,
+            'value'     => $acrow->AllowanceChargeReason,
+            'width'     => '20',
+            'maxlength' => '255',
+            'tabindex'  => $tabindex++));
+        ?>
+      </td>
+      <td colspan="4"></td>
+      <td>
+        <?
+          print '<span id="' . $db_table3 . '.VatPercent.' . $acrow->InvoiceAllowanceChargeID . '" >' . $_lib['format']->Percent($acrow->VatPercent) . '</span>';
+          print $_lib['form3']->hidden(array(
+            'table'    => $db_table3,
+            'field'    => 'VatID',
+            'pk'       => $acrow->InvoiceAllowanceChargeID,
+            'value'    => $acrow->VatID));
+        ?>
+      </td>
+      <td class="number">
+        <?
+          print '<span id="' . $db_table3 . '.VatAmount.' . $acrow->InvoiceAllowanceChargeID . '" >' . $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->Amount * ($acrow->VatPercent / 100.0)) . '</span>';
+        ?>
+      </td>
+      <td>
+        <?
+          print $_lib['form3']->text(array(
+            'table'    => $db_table3,
+            'field'    => 'Amount',
+            'OnChange' => 'updateInvoiceAllowanceChargeLineData(this)',
+            'pk'       => $acrow->InvoiceAllowanceChargeID,
+            'value'    => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->Amount),
+            'class'    => 'number',
+            'tabindex' => $tabindex++));
+        ?>
+      </td>
+      <td>
+        <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_delete=1&amp;InvoiceAllowanceChargeID=$acrow->InvoiceAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
+      </td>
+    </tr>
+<?
+      }
+    }
+?>
+    <tr class="allowance_charge"><td colspan="10"><hr/></td></tr>
 </tbody>
 
 <tfoot>
@@ -550,10 +526,20 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 			}
         }
         ?>
-        <td>
         </td>
-
-        <td colspan="6" align="right">
+        <td colspan="9"></td>
+    </tr>
+    <tr>
+      <td>
+        <a href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_allowance_charge_new=1&amp;inline=edit" ?>" class="button">Ny rabatt-/kostnadslinje</a>
+      </td>
+      <td colspan="2">
+        <a href="#" onclick="showHideAllowanceCharge(); return false;" class="button">Vis/Skjul rabatt/kostnad info</a>
+      </td>
+      <td colspan="7"></td>
+    </tr>
+    <tr>
+        <td colspan="10" align="right">
         <? if($invoicein->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $invoicein->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?>
 
         <?
@@ -588,15 +574,15 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     </tr>
     <tr>
         <td colspan="5" align="right">Totalt U/MVA</td>
-        <td colspan="2" id="invoiceout.TaxExclusiveAmount" align="right"><? print $_lib['format']->Amount($sumlines - $sum_allowance + $sum_charge) ?></td>
+        <td colspan="2" id="invoiceout.TaxExclusiveAmount" align="right"><? print $_lib['format']->Amount($sumlines + $sum_allowance + $sum_charge) ?></td>
     </tr>
     <tr>
         <td colspan="5" align="right">Total MVA</td>
-        <td colspan="2" id="invoiceout.TaxTotalTaxAmount" align="right"><? print $_lib['format']->Amount($vatlines - $vat_allowance + $vat_charge) ?></td>
+        <td colspan="2" id="invoiceout.TaxTotalTaxAmount" align="right"><? print $_lib['format']->Amount($vatlines + $vat_allowance + $vat_charge) ?></td>
     </tr>
     <tr>
         <td colspan="5" align="right">Totalt M/MVA</td>
-        <td colspan="2" id="invoiceout.TaxInclusiveAmount" align="right"><? print $_lib['format']->Amount($vatlines - $vat_allowance + $vat_charge + $sumlines - $sum_allowance + $sum_charge) ?></td>
+        <td colspan="2" id="invoiceout.TaxInclusiveAmount" align="right"><? print $_lib['format']->Amount($vatlines + $vat_allowance + $vat_charge + $sumlines + $sum_allowance + $sum_charge) ?></td>
         <?
             print $_lib['form3']->Input(array('type'=>'hidden', 'table'=>'field', 'field'=>'count', 'value'=>$rowCounter));
         ?>

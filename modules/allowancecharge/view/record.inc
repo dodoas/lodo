@@ -32,11 +32,6 @@ elseif($_lib['input']->getProperty('action_allowancecharge_update'))
   if (!is_null($accountplan_out) && (!$accountplan_out->EnableVAT || is_null($accountplan_out->VatID))) $accountplan_out->VatID = 10; // TODO: 10, 30 or 32? Fix when answered by Hildegunn
   $vat_query = "select Percent, VatID from vat where Type = 'sale' AND Active = 1 and VatID = " . (int) $accountplan_out->VatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
   $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
-  $accountplan_query = "select * from accountplan where AccountPlanID = " . (int) $_POST['allowancecharge_InAccountPlanID_' . $AllowanceChargeID];
-  $accountplan_in = $_lib['storage']->get_row(array('query' => $accountplan_query));
-  if (!is_null($accountplan_in) && (!$accountplan_in->EnableVAT || is_null($accountplan_in->VatID))) $accountplan_in->VatID = 40; // TODO: 40, 60 or 62? Fix when answered by Hildegunn
-  $vat_query = "select Percent, VatID from vat where Type = 'buy' AND Active = 1 and VatID = " . (int) $accountplan_in->VatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
-  $vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
 
   if ($vat_out->VatID) {
     $_POST['allowancecharge_OutVatID_' . $AllowanceChargeID] = $vat_out->VatID;
@@ -44,13 +39,6 @@ elseif($_lib['input']->getProperty('action_allowancecharge_update'))
   } else {
     unset($_POST['allowancecharge_OutAccountPlanID_' . $AllowanceChargeID]);
     $_lib['message']->add("Feil utg&aring;ende konto valg");
-  }
-  if ($vat_in->VatID) {
-    $_POST['allowancecharge_InVatID_' . $AllowanceChargeID] = $vat_in->VatID;
-    $_POST['allowancecharge_InVatPercent_' . $AllowanceChargeID] = $vat_in->Percent;
-  } else {
-    unset($_POST['allowancecharge_InAccountPlanID_' . $AllowanceChargeID]);
-    $_lib['message']->add("Feil inng&aring;ende konto valg");
   }
   $_lib['db']->db_update_multi_table($_POST, $tables);
 }

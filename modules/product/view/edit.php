@@ -19,12 +19,16 @@ require_once "record.inc";
 $query = "select * from $db_table where ProductID='$ProductID'";
 $row = $_lib['storage']->get_row(array('query' => $query));
 
-$accountplan = $accounting->get_accountplan_object($row->AccountPlanID);
-//$shelfs = new lodo_shelf();
+if (!empty($row->AccountPlanID)) {
+  $accountplan = $accounting->get_accountplan_object($row->AccountPlanID);
+  //$shelfs = new lodo_shelf();
 
-$VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $_lib['sess']->get_session('LoginFormDate')));
+  $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $_lib['sess']->get_session('LoginFormDate')));
 
-#print_r($VAT);
+  #print_r($VAT);
+} else {
+  $_lib['message']->add("Resultatkonto ikke satt");
+}
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <? print $_lib['sess']->doctype ?>
@@ -38,11 +42,16 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
 <?
     includeinc('top');
     includeinc('left');
+    if ($messages = $_lib['message']->get()) {
+?>
+    <div class="warning"><? print $messages; ?></div>
+    <br/>
+<?
+    }
 ?>
 
 <form name="product" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="ProductID" value="<? print $row->ProductID ?>">
-<? print $message ?>
 <table cellspacing="0">
 <thead>
     <tr>

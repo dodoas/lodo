@@ -32,14 +32,13 @@ CREATE TABLE IF NOT EXISTS allowancecharge (
   AllowanceChargeID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   Active tinyint(4) NOT NULL DEFAULT 1,
   ChargeIndicator tinyint NOT NULL DEFAULT 0,
-  InAccountPlanID int(11) NOT NULL,
   OutAccountPlanID int(11) NOT NULL,
   Reason varchar(255),
   Amount decimal(16,2) NOT NULL,
-  InVatPercent decimal(16,2) NOT NULL,
-  InVatID int(11) NULL,
   OutVatPercent decimal(16,2) NOT NULL,
-  OutVatID int(11) NULL
+  OutVatID int(11) NULL,
+  ProjectID int(11) DEFAULT 0,
+  DepartmentID int(11) DEFAULT 0
 );
 
 -- Down migration code
@@ -50,3 +49,12 @@ CREATE TABLE IF NOT EXISTS allowancecharge (
 -- DROP TABLE invoiceallowancecharge;
 -- DROP TABLE invoicelineallowancecharge;
 -- DROP TABLE allowancecharge;
+
+-- Migration change
+
+-- ALTER TABLE allowancecharge
+-- DROP InAccountPlanID,
+-- DROP InVatID,
+-- DROP InVatPercent,
+-- ADD  ProjectID int(11) DEFAULT 0,
+-- ADD  DepartmentID int(11) DEFAULT 0;

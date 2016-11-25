@@ -120,6 +120,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'EnableVatOverride',    'value' => $vat->EnableVatOverride)) ?></td>
                         <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
                         <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?></td>
+                        <td><? print $_lib['form3']->text(array('table'=>'vat', 'field'=>'Category', 'value'=>$vat->Category, 'width'=>'5')); ?></td>
                         <?
                     }
                     else
@@ -129,10 +130,10 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <td><? if($vat->EnableVatOverride) { print 'X'; } ?></td>
                         <td><? print $vat->ValidFrom ?></td>
                         <td><? print $vat->ValidTo ?></td>
+                        <td><? print $vat->Category; ?></td>
                         <?
                     }
                     ?>
-                    <td><? print $_lib['form3']->text(array('table'=>'vat', 'field'=>'Category', 'value'=>$vat->Category, 'width'=>'5')); ?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
@@ -197,7 +198,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
-                    <td><? print $_lib['form3']->text(array('table'=>'vat', 'field'=>'Category', 'value'=>$vat->Category, 'width'=>'5')); ?></td>
+                    <td><? print $vat->Category; ?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>

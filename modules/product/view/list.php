@@ -13,6 +13,11 @@ $db_total = $_lib['db']->db_numrows($result2);
 
 $query = "select * from $db_table order by CAST(ProductNumber as SIGNED), ProductNumber asc";
 $result2 = $_lib['db']->db_query($query);
+$products = array();
+while($row = $_lib['db']->db_fetch_object($result2)) {
+  $products[] = $row;
+  if (empty($row->AccountPlanID)) $_lib['message']->add("For produkt '".$row->ProductID." - ".$row->ProductName."' er ikke resultatkonto satt");
+}
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,9 +33,15 @@ $result2 = $_lib['db']->db_query($query);
 <?
     includeinc('top');
     includeinc('left');
+    if ($messages = $_lib['message']->get()) {
+?>
+    <div class="warning"><? print $messages; ?></div>
+    <br/>
+<?
+    }
 ?>
 
-    <table class="lodo_data" width="700px">
+    <table class="lodo_data" width="800px">
         <thead>
             <tr>
                 <th>Produkt listen:
@@ -47,7 +58,7 @@ $result2 = $_lib['db']->db_query($query);
          </thead>
     </table>
 
-    <table class="sortable lodo_data" width="700px">
+    <table class="sortable lodo_data" width="800px">
             <tr>
               <th class="sub">Produkt ID</th>
               <th class="sub">Produktnummer</th>
@@ -61,7 +72,8 @@ $result2 = $_lib['db']->db_query($query);
               <th class="sub" align="right">Prosjekt</th>
             </tr>
             <?
-                while($row = $_lib['db']->db_fetch_object($result2))
+              if (!empty($products)) {
+                foreach($products as $row)
                 {
                     if($row->AccountPlanID) {
                         $date = $_lib['sess']->get_session('LoginFormDate');
@@ -85,6 +97,7 @@ $result2 = $_lib['db']->db_query($query);
                     </tr>
                     <?
                 }
+              }
             ?>
     </table>
 </body>

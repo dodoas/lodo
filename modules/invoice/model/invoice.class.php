@@ -232,6 +232,7 @@ class invoice {
         #Update multi into db to support old format
         #print_r($args);
         self::addVATPercentToAllowanceCharge($args);
+        self::invertAllAllowanceAmounts($args);
         $tables_to_update = array(
           'invoiceout'                 => 'InvoiceID',
           'invoiceoutline'             => 'LineID',
@@ -249,6 +250,19 @@ class invoice {
         else $invoiceoutprint_date = $args["invoiceoutprint_InvoicePrintDate_". $invoice_id];
         $replace_invoiceoutprint = sprintf("REPLACE INTO invoiceoutprint (InvoiceID, InvoicePrintDate) VALUES ('%d', '%s');", $invoice_id, $invoiceoutprint_date);
         $_lib['db']->db_query($replace_invoiceoutprint);
+    }
+
+    // Since it is then simpler to load for XML, and we only show it inverted in view/edit page
+    function invertAllAllowanceAmounts(&$args) {
+        global $_lib;
+
+        foreach ($args as $arg_key => $arg_val) {
+          if ((strpos($arg_key, 'invoiceallowancecharge_Amount_') !== false) || (strpos($arg_key, 'invoicelineallowancecharge_Amount_') !== false)) {
+            $charge_indicator = $args[preg_replace('/Amount/', 'ChargeIndicator', $arg_key)];
+            $amount = $_lib['convert']->Amount($args[$arg_key]);
+            if ($charge_indicator == 0) $args[$arg_key] = -$amount;
+          }
+        }
     }
 
     function addVATPercentToAllowanceCharge(&$args) {
@@ -972,7 +986,7 @@ class invoice {
             $fieldsline['voucher_AmountOut'] = 0;
             $fieldsline['voucher_AmountIn'] = 0;
 
-            $query = "select AccountPlanID, CompanyDepartmentID, ProjectID from product where productID=".$row->ProductID;
+            $query = "select ProductID, ProductName, AccountPlanID, CompanyDepartmentID, ProjectID from product where productID=".$row->ProductID;
             $productRow = $_lib['storage']->get_row(array('query' => $query));
             #print_r($productRow);
 
@@ -1025,8 +1039,10 @@ class invoice {
 
             if(strlen($productRow->AccountPlanID)>0)
                 $line_accountplanid = $productRow->AccountPlanID;
-            else
+            else {
+                $_lib['message']->add("For produkt '".$productRow->ProductID.' - '.$productRow->ProductName."' er ikke resultatkonto satt");
                 $line_accountplanid = $setup['salecreditinntekt'];
+            }
 
            $fieldsline['voucher_AccountPlanID']    = $line_accountplanid;
 
@@ -1046,11 +1062,13 @@ class invoice {
             $fieldsline['voucher_AmountOut'] = 0;
             $fieldsline['voucher_AmountIn'] = 0;
 
-            $query = "select ac.OutAccountPlanID from invoiceallowancecharge iac left join allowancecharge ac on iac.AllowanceChargeID = ac.AllowanceChargeID where iac.InvoiceAllowanceChargeID = " . $row->InvoiceAllowanceChargeID;
+            $query = "select ac.OutAccountPlanID, ac.DepartmentID, ac.ProjectID from invoiceallowancecharge iac left join allowancecharge ac on iac.AllowanceChargeID = ac.AllowanceChargeID where iac.InvoiceAllowanceChargeID = " . $row->InvoiceAllowanceChargeID;
             $invoiceallowancecharge = $_lib['storage']->get_row(array('query' => $query));
 
             $fieldsline['voucher_AccountPlanID']    = $invoiceallowancecharge->OutAccountPlanID;
             $fieldsline['voucher_AutomaticReason']  = "Faktura rabatt/kostnad : $row->InvoiceAllowanceChargeID";
+            $fieldsline['voucher_DepartmentID']     = $invoiceallowancecharge->DepartmentID;
+            $fieldsline['voucher_ProjectID']        = $invoiceallowancecharge->ProjectID;
 
             $sumprice = round($row->Amount, 2);
             $sumprice *= ($row->ChargeIndicator == 1)? 1 : -1;

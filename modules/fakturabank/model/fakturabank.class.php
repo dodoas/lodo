@@ -1008,9 +1008,9 @@ class lodo_fakturabank_fakturabank {
                     if(!is_array($line->Item->AdditionalItemProperty)) {
                       $line->Item->AdditionalItemProperty = array($line->Item->AdditionalItemProperty);
                     }
+                    includelogic("car/car");
                     foreach($line->Item->AdditionalItemProperty as $additional_item_property) {
                       if ($additional_item_property->Name == 'Car') {
-                        includelogic("car/car");
                         $query = "select * from car where CarCode='" . $additional_item_property->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
                         $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                         if($carexists) {
@@ -1524,9 +1524,9 @@ class lodo_fakturabank_fakturabank {
                         $dataAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
                         $dataAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
                         $dataAC["Amount"] = $AllowanceCharge->Amount;
-                        // Select VatID based on the Category and date
-                        $vat_id_from_category = "select VatID from vat where Category = '" . $AllowanceCharge->TaxCategory->ID . "' and Type = 'buy' and ValidFrom <= '" . $InvoiceO->IssueDate . "' and ValidTo >= '" . $InvoiceO->IssueDate . "'";
-                        $vat = $_lib['db']->get_row(array('query' => $vat_id_from_category));
+                        // Select VatID based on the suppliers result bookkeeping account
+                        $vat_id_query = "SELECT case when a.VatID < 40 THEN a.VatID + 30 ELSE a.VatID END as VatID FROM accountplan a WHERE a.AccountPlanID = (SELECT MotkontoResultat1 FROM accountplan WHERE AccountPlanID = " . $InvoiceO->AccountPlanID . ")";
+                        $vat = $_lib['db']->get_row(array('query' => $vat_id_query));
                         $dataAC["VatID"] = $vat->VatID;
                         $dataAC["VatPercent"] = $AllowanceCharge->TaxCategory->Percent;
                         $_lib['storage']->store_record(array('data' => $dataAC, 'table' => 'invoiceallowancecharge', 'debug' => false));

@@ -8,10 +8,7 @@ $row = $_lib['storage']->get_row(array('query' => $query));
 $date = $_lib['sess']->get_session('LoginFormDate');
 $vat_query = "select Percent from vat where Type = 'sale' and Active = 1 and VatID = " . (int) $row->OutVatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
 $vat_out = $_lib['storage']->get_row(array('query' => $vat_query));
-$vat_query = "select Percent from vat where Type = 'buy' and Active = 1 and VatID = " . (int) $row->InVatID . " and ValidFrom <= '$date' and ValidTo >= '$date'";
-$vat_in = $_lib['storage']->get_row(array('query' => $vat_query));
 $tabindex = 1;
-if(!$vat_in) $_lib['message']->add("Feil inng&aring;ende konto valg");
 if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,9 +16,27 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
 <head>
     <title>Empatix - rabatt/kostnad</title>
     <? includeinc('head') ?>
+    <? includeinc('javascript') ?>
 </head>
 
 <body>
+<script>
+
+var first_time = true;
+function setAllowanceToNegativeAmountIfFirstTime() {
+
+  var charge_indicator_element = document.getElementById("allowancecharge.ChargeIndicator.<? print $AllowanceChargeID; ?>");
+  var charge_indicator = charge_indicator_element.value;
+  var amount_element = document.getElementById("allowancecharge.Amount.<? print $AllowanceChargeID; ?>");
+  var amount = toNumber(amount_element.value);
+  if (charge_indicator == 0 && amount > 0 && first_time) {
+    first_time = false;
+    amount = -amount;
+    amount_element.value = toAmountString(amount);
+  }
+  return true;
+}
+</script>
 <?
     includeinc('top');
     includeinc('left');
@@ -53,7 +68,7 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
     </tr>
     <tr>
         <td>Type</td>
-        <td colspan="2"><? print $_lib['form3']->Generic_menu3(array('data'=>array('1'=>'Kostnad', '0'=>'Rabatt'), 'table'=>$db_table, 'field'=>'ChargeIndicator', 'pk'=>$row->AllowanceChargeID, 'tabindex' => $tabindex++, 'value'=>$row->ChargeIndicator)); ?></td>
+        <td colspan="2"><? print $_lib['form3']->Generic_menu3(array('data'=>array('1'=>'Kostnad', '0'=>'Rabatt'), 'table'=>$db_table, 'field'=>'ChargeIndicator', 'pk'=>$row->AllowanceChargeID, 'tabindex' => $tabindex++, 'value'=>$row->ChargeIndicator, 'OnChange' => 'setAllowanceToNegativeAmountIfFirstTime()')); ?></td>
     </tr>
     <tr>
         <td>&Aring;rsak</td>
@@ -61,23 +76,23 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
     </tr>
     <tr>
         <td>Bel&oslash;p</td>
-        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Amount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->Amount))) ?>
+        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Amount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->Amount), 'OnChange' => 'setAllowanceToNegativeAmountIfFirstTime()')) ?>
     </tr>
     <tr>
-        <td>Resultat konto inng&aring;ende</td>
-        <td colspan="2"><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'InAccountPlanID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->InAccountPlanID, 'type' => array(0 => 'result', 1 => 'balance'), 'required' => 1)) ?></td>
-    </tr>
-    <tr>
-        <td>MVA inn</td>
-        <td colspan="2"><? if(!is_null($vat_in->Percent)) { print "$vat_in->Percent%"; } ?></td>
-    </tr>
-    <tr>
-        <td>Resultat konto utg&aring;ende</td>
+        <td>Resultat konto</td>
         <td colspan="2"><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'OutAccountPlanID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->OutAccountPlanID, 'type' => array(0 => 'result', 1 => 'balance'), 'required' => 1)) ?></td>
     </tr>
     <tr>
-        <td>MVA ut</td>
+        <td>MVA</td>
         <td colspan="2"><? if(!is_null($vat_out->Percent)) { print "$vat_out->Percent%"; } ?></td>
+    </tr>
+    <tr>
+        <td>Avdeling</td>
+        <td colspan="2"><? print $_lib['form2']->department_menu2(array('table'=>$db_table, 'field'=>'DepartmentID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->DepartmentID)) ?></td>
+    </tr>
+    <tr>
+        <td>Prosjekt</td>
+        <td colspan="2"><? print $_lib['form2']->project_menu2(array('table'=>$db_table, 'field'=>'ProjectID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->ProjectID)) ?></td>
     </tr>
 </tbody>
 <tfoot>
