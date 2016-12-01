@@ -1,6 +1,6 @@
 <?
 
-// Bencmarking class
+// Benchmarking class
 //
 // Usage:
 //
