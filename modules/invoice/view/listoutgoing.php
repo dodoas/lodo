@@ -80,7 +80,6 @@ if (substr($query, -1) == " ") {
 
 $query  .= " order by InvoiceID desc";
 
-#print "$query<br>\n";
 $query_for_ids = str_replace("#[select]", "i.InvoiceID", $query);
 $query = str_replace("#[select]", "i.*", $query);
 
@@ -312,7 +311,6 @@ SELECT DISTINCT(JournalID) FROM (
      HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')
      ORDER BY JournalID
   ) as ids";
-
 
 $invoices_with_line_control = array();
 $result_line_control = $_lib['db']->db_query($query_line_control);
