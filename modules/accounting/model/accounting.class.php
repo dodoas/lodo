@@ -26,6 +26,7 @@ class accounting {
 
     private $cached_department   = array(); # Caching department to remove 1+N query
     private $cached_project      = array(); # Caching project to remove 1+N query
+    private $cached_valid_accountperiod = array(); # Caching valid periods to remove 1+N query
 
     /***************************************************************************
     * Konstruktor
@@ -1820,12 +1821,16 @@ class accounting {
         $period = $_lib['date']->get_this_period($period);
 
         if($period == '0000-00') {
-            #Da fï¿½r man alltid endret datoer som er feil
+            # This way we can fix dates that is wrong
             return true;
         }
 
-        if($access > 2)
-        {
+        if (isset($this->cached_valid_accountperiod[$access][$periode])){
+          return $this->cached_valid_accountperiod[$access][$periode];
+        }
+
+
+        if($access > 2){
           $query = "select Period from accountperiod where Period='$period' and (Status=2 or Status=3) order by Period asc";
         } else {
           $query = "select Period from accountperiod where Period='$period' and Status=2 order by Period";
@@ -1836,10 +1841,12 @@ class accounting {
 
         if($row->Period)
         {
+            $this->cached_valid_accountperiod[$access][$periode] = true;
             return true;
         }
         else
         {
+            $this->cached_valid_accountperiod[$access][$periode] = false;
             return false;
         }
     }
