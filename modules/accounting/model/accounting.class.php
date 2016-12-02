@@ -24,6 +24,9 @@ class accounting {
     private $voucher_to_hovedbok = array();
     private $accountplanH        = array(); #Accountplan cache to not ask to frequently in the database
 
+    private $cached_department   = array(); # Caching department to remove 1+N query
+    private $cached_project      = array(); # Caching project to remove 1+N query
+
     /***************************************************************************
     * Konstruktor
     * @param
@@ -2131,16 +2134,32 @@ class accounting {
 
     function get_department_object($CompanyDepartmentID) {
         global $_lib;
+        $CompanyDepartmentID = (int) $CompanyDepartmentID;
 
-        $query="select * from companydepartment where CompanyDepartmentID=" . (int) $CompanyDepartmentID;
-        return $_lib['storage']->get_row(array('query' => $query));
+        if (isset($this->cached_department[$CompanyDepartmentID])) {
+          return $this->cached_department[$CompanyDepartmentID];
+        }
+
+        $query = "select * from companydepartment where CompanyDepartmentID=" . $CompanyDepartmentID;
+        $result = $_lib['storage']->get_row(array('query' => $query));
+
+        $this->cached_department[$CompanyDepartmentID] = $result;
+        return $result;
     }
 
     function get_project_object($ProjectID) {
         global $_lib;
+        $ProjectID = (int) $ProjectID;
 
-        $query="select * from project where ProjectID=" . (int) $ProjectID;
-        return $_lib['storage']->get_row(array('query' => $query));
+        if (isset($this->cached_project[$ProjectID])) {
+          return $this->cached_project[$ProjectID];
+        }
+
+        $query="select * from project where ProjectID=" . $ProjectID;
+        $result = $_lib['storage']->get_row(array('query' => $query));
+
+        $this->cached_project[$ProjectID] = $result;
+        return $result;
     }
 
     function update_accountline($AccountLineID, $KID, $InvoiceID) {
