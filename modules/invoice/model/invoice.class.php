@@ -1025,7 +1025,7 @@ class invoice {
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
         $this->invoiceO->Note                 = $invoice->CommentCustomer;
         $this->invoiceO->LodoSavedBy          = $invoice->SavedByInLodo;
-        $this->invoiceO->DocumentCurrencyCode = exchange::getLocalCurrency();
+        $this->invoiceO->DocumentCurrencyCode = $invoice->CurrencyID;
 
         if ($invoice->DepartmentID != "" || $invoice->DepartmentID === 0) { // "0" is valid
             $this->invoiceO->DepartmentCode = $invoice->DepartmentID;

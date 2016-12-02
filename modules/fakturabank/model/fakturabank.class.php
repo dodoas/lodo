@@ -1512,6 +1512,7 @@ class lodo_fakturabank_fakturabank {
                     $dataH['DepartmentCustomer'] = $InvoiceO->DepartmentCustomer;
                     $dataH['ProjectNameInternal'] = $InvoiceO->ProjectNameInternal;
                     $dataH['ProjectNameCustomer'] = $InvoiceO->ProjectNameCustomer;
+                    $dataH['CurrencyID'] = $InvoiceO->DocumentCurrencyCode;
 
                     # Sender info
                     $query                  = "select * from company where CompanyID='" . $dataH['FromCompanyID'] . "'";
