@@ -320,15 +320,20 @@ while($row = $_lib['db']->db_fetch_object($result_line_control)){
   $invoices_with_line_control[$row->JournalID] = true;
 }
 
+$query_printinfo = "SELECT InvoicePrintDate, InvoiceID FROM invoiceoutprint WHERE InvoiceID in ($query_for_ids)";
+$printinfo = array();
+$result_printinfo = $_lib['db']->db_query($query_printinfo);
+while($row = $_lib['db']->db_fetch_object($result_printinfo)){
+  $printinfo[$row->InvoiceID] = $row->InvoicePrintDate;
+}
+
 
 while($row = $_lib['db']->db_fetch_object($result_inv))
 {
-    $print_sql = "SELECT * FROM invoiceoutprint WHERE InvoiceID = " . $row->InvoiceID;
-    $printinfo = $_lib['db']->db_fetch_assoc( $_lib['db']->db_query($print_sql) );
-    $printdate = $printinfo['InvoicePrintDate'];
+    $printdate = $printinfo[$row->InvoiceID];
 
     if($printdate == "0000-00-00")
-	$printdate = "";
+      $printdate = "";
 
     $i++;
     if (!($i % 2))
