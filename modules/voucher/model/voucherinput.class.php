@@ -102,39 +102,12 @@ class framework_logic_voucherinput
         if(isset($args['voucher_ForeignCurrencyID']))
         {
             if ($args['voucher_ForeignCurrencyID'] != "") {
-                if (Exchange::validateForeignCurrencyFields($args)) {
-                    $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
+                $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
 
-                    $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
-                    $this->ForeignConvRate = $hash['value'];
-
-                    $amt_in = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountIn']));
-                    $v_amt_in = $amt_in['value'];
-                    $amt_out = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountOut']));
-                    $v_amt_out = $amt_out['value'];
-                    if ($v_amt_in == 0 && $v_amt_out == 0) {
-                      $v_amt_in = $this->AmountIn / (100 / $this->ForeignConvRate);
-                      $v_amt_out = $this->AmountOut / (100 / $this->ForeignConvRate);
-                    }
-                    if ($this->AmountIn > 0) {
-                      $this->ForeignAmount = $v_amt_in;
-                    } else {
-                      $this->ForeignAmount = $v_amt_out;
-                    }
-
-                    $foreign_converted_amount = abs($this->ForeignAmount * (100 / $this->ForeignConvRate));
-                    if ($foreign_converted_amount > 0) {
-                        if ($args['voucher_ForeignAmountIn'] > 0) {
-                            $this->AmountIn = $foreign_converted_amount;
-                            $this->AmountOut = 0;
-                        } else if (($args['voucher_ForeignAmountOut'] > 0)) {
-                            $this->AmountIn = 0;
-                            $this->AmountOut = $foreign_converted_amount;
-                        }
-                      }
-                } else {
-                    // invalid data, ignore for now
-                }
+                $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
+                $this->ForeignConvRate = $hash['value'];
+                $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmount']));
+                $this->ForeignAmount = $hash['value'];
             } else {
                 $this->ForeignCurrencyID = "";
                 $this->ForeignConvRate = 0;
@@ -223,8 +196,11 @@ class framework_logic_voucherinput
             $this->action['voucher_currency_update']      = true;
             unset($this->action['view_linedetails']);
         }
+        if(isset($args['action_postmotpost_save_currency'])) {
+            $this->action['journal_currency_update'] = true;
+        }
 
-        if(!$this->action['voucher_new'] && !$this->action['voucher_head_update'] && $this->VoucherID)
+        if(!$this->action['voucher_new'] && !$this->action['voucher_head_update'] && !$this->action['journal_currency_update'] && $this->VoucherID)
         {
             #We default to voucgher update because post exist, probably javascript autosubmit
             #Vil dette v¾re feil i noen sammenhenger?
@@ -663,7 +639,7 @@ class framework_logic_voucherinput
         global $_lib, $accounting;
         #Builds a has similar to request for db updates and the likes
         #NŒr vi oppretter en ny linje, sŒ mŒ den fŒ v¾re 0. MŒ gj¿res til slutt da amountin/out nkan v¾re satt fra kid ref s¿k og oppslag
-        if($this->AmountIn == 0 && $this->AmountOut == 0 && !$this->action['voucherline_new'] && !$this->action['voucher_delete'] && !$this->action['voucher_head_delete'] && !$this->new) {
+        if($this->AmountIn == 0 && $this->AmountOut == 0 && !$this->action['voucherline_new'] && !$this->action['voucher_delete'] && !$this->action['voucher_head_delete'] && !$this->new && !($this->ForeignAmount && $this->ForeignConvRate)) {
             $_lib['message']->add(array('message' => "Det m&aring; v&aelig;re fylt ut enten credit eller debit i en postering<br>"));
             $this->exit = 1;
         }
@@ -743,18 +719,9 @@ class framework_logic_voucherinput
             $this->action['voucher_update'] ||
             $this->action['voucherline_new']) {
 
-            $request['voucher_ForeignCurrencyID']      = $this->ForeignCurrencyID;
-            $request['voucher_ForeignConvRate']      = $this->ForeignConvRate;
-            if ($this->ForeignConvRate) {
-              if ($this->AmountIn > 0) {
-                if ($this->ForeignAmountIn > 0) $request['voucher_ForeignAmount'] = $this->ForeignAmountIn;
-                else $request['voucher_ForeignAmount'] = $this->AmountIn/(100/$this->ForeignConvRate);
-              }
-              if ($this->AmountOut > 0) {
-                if ($this->ForeignAmountOut > 0) $request['voucher_ForeignAmount'] = $this->ForeignAmountOut;
-                else $request['voucher_ForeignAmount'] = $this->AmountOut/(100/$this->ForeignConvRate);
-              }
-            } else $request['voucher_ForeignAmount'] = 0;
+            $request['voucher_ForeignCurrencyID'] = $this->ForeignCurrencyID;
+            $request['voucher_ForeignConvRate']   = $this->ForeignConvRate;
+            $request['voucher_ForeignAmount']     = $this->ForeignAmount;
         }
 
 

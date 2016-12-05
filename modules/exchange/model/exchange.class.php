@@ -145,12 +145,11 @@ class exchange {
 	}
 
     function validateForeignCurrencyFields($args) {
-        $amount_key_in = 'voucher_ForeignAmountIn';
-        $amount_key_out = 'voucher_ForeignAmountOut';
+        $amount_key = 'voucher_ForeignAmount';
         $rate_key = 'voucher_ForeignConvRate';
         $currency_id_key = 'voucher_ForeignCurrencyID';
 
-        if (empty($args[$amount_key_in]) && empty($args[$amount_key_out]) && empty($args[$currency_id_key])) {
+        if (empty($args[$amount_key]) && empty($args[$currency_id_key])) {
           return false;
         }
 
@@ -184,55 +183,19 @@ class exchange {
 
         $journal_id = $_POST['voucher_JournalID'];
         $voucher_type = $_POST['voucher_VoucherType'];
+        $currency_id = $_REQUEST['voucher_ForeignCurrencyID'];
 
-        $currency_id_key = 'voucher_ForeignCurrencyID';
-        $amount_key_in = 'voucher_ForeignAmountIn';
-        $amount_key_out = 'voucher_ForeignAmountOut';
-        $rate_key = 'voucher_ForeignConvRate';
-
-        $currency_id = $_REQUEST[$currency_id_key];
-
-        $args = array(
-                      'voucher_JournalID' => $journal_id,
-                      'voucher_ForeignCurrencyID' => $currency_id,
-                      $amount_key_in => 1, // hard set to 1, to get validate true
-                      $amount_key_out => 1, // hard set to 1, to get validate true
-                      $rate_key => $_POST[$rate_key],
-                      );
-
-        if (!self::validateForeignCurrencyFields($args)) {
-            return false;
-        }
-
-        $rate = $_POST[$rate_key] = str_replace(',', '.', $_POST[$rate_key]);
-        $e_rate = 100.0/$rate;
-
-		$data = $_lib['input']->get_data();
+        $rate = $_POST['voucher_ForeignConvRate'] = str_replace(',', '.', $_POST['voucher_ForeignConvRate']);
         $escaped_rate = $_lib['db']->db_escape($rate);
-        $escaped_e_rate = $_lib['db']->db_escape($e_rate);
 
-        // Think if we should populate ForeignAmountIn and ForeignAmountOut fields. In current logic only ForeignAmount field is used.
-        // Saving to those fields may be just extra info, but we may consider it in the future.
+        $query_update = " UPDATE voucher SET ".
+                        "  ForeignCurrencyID = '". $_lib['db']->db_escape($currency_id) . "'".
+                        ", ForeignConvRate = '". $escaped_rate ."'".
+                        ", ForeignAmount = IF(AmountIn > 0, AmountIn * ". $escaped_rate ." / 100, IF(AmountOut > 0, AmountOut * ". $escaped_rate ." / 100, 0))".
+                        " WHERE JournalID = '". $journal_id ."'".
+                        " AND VoucherType = '". $voucher_type ."'";
 
-        // used when we add valuta to a journal that previously had only domestic amounts
-        // so, for convinience, we calculate the foreign amounts(using domestic amounts) with the chosen exchange rate
-		    $query_update = " UPDATE voucher SET ".
-                        "  ForeignAmount=IF(AmountIn > 0, AmountIn / " . $escaped_e_rate . ", IF(AmountOut > 0, AmountOut / " . $escaped_e_rate . ", 0))" .
-						            " WHERE JournalID = '" . $journal_id . "'".
-                        " AND VoucherType = '" . $voucher_type . "'".
-                        " AND (ForeignAmount = 0 OR ISNULL(ForeignAmount))";
-        $number_of_lines_changed = $_lib['db']->db_update($query_update);
-
-        // update whole journal's currency and recalculate amounts for new currency rate
-		    $query_update = " UPDATE voucher SET ".
-                        "  ForeignCurrencyID='". $_lib['db']->db_escape($currency_id) . "'" .
-                        ", AmountIn=IF(AmountIn > 0 and (ForeignAmount <> 0 OR NOT ISNULL(ForeignAmount)), ForeignAmount * "     . $escaped_e_rate . ", AmountIn)" .
-                        ", AmountOut=IF(AmountOut > 0 and (ForeignAmount <> 0 OR NOT ISNULL(ForeignAmount)), ForeignAmount * "     . $escaped_e_rate . ", AmountOut)" .
-                        ", ForeignConvRate="   . "'" . $escaped_rate . "'" .
-						            " WHERE JournalID = '" . $journal_id . "'".
-                        " AND VoucherType = '" . $voucher_type . "'";
-        // update only if no lines were affected by previous query
-        if ($number_of_lines_changed == 0) $_lib['db']->db_update($query_update);
+        $_lib['db']->db_update($query_update);
 	}
 
 	/**
@@ -300,7 +263,7 @@ class exchange {
             return "";
         }
 
-        $select_options = '<option value="">Standard</option>';
+        $select_options = '<option value="">'. exchange::getLocalCurrency() .'</option>';
         foreach ($currencies as $currency) {
             if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
                 $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
@@ -312,21 +275,27 @@ class exchange {
         $currency_js = '<script type="text/javascript">';
         // $currency_js .= 'if (!window.currency_rates) var currency_rates = new Object();';
 
-        $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'] = new Object();';
+        $currency_js .= 'window.currency_rates = new Object();';
         foreach ($currencies as $currency) {
-            $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'][\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
+            $currency_js .= 'window.currency_rates[\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
         }
         $currency_js .= '</script>';
         $ch_curr .= $currency_js;
 
+        $currency_is_hidden = !($voucher->ForeignCurrencyID);
+
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
-        $ch_curr  .= '<div class="vouchercurrencyheaderwrapper" id="voucher_currency_div_'. $voucher_id_text .'" style="display:inline;">';
-        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . ' onchange="onCurrencyChange(this, \'' . $voucher_id_text . '\')">'. $select_options .'"</select>';
-        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" onchange="onCurrencyRateChange(this)" value="'. str_replace(".", ",", (string)(round($voucher_foreign_rate, 4))) .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
+        $ch_curr  .= '<div class="vouchercurrencyheaderwrapper" id="voucher_currency_div_'. $voucher_id_text .'" style="display:inline; padding: 5px; border: 1px solid grey;">';
+        $ch_curr .= '<form method="post" name="voucher_global">';
+        $ch_curr .= 'Valuta: <select class="currency_id" name="voucher.ForeignCurrencyID" ' . $block_return . ' onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
+        $ch_curr .= '<span class="currency_field" '. ($currency_is_hidden ? 'style="display: none;"' : '') .'>';
+        $ch_curr .= 'Rate: <input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" onchange="this.value=toAmountString(toNumber(this.value))" value="'. str_replace(".", ",", (string)(round($voucher_foreign_rate, 4))) .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
         $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a>';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
         $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
+        $ch_curr .= '</span>';
         $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return journalCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
+        $ch_curr .= '</form>';
         $ch_curr .= '</div>';
         return $ch_curr;
     }
