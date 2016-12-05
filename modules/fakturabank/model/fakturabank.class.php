@@ -1547,7 +1547,7 @@ class lodo_fakturabank_fakturabank {
                         if ($is_foreign) {
                             $datalineH['UnitCostPrice'] = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $CustPrice);
                             $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
-                            $datalineH['ForeignAmount']     = (float)$CustPrice;
+                            $datalineH['ForeignAmount']     = (float)$line->LineExtensionAmount + $line->TaxTotal->TaxAmount;
                             $datalineH['ForeignConvRate']   = $conversion_rate;
                         } else {
                             $datalineH['UnitCostPrice'] = $CustPrice;

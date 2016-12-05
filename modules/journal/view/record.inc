@@ -16,7 +16,6 @@ $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 global $_lib;
 $result = $_lib['db']->db_query('SELECT * FROM voucher WHERE JournalID = ' . $voucher_input->JournalID . ' LIMIT 1');
 $voucher_current = $_lib['db']->db_fetch_assoc($result);
-if (($voucher_input->ForeignCurrencyID != $voucher_current['ForeignCurrencyID']) || ($voucher_input->ForeignConvRate != $voucher_current['ForeignConvRate'])) exchange::updateJournalForeignCurrency();
 
 // Log warning (to logapplication table) if some required fields are not set
 $res = var_export($_REQUEST, true);
@@ -298,7 +297,7 @@ elseif(($voucher_input->action['voucher_update'] || $voucher_input->action['vouc
 
 	#print_r($voucher_input->request('voucher_update'));
 
-    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record');
+    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record', $_REQUEST['voucher_VoucherIsInOrOut']);
 
     #print "<h2>Test2</h2>";
     #Update hovedbokskonto for this postering, it may have changed

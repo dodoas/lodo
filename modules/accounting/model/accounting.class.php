@@ -215,7 +215,8 @@ class accounting {
         foreach($voucherH as $voucher) {
             if(!isset($hovedbokmedreskontroH[$voucher['AccountPlanID']])) {
                 $sum += ($voucher['AmountIn'] - $voucher['AmountOut']);
-                $fsum += ($voucher['AmountIn'] > 0) ? $voucher['ForeignAmount'] : (($voucher['AmountOut'] > 0) ? -$voucher['ForeignAmount'] : 0);
+                // commented out so the foreign currency sum doesnt have to add up to 0
+                // $fsum += ($voucher['AmountIn'] > 0) ? $voucher['ForeignAmount'] : (($voucher['AmountOut'] > 0) ? -$voucher['ForeignAmount'] : 0);
                 #print "num " . $voucher['VoucherID'] . "  * $sum += (" . $voucher['AmountIn'] . ' - ' . $voucher['AmountOut'] . ")<br>\n";
 
             }
@@ -845,11 +846,11 @@ class accounting {
                     $percent = $fields['voucher_Vat'];
                 else return; // VAT percent is not set(it will be zero) so we will create VAT lines with zero amount if we do not exit here
 
-                if(isset($args['post']['voucher_ForeignCurrencyID']) and $args['post']['voucher_ForeignCurrencyID'] != '')
+                if(isset($args['post']['voucher_ForeignCurrencyID']))
                 {
                   $fields['voucher_ForeignCurrencyID'] = $args['post']['voucher_ForeignCurrencyID'];
                 }
-                if(isset($args['post']['voucher_ForeignConvRate']) and $args['post']['voucher_ForeignConvRate'] > 0)
+                if(isset($args['post']['voucher_ForeignConvRate']))
                 {
                   $fields['voucher_ForeignConvRate'] = $args['post']['voucher_ForeignConvRate'];
                 }
@@ -863,10 +864,8 @@ class accounting {
                   $fields['voucher_AmountOut'] = $_lib['convert']->Amount(($args['post']['voucher_AmountOut'] / (100 + $percent))  * $percent);
                   $fields['voucher_AmountIn']  = 0;
                 }
-                if ($fields['voucher_ForeignCurrencyID'] != '') {
+                if (isset($fields['voucher_ForeignCurrencyID'])) {
                   $fields['voucher_ForeignAmount'] = $_lib['convert']->Amount(($args['post']['voucher_ForeignAmount'] / (100 + $percent))  * $percent);
-                  if ($fields['voucher_AmountIn'] > 0) $fields['voucher_AmountIn'] = $_lib['convert']->Amount(exchange::convertToLocal($fields['voucher_ForeignCurrencyID'], $fields['voucher_ForeignAmount']));
-                  if ($fields['voucher_AmountOut'] > 0) $fields['voucher_AmountOut'] = $_lib['convert']->Amount(exchange::convertToLocal($fields['voucher_ForeignCurrencyID'], $fields['voucher_ForeignAmount']));
                 }
 
                 $fields['voucher_Description']        = $args['voucher']->VatID . ':' . $percent . '%';
@@ -1434,8 +1433,10 @@ class accounting {
         }
     }
 
-    public function update_voucher_line_smart($fields, $VoucherID, $comment) {
+    public function update_voucher_line_smart($fields, $VoucherID, $comment, $in_or_out = '') {
         global $_lib;
+
+        $this->calculate_amount_foreign_and_rate($fields, $in_or_out);
 
         $_lib['sess']->debug("Oppdaterer linjen fra $comment");
         if(!$VoucherID) {
@@ -1542,6 +1543,7 @@ class accounting {
 
         if ($this->is_valid_accountperiod($fields['voucher_VoucherPeriod'], $_lib['sess']->get_person('AccessLevel')) ||
 			($check_only_period && $this->is_valid_accountperiod($check_only_period, $_lib['sess']->get_person('AccessLevel')))) {
+            $this->calculate_amount_foreign_and_rate($fields, $in_or_out);
 
             unset($fields['voucher_VoucherID']); #If voucher id is set, we risk that we change it. This will prevent voucherid change it permanently.
             $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
@@ -1557,6 +1559,43 @@ class accounting {
             $_lib['storage']->db_update_hash($fields, 'voucher', $primarykey);
         } else {
             print "Ikke lov &aring; oppdatere en bilagslinje i en stengt periode: " . $fields['voucher_VoucherPeriod'] . " - Linjenummer: $VoucherID - kommentar: $comment<br>\n";
+        }
+    }
+
+    // This function calculates one of: in/out amount, foreign amount or conversion rate, if we have the other two
+    // $in_or_out - string 'in' or 'out' that will set AmountIn or AmountOut if we are missing the amount.
+    //              Origin value of this field is set in vouchergui::currency2
+    function calculate_amount_foreign_and_rate(&$fields, $in_or_out = '') {
+        global $_lib;
+        if(isset($fields['voucher_ForeignCurrencyID'])) {
+            $amount = 0;
+            if($fields['voucher_AmountIn'] > 0) {
+                $amount = $fields['voucher_AmountIn'];
+            } else if($fields['voucher_AmountOut'] > 0) {
+                $amount = $fields['voucher_AmountOut'];
+            }
+
+            $foreign_amount = $fields['voucher_ForeignAmount'];
+            $rate = $fields['voucher_ForeignConvRate'];
+
+            // rate / 100 = foreign / amount
+
+            if($amount > 0 && $foreign_amount > 0 && ($rate == 0 || $rate == '' || $rate > 0)) {
+                $rate = $foreign_amount * 100 / $amount;
+                $fields['voucher_ForeignConvRate'] = $rate;
+            } else if($amount > 0 && ($foreign_amount == 0 || $foreign_amount == '') && $rate > 0) {
+                $foreign_amount = $amount * $rate / 100;
+                $fields['voucher_ForeignAmount'] = $foreign_amount;
+            } else if(($amount == 0 || $amount == '') && $foreign_amount > 0 && $rate > 0) {
+                $amount = $foreign_amount * 100 / $rate;
+                if($in_or_out == 'in') {
+                    $fields['voucher_AmountIn'] = $amount;
+                } else if($in_or_out == 'out') {
+                    $fields['voucher_AmountOut'] = $amount;
+                }
+            } else if($fields['voucher_ForeignCurrencyID'] != '') {
+                $_lib['message']->add('Error: Too many fields are empty!');
+            }
         }
     }
 
@@ -1634,19 +1673,21 @@ class accounting {
                 $fields['voucher_EnableAutoBalance']    = 1;
                 $fields['voucher_AddedByAutoBalance']   = 1;
                 $fields['voucher_DisableAutoVat']       = 0;
+                $fields['voucher_ForeignConvRate']      = 0;
+                $fields['voucher_ForeignAmount']        = 0;
+                $fields['voucher_ForeignCurrencyID']    = '';
 
                 #print "correct_journal_balance: update<br>";
                 #print_r($fields);
                 $this->update_voucher_line_smart($fields, $VoucherID, 'correct_journal_balance');
             }
             else {
-                $query_get_valuta  = "select ForeignConvRate, ForeignCurrencyID from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and Active=1";
-                $valuta_voucher    = $_lib['storage']->get_row(array('query' => $query_get_valuta));
                 #print "correct_journal_balance: new<br>";
                 $fields['voucher_AddedByAutoBalance']   = 1;
                 $fields['voucher_Active']               = 1;
-                $fields['voucher_ForeignConvRate']      = $valuta_voucher->ForeignConvRate;
-                $fields['voucher_ForeignCurrencyID']    = $valuta_voucher->ForeignCurrencyID;
+                $fields['voucher_ForeignConvRate']      = 0;
+                $fields['voucher_ForeignAmount']        = 0;
+                $fields['voucher_ForeignCurrencyID']    = '';
                 #print_r($fields);
                 $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
                 $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);
