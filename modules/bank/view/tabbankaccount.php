@@ -260,6 +260,14 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
       $extraLastOut = $extras['BankLastOut'];
       $extraStartAtJournalID = $extras['JournalID'];
    }
+    if($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut == 0) {
+        $bankin = $extraEntryIn;
+        $bankout = $extraEntryOut;
+    }
+    else {
+        $bankin = $bank->bankvotingperiod->AmountIn;
+        $bankout = $bank->bankvotingperiod->AmountOut;
+    }
 ?>
 
 </table>
@@ -272,7 +280,8 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <td></td>
   <? $val = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut);
      $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
-  <td colspan="3"><? echo "<span style='color: $color'>Differanse fra bank: " . $_lib['format']->Amount(($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut)) . "</span>";  ?></td>
+  <td colspan="2"><? echo "<span style='color: $color'>Diff kontoutskrift-banktransaksjoner: " . $_lib['format']->Amount($val) . "</span>";  ?></td>
+  <td><? echo "<span style='color: $color'>Diff banktransaksjoner-bankbilag: " . $_lib['format']->Amount(($bankin - $bankout) - $bank->voucher->saldo) . "</span>"; ?></td>
 </tr>
 <tr>
   <td>Bank den siste</td>
@@ -282,7 +291,8 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 
   <? $val = $bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut);
      $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
-  <td colspan="3"><? echo "<span style='color: $color'>Differanse fra bank: " . $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut)) . "</span>";  ?></td>
+  <td colspan="2"><? echo "<span style='color: $color'>Diff kontoutskrift-banktransaksjoner: " . $_lib['format']->Amount($val) . "</span>";  ?></td>
+  <td><? echo "<span style='color: $color'>Diff banktransaksjoner-bankbilag: " . $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo - $bank->voucher->sumSaldo) . "</span>"; ?></td>
 </tr>
 
 <tr>
@@ -378,16 +388,6 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Dato</td>
   </tr>
   <tr>
-    <?php
-    if($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut == 0) {
-        $bankin = $extraEntryIn;
-        $bankout = $extraEntryOut;
-    }
-    else {
-        $bankin = $bank->bankvotingperiod->AmountIn;
-        $bankout = $bank->bankvotingperiod->AmountOut;
-    }
-    ?>
 
 
     <td colspan="2">Saldo<? print $bank->ThisPeriod ?>-01
