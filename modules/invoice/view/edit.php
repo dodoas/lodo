@@ -92,6 +92,9 @@ products['<? print $product['ProductID']; ?>'] = {ProductName: '<? print $produc
 <?
 }
 ?>
+// indicates the if the allowances on invoice line level have been changed for the first time already
+// so we can know if we should set the amount to negative if it is the first time
+var first_time_array = [];
 // needed so we can update invoice allowance/charge line without reloading the page
 var allowances_charges = [];
 <?
@@ -153,6 +156,7 @@ function newInvoiceLineAllowanceCharge(InvoiceID, CustomerAccountPlanID, Invoice
            // console.log("Added line allowance/charge "+InvoiceLineAllowanceChargeID);
            // since we always add an empty allowance/charge to the line there is no need to update
            // the total amounts here
+           first_time_array[InvoiceLineAllowanceChargeID] = true;
          });
   return false;
 }
@@ -440,10 +444,20 @@ function calculateInvoiceLineAllowanceCharge(line_id) {
 function updateInvoiceLineAllowanceChargeData(element) {
   var id = element.id;
   var name = element.id.split('.');
+  var allowance_charge_id = name[2];
+
+  name[1] = 'ChargeIndicator';
+  var charge_indicator_element = document.getElementById(name.join('.'));
+  charge_indicator = charge_indicator_element.value;
 
   name[1] = 'Amount';
   var amount_element = document.getElementById(name.join('.'));
   var amount = toNumber(amount_element.value);
+  if (typeof(first_time_array[allowance_charge_id]) == 'undefined') first_time_array[allowance_charge_id] = true;
+  if (charge_indicator == 0 && first_time_array[allowance_charge_id] && amount > 0) {
+    first_time_array[allowance_charge_id] = false;
+    amount = -amount;
+  }
   amount_element.value = toAmountString(amount, 2);
 
   name[1] = 'AllowanceChargeType';

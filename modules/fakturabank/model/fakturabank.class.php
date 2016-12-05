@@ -968,22 +968,6 @@ class lodo_fakturabank_fakturabank {
                     #Just estimate which journal ID's we are going to use
                     $InvoiceO->JournalID   = $JournalID;
                     $JournalID++;
-
-                    if (!empty($InvoiceO->AllowanceCharge)) {
-                      foreach ($InvoiceO->AllowanceCharge as $allowance_charge) {
-                        $query = "select * from allowancecharge where ChargeIndicator = " . $allowance_charge->ChargeIndicator . " and lower(Reason) = lower('" . $allowance_charge->AllowanceChargeReason . "') and Active = 1";
-                        $allowance_charge_exists = $_lib['db']->get_row(array('query' => $query, 'debug' => false));
-                        if(!$allowance_charge_exists->AllowanceChargeID) {
-                          if ($allowance_charge->ChargeIndicator == 'true') {
-                            $InvoiceO->Status     .= "Kostnad: '" . $allowance_charge->AllowanceChargeReason . "' eksisterer ikke. ";
-                          } else {
-                            $InvoiceO->Status     .= "Rabatt: '" . $allowance_charge->AllowanceChargeReason . "' eksisterer ikke. ";
-                          }
-                          $InvoiceO->Journal     = false;
-                          $InvoiceO->Class       = 'red';
-                        }
-                      }
-                    }
                 }
 
                 # validate invoice lines

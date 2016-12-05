@@ -51,6 +51,9 @@ print $_lib['sess']->doctype ?>
     <? includeinc('javascript') ?>
 
 <script type="text/javascript">
+// indicates the if the allowances on invoice line level have been changed for the first time already
+// so we can know if we should set the amount to negative if it is the first time
+var first_time_array = [];
 // needed so we can update invoice allowance/charge line without reloading the page
 var allowances_charges = [];
 <?
@@ -77,6 +80,28 @@ function showHideAllowanceCharge() {
   for(var i = 0; i < allowance_charge_elements.length; i++) {
     allowance_charge_elements[i].hidden = is_hidden;
   }
+}
+
+// update data for the line's allowance/charge if anything of note changes
+// should only format the amount correctly
+function updateInvoiceLineAllowanceChargeData(element) {
+  var id = element.id;
+  var name = element.id.split('.');
+  var allowance_charge_id = name[2];
+
+  name[1] = 'ChargeIndicator';
+  var charge_indicator_element = document.getElementById(name.join('.'));
+  charge_indicator = charge_indicator_element.value;
+
+  name[1] = 'Amount';
+  var amount_element = document.getElementById(name.join('.'));
+  var amount = toNumber(amount_element.value);
+  if (typeof(first_time_array[allowance_charge_id]) == 'undefined') first_time_array[allowance_charge_id] = true;
+  if (charge_indicator == 0 && first_time_array[allowance_charge_id] && amount > 0) {
+    first_time_array[allowance_charge_id] = false;
+    amount = -amount;
+  }
+  amount_element.value = toAmountString(amount, 2);
 }
 
 // update data for the allowance/charge line if allowance/charge changes
@@ -394,6 +419,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'field'    => 'ChargeIndicator',
             'value'    => $acrow->ChargeIndicator,
             'tabindex' => $tabindex++,
+            'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)',
             'pk'       => $acrow->InvoiceLineAllowanceChargeID));
           print $_lib['form3']->Generic_menu3(array(
             'data'     => array('line' => 'Linje', 'price' => 'Pris'),
@@ -426,6 +452,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'pk'       => $acrow->InvoiceLineAllowanceChargeID,
             'value'    => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->Amount),
             'class'    => 'number',
+            'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)',
             'tabindex' => $tabindex++));
         ?>
       </td>
