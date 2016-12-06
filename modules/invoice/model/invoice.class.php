@@ -1565,6 +1565,10 @@ class invoice {
       $result_altinn_report4 = $_lib['db']->db_query($query_altinn_report4);
       $altinn_report4_row = $_lib['db']->db_fetch_object($result_altinn_report4);
 
+      $query_altinn_report1 = "select ar1.* from altinnReport4 ar4 inner join altinnReport2 as ar2 on ar4.res_ArchiveReference = ar2.res_ArchiveReference inner join altinnReport1 as ar1 on ar1.ReceiptId = ar2.res_ReceiptId where ar4.AltinnReport4ID = " . $AltinnReport4ID;
+      $result_altinn_report1 = $_lib['db']->db_query($query_altinn_report1);
+      $altinn_report1_row = $_lib['db']->db_fetch_object($result_altinn_report1);
+
       $altinn_file = new altinn_file($altinn_report4_row->Folder);
       $file_contents = $altinn_file->readFile("tilbakemelding" . $altinn_report4_row->AltinnReport4ID . ".xml");
       if (!$file_contents) {
@@ -1608,12 +1612,20 @@ class invoice {
         $amount = (float) $xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumForskuddstrekk;
       }
 
+      if($altinn_report1_row->ErstatterMeldingsId) {
+        $query = "SELECT res_ArchiveReference AS AltinnRef FROM altinnReport2 WHERE res_ReceiptId = (SELECT ReceiptId FROM altinnReport1 WHERE MeldingsId = '". $altinn_report1_row->ErstatterMeldingsId ."')";
+        $replaces_altinn_ref = $_lib["db"]->get_row(array('query' => $query))->AltinnRef;
+        if($replaces_altinn_ref) {
+          $note = "Erstatter ". $replaces_altinn_ref;
+        }
+      }
+
       $altinn_invoice->ID = $invoice_type . '-' . $altinn_reference;
       $altinn_invoice->IssueDate = $issue_date;
       $altinn_invoice->InvoiceTypeCode = '380';
       // Not by EHF, is used in fakturaBank
       $altinn_invoice->DateOfIssue = $publishing_date;
-      $altinn_invoice->Note = $invoice_type . ' ' . strftime('%Y-%m', strtotime($issue_date));
+      $altinn_invoice->Note = $note;
       $altinn_invoice->DocumentCurrencyCode = exchange::getLocalCurrency();
 
       // Invoice supplier

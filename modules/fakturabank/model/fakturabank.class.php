@@ -2212,7 +2212,7 @@ class lodo_fakturabank_fakturabank {
         $page = "/rest/invoices.xml";
         $url  = "$this->protocol://$this->host$page";
 
-        if (isset($_SESSION['oauth_invoice_sent'])) {
+        if (isset($_SESSION['oauth_invoice_sent']) && !isset($_SESSION['sent_aga_to_fakturabank'])) {
           unset($_SESSION['oauth_invoice_sent']);
           $data = $_SESSION['oauth_resource'];
           unset($_SESSION['oauth_resource']);
@@ -2239,29 +2239,26 @@ class lodo_fakturabank_fakturabank {
             VALUES
             ('ERROR', 'Failed AGA or FTR export to fakturabank', '" . $result->message . "', " . $_lib['sess']->get_person('PersonID') . ", " . $_SESSION['altinn_invoice_reference'] . ")";
           $_lib['db']->db_query($insert_query);
-          unset($_SESSION['altinn_invoice_reference']);
           unset($_SESSION['altinn_invoice_sending']);
         }
-        $_SESSION['oauth_invoice_error'] = "Error: " . $data['result'];
-        if ($data['code'] == 403) $_SESSION['oauth_invoice_error'] = "Error: Utilstrekkelige rettigheter i fakturabank!";
+        $invoice_type = $_SESSION['altinn_invoice_type'] ? $_SESSION['altinn_invoice_type'].": " : "";
+        $_SESSION['oauth_invoice_error'][] = $invoice_type."Error: " . $data['result'];
+        if ($data['code'] == 403) $_SESSION['oauth_invoice_error'][] = $invoice_type. "Error: Utilstrekkelige rettigheter i fakturabank!";
       }
       else {
         if (isset($_SESSION['altinn_invoice_sending']) && $_SESSION['altinn_invoice_sending']) {
           $AltinnReport4ID = $_SESSION['altinn_invoice_reference'];
           $invoice_type = $_SESSION['altinn_invoice_type'];
-          $dataH = array();
-          $dataH['AltinnReport4ID'] = $AltinnReport4ID;
-          if ($invoice_type == "AGA") {
-            $dataH['SentAGAToFakturabankBy'] = $_lib['sess']->get_person('PersonID');
-            $dataH['SentAGAToFakturabankAt'] = strftime("%F %T");
-          } elseif ($invoice_type == "FTR") {
-            $dataH['SentFTRToFakturabankBy'] = $_lib['sess']->get_person('PersonID');
-            $dataH['SentFTRToFakturabankAt'] = strftime("%F %T");
+          if ($invoice_type == "AGA" || $invoice_type == "FTR") {
+            $dataH = array();
+            $dataH['AltinnReport4ID'] = $AltinnReport4ID;
+            $dataH['SentToFakturabankBy'] = $_lib['sess']->get_person('PersonID');
+            $dataH['SentToFakturabankAt'] = strftime("%F %T");
+            $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'altinnReport4', 'debug' => false));
           }
-          unset($_SESSION['altinn_invoice_reference']);
           unset($_SESSION['altinn_invoice_sending']);
+          $_SESSION['oauth_invoice_error'][] = $_SESSION['altinn_invoice_type'].": Success";
           unset($_SESSION['altinn_invoice_type']);
-          $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'altinnReport4', 'debug' => false));
         } else {
           $dataH = array();
           $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
@@ -2275,9 +2272,23 @@ class lodo_fakturabank_fakturabank {
             $dataH['LockedBy'] = $_lib['sess']->get_person('PersonID');
           }
           $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+          $invoice_type = $_SESSION['altinn_invoice_type'] ? ($_SESSION['altinn_invoice_type'].": ") : "";
+          $_SESSION['oauth_invoice_error'][] = $invoice_type."Success";
         }
-        $_SESSION['oauth_invoice_error'] = "Success";
       }
+      if (isset($_SESSION['sending_aga_ftr_to_fakturabank'])) {
+        if(isset($_SESSION['sending_aga_to_fakturabank'])) {
+          unset($_SESSION['sending_aga_to_fakturabank']);
+          $_SESSION['sent_aga_to_fakturabank'] = true;
+          $AltinnReport4ID = $_SESSION['altinn_invoice_reference'];
+          header("Location: ". $_lib['sess']->dispatchs . "t=altinnsalary.show4&action_invoice_fakturabanksend_altinn_ftr=1&AltinnReport4ID=". $AltinnReport4ID);
+          die();
+        } else if(isset($_SESSION['sending_ftr_to_fakturabank'])) {
+          unset($_SESSION['sent_aga_to_fakturabank']);
+          unset($_SESSION['sending_ftr_to_fakturabank']);
+        }
+      }
+      unset($_SESSION['altinn_invoice_reference']);
     }
 
     public function updateCarFromFakturabank($CarCode, $CarID) {
