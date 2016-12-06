@@ -283,7 +283,7 @@ if (!empty($InvoicesO->Invoice)) {
         } ?>
       </td>
       <td class="number"><? print $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID ?></td>
-      <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
+      <td class="number"><? print $InvoiceO->PaymentMeans->PaymentID ?></td>
       <td align="center"><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $InvoiceO->FakturabankID; ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
