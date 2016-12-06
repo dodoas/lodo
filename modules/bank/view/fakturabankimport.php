@@ -52,12 +52,14 @@ unset($_SESSION['oauth_balance_report_messages']);
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> | 
-<? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> | 
-<? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
-<? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> | 
-<? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
-<? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?>
+<? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
+<? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?>
+<? if ($_lib['sess']->get_person('AccessLevel') > 1) { ?> |
+    <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
+    <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
+    <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period)) ?> |
+    <? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $AccountID . '&amp;Period=' . $Period));
+   } ?>
 
 <h2><? print $_lib['message']->get() ?></h2>
 

@@ -221,10 +221,12 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         <? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?>
         <? if ($_lib['sess']->get_person('AccessLevel') > 1) { ?> |
-        <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
-        <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
-        <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)); if($_lib['sess']->get_person('FakturabankImportBankTransactionAccess')) { ?> |
-        <? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod));} ?>
+            <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
+            <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
+            <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod));
+            if($_lib['sess']->get_person('FakturabankImportBankTransactionAccess')) { ?> |
+                <? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod));
+            } ?>
         <? } ?>
         <h2>Kasse/bank-avstemming for periode: <? print $bank->ThisPeriod ?> med bilag av type <? print $bank->VoucherType ?> p&aring; konto <? print $bank->AccountNumber ?> <? print $bank->AccountName ?></h2>
         </th>
@@ -460,16 +462,16 @@ if(is_array($bank->bankaccount)) {
             $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
         }
 
+        $sumBalance = $row->AmountIn - $row->AmountOut;
         if($row->KID || $row->InvoiceNumber) {
-            if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) {
+            if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
                 // if it has been closed then JournalID should not be red.
                 $JournalIDColColor = '';
                 $matchCaption = "Lukket";
             } else {
-                $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) . ")";
+                $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID, $sumBalance)) . ")";
             }
         } else {
-            $sumBalance = $row->AmountIn - $row->AmountOut;
             $matchCaption = " Diff(" . $sumBalance . ")";
         }
 
@@ -595,7 +597,7 @@ if(is_array($bank->bankaccount)) {
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
 
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
-        <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) . ")"; ?></td>
+        <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut))) . ")"; ?></td>
         <td class="<? print $bankvoucher->classAmountIn ?> <? print $bank->DebitColor ?>">
         <? if($bankvoucher->AmountIn > 0) {
             print $_lib['format']->Amount($bankvoucher->AmountIn);
@@ -637,7 +639,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',           'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',     'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
-        <td class="sub"><? if($bank->is_closeable($bankvoucher->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) print "Lukket"?></td>
+        <td class="sub"><? if($bank->is_closeable($bankvoucher->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)) print "Lukket"?></td>
         <td class="<? print $bank->DebitColor ?>">
         <? print $_lib['format']->Amount($bankvoucher->AmountIn) ?>
         <? #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=voucher&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')); ?>

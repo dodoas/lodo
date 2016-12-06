@@ -194,7 +194,10 @@ class framework_logic_bank {
             if($this->type == 'voucher' && round($row_voucher->{$this->side},2) == round($this->searchstring,2) && round($this->searchstring, 2) > 0)
                 $bankvoting_tilbake_hash[$id]->{'class' . $this->side} = 'number red';
 
-            $this->set_closeable_vouchertilbake(0, $row_voucher->KID, $row_voucher->InvoiceNumber, - $row_voucher->AmountIn + $row_voucher->AmountOut, 'bank voting tilbake');
+            $row_voucher->KID           = trim($row_voucher->KID);
+            $row_voucher->InvoiceNumber = trim($row_voucher->InvoiceNumber);
+            $row_voucher->JournalID     = trim($row_voucher->JournalID);
+            $this->set_closeable_vouchertilbake(0, $row_voucher->KID, $row_voucher->InvoiceNumber, (-$row_voucher->AmountIn + $row_voucher->AmountOut), 'bank voting tilbake', $row_voucher>JournalID);
         }
 
         #print_r($this->closeableaccounttilleggline);
@@ -236,8 +239,11 @@ class framework_logic_bank {
             if($this->type == 'bank' && round($row_voucher->{$this->side},2) == round($this->searchstring,2) && round($this->searchstring, 2) > 0)
                 $bankvoting_tillegg_hash[$id]->{'class' . $this->side} = 'number red';
 
-            if($row_voucher->KID)
-                $this->set_closeable_accounttillegg(0, $row_voucher->KID, $row_voucher->InvoiceNumber, $row_voucher->AmountIn - $row_voucher->AmountOut, 'bank voting tillegg');
+            if($row_voucher->$JournalID && ($row_voucher->InvoiceNumber || $row_voucher->KID))
+                $row_voucher->KID           = trim($row_voucher->KID);
+                $row_voucher->InvoiceNumber = trim($row_voucher->InvoiceNumber);
+                $row_voucher->JournalID     = trim($row_voucher->JournalID);
+                $this->set_closeable_accounttillegg(0, $row_voucher->KID, $row_voucher->InvoiceNumber, ($row_voucher->AmountIn - $row_voucher->AmountOut), 'bank voting tillegg', $row_voucher->JournalID);
         }
         #print_r($bankvoting_tillegg_hash);
         ksort($bankvoting_tillegg_hash, SORT_REGULAR);
@@ -308,9 +314,11 @@ class framework_logic_bank {
 
             if($this->type == 'bank' && round($row->{$this->side},2) == round($this->searchstring,2) && round($this->searchstring, 2) > 0)
                 $row->{'class' . $this->side} = 'number red';
-
-            $this->set_closeable_accounttillegg($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, -$row->AmountIn + $row->AmountOut, "fra konto linje nummer: $row->Priority");
-            $this->set_closeable_voucheraccount($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, -$row->AmountIn + $row->AmountOut, "fra konto linje nummer: $row->Priority");
+            $row->KID           = trim($row->KID);
+            $row->InvoiceNumber = trim($row->InvoiceNumber);
+            $row->JournalID     = trim($row->JournalID);
+            $this->set_closeable_accounttillegg($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, (-$row->AmountIn + $row->AmountOut), "fra konto linje nummer: $row->Priority", $row->JournalID);
+            $this->set_closeable_voucheraccount($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, (-$row->AmountIn + $row->AmountOut), "fra konto linje nummer: $row->Priority", $row->JournalID);
 
             $bankaccount_hash[] = $row;
         }
@@ -366,39 +374,19 @@ class framework_logic_bank {
     * @param Define input parameters
     * @return Define return og function
     */
-    private function is_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID){
-        $success    = false;
-        $KID        = trim($KID);
-        $InvoiceID  = trim($InvoiceID);
-
+    private function is_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID){
+        $key = "B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID;
         #print_r($this->closeablevoucheraccountline);
-
-        if($KID && !$success) {
-            if(isset($this->closeablevoucheraccountline['KID'][$KID]) && round($this->closeablevoucheraccountline['KID'][$KID], 2) == 0) {
-                $success = true;
-            }
+        if(isset($this->closeablevoucheraccountline[$key]) && round($this->closeablevoucheraccountline[$key], 2) == 0) {
+            return true;
+        } else {
+            return false;
         }
-        if($InvoiceID && !$success) {
-            if(isset($this->closeablevoucheraccountline['InvoiceID'][$InvoiceID]) && round($this->closeablevoucheraccountline['InvoiceID'][$InvoiceID], 2) == 0) {
-                $success = true;
-            }
-        }
-
-        return $success;
     }
 
-    private function set_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID, $amount, $comment){
-        $KID        = trim($KID);
-        $InvoiceID  = trim($InvoiceID);
-
+    private function set_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID, $amount, $comment, $JournalID){
         #print "Setter voucheraccount: Konto: $AccountPlanID, KID:$KID, Fnr: $InvoiceID, Belop:$amount, Kommentar: $comment<br>\n";
-
-        if($KID) {
-            $this->closeablevoucheraccountline['KID'][$KID]             += round($amount,2);
-        }
-        if($InvoiceID) {
-            $this->closeablevoucheraccountline['InvoiceID'][$InvoiceID] += round($amount,2);
-        }
+        $this->closeablevoucheraccountline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount,2);
 
         if($KID == $this->debugKID) {
             print "set: voucheraccount #$AccountPlanID#$KID#$InvoiceID# += $amount - saldo #" . $this->closeablevoucheraccountline['KID'][$KID] . "# - $comment<br>\n";
@@ -406,17 +394,8 @@ class framework_logic_bank {
         }
     }
 
-    private function get_voucheraccount($AccountPlanID, $KID, $InvoiceID) {
-
-        if($KID) {
-            $value = $this->closeablevoucheraccountline['KID'][$KID];
-        } elseif($InvoiceID) {
-            $value = $this->closeablevoucheraccountline['InvoiceID'][$InvoiceID];
-        } else {
-            $value = 0;
-        }
-
-        return $value;
+    private function get_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID) {
+        return $this->closeablevoucheraccountline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID];
     }
 
     /***********************************************************************************************
@@ -424,51 +403,25 @@ class framework_logic_bank {
     * @param Define input parameters
     * @return Define return og function
     */
-    private function is_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID){
-        $success    = false;
-        $KID        = trim($KID);
-        $InvoiceID  = trim($InvoiceID);
-
-        if($KID && !$success) {
-            if(isset($this->closeableaccounttilleggline['KID'][$KID]) && round($this->closeableaccounttilleggline['KID'][$KID], 2) == 0) {
-                $success = true;
-            }
-        }
-        if($InvoiceID && !$success) {
-            if(isset($this->closeableaccounttilleggline['InvoiceID'][$InvoiceID]) && round($this->closeableaccounttilleggline['InvoiceID'][$InvoiceID], 2) == 0) {
-                $success = true;
-            }
+    private function is_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID, $JournalID){
+        $key = "B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID;
+        if(isset($this->closeableaccounttilleggline[$key]) && round($this->closeableaccounttilleggline[$key], 2) == 0) {
+            return true;
+        } else {
+            return false;
         }
 
-        return $success;
     }
 
-    private function set_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID, $amount, $comment){
-        $KID        = trim($KID);
-        $InvoiceID  = trim($InvoiceID);
-
-        if($KID) {
-            $this->closeableaccounttilleggline['KID'][$KID]             += round($amount, 2);
-        }
-        if($InvoiceID) {
-            $this->closeableaccounttilleggline['InvoiceID'][$InvoiceID] += round($amount, 2);
-        }
+    private function set_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID, $amount, $comment, $JournalID){
+        $this->closeableaccounttilleggline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount, 2);
 
         if($KID == $this->debugKID)
             print "set: accounttillegg #$AccountPlanID#$KID#$InvoiceID# += $amount - saldo #" . $this->closeableaccounttilleggline['KID'][$KID] . "# - $comment<br>\n";
     }
 
-    private function get_accounttillegg($AccountPlanID, $KID, $InvoiceID) {
-
-        if($KID) {
-            $value = $this->closeableaccounttilleggline['KID'][$KID];
-        } elseif($InvoiceID) {
-            $value = $this->closeableaccounttilleggline['InvoiceID'][$InvoiceID];
-        } else {
-            $value = 0;
-        }
-
-        return $value;
+    private function get_accounttillegg($AccountPlanID, $KID, $InvoiceID, $JournalID) {
+        return $this->closeableaccounttilleggline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID];
     }
 
     /***********************************************************************************************
@@ -476,49 +429,24 @@ class framework_logic_bank {
     * @param Define input parameters
     * @return Define return og function
     */
-    private function is_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID){
-        $success    = false;
-        $KID        = trim($KID);
-        $InvoiceID  = trim($InvoiceID);
-
-        if($KID && !$success) {
-            if(isset($this->closeablevouchertilbakeline['KID'][$KID]) && round($this->closeablevouchertilbakeline['KID'][$KID], 2) == 0) {
-                $success = true;
-            }
+    private function is_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $JournalID){
+        $key = "B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID;
+        if(isset($this->closeablevouchertilbakeline[$key]) && round($this->closeablevouchertilbakeline[$key], 2) == 0) {
+            return true;
+        } else {
+            return false;
         }
-        if($InvoiceID && !$success) {
-            if(isset($this->closeablevouchertilbakeline['InvoiceID'][$InvoiceID]) && round($this->closeablevouchertilbakeline['InvoiceID'][$InvoiceID], 2) == 0) {
-                $success = true;
-            }
-        }
-        return $success;
     }
 
-    private function set_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $amount, $comment){
-        $KID        = trim($KID);
-        $InvoiceID  = trim($InvoiceID);
+    private function set_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $amount, $comment, $JournalID){
+        $this->closeablevouchertilbakeline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount, 2);
 
-        if($KID) {
-            $this->closeablevouchertilbakeline['KID'][$KID]             += round($amount, 2);
-        }
-        if($InvoiceID) {
-            $this->closeablevouchertilbakeline['InvoiceID'][$InvoiceID] += round($amount, 2);
-        }
         if($KID == $this->debugKID)
             print "set: vouchertilbake #$AccountPlanID#$KID#$InvoiceID# += $amount - saldo #" . $this->closeablevouchertilbakeline['KID'][$KID] . "# - $comment<br>\n";
     }
 
-    private function get_vouchertilbake($AccountPlanID, $KID, $InvoiceID) {
-
-        if($KID) {
-            $value = $this->closeablevouchertilbakeline['KID'][$KID];
-        } elseif($InvoiceID) {
-            $value = $this->closeablevouchertilbakeline['InvoiceID'][$InvoiceID];
-        } else {
-            $value = 0;
-        }
-
-        return $value;
+    private function get_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $JournalID) {
+        return $this->closeablevouchertilbakeline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID];
     }
 
     /***********************************************************************************************
@@ -526,18 +454,25 @@ class framework_logic_bank {
     * @param
     * @return
     */
-    public function is_closeable($AccountPlanID, $KID, $InvoiceID) {
-        $status = false;
+    public function is_closeable($AccountPlanID, $KID, $InvoiceID, $JournalID) {
+        $KID        = trim($KID);
+        $InvoiceID  = trim($InvoiceID);
+        $JournalID  = trim($JournalID);
+        $status     = false;
+
+        if(empty($JournalID) || (empty($KID) && empty($InvoiceID))) {
+            return $status;
+        }
         if($this->debug) print "is_closeable<br>\n";
-        if($this->is_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID)) {
-            $status = true;
+        if($this->is_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID)) {
+            $status  = true;
             $comment = "closeable_accounttillegg";
         }
-        if($this->is_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID)) {
-            $status = true;
+        if($this->is_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID, $JournalID)) {
+            $status  = true;
             $comment = "closeable_voucheraccount";
         }
-        if($this->is_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID)) {
+        if($this->is_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $JournalID)) {
             $status  = true;
             $comment = "closeable_vouchertilbake";
         }
@@ -546,15 +481,21 @@ class framework_logic_bank {
         return $status;
     }
 
-    public function getDiff($AccountPlanID, $KID, $InvoiceID) {
-        $value = 0;
+    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount) {
+        $KID        = trim($KID);
+        $InvoiceID  = trim($InvoiceID);
+        $JournalID   = trim($JournalID);
+        $value      = 0;
 
-        $value = $this->get_accounttillegg($AccountPlanID, $KID, $InvoiceID);
+        if(empty($JournalID) || (empty($KID) && empty($InvoiceID))) {
+          return $TotalAmount;
+        }
+        $value = $this->get_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID);
         if(!$value) {
-            $value = $this->get_voucheraccount($AccountPlanID, $KID, $InvoiceID);
+            $value = $this->get_accounttillegg($AccountPlanID, $KID, $InvoiceID, $JournalID);
         }
         if(!$value) {
-            $value = $this->get_vouchertilbake($AccountPlanID, $KID, $InvoiceID);
+            $value = $this->get_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $JournalID);
         }
         return $value;
     }
@@ -606,8 +547,11 @@ class framework_logic_bank {
             if($this->type == 'voucher' && round($row_voucher->{$this->oside},2) == round($this->searchstring,2) && round($this->searchstring, 2) > 0)
                 $row_hash->{'class' . $this->oside} = 'number red';
 
-            $this->set_closeable_vouchertilbake($row_voucher->AccountPlanID, $row_voucher->KID, $row_voucher->InvoiceID, ($row_voucher->AmountIn - $row_voucher->AmountOut), "fra bilag med JournalID: $row_voucher->JournalID");
-            $this->set_closeable_voucheraccount($row_voucher->AccountPlanID, $row_voucher->KID, $row_voucher->InvoiceID, ($row_voucher->AmountIn - $row_voucher->AmountOut), "fra bilag med JournalID: $row_voucher->JournalID");
+            $row_voucher->KID       = trim($row_voucher->KID);
+            $row_voucher->InvoiceID = trim($row_voucher->InvoiceID);
+            $row_voucher->JournalID = trim($row_voucher->JournalID);
+            $this->set_closeable_vouchertilbake($row_voucher->AccountPlanID, $row_voucher->KID, $row_voucher->InvoiceID, ($row_voucher->AmountIn - $row_voucher->AmountOut), "fra bilag med JournalID: $row_voucher->JournalID", $row_voucher->JournalID);
+            $this->set_closeable_voucheraccount($row_voucher->AccountPlanID, $row_voucher->KID, $row_voucher->InvoiceID, ($row_voucher->AmountIn - $row_voucher->AmountOut), "fra bilag med JournalID: $row_voucher->JournalID", $row_voucher->JournalID);
             #print "JID: $row_voucher->JournalID, Amount: $Amount, ref: $row_voucher->KID, date: $row_voucher->VoucherDate<br>";
             $bankvoucher_hash[] = $row_hash;
         }
@@ -641,7 +585,7 @@ class framework_logic_bank {
                 #print "KID1: $line->KID, AmountIn: $line->AmountIn AmountOut: $line->AmountOut<br>\n";
                 #print_r($line);
 
-                if(!$this->is_closeable_voucheraccount(0, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_vouchertilbake(0, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_accounttillegg(0, $line->KID, $line->InvoiceNumber)) {
+                if(!$this->is_closeable_voucheraccount(0, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_vouchertilbake(0, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_accounttillegg(0, $line->KID, $line->InvoiceNumber, $line->JournalID)) {
 
                     if($line->AmountIn > 0 || $line->AmountOut > 0) {
                         $this->unvotedaccount[] = $line;
@@ -660,7 +604,7 @@ class framework_logic_bank {
                 #print "KID2: $line->KID, AmountIn: $line->AmountIn AmountOut: $line->AmountOut<br>\n";
                 #print_r($line);
 
-                if(!$this->is_closeable_voucheraccount($line->ReskontroAccountPlanID, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_vouchertilbake($line->ReskontroAccountPlanID, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_accounttillegg($line->ReskontroAccountPlanID, $line->KID, $line->InvoiceNumber)) {
+                if(!$this->is_closeable_voucheraccount($line->ReskontroAccountPlanID, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_vouchertilbake($line->ReskontroAccountPlanID, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_accounttillegg($line->ReskontroAccountPlanID, $line->KID, $line->InvoiceNumber, $line->JournalID)) {
 
                     #print "NO KID: $line->KID, InvoiceID: $line->InvoiceID, AmountIn: $line->AmountIn AmountOut: $line->AmountOut<br>\n";
                     #print_r($line);
@@ -681,7 +625,7 @@ class framework_logic_bank {
         #Ikke matchede bilag og tilbakef¿ringslinjer
         foreach($this->bankvote_tillegg as $line) {
 
-            if(!$this->is_closeable_voucheraccount(0, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_vouchertilbake(0, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_accounttillegg(0, $line->KID, $line->InvoiceNumber)) {
+            if(!$this->is_closeable_voucheraccount(0, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_vouchertilbake(0, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_accounttillegg(0, $line->KID, $line->InvoiceNumber, $line->JournalID)) {
 
                 if($line->AmountIn > 0 || $line->AmountOut > 0) {
 
@@ -697,19 +641,13 @@ class framework_logic_bank {
             foreach($this->bankvoucher_this_hash as $line) {
                 #print_r($line);
 
-                if(!$this->is_closeable_voucheraccount($line->AccountPlanID, $line->KID, $line->InvoiceID) && !$this->is_closeable_vouchertilbake($line->AccountPlanID, $line->KID, $line->InvoiceID) && !$this->is_closeable_accounttillegg($line->AccountPlanID, $line->KID, $line->InvoiceID)) {
+                if(!$this->is_closeable_voucheraccount($line->AccountPlanID, $line->KID, $line->InvoiceID, $line->JournalID) && !$this->is_closeable_vouchertilbake($line->AccountPlanID, $line->KID, $line->InvoiceID, $line->JournalID) && !$this->is_closeable_accounttillegg($line->AccountPlanID, $line->KID, $line->InvoiceID, $line->JournalID)) {
 
                     if($this->debugKID == $line->KID) {
                         print "Open Konto: $line->AccountPlanID, KID: $line->KID<br>\n";
-                        print "closeablevouchertilbakeline KID: " . $this->closeablevouchertilbakeline['KID'][$line->KID] . "<br>\n";
-                        print "closeablevouchertilbakeline: " . $this->closeablevouchertilbakeline['InvoiceID'][$line->InvoiceID] . "<br>\n";
-
-                        print "closeableaccounttilleggline KID: " . $this->closeableaccounttilleggline['KID'][$line->KID] . "<br>\n";
-                        print "closeableaccounttilleggline: " . $this->closeableaccounttilleggline['InvoiceID'][$line->InvoiceID] . "<br>\n";
-
-                        print "closeablevoucheraccountline: " . $this->closeablevoucheraccountline['KID'][$line->KID] . "<br>\n";
-                        print "closeablevoucheraccountline: " . $this->closeablevoucheraccountline['InvoiceID'][$line->InvoiceID] . "<br>\n";
-
+                        print "closeablevouchertilbakeline KID: " . $this->closeablevouchertilbakeline["B" . $line->JournalID . "-Fakturanr" . $line->InvoiceID . "-KID" . $line->KID] . "<br>\n";
+                        print "closeableaccounttilleggline KID: " . $this->closeableaccounttilleggline["B" . $line->JournalID . "-Fakturanr" . $line->InvoiceID . "-KID" . $line->KID] . "<br>\n";
+                        print "closeablevoucheraccountline KID: " . $this->closeablevoucheraccountline["B" . $line->JournalID . "-Fakturanr" . $line->InvoiceID . "-KID" . $line->KID] . "<br>\n";
                     }
 
                     if($line->AmountIn > 0 || $line->AmountOut > 0) {
