@@ -276,6 +276,7 @@ class format {
         $args = $this->CheckInput($args);
         $value = $args['value'];
 
+        $value = self::Amount($value);
         $hash = array('value'=>($value)."%");
         if(strlen($args['return'])>0)
             return $hash[$args['return']];

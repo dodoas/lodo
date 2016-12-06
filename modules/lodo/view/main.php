@@ -95,6 +95,7 @@ print $_lib['sess']->doctype ?>
             <td>
                 <? if($_SETUP['MODE'] != 'empatix1') { ?>
                 <a href="<? print $_lib['sess']->dispatch ?>t=product.list">Produkt register</a>
+                <a href="<? print $_lib['sess']->dispatch ?>t=allowancecharge.list">Rabatt/Kostnad register</a>
                 <? } else { ?>
                 Produktregisteret er i Empatix
                 <? } ?>
