@@ -895,10 +895,12 @@ class postmotpost {
       while($id_row = $_lib['db']->db_fetch_assoc($ids_result)) {
         $id = $id_row[$GetID];
         $ids[] = $id;
-        $_ids = array_merge($ids, $this->getParentOrChildIDs($id, $GetID));
-        $ids = array_unique($_ids);
+        $_ids = $this->getParentOrChildIDs($id, $GetID);
+        foreach ($_ids as $id) {
+          array_push($ids, $id);
+        }
       }
-      return $ids;
+      return array_keys(array_flip($ids)); // faster than array_unique($ids);
     }
 
     // helper function to get all parent and child voucher ids from voucherstruct table for given voucher id
@@ -911,9 +913,14 @@ class postmotpost {
       if ($exists) {
         $parent_ids = $this->getParentOrChildIDs($VoucherID, "ParentVoucherID");
         $child_ids = $this->getParentOrChildIDs($VoucherID, "ChildVoucherID");
-        $ids = array_merge($parent_ids, $child_ids, $ids);
+        foreach ($parent_ids as $id) {
+          array_push($ids, $id);
+        }
+        foreach ($child_ids as $id) {
+          array_push($ids, $id);
+        }
       }
-      return array_unique($ids);
+      return array_keys(array_flip($ids)); // faster than array_unique($ids);
     }
 
     /**
@@ -922,20 +929,14 @@ class postmotpost {
     public function openAllPostsForOpenPeriods() {
         global $_lib;
 
-        $voucher_query = "select VoucherID from voucher where VoucherPeriod in (select Period from accountperiod where Status < 4) and Active = 1";
+        $voucher_query = "SELECT v.VoucherID FROM voucher v JOIN (SELECT Period FROM accountperiod WHERE Status < 4) ap ON ap.Period = v.VoucherPeriod WHERE Active = 1";
         $r = $_lib['db']->db_query($voucher_query);
 
         while($voucher = $_lib['db']->db_fetch_assoc($r)) {
             $id = $voucher['VoucherID'];
             $ids = $this->getVoucherParentAndChildIDs($id);
             if (!empty($ids)) {
-              $ids_string = "(";
-              $len = count($ids);
-              for($i=0; $i < $len; $i++) {
-                if ($i == 0) $ids_string .= " ". $ids[$i];
-                else $ids_string .= ", ". $ids[$i];
-              }
-              $ids_string .= ")";
+              $ids_string = '(' . implode(', ', $ids) . ')';
               $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID IN $ids_string OR ChildVoucherID IN $ids_string";
               $_lib['db']->db_delete($delete_query);
             }
