@@ -7,6 +7,8 @@ class logic_invoicein_invoicein implements Iterator {
     private $iteratorH   = array() ;
     private $table_head  = 'invoicein';
     private $table_line  = 'invoiceinline';
+    public  $allowance_charge_table      = 'invoiceallowancecharge';
+    public  $line_allowance_charge_table = 'invoicelineallowancecharge';
     private $VoucherType = 'U';
 
     public function __construct($args) {
@@ -171,6 +173,37 @@ class logic_invoicein_invoicein implements Iterator {
         }
     }
 
+    // Since it is then simpler to load for XML, and we only show it inverted in view/edit page
+    function invertAllAllowanceAmounts(&$args) {
+        global $_lib;
+
+        foreach ($args as $arg_key => $arg_val) {
+          if ((strpos($arg_key, 'invoiceallowancecharge_Amount_') !== false) || (strpos($arg_key, 'invoicelineallowancecharge_Amount_') !== false)) {
+            $charge_indicator = $args[preg_replace('/Amount/', 'ChargeIndicator', $arg_key)];
+            $amount = $_lib['convert']->Amount($args[$arg_key]);
+            if ($charge_indicator == 0) $args[$arg_key] = -$amount;
+          }
+        }
+    }
+
+    function addVATPercentToAllowanceCharge(&$args) {
+        if (!is_numeric($args['ID'])) {
+            return;
+        }
+
+        global $_lib;
+
+        $InvoiceID = $args['ID'];
+        $InvoiceDate = $args['invoicein_InvoiceDate_'.$InvoiceID];
+        foreach ($args as $arg_key => $arg_val) {
+          if (strpos($arg_key, 'invoiceallowancecharge_VatID_') !== false) {
+            $select_vat = "select * from vat where VatID = '" . $arg_val . "' and Type = 'buy' and ValidFrom <= '" . $InvoiceDate . "' and ValidTo >= '" . $InvoiceDate . "'";
+            $vat = $_lib['db']->get_row(array('query' => $select_vat));
+            $args[preg_replace('/VatID/', 'VatPercent', $arg_key)] = $vat->Percent;
+          }
+        }
+    }
+
     function update($args) {
         global $_lib, $_SETUP, $accounting;
 
@@ -179,6 +212,8 @@ class logic_invoicein_invoicein implements Iterator {
         $accountplan    = $accounting->get_accountplan_object($AccountPlanID);
         $invoicein      = $_lib['storage']->get_row(array('query' => "select * from invoicein where ID='$ID'"));
 
+        self::addVATPercentToAllowanceCharge($args);
+        self::invertAllAllowanceAmounts($args);
         if(!$invoicein->IZipCode) {
             if($accountplan->ZipCode) {
                 $args['invoicein_IZipCode_' . $ID] = $accountplan->ZipCode;
@@ -207,7 +242,12 @@ class logic_invoicein_invoicein implements Iterator {
         #print_r($accountplan);
         #print_r($args);
 
-        $_lib['db']->db_update_multi_table($args, array('invoicein' => 'ID', 'invoiceinline' => 'LineID'));
+        $tables_to_update = array(
+          'invoicein'                        => 'ID',
+          'invoiceinline'                    => 'LineID',
+          $this->allowance_charge_table      => 'InvoiceAllowanceChargeID',
+          $this->line_allowance_charge_table => 'InvoiceLineAllowanceChargeID');
+        $_lib['db']->db_update_multi_table($args, $tables_to_update);
 
     }
 
@@ -223,8 +263,62 @@ class logic_invoicein_invoicein implements Iterator {
         return $_lib['db']->db_new_hash($invoicelineH, $this->table_line);
     }
 
+    /*******************************************************************************
+    * Add a new invoice allowance/charge
+    * @param
+    * @return
+    */
+    function allowance_charge_new($args)
+    {
+        global $_lib;
+        $allowance_chargeH['invoiceallowancecharge_InvoiceType'] = 'in';
+        $allowance_chargeH['invoiceallowancecharge_InvoiceID']   = $this->ID;
+        return $_lib['db']->db_new_hash($allowance_chargeH, $this->allowance_charge_table);
+    }
+
+    /*******************************************************************************
+    * Add a new invoice line allowance/charge
+    * @param
+    * @return
+    */
+    function line_allowance_charge_new($args)
+    {
+        global $_lib;
+        $allowance_chargeH['invoicelineallowancecharge_InvoiceType']         = 'in';
+        $allowance_chargeH['invoicelineallowancecharge_InvoiceLineID']       = $args['LineID'];
+        $allowance_chargeH['invoicelineallowancecharge_AllowanceChargeType'] = 'line';
+        return $_lib['db']->db_new_hash($allowance_chargeH, $this->line_allowance_charge_table);
+    }
+
+    /*******************************************************************************
+    * Delete invoice line allowance/charge
+    * @param
+    * @return
+    */
+    function line_allowance_charge_delete($args)
+    {
+        global $_lib;
+        $query = "delete from $this->line_allowance_charge_table where InvoiceLineAllowanceChargeID = " . $args['InvoiceLineAllowanceChargeID'];
+        return $_lib['db']->db_delete($query);
+    }
+
+    /*******************************************************************************
+    * Delete invoice allowance/charge
+    * @param
+    * @return
+    */
+    function allowance_charge_delete($args)
+    {
+        global $_lib;
+        $query = "delete from $this->allowance_charge_table where InvoiceAllowanceChargeID = " . $args['InvoiceAllowanceChargeID'];
+        return $_lib['db']->db_delete($query);
+    }
+
     function linedelete($args) {
         global $_lib;
+        // dependant destroy for allowances/charges connected to this line
+        $query="delete from $this->line_allowance_charge_table where InvoiceType = 'in' and InvoiceLineID=" . $args['LineID'];
+        $_lib['db']->db_delete($query);
         $invoicelineH['Active']   = 0;
         $invoicelineH['LineID']   = $args['LineID'];
         return $_lib['storage']->store_record(array('table' => 'invoiceinline', 'data' => $invoicelineH, 'debug' => false));
@@ -324,6 +418,42 @@ class logic_invoicein_invoicein implements Iterator {
                     //#print_r($VoucherH);
                     $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra invoicein'));
 
+                    $invoice_line_sum = 0;
+
+                    // Allowances/Charges on invoice
+                    $query_invoice_allowance_charge = "select iac.*, ac.DepartmentID, ac.ProjectID from invoiceallowancecharge iac left join allowancecharge ac on iac.AllowanceChargeID=ac.AllowanceChargeID where InvoiceID = '$InvoiceO->ID' and InvoiceType = 'in'";
+                    $result_invoice_allowance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
+
+                    while ($acrow = $_lib['db']->db_fetch_object($result_invoice_allowance_charge)) {
+                        $query = "select a.MotkontoResultat1 as InAccountPlanID from accountplan a where a.AccountPlanID = " . $InvoiceO->SupplierAccountPlanID;
+                        $invoiceallowancecharge = $_lib['storage']->get_row(array('query' => $query));
+
+                        $VoucherH['voucher_AccountPlanID']  = $invoiceallowancecharge->InAccountPlanID;
+                        $VoucherH['voucher_AmountIn']       = 0;
+                        $VoucherH['voucher_AmountOut']      = 0;
+                        $VoucherH['voucher_Vat']            = $acrow->VatPercent;
+                        $VoucherH['voucher_VatID']          = $acrow->VatID;
+                        $VoucherH['voucher_Description']    = $acrow->AllowanceChargeReason;
+                        $VoucherH['voucher_DepartmentID']   = $acrow->DepartmentID;
+                        $VoucherH['voucher_ProjectID']      = $acrow->ProjectID;
+
+                        $TotalPrice = $acrow->Amount * ((100 + $acrow->VatPercent) / 100);
+                        $TotalPrice = $TotalPrice * (($acrow->ChargeIndicator == 1) ? 1 : -1);
+
+                        $invoice_line_sum += $TotalPrice;
+
+                        if($TotalPrice > 0) {
+                            $VoucherH['voucher_AmountIn']   = abs($TotalPrice);
+                            $VoucherH['voucher_AmountOut']  = 0;
+                        }
+                        else {
+                            $VoucherH['voucher_AmountOut']  = abs($TotalPrice);
+                            $VoucherH['voucher_AmountIn']   = 0;
+                        }
+
+                        $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
+                    }
+
                     //####################################################################################
                     //#Each line has a different Vat - motkonto is from supplier
                     $query_invoiceline      = "select il.* from invoiceinline as il where il.ID='$InvoiceO->ID' and il.Active <> 0 order by il.LineID asc";
@@ -338,8 +468,6 @@ class logic_invoicein_invoicein implements Iterator {
 
                     $num_lines = count($lines);
 
-                    $invoice_line_sum = 0;
-
                     for ($i = 0; $i < $num_lines; $i++) {
                         $line = $lines[$i];
 
@@ -351,12 +479,15 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_Description']    = '';
                         $VoucherH['voucher_AccountPlanID']  = 0;
 
-                        $TotalPrice = round(($line->QuantityDelivered * $line->UnitCustPrice), 2);
-                        $TotalForeignPrice = round($line->ForeignAmount, 2);
+                        $query = "select sum(if(ChargeIndicator = 1, Amount, -Amount)) as sum from invoicelineallowancecharge where InvoiceType = 'in' and AllowanceChargeType = 'line' and InvoiceLineID = " . $line->LineID;
+                        $result = $_lib['storage']->get_row(array('query' => $query));
+                        $sum_line_allowance_charge = $result->sum;
+
+                        $TotalPrice = round(($line->QuantityDelivered * $line->UnitCustPrice + $sum_line_allowance_charge), 2);
+                        $TotalForeignPrice = round($line->ForeignAmount + $sum_line_allowance_charge, 2);
 
                         if($line->Vat > 0) {
-                            //#Add VAT to the price - since it is ex VAT
-                            //#print "$line->UnitCustPrice * (($line->Vat/100) +1)";
+                            //Add VAT to the price - since it is ex VAT
 
                             // $TotalPrice = round(($TotalPrice * (($line->Vat/100) +1)), 2);
                             // $TotalForeignPrice = round(($TotalForeignPrice * (($line->Vat/100) +1)), 2);
@@ -364,11 +495,13 @@ class logic_invoicein_invoicein implements Iterator {
                             // So why recalculate, and possibly make 0.01 error in recalculation?
                             // Just add them up and get the correct amount.
                             if ($VoucherH['voucher_ForeignCurrencyID'] != '') {
-                              $TotalForeignPrice = round(($TotalForeignPrice + $line->TaxAmount), 2);
-                              $TotalPrice = round(($TotalPrice + exchange::convertToLocal($VoucherH['voucher_ForeignCurrencyID'], $line->TaxAmount)), 2);
+                              $TaxAmount = (!empty($line->TaxAmount)) ? $line->TaxAmount : $TotalForeignPrice * $line->Vat / 100.0;
+                              // Using $TotalPrice since we already have that amount converted to local currency on download of this invoice
+                              $TotalPrice = round(($TotalPrice + exchange::convertToLocal($VoucherH['voucher_ForeignCurrencyID'], $TaxAmount)), 2);
                             }
                             else {
-                              $TotalPrice = round(($TotalPrice + $line->TaxAmount), 2);
+                              $TaxAmount = (!empty($line->TaxAmount)) ? $line->TaxAmount : $TotalPrice * $line->Vat / 100.0;
+                              $TotalPrice = round(($TotalPrice + $TaxAmount), 2);
                             }
                             $invoice_line_sum += $TotalPrice;
                         } else {

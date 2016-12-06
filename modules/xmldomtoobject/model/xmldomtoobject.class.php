@@ -63,6 +63,10 @@ class empatix_framework_logic_xmldomtoobject {
     private function domtoobject($node, $level) {
         $level++;
 
+        // Add an indicator to the created object that this is a credit note
+        if ($node->nodeName == 'CreditNote') {
+          $obj->CreditNote = true;
+        }
         if($node->hasChildNodes()) {
 
             for($i=0; $i < $level;$i++) {
@@ -77,7 +81,10 @@ class empatix_framework_logic_xmldomtoobject {
 				if (!empty($this->attributesOfInterest)) {
 					foreach ($this->attributesOfInterest as $attr) {
 						if ($attr_value = $this->getAttribute($childnode, $attr)) {
-							$attribute_name = $this->nodeName($childnode->nodeName) ."_Attr_" . $attr;
+              $_nodeName = $this->nodeName($childnode->nodeName);
+              // Added so we get a CreditNote with all the same fields as a negative invoice since we can deal with that easier on LODO
+              if ($_nodeName == 'CreditedQuantity') $_nodeName = 'InvoicedQuantity';
+							$attribute_name = $_nodeName ."_Attr_" . $attr;
 							$obj->{$attribute_name} = $attr_value;
 						}
 					}
@@ -104,10 +111,16 @@ class empatix_framework_logic_xmldomtoobject {
 
                     if($childnode->childNodes->length == 1  && $childnode->firstChild->nodeName == '#text') {
                         #If its only one - and it is of type text - couple it directly.
-                        if(strlen($childnode->firstChild->nodeValue))
+                        if(strlen($childnode->firstChild->nodeValue)) {
+                            // Added so we get a CreditNote with all the same fields as a negative invoice since we can deal with that easier on LODO
+                            if ($nodeName == 'CreditedQuantity') $nodeName = 'InvoicedQuantity';
                             $obj->{$nodeName} = utf8_decode($childnode->firstChild->nodeValue);
+                        }
 
                     } else {
+                        // Added so we get a CreditNote with all the same fields as a negative invoice since we can deal with that easier on LODO
+                        if ($nodeName == 'CreditNote') $nodeName = 'Invoice';
+                        if ($nodeName == 'CreditNoteLine') $nodeName = 'InvoiceLine';
                         $obj->{$nodeName} = $this->domtoobject($childnode, $level);
                     }
 
@@ -116,10 +129,16 @@ class empatix_framework_logic_xmldomtoobject {
    
                     if($childnode->childNodes->length == 1  && $childnode->firstChild->nodeName == '#text') {
                         #If its only one - and it is of type text - couple it directly.
-                        if(strlen($childnode->firstChild->nodeValue))
+                        if(strlen($childnode->firstChild->nodeValue)) {
+                            // Added so we get a CreditNote with all the same fields as a negative invoice since we can deal with that easier on LODO
+                            if ($nodeName == 'CreditedQuantity') $nodeName = 'InvoicedQuantity';
                             list($obj->{$nodeName}[]) = utf8_decode($childnode->firstChild->nodeValue);
+                        }
 
                     } else {
+                        // Added so we get a CreditNote with all the same fields as a negative invoice since we can deal with that easier on LODO
+                        if ($nodeName == 'CreditNote') $nodeName = 'Invoice';
+                        if ($nodeName == 'CreditNoteLine') $nodeName = 'InvoiceLine';
                         $obj->{$nodeName}[] = $this->domtoobject($childnode, $level);
                     }                   
                 }

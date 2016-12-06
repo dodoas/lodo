@@ -20,10 +20,13 @@ class lodo_fakturabank_fakturabank {
     public  $error          = '';
     public  $success        = false;
     private $ArrayTag       = array(
-                                 'Invoice'          => true,
-                                 'cac:InvoiceLine'  => true,
-                                 'InvoiceLine'      => true,
-                                 'TaxSubtotal'      => true
+                                 'Invoice'                     => true,
+                                 'CreditNote'                  => true,
+                                 'AdditionalDocumentReference' => true,
+                                 'AllowanceCharge'             => true,
+                                 'InvoiceLine'                 => true,
+                                 'CreditNoteLine'              => true,
+                                 'TaxSubtotal'                 => true
                                 );
     private $attributesOfInterest = array(
 									 'schemeID',
@@ -64,7 +67,7 @@ class lodo_fakturabank_fakturabank {
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
         $params     .= "&supplier_status=" . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
-        $params     .= "&order=invoiceno&sord=asc&type=outgoing";
+        $params     .= "&order=invoiceno&sord=asc&type=outgoing&lodo=true";
 
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
@@ -90,7 +93,7 @@ class lodo_fakturabank_fakturabank {
         #https://fakturabank.no/invoices?orgnr=981951271
 
         $page       = "rest/invoices.xml";
-        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc&type=incoming'; // add top limit rows=1000, otherwise we only get one record
+        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc&type=incoming&lodo=true'; // add top limit rows=1000, otherwise we only get one record
         $params    .= '&customer_status=' . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
@@ -175,6 +178,21 @@ class lodo_fakturabank_fakturabank {
         }
     }
 
+    private function find_car_by_code($CarCode) {
+        global $_lib;
+
+        $query = "SELECT `CarID`, `CarCode` FROM car WHERE `CarCode` = '$CarCode'";
+        $result = $_lib['storage']->db_query3(array('query' => $query));
+        if (!$result) {
+            return false;
+        }
+        if ($obj = $_lib['storage']->db_fetch_object($result)) {
+            return $obj->CarID;
+        } else {
+            return false;
+        }
+    }
+
     private function find_department_by_id($CompanyDepartmentID) {
         global $_lib;
 
@@ -221,8 +239,8 @@ class lodo_fakturabank_fakturabank {
             $dataH['ProfileID'] = $invoice->ProfileID;
 
             //# find KID
-            if($invoice->PaymentMeans->InstructionNote == 'KID' && $invoice->PaymentMeans->InstructionID) {
-                $dataH['KID']  = $invoice->PaymentMeans->InstructionID; #KID
+            if($invoice->PaymentMeans->PaymentID) {
+                $dataH['KID']  = $invoice->PaymentMeans->PaymentID; #KID
                                                                             }
             $dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
             $dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
@@ -327,8 +345,8 @@ class lodo_fakturabank_fakturabank {
 			$dataH['ProfileID'] = $invoice->ProfileID;
 
 			# find KID
-			if($invoice->PaymentMeans->InstructionNote == 'KID' && $invoice->PaymentMeans->InstructionID) {
-				$dataH['KID']  = $invoice->PaymentMeans->InstructionID; #KID
+			if($invoice->PaymentMeans->PaymentID) {
+				$dataH['KID']  = $invoice->PaymentMeans->PaymentID; #KID
 			}
 			$dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
 			$dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
@@ -581,9 +599,6 @@ class lodo_fakturabank_fakturabank {
             $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
             $InvoiceO->ReconciliationReasons = array();
 
-            $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
-            $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
-
             # get fakturabankinvoiceout id
 			if ($LodoID = $this->get_fakturabankoutgoinginvoice($InvoiceO->FakturabankID)) {
 				$InvoiceO->LodoID = $LodoID;
@@ -618,6 +633,17 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
 
+                // We are changing an incomig EHF CreditNote to a negative invoice so this amount needs to be
+                // negated to be saved in LODO correctly as a negative invoice
+                if ($InvoiceO->CreditNote) {
+                    $InvoiceO->LegalMonetaryTotal->PayableAmount = -$InvoiceO->LegalMonetaryTotal->PayableAmount;
+                    $InvoiceO->TaxTotal->TaxAmount = -$InvoiceO->TaxTotal->TaxAmount;
+                    foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
+                    }
+                }
+
                 #Check that we have not journaled the same invoices earlier.
                 #JournalID = Invoice number on outgoing invoices.
                 $query          = "select * from invoiceout where InvoiceID='" . $InvoiceO->ID . "'";
@@ -632,7 +658,22 @@ class lodo_fakturabank_fakturabank {
 
                     foreach($InvoiceO->InvoiceLine as &$line) {
 
-                        if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount != 0) {
+                        if($line->LineExtensionAmount != 0) {
+                            // We are changing an incomig EHF CreditNote to a negative invoice so these amounts need to be
+                            // negated to be saved in LODO correctly as a negative invoice
+                            if ($InvoiceO->CreditNote) {
+                              $line->InvoicedQuantity = -$line->InvoicedQuantity;
+                              $line->LineExtensionAmount = -$line->LineExtensionAmount;
+                              $line->TaxTotal->TaxAmount = -$line->TaxTotal->TaxAmount;
+                              foreach ($line->AllowanceCharge as &$allowance_charge) {
+                                $allowance_charge->Amount = -$allowance_charge->Amount;
+                                unset($allowance_charge); // because of problem with references
+                              }
+                              foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
+                                $allowance_charge->Amount = -$allowance_charge->Amount;
+                                unset($allowance_charge); // because of problem with references
+                              }
+                            }
                             #It has to be an amount to be checked - all zero lines will not be imported later.
                             $query          = "select * from product where ProductNumber='" . $line->Item->SellersItemIdentification->ID . "' and Active=1";
                             #print "$query<br>\n";
@@ -640,7 +681,6 @@ class lodo_fakturabank_fakturabank {
                             if($productexists) {
                                 if($productexists->AccountPlanID) {
                                     $line->Item->SellersItemIdentification->ProductID = $productexists->ProductID;
-
                                 } else {
                                     $InvoiceO->Status     .= "Konto ikke satt p&aring; produkt: " . $line->Item->SellersItemIdentification->ID;
                                     $InvoiceO->Journal     = false;
@@ -654,13 +694,29 @@ class lodo_fakturabank_fakturabank {
                         }
                         #Vi kunne ha auto opprettet produkter ogsŒ.....
                     }
+
+                    if (!empty($InvoiceO->AllowanceCharge)) {
+                      foreach ($InvoiceO->AllowanceCharge as $allowance_charge) {
+                        $query = "select * from allowancecharge where ChargeIndicator = " . $allowance_charge->ChargeIndicator . " and lower(Reason) = lower('" . $allowance_charge->AllowanceChargeReason . "') and Active = 1";
+                        $allowance_charge_exists = $_lib['db']->get_row(array('query' => $query, 'debug' => false));
+                        if(!$allowance_charge_exists->AllowanceChargeID) {
+                          if ($allowance_charge->ChargeIndicator == 'true') {
+                            $InvoiceO->Status     .= "Kostnad: '" . $allowance_charge->AllowanceChargeReason . "' eksisterer ikke. ";
+                          } else {
+                            $InvoiceO->Status     .= "Rabatt: '" . $allowance_charge->AllowanceChargeReason . "' eksisterer ikke. ";
+                          }
+                          $InvoiceO->Journal     = false;
+                          $InvoiceO->Class       = 'red';
+                        }
+                      }
+                    }
                 }
 
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: Kundenummer";
                 }
             } else {
-                $InvoiceO->Status     .= "Finner ikke kunde basert pŒ kundenummer: " . $customernumber . ". ";
+                $InvoiceO->Status     .= "Finner ikke kunde basert p&aring; kundenummer: " . $customernumber . ". ";
                 $msg = "Opprett p&aring; kundenr";
                 $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
                 $InvoiceO->Journal = false;
@@ -694,6 +750,17 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Department = $DepartmentID;
                 } else {
                     $InvoiceO->Status     .= "Fant ikke intern avdeling for kode $DepartmentID (customerdepartmentcode does not match any internal departments)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+            }
+
+            if (($CarCode = $acc_cost_params['carcode']) != '') {
+                if ($CarID = $this->find_car_by_code($CarCode)) {
+                    $InvoiceO->CarID = $CarID;
+                } else {
+                    $InvoiceO->Status     .= "Fant ikke intern bil for kode " . $CarCode . " (carcode does not match any internal cars)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -791,8 +858,6 @@ class lodo_fakturabank_fakturabank {
                 continue;
             }
 
-            $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
-            $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
 	    #Cleaning after prior developer -eirhje 23.01.10
 
             # get fakturabankinvoicein id
@@ -806,6 +871,17 @@ class lodo_fakturabank_fakturabank {
             #print "FB ID:   $InvoiceO->FakturabankID<br>\n";
 
             //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
+
+            // We are changing an incomig EHF CreditNote to a negative invoice so this amount needs to be
+            // negated to be saved in LODO correctly as a negative invoice
+            if ($InvoiceO->CreditNote) {
+                $InvoiceO->LegalMonetaryTotal->PayableAmount = -$InvoiceO->LegalMonetaryTotal->PayableAmount;
+                $InvoiceO->TaxTotal->TaxAmount = -$InvoiceO->TaxTotal->TaxAmount;
+                foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
+                    $allowance_charge->Amount = -$allowance_charge->Amount;
+                    unset($allowance_charge); // because of problem with references
+                }
+            }
 
             $_CompanyID = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
             $_SchemeID  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
@@ -896,20 +972,44 @@ class lodo_fakturabank_fakturabank {
 
                 # validate invoice lines
                 foreach($InvoiceO->InvoiceLine as &$line) {
-                  if ($line->Item->AdditionalItemProperty->Name == 'Car') {
-                    includelogic("car/car");
-                    $query = "select * from car where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
-                    $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
-                    if($carexists) {
-                      $line->Item->CarID   = $carexists->CarID;
-                      $line->Item->CarCode = $carexists->CarCode;
+                  // We are changing an incomig EHF CreditNote to a negative invoice so these amounts need to be
+                  // negated to be saved in LODO correctly as a negative invoice
+                  if ($InvoiceO->CreditNote) {
+                    $line->InvoicedQuantity = -$line->InvoicedQuantity;
+                    $line->LineExtensionAmount = -$line->LineExtensionAmount;
+                    $line->TaxTotal->TaxAmount = -$line->TaxTotal->TaxAmount;
+                    foreach ($line->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
                     }
-                    else {
-                      $InvoiceO->Status .= "Bil: " . $line->Item->AdditionalItemProperty->Value . " eksisterer ikke. ";
-                      $InvoiceO->Journal = false;
-                      $InvoiceO->Class   = 'red';
+                    foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
                     }
                   }
+
+                  if ($line->Item->AdditionalItemProperty) {
+                    if(!is_array($line->Item->AdditionalItemProperty)) {
+                      $line->Item->AdditionalItemProperty = array($line->Item->AdditionalItemProperty);
+                    }
+                    includelogic("car/car");
+                    foreach($line->Item->AdditionalItemProperty as $additional_item_property) {
+                      if ($additional_item_property->Name == 'Car') {
+                        $query = "select * from car where CarCode='" . $additional_item_property->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
+                        $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                        if($carexists) {
+                          $line->Item->CarID   = $carexists->CarID;
+                          $line->Item->CarCode = $carexists->CarCode;
+                        }
+                        else {
+                          $InvoiceO->Status .= "Bil: " . $additional_item_property->Value . " eksisterer ikke. ";
+                          $InvoiceO->Journal = false;
+                          $InvoiceO->Class   = 'red';
+                        }
+                      }
+                    }
+                  }
+
                 }
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
@@ -986,7 +1086,7 @@ class lodo_fakturabank_fakturabank {
         global $_lib;
 
 
-        $query                  = "select * from accountplan where REPLACE(AccountPlanID, ' ', '') like '%" . $customernumber . "%' and AccountPlanID <> '' and AccountPlanID is not null and AccountPlanType='customer'";
+        $query                  = "select * from accountplan where (REPLACE(AccountPlanID, ' ', '') like '%" . $customernumber . "%' OR OrgNumber = '" . $customernumber . "') and AccountPlanID <> '' and AccountPlanID is not null and AccountPlanType='customer'";
         $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
         if($account) {
             return $account;
@@ -1383,39 +1483,51 @@ class lodo_fakturabank_fakturabank {
                 $dataH['IAddress']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
                 $dataH['ICity']                  = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
                 $dataH['IZipCode']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+                $dataH['ICountryCode']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode;
 
                 $dataH['DName']                  = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
-                $dataH['DAddress']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
-                $dataH['DCity']                  = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
-                $dataH['DZipCode']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+                $dataH['DAddress']               = $InvoiceO->Delivery->DeliveryLocation->Address->StreetName;
+                $dataH['DCity']                  = $InvoiceO->Delivery->DeliveryLocation->Address->CityName;
+                $dataH['DZipCode']               = $InvoiceO->Delivery->DeliveryLocation->Address->PostalZone;
+                $dataH['DCountryCode']           = $InvoiceO->Delivery->DeliveryLocation->Address->IdentificationCode;
 
                 #Only real KID can be registered in the KID field
-                if($InvoiceO->PaymentMeans->InstructionNote == 'KID' && $InvoiceO->PaymentMeans->InstructionID) {
-                    $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
+                if($InvoiceO->PaymentMeans->PaymentID) {
+                    $dataH['KID']  = $InvoiceO->PaymentMeans->PaymentID; #KID
                 }
                 $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoicein', 'debug' => false));
+
+                # Allowance/Charge on invoice
+                if (!empty($InvoiceO->AllowanceCharge)) {
+                    foreach ($InvoiceO->AllowanceCharge as $AllowanceCharge) {
+                        $query_allowance_charge = "select * from allowancecharge where ChargeIndicator = " . $AllowanceCharge->ChargeIndicator . " and lower(Reason) = lower('" . $AllowanceCharge->AllowanceChargeReason . "') and Active = 1";
+                        $allowance_charge = $_lib['db']->get_row(array('query' => $query_allowance_charge, 'debug' => false));
+                        $dataAC["AllowanceChargeID"] = $allowance_charge->AllowanceChargeID;
+                        $dataAC["InvoiceType"] = 'in'; # Hardcoded since this is an incoming invoice
+                        $dataAC["InvoiceID"] = $ID;
+                        $dataAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
+                        $dataAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
+                        $dataAC["Amount"] = $AllowanceCharge->Amount;
+                        // Select VatID based on the suppliers result bookkeeping account
+                        $vat_id_query = "SELECT case when a.VatID < 40 THEN a.VatID + 30 ELSE a.VatID END as VatID FROM accountplan a WHERE a.AccountPlanID = (SELECT MotkontoResultat1 FROM accountplan WHERE AccountPlanID = " . $InvoiceO->AccountPlanID . ")";
+                        $vat = $_lib['db']->get_row(array('query' => $vat_id_query));
+                        $dataAC["VatID"] = $vat->VatID;
+                        $dataAC["VatPercent"] = $AllowanceCharge->TaxCategory->Percent;
+                        $_lib['storage']->store_record(array('data' => $dataAC, 'table' => 'invoiceallowancecharge', 'debug' => false));
+                    }
+                }
 
                 foreach($InvoiceO->InvoiceLine as $line) {
 
                     #print_r($line);
 
                     #preprocess price/quantity - because inconsistent data can appear
-                    if($line->Price->BaseQuantity && $line->Price->PriceAmount) {
-                        if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
-                            if($line->Price->BaseQuantity * $line->Price->PriceAmount == $line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
-                                $Quantity   = $line->Price->BaseQuantity;
-                                $CustPrice  = $line->Price->PriceAmount;
-                            } else {
-                                $Quantity   = 1;
-                                $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
-                            }
-                        } else {
-                            $Quantity   = 1;
-                            $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
-                        }
+                    if($line->InvoicedQuantity != 0 && $line->Price->PriceAmount != 0) {
+                        $Quantity   = $line->InvoicedQuantity;
+                        $CustPrice  = $line->Price->PriceAmount;
                     } else {
                         $Quantity   = 1;
-                        $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
+                        $CustPrice  = $line->LineExtensionAmount;
                     }
 
                     if($CustPrice != 0) {
@@ -1446,15 +1558,41 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
                         $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
 
-                        $datalineH['TaxAmount']         = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
-                        $datalineH['Vat']               = $line->TaxTotal->TaxSubtotal[0]->Percent;
+                        $datalineH['TaxAmount']         = $line->TaxTotal->TaxAmount;
+                        $datalineH['Vat']               = $line->Item->ClassifiedTaxCategory->Percent;
                         #$datalineH['VatID']             = $line->Price->PriceAmount; #Denne mŒ nok mappes
 
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
                         $datalineH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
 
-                        $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
+                        $LineID = $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
+
+                        # Allowance/Charge on invoice line
+                        if (!empty($line->AllowanceCharge)) {
+                            foreach ($line->AllowanceCharge as $AllowanceCharge) {
+                                $datalineAC["InvoiceType"] = 'in'; # Hardcoded since this is an incoming invoice
+                                $datalineAC["AllowanceChargeType"] = 'line'; # Hardcoded since this is a line allowance/charge
+                                $datalineAC["InvoiceLineID"] = $LineID;
+                                $datalineAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
+                                $datalineAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
+                                $datalineAC["Amount"] = $AllowanceCharge->Amount;
+                                $_lib['storage']->store_record(array('data' => $datalineAC, 'table' => 'invoicelineallowancecharge', 'debug' => false));
+                            }
+                        }
+
+                        # Allowance/Charge on invoice line price
+                        if (!empty($line->Price->AllowanceCharge)) {
+                            foreach ($line->Price->AllowanceCharge as $AllowanceCharge) {
+                                $datalineAC["InvoiceType"] = 'in'; # Hardcoded since this is an incoming invoice
+                                $datalineAC["AllowanceChargeType"] = 'price'; # Hardcoded since this is a price allowance/charge
+                                $datalineAC["InvoiceLineID"] = $LineID;
+                                $datalineAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
+                                $datalineAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
+                                $datalineAC["Amount"] = $AllowanceCharge->Amount;
+                                $_lib['storage']->store_record(array('data' => $datalineAC, 'table' => 'invoicelineallowancecharge', 'debug' => false));
+                            }
+                        }
                     }
                 }
 
@@ -1502,6 +1640,7 @@ class lodo_fakturabank_fakturabank {
                     $dataH['InvoiceDate']           = $InvoiceO->IssueDate;
                     $dataH['DueDate']               = $InvoiceO->PaymentMeans->PaymentDueDate;
                     $dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+                    $dataH['TotalVat']              = $InvoiceO->TaxTotal->TaxAmount;
                     $dataH['InsertedByPersonID']    = $_lib['sess']->get_person('PersonID');
                     $dataH['InsertedDateTime']      = $_lib['sess']->get_session('Datetime');
                     $dataH['Active']                = 1;
@@ -1519,15 +1658,16 @@ class lodo_fakturabank_fakturabank {
 
                     $dataH['SName']         = empty($InvoiceO->AccountingSupplierParty->Party->PartyName->Name)                            ? $company->VName        : $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
                     $dataH['SAddress']      = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName)                  ? $company->VAddress     : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                    $dataH['SCity']         = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName)                    ? $company->VCity        : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
                     $dataH['SZipCode']      = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone)                  ? $company->VZipCode     : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
                     $dataH['SCountryCode']  = empty($InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode) ? $company->VCountryCode : $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode;
                     $dataH['SPhone']        = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone)                         ? $company->Phone        : $InvoiceO->AccountingSupplierParty->Party->Contact->Telephone;
-                    $dataH['SMobile']       = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)                            ? $company->Mobile       : $InvoiceO->AccountingSupplierParty->Party->Contact->Mobile; // ?? check on fb?
+                    $dataH['SMobile']       = $company->Mobile;
+                    $dataH['SFax']          = empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telefax)                           ? $company->Fax          : $InvoiceO->AccountingSupplierParty->Party->Contact->Telefax;
                     $dataH['SEmail']        = empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)                    ? $company->Email        : $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail;
-                    $dataH['SWeb']          = empty($InvoiceO->AccountingSupplierParty->Party->WebsiteURI)                                 ? $company->WWW          : $InvoiceO->AccountingSupplierParty->Party->WebsiteURI;
 
                     # Save from imported data only if correct type is sent
-                    $dataH['SBankAccount']        = (!empty($InvoiceO->PaymentMeans->PayeeFinancialAccount->ID) && ($InvoiceO->PaymentMeans->PayeeFinancialAccount->Name == "Bank")) ? $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID : $company->BankAccount;
+                    $dataH['SBankAccount']        = (!empty($InvoiceO->PaymentMeans->PayeeFinancialAccount->ID)) ? $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID : $company->BankAccount;
                     if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:ORGNR") {
                       $dataH['SOrgNo'] = empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID) ? $company->OrgNumber : $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
                       $dataH['SVatNo'] = $company->VatNumber;
@@ -1541,36 +1681,51 @@ class lodo_fakturabank_fakturabank {
                     $dataH['IAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
                     $dataH['ICity']                  = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName;
                     $dataH['IZipCode']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone;
+                    $dataH['ICountryCode']           = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode;
+                    $dataH['Phone']                  = $InvoiceO->AccountingCustomerParty->Party->Contact->Telephone;
+                    $dataH['IEmail']                 = $InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail;
 
                     $dataH['DName']                  = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
-                    $dataH['DAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
-                    $dataH['DCity']                  = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName;
-                    $dataH['DZipCode']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone;
+                    $dataH['DAddress']               = $InvoiceO->Delivery->DeliveryLocation->Address->StreetName;
+                    $dataH['DCity']                  = $InvoiceO->Delivery->DeliveryLocation->Address->CityName;
+                    $dataH['DZipCode']               = $InvoiceO->Delivery->DeliveryLocation->Address->PostalZone;
+                    $dataH['DCountryCode']           = $InvoiceO->Delivery->DeliveryLocation->Address->Country->IdentificationCode;
 
-                    if($InvoiceO->PaymentMeans->InstructionNote == 'KID' && $InvoiceO->PaymentMeans->InstructionID) {
-                        $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
+                    if($InvoiceO->PaymentMeans->PaymentID) {
+                        $dataH['KID']  = $InvoiceO->PaymentMeans->PaymentID; #KID
                     }
                     $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+
+                    # Allowance/Charge on invoice
+                    if (!empty($InvoiceO->AllowanceCharge)) {
+                        foreach ($InvoiceO->AllowanceCharge as $AllowanceCharge) {
+                            $query_allowance_charge = "select * from allowancecharge where ChargeIndicator = " . $AllowanceCharge->ChargeIndicator . " and lower(Reason) = lower('" . $AllowanceCharge->AllowanceChargeReason . "') and Active = 1";
+                            $allowance_charge = $_lib['db']->get_row(array('query' => $query_allowance_charge, 'debug' => false));
+                            $dataAC["AllowanceChargeID"] = $allowance_charge->AllowanceChargeID;
+                            $dataAC["InvoiceType"] = 'out'; # Hardcoded since this is an outgoing invoice
+                            $dataAC["InvoiceID"] = $ID;
+                            $dataAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
+                            $dataAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
+                            $dataAC["Amount"] = $AllowanceCharge->Amount;
+                            // Select VatID based on the Category and date
+                            $vat_id_from_category = "select VatID from vat where Category = '" . $AllowanceCharge->TaxCategory->ID . "' and Type = 'sale' and ValidFrom <= '" . $InvoiceO->IssueDate . "' and ValidTo >= '" . $InvoiceO->IssueDate . "'";
+                            $vat = $_lib['db']->get_row(array('query' => $vat_id_from_category));
+                            $dataAC["VatID"] = $vat->VatID;
+                            $dataAC["VatPercent"] = $AllowanceCharge->TaxCategory->Percent;
+                            $_lib['storage']->store_record(array('data' => $dataAC, 'table' => 'invoiceallowancecharge', 'debug' => false));
+                        }
+                    }
+
                     #MŒ sjekke at produktnummer stemmer og matcher
                     foreach($InvoiceO->InvoiceLine as $line) {
 
                         #preprocess price/quantity - because inconsistent data can appear
-                        if($line->Price->BaseQuantity && $line->Price->PriceAmount) {
-                            if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
-                                if($line->Price->BaseQuantity * $line->Price->PriceAmount == $line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
-                                    $Quantity   = $line->Price->BaseQuantity;
-                                    $CustPrice  = $line->Price->PriceAmount;
-                                } else {
-                                    $Quantity   = 1;
-                                    $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
-                                }
-                            } else {
-                                $Quantity   = 1;
-                                $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
-                            }
+                        if($line->InvoicedQuantity != 0 && $line->Price->PriceAmount != 0) {
+                            $Quantity   = $line->InvoicedQuantity;
+                            $CustPrice  = $line->Price->PriceAmount;
                         } else {
                             $Quantity   = 1;
-                            $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
+                            $CustPrice  = $line->LineExtensionAmount;
                         }
 
                         if($CustPrice != 0) {
@@ -1589,14 +1744,40 @@ class lodo_fakturabank_fakturabank {
                             $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
                             $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
 
-                            $datalineH['TaxAmount']         = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
-                            $datalineH['Vat']               = $line->TaxTotal->TaxSubtotal[0]->Percent;
+                            $datalineH['TaxAmount']         = $line->TaxTotal->TaxAmount;
+                            $datalineH['Vat']               = $line->Item->ClassifiedTaxCategory->Percent;
                             #$datalineH['VatID']             = $line->Price->VatID; #Denne mŒ nok mappes
 
                             $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                             $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
 
-                            $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceoutline', 'debug' => false));
+                            $LineID = $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceoutline', 'debug' => false));
+
+                            # Allowance/Charge on invoice line
+                            if (!empty($line->AllowanceCharge)) {
+                                foreach ($line->AllowanceCharge as $AllowanceCharge) {
+                                    $datalineAC["InvoiceType"] = 'out'; # Hardcoded since this is an outgoing invoice
+                                    $datalineAC["AllowanceChargeType"] = 'line'; # Hardcoded since this is a line allowance/charge
+                                    $datalineAC["InvoiceLineID"] = $LineID;
+                                    $datalineAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
+                                    $datalineAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
+                                    $datalineAC["Amount"] = $AllowanceCharge->Amount;
+                                    $_lib['storage']->store_record(array('data' => $datalineAC, 'table' => 'invoicelineallowancecharge', 'debug' => false));
+                                }
+                            }
+
+                            # Allowance/Charge on invoice line price
+                            if (!empty($line->Price->AllowanceCharge)) {
+                              foreach ($line->Price->AllowanceCharge as $AllowanceCharge) {
+                                $datalineAC["InvoiceType"] = 'out'; # Hardcoded since this is an outgoing invoice
+                                $datalineAC["AllowanceChargeType"] = 'price'; # Hardcoded since this is a price allowance/charge
+                                $datalineAC["InvoiceLineID"] = $LineID;
+                                $datalineAC["ChargeIndicator"] = ($AllowanceCharge->ChargeIndicator == 'true') ? 1 : 0;
+                                $datalineAC["AllowanceChargeReason"] = $AllowanceCharge->AllowanceChargeReason;
+                                $datalineAC["Amount"] = $AllowanceCharge->Amount;
+                                $_lib['storage']->store_record(array('data' => $datalineAC, 'table' => 'invoicelineallowancecharge', 'debug' => false));
+                              }
+                            }
                         }
                     }
 
@@ -1620,6 +1801,38 @@ class lodo_fakturabank_fakturabank {
         $this->setEvents($events);
     }
 
+    /* Adds a node element to the xml document
+     * Returns the created node or false on failure
+     * $doc               -> xml document object, used to create the node element
+     * $parent_element    -> element to which the new node is to be appended as a child
+     * $node_name         -> name of the new node
+     * $value             -> value the node is to have, defaults to 'null_value' if none given(in case of cac:... nodes)
+     * $attributes_array  -> array of key => value attributes to be added to the node, defaults to an empty array if none given
+     * $use_cdata         -> create a CDATA section in the node value, defaults to false
+     */
+    public function createElementIfNotEmpty($doc, $parent_element, $node_name, $value = 'null_value', $attributes_array = array(), $use_cdata = false) {
+        if (!is_null($value) && $value !== '') { // check if not null/empty string
+          if ($value !== 'null_value') { // if a value is given
+            $value = utf8_encode($value);
+            if ($use_cdata) {
+              $cdata_value = $doc->createCDATASection($value);
+              $cbc = $doc->createElement($node_name);
+              $cbc->appendChild($cdata_value);
+            } else {
+              $cbc = $doc->createElement($node_name, $value);
+            }
+          } else {
+            $cbc = $doc->createElement($node_name);
+          }
+          foreach($attributes_array as $attribute_name => $attribute_value) {
+            $cbc->setAttribute($attribute_name, $attribute_value);
+          }
+          $parent_element->appendChild($cbc);
+          return $cbc;
+        }
+        return false;
+    }
+
     ################################################################################################
     public function hash_to_xml($InvoiceO) {
         global $_lib;
@@ -1637,42 +1850,26 @@ class lodo_fakturabank_fakturabank {
             #print_r($invoice);
         }
 
-        $cbc = $doc->createElement('cbc:UBLVersionID', '2.0');
-        $invoice->appendChild($cbc);
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:UBLVersionID', '2.1');
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:CustomizationID', 'urn:www.cenbii.eu:transaction:biitrns010:ver2.0:extended:urn:www.peppol.eu:bis:peppol5a:ver2.0:extended:urn:www.difi.no:ehf:faktura:ver2.0');
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:ProfileID', 'urn:www.cenbii.eu:profile:bii05:ver2.0');
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:ID', $InvoiceO->ID);
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:IssueDate', $InvoiceO->IssueDate);
+        $invoice_type_code_attributes = array('listID' => 'UNCL1001');
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:InvoiceTypeCode', $InvoiceO->InvoiceTypeCode, $invoice_type_code_attributes);
 
-        $cbc = $doc->createElement('cbc:CustomizationID', 'urn:fakturabank.no:ubl-2.0-customizations:Invoice');
-        $invoice->appendChild($cbc);
+        // Not by EHF but needed by fakturaBank
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:OriginSystemSavedBy', $InvoiceO->LodoSavedBy);
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:DateOfIssue', $InvoiceO->DateOfIssue);
 
-        $cbc = $doc->createElement('cbc:ProfileID', 'Invoice');
-        $invoice->appendChild($cbc);
-
-        $cbc = $doc->createElement('cbc:ID', $InvoiceO->ID);
-        $invoice->appendChild($cbc);
-
-        $cbc = $doc->createElement('cbc:IssueDate', $InvoiceO->IssueDate);
-        $invoice->appendChild($cbc);
-
-        $cbc = $doc->createElement('cbc:OriginSystemSavedBy', $InvoiceO->LodoSavedBy);
-        $invoice->appendChild($cbc);
-
-        if (!is_null($InvoiceO->DateOfIssue)) {
-          $cbc = $doc->createElement('cbc:DateOfIssue', $InvoiceO->DateOfIssue);
-          $invoice->appendChild($cbc);
-        }
-
-        $cbc = $doc->createElement('cbc:Note');
-        $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->Note)); // handle ampersand in text
-        $cbc->appendChild($cdata);
-        $invoice->appendChild($cbc);
-
-        $cbc = $doc->createElement('cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode);
-        $invoice->appendChild($cbc);
-
+        // uses CDATA section for special text that may have some characters not allowed as regular XML node value
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:Note', $InvoiceO->Note, array(), true);
+        $currency_code_attributes = array('listID' => 'ISO4217');
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode, $currency_code_attributes);
 
         /* gather data to be sent in AccountCost element */
         $acc_cost = '';
         $acc_types = array('Department', 'DepartmentCode', 'Project', 'ProjectCode', 'CustomerDepartment', 'CustomerProject');
-
         foreach ($acc_types as $acc_type) {
             if ($InvoiceO->$acc_type != "") {
                 if (!empty($acc_cost)) {
@@ -1681,503 +1878,313 @@ class lodo_fakturabank_fakturabank {
                 $acc_cost .= strtolower($acc_type) . '=' . urlencode(utf8_encode($InvoiceO->$acc_type));
             }
         }
-
-        if (!empty($acc_cost)) {
-            $cbc = $doc->createElement('cbc:AccountingCost', utf8_encode($acc_cost));
-            $invoice->appendChild($cbc);
-        }
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:AccountingCost', $acc_cost);
 
         if (!empty($InvoiceO->OrderReference)) {
-            $order_reference = $doc->createElement('cac:OrderReference');
-
-            if (!empty($InvoiceO->OrderReference->ID)) {
-                $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->OrderReference->ID));
-                $order_reference->appendChild($cbc);
-            }
-            if (!empty($InvoiceO->OrderReference->SalesOrderID)) {
-                $cbc = $doc->createElement('cbc:SalesOrderID', utf8_encode($InvoiceO->OrderReference->SalesOrderID));
-                $order_reference->appendChild($cbc);
-            }
-
-            $invoice->appendChild($order_reference);
+            $order_reference = self::createElementIfNotEmpty($doc, $invoice, 'cac:OrderReference');
+            self::createElementIfNotEmpty($doc, $order_reference, 'cbc:ID', $InvoiceO->OrderReference->ID);
         }
 
         ############################################################################################
-        #AccountingSupplierParty
-        $supplier = $doc->createElement('cac:AccountingSupplierParty');
-            $cacparty = $doc->createElement('cac:Party');
+        # AccountingSupplierParty
+        $supplier = self::createElementIfNotEmpty($doc, $invoice, 'cac:AccountingSupplierParty');
+            $cacparty = self::createElementIfNotEmpty($doc, $supplier, 'cac:Party');
 
-            $cbc = $doc->createElement('cbc:WebsiteURI', utf8_encode($InvoiceO->AccountingSupplierParty->Party->WebsiteURI));
-                $cacparty->appendChild($cbc);
+                $name = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyName');
+                    // handle ampersand in company names (we should probably send all text data with cdata function)
+                    self::createElementIfNotEmpty($doc, $name, 'cbc:Name', $InvoiceO->AccountingSupplierParty->Party->PartyName->Name, array(), true);
 
-                $name = $doc->createElement('cac:PartyName');
-                $cbc = $doc->createElement('cbc:Name');
-                $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
-                $cbc->appendChild($cdata);
-                $name->appendChild($cbc);
-                $cacparty->appendChild($name);
+                $address = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PostalAddress');
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:StreetName', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName);
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:AdditionalStreetName', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber);
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:CityName', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName);
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:PostalZone', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone);
+                    $country = self::createElementIfNotEmpty($doc, $address, 'cac:Country');
+                        $country_identification_attributes = array('listID' => 'ISO3166-1:Alpha2');
+                        self::createElementIfNotEmpty($doc, $country, 'cbc:IdentificationCode', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode, $country_identification_attributes);
 
-                $address = $doc->createElement('cac:PostalAddress', utf8_encode(''));
+                if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme)) {
+                    $partytaxscheme = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyTaxScheme');
+                        $company_id_attributes = array();
+                        if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID)) {
+                            $company_id_attributes['schemeID'] = utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID);
+                        }
+                        self::createElementIfNotEmpty($doc, $partytaxscheme, 'cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID, $company_id_attributes);
 
-                    $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName));
-                    $address->appendChild($cbc);
-
-                    $cbc = $doc->createElement('cbc:AdditionalStreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber));
-                    $address->appendChild($cbc);
-
-                    $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName));
-                    $address->appendChild($cbc);
-
-                    $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone));
-                    $address->appendChild($cbc);
-
-                    $country = $doc->createElement('cac:Country');
-
-                        $cbc = $doc->createElement('cbc:IdentificationCode', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode));
-                        $country->appendChild($cbc);
-
-                    $address->appendChild($country);
-
-                $cacparty->appendChild($address);
-
-                if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID)) {
-                    $partytaxscheme = $doc->createElement('cac:PartyTaxScheme');
-                    $cbc = $doc->createElement('cbc:CompanyID', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID));
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID)) {
-                        $cbc->setAttribute('schemeID', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID));
-                    }
-
-
-                    $partytaxscheme->appendChild($cbc);
-
-                    $taxscheme = $doc->createElement('cac:TaxScheme');
-
-                    $cbc = $doc->createElement('cbc:ID', utf8_encode('VAT'));
-                    $cbc->setAttribute('schemeID', 'UN/ECE 5153');
-                    $cbc->setAttribute('schemeAgencyID', '6');
-                    $taxscheme->appendChild($cbc);
-
-                    $partytaxscheme->appendChild($taxscheme);
-
-                    $cacparty->appendChild($partytaxscheme);
+                        $taxscheme = self::createElementIfNotEmpty($doc, $partytaxscheme, 'cac:TaxScheme');
+                            $id_attributes = array('schemeID' => 'UN/ECE 5153', 'schemeAgencyID' => '6');
+                            self::createElementIfNotEmpty($doc, $taxscheme, 'cbc:ID', 'VAT', $id_attributes);
                 }
 
-                $legalentity = $doc->createElement('cac:PartyLegalEntity');
-                $cbc = $doc->createElement('cbc:CompanyID', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID));
-
-                $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                $legalentity->appendChild($cbc);
-
-                $cacparty->appendChild($legalentity);
-
+                if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID) && !empty($InvoiceO->AccountingSupplierParty->Party->PartyName->Name)){
+                    $legalentity = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyLegalEntity');
+                        // handle ampersand in company names (we should probably send all text data with cdata function)
+                        self::createElementIfNotEmpty($doc, $legalentity, 'cbc:RegistrationName', $InvoiceO->AccountingSupplierParty->Party->PartyName->Name, array(), true);
+                        $company_id_attributes = array('schemeID' => 'NO:ORGNR');
+                        self::createElementIfNotEmpty($doc, $legalentity, 'cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, $company_id_attributes);
+                }
 
                 if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone) ||
                     !empty($InvoiceO->AccountingSupplierParty->Party->Contact->Fax) ||
                     !empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail) ||
                     !empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)) {
-                    $contact = $doc->createElement('cac:Contact');
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone)) {
-                        $cbc = $doc->createElement('cbc:Telephone', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone));
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telefax)) {
-                        $cbc = $doc->createElement('cbc:Telefax', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Contact->Telefax));
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)) {
-                        $cbc = $doc->createElement('cbc:ElectronicMail', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail));
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)) {
-                        $cbc = $doc->createElement('cbc:Note', utf8_encode("Mobile: " . $InvoiceO->AccountingSupplierParty->Party->Contact->Mobile));
-                        $contact->appendChild($cbc);
-                    }
-                    $cacparty->appendChild($contact);
+                    $contact = self::createElementIfNotEmpty($doc, $cacparty, 'cac:Contact');
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Name', $InvoiceO->AccountingSupplierParty->Party->Contact->Name);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Telephone', $InvoiceO->AccountingSupplierParty->Party->Contact->Telephone);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Telefax', $InvoiceO->AccountingSupplierParty->Party->Contact->Telefax);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:ElectronicMail', $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail);
+                        // This is not strictly by EHF but is by the customization we use on the EHF (www.cenbii.eu, Look at Invoice/cbc:CustomizationID)
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Note', 'Mobile: ' . $InvoiceO->AccountingSupplierParty->Party->Contact->Mobile);
                 }
-
-
-                if (!empty($InvoiceO->AccountingSupplierParty->Party->Person)) {
-                    $person = $doc->createElement('cac:Person');
-                    $cbc = $doc->createElement('cbc:FirstName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->FirstName));
-                    $person->appendChild($cbc);
-                    $cbc = $doc->createElement('cbc:FamilyName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->FamilyName));
-                    $person->appendChild($cbc);
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Person->MiddleName)) {
-                        $cbc = $doc->createElement('cbc:MiddleName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->MiddleName));
-                        $person->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Person->JobTitle)) {
-                        $cbc = $doc->createElement('cbc:JobTitle', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->JobTitle));
-                        $person->appendChild($cbc);
-                    }
-
-                    $cacparty->appendChild($person);
-                }
-
-
-            $supplier->appendChild($cacparty);
-
-        $invoice->appendChild($supplier);
-
 
         ############################################################################################
-        #AccountingCustomerParty
-        $customer = $doc->createElement('cac:AccountingCustomerParty');
-            $cacparty = $doc->createElement('cac:Party');
+        # AccountingCustomerParty
+        $customer = self::createElementIfNotEmpty($doc, $invoice, 'cac:AccountingCustomerParty');
+            $cacparty = self::createElementIfNotEmpty($doc, $customer, 'cac:Party');
 
-            if (!empty($InvoiceO->AccountingCustomerParty->Party->WebsiteURI)) {
-                $cbc = $doc->createElement('cbc:WebsiteURI', utf8_encode($InvoiceO->AccountingCustomerParty->Party->WebsiteURI));
-                $cacparty->appendChild($cbc);
-            }
-
-                // Add customer nr
-                $identification = $doc->createElement('cac:PartyIdentification');
-                $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID));
-                $cbc->setAttribute('schemeID', 'NO:SUP-ACCNT-RE');
-                $identification->appendChild($cbc);
-                $cacparty->appendChild($identification);
-
-                $name = $doc->createElement('cac:PartyName');
-                $cbc = $doc->createElement('cbc:Name');
-                $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
-                //$cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
-                $cbc->appendChild($cdata);
-                $name->appendChild($cbc);
-                $cacparty->appendChild($name);
-
-                $address = $doc->createElement('cac:PostalAddress');
-
-                $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
-                $address->appendChild($cbc);
-
-                $cbc = $doc->createElement('cbc:AdditionalStreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber));
-                $address->appendChild($cbc);
-
-                $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
-                $address->appendChild($cbc);
-
-                $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone));
-                $address->appendChild($cbc);
-
-                $country = $doc->createElement('cac:Country');
-
-                $cbc = $doc->createElement('cbc:IdentificationCode', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode));
-                $country->appendChild($cbc);
-
-                $address->appendChild($country);
-
-                $cacparty->appendChild($address);
-
-
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID)) {
-                    $partytaxscheme = $doc->createElement('cac:PartyTaxScheme');
-                    $cbc = $doc->createElement('cbc:CompanyID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID));
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID)) {
-                        $cbc->setAttribute('schemeID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID));
-                    }
-                    $partytaxscheme->appendChild($cbc);
-
-                    $taxscheme = $doc->createElement('cac:TaxScheme');
-
-                    $cbc = $doc->createElement('cbc:ID', utf8_encode('VAT'));
-                    $cbc->setAttribute('schemeID', 'UN/ECE 5153');
-                    $cbc->setAttribute('schemeAgencyID', '6');
-                    $taxscheme->appendChild($cbc);
-
-                    $partytaxscheme->appendChild($taxscheme);
-
-                    $cacparty->appendChild($partytaxscheme);
+                // Add customer number
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                    $identification = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyIdentification');
+                        // Not by EHF standard, but since we send to FB only, we send whatever schema we want
+                        $AccountPlanID = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                        $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
+                        $firmaID = $schemeControl->getFirstFirmaID();
+                        if($firmaID && $firmaID['type'] && $firmaID['value']) {
+                            $schemaValue = $firmaID['value'];
+                            $id_attributes = array('schemeID' => $firmaID['type']);
+                            self::createElementIfNotEmpty($doc, $identification, 'cbc:ID', $schemaValue, $id_attributes);
+                        } else {
+                            $schemaValue = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                            $id_attributes = array('schemeID' => 'NO:SUP-ACCNT-RE');
+                            self::createElementIfNotEmpty($doc, $identification, 'cbc:ID', $schemaValue, $id_attributes);
+                        }
                 }
 
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)){
-                  $legal_entity = $doc->createElement('cac:PartyLegalEntity');
-                  $cbc = $doc->createElement('cbc:CompanyID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID));
-                  $cbc->setAttribute('schemeID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID));
-                  $legal_entity->appendChild($cbc);
+                $name = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyName');
+                    // handle ampersand in company names (we should probably send all text data with cdata function)
+                    self::createElementIfNotEmpty($doc, $name, 'cbc:Name', $InvoiceO->AccountingCustomerParty->Party->PartyName->Name, array(), true);
 
-                  $cacparty->appendChild($legal_entity);
+                $address = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PostalAddress');
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:StreetName', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName);
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:AdditionalStreetName', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber);
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:CityName', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName);
+                    self::createElementIfNotEmpty($doc, $address, 'cbc:PostalZone', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone);
+                    $country = self::createElementIfNotEmpty($doc, $address, 'cac:Country');
+                        $country_identification_attributes = array('listID' => 'ISO3166-1:Alpha2');
+                        self::createElementIfNotEmpty($doc, $country, 'cbc:IdentificationCode', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode, $country_identification_attributes);
+
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme)) {
+                    $partytaxscheme = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyTaxScheme');
+                        $company_id_attributes = array();
+                        if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID)) {
+                            $company_id_attributes['schemeID'] = utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID);
+                        }
+                        self::createElementIfNotEmpty($doc, $partytaxscheme, 'cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID, $company_id_attributes);
+
+                        $taxscheme = self::createElementIfNotEmpty($doc, $partytaxscheme, 'cac:TaxScheme');
+                            $id_attributes = array('schemeID' => 'UN/ECE 5153', 'schemeAgencyID' => '6');
+                            self::createElementIfNotEmpty($doc, $taxscheme, 'cbc:ID', 'VAT', $id_attributes);
+                }
+
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID) && !empty($InvoiceO->AccountingCustomerParty->Party->PartyName->Name)){
+                    $legalentity = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyLegalEntity');
+                        // handle ampersand in company names (we should probably send all text data with cdata function)
+                        self::createElementIfNotEmpty($doc, $legalentity, 'cbc:RegistrationName', $InvoiceO->AccountingCustomerParty->Party->PartyName->Name, array(), true);
+                        $company_id_attributes = array('schemeID' => utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID));
+                        self::createElementIfNotEmpty($doc, $legalentity, 'cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID, $company_id_attributes);
                 } else {
-                    $_lib['message']->add("Firma ID til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble ikke sendt.");
+                    $_lib['message']->add("Kunde ikke valgt, eller Firma ID er ugyldig. Fakturaen ble ikke sendt.");
                     return false; // stop from sending, crucial field missing
                 }
 
-
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telephone) ||
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->ID) ||
+                    !empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telephone) ||
                     !empty($InvoiceO->AccountingCustomerParty->Party->Contact->Fax) ||
                     !empty($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail) ||
                     !empty($InvoiceO->AccountingCustomerParty->Party->Contact->Mobile)) {
-                    $contact = $doc->createElement('cac:Contact');
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telephone)) {
-                        $cbc = $doc->createElement('cbc:Telephone', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Contact->Telephone));
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telefax)) {
-                        $cbc = $doc->createElement('cbc:Telefax', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Contact->Telefax));
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail)) {
-                        $cbc = $doc->createElement('cbc:ElectronicMail', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail));
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Mobile)) {
-                        $cbc = $doc->createElement('cbc:Note', utf8_encode('Mobile: ' . $InvoiceO->AccountingCustomerParty->Party->Contact->Mobile));
-                        $contact->appendChild($cbc);
-                    }
-
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->BankAccount)) {
-                        $cbc = $doc->createElement('cbc:BankAccount', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Contact->BankAccount));
-                        $cbc->setAttribute('schemeID', 'BBAN'); // use IBAN if IBAN, BBAN or BANK is unclassified account
-                        $contact->appendChild($cbc);
-                    }
-
-                    $cacparty->appendChild($contact);
-
-
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Person)) {
-                        $person = $doc->createElement('cac:Person');
-                        $cbc = $doc->createElement('cbc:FirstName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->FirstName));
-                        $person->appendChild($cbc);
-                        $cbc = $doc->createElement('cbc:FamilyName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->FamilyName));
-                        $person->appendChild($cbc);
-                        if (!empty($InvoiceO->AccountingCustomerParty->Party->Person->MiddleName)) {
-                            $cbc = $doc->createElement('cbc:MiddleName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->MiddleName));
-                            $person->appendChild($cbc);
-                        }
-                        if (!empty($InvoiceO->AccountingCustomerParty->Party->Person->JobTitle)) {
-                            $cbc = $doc->createElement('cbc:JobTitle', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->JobTitle));
-                            $person->appendChild($cbc);
-                        }
-
-                        $cacparty->appendChild($person);
-                    }
-
+                    $contact = self::createElementIfNotEmpty($doc, $cacparty, 'cac:Contact');
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:ID', $InvoiceO->AccountingCustomerParty->Party->Contact->ID);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Name', $InvoiceO->AccountingCustomerParty->Party->Contact->Name);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Telephone', $InvoiceO->AccountingCustomerParty->Party->Contact->Telephone);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Telefax', $InvoiceO->AccountingCustomerParty->Party->Contact->Telefax);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:ElectronicMail', $InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail);
+                        self::createElementIfNotEmpty($doc, $contact, 'cbc:Note', 'Mobile: ' . $InvoiceO->AccountingCustomerParty->Party->Contact->Mobile);
                 }
-
-
-            $customer->appendChild($cacparty);
-
-        $invoice->appendChild($customer);
-
 
         // Delivery (DeliveryAddress)
-        $delivery = $doc->createElement('cac:Delivery');
-            $cac_delivery_location = $doc->createElement('cac:DeliveryLocation');
-                $cac_address = $doc->createElement('cac:Address');
-                    $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->DeliveryAddress->Address));
-                    $cac_address->appendChild($cbc);
-
-                    $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->DeliveryAddress->City));
-                    $cac_address->appendChild($cbc);
-
-                    $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->DeliveryAddress->ZipCode));
-                    $cac_address->appendChild($cbc);
-
-                    $cac_country = $doc->createElement('cac:Country');
-                        $cbc = $doc->createElement('cbc:IdentificationCode', utf8_encode($InvoiceO->DeliveryAddress->CountryCode));
-                        $cbc->setAttribute('listID', 'ISO3166-1:Alpha2');
-                    $cac_country->appendChild($cbc);
-                $cac_address->appendChild($cac_country);
-            $cac_delivery_location->appendChild($cac_address);
-        $delivery->appendChild($cac_delivery_location);
-
-        $invoice->appendChild($delivery);
+        if (!empty($InvoiceO->DeliveryAddress)) {
+            $delivery = self::createElementIfNotEmpty($doc, $invoice, 'cac:Delivery');
+                $cac_delivery_location = self::createElementIfNotEmpty($doc, $delivery, 'cac:DeliveryLocation');
+                    $cac_address = self::createElementIfNotEmpty($doc, $cac_delivery_location, 'cac:Address');
+                        self::createElementIfNotEmpty($doc, $cac_address, 'cbc:StreetName', $InvoiceO->DeliveryAddress->Address);
+                        self::createElementIfNotEmpty($doc, $cac_address, 'cbc:CityName', $InvoiceO->DeliveryAddress->City);
+                        self::createElementIfNotEmpty($doc, $cac_address, 'cbc:PostalZone', $InvoiceO->DeliveryAddress->ZipCode);
+                        $cac_country = self::createElementIfNotEmpty($doc, $cac_address, 'cac:Country');
+                            $country_identification_attributes = array('listID' => 'ISO3166-1:Alpha2');
+                            self::createElementIfNotEmpty($doc, $cac_country, 'cbc:IdentificationCode', $InvoiceO->DeliveryAddress->CountryCode, $country_identification_attributes);
+        }
 
 
         ############################################################################################
-        $paymentmeans = $doc->createElement('cac:PaymentMeans');
+        # PaymentMeans
+        $paymentmeans = self::createElementIfNotEmpty($doc, $invoice, 'cac:PaymentMeans');
 
-        $cbc = $doc->createElement('cbc:PaymentMeansCode', utf8_encode($InvoiceO->PaymentMeans->PaymentMeansCode));
-            $cbc->setAttribute('listSchemeURI', 'urn:www.nesubl.eu:codelist:gc:PaymentMeansCode:2007.1');
-            $cbc->setAttribute('listID', 'Payment Means');
-            $paymentmeans->appendChild($cbc);
+            $means_code_attributes = array('listID' => 'UNCL4461');
+            self::createElementIfNotEmpty($doc, $paymentmeans, 'cbc:PaymentMeansCode', $InvoiceO->PaymentMeans->PaymentMeansCode, $means_code_attributes);
+            self::createElementIfNotEmpty($doc, $paymentmeans, 'cbc:PaymentDueDate', $InvoiceO->PaymentMeans->PaymentDueDate);
 
-            $cbc = $doc->createElement('cbc:PaymentDueDate', utf8_encode($InvoiceO->PaymentMeans->PaymentDueDate));
-            $paymentmeans->appendChild($cbc);
+            // KID number
+            self::createElementIfNotEmpty($doc, $paymentmeans, 'cbc:PaymentID', $InvoiceO->PaymentMeans->PaymentID);
 
-            #KID number
-            $cbc = $doc->createElement('cbc:InstructionID', utf8_encode($InvoiceO->PaymentMeans->InstructionID));
-            $paymentmeans->appendChild($cbc);
-
-            #KID (text)
-            $cbc = $doc->createElement('cbc:InstructionNote', utf8_encode($InvoiceO->PaymentMeans->InstructionNote));
-            $paymentmeans->appendChild($cbc);
-
-            if (!empty($InvoiceO->PaymentMeans->PayerFinancialAccount)) {
-                $payerfinancialaccount = $doc->createElement('cac:PayerFinancialAccount');
-
-                $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->PaymentMeans->PayerFinancialAccount->ID));
-                $cbc->setAttribute('schemeID', 'BBAN');
-                $payerfinancialaccount->appendChild($cbc);
-
-                $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->PaymentMeans->PayerFinancialAccount->Name));
-                $payerfinancialaccount->appendChild($cbc);
-
-                $paymentmeans->appendChild($payerfinancialaccount);
-            }
-
-            $financialaccount = $doc->createElement('cac:PayeeFinancialAccount');
-
-            $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->PaymentMeans->PayeeFinancialAccount->ID));
-                $cbc->setAttribute('schemeID', 'BBAN');
-                $financialaccount->appendChild($cbc);
-
-                $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->PaymentMeans->PayeeFinancialAccount->Name));
-                $financialaccount->appendChild($cbc);
-
-            $paymentmeans->appendChild($financialaccount);
-
-
-        $invoice->appendChild($paymentmeans);
+            $financialaccount = self::createElementIfNotEmpty($doc, $paymentmeans, 'cac:PayeeFinancialAccount');
+                $id_attributes = array('schemeID' => 'BBAN');
+                self::createElementIfNotEmpty($doc, $financialaccount, 'cbc:ID', $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID, $id_attributes);
 
         ############################################################################################
-        $paymentterms = $doc->createElement('cac:PaymentTerms');
-
-        $cbc = $doc->createElement('cbc:Note', utf8_encode($InvoiceO->PaymentTerms->Note));
-            $paymentterms->appendChild($cbc);
-
-        $invoice->appendChild($paymentterms);
-
-        ############################################################################################
-        #TaxTotal
-        $tax = $doc->createElement('cac:TaxTotal');
-
-            $cbc = $doc->createElement('cbc:TaxAmount', utf8_encode($InvoiceO->TaxTotal['TaxAmount']));
-            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-            $tax->appendChild($cbc);
-
-        #print_r($invoiceH);
-        #print "<h1>TAX hash</h1>";
-        #print_r($invoiceH['TaxTotal']);
-
-        if(is_array($InvoiceO->TaxTotal)) {
-            foreach($InvoiceO->TaxTotal as $VatPercent => $Vat) {
-                if(is_numeric($VatPercent)) {
-                    $subtotal = $doc->createElement('cac:TaxSubtotal');
-                    $cbc = $doc->createElement('cbc:TaxableAmount', utf8_encode($Vat->TaxSubtotal->TaxableAmount));
-                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                        $subtotal->appendChild($cbc);
-
-                        $cbc = $doc->createElement('cbc:TaxAmount', utf8_encode($Vat->TaxSubtotal->TaxAmount));
-                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                        $subtotal->appendChild($cbc);
-
-                        $category = $doc->createElement('cac:TaxCategory');
-
-                        $cbc = $doc->createElement('cbc:ID', utf8_encode($Vat->TaxSubtotal->TaxCategory->ID));
-                            $category->appendChild($cbc);
-
-                            $cbc = $doc->createElement('cbc:Percent', utf8_encode($Vat->TaxSubtotal->TaxCategory->Percent));
-                            $category->appendChild($cbc);
-
-                            $scheme = $doc->createElement('cac:TaxScheme');
-
-                            $cbc = $doc->createElement('cbc:ID', utf8_encode($Vat->TaxSubtotal->TaxCategory->TaxScheme->ID));
-                            $scheme->appendChild($cbc);
-
-                            $category->appendChild($scheme);
-
-                        $subtotal->appendChild($category);
-
-                    $tax->appendChild($subtotal);
-                }
-            }
-            $invoice->appendChild($tax);
-        } else {
-            print "TAX info mangler<br>\n";
+        # PaymentTerms
+        if (!empty($InvoiceO->PaymentTerms->Note)) {
+            $paymentterms = self::createElementIfNotEmpty($doc, $invoice, 'cac:PaymentTerms');
+                self::createElementIfNotEmpty($doc, $paymentterms, 'cbc:Note', $InvoiceO->PaymentTerms->Note, array(), true);
         }
 
         ############################################################################################
-        #LegalMonetaryTotal
-        $monetary = $doc->createElement('cac:LegalMonetaryTotal');
+        # Allowances/Charges on invoice
+        if(count($InvoiceO->AllowanceCharge)) {
+              foreach($InvoiceO->AllowanceCharge as $allowance_charge) {
+                  if ($allowance_charge->Amount != 0) {
+                      $allowance_charge_cac = self::createElementIfNotEmpty($doc, $invoice, 'cac:AllowanceCharge');
+                          self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:ChargeIndicator', (($allowance_charge->ChargeIndicator == '1')?'true':'false'));
+                          self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:AllowanceChargeReason', $allowance_charge->AllowanceChargeReason);
+                          $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                          self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', $allowance_charge->Amount, $amount_attributes);
 
-        $cbc = $doc->createElement('cbc:TaxExclusiveAmount', utf8_encode($InvoiceO->LegalMonetaryTotal->TaxExclusiveAmount));
-            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-            $monetary->appendChild($cbc);
-
-            $cbc = $doc->createElement('cbc:PayableAmount', utf8_encode($InvoiceO->LegalMonetaryTotal->PayableAmount));
-            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-            $monetary->appendChild($cbc);
-
-        $invoice->appendChild($monetary);
+                          $tax_category_cac = self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cac:TaxCategory');
+                              $id_attributes = array('schemeID' => 'UNCL5305');
+                              self::createElementIfNotEmpty($doc, $tax_category_cac, 'cbc:ID', $allowance_charge->TaxCategory->ID, $id_attributes);
+                              self::createElementIfNotEmpty($doc, $tax_category_cac, 'cbc:Percent', $allowance_charge->TaxCategory->Percent);
+                              $cac_tax = self::createElementIfNotEmpty($doc, $tax_category_cac, 'cac:TaxScheme');
+                                  self::createElementIfNotEmpty($doc, $cac_tax, 'cbc:ID', $allowance_charge->TaxCategory->TaxScheme->ID);
+                  }
+              }
+        }
 
         ############################################################################################
-        #InvoiceLine (loop)
+        # TaxTotal
+        $tax = self::createElementIfNotEmpty($doc, $invoice, 'cac:TaxTotal');
+            $tax_amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+            self::createElementIfNotEmpty($doc, $tax, 'cbc:TaxAmount', $InvoiceO->TaxTotal['TaxAmount'], $tax_amount_attributes);
+
+            if(is_array($InvoiceO->TaxTotal)) {
+                foreach($InvoiceO->TaxTotal as $VatPercent => $Vat) {
+                    if(is_numeric($VatPercent)) {
+                        $subtotal = self::createElementIfNotEmpty($doc, $tax, 'cac:TaxSubtotal');
+                            $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                            self::createElementIfNotEmpty($doc, $subtotal, 'cbc:TaxableAmount', $Vat->TaxSubtotal->TaxableAmount, $amount_attributes);
+                            self::createElementIfNotEmpty($doc, $subtotal, 'cbc:TaxAmount', $Vat->TaxSubtotal->TaxAmount, $amount_attributes);
+
+                            $category = self::createElementIfNotEmpty($doc, $subtotal, 'cac:TaxCategory');
+                                $id_attributes = array('schemeID' => 'UNCL5305');
+                                self::createElementIfNotEmpty($doc, $category, 'cbc:ID', $Vat->TaxSubtotal->TaxCategory->ID, $id_attributes);
+                                self::createElementIfNotEmpty($doc, $category, 'cbc:Percent', $Vat->TaxSubtotal->TaxCategory->Percent);
+                                self::createElementIfNotEmpty($doc, $category, 'cbc:TaxExemptionReason', $Vat->TaxSubtotal->TaxCategory->TaxExemptionReason);
+                                $scheme = self::createElementIfNotEmpty($doc, $category, 'cac:TaxScheme');
+                                    self::createElementIfNotEmpty($doc, $scheme, 'cbc:ID', $Vat->TaxSubtotal->TaxCategory->TaxScheme->ID);
+                    }
+                }
+            } else {
+                $_lib['message']->add("Skatte info mangler.");
+            }
+
+        ############################################################################################
+        # LegalMonetaryTotal
+        $monetary = self::createElementIfNotEmpty($doc, $invoice, 'cac:LegalMonetaryTotal');
+
+            $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:LineExtensionAmount', $InvoiceO->LegalMonetaryTotal->LineExtensionAmount, $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:TaxExclusiveAmount', $InvoiceO->LegalMonetaryTotal->TaxExclusiveAmount, $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:TaxInclusiveAmount', $InvoiceO->LegalMonetaryTotal->TaxInclusiveAmount, $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:AllowanceTotalAmount', $InvoiceO->LegalMonetaryTotal->AllowanceTotalAmount, $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:ChargeTotalAmount', $InvoiceO->LegalMonetaryTotal->ChargeTotalAmount, $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:PayableAmount', $InvoiceO->LegalMonetaryTotal->PayableAmount, $amount_attributes);
+
+        ############################################################################################
+        # InvoiceLine (loop)
         if(count($InvoiceO->InvoiceLine)) {
             foreach($InvoiceO->InvoiceLine as $id => $line) {
 
-                $invoiceline = $doc->createElement('cac:InvoiceLine');
-                    $cbc = $doc->createElement('cbc:ID', utf8_encode($line->ID));
-                    $invoiceline->appendChild($cbc);
+                $invoiceline = self::createElementIfNotEmpty($doc, $invoice, 'cac:InvoiceLine');
+                    self::createElementIfNotEmpty($doc, $invoiceline, 'cbc:ID', $line->ID);
+                    $quantity_attributes = array('unitCodeListID' => 'UNECERec20', 'unitCode' => 'NAR');
+                    self::createElementIfNotEmpty($doc, $invoiceline, 'cbc:InvoicedQuantity', $line->InvoicedQuantity, $quantity_attributes);
 
-                    $cbc = $doc->createElement('cbc:InvoicedQuantity', utf8_encode($line->Price->BaseQuantity));
-                    $invoiceline->appendChild($cbc);
+                    $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                    self::createElementIfNotEmpty($doc, $invoiceline, 'cbc:LineExtensionAmount', $line->LineExtensionAmount, $amount_attributes);
 
-                    $cbc = $doc->createElement('cbc:LineExtensionAmount', utf8_encode($line->LineExtensionAmount));
-                    $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                    $invoiceline->appendChild($cbc);
+                    ############################################################################################
+                    # Allowances/Charges on invoice line
+                    if(count($line->AllowanceCharge)) {
+                        foreach($line->AllowanceCharge as $allowance_charge) {
+                            if ($allowance_charge->Amount != 0) {
+                                $allowance_charge_cac = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:AllowanceCharge');
+                                    self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:ChargeIndicator', (($allowance_charge->ChargeIndicator == '1')?'true':'false'));
+                                    self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:AllowanceChargeReason', $allowance_charge->AllowanceChargeReason);
+                                    $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                                    self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', $allowance_charge->Amount, $amount_attributes);
+                            }
+                        }
+                    }
 
-                    $cac_tax_total = $doc->createElement('cac:TaxTotal');
-                        $cbc = $doc->createElement('cbc:TaxAmount', utf8_encode($line->TaxTotal->TaxAmount));
-                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                    $cac_tax_total->appendChild($cbc);
-                    $invoiceline->appendChild($cac_tax_total);
+                    $cac_tax_total = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:TaxTotal');
+                        $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                        self::createElementIfNotEmpty($doc, $cac_tax_total, 'cbc:TaxAmount', $line->TaxTotal->TaxAmount, $amount_attributes);
 
-                    $item = $doc->createElement('cac:Item');
+                    $item = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:Item');
+                        self::createElementIfNotEmpty($doc, $item, 'cbc:Description', $line->Item->Description);
+                        self::createElementIfNotEmpty($doc, $item, 'cbc:Name', $line->Item->Name);
 
-                        if($line->Item->Description) {
-                            $cbc = $doc->createElement('cbc:Description', utf8_encode($line->Item->Description));
-                            $item->appendChild($cbc);
+                        # Product number
+                        if (!empty($line->Item->SellersItemIdentification->ID)) {
+                            $cac_sellers_item_identification = self::createElementIfNotEmpty($doc, $item, 'cac:SellersItemIdentification');
+                                self::createElementIfNotEmpty($doc, $cac_sellers_item_identification, 'cbc:ID', $line->Item->SellersItemIdentification->ID);
                         }
 
-                        $cbc = $doc->createElement('cbc:Name', utf8_encode($line->Item->Name));
-                        $item->appendChild($cbc);
-
-                        #Productnumber
-                        $cac_sellers_item_identification = $doc->createElement('cac:SellersItemIdentification');
-                            $cbc = $doc->createElement('cbc:ID', utf8_encode($line->Item->SellersItemIdentification->ID));
-                            $cac_sellers_item_identification->appendChild($cbc);
-                        $item->appendChild($cac_sellers_item_identification);
-
-                        #Add UNSPSC
+                        # Add UNSPSC
                         if($line->Item->CommodityClassification->UNSPSC->ItemClassificationCode) {
-                            $cac_commodity_classification = $doc->createElement('cac:CommodityClassification');
-
-                                $item_classification_code = $doc->createElement('cbc:ItemClassificationCode', utf8_encode($line->Item->CommodityClassification->UNSPSC->ItemClassificationCode));
-                                $item_classification_code->setAttribute('listName', 'UNSPSC');
-                                $item_classification_code->setAttribute('listVersionID', '7.0401');
-
-                                $cac_commodity_classification->appendChild($item_classification_code);
-                            $item->appendChild($cac_commodity_classification);
+                            $cac_commodity_classification = self::createElementIfNotEmpty($doc, $item, 'cac:CommodityClassification');
+                                $item_classification_code_attributes = array('listName' => 'UNSPSC', 'listVersionID' => '7.0401');
+                                self::createElementIfNotEmpty($doc, $cac_commodity_classification, 'cbc:ItemClassificationCode', $line->Item->CommodityClassification->UNSPSC->ItemClassificationCode, $item_classification_code_attributes);
                         }
 
-                        $cac_classified_tax_category = $doc->createElement('cac:ClassifiedTaxCategory');
-                            $cbc = $doc->createElement('cbc:Percent', utf8_encode($line->TaxTotal->TaxSubtotal->Percent));
-                            $cac_classified_tax_category->appendChild($cbc);
-                            $cac_tax_scheme = $doc->createElement('cac:TaxScheme');
-                                $cbc = $doc->createElement('cbc:ID', "VAT");
-                            $cac_tax_scheme->appendChild($cbc);
-                            $cac_classified_tax_category->appendChild($cac_tax_scheme);
-                        $item->appendChild($cac_classified_tax_category);
+                        $cac_classified_tax_category = self::createElementIfNotEmpty($doc, $item, 'cac:ClassifiedTaxCategory');
+                            self::createElementIfNotEmpty($doc, $cac_classified_tax_category, 'cbc:ID', $line->Item->ClassifiedTaxCategory->ID);
+                            self::createElementIfNotEmpty($doc, $cac_classified_tax_category, 'cbc:Percent', $line->Item->ClassifiedTaxCategory->Percent);
+                            $cac_tax_scheme = self::createElementIfNotEmpty($doc, $cac_classified_tax_category, 'cac:TaxScheme');
+                                self::createElementIfNotEmpty($doc, $cac_tax_scheme, 'cbc:ID', 'VAT');
 
-                    $invoiceline->appendChild($item);
+                    # Price
+                    $price = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:Price');
+                        $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                        self::createElementIfNotEmpty($doc, $price, 'cbc:PriceAmount', $line->Price->PriceAmount, $amount_attributes);
+                        $quantity_attributes = array('unitCode' => 'NAR', 'unitCodeListID' => 'UNECERec20');
+                        self::createElementIfNotEmpty($doc, $price, 'cbc:BaseQuantity', $line->Price->BaseQuantity, $quantity_attributes);
 
-                    #Price
-                    $price = $doc->createElement('cac:Price');
-
-                        $cbc = $doc->createElement('cbc:PriceAmount', utf8_encode($line->Price->PriceAmount));
-                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
-                        $price->appendChild($cbc);
-
-                        $cbc = $doc->createElement('cbc:BaseQuantity', utf8_encode($line->Price->BaseQuantity));
-                        $cbc->setAttribute('unitCode', 'HUR');
-                        $price->appendChild($cbc);
-
-                    $invoiceline->appendChild($price);
-
-                $invoice->appendChild($invoiceline);
+                        ############################################################################################
+                        # Allowances/Charges on invoiceline price
+                        if(count($line->Price->AllowanceCharge)) {
+                            foreach($line->Price->AllowanceCharge as $allowance_charge) {
+                                if ($allowance_charge->Amount != 0) {
+                                    $allowance_charge_cac = self::createElementIfNotEmpty($doc, $price, 'cac:AllowanceCharge');
+                                        self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:ChargeIndicator', (($allowance_charge->ChargeIndicator == '1')?'true':'false'));
+                                        self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:AllowanceChargeReason', $allowance_charge->AllowanceChargeReason);
+                                        $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
+                                        self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', $allowance_charge->Amount, $amount_attributes);
+                                }
+                            }
+                        }
             }
         } else {
-            $_lib['message']->add('ERROR: Ingen fakturalinjer funnet');
+            $_lib['message']->add('Ingen fakturalinjer funnet. Fakturaen ble ikke sendt.');
+            return false;
         }
 
         ############################################################################################

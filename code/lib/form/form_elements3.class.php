@@ -823,7 +823,7 @@ class form3
         if(isset($args['BuyMeny']) && isset($args['SaleMenu']))
             $query = $this->_QUERY['form']['vatmenu'];
         elseif(isset($args['BuyMenu']))
-            $query = $this->_QUERY['form']['vatBuymenu'];
+            $query = $this->_QUERY['form']['vatBuyMenu'];
         elseif(isset($args['SaleMenu']))
             $query = $this->_QUERY['form']['vatSalesMenu'];
         else
@@ -839,7 +839,11 @@ class form3
         #print "$query<br>\n";
         $result = $_lib['db']->db_query($query);
 
-        $element = "<select name=\"$name\" tabindex=\"$args[tabindex]\">\n";
+        if(isset($args['disabled']) && $args['disabled']) {
+          $element = "<select name=\"$name\" tabindex=\"$args[tabindex]\" disabled=\"disabled\">\n";
+        } else {
+          $element = "<select name=\"$name\" tabindex=\"$args[tabindex]\">\n";
+        }
         $element = " $element <option value=\"0.00\">Ikke valgt";
         while($_row = $_lib['db']->db_fetch_object($result))
         {

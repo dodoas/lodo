@@ -102,8 +102,21 @@ if (!empty($InvoicesO->Invoice)) {
   $already_printed_new = array();
   $already_fetched_org = array();
   foreach($InvoicesO->Invoice as $InvoiceO) {
-    $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
     $tmp_currency_code = $InvoiceO->DocumentCurrencyCode;
+    $invoice_amount_string = "";
+    if ($tmp_currency_code == exchange::getLocalCurrency()) {
+        $invoice_amount_string = $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount);
+        $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
+    } else {
+        $conv = exchange::convertToLocal($tmp_currency_code, $InvoiceO->LegalMonetaryTotal->PayableAmount);
+        $rate = exchange::getConversionRate($tmp_currency_code);
+        if ($conv) {
+            $invoice_amount_string = " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ." / $rate) " . $_lib['format']->Amount($conv);
+            $TotalCustPrice += $conv;
+        } else {
+            $invoice_amount_string = "Valutaverdi for ". $tmp_currency_code ." er ikke satt" . " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) .") ";
+        }
+    }
     if ($InvoiceO->MissingAccountPlan) {
       $scheme_value = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
       $scheme_type  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
@@ -258,21 +271,7 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
       <!--<td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>-->
       <td class="number">
-<? if ($tmp_currency_code == exchange::getLocalCurrency()) { ?>
-        <? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?>
-<? } else {
-        $conv = exchange::convertToLocal($tmp_currency_code, $InvoiceO->LegalMonetaryTotal->PayableAmount);
-        $rate = exchange::getConversionRate($tmp_currency_code);
-        if ($conv) {
-            print " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ." / $rate) ";
-            print $_lib['format']->Amount($conv);
-        } else {
-            $conv = $_lib['format']->Amount($conv);
-            print "Valutaverdi for ". $tmp_currency_code ." er ikke satt";
-            print " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) .") ";
-       }
-   }
-?>
+        <? print $invoice_amount_string; ?>
       </td>
       <td class="number"><? print $InvoiceO->Department ?></td>
       <td class="number"><? print $InvoiceO->Project ?></td>
