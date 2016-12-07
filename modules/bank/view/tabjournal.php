@@ -265,13 +265,13 @@ if(is_array($bank->bankaccount)) {
       $bank_voucher_diff = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - $bank->voucher->saldo;
       if ($bank_voucher_diff < 0) {
     ?>
-      <td class="number"><? print $_lib['format']->Amount($bank_voucher_diff) ?></td>
+      <td class="number"><? print $_lib['format']->Amount($bank_voucher_diff * -1) ?></td>
       <td></td>
     <?php
       } else {
     ?>
       <td></td>
-      <td class="number"><? print $_lib['format']->Amount($bank_voucher_diff) ?></td>
+      <td class="number"><? print $_lib['format']->Amount($bank_voucher_diff * -1) ?></td>
     <?php
       }
     ?>
@@ -425,7 +425,7 @@ if(is_array($bank->unvotedaccount)) {
         <td><? print $row->Day ?></td>
 
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
-        <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
+        <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn * -1); ?></td>
 
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25));
                 if(substr($row->InvoiceNumber, 0, 2) == "FB") {
@@ -501,7 +501,7 @@ if(is_array($bank->unvotedvoucher)) {
         <td></td>
         <td><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $row->JournalID . '&amp;voucher_VoucherType=' . $row->VoucherType . "&amp;action_journalid_search=1", 'description' => $row->VoucherType . $row->JournalID)) ?></td>
         <td><? print substr($row->VoucherDate,8,2) ?></td>
-        <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
+        <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut * -1) ?></td>
         <td class="number menu-right-border"><? if ($row->AmountIn > 0) print $_lib['format']->Amount($row->AmountIn) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25))?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
