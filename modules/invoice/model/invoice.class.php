@@ -442,13 +442,26 @@ class invoice {
 
             #print_r($this->lineH);
 
+            foreach($this->invoice_allowance_charge as $allowance_chargeH)
+            {
+                $allowance_chargeH['InvoiceID'] = $this->InvoiceID;
+                $_lib['storage']->store_record(array('data' => $allowance_chargeH, 'table' => $this->allowance_charge_table, 'debug' => false));
+            }
+
+            $i = 0;
             /* Generate invoice line */
             #print "Generer fakturalinjer\n\n";
             foreach($this->lineH as $lineH)
             {
                 $lineH['InvoiceID'] = $this->InvoiceID;
                 if($this->debug) print_r($lineH);
-                $_lib['storage']->store_record(array('data' => $lineH, 'table' => $this->table_line, 'debug' => false));
+                $InvoiceLineID = $_lib['storage']->store_record(array('data' => $lineH, 'table' => $this->table_line, 'debug' => false));
+                foreach($this->invoice_line_allowance_charge[$i] as $line_allowance_chargeH)
+                {
+                    $line_allowance_chargeH['InvoiceLineID'] = $InvoiceLineID;
+                    $_lib['storage']->store_record(array('data' => $line_allowance_chargeH, 'table' => $this->line_allowance_charge_table, 'debug' => false));
+                }
+                $i++;
             }
 
             if((count($this->lineH) == 1 && $this->lineH[0]['ProductID'] > 0 && $this->lineH[0]['QuantityDelivered'] != 0) || count($this->lineH) > 1) {
@@ -645,10 +658,34 @@ class invoice {
 
         $this->set_head($headH);
 
+        $this->invoice_allowance_charge = array();
+        $query_invoice_allowance_charge = "select * from $this->allowance_charge_table where InvoiceID='$this->OldInvoiceID' and InvoiceType = 'out'";
+        $result_allowance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
+        while($allowance_chargeH = $_lib['db']->db_fetch_assoc($result_allowance_charge))
+        {
+            unset($allowance_chargeH['InvoiceAllowanceChargeID']); #This id is pk so we cannot copy it.
+            unset($allowance_chargeH['InvoiceID']);
+            $this->invoice_allowance_charge[] = $allowance_chargeH;
+        }
+
+        $this->invoice_line_allowance_charge = array();
+        $i = 0;
+
         $query_invoiceline = "select * from $this->table_line where InvoiceID='$this->OldInvoiceID' and Active!=0 order by LineID asc";
         $result2 = $_lib['db']->db_query($query_invoiceline);
         while($lineH = $_lib['db']->db_fetch_assoc($result2))
         {
+            $this->invoice_line_allowance_charge[$i] = array();
+            $query_invoiceline_allowance_charge = "select * from $this->line_allowance_charge_table where InvoiceLineID='" . $lineH['LineID'] . "' and InvoiceType = 'out'";
+            $result_line_allowance_charge = $_lib['db']->db_query($query_invoiceline_allowance_charge);
+            while($line_allowance_chargeH = $_lib['db']->db_fetch_assoc($result_line_allowance_charge))
+            {
+                unset($line_allowance_chargeH['InvoiceLineAllowanceChargeID']); #This id is pk so we cannot copy it.
+                unset($line_allowance_chargeH['InvoiceLineID']);
+                $this->invoice_line_allowance_charge[$i][] = $line_allowance_chargeH;
+            }
+            $i++;
+
             unset($lineH['LineID']); #This id is pk so we cannot copy it.
             unset($lineH['InvoiceID']);
             #print "linje\n";
