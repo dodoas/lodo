@@ -67,10 +67,16 @@ var allowances_charges = [];
 <?
 $allowances_charges = array();
 $date = $_lib['sess']->get_session('LoginFormDate');
-$supplier_accountplan = $accounting->get_accountplan_object($invoicein->SupplierAccountPlanID);
-$allowancecharge_query = "SELECT ac.AllowanceChargeID, ac.ChargeIndicator, a.AccountPlanID as InAccountPlanID, ac.Reason, ac.Amount, v.Percent as InVatPercent, case when a.VatID < 40 THEN a.VatID + 30 ELSE a.VatID END as InVatID
+if (!is_null($invoicein->SupplierAccountPlanID)) {
+  $supplier_accountplan = $accounting->get_accountplan_object($invoicein->SupplierAccountPlanID);
+  $allowancecharge_query = "SELECT ac.AllowanceChargeID, ac.ChargeIndicator, a.AccountPlanID as InAccountPlanID, ac.Reason, ac.Amount, v.Percent as InVatPercent, case when a.VatID < 40 THEN a.VatID + 30 ELSE a.VatID END as InVatID
                   FROM allowancecharge ac LEFT JOIN accountplan a ON a.AccountPlanID = " . $supplier_accountplan->MotkontoResultat1 . " LEFT JOIN vat v ON v.VatID = a.VatID AND v.Active = 1 AND v.ValidFrom <= '" . $date . "' AND v.ValidTo >= '" . $date . "'
                   WHERE ac.Active = 1";
+} else {
+  $allowancecharge_query = "SELECT ac.AllowanceChargeID, ac.ChargeIndicator, NULL as InAccountPlanID, ac.Reason, ac.Amount, NULL as InVatPercent, NULL as InVatID
+                  FROM allowancecharge ac
+                  WHERE ac.Active = 1";
+}
 $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
 while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
   $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
