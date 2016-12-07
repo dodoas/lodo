@@ -757,6 +757,22 @@ class altinn_report {
     return $query_employees;
   }
 
+  function queryStringForCurrentlyUnemployedEmployees() {
+    $query_employees = "SELECT ap_merged.* FROM (
+                          SELECT ap.*
+                          FROM accountplan ap
+                          INNER JOIN workrelation wr ON wr.AccountPlanID = ap.AccountPlanID
+                          WHERE !((wr.WorkStart <= '". $report->period ."-01' OR wr.WorkStart LIKE '". $report->period ."%') AND
+                          (wr.WorkStop >= '". $report->period ."-01' OR wr.WorkStop LIKE '0000-00-00')) AND
+                          AccountplanType LIKE '%employee%'
+                          UNION
+                          SELECT ap.*
+                          FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
+                          WHERE s.ActualPayDate LIKE  '". $report->period ."%' ) AS ap_merged
+                        ORDER BY ap_merged.FirstName";
+    return $query_employees;
+  }
+
 /* Helper function that generates the query to get
  * the included work relations
  */
