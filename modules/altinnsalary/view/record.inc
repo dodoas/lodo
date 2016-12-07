@@ -634,17 +634,30 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
                      WHERE s.AccountPlanID = a.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%'
                      ORDER BY s.JournalID DESC";
   $result_salary  = $_lib['db']->db_query($query_salary);
-} elseif($_lib['input']->getProperty('action_invoice_fakturabanksend_altinn_aga_ftr')) {
-  $invoice_type = $_REQUEST['type'];
+} elseif($_lib['input']->getProperty('action_invoice_fakturabanksend_altinn_aga')) {
   $AltinnReport4ID = $_REQUEST['AltinnReport4ID'];
-  $altinn_invoice = invoice::populateAltinnInvoiceObject($AltinnReport4ID, $invoice_type);
-  if ($altinn_invoice !== false) {
-    $_SESSION['altinn_invoice_sending'] = true;
-    $_SESSION['altinn_invoice_reference'] = $AltinnReport4ID;
-    $_SESSION['altinn_invoice_type'] = $invoice_type;
-    $fb = new lodo_fakturabank_fakturabank();
-    $fb->write($altinn_invoice);
+  $AGA_altinn_invoice = invoice::populateAltinnInvoiceObject($AltinnReport4ID, 'AGA');
+  $fb = new lodo_fakturabank_fakturabank();
+  $_SESSION['sending_aga_ftr_to_fakturabank'] = true;
+  $_SESSION['altinn_invoice_sending'] = true;
+  $_SESSION['altinn_invoice_reference'] = $AltinnReport4ID;
+  if ($AGA_altinn_invoice !== false) {
+    $_SESSION['altinn_invoice_type'] = 'AGA';
+    $_SESSION['sending_aga_to_fakturabank'] = true;
+    $fb->write($AGA_altinn_invoice);
   }
+} elseif($_lib['input']->getProperty('action_invoice_fakturabanksend_altinn_ftr')) {
+  $AltinnReport4ID = $_REQUEST['AltinnReport4ID'];
+  $FTR_altinn_invoice = invoice::populateAltinnInvoiceObject($AltinnReport4ID, 'FTR');
+  $fb = new lodo_fakturabank_fakturabank();
+  $_SESSION['altinn_invoice_sending'] = true;
+  $_SESSION['altinn_invoice_reference'] = $AltinnReport4ID;
+  if ($FTR_altinn_invoice !== false) {
+    $_SESSION['altinn_invoice_type'] = 'FTR';
+    $_SESSION['sending_ftr_to_fakturabank'] = true;
+    $fb->write($FTR_altinn_invoice);
+  }
+  unset($_SESSION['sending_aga_ftr_to_fakturabank']);
 }
 
 ?>

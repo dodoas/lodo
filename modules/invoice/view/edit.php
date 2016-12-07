@@ -35,6 +35,7 @@ $accounting = new accounting();
 require_once "record.inc";
 
 if (isset($_SESSION['oauth_invoice_error'])) {
+  if (is_array($_SESSION['oauth_invoice_error'])) $_SESSION['oauth_invoice_error'] = implode(", ", $_SESSION['oauth_invoice_error']);
   $_lib['message']->add($_SESSION['oauth_invoice_error']);
   unset($_SESSION['oauth_invoice_error']);
 }
