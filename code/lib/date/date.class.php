@@ -50,6 +50,11 @@ class Date
     }
   }
 
+  function get_first_day_in_month($period)
+  {
+    return Date::get_this_period($period) . "-01";
+  }
+
   function get_last_day_in_month($period)
   {
     global $_lib;

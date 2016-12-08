@@ -165,7 +165,7 @@ $warningH = array();
 <?
 $relationcount = array();
 if(is_array($bank->bankaccount)) {
-    foreach($bank->bankaccount as $row) { 
+    foreach($bank->bankaccount as $row) {
         if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
             preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
             $fakturabankID = $matches[1];
@@ -178,7 +178,7 @@ if(is_array($bank->bankaccount)) {
             if($c == 0) {
                 printf("<b>Noe er galt med denne importen fra fakturabank FB(%d).</b><br />", $fakturabankID);
             }
-        }        
+        }
     }
 }
 ?>
@@ -240,22 +240,41 @@ if(is_array($bank->bankaccount)) {
     <td class="menu">Prosjekt</td>
     <td class="menu"></td>
   </tr>
-<tr>
-    <td colspan="2">Saldo bank <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
-    <td></td>
-<?php
-    if ($bank->bankaccountcalc->AmountSaldo < 0) {
-?>
-    <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
-    <td></td>
+  <tr>
+      <td colspan="2">Saldo bank <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
+      <td></td>
   <?php
-    } else {
-?>
-    <td></td>
-    <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
-  <?php
-    }
-?>
+      if ($bank->bankaccountcalc->AmountSaldo < 0) {
+  ?>
+      <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo) ?></td>
+      <td></td>
+    <?php
+      } else {
+  ?>
+      <td></td>
+      <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
+    <?php
+      }
+  ?>
+      <td colspan="7"></td>
+  </tr>
+  <tr>
+      <td colspan="2">Diff bank-hovedbok <? print $_lib['date']->get_first_day_in_month($bank->ThisPeriod) ?></td>
+      <td></td>
+    <?php
+      $bank_voucher_diff = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - $bank->voucher->saldo;
+      if ($bank_voucher_diff < 0) {
+    ?>
+      <td class="number"><? print $_lib['format']->Amount($bank_voucher_diff * -1) ?></td>
+      <td></td>
+    <?php
+      } else {
+    ?>
+      <td></td>
+      <td class="number"><? print $_lib['format']->Amount($bank_voucher_diff * -1) ?></td>
+    <?php
+      }
+    ?>
     <td colspan="4"></td>
     <td><input type="button" onclick="$('input[name*=\'accountline.Approved\']').attr('checked', true)" value="OK" /></td>
     <td colspan="2"></td>
@@ -406,14 +425,14 @@ if(is_array($bank->unvotedaccount)) {
         <td><? print $row->Day ?></td>
 
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
-        <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
+        <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn * -1); ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25)); 
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25));
                 if(substr($row->InvoiceNumber, 0, 2) == "FB") {
                   preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
                   $fakturabankID = $matches[1];
 
-                  print $relationcount[$fakturabankID]; 
+                  print $relationcount[$fakturabankID];
                   }
             ?>
         </td>
@@ -482,11 +501,11 @@ if(is_array($bank->unvotedvoucher)) {
         <td></td>
         <td><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $row->JournalID . '&amp;voucher_VoucherType=' . $row->VoucherType . "&amp;action_journalid_search=1", 'description' => $row->VoucherType . $row->JournalID)) ?></td>
         <td><? print substr($row->VoucherDate,8,2) ?></td>
-        <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
+        <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut * -1) ?></td>
         <td class="number menu-right-border"><? if ($row->AmountIn > 0) print $_lib['format']->Amount($row->AmountIn) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25))?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-        
+
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Description', 'pk' => $row->VoucherID, 'value' => $row->Description,      'width' => 25, 'maxlength' => 255)) ?></td>
         <td></td>
         <td><? print $row->AccountPlanID ?></td>
@@ -506,15 +525,15 @@ if(is_array($bank->unvotedvoucher)) {
 </tr>
      <?php } ?>
 <tr>
-  <td class="menu" colspan="3">Saldo avstemming <? print $bank->ThisPeriod ?>-30/31</td>
-  <td class="number menu-left-border"><? print $_lib['format']->Amount($bank->unvotedcalc->AmountSaldo)  ?></td>
+  <td class="menu" colspan="3">Saldo avstemming <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
+  <td class="number menu-left-border"><? print $_lib['format']->Amount($bank->unvotedcalc->AmountSaldo - $bank_voucher_diff)  ?></td>
   <td class="menu-right-border"></td>
   <td></td>
   <td colspan="2">Sum mangler konto</td>
   <td><? print $warningH['chosseaccount'] ?></td>
 </tr>
 <tr>
-  <td class="menu" colspan="3">Saldo hovedbok <? print $bank->ThisPeriod ?>-30/31</td>
+  <td class="menu" colspan="3">Saldo hovedbok <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
   <td class="number menu-left-border"><? print $_lib['format']->Amount($bank->voucher->sumSaldo) ?></td>
   <td class="menu-right-border"></td>
   <td></td>
@@ -524,7 +543,7 @@ if(is_array($bank->unvotedvoucher)) {
 </tr>
 <tr>
   <td class="menu" colspan="3">Diff</td>
-  <td class="number menu-left-border"><? print $_lib['format']->Amount(abs($bank->unvotedcalc->AmountSaldo - $bank->voucher->sumSaldo))  ?></td>
+  <td class="number menu-left-border"><? print $_lib['format']->Amount($bank->unvotedcalc->AmountSaldo - $bank->voucher->sumSaldo - $bank_voucher_diff)  ?></td>
   <td class="menu-right-border"></td>
   <td></td>
   <td colspan="2">Bilagsnummer brukt.</td>
