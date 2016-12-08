@@ -1522,12 +1522,19 @@ class lodo_fakturabank_fakturabank {
                     #print_r($line);
 
                     #preprocess price/quantity - because inconsistent data can appear
+                    $IsOnlyTax = false;
                     if($line->InvoicedQuantity != 0 && $line->Price->PriceAmount != 0) {
                         $Quantity   = $line->InvoicedQuantity;
                         $CustPrice  = $line->Price->PriceAmount;
                     } else {
                         $Quantity   = 1;
                         $CustPrice  = $line->LineExtensionAmount;
+
+                        // If this is MVA only line, save this field to true. 
+                        // We later use it to bookkeep this line to tax account.
+                        if($line->Price->PriceAmount == 0 && preg_match("/^MVA/", $line->Item->Name)) {
+                            $IsOnlyTax = true;
+                        }
                     }
 
                     if($CustPrice != 0) {
@@ -1542,6 +1549,7 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['Comment']           = $line->Item->Description;
                         $datalineH['QuantityOrdered']   = $Quantity;
                         $datalineH['QuantityDelivered'] = $Quantity;
+                        $datalineH['IsOnlyTax']         = $IsOnlyTax;
 
                         #Foreign currency
                         if ($is_foreign) {
