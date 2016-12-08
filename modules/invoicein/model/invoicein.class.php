@@ -549,6 +549,9 @@ class logic_invoicein_invoicein implements Iterator {
 
                         //#Motkonto resultat.
                         $VoucherH['voucher_AccountPlanID']  = $line->AccountPlanID;
+                        if($line->IsOnlyTax) {
+                            $VoucherH['voucher_AccountPlanID'] = 2710;
+                        }
                         //#print_r($VoucherH);
                         $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
                     }
