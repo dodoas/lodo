@@ -280,10 +280,12 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraEntryIn) ?>" name="extraEntryIn" /></td>
   <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraEntryOut) ?>" name="extraEntryOut" /></td>
   <td></td>
-  <? $val = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut);
-     $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
-  <td colspan="2"><? echo "<span style='color: $color'>Diff kontoutskrift-banktransaksjoner: " . $_lib['format']->Amount($val) . "</span>";  ?></td>
-  <td><? echo "<span style='color: $color'>Diff banktransaksjoner-bankbilag: " . $_lib['format']->Amount(($bankin - $bankout) - $bank->voucher->saldo) . "</span>"; ?></td>
+  <? $bankvotingsum = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut);
+     $banksum = ($bankin - $bankout) - $bank->voucher->saldo;
+     $bankvotingsum_color = (round($bankvotingsum, 2) == 0) ? "" : "red";
+     $banksum_color = (round($banksum, 2) == 0) ? "" : "red"; ?>
+  <td class="<?= $bankvotingsum_color ?>"><? echo "<span>Kontoutskrift-banktransaksjoner: diff " . $_lib['format']->Amount($bankvotingsum) . "</span>";  ?></td>
+  <td class="<?= $banksum_color ?>"><? echo "<span>Banktransaksjoner-bankbilag regnskap: diff " . $_lib['format']->Amount($banksum) . "</span>"; ?></td>
 </tr>
 <tr>
   <td>Bank den siste</td>
@@ -291,10 +293,12 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraLastOut) ?>" name="extraLastOut" /></td>
   <td></td>
 
-  <? $val = $bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut);
-     $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
-  <td colspan="2"><? echo "<span style='color: $color'>Diff kontoutskrift-banktransaksjoner: " . $_lib['format']->Amount($val) . "</span>";  ?></td>
-  <td><? echo "<span style='color: $color'>Diff banktransaksjoner-bankbilag: " . $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo - $bank->voucher->sumSaldo) . "</span>"; ?></td>
+  <? $bankvotingsum = $bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut);
+     $banksum = $bank->bankaccountcalc->AmountSaldo - $bank->voucher->sumSaldo;
+     $bankvotingsum_color = (round($bankvotingsum, 2) == 0) ? "" : "red";
+     $banksum_color = (round($banksum, 2) == 0) ? "" : "red"; ?>
+    <td class="<?= $bankvotingsum_color ?>"><? echo "<span>Kontoutskrift-banktransaksjoner: diff " . $_lib['format']->Amount($bankvotingsum) . "</span>";  ?></td>
+    <td class="<?= $banksum_color ?>"><? echo "<span>Banktransaksjoner-bankbilag regnskap: diff " . $_lib['format']->Amount($banksum) . "</span>"; ?></td>
 </tr>
 
 <tr>
@@ -339,9 +343,11 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 <tr>
     <td colspan="14"
         class="<? $v = $bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo; if(abs($v) < 0.00001 && abs($v) > -0.00001) print 'sub'; else print 'red';?>">
-      Saldo fra forrige mnd (<? print $bank->PrevPeriod ?>):
+      Kontoutskrift <? print $_lib['date']->get_last_day_in_month($bank->PrevPeriod) ?>:
       <? print $_lib['format']->Amount($bank->prevbankaccountcalc->AmountSaldo) ?>
-      <? print "Saldo differanse " . $_lib['format']->Amount($bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo); ?>
+      Kontoutskrift <? print $_lib['date']->get_first_day_in_month($bank->ThisPeriod) ?>:
+      <? print $_lib['format']->Amount($bankin - $bankout) ?>
+      <? print "diff " . $_lib['format']->Amount($bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo); ?>
     </td>
 </tr>
 
@@ -349,11 +355,11 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td colspan="19">
         <? if(round($bank->bankvotingperiod->topAmountSaldo,2) != round($bank->voucher->saldo,2)) { ?>
           <b>
-          Det er differanse mellom summen av tilbakef&oslash;rte + tilleggsf&oslash;rte bilag
-          (<? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo) ?>)
-            og summen av transaksjoner p&aring; kto
-          <? print $bank->AccountPlanID ?> (<? print $_lib['format']->Amount($bank->voucher->saldo) ?>) :
-          <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo) ?>
+            Kontoutskrift <? print $_lib['date']->get_first_day_in_month($bank->ThisPeriod) ?>:
+            <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo) ?>
+              og bankbilag regnskap <? print $_lib['date']->get_first_day_in_month($bank->ThisPeriod) ?>:
+            <? print $_lib['format']->Amount($bank->voucher->saldo) ?> , diff
+            <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo) ?>
           </b>
         <? } ?>
         </td>
