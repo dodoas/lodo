@@ -641,7 +641,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
         if (!($i % 2)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
       <tr class="<? print $sec_color ?>">
-        <td colspan="19"></td>
+        <td colspan="20"></td>
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',           'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',     'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>

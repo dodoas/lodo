@@ -509,9 +509,15 @@ class SessionNew
         'RequestURI'        => $_SERVER['REQUEST_URI'],
         'Dispatch'          => $_lib['sess']->dispatch,
         'LoginFormDate'     => $formdate,
+        'TabJournalSort'    => 1,
       );
 
       return $_mysession;
+    }
+
+    ############################################################
+    function set_mysession($field, $value){
+      $this->_mysession[$field] = $value;
     }
 
     ############################################################
