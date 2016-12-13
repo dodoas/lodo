@@ -23,35 +23,13 @@ if(!$ToDate) {
 $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
 
-/* sortering og gruppering av data */
-if (!$SORT || $SORT == "ASC")
-{
-    $SORT = "DESC";
-}
-else
-{
-    $SORT = "ASC";
-}
-
-if(!$_SETUP['DB_START']['0'])
-{
-    $_SETUP['DB_START']['0'] = 0;
-}
+$invoices_per_page = 1000;
+$page = isset($_GET['page'])? $_GET['page'] : 1;
+$sort = isset($_GET['sort'])? $_GET['sort'] : 'DESC';
 
 if (!$order_by)
 {
     $order_by = "InvoiceID";
-}
-
-$db_stop = $_SETUP['DB_START']['0'] + $_SETUP['DB_OFFSET']['0'];
-
-if (!$SORT || $SORT == "ASC")
-{
-    $SORT = "DESC";
-}
-else
-{
-    $SORT = "ASC";
 }
 
 /* Sokestreng */
@@ -71,20 +49,20 @@ if($searchstring){
     $query .= " i.IName like '%$searchstring%' and ";
 }
 
-$query = substr($query, 0, -4);
+$query_for_ids = substr($query, 0, -4);
 
-# Work around to avoid mysql stall query because of double space before order statement
-if (substr($query, -1) == " ") {
-        $query = substr($query, 0, -1);
-}
+$query_for_ids = str_replace("#[select]", "i.InvoiceID", $query_for_ids);
 
-$query  .= " order by InvoiceID desc";
-
-$query_for_ids = str_replace("#[select]", "i.InvoiceID", $query);
 $query = str_replace("#[select]", "i.*", $query);
 
-// print "$query<br>\n";
-// print "$query_for_ids<br>\n";
+$result_inv_ids = $_lib['db']->db_query($query_for_ids . " order by " . $order_by . " " . $sort . " limit " . (($page-1)*$invoices_per_page) . ", " . $invoices_per_page);
+$ids = array();
+while($row = $_lib['db']->db_fetch_object($result_inv_ids)) { array_push($ids, $row->InvoiceID); }
+$ids_string = implode(', ', $ids);
+
+$query .= " i.InvoiceID in ($ids_string)";
+$query .= " order by " . $order_by . " " . $sort;
+
 $result_inv = $_lib['db']->db_query($query);
 
 $query_count = "SELECT COUNT(*) as total, sum(TotalCustPrice) as sum FROM $db_table $where";
@@ -181,24 +159,33 @@ $db_sum   = $row->sum;
 <tr>
     <th>
         <?
-        if($_SETUP['DB_START']['0'] > 0)
-            {?> <a href="<? print $MY_SELF ?>&amp;DB_START=<? print $_SETUP['DB_START']['0']-$_SETUP['DB_OFFSET']['0']; ?>&amp;searchstring=<? print "$searchstring"; ?>&amp;InvoiceStatus=<? print "$InvoiceStatus"; ?>&amp;order_by=<? print "$order_by"; ?>&amp;sort=<? print "$SORT"; ?>" title="forrige">&lt;&lt;</a> <?}
+        $start_number = ($page - 1) * $invoices_per_page;
+        $stop_number = $page * $invoices_per_page;
+        $stop_number = ($stop_number > $db_total) ? $db_total : $stop_number;
+        if($page > 1)
+            {?> <a href="<? print $MY_SELF ?>&amp;page=<? print $page-1; ?>&amp;searchstring=<? print "$searchstring"; ?>&amp;InvoiceStatus=<? print "$InvoiceStatus"; ?>&amp;order_by=<? print "$order_by"; ?>&amp;sort=<? print "$sort"; ?>" title="forrige">&lt;&lt;</a> <?}
         else
             {?> &lt;&lt; <?}
         ?>
-    <th colspan="2">Fant:<? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til ".$db_stop; ?></th>
+    <th colspan="2">Fant:<? print $db_total ?>, viser <? print ($start_number+1)." til ". $stop_number; ?></th>
     <th colspan="13">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
     <th align="right">
         <?
-        if($db_total > $db_stop)
-            {?> <a href="<? print $MY_SELF ?>&amp;DB_START=<? print $_SETUP['DB_START']['0']+$_SETUP['DB_OFFSET']['0']; ?>&amp;searchstring=<? print "$searchstring"; ?>&amp;InvoiceStatus=<? print "$InvoiceStatus"; ?>&amp;order_by=<? print "$order_by"; ?>&amp;sort=<? print "$SORT"; ?>" title="next">&gt;&gt;</a> <?}
+        if($db_total > $stop_number)
+            {?> <a href="<? print $MY_SELF ?>&amp;page=<? print $page+1; ?>&amp;searchstring=<? print "$searchstring"; ?>&amp;InvoiceStatus=<? print "$InvoiceStatus"; ?>&amp;order_by=<? print "$order_by"; ?>&amp;sort=<? print "$sort"; ?>" title="next">&gt;&gt;</a> <?}
         else
             {?> &gt;&gt; <?}
         ?>
     </th>
 </tr>
 <tr>
-    <th align="right">Faktura nr</th>
+    <th align="right">
+<? if ($sort == 'DESC') { ?>
+<a href="<? print $MY_SELF ?>&amp;page=<? print $page; ?>&amp;searchstring=<? print "$searchstring"; ?>&amp;InvoiceStatus=<? print "$InvoiceStatus"; ?>&amp;order_by=<? print "$order_by"; ?>&amp;sort=ASC" title="snu">v</a>
+<? } else { ?>
+<a href="<? print $MY_SELF ?>&amp;page=<? print $page; ?>&amp;searchstring=<? print "$searchstring"; ?>&amp;InvoiceStatus=<? print "$InvoiceStatus"; ?>&amp;order_by=<? print "$order_by"; ?>&amp;sort=DESC" title="snu">^</a>
+<? } ?>
+Faktura nr</th>
     <th align="right">Utskriftsdato</th>
     <th align="right">Fakturadato</th>
     <th align="right">Periode</th>
@@ -259,7 +246,7 @@ SELECT DISTINCT(JournalID) FROM (
       ), 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut,
       il.InvoiceID AS JournalID
       FROM invoiceoutline il
-      WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+      WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($ids_string)
 
       UNION
 
@@ -270,7 +257,7 @@ SELECT DISTINCT(JournalID) FROM (
         ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * (100.0 + iac.VatPercent) / 100.0), 2) AS AmountOut,
         iac.InvoiceID AS JournalID
         FROM invoiceallowancecharge iac
-        WHERE InvoiceType = 'out' AND InvoiceID in ($query_for_ids) AND Amount <> 0
+        WHERE InvoiceType = 'out' AND InvoiceID in ($ids_string) AND Amount <> 0
 
         UNION
 
@@ -281,7 +268,7 @@ SELECT DISTINCT(JournalID) FROM (
           ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * iac.VatPercent / 100.0), 2) AS AmountOut,
           iac.InvoiceID AS JournalID
           FROM invoiceallowancecharge iac
-          WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($query_for_ids) AND Amount <> 0
+          WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($ids_string) AND Amount <> 0
 
           UNION
 
@@ -291,7 +278,7 @@ SELECT DISTINCT(JournalID) FROM (
             ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * iac.VatPercent / 100.0 * -1, 0), 2) AS AmountOut,
             iac.InvoiceID AS JournalID
             FROM invoiceallowancecharge iac
-            WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($query_for_ids) AND Amount <> 0
+            WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($ids_string) AND Amount <> 0
 
             UNION
 
@@ -318,7 +305,7 @@ SELECT DISTINCT(JournalID) FROM (
             )) * il.Vat / 100, 0), 2) AS AmountOut,
             il.InvoiceID AS JournalID
             FROM invoiceoutline il
-            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($ids_string)
 
             UNION
 
@@ -344,7 +331,7 @@ SELECT DISTINCT(JournalID) FROM (
             )) * il.Vat / 100 * -1), 2) AS AmountOut,
             il.InvoiceID AS JournalID
             FROM invoiceoutline il
-            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($query_for_ids)
+            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($ids_string)
 
             UNION
 
@@ -355,7 +342,7 @@ SELECT DISTINCT(JournalID) FROM (
               IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut,
               i.InvoiceID AS JournalID
               FROM invoiceout i
-              WHERE i.TotalCustPrice <> 0 AND i.InvoiceID in ($query_for_ids)
+              WHERE i.TotalCustPrice <> 0 AND i.InvoiceID in ($ids_string)
             ) li
 
             UNION ALL
@@ -381,7 +368,7 @@ SELECT DISTINCT(JournalID) FROM (
               JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
               WHERE
               -- Exclude the hovedbok lines
-              ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID in ($query_for_ids)
+              ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID in ($ids_string)
             ) ta
           ) taa
           -- Group the same so we can count the duplicates
@@ -397,7 +384,7 @@ while($row = $_lib['db']->db_fetch_object($result_line_control)){
   $invoices_with_line_control[$row->JournalID] = true;
 }
 
-$query_printinfo = "SELECT InvoicePrintDate, InvoiceID FROM invoiceoutprint WHERE InvoiceID in ($query_for_ids)";
+$query_printinfo = "SELECT InvoicePrintDate, InvoiceID FROM invoiceoutprint WHERE InvoiceID in ($ids_string)";
 $printinfo = array();
 $result_printinfo = $_lib['db']->db_query($query_printinfo);
 while($row = $_lib['db']->db_fetch_object($result_printinfo)){
