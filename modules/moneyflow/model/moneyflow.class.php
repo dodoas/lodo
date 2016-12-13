@@ -41,18 +41,6 @@ class moneyflow {
         $this->result_account = $_lib['db']->db_query($expected_query_accounts);    
 
         ############################################################################################
-        #Start saldo
-        $saldo_query     = "select a.AccountPlanID, a.AccountName, sum(v.AmountIn) as AmountIn, sum(v.AmountOut) as AmountOut from voucher as v, accountplan as a where a.EnableSaldo=1 and v.AccountplanID=a.AccountplanID and v.VoucherDate >= '" . $this->year . "" . "-01-01' and v.VoucherDate <= '" . $this->StartDate . "' and v.Active=1 group by v.AccountPlanID";
-        #print "<b>$saldo_query</b><br>\n";
-        $result_saldo = $_lib['db']->db_query($saldo_query);
-        while($saldo = $_lib['db']->db_fetch_object($result_saldo)) {
-            $saldo->AmountBalance = $saldo->AmountIn - $saldo->AmountOut;
-            $this->AmountStartBalance += $saldo->AmountBalance;
-            $this->saldoH[] = $saldo;
-        }
-        #print_r($this->saldoH);
-        
-        ############################################################################################
         #$startsaldo     = $_lib['storage']->get_row(array('query' => $sql_result));
         if($this->AmountStartBalance > 0) 
             $this->StartAmountIn    = $this->AmountStartBalance;
@@ -93,7 +81,22 @@ class moneyflow {
           }
         }
     }
-    
+
+    function calculate_saldoH(){
+        global $_lib;
+        #Start saldo
+        $saldo_query = "select a.AccountPlanID, a.AccountName, sum(v.AmountIn) as AmountIn, sum(v.AmountOut) as AmountOut from voucher as v, accountplan as a where a.EnableSaldo=1 and v.AccountplanID=a.AccountplanID and v.VoucherDate <= '" . $this->StartDate . "' and v.Active=1 group by v.AccountPlanID";
+        #print "<b>$saldo_query</b><br>\n";
+        $result_saldo = $_lib['db']->db_query($saldo_query);
+        while($saldo = $_lib['db']->db_fetch_object($result_saldo)) {
+            $saldo->AmountBalance = $saldo->AmountIn - $saldo->AmountOut;
+            $this->AmountStartBalance += $saldo->AmountBalance;
+            $this->saldoH[] = $saldo;
+        }
+        #print_r($this->saldoH);
+        return true;
+    }
+
     #Return value changed to return one ore more matches. All recieving functions has to be changed accordingly.
     function findmatch($args) {
         global $_lib;
