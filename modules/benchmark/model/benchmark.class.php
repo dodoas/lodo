@@ -4,7 +4,7 @@
 //
 // Usage:
 //
-// includelogic('benchmark/benchmark')
+// includelogic('benchmark/benchmark');
 //
 // $bm = new benchmark("benchmark title"); // create new benchmark object
 // $bm->start("benchmark start message");  // start the bencmark

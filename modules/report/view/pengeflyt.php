@@ -5,6 +5,7 @@
 
 includelogic('moneyflow/moneyflow');
 $moneyflow = new moneyflow(array('StartDate' => $_lib['input']->getProperty('StartDate'), 'pengeflyt_page' => true));
+$moneyflow->calculate_saldoH();
 
 $_lib['sess']->debug($expected_query_accounts);
 print $_lib['sess']->doctype; ?>
@@ -32,7 +33,7 @@ print $_lib['sess']->doctype; ?>
             print "<tr>";
             print "<td><a href=\"$_SETUP[DISPATCH]t=accountplan.hovedbok&accountplan.AccountPlanID=$row->AccountPlanID\">$account->AccountPlanID</a></td>";
             print "<td><a href=\"$_SETUP[DISPATCH]t=accountplan.hovedbok&accountplan.AccountPlanID=$row->AccountPlanID\">$account->AccountName</a></td>";
-            print "<td>" . $_lib['format']->Amount($account->AmountBalance) . "</td>";
+            print "<td class=\"number\">" . $_lib['format']->Amount($account->AmountBalance) . "</td>";
             print "</tr>";
             $sum += ($row->sumin - $row->sumout);
         }
@@ -64,13 +65,13 @@ print $_lib['sess']->doctype; ?>
             </tr>
             <tr>
                 <td>Forfallsdato</td>
-                <td>Kto</td>
+                <td>Konto</td>
                 <td>Navn</td>
-                <td>KID</td>
-                <td>Faktura</td>
-                <td>Inn</td>
-                <td>Ut</td>
-                <td>Balanse</td>
+                <td class="number">KID</td>
+                <td class="number">Faktura</td>
+                <td class="number">Inn</td>
+                <td class="number">Ut</td>
+                <td class="number">Balanse</td>
             </tr>
         <tbody>
             <tr>
@@ -92,7 +93,7 @@ print $_lib['sess']->doctype; ?>
                     <td class="number"><? print $row->KID ?></td>
                     <td class="number"><? print $row->InvoiceID ?></td>
                     <td class="number"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn) ?></td>
-                    <td class="number red"><?   if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
+                    <td class="number red"><?   if($row->AmountOut > 0) print $_lib['format']->Amount(-$row->AmountOut) ?></td>
                     <td class="number <? print $row->color ?>"><b><? print $_lib['format']->Amount($row->sumBalance) ?></b></td>
                 </tr>
             <? } ?>

@@ -145,7 +145,7 @@ class accounting {
             {
               #Dette journalnummeret er tidligere brukt og firma info er ikke oppdatert
               #Vi finner neste ledige i rekken
-              $select_newjournalid  = "select JournalID from voucher where VoucherType='" . $args['type'] . "' and Active=1 order by JournalID desc limit 1";
+              $select_newjournalid  = "select MAX(JournalID) as JournalID from voucher where VoucherType='" . $args['type'] . "' and Active=1;";
               $_lib['sess']->debug($select_newjournalid);
 
               $new                  = $_lib['storage']->get_row(array('query' => $select_newjournalid));

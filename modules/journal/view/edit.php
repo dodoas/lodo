@@ -167,23 +167,6 @@ if($accountplan->EnableVAT == 1)
       $voucher_input->oldVatID         = $voucherHead->VatID;
     }
 }
-#gjøre en beregning for å sjekke om balanse og resultat kontoer går i null
-$query_balanse      = "select sum(v.AmountIn) as saldo1, sum(v.AmountOut) as saldo2 from voucher as v, accountplan as a where v.AccountPlanID=a.AccountPlanID and a.AccountPlanType = 'balance' and v.Active=1";
-#print "Balanse: $query_balanse<br>";
-$balanceCheck       = $_lib['storage']->get_row(array('query' => $query_balanse));
-
-$query_result       = "select sum(v.AmountIn) as saldo1, sum(v.AmountOut) as saldo2 from voucher as v, accountplan as a where v.AccountPlanID=a.AccountPlanID and a.AccountPlanType = 'result' and v.Active=1";
-#print "Resultat: $query_result<br>";
-$resultCheck        = $_lib['storage']->get_row(array('query' => $query_result));
-
-$balanceAccount     = $_lib['sess']->get_companydef('VoucherBalanceAccount');
-$query_balanse      = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from voucher where AccountPlanID = '$balanceAccount' and Active=1";
-$balanceAccount     = $_lib['storage']->get_row(array('query' => $query_balanse));
-
-$resultAccount      = $_lib['sess']->get_companydef('VoucherResultAccount');
-$query_result       = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from voucher where AccountPlanID = '$resultAccount' and Active=1";
-$resultAccount      = $_lib['storage']->get_row(array('query' => $query_result));
-
 
 if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
     $period_open = true;
@@ -211,18 +194,6 @@ print $_lib['sess']->doctype ?>
 #choose = search fopr KID
 // print "Hit2,5<br>";
 
-if (!$_REQUEST['action_journal_kidsearch'])
-{
-
-if(abs($balanceCheck->saldo1 - $balanceCheck->saldo2) != 0)
-    $_lib['message']->add(array('message' => "Balanse kontoene g&aring;r ikke i 0, det er skjedd en feil. Sum balanse kontoene er: "   . $_lib['format']->Amount($balanceCheck->saldo1 - $balanceCheck->saldo2) . "<br>Ta kontakt med din kontaktperson for Lodo"));
-if(abs($resultCheck->saldo1 - $resultCheck->saldo2) != 0)
-    $_lib['message']->add(array('message' => "Resultat kontoene g&aring;r ikke i 0, det er skjedd en feil. Sum resultat kontoene er: " . $_lib['format']->Amount($resultCheck->saldo1 - $resultCheck->saldo2)   . "<br>Ta kontakt med din kontaktperson for Lodo"));
-?>
-
-<? if(1 == 2) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
-
-<?php
 if(!$period_open) {
     ?>
     <div style="padding: 20px; border: 1px solid black;">
@@ -708,85 +679,5 @@ if($_showresult) {
   #print "<br />showresult<br />";
   print $_showresult;
 }
-} else {
 
-$kid = $_REQUEST['voucher_KID'];
-
-#Find all open posts with this kid defined on this customer
-$_lib['sess']->debug("I edit bildet");
-#$query = "select AmountIn, AmountOut, JournalID, KID, InvoiceID, VoucherDate from voucher as v, voucherstruct as s where (v.AmountIn = '$Amount' or v.AmountOut = '$Amount') and (v.JournalID=s.Parent or v.JournalID=s.Child) and Closed=0";
-$query = "select v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a, voucher as v left join voucherstruct as s on (v.JournalID=s.Parent or v.JournalID=s.Child)  where KID = '$kid' and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType== 'customer' or a.AccountPlanType== 'supplier' or a.AccountPlanType== 'employee') and a.AccountPlanID=v.AccountPlanID and Active=1";
-#print "<h1>$query</h1><br>";
-#$result_search = $_lib['db']->db_query($query);
-?>
-<body>
-<h2>S&oslash;kebegrep: <? print $searchstring ?>, treff  <? print $_lib['db']->db_numrows($result_search) ?></h2>
-<table class="lodo_journal">
-<thead>
-<tr>
-  <th>Type</th>
-  <th>Bilag</th>
-  <th>Dato</th>
-  <th>Konto</th>
-  <th>Konto navn</th>
-  <th>Debet</th>
-  <th>Kredit</th>
-  <th>Faktura</th>
-  <th>KID</th>
-  <th></th>
-</tr>
-</thead>
-
-<tbody>
-<?
-if($VoucherID > 0) { #Vi har ikke dette på den forste linjen for den er lagret.
-    while($row = $_lib['db']->db_fetch_object($result_search)) {
-      #$accounting->sum_journal();
-      #$line = $_lib['storage']->get_row(array('query' => 'select sum(AmountIn) as AmountIn, sum(AmountOut) as AmountOut '));
-    ?>
-        <tr>
-            <td><? print $row->VoucherType ?></td>
-            <td><? print $row->JournalID ?></td>
-            <td><? print $row->VoucherDate ?></td>
-            <td><? print $row->AccountPlanID ?></td>
-            <td><? print $row->AccountName ?></td>
-            <td><? print $row->AmountIn ?></td>
-            <td><? print $row->AmountOut ?></td>
-            <td><? print $row->InvoiceID ?></td>
-            <td><? print $row->KID ?></td>
-
-
-            <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
-            <? print $_lib['form3']->hidden(array('name' => 'type'                  , 'value' => $voucher_input->type)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'VoucherType'           , 'value' => $voucher_input->VoucherType)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.JournalID'     , 'value' => $voucher_input->JournalID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.VoucherID'     , 'value' => $VoucherID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.AccountPlanID' , 'value' => $row->AccountPlanID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.AmountIn'      , 'value' => $row->AmountOut)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.AmountOut'     , 'value' => $row->AmountIn)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.KID'       , 'value' => $row->KID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'AccountLineID'     , 'value' => $voucher_input->AccountLineID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'view_mvalines'     , 'value' => $view_mvalines)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'view_linedetails'  , 'value' => $view_linedetails)) ?>
-            <td><input type="submit"  name="action_voucher_update" value="Velg"></td>
-            </form>
-        </tr>
-    <? } ?>
-    </table>
-            <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
-            <? print $_lib['form3']->hidden(array('name' => 'type'                  , 'value' => $voucher_input->type)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'VoucherType'           , 'value' => $voucher_input->VoucherType)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.JournalID'     , 'value' => $voucher_input->JournalID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.VoucherID'     , 'value' => $VoucherID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.AccountPlanID' , 'value' => $row->AccountPlanID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.AmountIn'      , 'value' => $row->AmountOut)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.AmountOut'     , 'value' => $row->AmountIn)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'voucher.KID'       , 'value' => $row->KID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'AccountLineID'     , 'value' => $voucher_input->AccountLineID)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'view_mvalines'     , 'value' => $view_mvalines)) ?>
-            <? print $_lib['form3']->hidden(array('name' => 'view_linedetails'  , 'value' => $view_linedetails)) ?>
-            <td><input type="submit"  name="action_voucher_update" value="Glem det"></td>
-            </form>
-    <? }
-}?>
-<? includeinc('bottom'); ?>
+includeinc('bottom'); ?>
