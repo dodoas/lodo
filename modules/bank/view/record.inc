@@ -76,9 +76,6 @@ elseif($_lib['input']->getProperty('action_bank_cardadd')) {
 elseif($_lib['input']->getProperty('action_bank_cardremove')) {
     $bankaccount->cardremove($_lib['input']->getProperty('BankAccountCardID'));
 }
-elseif($_lib['input']->getProperty('action_bank_periodlock')) {
-    $bankaccount->periodlock();
-}
 elseif($_lib['input']->getProperty('action_bank_commentupdate')) {
 	#print_r($_POST);
 	$tables['bankvotingperiod']    = 'BankVotingPeriodID';
@@ -110,6 +107,16 @@ VALUES
     $_lib['db']->db_query($q);
 }
 
+$BankVotingPeriodID = $_lib['input']->getProperty('BankVotingPeriodID');
+# Moved outside if elseif statement because we want to save before we unlock
+if($_lib['input']->getProperty('action_bank_periodunlock')) {
+    $bankaccount->periodunlock($BankVotingPeriodID);
+}
+
+# Moved outside if elseif statement because we want to save before we lock
+if($_lib['input']->getProperty('action_bank_periodlock')) {
+    $bankaccount->periodlock($BankVotingPeriodID);
+}
 
 function do_bank_update($AccountID, $Period) {
     global $_lib, $accounting;

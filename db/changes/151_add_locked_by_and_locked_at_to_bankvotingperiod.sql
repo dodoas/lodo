@@ -1,0 +1,5 @@
+ALTER TABLE bankvotingperiod
+ADD COLUMN LockedAt datetime DEFAULT NULL,
+ADD COLUMN LockedBy int(11) DEFAULT NULL,
+ADD COLUMN UnLockedAt datetime DEFAULT NULL,
+ADD COLUMN UnLockedBy int(11) DEFAULT NULL;
