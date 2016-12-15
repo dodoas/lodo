@@ -11,6 +11,9 @@ $AccountPlanID      = $_REQUEST['AccountPlanID'];*/
 includelogic('voucher/voucherinput');
 
 $voucher_input      = new framework_logic_voucherinput($_REQUEST);
+// trim spaces on InvoiceID and KID
+$voucher_input->KID = trim($voucher_input->KID);
+$voucher_input->InvoiceID = trim($voucher_input->InvoiceID);
 
 // if the valuta(either currency_id or exchange_rate) has changed for the voucher we are saving, then we update foreign currency for the whole journal
 global $_lib;

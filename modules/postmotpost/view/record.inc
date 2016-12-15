@@ -1,6 +1,16 @@
 <?
 // var_dump($_POST);
 // die();
+
+//trim the spaces on InvoiceID, KID and MatchNumber
+foreach($_POST as $key => $value) {
+  if ((strstr($key, "voucher_InvoiceID") !== false) ||
+      (strstr($key, "voucher_KID") !== false) ||
+      (strstr($key, "vouchermatch_MatchNumber") !== false)) {
+    $_POST[$key] = trim($value);
+  }
+}
+
 if(isset($_REQUEST['action_postpost_update'])) {
   $primarykey = "VoucherID";
   $_lib['db']->db_update_multi_record($_POST, $db_table, $primarykey);
