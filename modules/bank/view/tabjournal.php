@@ -416,11 +416,10 @@ if(is_array($bank->unvotedaccount)) {
 
 
       ?>
-      <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'JournalID',   'pk' => $row->AccountLineID, 'value' => $row->JournalID)) ?>
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'Day',         'pk' => $row->AccountLineID, 'value' => $row->Day)) ?>
       <tr class="<? print "$sec_color"; ?>">
         <td><? print $row->Priority ?></td>
-           <td><? print ($bank->VoucherType . $row->JournalID) ?></td>
+           <td><? print ($bank->VoucherType . $_lib['form3']->input(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6))) ?></td>
 
         <td><? print $row->Day ?></td>
 

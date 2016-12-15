@@ -386,7 +386,9 @@ class framework_logic_bank {
 
     private function set_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID, $amount, $comment, $JournalID){
         #print "Setter voucheraccount: Konto: $AccountPlanID, KID:$KID, Fnr: $InvoiceID, Belop:$amount, Kommentar: $comment<br>\n";
-        $this->closeablevoucheraccountline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount,2);
+        if((isset($InvoiceID) && !empty($InvoiceID)) || (isset($KID) && !empty($KID))){
+            $this->closeablevoucheraccountline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount,2);
+        }
 
         if($KID == $this->debugKID) {
             print "set: voucheraccount #$AccountPlanID#$KID#$InvoiceID# += $amount - saldo #" . $this->closeablevoucheraccountline['KID'][$KID] . "# - $comment<br>\n";
@@ -481,14 +483,14 @@ class framework_logic_bank {
         return $status;
     }
 
-    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount) {
+    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount, $From = "") {
         $KID        = trim($KID);
         $InvoiceID  = trim($InvoiceID);
         $JournalID   = trim($JournalID);
         $value      = 0;
 
         if(empty($JournalID) || (empty($KID) && empty($InvoiceID))) {
-          return $TotalAmount;
+          return ($TotalAmount * (($From == "bank") ? -1 : 1));
         }
         $value = $this->get_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID);
         if(!$value) {

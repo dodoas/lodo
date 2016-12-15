@@ -468,17 +468,12 @@ if(is_array($bank->bankaccount)) {
             $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
         }
 
-        $sumBalance = $row->AmountIn - $row->AmountOut;
-        if($row->KID || $row->InvoiceNumber) {
-            if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
-                // if it has been closed then JournalID should not be red.
-                $JournalIDColColor = '';
-                $matchCaption = "Lukket";
-            } else {
-                $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID, $sumBalance)) . ")";
-            }
+        if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
+            // if it has been closed then JournalID should not be red.
+            $JournalIDColColor = '';
+            $matchCaption = "Lukket";
         } else {
-            $matchCaption = " Diff(" . $sumBalance . ")";
+            $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID, ($row->AmountIn - $row->AmountOut))) . ")";
         }
 
 
@@ -603,7 +598,7 @@ if(is_array($bank->bankaccount)) {
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
 
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
-        <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut))) . ")"; ?></td>
+        <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut), 'bank')) . ")"; ?></td>
         <td class="<? print $bankvoucher->classAmountIn ?> <? print $bank->DebitColor ?>">
         <? if($bankvoucher->AmountIn > 0) {
             print $_lib['format']->Amount($bankvoucher->AmountIn);
