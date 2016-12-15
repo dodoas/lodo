@@ -7,8 +7,11 @@ includelogic('fakturabank/bankreconciliationreason');
 
 #$bank2           = new framework_logic_bank($_lib['input']->request);
 #$bank2->init();
+if( isset($_GET['sort_direction'])){
+  $_SESSION['TabJournalSort'] = intval($_GET['sort_direction']);
+  $_lib['sess']->set_mysession('TabJournalSort', $_SESSION['TabJournalSort']);
+}
 
-if( isset($_GET['sort_direction'])){ $_lib['sess']->set_mysession('TabJournalSort', intval($_GET['sort_direction'])); }
 if($_lib['input']->getProperty('action_bank_periodremove')) {
     $bankaccount->periodremove();
 }
