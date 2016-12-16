@@ -481,14 +481,15 @@ class framework_logic_bank {
         return $status;
     }
 
-    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount) {
+    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount, $InnOrOut, $From = "") {
         $KID        = trim($KID);
         $InvoiceID  = trim($InvoiceID);
         $JournalID   = trim($JournalID);
         $value      = 0;
 
         if(empty($JournalID) || (empty($KID) && empty($InvoiceID))) {
-          return $TotalAmount;
+          // Invert the sign so the amount shown should be the amount which needs to be added for them to match
+          return ($TotalAmount * (($From == "voucher") ? -1 : 1));
         }
         $value = $this->get_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID);
         if(!$value) {
@@ -497,6 +498,9 @@ class framework_logic_bank {
         if(!$value) {
             $value = $this->get_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $JournalID);
         }
+        // Invert the sign so the amount shown should be the amount which needs to be added for them to match
+        $value = ($value * (($From == "voucher" && $InnOrOut == "inn") ? -1 : 1));
+        $value = ($value * (($From == "bank" && $InnOrOut == "out") ? -1 : 1));
         return $value;
     }
 
