@@ -1039,6 +1039,13 @@ class framework_logic_bank {
                         continue;
                     }
 
+                    $has_foreign_invoice = false;
+                    foreach ($relations as $rel) {
+                        if($rel["Currency"] != exchange::getLocalCurrency()) {
+                            $has_foreign_invoice = true;
+                        }
+                    }
+
                     //$VoucherH['voucher_InvoiceID'] = implode(',', $relations_invoices);
 
                     $accounting->insert_voucher_line(
@@ -1054,9 +1061,12 @@ class framework_logic_bank {
                     $FBVoucherH['voucher_CarID']         = $unvoted->CarID;
                     $FBVoucherH['voucher_DepartmentID']  = $unvoted->DepartmentID;
                     $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
-                    $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
+                    $FBVoucherH['voucher_Vat']           = $unvoted->VAT;
 
                     foreach($relations as $rel) {
+                        // Skip creating the reason voucher if reason is currency difference.
+                        // After conversion, real difference is automatically generated.
+                        if($has_foreign_invoice && $rel["FakturabankBankTransactionAccountID"] == 90) continue;
 
                         if($rel['InvoiceType'] == 'incoming') {
                             $accountplan_row = $fbbank->find_account_plan_type(
@@ -1078,8 +1088,20 @@ class framework_logic_bank {
                                 if ($this->debug) printf("Adding normal Incoming\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
 
-                                $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
-                                $FBVoucherH['voucher_AmountIn']      = 0;
+                                if($rel['Currency'] == exchange::getLocalCurrency()) {
+                                    $FBVoucherH['voucher_AmountOut']         = $rel['Amount'];
+                                    $FBVoucherH['voucher_AmountIn']          = 0;
+                                    // reset foreign currency fields if this voucher should be in local currency
+                                    $FBVoucherH['voucher_ForeignCurrencyID'] = null;
+                                    $FBVoucherH['voucher_ForeignAmount']     = 0;
+                                    $FBVoucherH['voucher_ForeignConvRate']   = 0;
+                                } else {
+                                    $FBVoucherH['voucher_ForeignCurrencyID'] = $rel['Currency'];
+                                    $FBVoucherH['voucher_ForeignAmount']     = $rel['Amount'];
+                                    $FBVoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($rel['Currency']);
+                                    $FBVoucherH['voucher_AmountOut']         = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
+                                    $FBVoucherH['voucher_AmountIn']          = 0;
+                                }
 
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
@@ -1108,8 +1130,20 @@ class framework_logic_bank {
                                 if ($this->debug) printf("Adding normal Outgoing\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
 
-                                $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
-                                $FBVoucherH['voucher_AmountIn']      = 0;
+                                if($rel['Currency'] == exchange::getLocalCurrency()) {
+                                    $FBVoucherH['voucher_AmountOut']         = $rel['Amount'];
+                                    $FBVoucherH['voucher_AmountIn']          = 0;
+                                    // reset foreign currency fields if this voucher should be in local currency
+                                    $FBVoucherH['voucher_ForeignCurrencyID'] = null;
+                                    $FBVoucherH['voucher_ForeignAmount']     = 0;
+                                    $FBVoucherH['voucher_ForeignConvRate']   = 0;
+                                } else {
+                                    $FBVoucherH['voucher_ForeignCurrencyID'] = $rel['Currency'];
+                                    $FBVoucherH['voucher_ForeignAmount']     = $rel['Amount'];
+                                    $FBVoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($rel['Currency']);
+                                    $FBVoucherH['voucher_AmountOut']         = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
+                                    $FBVoucherH['voucher_AmountIn']          = 0;
+                                }
 
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
@@ -1159,6 +1193,15 @@ class framework_logic_bank {
                             }
                         }
                     }
+
+                    // In case that this journal had a foreign currency invoices, we should check if there is difference
+                    // after currency conversion between bank transaction and invoice amounts, and fix it.
+                    if($has_foreign_invoice) {
+                        if($result_motkonto_for_currency_difference = $accounting->get_accountplan_object($FBVoucherH['voucher_AccountPlanID'])->MotkontoResultat1) {
+                            $FBVoucherH['voucher_AccountPlanID'] = $result_motkonto_for_currency_difference;
+                        }
+                        $accounting->correct_journal_balance($FBVoucherH, $FBVoucherH['voucher_JournalID'], $this->VoucherType);
+                    }
                 }
                 ####################################################################################
                 else if($unvoted->ReskontroAccountPlanID && $unvoted->ResultAccountPlanID) {
@@ -1185,7 +1228,7 @@ class framework_logic_bank {
                     $VoucherH['voucher_ProjectID']          = $unvoted->ProjectID;
                     $VoucherH['voucher_DepartmentID']       = $unvoted->DepartmentID;
                     $VoucherH['voucher_Quantity']           = $unvoted->ResultQuantity;
-                    $VoucherH['voucher_VAT']                = $unvoted->VAT;
+                    $VoucherH['voucher_Vat']                = $unvoted->VAT;
 
                     $VoucherH = $this->SwitchSideAmount($VoucherH);
                     $accounting->insert_voucher_line(array('post'=> $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
@@ -1196,6 +1239,18 @@ class framework_logic_bank {
                     ############
                     #1.st line
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
+
+                    if($unvoted->Currency == exchange::getLocalCurrency()) {
+                        $VoucherH['voucher_AmountOut']         = $unvoted->AmountOut;
+                        $VoucherH['voucher_AmountIn']          = $unvoted->AmountIn;
+                    } else {
+                        $amount = $unvoted->AmountIn > 0 ? $unvoted->AmountIn : $unvoted->AmountOut;
+                        $VoucherH['voucher_ForeignCurrencyID'] = $unvoted->Currency;
+                        $VoucherH['voucher_ForeignAmount']     = $amount;
+                        $VoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($unvoted->Currency);
+                        $VoucherH['voucher_AmountOut']         = $unvoted->AmountOut > 0 ? exchange::convertToLocal($unvoted->Currency, $unvoted->AmountOut) : 0;
+                        $VoucherH['voucher_AmountIn']          = $unvoted->AmountIn  > 0 ? exchange::convertToLocal($unvoted->Currency, $unvoted->AmountIn)  : 0;
+                    }
 
                     //else
                     {
@@ -1221,7 +1276,7 @@ class framework_logic_bank {
                     $VoucherH['voucher_ProjectID']          = $unvoted->ProjectID;
                     $VoucherH['voucher_DepartmentID']       = $unvoted->DepartmentID;
                     $VoucherH['voucher_Quantity']           = $unvoted->ResultQuantity;
-                    $VoucherH['voucher_VAT']                = $unvoted->VAT;
+                    $VoucherH['voucher_Vat']                = $unvoted->VAT;
 
                     $VoucherH = $this->SwitchSideAmount($VoucherH);
                     $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
