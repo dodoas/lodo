@@ -137,6 +137,8 @@ elseif($balance < 0)
   $class1 = "creditred";
 }
 
+$print_currency_inputs = $voucherHead->ForeignCurrencyID != '';
+
 ##############################################################
 #Get accountplan info
 
@@ -372,7 +374,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>Valuta</th>
     <th>I<u>n</u>n</th>
     <th>U<u>t</u></th>
-    <th>Rate</th>
+    <th>Kurs</th>
     <th><u>M</u>VA</th>
     <th>M<u>e</u>ngde</th>
     <th>A<u>v</u>d.</th>
@@ -395,7 +397,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     </td>
 <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut, !$period_open) ?>
     <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
-<? print $voucher_gui->currency2($voucherHead) ?>
+<? print $voucher_gui->currency2($voucherHead, $print_currency_inputs) ?>
 <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent, !$period_open) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucherHead->Quantity, 'return' => 'value')) ?>"><? } ?></td>
     <td>
@@ -608,7 +610,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
       <!--<td></td><td></td><td></td><td></td>-->
       <? $currency_is_editable = $voucher->DisableAutoVat != 1; ?>
-      <? print $voucher_gui->currency2($voucher, $currency_is_editable) // disable currency for nonhead lines ?>
+      <? print $voucher_gui->currency2($voucher, $currency_is_editable && $print_currency_inputs) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, !$period_open) ?></td>
       <td><? if($accountplan->EnableQuantity) { if ($voucher->DisableAutoVat != 1) { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucher->Quantity, 'return' => 'value')); ?>"><? } } ?></td>
       <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>

@@ -289,7 +289,7 @@ class exchange {
         $ch_curr .= '<form method="post" name="voucher_global">';
         $ch_curr .= 'Valuta: <select class="currency_id" name="voucher.ForeignCurrencyID" ' . $block_return . ' onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
         $ch_curr .= '<span class="currency_field" '. ($currency_is_hidden ? 'style="display: none;"' : '') .'>';
-        $ch_curr .= 'Rate: <input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" onchange="this.value=toAmountString(toNumber(this.value))" value="'. str_replace(".", ",", (string)(round($voucher_foreign_rate, 4))) .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
+        $ch_curr .= 'Kurs: <input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" onchange="this.value=toAmountString(toNumber(this.value))" value="'. str_replace(".", ",", (string)(round($voucher_foreign_rate, 4))) .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
         $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a>';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
         $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';

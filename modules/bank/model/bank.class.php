@@ -1097,7 +1097,7 @@ class framework_logic_bank {
                                     $FBVoucherH['voucher_ForeignConvRate']   = 0;
                                 } else {
                                     $FBVoucherH['voucher_ForeignCurrencyID'] = $rel['Currency'];
-                                    $FBVoucherH['voucher_ForeignAmount']     = $rel['Amount'];
+                                    $FBVoucherH['voucher_ForeignAmount']     = abs($rel['Amount']);
                                     $FBVoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($rel['Currency']);
                                     $FBVoucherH['voucher_AmountOut']         = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
                                     $FBVoucherH['voucher_AmountIn']          = 0;
@@ -1139,7 +1139,7 @@ class framework_logic_bank {
                                     $FBVoucherH['voucher_ForeignConvRate']   = 0;
                                 } else {
                                     $FBVoucherH['voucher_ForeignCurrencyID'] = $rel['Currency'];
-                                    $FBVoucherH['voucher_ForeignAmount']     = $rel['Amount'];
+                                    $FBVoucherH['voucher_ForeignAmount']     = abs($rel['Amount']);
                                     $FBVoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($rel['Currency']);
                                     $FBVoucherH['voucher_AmountOut']         = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
                                     $FBVoucherH['voucher_AmountIn']          = 0;
@@ -1246,7 +1246,7 @@ class framework_logic_bank {
                     } else {
                         $amount = $unvoted->AmountIn > 0 ? $unvoted->AmountIn : $unvoted->AmountOut;
                         $VoucherH['voucher_ForeignCurrencyID'] = $unvoted->Currency;
-                        $VoucherH['voucher_ForeignAmount']     = $amount;
+                        $VoucherH['voucher_ForeignAmount']     = abs($amount);
                         $VoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($unvoted->Currency);
                         $VoucherH['voucher_AmountOut']         = $unvoted->AmountOut > 0 ? exchange::convertToLocal($unvoted->Currency, $unvoted->AmountOut) : 0;
                         $VoucherH['voucher_AmountIn']          = $unvoted->AmountIn  > 0 ? exchange::convertToLocal($unvoted->Currency, $unvoted->AmountIn)  : 0;
