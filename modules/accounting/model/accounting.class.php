@@ -1705,6 +1705,59 @@ class accounting {
         #print "<b>Ferdig korriger balanse automatisk</b><br>";
     }
 
+    public function add_line_currency_difference($fields, $JournalID, $VoucherType, $current_sum, $total_sum) {
+        global $_lib;
+
+        $original_fields = $fields;
+
+        $accountplan = $this->get_accountplan_object($fields['voucher_AccountPlanID']);
+        if($result_motkonto_for_currency_difference = $this->get_accountplan_object($accountplan->MotkontoResultat1)) {
+            $fields['voucher_AccountPlanID'] = $result_motkonto_for_currency_difference->AccountPlanID;
+
+            $vat = $this->get_vataccount_object(array('VatID'=>$result_motkonto_for_currency_difference->VatID, 'date' => $fields['voucher_VoucherDate']));
+            $fields['voucher_Vat'] = $vat->Percent;
+            $fields['voucher_VatID'] = $vat->VatID;
+        }
+
+        $fields['voucher_AutoKID']            = '';
+        $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
+        $fields['voucher_VoucherType']        = $VoucherType;
+
+        $amount = $total_sum - $current_sum;
+        $amount = -$amount; // to get the amount to the other side of the voucher
+
+        if($amount >= 0.0001 || $amount <= -0.0001) {
+            if($amount < 0) {
+              $fields['voucher_AmountIn']  = 0;
+              $fields['voucher_AmountOut'] = abs($amount);
+            }
+            elseif($amount > 0) {
+              $fields['voucher_AmountIn']  = abs($amount);
+              $fields['voucher_AmountOut'] = 0;
+            }
+
+            $fields['voucher_ForeignCurrencyID'] = '';
+            $fields['voucher_ForeignAmount']     = 0;
+            $fields['voucher_ForeignConvRate']   = 0;
+
+            unset($fields['voucher_DescriptionID']);
+            unset($fields['voucher_VoucherID']);
+
+            $fields['voucher_AutomaticReason']      = "Automatisk balanse fra valuta forskjell";
+
+            $fields['voucher_AddedByAutoBalance']   = 0;
+            $fields['voucher_Active']               = 1;
+
+            $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
+            $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);
+
+            $this->update_vat_smart(array('VoucherID'=>$VoucherID, 'post'=>$fields, 'comment' => 'Called from: add_line_currency_difference'));
+            $this->voucher_to_hovedbok_auto($fields['voucher_AccountPlanID'], $fields, $VoucherID);
+        }
+
+        $this->correct_journal_balance($original_fields, $original_fields['voucher_JournalID'], $VoucherType);
+    }
+
     /***************************************************************************
     * Update VAT correctly for this line
     * @param
