@@ -241,7 +241,7 @@ function onCurrencyChange(selObj) {
  */
 function journalCurrencyChange(btn, action_url)
 {
-    var wrapper = btn.parentNode;
+    wrapper = btn.parentNode;
 
     var wrapper_children = wrapper.childNodes;
 
