@@ -111,13 +111,29 @@ class model_bank_bankaccount {
         $_lib['db']->db_delete($query);
     }
 
-    #Lock the period, no further updating is allowed
-    function periodlock() {
+    #Lock the period, and store who locked it and when it was locked
+    function periodlock($BankVotingPeriodID) {
         global $_lib;
 
-        $query = "update bankvotingperiod set Locked=1 where Period='$this->Period' and AccountID='$this->AccountID'";
-        print "query: $query<br>\n";
-        $_lib['db']->db_update($query);
+        $dataH = array();
+        $dataH['BankVotingPeriodID'] = $BankVotingPeriodID;
+        $dataH['Locked']    = 1;
+        $dataH['LockedBy']  = $_lib['sess']->get_person('PersonID');
+        $dataH['LockedAt']  = date("Y-m-d H:i:s");
+
+        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'bankvotingperiod', 'debug' => false, 'action' => 'update'));
+    }
+
+    function periodunlock($BankVotingPeriodID) {
+        global $_lib;
+
+        $dataH = array();
+        $dataH['BankVotingPeriodID'] = $BankVotingPeriodID;
+        $dataH['Locked']    = 0;
+        $dataH['UnLockedBy']  = $_lib['sess']->get_person('PersonID');
+        $dataH['UnLockedAt']  = date("Y-m-d H:i:s");
+
+        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'bankvotingperiod', 'debug' => false, 'action' => 'update'));
     }
 }
 ?>

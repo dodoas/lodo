@@ -59,6 +59,7 @@ $_QUERY['form']['periodmenuforreadonly']    = "select Period from accountperiod 
 $_QUERY['form']['periodaccess2menu']        = "select Period from accountperiod where (Status=2 or Status=3) order by Period desc";
 $_QUERY['form']['periodaccessmenu']         = "select Period from accountperiod where Status=2 order by Period desc";
 $_QUERY['form']['PosibleSalaryYears']       = "select distinct substring(Period, 1, 4) from accountperiod where Period is not null order by Period";
+$_QUERY['form']['PosibleSalaryYearsForReadOnly'] = "select distinct substring(Period, 1, 4) from accountperiod where ShowForReadOnly = 1 and Period is not null order by Period";
 $_QUERY['form']['interfacemenu']            = "select rta.Interface from roleperson as rp, roletemplateaccess as rta where rp.PersonID=".$_sess->login_id." and rp.RoleID=rta.RoleID and rta.Interface is not null and rta.Interface != '' group by rta.Interface order by rta.Interface";
 $_QUERY['form']['modulemenu']               = "select rta.Module from roleperson as rp, roletemplateaccess as rta where rp.PersonID=".$_sess->login_id." and rp.RoleID=rta.RoleID and rta.Module is not null and rta.Module != '' group by rta.Module order by rta.Module";
 $_QUERY['form']['templatemenu']             = "select rta.Template from roleperson as rp, roletemplateaccess as rta where rp.PersonID=".$_sess->login_id." and rp.RoleID=rta.RoleID and rta.Template is not null and rta.Template != '' group by rta.Template order by rta.Template";
