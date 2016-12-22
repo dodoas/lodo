@@ -167,7 +167,7 @@ print $_lib['sess']->doctype ?>
     <th width="50" class="align-right">Valuta</th>
     <th width="50" class="align-right">Saldo</th>
     <th>Tekst</th>
-    <th>Fakturano</th>
+    <th>Fakturanr</th>
     <th>KID</th>
     <th>Matchet med</th>
     <th class="noprint" class="align-right">Diff</th>
@@ -362,7 +362,7 @@ print $_lib['sess']->doctype ?>
                 <td class="number"><nobr><? print $_lib['format']->Amount($saldo); ?></nobr></td>
                 <td class="number"><? ($voucher->AmountIn > 0) ? print $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($foreign_amount_in) : print '' ?></td>
                 <td class="number"><? ($voucher->AmountOut > 0) ? print $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount(-$foreign_amount_out) : print '' ?></td>
-                <td class="number"><? print $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($foreign_saldo) ?></td>
+                <td class="number"><? print $_lib['format']->Amount($foreign_saldo) ?></td>
                 <td><? print $foreign_currency; print substr($voucher->Description,0,20); if(strlen($voucher->Description) > 20) print "..."; ?></td>
                 <td><? print $voucher->InvoiceID ?></td>
                 <td><? print $voucher->KID ?></td>
