@@ -489,7 +489,8 @@ if(is_array($bank->unvotedaccount)) {
 }
 ?>
   <tr>
-    <th class="menu" colspan="6">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank <? print $_lib['form3']->url(array('description' => 'Snu', 'url' => $_lib['sess']->dispatch . 't=bank.tabjournal&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod . '&sort_direction=' . abs($_lib['sess']->get_session('TabJournalSort') - 1))) ?></th>
+    <th class="menu" colspan="5">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank <? print $_lib['form3']->url(array('description' => 'Snu', 'url' => $_lib['sess']->dispatch . 't=bank.tabjournal&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod . '&sort_direction=' . abs($_lib['sess']->get_session('TabJournalSort') - 1))) ?></th>
+    <td class="menu" ><input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S"></td>
     <td class="menu" colspan="13"></td>
   </tr>
 <?

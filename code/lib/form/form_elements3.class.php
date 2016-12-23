@@ -103,6 +103,8 @@ class form3
 ###########################################################
 
     function Type_menu3($args) {
+      global $_lib;
+      if ($args['type'] == 'PosibleSalaryYears' && $_lib['sess']->get_person('AccessLevel') == 1) $args['type'] = 'PosibleSalaryYearsForReadOnly';
       $args['query'] = $this->_QUERY['form'][$args['type']];
       #print "test #" . $args['type'] . "# " . $args['query'] . "<br>";
       return $this->_MakeSelect($args);
