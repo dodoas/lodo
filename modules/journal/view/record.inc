@@ -315,7 +315,7 @@ if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_
         $accounting->voucher_to_hovedbok_auto($voucher_input->AccountPlanID, $voucher_input->request('voucher_to_hovedbok_auto'), $voucher_input->VoucherIDOld);
 
         $accounting->delete_credit_debit_zero_lines($voucher_input->JournalID, $voucher_input->VoucherType); //#Dette blir feil bla nŒr vi legger til ny linje
-        $accounting->correct_journal_balance($voucher_input->request('correct_journal_balance'), $voucher_input->JournalID, $voucher_input->VoucherType);
+        $accounting->correct_journal_balance($voucher_input->request('correct_journal_balance'), $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->action['voucher_new']);
 
         //#We only do this if the user has clicked new or update
         //#################################################################################################################

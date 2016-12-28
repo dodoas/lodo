@@ -137,7 +137,7 @@ class framework_logic_vouchergui
         $currencies = exchange::getActiveCurrencies();
 
         if (!empty($currencies)) {
-            $in_or_out = ($voucher->AmountIn > 0 ? 'in' : ($voucher->AmountOut > 0 ? 'out' : ''));
+            $in_or_out = ($voucher->AmountIn > 0 ? 'in' : ($voucher->AmountOut > 0 ? 'out' : 'both'));
 
             $html = '';
             $html .= '<td><input type="hidden" name="voucher_VoucherIsInOrOut" value="'. $in_or_out .'"></td>';
@@ -161,29 +161,30 @@ class framework_logic_vouchergui
             $html .= '</td>';
 
             if($editable) {
-                $foreign_amount_input = $_lib['form3']->text(array('name' => 'voucher.ForeignAmount', 'value' => $_lib['format']->Amount($voucher->ForeignAmount), 'class' => 'number', 'OnChange' => 'this.value = toAmountString(toNumber(this.value))', 'width' => '12'));
+                $foreign_amount_input_in = $_lib['form3']->text(array('name' => 'voucher.ForeignAmountIn', 'value' => $_lib['format']->Amount($voucher->ForeignAmount), 'class' => 'number', 'OnChange' => "setForeignInOrOut(this, 'in');", 'width' => '12'));
+                $foreign_amount_input_out = $_lib['form3']->text(array('name' => 'voucher.ForeignAmountOut', 'value' => $_lib['format']->Amount($voucher->ForeignAmount), 'class' => 'number', 'OnChange' => "setForeignInOrOut(this, 'out');", 'width' => '12'));
             } else {
                 $foreign_amount_input = '<div style="width: 80px !important;">'. $_lib['format']->Amount($voucher->ForeignAmount) .'</div>';
             }
 
             #AmountIn
             $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? 'text-align: right;' : 'display: none;') .'">';
-            if($in_or_out == 'in') {
-                $html .= $foreign_amount_input;
+            if($in_or_out == 'in' || $in_or_out == 'both') {
+                $html .= $foreign_amount_input_in;
             };
             $html .= '</div>'.'</td>';
 
             #AmountOut
             $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? 'text-align: right;' : 'display: none;') .'">';
-            if($in_or_out == 'out') {
-                $html .= $foreign_amount_input;
+            if($in_or_out == 'out' || $in_or_out == 'both') {
+                $html .= $foreign_amount_input_out;
             };
             $html .= '</div>'.'</td>';
 
             if($editable) {
-                $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? '' : 'display: none;') .'">'.'<input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" value="'. $_lib['format']->Amount($voucher->ForeignConvRate) .'" onchange="this.value = toAmountString(toNumber(this.value))"> = 100'. exchange::getLocalCurrency() .'</div></td>';
+                $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? '' : 'display: none;') .'">'.'<input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" value="'. $_lib['format']->Amount(array('value' => $voucher->ForeignConvRate, 'decimals' => 4, 'return' => 'value')) .'" onchange="this.value = toAmountString(toNumber(this.value), 4)"> = 100'. exchange::getLocalCurrency() .'</div></td>';
             } else {
-                $html .= '<td style="text-align: right;">'. ($is_foreign ? $_lib['format']->Amount($voucher->ForeignConvRate) .' = 100NOK' : '') .'</td>';
+                $html .= '<td style="text-align: right;">'. ($is_foreign ? $_lib['format']->Amount(array('value' => $voucher->ForeignConvRate, 'decimals' => 4, 'return' => 'value')) .' = 100NOK' : '') .'</td>';
             }
         }
 

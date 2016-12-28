@@ -1408,7 +1408,7 @@ class accounting {
 
             #########################################
             #Update line values
-            $this->update_voucher_line_smart($voucher_input->request('voucher_head_update'), $voucher_input->VoucherIDOld, 'update_voucher_head');
+            $this->update_voucher_line_smart($voucher_input->request('voucher_head_update'), $voucher_input->VoucherIDOld, 'update_voucher_head', $voucher_input->VoucherIsInOrOut);
 
             ########################################
             #oppdatere motkontoer hvis vi har byttet periode
@@ -1605,9 +1605,13 @@ class accounting {
     * @param
     * @return
     */
-    public function correct_journal_balance($fields, $JournalID, $VoucherType) {
+    public function correct_journal_balance($fields, $JournalID, $VoucherType, $new = false) {
         global $_lib;
         #print "<b>Korriger balanse automatisk</b><br>";
+
+        $ForeignConvRate   = $fields['voucher_ForeignConvRate'];
+        $ForeignAmount     = $fields['voucher_ForeignAmount'];
+        $ForeignCurrencyID = $fields['voucher_ForeignCurrencyID'];
 
         #$fields['voucher_KID']         = '';
         $fields['voucher_AutoKID']            = '';#We empty kid
@@ -1685,9 +1689,15 @@ class accounting {
                 #print "correct_journal_balance: new<br>";
                 $fields['voucher_AddedByAutoBalance']   = 1;
                 $fields['voucher_Active']               = 1;
-                $fields['voucher_ForeignConvRate']      = 0;
-                $fields['voucher_ForeignAmount']        = 0;
-                $fields['voucher_ForeignCurrencyID']    = '';
+                if ($new) {
+                  $fields['voucher_ForeignConvRate']      = $ForeignConvRate;
+                  $fields['voucher_ForeignAmount']        = $ForeignAmount;
+                  $fields['voucher_ForeignCurrencyID']    = $ForeignCurrencyID;
+                } else {
+                  $fields['voucher_ForeignConvRate']      = 0;
+                  $fields['voucher_ForeignAmount']        = 0;
+                  $fields['voucher_ForeignCurrencyID']    = '';
+                }
                 #print_r($fields);
                 $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
                 $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);

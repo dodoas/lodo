@@ -137,7 +137,7 @@ elseif($balance < 0)
   $class1 = "creditred";
 }
 
-$print_currency_inputs = $voucherHead->ForeignCurrencyID != '';
+$print_currency_inputs = $voucherHead->ForeignCurrencyID != '' || is_null($voucherHead->VoucherID);
 
 ##############################################################
 #Get accountplan info

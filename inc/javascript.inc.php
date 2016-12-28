@@ -32,7 +32,7 @@ function toAmountString(num, decimal_places) {
     var j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   };
-  return num.formatMoney();
+  return num.formatMoney(decimal_places);
 }
 
 /*
@@ -215,7 +215,11 @@ window.currency_rates = new Object();
  * with which we show and hide the valuta related fields for a new voucher.
  * Used in journal/edit view.
  */
-function onCurrencyChange(selObj) {
+function onCurrencyChange(selObj, top_level) {
+    // needed so we do not get into an infinite loop of setting
+    // the currency fields for voucher head, we only trigger that
+    // if we are changing on top level, entire journal
+    top_level = typeof top_level !== 'undefined' ? top_level : false; 
     var currency = selObj.value;
     var parent = $(selObj).parents("tr")[0];
 
@@ -230,8 +234,24 @@ function onCurrencyChange(selObj) {
     }
 
     var currency_rate_input = $(parent).find("input.currency_rate")[0];
+    if (top_level) {
+      var voucher_id = $(document).find("#hidden_currency_form [name='voucher.VoucherID']")[0].value;
+      var currency_fields_for_voucher = $(document).find(".voucher .currency_field");
+      var currency_select_field_for_voucher = $(document).find(".voucher select[name='voucher.ForeignCurrencyID']")[1];
+      // if voucher id is not set it is an empty journal
+      if (voucher_id == "") {
+        // set the currency drop down for voucher head to the same
+        currency_select_field_for_voucher.value = currency;
+        $(currency_select_field_for_voucher).trigger('change');
+        if (!(currency == "")) {
+          currency_fields_for_voucher.show();
+        } else {
+          currency_fields_for_voucher.hide();
+        }
+      }
+    }
 
-    currency_rate_input.value = toAmountString(rate);    
+    currency_rate_input.value = toAmountString(rate, 4);
 }
 
 /*
@@ -465,6 +485,15 @@ function getCookie(cookie_name) {
     }
   }
   return "";
+}
+
+function setForeignInOrOut(element, in_or_out) {
+  amount = toNumber(element.value);
+  element.value = toAmountString(amount);
+  element_to_overwrite = (in_or_out == 'in') ? "[id='voucher.ForeignAmountOut']" : "[id='voucher.ForeignAmountIn']";
+  element_for_in_out_indicator = "[name='voucher_VoucherIsInOrOut']";
+  $(element).parents('tr').find(element_to_overwrite).val(toAmountString(0));
+  $(element).parents('tr').find(element_for_in_out_indicator).val(in_or_out);
 }
 
 </script>

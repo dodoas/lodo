@@ -6,6 +6,7 @@
 ##################################
 
 includelogic('exchange/exchange');
+includelogic('accounting/accounting');
 
 class framework_logic_voucherinput
 {
@@ -88,6 +89,7 @@ class framework_logic_voucherinput
         $this->Description        = strip_tags($args['voucher_Description']);
         $this->AccountLineID      = $args['AccountLineID'];
         $this->Quantity           = $args['voucher_Quantity'];
+        $this->VoucherIsInOrOut   = $args['voucher_VoucherIsInOrOut'];
 
         if(!is_null($args['voucher_matched_by'])) $this->matched_by = $args['voucher_matched_by'];
         else $this->matched_by = '0';
@@ -104,10 +106,16 @@ class framework_logic_voucherinput
             if ($args['voucher_ForeignCurrencyID'] != "") {
                 $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
 
-                $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
-                $this->ForeignConvRate = $hash['value'];
-                $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmount']));
-                $this->ForeignAmount = $hash['value'];
+                $this->ForeignConvRate = $_lib['convert']->Amount($args['voucher_ForeignConvRate']);
+                $this->ForeignAmount = ($args['voucher_VoucherIsInOrOut'] == 'in') ? $_lib['convert']->Amount($args['voucher_ForeignAmountIn']) : $_lib['convert']->Amount($args['voucher_ForeignAmountOut']);
+                $amounts = array(
+                  'voucher_ForeignCurrencyID' => &$this->ForeignCurrencyID,
+                  'voucher_ForeignConvRate'   => &$this->ForeignConvRate,
+                  'voucher_ForeignAmount'     => &$this->ForeignAmount,
+                  'voucher_AmountIn'          => &$this->AmountIn,
+                  'voucher_AmountOut'         => &$this->AmountOut
+                );
+                accounting::calculate_amount_foreign_and_rate($amounts, $this->VoucherIsInOrOut);
             } else {
                 $this->ForeignCurrencyID = "";
                 $this->ForeignConvRate = 0;
