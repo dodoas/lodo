@@ -157,7 +157,7 @@ print $_lib['sess']->doctype
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <? 
-            $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled");
+            $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "pending");
             print $_lib['form3']->submit(array(
               'name'=>'action_soap1',
               'value'=>'Send p&aring; nytt',
@@ -165,7 +165,7 @@ print $_lib['sess']->doctype
             )); ?>
 
           <?
-            $cancel_enabled = $so1row->ReceivedStatus == "received" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "is_cancellation";
+            $cancel_enabled = $so1row->ReceivedStatus == "received" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "pending";
             print $_lib['form3']->submit(array(
               'name'=>'action_soap1_cancel',
               'value'=>'Kansellere',
