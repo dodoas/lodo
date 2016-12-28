@@ -509,7 +509,7 @@ class SessionNew
         'RequestURI'        => $_SERVER['REQUEST_URI'],
         'Dispatch'          => $_lib['sess']->dispatch,
         'LoginFormDate'     => $formdate,
-        'TabJournalSort'    => 1,
+        'TabJournalSort'    => (isset($_SESSION['TabJournalSort']) ? $_SESSION['TabJournalSort'] : 0)
       );
 
       return $_mysession;

@@ -166,7 +166,7 @@ class framework_logic_bank {
     * @param Define input parameters
     * @return Define return og function
     */
-    #Avstemming mot tilbakef¿ring i perioden
+    #Avstemming mot tilbakefÂ¿ring i perioden
     private function _get_bank_voting_tilbake($Period) {
         global  $_lib;
         if($this->debug) print "_get_bank_voting_tilbake<br>\n";
@@ -208,7 +208,7 @@ class framework_logic_bank {
     }
 
     /***********************************************************************************************
-    * Avstemming mot tillegsf¿ring i perioden
+    * Avstemming mot tillegsfÂ¿ring i perioden
     * @param Define input parameters
     * @return Define return og function
     */
@@ -386,7 +386,9 @@ class framework_logic_bank {
 
     private function set_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID, $amount, $comment, $JournalID){
         #print "Setter voucheraccount: Konto: $AccountPlanID, KID:$KID, Fnr: $InvoiceID, Belop:$amount, Kommentar: $comment<br>\n";
-        $this->closeablevoucheraccountline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount,2);
+        if((isset($InvoiceID) && !empty($InvoiceID)) || (isset($KID) && !empty($KID))){
+            $this->closeablevoucheraccountline["B" . $JournalID . "-Fakturanr" . $InvoiceID . "-KID" . $KID] += round($amount,2);
+        }
 
         if($KID == $this->debugKID) {
             print "set: voucheraccount #$AccountPlanID#$KID#$InvoiceID# += $amount - saldo #" . $this->closeablevoucheraccountline['KID'][$KID] . "# - $comment<br>\n";
@@ -450,7 +452,7 @@ class framework_logic_bank {
     }
 
     /***********************************************************************************************
-    * Super funksjon som ser pŒ alle kombinasjoner av lukninger
+    * Super funksjon som ser pÂŒ alle kombinasjoner av lukninger
     * @param
     * @return
     */
@@ -481,14 +483,16 @@ class framework_logic_bank {
         return $status;
     }
 
-    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount) {
+
+    public function getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $TotalAmount, $InnOrOut, $From = "") {
         $KID        = trim($KID);
         $InvoiceID  = trim($InvoiceID);
         $JournalID   = trim($JournalID);
         $value      = 0;
 
         if(empty($JournalID) || (empty($KID) && empty($InvoiceID))) {
-          return $TotalAmount;
+          // Invert the sign so the amount shown should be the amount which needs to be added for them to match
+          return ($TotalAmount * (($From == "voucher") ? -1 : 1));
         }
         $value = $this->get_voucheraccount($AccountPlanID, $KID, $InvoiceID, $JournalID);
         if(!$value) {
@@ -497,12 +501,15 @@ class framework_logic_bank {
         if(!$value) {
             $value = $this->get_vouchertilbake($AccountPlanID, $KID, $InvoiceID, $JournalID);
         }
+        // Invert the sign so the amount shown should be the amount which needs to be added for them to match
+        $value = ($value * (($From == "voucher" && $InnOrOut == "inn") ? -1 : 1));
+        $value = ($value * (($From == "bank" && $InnOrOut == "out") ? -1 : 1));
         return $value;
     }
 
 
     /***********************************************************************************************
-    * Alle banktransaksjoner som er f¿rt mot kto 1920 i perioden som er oppgitt
+    * Alle banktransaksjoner som er fÂ¿rt mot kto 1920 i perioden som er oppgitt
     * @param Define input parameters
     * @return Define return og function
     */
@@ -578,7 +585,7 @@ class framework_logic_bank {
             $this->unvotedcalc->AmountOut += abs($this->bankaccountcalc->AmountSaldo);
 
         /******************************************************************************************/
-        #Ikke matchede bank konto og tillegsf¿ringslinjer
+        #Ikke matchede bank konto og tillegsfÂ¿ringslinjer
         if(is_array($this->bankvote_tilbake)) {
             foreach($this->bankvote_tilbake as $line) {
 
@@ -622,7 +629,7 @@ class framework_logic_bank {
         }
 
         /******************************************************************************************/
-        #Ikke matchede bilag og tilbakef¿ringslinjer
+        #Ikke matchede bilag og tilbakefÂ¿ringslinjer
         foreach($this->bankvote_tillegg as $line) {
 
             if(!$this->is_closeable_voucheraccount(0, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_vouchertilbake(0, $line->KID, $line->InvoiceNumber, $line->JournalID) && !$this->is_closeable_accounttillegg(0, $line->KID, $line->InvoiceNumber, $line->JournalID)) {

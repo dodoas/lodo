@@ -35,6 +35,11 @@ $params = "/bank_statements/get_bank_statement_for_lodo?identifier=" . $identifi
     <meta name="cvs"                content="$Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $" />
     <? includeinc('head') ?>
 
+    <style>
+      td.highlighted {
+        background-color: rgba(0, 182, 0, 0.6) !important;
+      }
+    </style>
 
     <script>
       /* script for å generere de enorme konto-listene */
@@ -174,10 +179,29 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
         $resultconf = null;
       ?>
 
+    $(document).ready(function() {
+      $('.navigate.to').click(function(e) {
+        var element = $(e.target);
+        var targetID = element.attr('id');
+        highlight('.column_' + targetID);
+      });
+
+      function highlight(elementid){
+        $(elementid).addClass("highlighted");
+        setTimeout(function() {
+          $(elementid).removeClass("highlighted");
+        } , 5000);
+      }
+    });
     </script>
 </head>
 <body>
 
+<?
+// create_span is a helper function highlighting matching lines
+function create_span($value, $ID){
+    return "<span class=\"navigate to\" id=$ID>$value</span>";
+}?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
@@ -402,7 +426,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 
 
     <td colspan="2">Saldo<? print $bank->ThisPeriod ?>-01
-    <? if($_lib['sess']->get_person('AccessLevel') >= 2 && !$bank->bankvotingperiod->Locked) { ?>
+    <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
     <input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S" tabindex="1">
     <? } ?>
     </td>
@@ -434,6 +458,7 @@ $tabindexH[5] = $tabindex + ($count * 5);
 $tabindexH[6] = $tabindex + ($count * 5) + 1;
 $tabindexH[7] = $tabindex + ($count * 7);
 
+$EmptyHighlightCount = 0;
 
 if(is_array($bank->bankaccount)) {
     foreach($bank->bankaccount as $row) {
@@ -471,35 +496,36 @@ if(is_array($bank->bankaccount)) {
             $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
         }
 
-        $sumBalance = $row->AmountIn - $row->AmountOut;
-        if($row->KID || $row->InvoiceNumber) {
-            if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
-                // if it has been closed then JournalID should not be red.
-                $JournalIDColColor = '';
-                $matchCaption = "Lukket";
-            } else {
-                $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID, $sumBalance)) . ")";
-            }
+        if(empty($row->InvoiceNumber) && empty($row->KID)){
+            $EmptyHighlightCount ++;
+            $BankHiglightClass ="column_empty$EmptyHighlightCount";
+        } else{
+            $BankHiglightClass = "column_$row->JournalID-$row->InvoiceNumber-$row->KID";
+        }
+        if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
+            // if it has been closed then JournalID should not be red.
+            $JournalIDColColor = '';
+            $matchCaption = "Lukket";
         } else {
-            $matchCaption = " Diff(" . $sumBalance . ")";
+            $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID, ($row->AmountIn - $row->AmountOut), (($row->AmountIn > 0) ? "inn" : "out"), "bank")) . ")";
         }
 
 
         if (!($i % 3)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
       <tr class="<? print $sec_color ?>">
-        <td>
+        <td class="<?=$BankHiglightClass?>">
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Priority', 'pk' => $row->AccountLineID, 'value' => $row->Priority, 'width' => 3, 'tabindex' => $tabindexH[0])); ?>
         </td>
 
         <?php
         ?>
-        <td <?= $JournalIDColColor ?>>
+        <td class="<?="$BankHiglightClass $JournalIDColColor" ?>">
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6, 'tabindex' => $tabindexH[1])); ?>
         </td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
+        <td class="<?=$BankHiglightClass?>"><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
 
-        <td class="<? print $bank->CreditColor ?> number" style="min-width: 106px">
+        <td class="<?="$BankHiglightClass $bank->CreditColor"?> number" style="min-width: 106px">
         <?
             if($row->AmountOut > 0)
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountOut', 'pk' => $row->AccountLineID, 'value' => $_lib['format']->Amount($row->AmountOut), 'class' => $row->classAmountOut, 'tabindex' => $tabindexH[3]));
@@ -507,7 +533,7 @@ if(is_array($bank->bankaccount)) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountOut', 'pk' => $row->AccountLineID, 'value' => '',     'class' => $row->classAmountOut, 'tabindex' => $tabindexH[3]));
         ?>
         </td>
-        <td class="<? print $bank->DebitColor ?> number" style="min-width: 106px">
+        <td class="<?="$BankHiglightClass $bank->DebitColor"?> number" style="min-width: 106px">
             <?
             if($row->AmountIn > 0)
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountIn', 'pk' => $row->AccountLineID, 'value' => $_lib['format']->Amount($row->AmountIn),     'class' => $row->classAmountIn, 'tabindex' => $tabindexH[4]));
@@ -518,7 +544,7 @@ if(is_array($bank->bankaccount)) {
         </td>
 
         <? if($row->InvoiceNumber != '' || count($row->MatchSelect) < 1) { ?>
-        <td>
+        <td class="<?=$BankHiglightClass ?>">
             <?
 
             print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25, 'tabindex' => $tabindexH[5]));
@@ -535,7 +561,7 @@ if(is_array($bank->bankaccount)) {
         <? } ?>
 
 
-        <td <? if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
+        <td class="<?=$BankHiglightClass ?>" <? if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
             <?
             if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
                 print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false));
@@ -547,10 +573,10 @@ if(is_array($bank->bankaccount)) {
 
 
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,      'width' => 28, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,          'width' => 28, 'maxlength' => 255, 'tabindex' => $tabindexH[8])) ?></td>
-        <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved',     'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
-        <td>
+        <td class="<?=$BankHiglightClass?>"><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,      'width' => 28, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
+        <td class="<?=$BankHiglightClass?>"><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,          'width' => 28, 'maxlength' => 255, 'tabindex' => $tabindexH[8])) ?></td>
+        <td class="<?="$BankHiglightClass $classApproved"?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved',     'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
+        <td class="<?=$BankHiglightClass?>">
             <?
             $reskontroconf['field']         = 'ReskontroAccountPlanID';
             $reskontroconf['value']         = $row->ReskontroAccountPlanID;
@@ -565,8 +591,8 @@ if(is_array($bank->bankaccount)) {
             }
             ?>
         </td>
-        <td><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'AutoResultAccount',     'pk' => $row->AccountLineID, 'value' => $row->AutoResultAccount, 'title' => 'Klikk her for &aring; velge resultatkonto automatisk fra reskontro')) ?></td>
-        <td>
+        <td class="<?=$BankHiglightClass?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'AutoResultAccount',     'pk' => $row->AccountLineID, 'value' => $row->AutoResultAccount, 'title' => 'Klikk her for &aring; velge resultatkonto automatisk fra reskontro')) ?></td>
+        <td class="<?=$BankHiglightClass?>">
             <?
             $resultconf['field']         = 'ResultAccountPlanID';
             $resultconf['value']         = $row->ResultAccountPlanID;
@@ -576,52 +602,67 @@ if(is_array($bank->bankaccount)) {
             //print $_lib['form3']->accountplan_number_menu($resultconf);    // OLD
             ?>
         </td>
-        <td>
+        <td class="<?=$BankHiglightClass?>">
             <?
               if(!empty($resultaccountplan) && $resultaccountplan->EnableVAT) {
                   print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Vat',        'pk' => $row->AccountLineID, 'value' => (int) $row->Vat,         'width' => 2, 'maxlength' => 3));
               }
             ?>
         </td>
-        <td>
+        <td class="<?=$BankHiglightClass?>">
             <?
             if(!empty($resultaccountplan) && $resultaccountplan->EnableQuantity) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ResultQuantity',        'pk' => $row->AccountLineID, 'value' => $row->ResultQuantity,         'width' => 5, 'maxlength' => 255));
             }
             ?>
         </td>
-        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID', 'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
-        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
-        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
-        <td>
-          <?= $matchCaption ?>
+        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID', 'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
+        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
+        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
+        <td class="<?=$BankHiglightClass?>">
+          <?= create_span($matchCaption, ((empty($row->InvoiceNumber) && empty($row->KID)) ? "empty$EmptyHighlightCount" : "$row->JournalID-$row->InvoiceNumber-$row->KID")); ?>
         </td>
-        <td class="horiz">
-                  <? print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=bank.tabbankaccount&amp;action_bank_accountlinedelete=1&amp;AccountLineID=$row->AccountLineID&amp;AccountID=$bank->AccountID&amp;Period=$bank->ThisPeriod", 'description' => '<img src="/lib/icons/trash.gif">', 'title' => 'Slett', 'confirm' => 'Er du sikker?')) ?>
+        <td class="horiz <?=$BankHiglightClass?>">
+                  <?
+                  if(!$_lib['form3']->Locked) {
+                      print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=bank.tabbankaccount&amp;action_bank_accountlinedelete=1&amp;AccountLineID=$row->AccountLineID&amp;AccountID=$bank->AccountID&amp;Period=$bank->ThisPeriod", 'description' => '<img src="/lib/icons/trash.gif">', 'title' => 'Slett', 'confirm' => 'Er du sikker?'));
+                  } ?>
             </td>
-        <? if($bankvoucher) { ?>
+        <? if($bankvoucher) {
+        if(empty($bankvoucher->InvoiceID) && empty($bankvoucher->KID)){
+            $EmptyHighlightCount ++;
+            $VoucherHiglightClass ="column_empty$EmptyHighlightCount";
+        } else{
+            $VoucherHiglightClass = "column_$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID";
+        }
 
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-
-        <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
-        <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut))) . ")"; ?></td>
-        <td class="<? print $bankvoucher->classAmountIn ?> <? print $bank->DebitColor ?>">
+        $HighlightID = (empty($bankvoucher->InvoiceID) && empty($bankvoucher->KID)) ? "empty$EmptyHighlightCount" : "$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID";
+        if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)){
+            $VoucherDiff = create_span("Lukket", $HighlightID);
+        } else {
+            $BankVoucherAmount =  $bankvoucher->AmountIn - $bankvoucher->AmountOut;
+            $DiffAmount = $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID, $BankVoucherAmount, (($BankVoucherAmount > 0) ? "inn" : "out"), 'voucher'));
+            $VoucherDiff = create_span("Diff (" . $DiffAmount . ")", $HighlightID);
+        } ?>
+        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td class="sub <?=$VoucherHiglightClass ?>"><?= $VoucherDiff ?></td>
+        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
+        <td class="<?="$VoucherHiglightClass $bankvoucher->classAmountIn $bank->DebitColor" ?>">
         <? if($bankvoucher->AmountIn > 0) {
             print $_lib['format']->Amount($bankvoucher->AmountIn);
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=voucher&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">'));
         } ?>
         </td>
-        <td class="<? print $bankvoucher->classAmountOut ?> <? print $bank->CreditColor ?>">
+        <td class="<?="$VoucherHiglightClass $bankvoucher->classAmountOut $bank->CreditColor" ?>">
         <? if($bankvoucher->AmountOut > 0) {
             print $_lib['format']->Amount($bankvoucher->AmountOut);
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=voucher&amp;side=AmountOut&amp;searchstring=' . $row->AmountOut, 'description' => '<img src="/lib/icons/search.gif">'));
         } ?>
         </td>
-        <td class="sub"><? print $bankvoucher->VoucherDate ?></td>
+        <td class="sub <?=$VoucherHiglightClass ?>"><? print $bankvoucher->VoucherDate ?></td>
         <? } else { ?>
-        <td colspan="6" class="sub"></td>
+        <td colspan="7" class="sub"></td>
         <? } ?>
       </tr>
     <?
@@ -718,6 +759,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
     <? if ($bank->bankvotingperiod->LockedBy) echo "<td class='menu' colspan='4'>" . $bank->bankvotingperiod->LockedAt . " l&aring;st av " . $_lib['format']->PersonIDToName($bank->bankvotingperiod->LockedBy) . "</td>"; ?>
    <? unset($_lib['form3']->Locked); ?>
     <td class="menu"><? if($_lib['sess']->get_person('AccessLevel') >= 4){ print $_lib['form3']->submit(array('name' => 'action_bank_periodunlock',   'value' => 'L&aring;s opp',  'accesskey' => 'L', 'confirm' => "Vil du virkelig l&aring;se opp perioden " . $bank->ThisPeriod)); } ?></td>
+    <td class="menu"><? if($_lib['sess']->get_person('AccessLevel') >= 2){?><input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S"><? } ?></td>
    <? $_lib['form3']->Locked = $bank->bankvotingperiod->Locked; ?>
     <td class="menu" colspan="21"></td>
 </tr>

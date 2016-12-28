@@ -416,11 +416,10 @@ if(is_array($bank->unvotedaccount)) {
 
 
       ?>
-      <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'JournalID',   'pk' => $row->AccountLineID, 'value' => $row->JournalID)) ?>
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'Day',         'pk' => $row->AccountLineID, 'value' => $row->Day)) ?>
       <tr class="<? print "$sec_color"; ?>">
         <td><? print $row->Priority ?></td>
-           <td><? print ($bank->VoucherType . $row->JournalID) ?></td>
+           <td><? print ($bank->VoucherType . $_lib['form3']->input(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6))) ?></td>
 
         <td><? print $row->Day ?></td>
 
@@ -490,7 +489,8 @@ if(is_array($bank->unvotedaccount)) {
 }
 ?>
   <tr>
-    <th class="menu" colspan="6">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank <? print $_lib['form3']->url(array('description' => 'Snu', 'url' => $_lib['sess']->dispatch . 't=bank.tabjournal&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod . '&sort_direction=' . abs($_lib['sess']->get_session('TabJournalSort') - 1))) ?></th>
+    <th class="menu" colspan="5">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank <? print $_lib['form3']->url(array('description' => 'Snu', 'url' => $_lib['sess']->dispatch . 't=bank.tabjournal&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod . '&sort_direction=' . abs($_lib['sess']->get_session('TabJournalSort') - 1))) ?></th>
+    <td class="menu" ><input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S"></td>
     <td class="menu" colspan="13"></td>
   </tr>
 <?
