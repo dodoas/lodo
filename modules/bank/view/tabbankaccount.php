@@ -426,7 +426,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 
 
     <td colspan="2">Saldo<? print $bank->ThisPeriod ?>-01
-    <? if($_lib['sess']->get_person('AccessLevel') >= 2 && !$bank->bankvotingperiod->Locked) { ?>
+    <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
     <input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S" tabindex="1">
     <? } ?>
     </td>
@@ -623,7 +623,10 @@ if(is_array($bank->bankaccount)) {
           <?= create_span($matchCaption, ((empty($row->InvoiceNumber) && empty($row->KID)) ? "empty$EmptyHighlightCount" : "$row->JournalID-$row->InvoiceNumber-$row->KID")); ?>
         </td>
         <td class="horiz <?=$BankHiglightClass?>">
-                  <? print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=bank.tabbankaccount&amp;action_bank_accountlinedelete=1&amp;AccountLineID=$row->AccountLineID&amp;AccountID=$bank->AccountID&amp;Period=$bank->ThisPeriod", 'description' => '<img src="/lib/icons/trash.gif">', 'title' => 'Slett', 'confirm' => 'Er du sikker?')) ?>
+                  <?
+                  if(!$_lib['form3']->Locked) {
+                      print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=bank.tabbankaccount&amp;action_bank_accountlinedelete=1&amp;AccountLineID=$row->AccountLineID&amp;AccountID=$bank->AccountID&amp;Period=$bank->ThisPeriod", 'description' => '<img src="/lib/icons/trash.gif">', 'title' => 'Slett', 'confirm' => 'Er du sikker?'));
+                  } ?>
             </td>
         <? if($bankvoucher) {
         if(empty($bankvoucher->InvoiceID) && empty($bankvoucher->KID)){
@@ -756,6 +759,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
     <? if ($bank->bankvotingperiod->LockedBy) echo "<td class='menu' colspan='4'>" . $bank->bankvotingperiod->LockedAt . " l&aring;st av " . $_lib['format']->PersonIDToName($bank->bankvotingperiod->LockedBy) . "</td>"; ?>
    <? unset($_lib['form3']->Locked); ?>
     <td class="menu"><? if($_lib['sess']->get_person('AccessLevel') >= 4){ print $_lib['form3']->submit(array('name' => 'action_bank_periodunlock',   'value' => 'L&aring;s opp',  'accesskey' => 'L', 'confirm' => "Vil du virkelig l&aring;se opp perioden " . $bank->ThisPeriod)); } ?></td>
+    <td class="menu"><? if($_lib['sess']->get_person('AccessLevel') >= 2){?><input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S"><? } ?></td>
    <? $_lib['form3']->Locked = $bank->bankvotingperiod->Locked; ?>
     <td class="menu" colspan="21"></td>
 </tr>
