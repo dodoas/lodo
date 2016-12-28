@@ -215,50 +215,23 @@ window.currency_rates = new Object();
  * with which we show and hide the valuta related fields for a new voucher.
  * Used in journal/edit view.
  */
-function onCurrencyChange(selObj, voucher_id) {
+function onCurrencyChange(selObj) {
     var currency = selObj.value;
-    var parent = document.getElementById('voucher_currency_div_' + voucher_id);
+    var parent = $(selObj).parents("tr")[0];
 
-    for(var i = 0; i < selObj.options.length; i++)
-    {
-      if(selObj.options[i].value === currency) {
-        selObj.options[i].selected = 'selected';
-        break;
-      }
-    }
-    selObj.value = currency;
-    if (voucher_id == "newvoucher") {
-      var valuta_fields = document.getElementById("voucher_line_currency_div_newvoucher");
-      if (!(currency == "")) valuta_fields.style.display = "inline";
-      else valuta_fields.style.display = "none";
-    }
+    currency_fields = $(parent).find(".currency_field");
+    if (!(currency == "")) currency_fields.show();
+    else currency_fields.hide();
+    
     if (currency == "") {
         rate = 0;
     } else {
-        rate = window.currency_rates[voucher_id][currency];
+        rate = window.currency_rates[currency];
     }
 
-    var currency_rate_input = findDirectChildByName(parent, "voucher.ForeignConvRate");
+    var currency_rate_input = $(parent).find("input.currency_rate")[0];
 
-    currency_rate_input.value = toAmountString(rate, 4);
-    onCurrencyRateChange(currency_rate_input);
-}
-
-/*
- * OnChange action for currency rate input field.
- * The first element is the input field.
- * Used in journal/edit view.
- */
-function onCurrencyRateChange(element) {
-    var valuta_ids = document.getElementsByName("voucher.ForeignCurrencyID");
-    var valuta_rates = document.getElementsByName("voucher.ForeignConvRate");
-    var valuta_id = valuta_ids[0].value;
-    var valuta_rate = valuta_rates[0].value;
-    for (i = 1; i < valuta_ids.length; i++) {
-      valuta_ids[i].value = valuta_id;
-      valuta_rates[i].value = valuta_rate;
-    }
-    valuta_rates[0].value = toAmountString(toNumber(valuta_rates[0].value), 4);
+    currency_rate_input.value = toAmountString(rate);    
 }
 
 /*
@@ -276,31 +249,21 @@ function journalCurrencyChange(btn, action_url)
     var currency_id_selected_input = null;
     var currency_rate_input = null;
 
-    for(var i = 0; i < wrapper_children.length; i++)
-    {
-        if (typeof(wrapper_children[i].name) == 'undefined') {
-            continue;
-        }
+    currency_id_input = $(wrapper).find(".currency_id")[0];
+    currency_rate_input = $(wrapper).find(".currency_rate")[0];
 
-        if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
-            currency_id_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
-            currency_rate_input = wrapper_children[i];
-        }
-    }
     var currency = currency_id_input.value;
-    if (currency == "") {
-        alert("Velg en valuta");
-        return false;
-    }
-
-    if (currency_rate_input.value == 0) {
-        alert("Velg en vekslingsrate");
+    
+    var rate = toNumber(currency_rate_input.value);
+    if (currency == "" && rate != 0 || currency != "" && rate == 0) {
+        alert("Velg en valuta, vekslingsrate.");
         return false;
     }
 
     currency_id_input.value = currency;
-    var form = document.getElementsByName('voucher')[0];
+    var form = document.getElementById('hidden_currency_form');
+    form.getElementsByClassName("hiddenForeignCurrencyID")[0].value = currency;
+    form.getElementsByClassName("hiddenForeignConvRate")[0].value = rate;
     form.submit();
 }
 
@@ -408,27 +371,14 @@ function allowOnlyCreditOrDebit(element, credit_or_debit) {
   var val_f_in_amount  = toNumber(f_in_amount.value);
   var val_f_out_amount = toNumber(f_out_amount.value);
 
-  // if the valuta is only domestic, do nothing
-  if (currency.value == '') return false;
-
-  if ((element == in_amount && val_f_in_amount == 0) || (element == out_amount && val_f_out_amount == 0)) {
-    // TODO (mladjo2505)
-    // Translate message to Norwegian
-    alert("Can't recalculate currency rate when foreign amount is 0.");
-    element.value = toAmountString(0, 2);
-    return false;
-  }
   if (credit_or_debit == 'credit') {
     out_amount.value = toAmountString(0, 2);
     in_amount.value = toAmountString(toNumber(in_amount.value), 2);
-    conv_rate.value = toAmountString(Math.round((100/(val_in_amount/val_f_in_amount)) * 10000)/10000, 4);
   }
   else if (credit_or_debit == 'debit') {
     in_amount.value = toAmountString(0, 2);
     out_amount.value = toAmountString(toNumber(out_amount.value), 2);
-    conv_rate.value = toAmountString(Math.round((100/(val_out_amount/val_f_out_amount)) * 10000)/10000, 4);
   }
-  onCurrencyRateChange(conv_rate);
 }
 
 /*

@@ -137,6 +137,8 @@ elseif($balance < 0)
   $class1 = "creditred";
 }
 
+$print_currency_inputs = $voucherHead->ForeignCurrencyID != '';
+
 ##############################################################
 #Get accountplan info
 
@@ -260,7 +262,18 @@ if(!$period_open) {
 
 <br />
 <br />
-
+<form id="hidden_currency_form" action="<? print $MY_SELF ?>" method="post">
+    <? print $_lib['form3']->hidden(array('name' => 'type'              , 'value' => $voucher_input->type)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.VoucherID' , 'value' => $voucherHead->VoucherID)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.JournalID' , 'value' => $voucher_input->JournalID)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'AccountLineID'  , 'value' => $voucher_input->AccountLineID)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'VoucherType'       , 'value' => $voucher_input->VoucherType)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'view_mvalines'     , 'value' => $view_mvalines)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'view_linedetails'  , 'value' => $view_linedetails)) ?>
+    <input type="hidden" name="action_postmotpost_save_currency" value="1" />
+    <input class="hiddenForeignCurrencyID" type="hidden" name="voucher.ForeignCurrencyID" value="" />
+    <input class="hiddenForeignConvRate" type="hidden" name="voucher.ForeignConvRate" value="" />
+</form>
 <form class="voucher" name="<? print $form_name2 ?>" action="<? print $MY_SELF ?>" method="post">
     <? print $_lib['form3']->hidden(array('name' => 'type'              , 'value' => $voucher_input->type)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'voucher.VoucherID' , 'value' => $voucherHead->VoucherID)) ?>
@@ -358,9 +371,10 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>Debet</th>
     <th>Kredit</th>
     <th>Saldo</th>
-    <th></th>
+    <th>Valuta</th>
     <th>I<u>n</u>n</th>
     <th>U<u>t</u></th>
+    <th>Kurs</th>
     <th><u>M</u>VA</th>
     <th>M<u>e</u>ngde</th>
     <th>A<u>v</u>d.</th>
@@ -383,7 +397,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     </td>
 <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut, !$period_open) ?>
     <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
-<? print $voucher_gui->currency2($voucherHead) ?>
+<? print $voucher_gui->currency2($voucherHead, $print_currency_inputs) ?>
 <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent, !$period_open) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucherHead->Quantity, 'return' => 'value')) ?>"><? } ?></td>
     <td>
@@ -580,8 +594,6 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <input type="hidden" name="voucher.VoucherDateOld"   value="<? print $voucher->VoucherDate ?>" />
     <input type="hidden" name="view_mvalines"         value="<? print $view_mvalines ?>" />
     <input type="hidden" name="view_linedetails"      value="<? print $view_linedetails ?>" />
-    <input type="hidden" name="voucher.ForeignCurrencyID"      value="<? print $voucher->ForeignCurrencyID ?>" />
-    <input type="hidden" name="voucher.ForeignConvRate"      value="<? print $voucher->ForeignConvRate ?>" />
 
 
     <tr class="<? print $row_class ?> voucher">
@@ -597,7 +609,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher->AmountIn, $voucher->AmountOut, !$period_open) ?>
       <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
       <!--<td></td><td></td><td></td><td></td>-->
-      <?  print $voucher_gui->currency2($voucher) // disable currency for nonhead lines ?>
+      <? $currency_is_editable = $voucher->DisableAutoVat != 1; ?>
+      <? print $voucher_gui->currency2($voucher, $currency_is_editable && $print_currency_inputs) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, !$period_open) ?></td>
       <td><? if($accountplan->EnableQuantity) { if ($voucher->DisableAutoVat != 1) { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucher->Quantity, 'return' => 'value')); ?>"><? } } ?></td>
       <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
@@ -636,8 +649,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <td align="right"><? print $_lib['format']->Amount($totalAmountIn) ?></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountOut) ?></td>
     <td colspan="2"></td>
-    <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountIn) ?></td>
-    <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountOut) ?></td>
+    <td align="right"></td>
+    <td align="right"></td>
   <td colspan="10" align="right">
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) {
        if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) { ?>

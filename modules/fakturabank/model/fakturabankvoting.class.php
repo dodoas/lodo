@@ -772,7 +772,11 @@ class lodo_fakturabank_fakturabankvoting {
                         }
                         $dataH['Type'] = $relation->{'type'};
                         $dataH['Amount'] = $relation->{'amount'};
-                        $dataH['Currency'] = $transaction->{"currency"}; // should be relation currency
+                        if(!empty($relation->{"invoice-currency"})) {
+                            $dataH['Currency'] = $relation->{"invoice-currency"};
+                        } else {
+                            $dataH['Currency'] = $transaction->{"currency"};
+                        }
                         $dataH['TransactionAmount'] = $transaction->amount;
                         $dataH['TransactionCurrency'] = $transaction->{"currency"};
                         $dataH['FakturabankBankTransactionAccountID'] = $relation->{'bank-transaction-account-id'};
