@@ -136,9 +136,9 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 <th class="sub">Periode</th>
                 <th class="sub align-right">Inn</th>
                 <th class="sub align-right">Ut</th>
-                <th class="sub">Valuta inn</th>
-                <th class="sub">Valuta ut</th>
-                <th class="sub">Valuta/kurs</th>
+                <th class="sub align-right">Valuta</th>
+                <th class="sub align-right">Valuta</th>
+                <th class="sub align-right">Kurs</th>
                 <th class="sub">MVA%</th>
                 <th class="sub">Mengde</th>
                 <th class="sub">Avd.</th>
