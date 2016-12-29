@@ -252,6 +252,10 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 
 <br/>
   <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
+  <span>OTP:</span><br/>
+  <span>Sone: <? print $tax_zone . " ($tax_municipality_name)"; ?></span><br/>
+  <span>Prosent: <? print $_lib['format']->Amount($tax_percent); ?>%</span><br/>
+  <span>Bel&oslash;p: </span><input type="text" name="altinnReport1_pensionAmount" value='<? print $_lib['format']->Amount(0); ?>'><br/><br/>
 <?
   print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send rapport'));
 ?>

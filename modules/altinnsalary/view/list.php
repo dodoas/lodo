@@ -53,6 +53,7 @@ print $_lib['sess']->doctype
       <th class='menu'>Periode</th>
       <th class='menu'>Sent kl</th>
       <th class='menu'>Rapportert</th>
+      <th class='menu align-right'>OTP Bel&oslash;p</th>
       <th class='menu'>Arkivert kl</th>
       <th class='menu'>Status</th>
       <th class='menu'>Handlinger</th>
@@ -113,6 +114,7 @@ print $_lib['sess']->doctype
         ?>
           <button id="report_extra_info_button_<? print $report_id; ?>" onclick="toggleReportDetails(<? print $report_id; ?>)">Vis</button>
       </td>
+      <td class="number"><? print $_lib['format']->Amount($so1row->PensionAmount); ?></td>
       <td>
         <?
         $so5_query = "SELECT * FROM altinnReport5 WHERE req_CorrespondenceID = '".$so2row->res_ReceiversReference."' ORDER BY AltinnReport5ID";
@@ -156,6 +158,7 @@ print $_lib['sess']->doctype
             <input type="hidden" name="use_work_relation[<? print $work_relation_id; ?>]" value='1'>
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
+          <input type="hidden" name="altinnReport1.pensionAmount" value='<?print $so1row->PensionAmount; ?>'>
           <? 
             $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "pending");
             print $_lib['form3']->submit(array(
