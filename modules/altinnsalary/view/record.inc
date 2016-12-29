@@ -27,6 +27,18 @@ class LocalSoapClient extends SoapClient {
   }
 }
 
+// Zone tax info for OTP
+$company_municipality = $_lib['sess']->get_companydef('CompanyMunicipalityID');
+$query_municipality_tax_zone = "SELECT agag.*, CONCAT(k.KommuneNumber, ' ', k.KommuneName) as Name
+                                FROM arbeidsgiveravgift agag JOIN kommune k ON k.Sone = agag.Code
+                                WHERE k.KommuneID = '" . $company_municipality . "'";
+$result_municipality_tax_zone = $_lib['db']->db_query($query_municipality_tax_zone);
+$company_minucipality_tax_zone = $_lib['db']->db_fetch_object($result_municipality_tax_zone);
+$tax_zone = $company_minucipality_tax_zone->Code;
+$tax_percent = $company_minucipality_tax_zone->Percent;
+$tax_calculation_code = 'generelleNaeringer';
+$tax_municipality_name = $company_minucipality_tax_zone->Name;
+
 // redirect back to lodo.main page if no access to altinn salary
 if(!$_lib['sess']->get_person('AltinnSalaryAccess')) {
   header('Location: ' . $_lib['sess']->dispatchs . "t=lodo.main");
@@ -47,6 +59,9 @@ if (isset($_REQUEST['use_work_relation'])) {
   }
 }
 if (empty($salary_ids) && !empty($work_relation_ids)) $_REQUEST['only_register_employee'] = true;
+
+$pension_amount = $_lib['convert']->Amount($_POST['altinnReport1_pensionAmount']);
+$pension_amount = ($pension_amount == 0) ? null : $pension_amount;
 
 $error_msg = "";
 // Make sure user have set AltinnUserSSN
@@ -146,6 +161,10 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
     $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']), false, $is_cancellation);
     if (isset($_POST['altinnReport1_MeldingsId'])) {
       $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
+    }
+    if (!is_null($pension_amount)) {
+      $pension_amount = ($is_cancellation) ? 0 : $pension_amount;
+      $report->addPensionAmount($pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
     }
     $xml = $report->generateXML();
     if (!empty($report->errors)) {
@@ -248,6 +267,7 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
       $values['ReceiptStatusCode']  = $result->SubmitFormTaskBasicResult->ReceiptStatusCode;
       $values['ParentReceiptId']  = $result->SubmitFormTaskBasicResult->ParentReceiptId;
       $values['ReceivedStatus'] = 'sent';
+      if (!is_null($pension_amount)) $values['PensionAmount'] = $pension_amount;
       $is_cancellation ? $values['CancellationStatus'] = 'is_cancellation' : NULL;
 
       for ($i=0; $i < count($result->SubmitFormTaskBasicResult->References->ReferenceBE); $i++) {
@@ -574,6 +594,9 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
   }
   // generate the altinn report object for the selected period
   $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
+  if (!is_null($pension_amount)) {
+    $report->addPensionAmount($pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
+  }
   $xml_generated = true;
 } elseif($_lib['input']->getProperty('action_confirm_authentication')) {
   try {

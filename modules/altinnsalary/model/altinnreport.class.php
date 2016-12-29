@@ -9,6 +9,7 @@ includecodelib('validation/validation');
 
 class altinn_report {
   public $salaries               = array();
+  public $pension                = array();
   public $salary_ids             = array();
   public $salary_lines           = array();
   public $employees              = array();
@@ -70,6 +71,16 @@ class altinn_report {
  */
   function addReplacementMessageID($message_id) {
     $this->erstatterMeldingsId = $message_id;
+  }
+
+/* Helper function to add pension amount
+ */
+  function addPensionAmount($amount, $percent, $zone, $code) {
+    $pension = array("beregningskodeForArbeidsgiveravgift"  => $code,
+                     "sone"                                 => $zone,
+                     "avgiftsgrunnlagBeloep"                => $amount,
+                     "prosentsatsForAvgiftsberegning"       => $percent);
+    array_push($this->pension, $pension);
   }
 
 /* Helper function to check if the variable is a valid date
@@ -249,8 +260,12 @@ class altinn_report {
     if ($use_loennOgGodtgjoerelse) {
       $virksomhet['arbeidsgiveravgift'] = $loennOgGodtgjoerelse;
     }
+    if (!empty($this->pension)) $virksomhet['arbeidsgiveravgift']['tilskuddOgPremieTilPensjon'] = $this->pension;
     foreach($loennOgGodtgjoerelse as $zone_tax_array) {
       $zone_tax = $zone_tax_array['loennOgGodtgjoerelse'];
+      $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
+    }
+    foreach($this->pension as $zone_tax) {
       $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
     }
     return $virksomhet;
