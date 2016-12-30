@@ -36,6 +36,7 @@ $ba = new model_bank_bankaccount(array());
     <th>Bankkonto</th>
     <th>Banknavn</th>
     <th>Kontonavn</th>
+    <th>Valuta</th>
     <th>Konto</th>
     <th>Eier</th>
     <th>Saldo</th>
@@ -54,28 +55,29 @@ $i++;
 if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 if($row->DefaultPeriod)
     $Period = $row->DefaultPeriod;
-else 
+else
     $Period = $_lib['date']->get_prev_period(array('value' => $_lib['sess']->get_session('LoginFormDate'), 'realPeriod' => 1));
-	
+
 	list($Amount, $LastPeriod) = $ba->saldo($row->AccountID);
 	$TotalAmount += $Amount;
 ?>
     <tr class="<? print "$sec_color"; ?>">
-      <td>	
+      <td>
         <form method="post" action="">
-        <? 
+        <?
            print $_lib['form3']->AccountPeriod_menu3(
                 array('table' => 'account', 'field' => 'DefaultPeriod',
-                        'pk' => $row->AccountID, 'value' => $Period, 
-                        'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 
+                        'pk' => $row->AccountID, 'value' => $Period,
+                        'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P',
                         'required'=> false));
-        ?>	
+        ?>
 	<input type="submit" value="Lagre" name="action_period_update">
         </form>
       </td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountNumber ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->BankName ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountDescription ?></a></td>
+      <td><? print $row->Currency ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.hovedbok&amp;accountplan_AccountPlanID=<? print $row->AccountPlanID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->OwnerName ?></a></td>
       <td class="number"><? print $_lib['format']->Amount($Amount) ?></td>

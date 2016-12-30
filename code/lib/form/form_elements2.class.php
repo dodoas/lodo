@@ -61,6 +61,26 @@ class form2 {
 
   }
 
+  function currency_menu2_local($table, $field, $value, $pk) {
+      global $_lib;
+      $query = "select CurrencyID, Amount from exchange order by CurrencyID";
+      $result = $_lib['db']->db_query($query);
+
+      print "<select name=\"$table.$field.$pk\">\n";
+      print '<option value="">'. exchange::getLocalCurrency() .'</option>';;
+      while($_row = $_lib['db']->db_fetch_object($result)) {
+          if($_row->CurrencyID == $value)
+              print "<option value=\"$_row->CurrencyID\" selected>$_row->CurrencyID</option>\n";
+          else
+              print "<option value=\"$_row->CurrencyID\">$_row->CurrencyID</option>\n";
+      }
+
+      print "</select>\n";
+      #$_lib['db']->db_free_result($result);
+
+  }
+
+
   function ArbeidsgiverAvgift_menu2($conf) {
       global $_lib;
 

@@ -37,6 +37,7 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
       <th>Aktiv</th>
       <th>Saldobergning</th>
       <th>Land</th>
+      <th>Valuta</th>
 
       <th>Default periode</th>
       <th>Kontonummer</th>
@@ -64,8 +65,9 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
       <td><? $_lib['form2']->checkbox2('account', "includeinsaldo", $bank->includeinsaldo, $bank->AccountID); ?></td>
       <td><? print $_lib['form3']->Country_menu3(array('table' => 'account', 'field' => 'CountryCode', 'pk' => $bank->AccountID, 'value'=>$bank->CountryCode, 'required'=> false)); ?></td>
       <script>$('#account\\.CountryCode\\.<? echo $bank->AccountID; ?>').css({'width': 100});</script>
+      <td><? $_lib['form2']->currency_menu2_local('account', "Currency", $bank->Currency, $bank->AccountID); ?></td>
 
-      <td><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'account', 'field' => 'DefaultPeriod', 'pk' => $bank->AccountID, 'value' => $bank->DefaultPeriod, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> false)); ?></td>    
+      <td><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'account', 'field' => 'DefaultPeriod', 'pk' => $bank->AccountID, 'value' => $bank->DefaultPeriod, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> false)); ?></td>
 
       <td><input type="text" name="account.AccountNumber.<? print $bank->AccountID ?>"    value="<? print $bank->AccountNumber ?>" size="30" class="number"></td>
 
