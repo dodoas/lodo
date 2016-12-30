@@ -102,6 +102,7 @@ class framework_logic_bank {
         $this->AccountNumber    = $bank_head->AccountNumber;
         $this->AccountName      = $bank_head->AccountDescription;
         $this->AccountPlanID    = $bank_head->AccountPlanID;
+        $this->Currency         = $bank_head->Currency;
         $this->VoucherType      = $bank_head->VoucherType;
         $this->DebitColor       = $accountplan->DebitColor;
         $this->CreditColor      = $accountplan->CreditColor;
@@ -882,7 +883,7 @@ class framework_logic_bank {
         $DataH['Period']            = $this->ThisPeriod;
         $DataH['AccountID']         = $this->AccountID;
         $DataH['Active']            = 1;
-        $DataH['AccountID']         = $this->AccountID;
+        $DataH['Currency']         = $this->Currency;
         $DataH['InterestDate']      = $LastDate;
         $DataH['BookKeepingDate']   = $LastDate;
         $DataH['Period']            = $this->ThisPeriod;
@@ -932,8 +933,8 @@ class framework_logic_bank {
                 $DataH = array();
                 $DataH['Period']            = $this->ThisPeriod;
                 $DataH['AccountID']         = $this->AccountID;
+                $DataH['Currency']          = $this->Currency;
                 $DataH['Active']            = 1;
-                $DataH['AccountID']         = $this->AccountID;
                 $DataH['InterestDate']      = $LastDate;
                 $DataH['BookKeepingDate']   = $LastDate;
                 $DataH['Period']            = $this->ThisPeriod;

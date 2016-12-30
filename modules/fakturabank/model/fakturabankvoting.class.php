@@ -494,6 +494,7 @@ class lodo_fakturabank_fakturabankvoting {
             }
 
             $lineH['AmountOut'] = $lineH['AmountOut'] * -1;
+            $lineH['Currency'] = $fb_transaction['Currency'];
             #Only add lines with an amount
             if($lineH['AmountIn'] > 0 || $lineH['AmountOut'] > 0) {
                 # Don't insert transaction if already in DB
