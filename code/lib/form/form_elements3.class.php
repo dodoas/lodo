@@ -430,7 +430,7 @@ class form3
             else $_number = $args['_number'];
             $obj =  $args['field'].$_number;
             $element .= "<script type=\"text/javascript\">\n";
-            $element .= "var $obj = new calendar1(document.forms['".$args['form_name']."'].elements['".$name."']);\n";
+            $element .= "var $obj = new calendar1(document.querySelector('form[name=".$args['form_name']."]').querySelector('input#".$name."'));\n";
             $element .= "$obj.year_scroll = true;\n";
             if($args['validation'] == 'Date')
             {
