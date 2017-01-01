@@ -99,8 +99,8 @@ $db_sum   = $row->sum;
 <table>
 <thead>
 <tr>
-     <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
      <td>
+     <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
         Kundenavn:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
         Fakturanummer: <? print $_lib['form3']->text(array('name' => 'SearchInvoiceID',   'value' => $SearchInvoiceID)) ?>
         Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate', 'field' => 'FromDate', 'form_name' => 'invoice_list', 'value' => $FromDate)) ?>
@@ -108,14 +108,14 @@ $db_sum   = $row->sum;
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-     </td>
      </form>
+     </td>
 
 </tr>
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
 <tr>
-    <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
     <td>
+    <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
 	Fakturadato:
 	<? 
 	  $voucher_date = $_COOKIE['invoice_voucher_date']; 
@@ -155,8 +155,8 @@ $db_sum   = $row->sum;
   }
         ?>
 
-    </td>
     </form>
+    </td>
 </tr>
 <? } ?>
 </table>
