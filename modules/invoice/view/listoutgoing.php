@@ -60,7 +60,12 @@ $ids = array();
 while($row = $_lib['db']->db_fetch_object($result_inv_ids)) { array_push($ids, $row->InvoiceID); }
 $ids_string = implode(', ', $ids);
 
-$query .= " i.InvoiceID in ($ids_string)";
+if (!empty($ids_string)){
+  $ids_string_condition .= "in ($ids_string)";
+} else {
+  $ids_string_condition .= "IS null";
+}
+$query .= " i.InvoiceID " . $ids_string_condition;
 $query .= " order by " . $order_by . " " . $sort;
 
 $result_inv = $_lib['db']->db_query($query);
@@ -246,7 +251,7 @@ SELECT DISTINCT(JournalID) FROM (
       ), 2) * (1 + (il.Vat/100)), 0), 2) AS AmountOut,
       il.InvoiceID AS JournalID
       FROM invoiceoutline il
-      WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($ids_string)
+      WHERE il.Active = 1 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID $ids_string_condition
 
       UNION
 
@@ -257,7 +262,7 @@ SELECT DISTINCT(JournalID) FROM (
         ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * (100.0 + iac.VatPercent) / 100.0), 2) AS AmountOut,
         iac.InvoiceID AS JournalID
         FROM invoiceallowancecharge iac
-        WHERE InvoiceType = 'out' AND InvoiceID in ($ids_string) AND Amount <> 0
+        WHERE InvoiceType = 'out' AND InvoiceID $ids_string_condition AND Amount <> 0
 
         UNION
 
@@ -268,7 +273,7 @@ SELECT DISTINCT(JournalID) FROM (
           ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * iac.VatPercent / 100.0), 2) AS AmountOut,
           iac.InvoiceID AS JournalID
           FROM invoiceallowancecharge iac
-          WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($ids_string) AND Amount <> 0
+          WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID $ids_string_condition AND Amount <> 0
 
           UNION
 
@@ -278,7 +283,7 @@ SELECT DISTINCT(JournalID) FROM (
             ROUND(IF(IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount < 0, IF(iac.ChargeIndicator = 1, 1, -1) * iac.Amount * iac.VatPercent / 100.0 * -1, 0), 2) AS AmountOut,
             iac.InvoiceID AS JournalID
             FROM invoiceallowancecharge iac
-            WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID in ($ids_string) AND Amount <> 0
+            WHERE InvoiceType = 'out' AND iac.VatPercent <> 0 AND InvoiceID $ids_string_condition AND Amount <> 0
 
             UNION
 
@@ -305,7 +310,7 @@ SELECT DISTINCT(JournalID) FROM (
             )) * il.Vat / 100, 0), 2) AS AmountOut,
             il.InvoiceID AS JournalID
             FROM invoiceoutline il
-            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($ids_string)
+            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID $ids_string_condition
 
             UNION
 
@@ -331,7 +336,7 @@ SELECT DISTINCT(JournalID) FROM (
             )) * il.Vat / 100 * -1), 2) AS AmountOut,
             il.InvoiceID AS JournalID
             FROM invoiceoutline il
-            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID in ($ids_string)
+            WHERE il.Active = 1 AND il.Vat <> 0 AND il.QuantityDelivered <> 0 AND il.UnitCustPrice <> 0 AND il.InvoiceID $ids_string_condition
 
             UNION
 
@@ -342,7 +347,7 @@ SELECT DISTINCT(JournalID) FROM (
               IF(i.TotalCustPrice > 0, 0, i.TotalCustPrice * -1) AS AmountOut,
               i.InvoiceID AS JournalID
               FROM invoiceout i
-              WHERE i.TotalCustPrice <> 0 AND i.InvoiceID in ($ids_string)
+              WHERE i.TotalCustPrice <> 0 AND i.InvoiceID $ids_string_condition
             ) li
 
             UNION ALL
@@ -368,7 +373,7 @@ SELECT DISTINCT(JournalID) FROM (
               JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
               WHERE
               -- Exclude the hovedbok lines
-              ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID in ($ids_string)
+              ap.EnableReskontro = 0 AND v.VoucherType = 'S' AND v.Active = 1 AND v.JournalID $ids_string_condition
             ) ta
           ) taa
           -- Group the same so we can count the duplicates
@@ -384,7 +389,7 @@ while($row = $_lib['db']->db_fetch_object($result_line_control)){
   $invoices_with_line_control[$row->JournalID] = true;
 }
 
-$query_printinfo = "SELECT InvoicePrintDate, InvoiceID FROM invoiceoutprint WHERE InvoiceID in ($ids_string)";
+$query_printinfo = "SELECT InvoicePrintDate, InvoiceID FROM invoiceoutprint WHERE InvoiceID $ids_string_condition";
 $printinfo = array();
 $result_printinfo = $_lib['db']->db_query($query_printinfo);
 while($row = $_lib['db']->db_fetch_object($result_printinfo)){
