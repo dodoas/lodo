@@ -78,8 +78,8 @@ if(!empty($validation_errors)) {
 
 <? require_once 'new.inc'; ?>
 
-<table class="lodo_data">
 <form name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
+<table class="lodo_data">
 <input type="hidden" name="accountplan_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="fakturabankemail_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="JournalID" value="<? print $JournalID ?>">
