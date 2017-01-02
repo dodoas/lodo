@@ -133,7 +133,7 @@ $(document).ready(
                 var percent = rating(index);
 
                 var color = colors[ Math.round( (colors.length - 1) * percent / 100) ];
-                var row_text = '<b>' + index + '</b> - ' + data[index][0]['TS'] + ' - ' + data[index][0]['Email'] + ' - ' + data[index][0]['SessionID'] + '<br />';
+                var row_text = '<b>' + index + '</b> - ' + data[index][0]['TS'] + ' - ' + data[index][0]['Email'] + ' - ' + data[index][0]['IPAdress'] + ' - ' + data[index][0]['SessionID'] + '<br />';
 
                 var hide_button = $('<a>')
                     .text('skjul')
@@ -155,7 +155,7 @@ $(document).ready(
                                 var text = '<b>' + index + '</b><br />';
                                 for(l in array)
                                 {
-                                    text += array[l]['TS'] + ' - ' + array[l]['Email'] + ' - ' + array[l]['SessionID'] + '<br />';
+                                    text += array[l]['TS'] + ' - ' + array[l]['Email'] + ' - ' + array[l]['IPAdress'] + ' - ' + array[l]['SessionID'] + '<br />';
                                 }
                                 row.html(text);
                                 row.append(hide_button);

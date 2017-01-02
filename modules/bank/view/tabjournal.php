@@ -22,8 +22,33 @@ $warningH = array();
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - avstemming av bank</title>
     <meta name="cvs"                content="$Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $" />
     <? includeinc('head') ?>
-
+    <? includeinc('javascript') ?>
     <script>
+
+      // scroll to the same position as previously saved on action click
+      function goBack() {
+        var element_id = popCookie('scroll_element_id')
+        if (element_id != '') {
+          var new_scroll_top = $('#'+element_id).offset().top;
+          var old_scroll_top = popCookie('scroll_top');
+          $(window).scrollTop(new_scroll_top - old_scroll_top);
+        }
+      }
+
+      function saveScrollCookies() {
+        setCookie('scroll_top', $(this).offset().top - $(window).scrollTop(), 1000);
+        setCookie('scroll_element_id', $(this).attr('id'), 1000);
+      }
+
+      $(document).ready(
+        function () {
+          $('input[type="submit"], button').click(
+            saveScrollCookies
+          );
+          goBack();
+        }
+      );
+
       /* script for å generere de enorme konto-listene */
       /*
         $reskontroconf['field']         = 'ReskontroAccountPlanID';
@@ -490,7 +515,7 @@ if(is_array($bank->unvotedaccount)) {
 ?>
   <tr>
     <th class="menu" colspan="5">Tilleggsf&oslash;re - f&oslash;rt regnskap ikke bank <? print $_lib['form3']->url(array('description' => 'Snu', 'url' => $_lib['sess']->dispatch . 't=bank.tabjournal&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod . '&sort_direction=' . abs($_lib['sess']->get_session('TabJournalSort') - 1))) ?></th>
-    <td class="menu" ><input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S"></td>
+    <td class="menu" ><input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S" id="save_button"></td>
     <td class="menu" colspan="13"></td>
   </tr>
 <?
