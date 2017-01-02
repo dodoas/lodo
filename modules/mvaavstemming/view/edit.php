@@ -28,6 +28,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 <body>
 <h2>MVA Avstemming <? print $_lib['sess']->get_companydef('VName') ?> - <? print $avst->year ?></h2>
 
+<form name="budget" action="<? print $_lib['sess']->dispatch."t=mvaavstemming.edit&amp;Period=".$avst->year ?>" method="post">
 <table width="100%"  class="lodo_data">
 	<tr>
 		<th colspan="100">MVA Avstemming i f&oslash;lge bokf&oslash;rt regnskap - p&aring; grunnlag av MVA koden</th>
@@ -186,7 +187,6 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             <td class="number">MVA</td>
         </tr>
     <tbody>
-        <form name="budget" action="<? print $_lib['sess']->dispatch."t=mvaavstemming.edit&amp;Period=".$avst->year ?>" method="post">
         <?
         ########################################################################
         # Innsendte oppgaver
