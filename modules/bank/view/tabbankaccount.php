@@ -378,20 +378,6 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     </td>
 </tr>
 
-<tr class="red">
-    <td colspan="19">
-        <? if(round($bank->bankvotingperiod->topAmountSaldo,2) != round($bank->voucher->saldo,2)) { ?>
-          <b>
-            Kontoutskrift <? print $_lib['date']->get_first_day_in_month($bank->ThisPeriod) ?>:
-            <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo) ?>
-              og bankbilag regnskap <? print $_lib['date']->get_first_day_in_month($bank->ThisPeriod) ?>:
-            <? print $_lib['format']->Amount($bank->voucher->saldo) ?> , diff
-            <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo) ?>
-          </b>
-        <? } ?>
-        </td>
-    <td colspan="7" class="sub"><b>Hovedbokskonto: <? print $bank->AccountPlanID ?>  - <?= $bankname ?></b></td>
-</tr>
   <tr>
     <td class="menu">Pri</td>
     <td class="menu">Bilagsnr</td>
