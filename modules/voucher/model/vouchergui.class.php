@@ -185,6 +185,8 @@ class framework_logic_vouchergui
             } else {
                 $html .= '<td style="text-align: right;">'. ($is_foreign ? $_lib['format']->Amount($voucher->ForeignConvRate) .' = 100NOK' : '') .'</td>';
             }
+        } else {
+          $html .= '<td></td><td></td><td></td><td></td><td></td>';
         }
 
         return $html;
