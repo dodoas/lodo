@@ -355,10 +355,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
         <?
             if(!$period_open)
                 printf("Perioden %s er stengt", $voucher_input->VoucherPeriod);
-        ?>
-        &nbsp;-&nbsp;<b><u>V</u>aluta</b>
-	    &nbsp;&nbsp;
-        <?
+
         echo exchange::getFormHeaderCurrencyDropdown($voucherHead);
         ?>
         <br /><br />
