@@ -35,20 +35,20 @@ $save_button = $_lib['form3']->submit(array('name' => 'action_bank_commentupdate
 
 foreach($apc->AccountH as $AccountID => $AccountName) {
 
-    foreach($apc->PeriodH as $Period => $tmp)
+    foreach($apc->PeriodH as $tmp => $Period)
     {
         $year = substr($Period, 0, 4);
 
         if($apc->DataH[$AccountID][$Period]->BankVotingPeriodID)
-            $data[$year][$AccountName][$Period] = 
+            $data[$year][$AccountName['AccountNumber']][$Period] =
                 array(
                 'a' => $AccountID,
-                'period' => $Period, 
+                'period' => $Period,
                 'pk' => $apc->DataH[$AccountID][$Period]->BankVotingPeriodID,
                 'value' => $apc->DataH[$AccountID][$Period]->Comment
                 );
         else
-            $data[$year][$AccountName][$Period] = array(
+            $data[$year][$AccountName['AccountNumber']][$Period] = array(
                 'a' => $AccountID,
                 'error' => true
                 );
