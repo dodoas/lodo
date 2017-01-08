@@ -71,16 +71,18 @@ foreach($data as $year => $accounts) {
         $acc_id = $period[key($period)]['a'];
         if (isset($apc->AccountExp[$acc_id]) && $year > date('Y', strtotime($apc->AccountExp[$acc_id]))) continue;
         echo "<tr>";
-        echo "<td>$account</td>";
+        echo "<td>$account<br><br><br></td>";
 
         foreach($period as $pname => $d) {
             if(!isset($d['error'])) {
-              $query_max_min = "SELECT MAX(JournalID) AS max, MIN(JournalID) AS min FROM accountline WHERE AccountID = " . $d['a'] . " AND Active = 1 AND Period = '$pname'";
+              $query_max_min = "SELECT MAX(JournalID) AS max, MIN(JournalID) AS min, COUNT(JournalID) as count FROM accountline WHERE AccountID = " . $d['a'] . " AND Active = 1 AND Period = '$pname'";
               $max_min = $_lib['db']->get_row(array("query" => $query_max_min));
               $query_acc_voucher_type = "SELECT VoucherType FROM account WHERE AccountID = " . $d['a'];
               $voucher_type = $_lib['db']->get_row(array("query" => $query_acc_voucher_type))->VoucherType;
-              if (is_null($max_min->min) || is_null($max_min->max)) $voucher_type = "";
-              $_done_journals = "<br>" . $voucher_type . " " . $max_min->min . "-" . $max_min->max;
+              $query_max_min_voucher = "SELECT MAX(VoucherID) AS max, MIN(VoucherID) AS min, COUNT(VoucherID) as count FROM voucher WHERE AccountPlanID = " . $apc->AccountH[$d['a']]['AccountPlanID'] . " AND VoucherType = '" . $voucher_type . "' AND Active = 1 AND VoucherPeriod = '$pname'";
+              $max_min_voucher = $_lib['db']->get_row(array("query" => $query_max_min_voucher));
+              $_done_journals = "<br>K $max_min->count " . $voucher_type . " " . $max_min->min . "-" . $max_min->max;
+              $_done_journals .= "<br>R $max_min_voucher->count " . $voucher_type . " " . $max_min_voucher->min . "-" . $max_min_voucher->max;
               $comment_input = $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'Comment', 'pk' => $d['pk'], 'value' => $d['value']));
               if (isset($apc->AccountExp[$acc_id]) && $pname > date('Y-m', strtotime($apc->AccountExp[$acc_id]))) $comment_input = "Avsluttet";
               printf("<td>%s</td>", $comment_input . $_done_journals);
@@ -93,7 +95,7 @@ foreach($data as $year => $accounts) {
         echo "</tr>";
     }
 
-    echo "<tr><td>$save_button</td></tr>";
+    echo "<tr><td colspan='6'>$save_button</td><td>$save_button</td></tr>";
 
     echo "</table>";
 }

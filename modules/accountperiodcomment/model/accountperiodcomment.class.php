@@ -19,23 +19,26 @@ class accountperiodcomment {
             $this->AccountH[$row->AccountID] = array('AccountPlanID' => $row->AccountPlanID, 'AccountNumber' => $row->AccountNumber );
         }
 
-
         #Y Axis
         $query_periods  = "select * from accountperiod where (Status=2 or Status=3) order by Period desc";
         $this->PeriodH  = $_lib['storage']->get_hash(array('key' => 'Period', 'value' => 'Period', 'query' => $query_periods));
         $ArrayAllOpenPeriods = array_keys($this->PeriodH);
+        $LastOpenPeriod = end($ArrayAllOpenPeriods);
 
-        $ToPeriod = array(substr($ArrayAllOpenPeriods[0],0,4), "12");
-        $FromPeriod = strval(intval(substr(end($ArrayAllOpenPeriods),0,4)) - 1) . "-01";
+        $ToPeriodYear = substr($ArrayAllOpenPeriods[0],0,4);
+        $FromPeriod = strftime('%Y', strtotime("-1 year", strtotime($LastOpenPeriod))) . "-01";
+        $ToPeriod = $ToPeriodYear . "-12";
 
-        $ThisPeriod = $FromPeriod;
+        $CurrentPeriod = $FromPeriod;
         $this->PeriodH = array();
-        while(strtotime($ThisPeriod) <= strtotime(implode($ToPeriod, '-'))){
-            array_push($this->PeriodH, $ThisPeriod);
-            if(substr($ThisPeriod,5,2) == "12"){
-                array_push($this->PeriodH, substr($ThisPeriod,0,4) . "-13");
+        while(strtotime($CurrentPeriod) <= strtotime($ToPeriod)){
+            array_push($this->PeriodH, $CurrentPeriod);
+            $CurrentPeriodYear = substr($CurrentPeriod,0,4);
+            $CurrentPeriodMonth = substr($CurrentPeriod,5,2);
+            if($CurrentPeriodMonth == "12"){
+                array_push($this->PeriodH, $CurrentPeriodYear . "-13");
             }
-            $ThisPeriod = date('Y-m', strtotime('next month', strtotime($ThisPeriod)));
+            $CurrentPeriod = date('Y-m', strtotime('next month', strtotime($CurrentPeriod)));
         }
         rsort($this->PeriodH);
 
@@ -51,15 +54,15 @@ class accountperiodcomment {
         }, $AccounIDPeriod));
 
         $query_create_missing = "INSERT INTO bankvotingperiod(AccountID, Period, Comment)
-                                (
-                                  SELECT bar.AccountID, bar.Period, '' as Comment
-                                  FROM ($select_query) as bar
-                                  WHERE (bar.AccountID, bar.Period) NOT IN
-                                  (SELECT AccountID, Period FROM bankvotingperiod) );";
+
+                                  SELECT AllPeriods.AccountID, AllPeriods.Period, '' as Comment
+                                  FROM ($select_query) as AllPeriods
+                                  WHERE (AllPeriods.AccountID, AllPeriods.Period) NOT IN
+                                  (SELECT AccountID, Period FROM bankvotingperiod WHERE AccountID IS NOT NULL AND Period IS NOT NULL);";
         $_lib['db']->db_query($query_create_missing);
 
         #Data
-        $query_comments = "select BankVotingPeriodID, AccountID, Period, Comment from bankvotingperiod where Period >= '$FromPeriod' and Period <= '$ToPeriod[0]-13' order by Period, AccountID";
+        $query_comments = "select BankVotingPeriodID, AccountID, Period, Comment from bankvotingperiod where Period >= '$FromPeriod' and Period <= '$ToPeriodYear-13' order by Period, AccountID";
         $result_account = $_lib['db']->db_query($query_comments);
 
         while($row = $_lib['db']->db_fetch_object($result_account)) {
