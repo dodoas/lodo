@@ -1589,8 +1589,10 @@ class accounting {
             } else if(($amount == 0 || $amount == '') && $foreign_amount > 0 && $rate > 0) {
                 $amount = $foreign_amount * 100 / $rate;
                 if($in_or_out == 'in') {
-                    $fields['voucher_AmountIn'] = $amount;
+                    $fields['voucher_AmountIn']  = $amount;
+                    $fields['voucher_AmountOut'] = 0;
                 } else if($in_or_out == 'out') {
+                    $fields['voucher_AmountIn']  = 0;
                     $fields['voucher_AmountOut'] = $amount;
                 }
             } else if($fields['voucher_ForeignCurrencyID'] != '') {

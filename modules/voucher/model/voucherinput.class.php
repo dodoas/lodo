@@ -106,8 +106,10 @@ class framework_logic_voucherinput
 
                 $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
                 $this->ForeignConvRate = $hash['value'];
-                $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmount']));
-                $this->ForeignAmount = $hash['value'];
+
+                $ForeignAmountIn  = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountIn']));
+                $ForeignAmountOut = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountOut']));
+                $this->ForeignAmount = abs($ForeignAmountIn['value'] != 0 ? $ForeignAmountIn['value'] : $ForeignAmountOut['value']);
             } else {
                 $this->ForeignCurrencyID = "";
                 $this->ForeignConvRate = 0;
@@ -115,6 +117,17 @@ class framework_logic_voucherinput
             }
         }
 
+        if($args['voucher_AmountIn'] != 0) {
+          $this->InOrOut = 'in';
+        } else if($args['voucher_AmountOut'] != 0) {
+          $this->InOrOut = 'out';
+        } else if($args['voucher_ForeignAmountIn'] != 0) {
+          $this->InOrOut = 'in';
+        } else if($args['voucher_ForeignAmountOut'] != 0) {
+          $this->InOrOut = 'out';
+        } else {
+          $this->InOrOut = '';
+        }
 
         if(isset($_REQUEST['voucher_VoucherType']))
             $this->VoucherType        = strip_tags($args['voucher_VoucherType']);

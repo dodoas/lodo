@@ -300,7 +300,7 @@ elseif(($voucher_input->action['voucher_update'] || $voucher_input->action['vouc
 
 	#print_r($voucher_input->request('voucher_update'));
 
-    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record', $_REQUEST['voucher_VoucherIsInOrOut']);
+    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record', $voucher_input->InOrOut);
 
     #print "<h2>Test2</h2>";
     #Update hovedbokskonto for this postering, it may have changed

@@ -234,39 +234,6 @@ function onCurrencyChange(selObj) {
     currency_rate_input.value = toAmountString(rate);    
 }
 
-/*
- * OnSubmit action for valuta related form. Sends the request to change
- * the valuta (id, currency rate) for the whole current journal.
- * Used in journal/edit view.
- */
-function journalCurrencyChange(btn, action_url)
-{
-    var wrapper = btn.parentNode;
-
-    var wrapper_children = wrapper.childNodes;
-
-    var currency_id_input = null;
-    var currency_id_selected_input = null;
-    var currency_rate_input = null;
-
-    currency_id_input = $(wrapper).find(".currency_id")[0];
-    currency_rate_input = $(wrapper).find(".currency_rate")[0];
-
-    var currency = currency_id_input.value;
-    
-    var rate = toNumber(currency_rate_input.value);
-    if (currency == "" && rate != 0 || currency != "" && rate == 0) {
-        alert("Velg en valuta, vekslingsrate.");
-        return false;
-    }
-
-    currency_id_input.value = currency;
-    var form = document.getElementById('hidden_currency_form');
-    form.getElementsByClassName("hiddenForeignCurrencyID")[0].value = currency;
-    form.getElementsByClassName("hiddenForeignConvRate")[0].value = rate;
-    form.submit();
-}
-
 function disableEnterKey(e)
 {
      var key;
@@ -358,25 +325,26 @@ function calculateFromForeignAmount(element, in_flag) {
  * Used in journal/edit view.
  */
 function allowOnlyCreditOrDebit(element, credit_or_debit) {
-  var in_amount    = element.parentElement.parentElement.getElementsByTagName('input')[0];
-  var out_amount   = element.parentElement.parentElement.getElementsByTagName('input')[1];
-  var conv_rate    = document.getElementsByName('voucher.ForeignConvRate')[0];
-  var currency     = document.getElementsByName('voucher.ForeignCurrencyID')[0];
-  var f_in_amount  = element.parentElement.parentElement.getElementsByTagName('input')[2];
-  var f_out_amount = element.parentElement.parentElement.getElementsByTagName('input')[3];
+  var tr_element = element.parentElement.parentElement;
+
+  var in_amount    = tr_element.getElementsByTagName('input')[0];
+  var out_amount   = tr_element.getElementsByTagName('input')[1];
+  var f_in_amount  = tr_element.getElementsByTagName('input')[2];
+  var f_out_amount = tr_element.getElementsByTagName('input')[3];
 
   var val_in_amount    = toNumber(in_amount.value);
   var val_out_amount   = toNumber(out_amount.value);
-  var val_conv_rate    = toNumber(conv_rate.value);
   var val_f_in_amount  = toNumber(f_in_amount.value);
   var val_f_out_amount = toNumber(f_out_amount.value);
 
   if (credit_or_debit == 'credit') {
     out_amount.value = toAmountString(0, 2);
+    f_out_amount.value = toAmountString(0, 2);
     in_amount.value = toAmountString(toNumber(in_amount.value), 2);
   }
   else if (credit_or_debit == 'debit') {
     in_amount.value = toAmountString(0, 2);
+    f_in_amount.value = toAmountString(0, 2);
     out_amount.value = toAmountString(toNumber(out_amount.value), 2);
   }
 }
