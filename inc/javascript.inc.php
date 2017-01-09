@@ -327,10 +327,10 @@ function calculateFromForeignAmount(element, in_flag) {
 function allowOnlyCreditOrDebit(element, credit_or_debit) {
   var tr_element = element.parentElement.parentElement;
 
-  var in_amount    = tr_element.getElementsByTagName('input')[0];
-  var out_amount   = tr_element.getElementsByTagName('input')[1];
-  var f_in_amount  = tr_element.getElementsByTagName('input')[2];
-  var f_out_amount = tr_element.getElementsByTagName('input')[3];
+  var in_amount    = tr_element.getElementsByTagName('input')[1];
+  var out_amount   = tr_element.getElementsByTagName('input')[2];
+  var f_in_amount  = tr_element.getElementsByTagName('input')[3];
+  var f_out_amount = tr_element.getElementsByTagName('input')[4];
 
   var val_in_amount    = toNumber(in_amount.value);
   var val_out_amount   = toNumber(out_amount.value);

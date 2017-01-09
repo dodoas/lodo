@@ -362,7 +362,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     </td>
   </tr>
   <tr class="voucher">
-    <th></th>
+    <th colspan="2"></th>
     <th>Kontoplan</th>
     <th>Debet</th>
     <th>Kredit</th>
@@ -384,6 +384,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>&nbsp;</th>
   </tr>
   <tr class="voucher" valign="top">
+    <td><? if($period_open) print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount, 'update'); ?></td>
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
     <td>
     <?
@@ -452,10 +453,7 @@ if($accountplan->EnableProject)
 
 <td><input class="voucher" type="text" size="40" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
-<?
-if($period_open)
-    print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount)
-?>
+    <? if($period_open && !$voucher_input->new) print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount, 'delete') ?>
     </td>
   </tr>
   <? if($view_linedetails == 1) { ?>
@@ -592,6 +590,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 
 
     <tr class="<? print $row_class ?> voucher">
+      <td><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type, 'update') ?></td>
       <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucher->VoucherID); ?></td>
       <td><? print $voucher_gui->account($voucher_input->VoucherPeriod,
                                          $voucher_input->new,
@@ -621,7 +620,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 
       <td><!-- <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucher->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tabindex++, 'accesskey' => 'E')); ?> </td>-->
       <td><input class="voucher" type="text" size="40" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-      <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type) ?></td>
+      <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type, 'delete') ?></td>
     </tr>
     <? if($view_linedetails == 1) { ?>
     <tr class="<? print $row_class ?>">
@@ -639,8 +638,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 ?>
 
 <tr>
-    <td colspan="1"></td>
-    <td></td>
+    <td colspan="3"></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountIn) ?></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountOut) ?></td>
     <td colspan="2"></td>

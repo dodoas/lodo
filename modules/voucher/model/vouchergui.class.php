@@ -271,7 +271,7 @@ class framework_logic_vouchergui
     * @return
     */
     #Buttons on line
-    function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type) {
+    function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type, $button) {
         global $_lib, $accounting, $tabindex, $MY_SELF;
         $html = '';
 
@@ -284,11 +284,12 @@ class framework_logic_vouchergui
             {
                 if($voucher->DisableAutoVat !=1 )
                 {
-                    $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$voucher->VoucherPeriod&amp;voucher.VoucherDate=$voucher->VoucherDate&amp;voucher.JournalID=$JournalID&amp;voucher.VoucherID=$voucher->VoucherID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_delete=1&amp;view_mvalines=$view_mvalines&amp;view_linedetails=$view_linedetails", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette linjen?'));
-                }
-                if($voucher->DisableAutoVat !=1 )
-                {
-                    $html .= '<input type="submit" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
+                    if($button == 'delete') {
+                        $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$voucher->VoucherPeriod&amp;voucher.VoucherDate=$voucher->VoucherDate&amp;voucher.JournalID=$JournalID&amp;voucher.VoucherID=$voucher->VoucherID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_delete=1&amp;view_mvalines=$view_mvalines&amp;view_linedetails=$view_linedetails", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette linjen?'));
+                    }
+                    if($button == 'update') {
+                        $html .= '<input type="submit" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
+                    }
                 }
                 else
                 {
@@ -296,9 +297,13 @@ class framework_logic_vouchergui
                 }
             }
             elseif($voucher->VoucherType == 'A') {
-                $html .= "Det er ikke lov &aring; endre auto bilag";
+                if($button != 'update') {
+                    $html .= "Det er ikke lov &aring; endre auto bilag";
+                }
             } else {
-                $html .= "Perioden er avsluttet";
+                if($button != 'update') {
+                    $html .= "Perioden er avsluttet";
+                }
             }
         }
         return $html;
@@ -319,7 +324,7 @@ class framework_logic_vouchergui
     * @return
     */
     #Buttons on head
-    function update_journal_button_head($voucherHead, $VoucherPeriod, $VoucherType, $JournalID, $new, $rowCount) {
+    function update_journal_button_head($voucherHead, $VoucherPeriod, $VoucherType, $JournalID, $new, $rowCount, $button) {
         global $_lib, $tabindex, $accounting, $MY_SELF;
 
         $html = '';
@@ -328,29 +333,35 @@ class framework_logic_vouchergui
 
             if($new)
             {
-                $html .= '<input type="submit" name="action_voucher_new" value="Lagre" class="green" tabindex="';
-                if($rowCount>1) {
-                    $html .= '';
-                } else {
-                    $html .= $tabindex++;
+                if($button = 'update') {
+                    $html .= '<input type="submit" name="action_voucher_new" value="Lagre" class="green" tabindex="';
+                    if($rowCount>1) {
+                        $html .= '';
+                    } else {
+                        $html .= $tabindex++;
+                    }
+                    $html .= ' class="button">';
                 }
-                $html .= ' class="button">';
             }
             elseif(($accounting->is_valid_accountperiod($VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) && $voucherHead->VoucherType != 'A') || $VoucherPeriod == '0000-00')
             {
-                $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$VoucherPeriod&amp;voucher.VoucherDate=$voucherHead->VoucherDate&amp;voucher.JournalID=$JournalID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_head_delete=1", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette bilaget?'));
-                $html .= '<input type="submit" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
-                if($rowCount>1) {
-                    $html .= '';
-                } else {
-                    $html .= $tabindex++;
+                if($button == 'delete') {
+                    $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$VoucherPeriod&amp;voucher.VoucherDate=$voucherHead->VoucherDate&amp;voucher.JournalID=$JournalID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_head_delete=1", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette bilaget?'));
                 }
-                $html .= '" class="button" accesskey="S" />';
+                if($button == 'update') {
+                    $html .= '<input type="submit" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
+                    if($rowCount>1) {
+                        $html .= '';
+                    } else {
+                        $html .= $tabindex++;
+                    }
+                    $html .= '" class="button" accesskey="S" />';
+                }
             }
             elseif($voucherHead->VoucherType == 'A') {
-                $html .= "Det er ikke lov &aring; endre auto bilag";
+                if($button != 'update') $html .= "Det er ikke lov &aring; endre auto bilag";
             } else {
-                $html .= "Perioden er avsluttet";
+                if($button != 'update') $html .= "Perioden er avsluttet";
             }
         }
 
