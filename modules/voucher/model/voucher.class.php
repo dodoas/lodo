@@ -147,41 +147,6 @@ class framework_logic_voucher
     * @param
     * @return
     */
-    #Print credit/debit fields in td menu on line
-    function creditdebitfield($AmountField, $accountplan, $AmountIn, $AmountOut) {
-        global $_lib, $tabindex;
-        $html = '<td class="' . $accountplan->DebitColor . '">';
-        $tabindexin  = '';
-        $tabindexout = '';
-        if($accountplan->EnableCurrency) { #Not possibel to edit in and out when currency is enabled
-          $readonly = "readonly disable";
-        } else {
-          if($AmountField == 'in')
-          {
-              $tabindexin = $tabindex++;
-          }
-          else
-          {
-              $tabindexout = $tabindex++;
-          }
-        }
-
-        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I'));
-        $html .= '<br>' . $accountplan->debittext;
-        $html .= '</td>';
-        $html .= '<td class="' . $accountplan->CreditColor . '">';
-        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountOut', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountOut), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexout, 'accesskey' => 'I'));
-        $html .= '<br>' . $accountplan->credittext;
-        $html .= '</td>';
-
-        return $html;
-    }
-
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
     #Buttons on line
     function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type) {
         global $_lib, $accounting, $tabindex, $MY_SELF;
