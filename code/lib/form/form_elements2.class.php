@@ -587,7 +587,7 @@ class form2 {
       ?>
   <? }
 
-  function car_menu2($args) {
+  function car_menu2_str($args) {
       global $_lib;
       includelogic("car/car");
       $restrict_car = "";
@@ -603,45 +603,51 @@ class form2 {
         $num_letters = 15;
       }
 
+      $print = "";
       if($args[table]){
         if($args[pk]) {
-          print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+          $print .= "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
         } else {
-          print "<select name=\"$args[table].$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+          $print .= "<select name=\"$args[table].$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
         }
       } else {
         if($args[pk]) {
-          print "<select name=\"$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+          $print .= "<select name=\"$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
         } else {
-          print "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+          $print .= "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
         }
       }
 
-      if($args['value']) {        
+      if($args['value']) {
         $car_exists_query = "SELECT * FROM car WHERE CarID = ".$args['value'];
         $rs = $_lib['db']->db_query($car_exists_query);
         $car_exists = $_lib['db']->db_fetch_object($rs) != null;
         if(!$car_exists) {
-          print "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
+          $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
         } else {
-          print "<option value=\"\">" . substr('Velg bil',0, $num_letters);
+          $print .= "<option value=\"\">" . substr('Velg bil',0, $num_letters);
         }
       } else {
-        print "<option value=\"\">" . substr('Velg bil',0, $num_letters);
+        $print .= "<option value=\"\">" . substr('Velg bil',0, $num_letters);
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
           $inaktive = ($_row->Active) ? '' : 'INAKTIV ';
           $name     = ($_row->CarID) ? $_row->CarCode : $_row->CarName;
           if($_row->CarID == $args[value])
-              print "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+              $print .= "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
           else
-              print "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+              $print .= "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
       }
 
-      print "</select>\n";
+      $print .= "</select>\n";
+      return $print;
       #$_lib['db']->db_free_result($result);
-      ?>
-  <? }
+
+  }
+
+  function car_menu2($args) {
+    print $this->car_menu2_str($args);
+  }
 
   function ExpenceHead_menu2($name, $value, $form_name, $where, $db_table) {
       global $_lib;
