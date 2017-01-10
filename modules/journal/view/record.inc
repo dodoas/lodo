@@ -216,7 +216,7 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
     /****************************************************************************/
     if($debug) print "<br />\nPostering1: $voucher_input->AccountPlanID<br>\n";
     #print_r($voucher_input->request('voucher_new'));
-    $voucher_input->VoucherIDOld = $voucher_input->VoucherID = $accounting->insert_voucher_line(array('post'=>$voucher_input->request('voucher_new'), 'accountplanid'=>$voucher_input->AccountPlanID, 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'F¿rste line ny postering'));
+    $voucher_input->VoucherIDOld = $voucher_input->VoucherID = $accounting->insert_voucher_line(array('post'=>$voucher_input->request('voucher_new'), 'accountplanid'=>$voucher_input->AccountPlanID, 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'F¿rste line ny postering', 'in_or_out' => $voucher_input->InOrOut));
     if($debug) print_r($voucher_input->request('debug2'));
     #exit;
     if($KIDstatus) {
@@ -291,7 +291,7 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
             $_lib['sess']->debug("######Autopostering loop: $account : $account_type######. AmountIn: " .  $requestcopy['voucher_AmountIn'] . ' AmountOut: ' . $requestcopy['voucher_AmountOut']);
             #print "<br>Postering4: $account<br>\n";
             #print_r($requestcopy);
-            $accounting->insert_voucher_line(array('post'=>$requestcopy, 'accountplanid'=>$account, 'type'=>$account_type, 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'Fra auto voucher'));
+            $accounting->insert_voucher_line(array('post'=>$requestcopy, 'accountplanid'=>$account, 'type'=>$account_type, 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'Fra auto voucher', 'in_or_out' => $voucher_input->InOrOut));
         }
     }
 }

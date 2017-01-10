@@ -144,19 +144,17 @@ class framework_logic_vouchergui
             $html .= '<td>';
 
             $voucher_foreign_currency = $voucher->ForeignCurrencyID;
-            if($in_or_out) {
-                if($editable) {
-                    $select_options = '<option value="">'. exchange::getLocalCurrency() .'</option>';
-                    foreach ($currencies as $currency) {
-                        if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
-                            $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
-                        else
-                            $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
-                    }
-                    $html .= '<select name="voucher.ForeignCurrencyID" onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
-                } else {
-                    $html .= $voucher_foreign_currency;
+            if($editable) {
+                $select_options = '<option value="">'. exchange::getLocalCurrency() .'</option>';
+                foreach ($currencies as $currency) {
+                    if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
+                        $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
+                    else
+                        $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
                 }
+                $html .= '<select name="voucher.ForeignCurrencyID" onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
+            } else {
+                $html .= $voucher_foreign_currency;
             }
             $html .= '</td>';
 

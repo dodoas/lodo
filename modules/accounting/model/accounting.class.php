@@ -471,6 +471,8 @@ class accounting {
             $fields['voucher_CarID']     = $accountplan->CarID; #Default car
         }
 
+        $this->calculate_amount_foreign_and_rate($post, $args['in_or_out']);
+
         ############################################################################################
         #Deault values
         $fields['voucher_JournalID']          = $post['voucher_JournalID'];
