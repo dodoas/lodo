@@ -41,10 +41,7 @@ elseif($_REQUEST['action_install_db'])
     $tables['currency']         = true;
     $tables['country']         = true;
 
-    $vat  = $_REQUEST['install_vat'];
-    if($_REQUEST['install_vat'] == 1) {
-        $tables['vat'] = true;
-    }
+    $tables['vat'] = true;
 
     #print_r($_REQUEST);
 
@@ -105,9 +102,6 @@ elseif($_REQUEST['action_install_db'])
     ##########
     $install->install_tables();
     #print "Installer tabeller<br>";
-    ##########
-    $install->vat(array('vat' => $vat));
-    #print "Installer MVA<br>";
     ##########
     $install->install_prefs();
     #print "Installer preferanser<br>";

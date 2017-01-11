@@ -280,20 +280,6 @@ OrgNumber='" . $args['installation_CompanyNumber']. "'";
         return true;
     }
 
-    function vat($args)
-    {
-        global $_lib;
-
-        if($args['vat'] == 2) #Copy without vat
-        {
-            $query = "update company set EnableVAT=0, AccountVat=0";
-            $this->_dbh[$this->dsn_remote]->db_query3(array('query'=>$query, 'do_not_die'=>'1'));
-
-            $query = "update vat set Active=0, AccountPlanID=0";
-            $this->_dbh[$this->dsn_remote]->db_query3(array('query'=>$query, 'do_not_die'=>'1'));
-        }
-    }
-
     function install_prefs()
     {
         global $_lib;
