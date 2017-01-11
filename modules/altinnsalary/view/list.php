@@ -20,6 +20,13 @@ print $_lib['sess']->doctype
       $('#report_extra_info_button_'+id).html(new_name);
     }
 
+    function submitSoapForm(submitButton) {
+      form = submitButton.parentElement.parentElement.getElementsByClassName("soap_form")[0];
+      $(submitButton.cloneNode(true)).insertAfter($(submitButton));
+      form.appendChild(submitButton);
+      // form submits automatically upon appending this input
+    }
+
     $(document).ready(function() {
       $('.navigate.to').click(function(e) {
         var element = $(e.target);
@@ -57,6 +64,7 @@ print $_lib['sess']->doctype
       <th class='menu'>Arkivert kl</th>
       <th class='menu'>Status</th>
       <th class='menu'>Handlinger</th>
+      <th class='menu'></th>
       <th class='menu'></th>
       <th class='menu'></th>
       <th class='menu'></th>
@@ -148,7 +156,7 @@ print $_lib['sess']->doctype
         </form>
       </td>
       <td>
-        <form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
+        <form class="soap_form" style="display: none;" name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
           <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
           <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
           <? foreach($salary_ids as $salary_id) { ?>
@@ -159,22 +167,16 @@ print $_lib['sess']->doctype
           <? } ?>
           <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
           <input type="hidden" name="altinnReport1.pensionAmount" value='<?print $so1row->PensionAmount; ?>'>
-          <? 
-            $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "pending");
-            print $_lib['form3']->submit(array(
-              'name'=>'action_soap1',
-              'value'=>'Send p&aring; nytt',
-              'disabled' => !$resend_enabled
-            )); ?>
-
-          <?
-            $cancel_enabled = $so1row->ReceivedStatus == "received" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "pending";
-            print $_lib['form3']->submit(array(
-              'name'=>'action_soap1_cancel',
-              'value'=>'Kansellere',
-              'disabled' => !$cancel_enabled
-            )); ?>
         </form>
+
+        <? 
+          $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "pending");
+          print $_lib['form3']->submit(array(
+            'name'=>'action_soap1',
+            'value'=>'Send p&aring; nytt',
+            'disabled' => !$resend_enabled,
+            'OnClick' => "submitSoapForm(this);"
+          )); ?>
         <?
           $so4query = "SELECT ar4.* FROM altinnReport1 ar1 JOIN altinnReport2 ar2 ON ar1.ReceiptId = ar2.res_ReceiptId JOIN altinnReport4 ar4 ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID WHERE ar1.ReceiptId = " . $so1row->ReceiptId . " ORDER BY AltinnReport4ID DESC LIMIT 1";
           $so4 = $_lib['db']->db_query($so4query);
@@ -230,6 +232,16 @@ print $_lib['sess']->doctype
             print "Kansellerer <span class=\"navigate to\" id=\"". $cancelled_so1row->AltinnReport1ID ."\">". $cancelled_so1row->AltinnReport1ID ."</span>";
           }
         ?>
+      </td>
+      <td>
+        <?
+          $cancel_enabled = $so1row->ReceivedStatus == "received" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "pending";
+          print $_lib['form3']->submit(array(
+            'name'=>'action_soap1_cancel',
+            'value'=>'Kansellere',
+            'disabled' => !$cancel_enabled,
+            'OnClick' => "submitSoapForm(this);"
+          )); ?>
       </td>
     </tr>
     <tr id="report_extra_info_header_<? print $report_id; ?>" class="r0" style="display: none">
