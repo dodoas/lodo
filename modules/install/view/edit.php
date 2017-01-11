@@ -89,10 +89,6 @@ else
         <td><? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'accountplan', 'value'=>'1')) ?> Alle konto - <? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'accountplan', 'value'=>'2', 'choise' => '1')) ?> NS4102
       </tr>
       <tr>
-        <td class="menu">MVA</td>
-        <td><? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'vat', 'value'=>'1', 'choice'=>'1')) ?> Med MVA - <? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'vat', 'value'=>'2')) ?> Uten MVA
-      </tr>
-      <tr>
         <td class="menu">Periode oppsett</td>
         <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'accountperiod')); ?></td>
       </tr>
