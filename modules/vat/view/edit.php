@@ -29,6 +29,20 @@ $result_vat = $_lib['db']->db_query($query_vat);
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
+<script  type="text/javascript">
+  function copyForm(button){
+    var insterted_element;
+    var fields = $(button).parents('tr')[0].querySelectorAll('input:not([type=submit]), select');
+    var formHolder = button.parentElement.querySelector('.form_holder');
+    for (var i = 0; i < fields.length; i++) {
+      insterted_element = formHolder.appendChild(fields[i].cloneNode(true));
+      if (fields[i].tagName === "SELECT"){
+        insterted_element.value = fields[i].value
+      }
+    }
+  }
+</script>
+
     <h2>MVA-registeret</h2>
     <table class="lodo_data">
         <tr class="result">
@@ -69,11 +83,12 @@ $result_vat = $_lib['db']->db_query($query_vat);
             }
             ?>
             <tr>
-                <form name="<? print $form_name.$vat->ID; ?>" action="<? print $MY_SELF ?>" method="post">
-                    <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
-                    <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
-                    <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
-                    <td class="menu"><? print $vat->VatID ?></td>
+                    <td class="menu">
+                      <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
+                      <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
+                      <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
+                      <? print $vat->VatID ?>
+                    </td>
                     <td>
                         <?
                         if($vat->VatID < 30 and $vat->VatID > 10)
@@ -118,8 +133,19 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         ?>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'Active',           'value' => $vat->Active)) ?></td>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'EnableVatOverride',    'value' => $vat->EnableVatOverride)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?></td>
+                        <td>
+                          <!-- Need form for date picker -->
+                          <form name="<? print $form_name.$vat->ID.'ValidFrom'; ?>" action="<? print $MY_SELF ?>" method="post">
+                          <? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID.'ValidFrom', '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?>
+                          </form>
+                        </td>
+
+                        <td>
+                          <!-- Need form for date picker -->
+                          <form name="<? print $form_name.$vat->ID.'ValidTo'; ?>" action="<? print $MY_SELF ?>" method="post">
+                          <? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID.'ValidTo', '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?>
+                          </form>
+                        </td>
                         <td><? print $_lib['form3']->text(array('table'=>'vat', 'field'=>'Category', 'value'=>$vat->Category, 'width'=>'5')); ?></td>
                         <?
                     }
@@ -134,10 +160,18 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
+                    <td colspan="2">
+                      <? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?>
+                        <form name="<? print $form_name.$vat->ID; ?>" action="<? print $MY_SELF ?>" method="post">
+                          <!-- Onclick submit of the form we would append to this span -->
+                          <span class='form_holder' style="display: none"></span>
+
+                          <input type="submit" name="action_vat_update" value="Lagre" onclick="copyForm(this)" />
+                          <input type="submit" name="action_vat_new" value="Ny" onclick="copyForm(this)" />
+                        </form>
+                      <? } ?>
+                    </td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
-                </form>
             </tr>
             <?
         }
@@ -153,7 +187,6 @@ $result_vat = $_lib['db']->db_query($query_vat);
         {
             ?>
             <tr>
-                <form name="<? print $form_name.$vat->ID; ?>" action="<? print $MY_SELF ?>" method="post">
                     <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
                     <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
                     <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
@@ -184,8 +217,19 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         ?>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'Active',               'value' => $vat->Active)) ?></td>
                         <td><? print $_lib['form3']->checkbox(array('table'=>'vat', 'field' => 'EnableVatOverride',    'value' => $vat->EnableVatOverride)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?></td>
-                        <td><? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID, '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?></td>
+                        <td>
+                          <!-- Need form for date picker -->
+                          <form name="<? print $form_name.$vat->ID.'ValidFrom'; ?>" action="<? print $MY_SELF ?>" method="post">
+                            <? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidFrom', 'form_name' => $form_name.$vat->ID.'ValidFrom', '_number' => $vat->ID, 'value' => $vat->ValidFrom, 'width' => 10)) ?>
+                          </form>
+                        </td>
+
+                        <td>
+                          <!-- Need form for date picker -->
+                          <form name="<? print $form_name.$vat->ID.'ValidTo'; ?>" action="<? print $MY_SELF ?>" method="post">
+                            <? print $_lib['form3']->date(array('table'=>'vat', 'field' => 'ValidTo', 'form_name' => $form_name.$vat->ID.'ValidTo', '_number' => $vat->ID, 'value' => $vat->ValidTo, 'width' => 10)) ?>
+                          </form>
+                        </td>
                         <?
                     }
                     else
@@ -199,10 +243,19 @@ $result_vat = $_lib['db']->db_query($query_vat);
                     }
                     ?>
                     <td><? print $vat->Category; ?></td>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
+                    <td colspan="2">
+                    <?
+                    if($_lib['sess']->get_person('AccessLevel') >= 3) { ?>
+                      <form name="<? print $form_name.$vat->ID; ?>" action="<? print $MY_SELF ?>" method="post">
+                        <!-- Onclick submit of the form we would append to this span -->
+                        <span class='form_holder' style="display: none"></span>
+
+                        <input type="submit" name="action_vat_update" value="Lagre" onclick="copyForm(this)" />
+                        <input type="submit" name="action_vat_new" value="Ny" onclick="copyForm(this)" />
+                      </form>
+                    <? } ?>
+                    </td>
                     <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
-                </form>
             </tr>
             <?
         }
