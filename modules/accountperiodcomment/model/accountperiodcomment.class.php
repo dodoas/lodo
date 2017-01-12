@@ -5,45 +5,71 @@ class accountperiodcomment {
     public $AccountH    = array();
     public $DataH       = array();
     public $AccountExp  = array();
+    public $FromPeriod  = "";
+    public $ToPeriod  = "";
 
     function __construct() {
         global $_lib;
-
-        #$ToPeriod   = $_lib['date']->get_this_period($_lib['sess']->get_session('Date'));
-        $Year       = $_lib['date']->get_this_year($_lib['sess']->get_session('Date'));
-        $ToPeriod   = $Year . '-12';
-        #$FromPeriod = $Year . '-01';
-        $FromPeriod = '2007-01';
-
-        $query_create_missing = "INSERT INTO bankvotingperiod(AccountID, Period, Comment)
-                                 (SELECT a.AccountID, ap.Period, \"\"
-                                 FROM account a, accountperiod ap
-                                 WHERE ap.Status IN (2,3) AND
-                                       (a.ValidTo = '0000-00-00' OR
-                                        (a.ValidTo <> '0000-00-00' AND SUBSTR(a.ValidTo, 1, 7) >= ap.Period) ) AND
-                                       (a.AccountID, ap.Period) NOT IN (SELECT AccountID, Period FROM bankvotingperiod)
-                                 ORDER BY a.AccountID ASC);";
-        $_lib['db']->db_query($query_create_missing);
-
-        #Data
-        $query_comments = "select BankVotingPeriodID, AccountID, Period, Comment from bankvotingperiod where Period >= '$FromPeriod' and Period <= '$ToPeriod' order by Period, AccountID";
-        $result_account = $_lib['db']->db_query($query_comments);
-        
-        while($row = $_lib['db']->db_fetch_object($result_account)) {
-            $this->DataH[$row->AccountID][$row->Period] = $row;
-        }
-    
-        #Y Axis
-        $query_periods  = "select * from accountperiod where (Status=2 or Status=3) and Period >= '$FromPeriod' and Period <= '$ToPeriod' order by Period desc";
-        $this->PeriodH  = $_lib['storage']->get_hash(array('key' => 'Period', 'value' => 'Period', 'query' => $query_periods));
-        
-        #X axis
-        $query_accounts = "select AccountID, concat(AccountPlanID, ' - ' ,AccountNumber, ' - ' , BankName, ' - ', AccountDescription) as AccountNumber from account where Active=1 order by Sort";
-        $this->AccountH = $_lib['storage']->get_hash(array('key' => 'AccountID', 'value' => 'AccountNumber', 'query' => $query_accounts));
-
         #Get expiry date for account
         $query_accounts_exp = "select AccountID, ValidTo from account where Active=1 AND YEAR(ValidTo) <> 0 order by Sort";
         $this->AccountExp   = $_lib['storage']->get_hash(array('key' => 'AccountID', 'value' => 'ValidTo', 'query' => $query_accounts_exp));
+
+        #X axis
+        $query_accounts = "select AccountID, AccountPlanID, concat(AccountPlanID, ' - ' ,AccountNumber, ' - ' , BankName, ' - ', AccountDescription) as AccountNumber from account where Active=1 order by Sort";
+        $result_account = $_lib['storage']->db_query( $query_accounts);
+        while($row = $_lib['db']->db_fetch_object($result_account)) {
+            $this->AccountH[$row->AccountID] = array('AccountPlanID' => $row->AccountPlanID, 'AccountNumber' => $row->AccountNumber );
+        }
+
+        #Y Axis
+        $query_periods  = "select * from accountperiod where (Status=2 or Status=3) order by Period desc";
+        $this->PeriodH  = $_lib['storage']->get_hash(array('key' => 'Period', 'value' => 'Period', 'query' => $query_periods));
+        $ArrayAllOpenPeriods = array_keys($this->PeriodH);
+        $LastOpenPeriod = end($ArrayAllOpenPeriods);
+
+        $ToPeriodYear = substr($ArrayAllOpenPeriods[0],0,4);
+        $this->FromPeriod = strftime('%Y', strtotime("-1 year", strtotime($LastOpenPeriod))) . "-01";
+        $this->ToPeriod = $ToPeriodYear . "-12";
+
+        $CurrentPeriod = $this->FromPeriod;
+        $this->PeriodH = array();
+        while(strtotime($CurrentPeriod) <= strtotime($this->ToPeriod)){
+            array_push($this->PeriodH, $CurrentPeriod);
+            $CurrentPeriodYear = substr($CurrentPeriod,0,4);
+            $CurrentPeriodMonth = substr($CurrentPeriod,5,2);
+            if($CurrentPeriodMonth == "12"){
+                array_push($this->PeriodH, $CurrentPeriodYear . "-13");
+            }
+            $CurrentPeriod = date('Y-m', strtotime('next month', strtotime($CurrentPeriod)));
+        }
+        rsort($this->PeriodH);
+
+        $AccounIDPeriod = array();
+        foreach ($this->AccountH as $account_id => $_) {
+            foreach ($this->PeriodH as $period) {
+                array_push($AccounIDPeriod, array($account_id, $period));
+            }
+        }
+
+        $select_query = implode(" UNION ", array_map(function($account) {
+            return "SELECT $account[0] as AccountID, '$account[1]' as Period";
+        }, $AccounIDPeriod));
+
+        $query_create_missing = "INSERT INTO bankvotingperiod(AccountID, Period, Comment)
+
+                                  SELECT AllPeriods.AccountID, AllPeriods.Period, '' as Comment
+                                  FROM ($select_query) as AllPeriods
+                                  WHERE (AllPeriods.AccountID, AllPeriods.Period) NOT IN
+                                  (SELECT AccountID, Period FROM bankvotingperiod WHERE AccountID IS NOT NULL AND Period IS NOT NULL);";
+        $_lib['db']->db_query($query_create_missing);
+
+        #Data
+        $query_comments = "select BankVotingPeriodID, AccountID, Period, Comment from bankvotingperiod where Period >= '$this->FromPeriod' and Period <= '$ToPeriodYear-13' order by Period, AccountID";
+        $result_account = $_lib['db']->db_query($query_comments);
+
+        while($row = $_lib['db']->db_fetch_object($result_account)) {
+            $this->DataH[$row->AccountID][$row->Period] = $row;
+        }
     }
 }
 
