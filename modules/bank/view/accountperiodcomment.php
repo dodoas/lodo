@@ -55,6 +55,27 @@ foreach($apc->AccountH as $AccountID => $AccountName) {
     }
 }
 
+$all_account_ids = array();
+foreach($apc->AccountH as $account_id => $array){
+    array_push($all_account_ids, $array['AccountPlanID']);
+}
+$all_account_ids = array_keys(array_flip($all_account_ids));
+$all_account_ids_sql = "";
+if(empty($all_account_ids)){
+    $all_account_ids_sql = "1=0";
+} else {
+  $all_account_ids_sql = "AccountPlanID in (" . implode($all_account_ids, ", ").")";
+}
+
+$query_max_min_vouchers = "SELECT AccountPlanID, VoucherPeriod, VoucherType, MAX(JournalID) AS max, MIN(JournalID) AS min, COUNT(JournalID) as count FROM voucher WHERE Active = 1 AND $all_account_ids_sql AND VoucherPeriod >= '$apc->FromPeriod' AND VoucherPeriod <= '$apc->ToPeriod'
+GROUP BY VoucherPeriod, AccountPlanID, VoucherType";
+$result_max_min_vouchers = $_lib['db']->db_query($query_max_min_vouchers);
+
+$max_min_vouchers = array();
+while($row = $_lib['db']->db_fetch_object($result_max_min_vouchers)) {
+    $max_min_vouchers[$row->AccountPlanID][$row->VoucherPeriod][$row->VoucherType] = $row;
+}
+
 foreach($data as $year => $accounts) {
     echo "<h1>$year</h1>";
 
@@ -79,10 +100,9 @@ foreach($data as $year => $accounts) {
               $max_min = $_lib['db']->get_row(array("query" => $query_max_min));
               $query_acc_voucher_type = "SELECT VoucherType FROM account WHERE AccountID = " . $d['a'];
               $voucher_type = $_lib['db']->get_row(array("query" => $query_acc_voucher_type))->VoucherType;
-              $query_max_min_voucher = "SELECT MAX(VoucherID) AS max, MIN(VoucherID) AS min, COUNT(VoucherID) as count FROM voucher WHERE AccountPlanID = " . $apc->AccountH[$d['a']]['AccountPlanID'] . " AND VoucherType = '" . $voucher_type . "' AND Active = 1 AND VoucherPeriod = '$pname'";
-              $max_min_voucher = $_lib['db']->get_row(array("query" => $query_max_min_voucher));
-              $_done_journals = "<br>K $max_min->count " . $voucher_type . " " . $max_min->min . "-" . $max_min->max;
-              $_done_journals .= "<br>R $max_min_voucher->count " . $voucher_type . " " . $max_min_voucher->min . "-" . $max_min_voucher->max;
+              $max_min_voucher = $max_min_vouchers[$apc->AccountH[$d['a']]['AccountPlanID']][$pname][$voucher_type];
+              $_done_journals = "<br>K $max_min->count $voucher_type $max_min->min-$max_min->max";
+              $_done_journals .= "<br>R $max_min_voucher->count $voucher_type $max_min_voucher->min-$max_min_voucher->max";
               $comment_input = $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'Comment', 'pk' => $d['pk'], 'value' => $d['value']));
               if (isset($apc->AccountExp[$acc_id]) && $pname > date('Y-m', strtotime($apc->AccountExp[$acc_id]))) $comment_input = "Avsluttet";
               printf("<td>%s</td>", $comment_input . $_done_journals);

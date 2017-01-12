@@ -5,6 +5,8 @@ class accountperiodcomment {
     public $AccountH    = array();
     public $DataH       = array();
     public $AccountExp  = array();
+    public $FromPeriod  = "";
+    public $ToPeriod  = "";
 
     function __construct() {
         global $_lib;
@@ -26,12 +28,12 @@ class accountperiodcomment {
         $LastOpenPeriod = end($ArrayAllOpenPeriods);
 
         $ToPeriodYear = substr($ArrayAllOpenPeriods[0],0,4);
-        $FromPeriod = strftime('%Y', strtotime("-1 year", strtotime($LastOpenPeriod))) . "-01";
-        $ToPeriod = $ToPeriodYear . "-12";
+        $this->FromPeriod = strftime('%Y', strtotime("-1 year", strtotime($LastOpenPeriod))) . "-01";
+        $this->ToPeriod = $ToPeriodYear . "-12";
 
-        $CurrentPeriod = $FromPeriod;
+        $CurrentPeriod = $this->FromPeriod;
         $this->PeriodH = array();
-        while(strtotime($CurrentPeriod) <= strtotime($ToPeriod)){
+        while(strtotime($CurrentPeriod) <= strtotime($this->ToPeriod)){
             array_push($this->PeriodH, $CurrentPeriod);
             $CurrentPeriodYear = substr($CurrentPeriod,0,4);
             $CurrentPeriodMonth = substr($CurrentPeriod,5,2);
@@ -62,7 +64,7 @@ class accountperiodcomment {
         $_lib['db']->db_query($query_create_missing);
 
         #Data
-        $query_comments = "select BankVotingPeriodID, AccountID, Period, Comment from bankvotingperiod where Period >= '$FromPeriod' and Period <= '$ToPeriodYear-13' order by Period, AccountID";
+        $query_comments = "select BankVotingPeriodID, AccountID, Period, Comment from bankvotingperiod where Period >= '$this->FromPeriod' and Period <= '$ToPeriodYear-13' order by Period, AccountID";
         $result_account = $_lib['db']->db_query($query_comments);
 
         while($row = $_lib['db']->db_fetch_object($result_account)) {
