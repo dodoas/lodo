@@ -1867,8 +1867,8 @@ class accounting {
             return true;
         }
 
-        if (isset($this->cached_valid_accountperiod[$access][$periode])){
-          return $this->cached_valid_accountperiod[$access][$periode];
+        if (isset($this->cached_valid_accountperiod[$access][$period])){
+          return $this->cached_valid_accountperiod[$access][$period];
         }
 
 
@@ -1883,12 +1883,12 @@ class accounting {
 
         if($row->Period)
         {
-            $this->cached_valid_accountperiod[$access][$periode] = true;
+            $this->cached_valid_accountperiod[$access][$period] = true;
             return true;
         }
         else
         {
-            $this->cached_valid_accountperiod[$access][$periode] = false;
+            $this->cached_valid_accountperiod[$access][$period] = false;
             return false;
         }
     }
