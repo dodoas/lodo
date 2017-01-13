@@ -6,6 +6,7 @@
 
 // include validation class
 includecodelib('validation/validation');
+includelogic('car/car');
 
 class altinn_report {
   public $salaries               = array();
@@ -695,6 +696,24 @@ class altinn_report {
           // Error is: Salary line quantity(in days) for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
           self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall dager");
           $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
+        }elseif (in_array($salary_line->SalaryDescription, array('bil'))) {
+          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon'] = array();
+          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat'] = array();
+          // FreeCarID
+          // Car->OfficialPrice
+          // Car->inBool
+          $car = car::get($salary_line->FreeCarID);
+
+          // Error is: Car officalPrice is not set for car id' . $salary_line->FreeCarID
+          self::checkIfEmpty($car->OfficalPrice, 'Bil: Listepris er ikke satt p&aring; bil id ' . $salary_line->FreeCarID, "number");
+          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['listeprisForBil'] = $car->OfficalPrice;
+
+          // Error is: Car registration no is not set for car id' . $salary_line->FreeCarID;
+          self::checkIfEmpty($car->CarCode, 'Bil: Registerings nr er ikke satt p&aring; bil id ' . $salary_line->FreeCarID);
+          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['bilregistreringsnummer'] = $car->CarCode;
+
+          // erBilpool, is car pool, it is allways set, 99% for false, default value in db
+          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['erBilpool'] = $salary_line->Carpool ? 'true' : 'false';
         }
         // there can be multiple entries for one salary so we add to an array
         $inntekt_tmp[] = $inntekt;

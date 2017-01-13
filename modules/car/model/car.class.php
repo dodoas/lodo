@@ -28,5 +28,15 @@ class car {
     $result = $_lib['db']->get_row(array('query' => $query))->active == "1";
     return $result;
   }
+
+  public static function get($car_id) {
+    global $_lib;
+    if (empty($car_id)) {
+      return null;
+    }
+    $result = $_lib['db']->get_row(array('query' => "SELECT * FROM car WHERE car.CarID = $car_id"));
+    return $result;
+  }
+
 }
 ?>

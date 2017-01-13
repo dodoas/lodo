@@ -33,8 +33,8 @@ foreach($car_milage as $milage_year => $milage) {
   $price_per_liter = $milage->PricePerLiter;
   $total_liters = 0;
   if($price_per_liter > 0) {
-    $total_liters = $money_spent_on_fuel / $milage->PricePerLiter;  
-  }  
+    $total_liters = $money_spent_on_fuel / $milage->PricePerLiter;
+  }
   if ($distance_in_miles > 0) {
     $money_spent_per_mile = $money_spent_on_fuel / $distance_in_miles;
     $liter_per_mile = $total_liters / $distance_in_miles;
@@ -175,6 +175,14 @@ foreach($car_milage as $milage_year => $milage) {
 <tr>
     <td class="menu">Kj&oslash;pepris</td>
     <td><input type="text" name="car.PurchasePrice" value="<? print $_lib['format']->Amount($car->PurchasePrice) ?>" size="60"></td>
+</tr>
+<tr>
+    <td class="menu">Listepris</td>
+    <td><input type="text" name="car.OfficalPrice" value="<? print $_lib['format']->Amount($car->OfficalPrice) ?>" size="60"></td>
+</tr>
+<tr>
+    <td class="menu">er <a href="https://www.hertzbilpool.no/" target="_blank">BilPool</a></td>
+    <td><? print $_lib['form3']->checkbox(array('table'=>'car', 'field'=>'Carpool', 'value'=>$car->Carpool)) ?></td>
 </tr>
 <tr>
     <td class="menu">Salgsdato</td>

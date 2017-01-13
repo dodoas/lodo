@@ -22,6 +22,8 @@ else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID="
 
 includelogic('accounting/accounting');
 includelogic('altinnsalary/altinnreport');
+includelogic('car/car');
+
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -188,7 +190,7 @@ $formname = "salaryUpdate";
 
 <? print $_lib['sess']->doctype ?>
 
-<? 
+<?
   $work_relation_query = sprintf("SELECT
                         w.AccountPlanID as AccountPlanID,
                         w.WorkRelationID as WorkRelationID,
@@ -205,10 +207,10 @@ $formname = "salaryUpdate";
                         w.WorkPercentUpdatedAt as WorkPercentUpdatedAt,
                         w.WorkMeasurement as WorkMeasurement,
                         w.SalaryDateChangedAt as SalaryDateChangedAt
-                      FROM 
+                      FROM
                         workrelation w
                         LEFT JOIN subcompany sc ON w.SubcompanyID = sc.SubcompanyID
-                      GROUP BY 
+                      GROUP BY
                         WorkRelationID
                       ");
   $work_relation_result = $_lib['db']->db_query($work_relation_query);
@@ -487,6 +489,52 @@ $formname = "salaryUpdate";
             <? } ?>
         </td>
     </tr>
+    <?
+      if ($line->SalaryDescription == 'bil') {
+        // first tr, for car headers
+        $line_one = array('');
+        // second tr, for data, selects, inputs
+        $line_two = array('');
+        array_push($line_one, 'Bil');
+        array_push($line_two, $_lib['form2']->car_menu2_str(array('table' => 'salaryline', 'field' => 'FreeCarID', 'value' => $line->FreeCarID, 'tabindex' => $tabindex++, 'pk' => $line->SalaryLineID, 'active_reference_date' => $head->JournalDate)));
+
+        $car = car::get($line->FreeCarID);
+        if ($car) {
+          array_push($line_one, 'Listepris');
+          array_push($line_two, $_lib['format']->Amount($car->OfficalPrice));
+
+          array_push($line_one, '<a href="https://www.hertzbilpool.no/" target="_blank">BilPool</a>');
+          array_push($line_two, $car->Carpool ? 'Ja' : 'Nei');
+        }
+
+        ?>
+        <tr>
+          <td>
+          <?
+            for ($i=0; $i < count($line_one); $i++) {
+              print($line_one[$i]);
+              print("</td><td>");
+            }
+          ?>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+          <?
+            for ($i=0; $i < count($line_two); $i++) {
+              print($line_two[$i]);
+              print("</td><td>");
+            }
+          ?>
+
+          </td>
+        </tr>
+
+        <?
+      }
+    ?>
+
     <?
   }
   ?>
