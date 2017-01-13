@@ -224,7 +224,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             }
         }
         
-        if( (strlen($_POST['accountplan_Currency']) > 1) and ($_POST['accountplan_EnableCurrency'] == 1) )
+        if( (strlen($_POST['accountplan_Currency']) < 1) and ($_POST['accountplan_EnableCurrency'] == 1) )
         {
             $_lib['message']->add("Du m&aring; velge valuta n&aring;r du har haket av for valuta");
         }
