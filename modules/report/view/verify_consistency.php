@@ -659,7 +659,7 @@ $result_diff = $_lib['db']->db_query($query_diff);
   while($salary = $_lib['db']->db_fetch_object($result_diff)) { ?>
     <tr class="voucher">
         <td><? print "L" ?></td>
-        <td><a href="<? print $_SETUP[DISPATCH]."t=salary.edit&SalaryID=".$salary->SalaryID; ?>" target="_blank"><? print $salary->SalaryID; ?></a></td>
+        <td><a href="<? print $_SETUP[DISPATCH]."t=salary.edit&SalaryID=".$salary->SalaryID; ?>" target="_blank"><? print $salary->JournalID; ?></a></td>
         <td><? print $salary->JournalDate; ?></td>
         <td><? print $salary->Period; ?></td>
         <td><? print $salary->AccountPlanID . " " . $salary->AccountName; ?></td>
