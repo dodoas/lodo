@@ -629,7 +629,7 @@ class lodo_fakturabank_fakturabank {
                     #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
 
                     $PeriodOld         = $InvoiceO->Period;
-                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
+                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod($PeriodOld);
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
 
@@ -929,7 +929,7 @@ class lodo_fakturabank_fakturabank {
                     #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
 
                     $PeriodOld         = $InvoiceO->Period;
-                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
+                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod($PeriodOld);
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
                 if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency() && !exchange::getConversionRate($InvoiceO->DocumentCurrencyCode)) {
