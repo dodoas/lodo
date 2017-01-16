@@ -16,7 +16,7 @@ print $_lib['sess']->doctype
       $('#report_extra_info_'+id).toggle();
       $('#report_extra_info_header_'+id).toggle();
       var name = $('#report_extra_info_button_'+id).html();
-      var new_name = (name == 'Vis') ? 'Skjull' : 'Vis';
+      var new_name = (name == 'Vis') ? 'Skjul' : 'Vis';
       $('#report_extra_info_button_'+id).html(new_name);
     }
 
