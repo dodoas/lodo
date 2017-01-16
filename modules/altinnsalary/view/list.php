@@ -244,50 +244,65 @@ print $_lib['sess']->doctype
           )); ?>
       </td>
     </tr>
-    <tr id="report_extra_info_header_<? print $report_id; ?>" class="r0" style="display: none">
-      <?
-        $salary_detail_columns = 4;
-        $employee_detail_columns = 3;
-      ?>
-      <td class="menu" colspan="<? print $salary_detail_columns; ?>">L&oslash;nnslipper</td>
-      <td class="menu" colspan="<? print $employee_detail_columns; ?>">Arbeidsforhold</td>
-    </tr>
-    <tr id="report_extra_info_<? print $report_id; ?>" class="<? print $line_color; ?>" style="display: none">
-      <td>
-        <?
-        if (!empty($included_salaries)) {
-          $salary_print_count = 1;
-          $new_column_every = ceil(count($included_salaries)/$salary_detail_columns);
-          foreach($included_salaries as $included_salary) {
-        ?>
-          L <a href="<? print $included_salary['link']; ?>"><? print $included_salary['JournalID']; ?></a><br/>
-        <?
-            if (!($salary_print_count % $new_column_every)) {
-              echo '</td><td>';
-            }
-            $salary_print_count++;
-          }
-        }
-        ?>
+    <tr>
+      <td colspan="15" style="padding: 0;">
+        <table class="lodo_data" style="width: 100%;">
+          <tr id="report_extra_info_header_<? print $report_id; ?>" class="r0" style="display: none">
+            <?
+              $salary_detail_columns = 4;
+              $employee_detail_columns = 2;
+            ?>
+            <td class="menu" colspan="<? print $salary_detail_columns; ?>">L&oslash;nnslipper</td>
+            <td class="menu" colspan="<? print $employee_detail_columns; ?>">Arbeidsforhold</td>
+          </tr>
+          <tr id="report_extra_info_<? print $report_id; ?>" class="<? print $line_color; ?>" style="display: none">
+            <td>
+              <?
+              $columns_printed = 1;
+              if (!empty($included_salaries)) {
+                $salary_print_count = 1;
+                $new_column_every = ceil(count($included_salaries)/$salary_detail_columns);
+                foreach($included_salaries as $included_salary) {
+              ?>
+                L <a href="<? print $included_salary['link']; ?>"><? print $included_salary['JournalID']; ?></a><br/>
+              <?
+                  if (!($salary_print_count % $new_column_every || $columns_printed == $salary_detail_columns)) {
+                    echo '</td><td>';
+                    $columns_printed++;
+                  }
+                  $salary_print_count++;
+                }
+              }
+              ?>
+            </td>
+            <?
+                while($columns_printed++ < $salary_detail_columns) print "<td></td>";
+            ?>
+            <td>
+              <?
+              $columns_printed = 1;
+              if (!empty($included_work_relations)) {
+                $employee_print_count = 1;
+                $new_column_every = ceil(count($included_work_relations)/$employee_detail_columns);
+                foreach($included_work_relations as $included_employee) {
+              ?>
+                <a href="<? print $included_employee['link']; ?>"><? print $included_employee['AccountPlanName']; ?></a><br/>
+              <?
+                  if (!($employee_print_count % $new_column_every || $columns_printed == $employee_detail_columns)) {
+                    echo '</td><td>';
+                    $columns_printed++;
+                  }
+                  $employee_print_count++;
+                }
+              }
+              ?>
+            </td>
+            <?
+                while($columns_printed++ < $employee_detail_columns) print "<td></td>";
+            ?>
+          </tr>
+        </table>
       </td>
-      <td>
-        <?
-        if (!empty($included_work_relations)) {
-          $employee_print_count = 1;
-          $new_column_every = ceil(count($included_work_relations)/$employee_detail_columns);
-          foreach($included_work_relations as $included_employee) {
-        ?>
-          <a href="<? print $included_employee['link']; ?>"><? print $included_employee['AccountPlanName']; ?></a><br/>
-        <?
-            if (!($employee_print_count % $new_column_every)) {
-              echo '</td><td>';
-            }
-            $employee_print_count++;
-          }
-        }
-        ?>
-      </td>
-      <td colspan='3'></td>
     </tr>
     <?
       $report_count++;
