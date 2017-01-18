@@ -1867,8 +1867,8 @@ class accounting {
             return true;
         }
 
-        if (isset($this->cached_valid_accountperiod[$access][$periode])){
-          return $this->cached_valid_accountperiod[$access][$periode];
+        if (isset($this->cached_valid_accountperiod[$access][$period])){
+          return $this->cached_valid_accountperiod[$access][$period];
         }
 
 
@@ -1883,12 +1883,12 @@ class accounting {
 
         if($row->Period)
         {
-            $this->cached_valid_accountperiod[$access][$periode] = true;
+            $this->cached_valid_accountperiod[$access][$period] = true;
             return true;
         }
         else
         {
-            $this->cached_valid_accountperiod[$access][$periode] = false;
+            $this->cached_valid_accountperiod[$access][$period] = false;
             return false;
         }
     }
@@ -1913,10 +1913,10 @@ class accounting {
     * @param
     * @return hash with active periods
     */
-    function get_open_accountperiod_hash(){
+    function get_open_accountperiod_hash($minimal_period = false){
         // TODO this method should maybe take AcccessLevel into account
         global $_lib;
-        $query = "select Period, 1 from accountperiod where (Status=2 or Status=3) order by Period asc";
+        $query = "select Period, 1 from accountperiod where (Status=2 or Status=3) ". ($minimal_period ? "and Period >= '$minimal_period' " : "") ."order by Period asc";
         return $_lib['storage']->get_hash(array('query' => $query, 'key' => 'Period', 'value' => 'Period'));
     }
 
@@ -1925,9 +1925,9 @@ class accounting {
     * @param
     * @return
     */
-    function get_first_open_accountingperiod() {
+    function get_first_open_accountingperiod($minimal_period = false) {
 
-        $PeriodH = $this->get_open_accountperiod_hash();
+        $PeriodH = $this->get_open_accountperiod_hash($minimal_period);
         return array_shift($PeriodH); # Get
     }
 
