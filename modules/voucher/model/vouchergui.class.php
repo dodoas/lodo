@@ -140,45 +140,44 @@ class framework_logic_vouchergui
             $in_or_out = ($voucher->AmountIn > 0 ? 'in' : ($voucher->AmountOut > 0 ? 'out' : ''));
 
             $html = '';
-            $html .= '<td><input type="hidden" name="voucher_VoucherIsInOrOut" value="'. $in_or_out .'"></td>';
 
             $html .= '<td>';
+
             $voucher_foreign_currency = $voucher->ForeignCurrencyID;
-            if($in_or_out) {
-                if($editable) {
-                    $select_options = '<option value="">'. exchange::getLocalCurrency() .'</option>';
-                    foreach ($currencies as $currency) {
-                        if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
-                            $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
-                        else
-                            $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
-                    }
-                    $html .= '<select name="voucher.ForeignCurrencyID" onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
-                } else {
-                    $html .= $voucher_foreign_currency;
+            if($editable) {
+                $select_options = '<option value="">'. exchange::getLocalCurrency() .'</option>';
+                foreach ($currencies as $currency) {
+                    if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
+                        $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
+                    else
+                        $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
                 }
+                $html .= '<select name="voucher.ForeignCurrencyID" onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
+            } else {
+                $html .= $voucher_foreign_currency;
             }
             $html .= '</td>';
 
-            if($editable) {
-                $foreign_amount_input = $_lib['form3']->text(array('name' => 'voucher.ForeignAmount', 'value' => $_lib['format']->Amount($voucher->ForeignAmount), 'class' => 'number', 'OnChange' => 'this.value = toAmountString(toNumber(this.value))', 'width' => '12'));
-            } else {
-                $foreign_amount_input = '<div style="width: 80px !important;">'. $_lib['format']->Amount($voucher->ForeignAmount) .'</div>';
-            }
+            $foreign_amount_in =  ($in_or_out == 'in'  ? $voucher->ForeignAmount : 0);
+            $foreign_amount_out = ($in_or_out == 'out' ? $voucher->ForeignAmount : 0);
 
             #AmountIn
-            $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? 'text-align: right;' : 'display: none;') .'">';
-            if($in_or_out == 'in') {
-                $html .= $foreign_amount_input;
-            };
-            $html .= '</div>'.'</td>';
+            $html .= '<td>';
+            if($editable) {
+                $html .=  $_lib['form3']->text(array('name' => 'voucher.ForeignAmountIn', 'value' => $_lib['format']->Amount($foreign_amount_in), 'class' => 'number currency_field', 'OnChange' => "this.value = toAmountString(toNumber(this.value)); allowOnlyCreditOrDebit(this, 'credit')", 'width' => '12', 'style' => ($is_foreign ? 'text-align: right;' : 'display: none;')));
+            } else {
+                $html .= '<div style="width: 80px !important;">'. $_lib['format']->Amount($foreign_amount_in) .'</div>';
+            }
+            $html .= '</td>';
 
             #AmountOut
-            $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? 'text-align: right;' : 'display: none;') .'">';
-            if($in_or_out == 'out') {
-                $html .= $foreign_amount_input;
-            };
-            $html .= '</div>'.'</td>';
+            $html .= '<td>';
+            if($editable) {
+                $html .=  $_lib['form3']->text(array('name' => 'voucher.ForeignAmountOut', 'value' => $_lib['format']->Amount($foreign_amount_out), 'class' => 'number currency_field', 'OnChange' => "this.value = toAmountString(toNumber(this.value)); allowOnlyCreditOrDebit(this, 'debit')", 'width' => '12', 'style' => ($is_foreign ? 'text-align: right;' : 'display: none;')));
+            } else {
+                $html .= '<div style="width: 80px !important;">'. $_lib['format']->Amount($foreign_amount_out) .'</div>';
+            }
+            $html .= '</td>';
 
             if($editable) {
                 $html .= '<td>'.'<div class="currency_field" style="'. ($is_foreign ? '' : 'display: none;') .'">'.'<input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" value="'. $_lib['format']->Amount($voucher->ForeignConvRate) .'" onchange="this.value = toAmountString(toNumber(this.value))"> = 100'. exchange::getLocalCurrency() .'</div></td>';
@@ -186,7 +185,7 @@ class framework_logic_vouchergui
                 $html .= '<td style="text-align: right;">'. ($is_foreign ? $_lib['format']->Amount($voucher->ForeignConvRate) .' = 100NOK' : '') .'</td>';
             }
         } else {
-          $html .= '<td></td><td></td><td></td><td></td><td></td>';
+          $html .= '<td colspan="4"></td>';
         }
 
         return $html;
@@ -236,10 +235,10 @@ class framework_logic_vouchergui
     //#Print credit/debit fields in td menu on line
     function creditdebitfield($AmountField, $accountplan, $AmountIn, $AmountOut, $closed = false) {
         global $_lib, $tabindex;
-        $html = '<td class="' . $accountplan->DebitColor . '" style="text-align: right;">';
+        
         $tabindexin  = '';
         $tabindexout = '';
-        if($accountplan->EnableCurrency || $closed) { #Not possibel to edit in and out when currency is enabled
+        if($closed) {
           $readonly = "readonly disable";
         } else {
           if($AmountField == 'in')
@@ -252,6 +251,7 @@ class framework_logic_vouchergui
           }
         }
 
+        $html = '<td class="' . $accountplan->DebitColor . '" style="text-align: right;">';
         $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I', 'OnChange' => 'return allowOnlyCreditOrDebit(this, \'credit\')'));
         $html .= '<br>' . $accountplan->debittext;
         $html .= "</td>\n";
@@ -269,7 +269,7 @@ class framework_logic_vouchergui
     * @return
     */
     #Buttons on line
-    function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type) {
+    function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type, $button) {
         global $_lib, $accounting, $tabindex, $MY_SELF;
         $html = '';
 
@@ -282,11 +282,12 @@ class framework_logic_vouchergui
             {
                 if($voucher->DisableAutoVat !=1 )
                 {
-                    $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$voucher->VoucherPeriod&amp;voucher.VoucherDate=$voucher->VoucherDate&amp;voucher.JournalID=$JournalID&amp;voucher.VoucherID=$voucher->VoucherID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_delete=1&amp;view_mvalines=$view_mvalines&amp;view_linedetails=$view_linedetails", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette linjen?'));
-                }
-                if($voucher->DisableAutoVat !=1 )
-                {
-                    $html .= '<input type="submit" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
+                    if($button == 'delete') {
+                        $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$voucher->VoucherPeriod&amp;voucher.VoucherDate=$voucher->VoucherDate&amp;voucher.JournalID=$JournalID&amp;voucher.VoucherID=$voucher->VoucherID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_delete=1&amp;view_mvalines=$view_mvalines&amp;view_linedetails=$view_linedetails", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette linjen?'));
+                    }
+                    if($button == 'update') {
+                        $html .= '<input type="submit" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
+                    }
                 }
                 else
                 {
@@ -294,9 +295,13 @@ class framework_logic_vouchergui
                 }
             }
             elseif($voucher->VoucherType == 'A') {
-                $html .= "Det er ikke lov &aring; endre auto bilag";
+                if($button != 'update') {
+                    $html .= "Det er ikke lov &aring; endre auto bilag";
+                }
             } else {
-                $html .= "Perioden er avsluttet";
+                if($button != 'update') {
+                    $html .= "Perioden er avsluttet";
+                }
             }
         }
         return $html;
@@ -317,7 +322,7 @@ class framework_logic_vouchergui
     * @return
     */
     #Buttons on head
-    function update_journal_button_head($voucherHead, $VoucherPeriod, $VoucherType, $JournalID, $new, $rowCount) {
+    function update_journal_button_head($voucherHead, $VoucherPeriod, $VoucherType, $JournalID, $new, $rowCount, $button) {
         global $_lib, $tabindex, $accounting, $MY_SELF;
 
         $html = '';
@@ -326,29 +331,35 @@ class framework_logic_vouchergui
 
             if($new)
             {
-                $html .= '<input type="submit" name="action_voucher_new" value="Lagre" class="green" tabindex="';
-                if($rowCount>1) {
-                    $html .= '';
-                } else {
-                    $html .= $tabindex++;
+                if($button = 'update') {
+                    $html .= '<input type="submit" name="action_voucher_new" value="Lagre" class="green" tabindex="';
+                    if($rowCount>1) {
+                        $html .= '';
+                    } else {
+                        $html .= $tabindex++;
+                    }
+                    $html .= ' class="button">';
                 }
-                $html .= ' class="button">';
             }
             elseif(($accounting->is_valid_accountperiod($VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) && $voucherHead->VoucherType != 'A') || $VoucherPeriod == '0000-00')
             {
-                $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$VoucherPeriod&amp;voucher.VoucherDate=$voucherHead->VoucherDate&amp;voucher.JournalID=$JournalID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_head_delete=1", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette bilaget?'));
-                $html .= '<input type="submit" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
-                if($rowCount>1) {
-                    $html .= '';
-                } else {
-                    $html .= $tabindex++;
+                if($button == 'delete') {
+                    $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$VoucherPeriod&amp;voucher.VoucherDate=$voucherHead->VoucherDate&amp;voucher.JournalID=$JournalID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_head_delete=1", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette bilaget?'));
                 }
-                $html .= '" class="button" accesskey="S" />';
+                if($button == 'update') {
+                    $html .= '<input type="submit" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
+                    if($rowCount>1) {
+                        $html .= '';
+                    } else {
+                        $html .= $tabindex++;
+                    }
+                    $html .= '" class="button" accesskey="S" />';
+                }
             }
             elseif($voucherHead->VoucherType == 'A') {
-                $html .= "Det er ikke lov &aring; endre auto bilag";
+                if($button != 'update') $html .= "Det er ikke lov &aring; endre auto bilag";
             } else {
-                $html .= "Perioden er avsluttet";
+                if($button != 'update') $html .= "Perioden er avsluttet";
             }
         }
 

@@ -137,8 +137,6 @@ elseif($balance < 0)
   $class1 = "creditred";
 }
 
-$print_currency_inputs = $voucherHead->ForeignCurrencyID != '';
-
 ##############################################################
 #Get accountplan info
 
@@ -208,6 +206,8 @@ if(!$period_open) {
     <?
 }
 ?>
+
+<? print exchange::getCurrenciesInJS(); ?>
 
 <form class="voucher" name="find_customer" action="<? print $MY_SELF ?>" method="post">
     Kunde/Org-nummer
@@ -356,27 +356,25 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
             if(!$period_open)
                 printf("Perioden %s er stengt", $voucher_input->VoucherPeriod);
 
-        echo exchange::getFormHeaderCurrencyDropdown($voucherHead);
         ?>
         <br /><br />
 
     </td>
   </tr>
   <tr class="voucher">
-    <th></th>
+    <th colspan="2"></th>
     <th>Kontoplan</th>
     <th>Debet</th>
     <th>Kredit</th>
-    <th>Saldo</th>
     <th>Valuta</th>
     <th>I<u>n</u>n</th>
     <th>U<u>t</u></th>
     <th>Kurs</th>
     <th><u>M</u>VA</th>
     <th>M<u>e</u>ngde</th>
-    <th>A<u>v</u>d.</th>
-    <th><u>P</u>rosjekt</th>
     <th>Bil</th>
+    <th><u>P</u>rosjekt</th>
+    <th>A<u>v</u>d.</th>
     <th><u>F</u>orfallsdato</th>
     <th>Faktura</th>
     <th></th>
@@ -386,6 +384,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>&nbsp;</th>
   </tr>
   <tr class="voucher" valign="top">
+    <td><? if($period_open) print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount, 'update'); ?></td>
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
     <td>
     <?
@@ -394,55 +393,34 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     </td>
 <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut, !$period_open) ?>
     <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
-<? print $voucher_gui->currency2($voucherHead, $print_currency_inputs) ?>
+<? print $voucher_gui->currency2($voucherHead) ?>
 <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent, !$period_open) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucherHead->Quantity, 'return' => 'value')) ?>"><? } ?></td>
+
     <td>
       <?
-if($rowCount>1) {
-    $tmp = '';
-}
-else {
-    $tmp = $tabindex++;
-}
-
-if($accountplan->EnableDepartment) {
-    $_lib['form2']->department_menu2(
-        array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V',
-              'disabled' => $period_disabled));
-} ?></td>
-
-    <td>
-<?
-if($rowCount>1)
-{
-    $tmp = '';
-} else
-{
-    $tmp = $tabindex++;
-}
-
-if($accountplan->EnableProject)
-{
-    $_lib['form2']->project_menu2(
-        array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $voucher_input->ProjectID, 'tabindex' => $tmp, 'accesskey' => 'P',
-              'disabled' => $period_disabled));
-}
-?>
+      $tmp = ($rowCount > 1 ? '' : $tabindex++);
+      if($accountplan->EnableCar) {
+        $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled, 'active_reference_date' => $voucher_input->VoucherDate));
+      } ?>
     </td>
+
     <td>
       <?
-    if($rowCount>1) {
-        $tmp = '';
-    }
-    else {
-        $tmp = $tabindex++;
-    }
+      $tmp = ($rowCount > 1 ? '' : $tabindex++);
+      if($accountplan->EnableProject) {
+        $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $voucher_input->ProjectID, 'tabindex' => $tmp, 'accesskey' => 'P', 'disabled' => $period_disabled));
+      } ?>
+    </td>
 
-    if($accountplan->EnableCar) {
-        $_lib['form2']->car_menu2(
-            array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled, 'active_reference_date' => $voucher_input->VoucherDate));
-    } ?></td>
+    <td>
+      <?
+      $tmp = ($rowCount > 1 ? '' : $tabindex++);
+      if($accountplan->EnableDepartment) {
+        $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V', 'disabled' => $period_disabled));
+      } ?>
+    </td>
+
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
@@ -454,10 +432,7 @@ if($accountplan->EnableProject)
 
 <td><input class="voucher" type="text" size="40" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
-<?
-if($period_open)
-    print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount)
-?>
+    <? if($period_open && !$voucher_input->new) print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount, 'delete') ?>
     </td>
   </tr>
   <? if($view_linedetails == 1) { ?>
@@ -594,6 +569,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 
 
     <tr class="<? print $row_class ?> voucher">
+      <td><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type, 'update') ?></td>
       <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucher->VoucherID); ?></td>
       <td><? print $voucher_gui->account($voucher_input->VoucherPeriod,
                                          $voucher_input->new,
@@ -607,12 +583,12 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
       <!--<td></td><td></td><td></td><td></td>-->
       <? $currency_is_editable = $voucher->DisableAutoVat != 1; ?>
-      <? print $voucher_gui->currency2($voucher, $currency_is_editable && $print_currency_inputs) // disable currency for nonhead lines ?>
+      <? print $voucher_gui->currency2($voucher, $currency_is_editable) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, !$period_open) ?></td>
       <td><? if($accountplan->EnableQuantity) { if ($voucher->DisableAutoVat != 1) { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucher->Quantity, 'return' => 'value')); ?>"><? } } ?></td>
-      <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
-      <td><? if($accountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' => 'ProjectID', 'value' => $voucher->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')); } ?></td>
       <td><? if($accountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher->CarID, 'tabindex' => $tabindex, 'active_reference_date' => $voucher_input->VoucherDate)); } ?></td>
+      <td><? if($accountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' => 'ProjectID', 'value' => $voucher->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')); } ?></td>
+      <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
       <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.InvoiceID"   accesskey="R" value="<? print $voucher->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
@@ -623,7 +599,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 
       <td><!-- <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucher->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tabindex++, 'accesskey' => 'E')); ?> </td>-->
       <td><input class="voucher" type="text" size="40" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-      <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type) ?></td>
+      <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type, 'delete') ?></td>
     </tr>
     <? if($view_linedetails == 1) { ?>
     <tr class="<? print $row_class ?>">
@@ -641,8 +617,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 ?>
 
 <tr>
-    <td colspan="1"></td>
-    <td></td>
+    <td colspan="3"></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountIn) ?></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountOut) ?></td>
     <td colspan="2"></td>

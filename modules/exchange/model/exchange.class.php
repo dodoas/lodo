@@ -241,66 +241,6 @@ class exchange {
 	}
 
 	/**
-	 * @param  int    $voucher The voucher
-	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
-	 */
-	function getFormHeaderCurrencyDropdown($voucher) {
-        $voucher_id = $voucher->VoucherID;
-
-        if ($voucher_id == "") {
-            $voucher_id_text = "newvoucher"; // set to new to make js work
-        } else {
-            $voucher_id_text = "";
-        }
-
-        $voucher_foreign_rate = $voucher->ForeignConvRate;
-        $voucher_foreign_currency = $voucher->ForeignCurrencyID;
-
-        $action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
-        $currencies = self::getActiveCurrencies();
-
-        if (empty($currencies)) {
-            return "";
-        }
-
-        $select_options = '<option value="">'. exchange::getLocalCurrency() .'</option>';
-        foreach ($currencies as $currency) {
-            if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
-                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
-            else
-                $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
-        }
-
-        // we create one currency array for each voucher to allow for specific rates to be tied to specific accountplans or dates (which might be needed in the future) in reports
-        $currency_js = '<script type="text/javascript">';
-        // $currency_js .= 'if (!window.currency_rates) var currency_rates = new Object();';
-
-        $currency_js .= 'window.currency_rates = new Object();';
-        foreach ($currencies as $currency) {
-            $currency_js .= 'window.currency_rates[\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
-        }
-        $currency_js .= '</script>';
-        $ch_curr .= $currency_js;
-
-        $currency_is_hidden = !($voucher->ForeignCurrencyID);
-
-        $block_return = 'onKeyPress="return disableEnterKey(event)"';
-        $ch_curr  .= '<div class="vouchercurrencyheaderwrapper" id="voucher_currency_div_'. $voucher_id_text .'" style="display:inline; padding: 5px; border: 1px solid grey;">';
-        $ch_curr .= '<form method="post" name="voucher_global">';
-        $ch_curr .= '<b><u>V</u>aluta</b>: <select class="currency_id" name="voucher.ForeignCurrencyID" ' . $block_return . ' onchange="onCurrencyChange(this)">'. $select_options .'"</select>';
-        $ch_curr .= '<span class="currency_field" '. ($currency_is_hidden ? 'style="display: none;"' : '') .'>';
-        $ch_curr .= 'Kurs: <input class="number currency_rate" type="text" name="voucher.ForeignConvRate" size="10" onchange="this.value=toAmountString(toNumber(this.value))" value="'. str_replace(".", ",", (string)(round($voucher_foreign_rate, 4))) .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
-        $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a>';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
-        $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
-        $ch_curr .= '</span>';
-        $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return journalCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
-        $ch_curr .= '</form>';
-        $ch_curr .= '</div>';
-        return $ch_curr;
-    }
-
-	/**
 	 * @param  int    $voucher_id The voucher id
 	 * @param  float  $voucher_foreign_amount The amount in foreign currency
 	 * @param  float  $voucher_foreign_rate The conversion rate based in 100 of local currency
@@ -361,6 +301,20 @@ class exchange {
         $googleQuery = $amount . ' ' . $currency . ' in ' . $exchangeIn;
         $googleQuery = urlEncode( $googleQuery );
         return 'http://www.google.com/search?q=' . $googleQuery;
+    }
+
+    function getCurrenciesInJS() {
+      $currency_js = '';
+      $currencies = self::getActiveCurrencies();
+      if (!empty($currencies)) {            
+        $currency_js .= '<script type="text/javascript">';
+        $currency_js .= 'window.currency_rates = new Object();';
+        foreach ($currencies as $currency) {
+          $currency_js .= 'window.currency_rates[\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
+        }
+        $currency_js .= '</script>';
+      }
+      return $currency_js;
     }
 }
 ?>
