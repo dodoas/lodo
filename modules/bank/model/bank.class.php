@@ -1019,17 +1019,22 @@ class framework_logic_bank {
                     //print_r($matches);
                     $transaction = $fbbank->get_fakturabanktransactionobject($fakturabankID);
 
-                    $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
-                    $relations_invoices = array();
-                    foreach($relations as $rel) {
-                        $relations_invoices[] = $rel['InvoiceNumber'];
+                    $fb_relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+
+                    $relation_groups = array();
+                    $relation_groups_info = array();
+                    foreach ($fb_relations as $rel) {
+                        $relation_groups[$rel['FakturabankReconciliationID']][] = $rel;
                     }
 
                     $sum = $unvoted->AmountIn - $unvoted->AmountOut;
 
-                    foreach($relations as $rel) {
-                        $sum -= $rel['Amount'];
-                        #print_r($rel);
+                    foreach ($relation_groups as $reconciliation_id => $relations) {
+                        $relation_groups_info[$reconciliation_id] = array('current_sum' => 0, 'total_sum' => 0);
+                        foreach($relations as $rel) {
+                            $sum -= $rel['Amount'];
+                            $relation_groups_info[$reconciliation_id]['total_sum'] += $rel['Amount'];
+                        }
                     }
 
                     if($sum >= 0.0001 || $sum <= -0.0001) {
@@ -1040,14 +1045,14 @@ class framework_logic_bank {
                         continue;
                     }
 
-                    $has_foreign_invoice = false;
-                    foreach ($relations as $rel) {
-                        if($rel["Currency"] != exchange::getLocalCurrency()) {
-                            $has_foreign_invoice = true;
+                    foreach ($relation_groups as $reconciliation_id => $relations) {
+                        $relation_groups_info[$reconciliation_id]['has_foreign_invoice'] = false;
+                        foreach ($relations as $rel) {
+                            if($rel["Currency"] != exchange::getLocalCurrency()) {
+                                $relation_groups_info[$reconciliation_id]['has_foreign_invoice'] = true;
+                            }
                         }
                     }
-
-                    //$VoucherH['voucher_InvoiceID'] = implode(',', $relations_invoices);
 
                     $accounting->insert_voucher_line(
                         array(
@@ -1064,6 +1069,9 @@ class framework_logic_bank {
                     $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
                     $FBVoucherH['voucher_Vat']           = $unvoted->VAT;
 
+                    foreach ($relation_groups as $reconciliation_id => $relations) {
+
+                    $has_foreign_invoice = $relation_groups_info[$reconciliation_id]['has_foreign_invoice'];
                     foreach($relations as $rel) {
                         // Skip creating the reason voucher if reason is currency difference.
                         // After conversion, real difference is automatically generated.
@@ -1103,6 +1111,7 @@ class framework_logic_bank {
                                     $FBVoucherH['voucher_AmountOut']         = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
                                     $FBVoucherH['voucher_AmountIn']          = 0;
                                 }
+                                $relation_groups_info[$reconciliation_id]['current_sum'] += $FBVoucherH['voucher_AmountOut'];
 
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
@@ -1145,6 +1154,7 @@ class framework_logic_bank {
                                     $FBVoucherH['voucher_AmountOut']         = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
                                     $FBVoucherH['voucher_AmountIn']          = 0;
                                 }
+                                $relation_groups_info[$reconciliation_id]['current_sum'] += $FBVoucherH['voucher_AmountOut'];
 
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
@@ -1175,13 +1185,21 @@ class framework_logic_bank {
 
                                 $FBVoucherH['voucher_AccountPlanID'] = $reconciliation->AccountPlanID;
 
-                                if($rel['Amount'] > 0) {
-                                    $FBVoucherH['voucher_AmountOut']    = $rel['Amount'];
-                                    $FBVoucherH['voucher_AmountIn']     = 0;
+                                if($rel['Currency'] == exchange::getLocalCurrency()) {
+                                    $FBVoucherH['voucher_AmountOut']         = ($rel['Amount'] > 0 ?  $rel['Amount'] : 0);
+                                    $FBVoucherH['voucher_AmountIn']          = ($rel['Amount'] < 0 ? -$rel['Amount'] : 0);
+                                    $FBVoucherH['voucher_ForeignCurrencyID'] = null;
+                                    $FBVoucherH['voucher_ForeignAmount']     = 0;
+                                    $FBVoucherH['voucher_ForeignConvRate']   = 0;
                                 } else {
-                                    $FBVoucherH['voucher_AmountIn']     = -$rel['Amount'];
-                                    $FBVoucherH['voucher_AmountOut']    = 0;
+                                    $FBVoucherH['voucher_ForeignCurrencyID'] = $rel['Currency'];
+                                    $FBVoucherH['voucher_ForeignAmount']     = abs($rel['Amount']);
+                                    $FBVoucherH['voucher_ForeignConvRate']   = exchange::getConversionRate($rel['Currency']);
+                                    $converted_amount = exchange::convertToLocal($rel['Currency'], $rel['Amount']);
+                                    $FBVoucherH['voucher_AmountOut']         = ($converted_amount > 0 ?  $converted_amount : 0);
+                                    $FBVoucherH['voucher_AmountIn']          = ($converted_amount < 0 ? -$converted_amount : 0);
                                 }
+                                $relation_groups_info[$reconciliation_id]['current_sum'] += $rel['Amount'];
 
                                 $FBVoucherH['voucher_InvoiceID']     = '';
                                 $FBVoucherH['voucher_KID']           = '';
@@ -1193,15 +1211,17 @@ class framework_logic_bank {
                                                                        'comment' => 'Hov. Fra bankavstemming'));
                             }
                         }
+                        if($rel['Currency'] != exchange::getLocalCurrency()) {
+                            $relation_groups_info[$reconciliation_id]['foreign_voucher'] = $FBVoucherH;
+                        }
                     }
 
                     // In case that this journal had a foreign currency invoices, we should check if there is difference
                     // after currency conversion between bank transaction and invoice amounts, and fix it.
                     if($has_foreign_invoice) {
-                        if($result_motkonto_for_currency_difference = $accounting->get_accountplan_object($FBVoucherH['voucher_AccountPlanID'])->MotkontoResultat1) {
-                            $FBVoucherH['voucher_AccountPlanID'] = $result_motkonto_for_currency_difference;
-                        }
-                        $accounting->correct_journal_balance($FBVoucherH, $FBVoucherH['voucher_JournalID'], $this->VoucherType);
+                        $foreign_voucher = $relation_groups_info[$reconciliation_id]['foreign_voucher'];
+                        $accounting->add_line_currency_difference($foreign_voucher, $foreign_voucher['voucher_JournalID'], $this->VoucherType, $relation_groups_info[$reconciliation_id]['current_sum'], $relation_groups_info[$reconciliation_id]['total_sum']);
+                    }
                     }
                 }
                 ####################################################################################

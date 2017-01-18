@@ -763,6 +763,7 @@ class lodo_fakturabank_fakturabankvoting {
 
                         $dataH['Incoming'] = $transaction->incoming;
                         $dataH['Description'] = $transaction->description;
+                        $dataH['FakturabankReconciliationID'] = $relation->{"reconciliation-id"};
                         $dataH['DoneReconciliatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"done-reconciliated-at"});
                         $dataH['FromBankAccount'] = $this->strip_account_number($transaction->{"from-account"});
                         $dataH['ToBankAccount'] = $this->strip_account_number($transaction->{"to-account"});
