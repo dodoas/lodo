@@ -51,6 +51,15 @@ elseif(strlen($voucher_input->Amount) > 0)
 #Check if this account is a reskontro. This information should only be checked for reskontro
 $hovedbokto   = $_lib['sess']->get_companydef('AccountHovedbokResultatTo');
 #if($accountplan->AccountPlanID > $_lib['sess']->get_companydef('AccountHovedbokResultatTo')) {
+if($voucher_input->accountplan->AccountPlanType == 'supplier' && $voucher_input->accountplan->EnableCurrency && $voucher_input->ForeignCurrencyID == '') {
+    if($voucher_input->action['voucher_head_update'] || $voucher_input->action['voucher_update']) {
+        $old_AccountPlanID = $_lib['db']->get_row(array('query' => "SELECT AccountPlanID FROM voucher WHERE VoucherID = $voucher_input->VoucherIDOld;"))->AccountPlanID;
+    }
+    if($voucher_input->action['voucher_new'] || ($voucher_input->action['voucher_head_update'] || $voucher_input->action['voucher_update']) && $old_AccountPlanID != $voucher_input->AccountPlanID) {
+        $voucher_input->ForeignCurrencyID = $voucher_input->accountplan->Currency;
+        $voucher_input->ForeignConvRate   = exchange::getConversionRate($voucher_input->accountplan->Currency);
+    }
+}
 
 if($voucher_input->action['voucher_head_update']){
     $accounting->update_voucher_head($voucher_input);
@@ -216,7 +225,7 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
     /****************************************************************************/
     if($debug) print "<br />\nPostering1: $voucher_input->AccountPlanID<br>\n";
     #print_r($voucher_input->request('voucher_new'));
-    $voucher_input->VoucherIDOld = $voucher_input->VoucherID = $accounting->insert_voucher_line(array('post'=>$voucher_input->request('voucher_new'), 'accountplanid'=>$voucher_input->AccountPlanID, 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'F¿rste line ny postering'));
+    $voucher_input->VoucherIDOld = $voucher_input->VoucherID = $accounting->insert_voucher_line(array('post'=>$voucher_input->request('voucher_new'), 'accountplanid'=>$voucher_input->AccountPlanID, 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'F¿rste line ny postering', 'in_or_out' => $voucher_input->InOrOut));
     if($debug) print_r($voucher_input->request('debug2'));
     #exit;
     if($KIDstatus) {
@@ -291,7 +300,7 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
             $_lib['sess']->debug("######Autopostering loop: $account : $account_type######. AmountIn: " .  $requestcopy['voucher_AmountIn'] . ' AmountOut: ' . $requestcopy['voucher_AmountOut']);
             #print "<br>Postering4: $account<br>\n";
             #print_r($requestcopy);
-            $accounting->insert_voucher_line(array('post'=>$requestcopy, 'accountplanid'=>$account, 'type'=>$account_type, 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'Fra auto voucher'));
+            $accounting->insert_voucher_line(array('post'=>$requestcopy, 'accountplanid'=>$account, 'type'=>$account_type, 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'Fra auto voucher', 'in_or_out' => $voucher_input->InOrOut));
         }
     }
 }
@@ -300,7 +309,7 @@ elseif(($voucher_input->action['voucher_update'] || $voucher_input->action['vouc
 
 	#print_r($voucher_input->request('voucher_update'));
 
-    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record', $_REQUEST['voucher_VoucherIsInOrOut']);
+    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record', $voucher_input->InOrOut);
 
     #print "<h2>Test2</h2>";
     #Update hovedbokskonto for this postering, it may have changed

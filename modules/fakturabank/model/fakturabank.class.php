@@ -629,7 +629,7 @@ class lodo_fakturabank_fakturabank {
                     #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
 
                     $PeriodOld         = $InvoiceO->Period;
-                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
+                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod($PeriodOld);
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
 
@@ -638,9 +638,11 @@ class lodo_fakturabank_fakturabank {
                 if ($InvoiceO->CreditNote) {
                     $InvoiceO->LegalMonetaryTotal->PayableAmount = -$InvoiceO->LegalMonetaryTotal->PayableAmount;
                     $InvoiceO->TaxTotal->TaxAmount = -$InvoiceO->TaxTotal->TaxAmount;
-                    foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
-                        $allowance_charge->Amount = -$allowance_charge->Amount;
-                        unset($allowance_charge); // because of problem with references
+                    if(!empty($InvoiceO->AllowanceCharge)) {
+                        foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
+                            $allowance_charge->Amount = -$allowance_charge->Amount;
+                            unset($allowance_charge); // because of problem with references
+                        }
                     }
                 }
 
@@ -665,13 +667,17 @@ class lodo_fakturabank_fakturabank {
                               $line->InvoicedQuantity = -$line->InvoicedQuantity;
                               $line->LineExtensionAmount = -$line->LineExtensionAmount;
                               $line->TaxTotal->TaxAmount = -$line->TaxTotal->TaxAmount;
-                              foreach ($line->AllowanceCharge as &$allowance_charge) {
-                                $allowance_charge->Amount = -$allowance_charge->Amount;
-                                unset($allowance_charge); // because of problem with references
+                              if(!empty($line->AllowanceCharge)) {
+                                  foreach ($line->AllowanceCharge as &$allowance_charge) {
+                                    $allowance_charge->Amount = -$allowance_charge->Amount;
+                                    unset($allowance_charge); // because of problem with references
+                                  }
                               }
-                              foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
-                                $allowance_charge->Amount = -$allowance_charge->Amount;
-                                unset($allowance_charge); // because of problem with references
+                              if(!empty($line->Price->AllowanceCharge)) {
+                                  foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
+                                    $allowance_charge->Amount = -$allowance_charge->Amount;
+                                    unset($allowance_charge); // because of problem with references
+                                  }
                               }
                             }
                             #It has to be an amount to be checked - all zero lines will not be imported later.
@@ -877,9 +883,11 @@ class lodo_fakturabank_fakturabank {
             if ($InvoiceO->CreditNote) {
                 $InvoiceO->LegalMonetaryTotal->PayableAmount = -$InvoiceO->LegalMonetaryTotal->PayableAmount;
                 $InvoiceO->TaxTotal->TaxAmount = -$InvoiceO->TaxTotal->TaxAmount;
-                foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
-                    $allowance_charge->Amount = -$allowance_charge->Amount;
-                    unset($allowance_charge); // because of problem with references
+                if(!empty($InvoiceO->AllowanceCharge)) {
+                    foreach ($InvoiceO->AllowanceCharge as &$allowance_charge) {
+                        $allowance_charge->Amount = -$allowance_charge->Amount;
+                        unset($allowance_charge); // because of problem with references
+                    }
                 }
             }
 
@@ -929,7 +937,7 @@ class lodo_fakturabank_fakturabank {
                     #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
 
                     $PeriodOld         = $InvoiceO->Period;
-                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
+                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod($PeriodOld);
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
                 if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency() && !exchange::getConversionRate($InvoiceO->DocumentCurrencyCode)) {
@@ -978,13 +986,17 @@ class lodo_fakturabank_fakturabank {
                     $line->InvoicedQuantity = -$line->InvoicedQuantity;
                     $line->LineExtensionAmount = -$line->LineExtensionAmount;
                     $line->TaxTotal->TaxAmount = -$line->TaxTotal->TaxAmount;
-                    foreach ($line->AllowanceCharge as &$allowance_charge) {
-                        $allowance_charge->Amount = -$allowance_charge->Amount;
-                        unset($allowance_charge); // because of problem with references
+                    if(!empty($line->AllowanceCharge)) {
+                        foreach ($line->AllowanceCharge as &$allowance_charge) {
+                            $allowance_charge->Amount = -$allowance_charge->Amount;
+                            unset($allowance_charge); // because of problem with references
+                        }
                     }
-                    foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
-                        $allowance_charge->Amount = -$allowance_charge->Amount;
-                        unset($allowance_charge); // because of problem with references
+                    if(!empty($line->Price->AllowanceCharge)) {
+                        foreach ($line->Price->AllowanceCharge as &$allowance_charge) {
+                            $allowance_charge->Amount = -$allowance_charge->Amount;
+                            unset($allowance_charge); // because of problem with references
+                        }
                     }
                   }
 

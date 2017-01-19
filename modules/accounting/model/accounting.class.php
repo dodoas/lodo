@@ -471,6 +471,8 @@ class accounting {
             $fields['voucher_CarID']     = $accountplan->CarID; #Default car
         }
 
+        $this->calculate_amount_foreign_and_rate($post, $args['in_or_out']);
+
         ############################################################################################
         #Deault values
         $fields['voucher_JournalID']          = $post['voucher_JournalID'];
@@ -1589,8 +1591,10 @@ class accounting {
             } else if(($amount == 0 || $amount == '') && $foreign_amount > 0 && $rate > 0) {
                 $amount = $foreign_amount * 100 / $rate;
                 if($in_or_out == 'in') {
-                    $fields['voucher_AmountIn'] = $amount;
+                    $fields['voucher_AmountIn']  = $amount;
+                    $fields['voucher_AmountOut'] = 0;
                 } else if($in_or_out == 'out') {
+                    $fields['voucher_AmountIn']  = 0;
                     $fields['voucher_AmountOut'] = $amount;
                 }
             } else if($fields['voucher_ForeignCurrencyID'] != '') {
@@ -1703,6 +1707,59 @@ class accounting {
         #Voucher is in balance. Set Balance Ok. (Default is not ok)
         $this->set_journal_balance(array('ok' => true, 'JournalID' => $JournalID, 'VoucherType' => $VoucherType));
         #print "<b>Ferdig korriger balanse automatisk</b><br>";
+    }
+
+    public function add_line_currency_difference($fields, $JournalID, $VoucherType, $current_sum, $total_sum) {
+        global $_lib;
+
+        $original_fields = $fields;
+
+        $accountplan = $this->get_accountplan_object($fields['voucher_AccountPlanID']);
+        if($result_motkonto_for_currency_difference = $this->get_accountplan_object($accountplan->MotkontoResultat1)) {
+            $fields['voucher_AccountPlanID'] = $result_motkonto_for_currency_difference->AccountPlanID;
+
+            $vat = $this->get_vataccount_object(array('VatID'=>$result_motkonto_for_currency_difference->VatID, 'date' => $fields['voucher_VoucherDate']));
+            $fields['voucher_Vat'] = $vat->Percent;
+            $fields['voucher_VatID'] = $vat->VatID;
+        }
+
+        $fields['voucher_AutoKID']            = '';
+        $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
+        $fields['voucher_VoucherType']        = $VoucherType;
+
+        $amount = $total_sum - $current_sum;
+        $amount = -$amount; // to get the amount to the other side of the voucher
+
+        if($amount >= 0.0001 || $amount <= -0.0001) {
+            if($amount < 0) {
+              $fields['voucher_AmountIn']  = 0;
+              $fields['voucher_AmountOut'] = abs($amount);
+            }
+            elseif($amount > 0) {
+              $fields['voucher_AmountIn']  = abs($amount);
+              $fields['voucher_AmountOut'] = 0;
+            }
+
+            $fields['voucher_ForeignCurrencyID'] = '';
+            $fields['voucher_ForeignAmount']     = 0;
+            $fields['voucher_ForeignConvRate']   = 0;
+
+            unset($fields['voucher_DescriptionID']);
+            unset($fields['voucher_VoucherID']);
+
+            $fields['voucher_AutomaticReason']      = "Automatisk balanse fra valuta forskjell";
+
+            $fields['voucher_AddedByAutoBalance']   = 0;
+            $fields['voucher_Active']               = 1;
+
+            $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
+            $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);
+
+            $this->update_vat_smart(array('VoucherID'=>$VoucherID, 'post'=>$fields, 'comment' => 'Called from: add_line_currency_difference'));
+            $this->voucher_to_hovedbok_auto($fields['voucher_AccountPlanID'], $fields, $VoucherID);
+        }
+
+        $this->correct_journal_balance($original_fields, $original_fields['voucher_JournalID'], $VoucherType);
     }
 
     /***************************************************************************
@@ -1867,8 +1924,8 @@ class accounting {
             return true;
         }
 
-        if (isset($this->cached_valid_accountperiod[$access][$periode])){
-          return $this->cached_valid_accountperiod[$access][$periode];
+        if (isset($this->cached_valid_accountperiod[$access][$period])){
+          return $this->cached_valid_accountperiod[$access][$period];
         }
 
 
@@ -1883,12 +1940,12 @@ class accounting {
 
         if($row->Period)
         {
-            $this->cached_valid_accountperiod[$access][$periode] = true;
+            $this->cached_valid_accountperiod[$access][$period] = true;
             return true;
         }
         else
         {
-            $this->cached_valid_accountperiod[$access][$periode] = false;
+            $this->cached_valid_accountperiod[$access][$period] = false;
             return false;
         }
     }
@@ -1913,10 +1970,10 @@ class accounting {
     * @param
     * @return hash with active periods
     */
-    function get_open_accountperiod_hash(){
+    function get_open_accountperiod_hash($minimal_period = false){
         // TODO this method should maybe take AcccessLevel into account
         global $_lib;
-        $query = "select Period, 1 from accountperiod where (Status=2 or Status=3) order by Period asc";
+        $query = "select Period, 1 from accountperiod where (Status=2 or Status=3) ". ($minimal_period ? "and Period >= '$minimal_period' " : "") ."order by Period asc";
         return $_lib['storage']->get_hash(array('query' => $query, 'key' => 'Period', 'value' => 'Period'));
     }
 
@@ -1925,9 +1982,9 @@ class accounting {
     * @param
     * @return
     */
-    function get_first_open_accountingperiod() {
+    function get_first_open_accountingperiod($minimal_period = false) {
 
-        $PeriodH = $this->get_open_accountperiod_hash();
+        $PeriodH = $this->get_open_accountperiod_hash($minimal_period);
         return array_shift($PeriodH); # Get
     }
 
