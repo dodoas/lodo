@@ -678,7 +678,7 @@ class framework_logic_bank {
             foreach($this->unvotedaccount as $id => $unvotedmatch) {
 
                 if(!$unvotedmatch->KID) {
-                    $match = $moneyflow->findmatch(array('AmountIn' => $unvotedmatch->AmountIn, 'AmountOut' => $unvotedmatch->AmountOut, 'VoucherDate' => $line->Period .'-'.$line->Day ));
+                    $match = $moneyflow->findmatch(array('AmountIn' => $unvotedmatch->AmountIn, 'AmountOut' => $unvotedmatch->AmountOut));
                     if(count($match) == 1) {
                         $this->unvotedaccount[$id]->MatchAccountPlanID   = $match[0]->AccountPlanID;
                         $this->unvotedaccount[$id]->MatchAccountName     = $match[0]->AccountName;

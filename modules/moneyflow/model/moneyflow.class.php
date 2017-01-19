@@ -25,13 +25,9 @@ class moneyflow {
             $this->StartDate = $_lib['sess']->get_session('LoginFormDate');
         
         $this->year          = $_lib['date']->get_this_year($this->StartDate);
-        
-        $expected_query = "select voucher.*, accountplan.AccountName, accountplan.OrgNumber from voucher, accountplan where voucher.AccountPlanID=accountplan.AccountPlanID and accountplan.EnableMoneyFlow=1 and voucher.DueDate > '" . $this->StartDate . "' and accountplan.EnableReskontro != 1 and (VoucherType='U' or VoucherType='S' or VoucherType='L') and voucher.Active=1 order by voucher.DueDate asc ";
-        #print "expected: $expected_query<br>\n";
-        $result = $_lib['db']->db_query($expected_query);
-        $this->expected = $result;
-        #VoucherType = U og S
-        
+
+        $this->query_expected();
+
         $saldo_query = "select voucher.AccountPlanID, accountplan.AccountName, sum(voucher.AmountIn) as sumin, sum(voucher.AmountOut) as sumout from voucher, accountplan where voucher.AccountPlanID=accountplan.AccountPlanID and accountplan.EnableSaldo=1 and voucher.VoucherDate <= '" . $this->StartDate . "' and voucher.Active=1  group by voucher.AccountPlanID"; #Where start saldo er satt.
         #print "saldo: $saldo_query<br>\n";
         $this->result_saldo = $_lib['db']->db_query($saldo_query);
@@ -82,6 +78,15 @@ class moneyflow {
         }
     }
 
+    function query_expected(){
+      global $_lib;
+        $expected_query = "select voucher.*, accountplan.AccountName, accountplan.OrgNumber from voucher, accountplan where voucher.AccountPlanID=accountplan.AccountPlanID and accountplan.EnableMoneyFlow=1 and voucher.DueDate > '" . $this->StartDate . "' and accountplan.EnableReskontro != 1 and (VoucherType='U' or VoucherType='S' or VoucherType='L') and voucher.Active=1 order by voucher.DueDate asc ";
+        #print "expected: $expected_query<br>\n";
+        $result = $_lib['db']->db_query($expected_query);
+        $this->expected = $result;
+        #VoucherType = U og S
+    }
+
     function calculate_saldoH(){
         global $_lib;
         #Start saldo
@@ -100,8 +105,6 @@ class moneyflow {
     #Return value changed to return one ore more matches. All recieving functions has to be changed accordingly.
     function findmatch($args) {
         global $_lib;
-        $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
-    
         $balance = $args['AmountIn'] - $args['AmountOut'];
 
         #if($balance == 5) {
@@ -109,6 +112,7 @@ class moneyflow {
         #    print "find: $balance<br>\n";
         #    print_r($this->amountH);
         #}
+        $this->query_expected();
 
         $return_array = array();
         while($expected = $_lib['db']->db_fetch_object($this->expected)) {
@@ -127,7 +131,7 @@ class moneyflow {
         if(!empty($return_array)) {
             return $return_array;
         } else {
-            return 0;
+            return NULL;
         }
     }
 }
