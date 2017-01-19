@@ -42,6 +42,7 @@ elseif($_REQUEST['action_install_db'])
     $tables['country']         = true;
 
     $tables['vat'] = true;
+    $tables['car'] = true;
 
     #print_r($_REQUEST);
 
