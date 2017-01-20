@@ -1979,6 +1979,10 @@ class lodo_fakturabank_fakturabank {
                             $id_attributes = array('schemeID' => 'NO:SUP-ACCNT-RE');
                             self::createElementIfNotEmpty($doc, $identification, 'cbc:ID', $schemaValue, $id_attributes);
                         }
+                        
+                        // Not by EHF standard, but we always want to send this customer number to FB
+                        $customer_number = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                        self::createElementIfNotEmpty($doc, $identification, 'cbc:CustomerNumber', $customer_number);
                 }
 
                 $name = self::createElementIfNotEmpty($doc, $cacparty, 'cac:PartyName');
