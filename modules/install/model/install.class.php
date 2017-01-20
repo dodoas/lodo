@@ -111,7 +111,10 @@ class Install
             {
               $where = "-w \"SalaryConfID = 1\"";
             }
-
+            elseif($table == "car")
+            {
+              $where = "-w \"CarID = 0\"";
+            }
 
             if($i == 1)
                 $operator = '>';

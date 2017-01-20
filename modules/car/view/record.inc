@@ -26,19 +26,26 @@ if($_lib['input']->getProperty('action_car_update')) {
 }
 elseif($_lib['input']->getProperty('action_car_new'))
 {
-
-  if($car_CarID > 0) {
-
-    $query  = "select CarID from $db_table where CarID=" . (int) $car_CarID . "";
-    $result = $_lib['db']->db_query($query);
-    if($_lib['db']->db_numrows($result) == 0) {
+  if($car_CarID > 0 || $car_CarID === "") {
+    $exists = false;
+    if($car_CarID !== "") {
+      $query  = "select CarID from $db_table where CarID=" . (int) $car_CarID . "";
+      $result = $_lib['db']->db_query($query);
+      if($_lib['db']->db_numrows($result) > 0) {
+        $exists = true;
+      }
+    }
+    if(!$exists) {
       $post = $_POST;
       $post['car_ValidFrom'] = "NOW()";
 
       $query  = "insert into car (CarID, ValidFrom) values (". (int) $post['car_CarID'].", ". $post['car_ValidFrom'] .")";
-      $_lib['db']->db_insert2(array('query'=>$query));
+      $new_id = $_lib['db']->db_insert2(array('query'=>$query, 'insert_id'=>true));
+
+      $CarID = $_POST['car_CarID'] = $new_id;
+    } else {
+      $CarID = $_POST['car_CarID'];
     }
-    $CarID = $_POST['car_CarID'];
   } else {
     $_lib['message']->add("Bilnummer ikke oppgitt, pr&oslash;v p&aring; nytt");
     header("Location: " . $_lib['sess']->dispatchs . "t=car.list");
