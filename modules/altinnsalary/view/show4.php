@@ -43,6 +43,11 @@ print $_lib['sess']->doctype ?>
 
 <body>
 <?
+if ($messages = $_lib['message']->get()) { ?>
+  <div class="warning"><? print $messages; ?></div>
+  <br>
+<?
+}
 if (isset($_SESSION['oauth_invoice_error'])) {
   if(!is_array($_SESSION['oauth_invoice_error'])) {
     $_SESSION['oauth_invoice_error'] = array($_SESSION['oauth_invoice_error']);
