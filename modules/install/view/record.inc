@@ -29,6 +29,7 @@ elseif($_REQUEST['action_install_db'])
     $tables = array();
     $tables['confmenues']               = true;
     $tables['confdbfields']             = true;
+    $tables['migrations']               = true;
     $tables['role']                     = true;
     $tables['roletemplate']             = true;
     $tables['roletemplateaccess']       = true;
