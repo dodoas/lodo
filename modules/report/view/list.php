@@ -12,7 +12,6 @@ while($row = $_lib['db']->db_fetch_object($result_setup)) {
 }
 
 includelogic('accounting/accounting');
-//includelogic('timesheets/timesheet');
 $accounting = new accounting();
 
 $thisDate            	= $_lib['sess']->get_session('LoginFormDate');
@@ -20,8 +19,6 @@ $thisYear            	= substr($thisDate,0,4);
 $firstPeriodThisYear 	= $_lib['date']->get_this_year($thisDate).'-01';
 $lastPeriodThisYear 	= $accounting->get_last_accountperiod_this_year($thisDate);
 
-//$timesheet = new timesheet_user();
-//$timesheet_projects = $timesheet->list_projects();
 
 print $_lib['sess']->doctype ?>
 
@@ -192,7 +189,7 @@ print $_lib['sess']->doctype ?>
   <tr>
     <th rowspan="12">
   	R<br />E<br />S<br />K<br />O<br />N<br />T<br />R<br />O<br />
-  	</th>
+    </th>
   <td rowspan="4">Saldobalanse</td>
     <td>Reskontro fra hovedbok kontonummer</td>
     <td><?
@@ -268,7 +265,7 @@ print $_lib['sess']->doctype ?>
 <input type="hidden" name="report.Type" value="reskontro">
 <input type="hidden" name="report.Sort" value="VoucherDate">
   <tr class="r0">
-	<td rowspan="5">bilagsutskrift</td>
+  <td rowspan="5">bilagsutskrift</td>
     <td>Reskontro fra hovedbok kontonummer</td>
     <td><?
         $aconf = array();
@@ -303,7 +300,7 @@ print $_lib['sess']->doctype ?>
     <td><? $_lib['form2']->Type_menu2(array('field' => 'VoucherType', 'type' => 'VoucherType', 'table' => 'report')) ?></td>
 </tr>
 <tr class="r0">
-	<td colspan="6">Hvis du &oslash;nsker at rapporten skal stemme med hovedbok m&aring; du kj&oslash;re ut fra du startet regnskapet</td>
+  <td colspan="6">Hvis du &oslash;nsker at rapporten skal stemme med hovedbok m&aring; du kj&oslash;re ut fra du startet regnskapet</td>
 </tr>
 <tr class="r0">
     <td colspan='2'></td>
@@ -421,7 +418,6 @@ print $_lib['sess']->doctype ?>
         <?
             print $_lib['form3']->AccountPeriod_menu3(array('name' => 'ToPeriod', 'noaccess' => true, 'value'=>$lastPeriodThisYear));
         ?>
-
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
@@ -461,7 +457,6 @@ print $_lib['sess']->doctype ?>
 <tr class="r0">
     <td>Innberetning l&oslash;nn</td>
     <td>Velg &aring;r</td>
-
     <td>
     <?
        print $_lib['form3']->Type_menu3(array('table' => 'report', 'field' => 'year', 'type'=>'PosibleSalaryYears', 'required'=>true, 'value' => $thisYear));
@@ -498,18 +493,15 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->project_menu2($aconf);
             ?>
     </td>
-
     <td>Periode</td>
     <td><?
            $timesheet_period_sql = "SELECT CONCAT(YEAR(date), '-', MONTH(date)) as one, CONCAT(YEAR(date), '-', MONTH(date)) as two FROM timesheets GROUP BY one";
            print $_lib['form3']->_MakeSelect(array('query' => $timesheet_period_sql, 'name' => 'report_Project'));
             ?>
     </td>
-
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
-
 </table>
 
 <hr>
@@ -517,7 +509,7 @@ print $_lib['sess']->doctype ?>
 <table class="lodo_data" width="100%">
 <tr>
 	<th rowspan="7">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
-	<td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td>
+  <td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID" target="_blank">Bilags, balanse, resultat, reskontro, dato og periode kontroll</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=auditorreport.list" target="_blank">Saldobalanse selvangivelse &aring;rsregnskap</a></td>
 </tr>
@@ -548,7 +540,6 @@ print $_lib['sess']->doctype ?>
             print $_lib['form3']->accountplan_number_menu($aconf);
             ?>
     </td>
-
     <td>&Aring;r
         <?
             print $_lib['form3']->Type_menu3(array('table' => 'report', 'field' => 'Year', 'type'=>'PosibleSalaryYears', 'required'=>true, 'value' => $thisYear));
@@ -701,7 +692,6 @@ print $_lib['sess']->doctype ?>
     <td></td>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
-
 </form>
 </table>
 
@@ -764,14 +754,10 @@ while ($bRow = $_lib['db']->db_fetch_object($query_handler))
 }
 ?>
   </select>
-    <!-- <input type="text" name="report.FromDate" value=""  size="10" class="number"> -->
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
 </table>
-
-
-
 <? includeinc('bottom') ?>
 </body>
 </html>

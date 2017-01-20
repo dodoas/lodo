@@ -55,11 +55,9 @@ if(strlen($account->AccountPlanType) > 0) {
 <? includeinc('left'); ?>
 
 <?
-if(isset($JournalID))
-{ ?>
+if(isset($JournalID)){ ?>
    <a href="<? print $_lib['sess']->dispatch ?>t=journal.edit&JournalID=<? print $JournalID ?>">Tilbake til bilag <? print $JournalID ?></a>
-<?
-}
+<? }
 
 require_once 'new.inc';
 print '<h1>' . $_lib['message']->get() . '</h1>';
@@ -249,9 +247,8 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     <td>
     <? $_lib['form2']->checkbox2($db_table, "EnableMotkontoResultat", $account->EnableMotkontoResultat,'');
         $aconf = array();
-        $aconf['type'][]  		= 'result';
+        $aconf['type'][]        = 'result';
         $aconf['table']         = 'accountplan';
-
         $aconf['field']         = 'MotkontoResultat1';
         $aconf['value']         = $account->MotkontoResultat1;
         print $_lib['form3']->accountplan_number_menu($aconf);
@@ -269,9 +266,8 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     <td>
     <? $_lib['form2']->checkbox2($db_table, "EnableMotkontoBalanse", $account->EnableMotkontoBalanse,'');
         $aconf = array();
-        $aconf['type'][]  		= 'balance';        
+        $aconf['type'][]        = 'balance';
         $aconf['table']         = 'accountplan';
-        
         $aconf['field']         = 'MotkontoBalanse1';
         $aconf['value']         = $account->MotkontoBalanse1;
         print $_lib['form3']->accountplan_number_menu($aconf);
@@ -320,10 +316,10 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   <tr>
     <td colspan="2" align="right">
         <form name="delete" action="<? print $_SETUP['DISPATCH'] ?>t=accountplan.list&accountplan_type=hovedbok" method="post">
-        <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID)) ?>
-        <? print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D')) ?>
-        <? if($_lib['sess']->get_person('AccessLevel') > 3) {
-            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>'', 'confirm' => 'Er du sikker p&aring; at du vil slette kontoen'));
+        <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID))
+         print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D'))
+         if($_lib['sess']->get_person('AccessLevel') > 3) {
+            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>'', 'confirm' => 'Er du sikker p&aring; at du vil slette kontoen?'));
         } ?>
         </form>
     </td>

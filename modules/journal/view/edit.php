@@ -20,8 +20,6 @@ $view_linedetails   = $_lib['input']->getProperty('view_linedetails');
 if(!$view_mvalines)     $view_mvalines = 0;
 if(!$view_linedetails)  $view_linedetails = 0;
 
-//tatt vekk pga link feil i fra rapporter
-//$voucher_input->type = $_REQUEST['type'];
 $view   = $_REQUEST['view'];
 
 #################################################################################################################
@@ -73,7 +71,7 @@ if($voucherHead->AccountPlanID > 0) {
 } elseif(!$voucher_input->AccountPlanID) {
     $voucher_input->AccountPlanID = $voucher_input->DefAccountPlanID;
 } else {
-    #The accountplan id is what we sendt in the querystring
+    #The accountplan id is what we send in the querystring
 }
 
 $accountplan    = $accounting->get_accountplan_object($voucher_input->AccountPlanID); #Find account
@@ -112,17 +110,17 @@ else
     $voucher_input->DueDate = $date->VoucherDate;
 ##############################################################
 #Calculate account balance
-#Check if it is hovedbok or balamse konto
+#Check if it is (main ledger)hovedbok or balance account
 $fromperiod     = $_lib['date']->get_this_year($_lib['sess']->get_session('LoginFormDate'))."-01";
 $toperiod       = $_lib['date']->get_this_period($_lib['sess']->get_session('LoginFormDate'));
 if($accountplan->AccountPlanType == 'result')
 {
-    #This is a result konto - only to be calculated for this year to innlogged date
+    #This is a result account - only to be calculated for this year to login form date
     $account_balance = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from $db_table  where AccountPlanID='$voucher_input->AccountPlanID' and VoucherPeriod >= '$fromperiod' and VoucherPeriod <= '$toperiod' and Active=1 group by AccountPlanID";
 }
 else
 {
-    #Calculate from the beginning to innlogged date
+    #Calculate from the beginning to form login date
     $account_balance = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from $db_table  where AccountPlanID='$voucher_input->AccountPlanID' and VoucherPeriod <= '$toperiod' and Active=1 group by AccountPlanID";
 }
 $vb = $_lib['storage']->get_row(array('query' => $account_balance));
@@ -186,13 +184,8 @@ print $_lib['sess']->doctype ?>
     <? includeinc('javascript') ?>
 </head>
 <body onload="document.forms['<? print $form_name2 ?>'].elements['voucher.VoucherDate'].focus();">
-<? includeinc('top') ?>
-<? includeinc('left') ?>
-<?
-#print "Til slutt<br>\n";
-#print_r($voucher_input->request('toppen av skjermbildet'));
-#choose = search fopr KID
-// print "Hit2,5<br>";
+<? includeinc('top');
+   includeinc('left');
 
 if(!$period_open) {
     ?>
@@ -392,7 +385,6 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     ?>
     </td>
 <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut, !$period_open) ?>
-    <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
 <? print $voucher_gui->currency2($voucherHead) ?>
 <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent, !$period_open) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucherHead->Quantity, 'return' => 'value')) ?>"><? } ?></td>
@@ -445,9 +437,6 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
 <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="invoice" onclick="changeMatchBy(this);" <? if ($voucherHead->matched_by == 'invoice') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.KID" value="<? print $voucher_input->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="kid" onclick="changeMatchBy(this);" <? if ($voucherHead->matched_by == 'kid') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-
-    <td><!-- <? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucherHead->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tmp, 'accesskey' => 'E')); ?> --></td>
-
 <td><input class="voucher" type="text" size="40" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
     <? if($period_open && !$voucher_input->new) print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount, 'delete') ?>
@@ -462,12 +451,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
    <? } ?>
 </form>
 
-
-
 <?
-#print "VID: $VoucherID<br>";
-#if($VoucherID) { #Hvorfor denne? FJernet
-
 $rowCount--;
 $bgit=0;
 $i = 0;
@@ -515,10 +499,10 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 
     #Calculate account balance
     if($accountplan->AccountPlanType == 'balance') {
-      #This is a result konto - only to be calculated for this year to innlogged date
+      #This is a result konto - only to be calculated for this year to login form date
       $account_balance = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from $db_table  where AccountPlanID='$voucher->AccountPlanID' and VoucherPeriod >= '$fromperiod' and VoucherPeriod <= '$toperiod'group by AccountPlanID and Active=1";
     } else {
-      #Calculate from the beginning to innlogged date
+      #Calculate from the beginning to login form date
       $account_balance = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from $db_table  where AccountPlanID='$voucher->AccountPlanID' and VoucherPeriod <= '$toperiod' group by AccountPlanID and Active=1";
     }
 
@@ -599,7 +583,6 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
         ?></td>
       <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher->AmountIn, $voucher->AmountOut, !$period_open) ?>
       <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
-      <!--<td></td><td></td><td></td><td></td>-->
       <? $currency_is_editable = $voucher->DisableAutoVat != 1; ?>
       <? print $voucher_gui->currency2($voucher, $currency_is_editable) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, !$period_open) ?></td>
@@ -669,7 +652,6 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.KID"   accesskey="R" value="<? print $voucher->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
       <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="kid" onclick="changeMatchBy(this);" <? if ($voucher->matched_by == 'kid') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
-      <td><!-- <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucher->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tabindex++, 'accesskey' => 'E')); ?> </td>-->
       <td><input class="voucher" type="text" size="40" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
       <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type, 'delete') ?></td>
     </tr>

@@ -23,12 +23,12 @@ else #independent instalation
     #$_SETUP['INTRFACE'] = "";
      session_start();
      require_once("../conf/default.inc");
-     #Init the database asced for
+     #Init the database asked for
      if(isset($_POST['DB_NAME_LOGIN']))
      {
         #session_regenerate_id();
         $_SESSION['DB_NAME'] = $_POST['DB_NAME_LOGIN'];
-        #print "Ny db: " .  $_SESSION['DB_NAME'] . "<br>";
+        #print "New db: " .  $_SESSION['DB_NAME'] . "<br>";
      }
      elseif(!isset($_SESSION['DB_NAME']))
      { #Should we validate this?

@@ -1,12 +1,8 @@
 <?
 $db_table    = "voucher";
-#print_r($_REQUEST);
 
 /*$VoucherType        = $_REQUEST['VoucherType'];
 $AccountPlanID      = $_REQUEST['AccountPlanID'];*/
-
-#print_r($_REQUEST);
-#print "<br>\n";
 
 includelogic('voucher/voucherinput');
 
@@ -27,11 +23,6 @@ if ((isset($_REQUEST['action_voucher_new']) || isset($_REQUEST['action_voucher_h
 includelogic('journal/search');
 $search_class   = new search_class();
 
-#print_r($voucher_input);
-
-#print_r($voucher_input->action);
-
-#print "VoucherType6: $VoucherType<br>\n";
 #################################################################################################################
 #Search fasilities
 if(strlen($voucher_input->CustomerNumber) > 0)
@@ -41,7 +32,7 @@ if(strlen($voucher_input->CustomerNumber) > 0)
 }
 
 ####################################
-#Check if this account is a reskontro. This information should only be checked for reskontro
+#Check if this account is a ledger. This information should only be checked for ledger
 $hovedbokto   = $_lib['sess']->get_companydef('AccountHovedbokResultatTo');
 #if($accountplan->AccountPlanID > $_lib['sess']->get_companydef('AccountHovedbokResultatTo')) {
 if($voucher_input->accountplan->AccountPlanType == 'supplier' && $voucher_input->accountplan->EnableCurrency && $voucher_input->ForeignCurrencyID == '') {
@@ -58,7 +49,6 @@ if($voucher_input->action['voucher_head_update']){
     $accounting->update_voucher_head($voucher_input);
 }
 
-#print_r($voucher_input->action);
 #Get next available or update journal id
 if($voucher_input->action['voucher_new']) { #We are saving a billag for the first time, update journal id
     $voucher_input->JournalIDOrg = $voucher_input->JournalID;
@@ -85,15 +75,13 @@ if($voucher_input->action['voucher_new']) { #We are saving a billag for the firs
 
 elseif($voucher_input->new && !$_lib['input']->getProperty('action_journalid_search')
        && empty($_REQUEST['action_postmotpost_save_currency'])){ #We are just asking the next available journal id
-    #print "Finn billag";
-
-     #TE changes to make it possible to set JournalID from bank avstemming to get nicer series of journalids
+     # Something to think about: changes to make it possible to set JournalID from bank reconciliation to get nicer series of journalids
     if($voucher_input->JournalID > 0) {
         list($voucher_input->JournalID, $tmp) = $accounting->get_next_available_journalid(array('verify' => true, 'JournalID' => $voucher_input->JournalID, 'type' => $voucher_input->VoucherType));
 
             $_lib['message']->add(array('message' => $tmp));
             if($voucher_input->JournalIDOrg != $voucher_input->JournalID) {
-                $_lib['message']->add(array('message' => "Bilagnsummeret du pr&oslash;vde og bruke er allerede i bruk: Du har fï¿½tt tildelt et ledig nummwer: $voucher_input->JournalID<br>"));
+                $_lib['message']->add(array('message' => "Bilagnsummeret du pr&oslash;vde og bruke er allerede i bruk: Du har f&aring;tt tildelt et ledig nummer: $voucher_input->JournalID<br>"));
         }
     } else {
         list($voucher_input->JournalID, $tmp) = $accounting->get_next_available_journalid(array('available' => true, 'type' => $voucher_input->VoucherType, 'from' => 'input->new'));
@@ -109,7 +97,8 @@ elseif($voucher_input->action['voucher_head_update'])
 
         $_lib['message']->add(array('message' => $tmp));
         if($voucher_input->JournalIDOrg != $voucher_input->JournalID) {
-            $_lib['message']->add(array('message' => "Bilagnsummeret du pr&oslash;vde og bruke er allerede i bruk: Du har fï¿½tt tildelt et ledig nummwer: $voucher_input->JournalID<br>"));
+            // The journal number you tried to use is already in use: You've been given the first available number
+            $_lib['message']->add(array('message' => "Bilagnsummeret du pr&oslash;vde og bruke er allerede i bruk: Du har f&aring;tt tildelt et ledig nummer: $voucher_input->JournalID<br>"));
         }
     }
 }
@@ -122,7 +111,6 @@ elseif($voucher_input->action['voucher_head_delete'])
 }
 elseif($voucher_input->action['voucher_delete'])
 {
-    #print "Sletter linje 3<br>\n";
     $accounting->delete_voucher_line_smart($voucher_input->VoucherIDOld, $voucher_input->JournalID, $voucher_input->VoucherType);
 
     #this is wrong, we should not set this balance not ok, we should try to make it balance
@@ -130,7 +118,7 @@ elseif($voucher_input->action['voucher_delete'])
 
     #################################################################################################################
     #Add vouchers so that the balance is zero
-    #summerer bilag og evnt oppretter motposteringer.
+    # Sums up journal and a creates counter lines.
     $accounting->correct_journal_balance($_REQUEST, $voucher_input->JournalID, $voucher_input->VoucherType);
     $voucher_input->exit = 1;
 }
@@ -150,7 +138,6 @@ elseif(!empty($_REQUEST['action_postmotpost_save_currency']))
 
 if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
 {
-    #print "<h1>kk1</h2>";
 
     $VoucherKidH = array(); #Hash that will be poulated on KID Match
 
@@ -167,28 +154,26 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
     #print "type:" . $voucher_input->type . "<br>\n";
     if($voucher_input->type == "bank_in" or $voucher_input->type == "bank_out" or $voucher_input->type == "buycash_out" or $voucher_input->type == "buynotacash_out" or $voucher_input->type == "salecash_in" or $voucher_input->type == "salecredit_in" or $voucher_input->type == "salenotacash_in" or $voucher_input->type == "salenotacredit_in") {
         if(!strlen($voucher_input->InvoiceID) > 0) {
-            #print "Setter: JournalID til reference<br>\n";
             $voucher_input->InvoiceID = $voucher_input->VoucherType . $voucher_input->JournalID;
         }
     }
 
     /****************************************************************************/
-    # Vi mï¿½ kjï¿½re kid oppslag fï¿½rst for ï¿½ kunne sette belï¿½p ol. rikitg i den fï¿½rste posteringen for ï¿½ fï¿½ lov til ï¿½ lagre linjen
+    # We have to do a KID search first so we can set the correct amount on the first voucher to be able to save the line
     $debug = false;
     if($voucher_input->KID && ($voucher_input->VoucherType == 'K' || $voucher_input->VoucherType == 'B')) {
-        #print "Opprett neste linje automatisk basert pï¿½ kid referanse<br>\n";
 
-        #Det mï¿½ vï¿½re en kid oppgitt, vi mï¿½ ikke ha funnet kid match tidligere og kontoen vi fï¿½rer pï¿½ mï¿½ ha kid stï¿½tte pï¿½skrudd
+        # The KID must be supplied, we must not have found a KID match earlier and the account plan we are accounting on must have KID enabled
         #We only do if if we have a KID, and the voucher line is not automatically updated from this KID before.
-        if($debug) print "Kid oppgitt og kontoen stï¿½tter kid<br>\n";
-        if($debug) print "Vi bruker KID referansen for videre oppslag<br>";
+        if($debug) print "KID supplied and account plan has KID enabled<br>\n";
+        if($debug) print "We are using KID reference for the upcomig searches<br>";
         if($debug) print "findOpenPostKid1<br>";
         list($status, $refH) = $accounting->postmotpost->findOpenPostKid($voucher_input->KID, $voucher_input->VoucherIDOld, $voucher_input->AccountPlanID);
-        if($debug) print "Status finn KID: $status<br>";
+        if($debug) print "Status find KID: $status<br>";
         if($status) {
             #Exactly one KID ref match, update the voucher AmountIn, AmountOut and Accountplan ID only if not updated before.
-            list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $accounting->postmotpost->getKIDInfo($refH); #finn linje som har en reskontro (det mï¿½ vï¿½re kunde)
-            if($debug) print "Status finn KIDInfo: $KIDstatus<br>\n";
+            list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $accounting->postmotpost->getKIDInfo($refH); # find line that has a ledger (it has to be a  customer, supplier or employee)
+            if($debug) print "Status find KID Info: $KIDstatus<br>\n";
             if($KIDstatus) {
 
                 $VoucherKidH['voucher_JournalID']           = $voucher_input->JournalID;
@@ -206,24 +191,24 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
                 $VoucherKidH['voucher_Active']              = 1;
                 $VoucherKidH['voucher_AutomaticReason']     = "Automatisk fra KID: " . $voucher_input->KID;
 
-                #Update the original voucher to, if not amouns are presen it will not be inserted
+                # Update the original voucher too, if not amounts are present it will not be inserted
                 if($KIDAmountOut > 0) $voucher_input->setAmountIn($KIDAmountOut);
-                if($KIDAmountIn  > 0)  $voucher_input->setAmountOut($KIDAmountIn);
+                if($KIDAmountIn  > 0) $voucher_input->setAmountOut($KIDAmountIn);
                 #$voucher_input->KID           = $voucher_input->JournalID; #Kid should only be saved in the vouchers that should generate a match.
 
-                #Husk ï¿½ lukke mot denne matchen. Men den vil bli ï¿½pnet igjen umiddelbart. Dette mï¿½ nok sjekkes grundigere. Kid mï¿½ ï¿½pnes bare pï¿½ linjenivï¿½.
+                # Remember to close against this match. But it will be reopened again at once. This must be checked more thouroughly. KID must be oppened on line level.
             }
         }
     }
     /****************************************************************************/
-    if($debug) print "<br />\nPostering1: $voucher_input->AccountPlanID<br>\n";
+    if($debug) print "<br />\nVoucher1: $voucher_input->AccountPlanID<br>\n";
     #print_r($voucher_input->request('voucher_new'));
     $voucher_input->VoucherIDOld = $voucher_input->VoucherID = $accounting->insert_voucher_line(array('post'=>$voucher_input->request('voucher_new'), 'accountplanid'=>$voucher_input->AccountPlanID, 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'F�rste line ny postering', 'in_or_out' => $voucher_input->InOrOut));
     if($debug) print_r($voucher_input->request('debug2'));
     #exit;
     if($KIDstatus) {
-        #Update kid postering, this shoudl balance the billag
-        if($debug) print "<br \>\nPostering2 KID: " . $VoucherKidH['voucher_AccountPlanID'] . "<br>\n";
+        # Update KID voucher, this should balance the journal
+        if($debug) print "<br \>\nVoucher2 KID: " . $VoucherKidH['voucher_AccountPlanID'] . "<br>\n";
         #print_r($VoucherKidH);
         $VoucherKidID = $accounting->insert_voucher_line(array('post'=>$VoucherKidH, 'accountplanid'=>$VoucherKidH['voucher_AccountPlanID'], 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'KID postering'));
         #exit;
@@ -232,34 +217,24 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
     }
     if($debug) print "<br \><br \>\n\n";
     /****************************************************************************/
-    #unset($_REQUEST['voucher_Description']); #Vi kopierer med tekst p� de nye linjene ogs�: TE 2006-05-16
+    #unset($_REQUEST['voucher_Description']); # We are copying text on the new lines as well: TBD 2006-05-16
     $voucher_input->DescriptionID   = '';
     $voucher_KID              = $voucher_input->KID;
     $voucher_InvoiceID        = $voucher_input->InvoiceID;
-    #$voucher_input->Reference       = ''; #New test TE. Removed to copy kid 2006-05-16
 
     if(isset($voucher_input->autovoucher['balanse']) && !$KIDstatus)
     {
         $voucher_input->AutomaticReason     = "Automatisk motpostering";
         if($voucher_input->AmountIn > 0) $voucher_input->setAmountOut($voucher_input->AmountIn);
         if($voucher_input->AmountOut > 0) $voucher_input->setAmountIn($voucher_input->AmountOut);
-        #print "Bel�p endret<br>\n";
-        #print_r($voucher_input);
-        #$voucher_input->AddedByAutoBalance  = 1; #Kan den gjentas? Nei. TE 2006-06-01
-        #print "Postering3: Automatisk motpostering: $voucher_input->AccountPlanID (kommentert ut) HUSK<br>\n";
 
         #$voucher_input->VoucherID           = $accounting->insert_voucher_line(array('post'=>$voucher_input->request(), 'accountplanid' => $voucher_input->AccountPlanID, 'type'=>'first', 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'Automatisk motpostering'));
     }
 
-    #Nytt. Bytt side p� alt som blir auto postert. Eller skal det bare bli snudd for visse tuper: balanse, resultat, reskontro
-    # Merk: Reskontro og resultatkontoer f�res p� motsatt side av opprinnelig debit/kredit
-    # Balanse f�res p� samme side som opprinnelig debit/credit
+    # New. Change side on everything that is automatically provided. Or should it be changed only for certain types: balance, result, ledger
+    # Note: Ledger and result accountplan are accounted on the opposite side of their original debit/credit
+    # Balance are accounted on the same side as their original debit/credit
 
-    #################################################################################################################
-    #Legg til nnye posteringer automatisk
-
-    #print "Autocoucher<br>\n";
-    #print_r($voucher_input->autovoucher);
     foreach($voucher_input->autovoucher as $account_type => $account)
     {
         if($account > 0 and $account_type != 'balanse' and $account_type != 'resultat')
@@ -269,7 +244,7 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
 
             if($voucher_input->type == "buycash_out" || $voucher_input->type == "buynotacash_out" || $voucher_input->type == "salecash_in" || $voucher_input->type == "salenotacash_in") {
                 if(!preg_match("/balanse/", $account_type)) {
-                    #Vi snur bel�pene for reskontro og resultatkonto ved automatisk f�ring
+                    # We invert amounts for ledger and result account plan with automatic voucher
                     $tmp = $requestcopy['voucher_AmountIn'];
                     $requestcopy['voucher_AmountIn']           = $requestcopy['voucher_AmountOut'];
                     $requestcopy['voucher_AmountOut']          = $tmp;
@@ -288,11 +263,11 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
                 $requestcopy['voucher_KID']         = $voucher_KID;
                 $requestcopy['voucher_InvoiceID']   = $voucher_InvoiceID;
             }
+            // Automatic voucher after rule set: __
             $requestcopy['voucher_AutomaticReason'] = "Automatisk postering etter regelsett: $account_type";
 
-            $_lib['sess']->debug("######Autopostering loop: $account : $account_type######. AmountIn: " .  $requestcopy['voucher_AmountIn'] . ' AmountOut: ' . $requestcopy['voucher_AmountOut']);
-            #print "<br>Postering4: $account<br>\n";
-            #print_r($requestcopy);
+            $_lib['sess']->debug("######Auto voucher loop: $account : $account_type######. AmountIn: " .  $requestcopy['voucher_AmountIn'] . ' AmountOut: ' . $requestcopy['voucher_AmountOut']);
+            # From auto voucher
             $accounting->insert_voucher_line(array('post'=>$requestcopy, 'accountplanid'=>$account, 'type'=>$account_type, 'VoucherType'=>$voucher_input->VoucherType, 'comment' => 'Fra auto voucher', 'in_or_out' => $voucher_input->InOrOut));
         }
     }
@@ -304,27 +279,24 @@ elseif(($voucher_input->action['voucher_update'] || $voucher_input->action['vouc
 
     $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record', $voucher_input->InOrOut);
 
-    #print "<h2>Test2</h2>";
-    #Update hovedbokskonto for this postering, it may have changed
+    #Update main ledger(hovedbok) account plan for this voucher, it may have changed
 }
 
 if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_head_update'] or $voucher_input->action['voucher_new'] or $voucher_input->action['voucher_delete'] or $voucher_input->action['voucher_head_delete']) and !$voucher_input->exit)
 {
-    //#The following code has to be run for all actions that potentially changes data in the voucher.
-    //#Vi m� korrigere balanse f�r vi oppdaterer motkonto-. Dvs vi m� beregne resultatet etter at alle posteringer er postert
+    // The following code has to be run for all actions that potentially changes data in the voucher.
+    // We must correct the balance before we update counterpart account plan. That means we have to calculate the result after all vouchers are bookkeept
 
-    //#This will run more often now (also on delete) so it will probably be more correct. Or could it have zero data for period etc?
-    //#FEIL HER?
-    /* Just in case... */
+    // This will run more often now (also on delete) so it will probably be more correct. Or could it have zero data for period etc?
     if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
         $accounting->voucher_to_hovedbok_auto($voucher_input->AccountPlanID, $voucher_input->request('voucher_to_hovedbok_auto'), $voucher_input->VoucherIDOld);
 
-        $accounting->delete_credit_debit_zero_lines($voucher_input->JournalID, $voucher_input->VoucherType); //#Dette blir feil bla n�r vi legger til ny linje
+        $accounting->delete_credit_debit_zero_lines($voucher_input->JournalID, $voucher_input->VoucherType); // This becomes wrong when we add a new line
         $accounting->correct_journal_balance($voucher_input->request('correct_journal_balance'), $voucher_input->JournalID, $voucher_input->VoucherType);
 
-        //#We only do this if the user has clicked new or update
+        // We only do this if the user has clicked new or update
         //#################################################################################################################
-        //# Automatically update motkonto resultat og balanse for perioden (Always on all changes)
+        // Automatically update counterpart account plan result and balance for the period (Always on all changes)
         $post = array();
         $post['voucher_VoucherPeriod']      = $voucher_input->VoucherPeriod;
         $accounting->set_journal_motkonto(array('post' => $post));
@@ -334,18 +306,16 @@ if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_
     }
 }
 
-//print_r($_REQUEST);
-#Hvis det er en reskontro sï¿½ vis en liste med alle ï¿½pne poster mot denne reskontroen (dette er den kontoen  man har valgt pï¿½ en posteringslinje
+# If there's a ledger display a list with all open posts against this ledger (this is the account plan we have chosen on a voucher)
 #print "AccountPlanID: $AccountPlanID<br>\n";
 
 if(!empty($voucher_input->AccountPlanID) &&
    $accounting->is_reskontro($voucher_input->AccountPlanID)) {
     $accountplan = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     if($accountplan->EnablePostPost) $print_postmotpost_matches_button = true;
-
 }
 
-#Dette m� gj�res til slutt for at ikke linjer med null i debit og credit skal slettes
+# This must be done at the end so it doesn't get removed with the lines with zero in debit and credit before
 if($voucher_input->action['voucherline_new'])
 {
    $fields = array();
@@ -362,7 +332,6 @@ if($voucher_input->action['voucherline_new'])
    $fields['voucher_ForeignAmount']     = 0;
    $fields['voucher_AutomaticReason']   = 'Ny linje';
    $fields['voucher_Active']            = 1;
-   #print_r($fields);
    $_lib['storage']->db_new_hash($fields,'voucher');
 }
 ?>

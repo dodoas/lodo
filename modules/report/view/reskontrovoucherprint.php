@@ -84,7 +84,7 @@ $numrows        = $_lib['db']->db_numrows($result_voucher);
 
 function setdiffKID($result_voucher) {
     global $_lib, $kidmatchH;
-    
+
     while($voucher = $_lib['db']->db_fetch_object($result_voucher)) {
         $kidmatchH[$voucher->AccountPlanID][$voucher->KID] += $voucher->AmountIn - $voucher->AmountOut;
     }
@@ -178,12 +178,11 @@ print $_lib['sess']->doctype ?>
     $sumAccountH = array();
     // set starting previous account to starting one
     $prev_acc_id = $_reskontroFrom;
-    
+
     while($voucher = $_lib['db']->db_fetch_object($result_voucher))
     {
         if($account != $voucher->AccountPlanID || $account == 0)
         {
-            #Dette er siste linje i loopen
             // only prints after first time(when $account var is set)
             if ($account) {
             ?>
@@ -221,9 +220,9 @@ print $_lib['sess']->doctype ?>
                     $sql_accountplan = "select * from accountplan where AccountPlanID=$key";
                     $accountplan     = $_lib['storage']->get_row(array('query' => $sql_accountplan));
                     $sumAccountH[$key] = $sum;
-                    // add to sum and print table with no vouchers since they 
+                    // add to sum and print table with no vouchers since they
                     // are not in the selected period
-                    // print order of each tr: accountplan id and name, period and leftover amount, 
+                    // print order of each tr: accountplan id and name, period and leftover amount,
                     // sum(leftover amount at the end of selected period, same as at the beginning)
                 ?>
                 <tr>
@@ -266,7 +265,7 @@ print $_lib['sess']->doctype ?>
             $saldo       = 0;
 
             $foreign_saldo      = 0;
-            
+
             #if account is reskontro, get its hovedboks konto
             $accountWork = $accounting->getHovedbokToAccount($account);
 
@@ -281,10 +280,10 @@ print $_lib['sess']->doctype ?>
               list($saldo, $quantity) = get_saldo($account ,'' , $_REQUEST['report_FromPeriod']);
               $sumAccountH[$account]  = $saldo;
               #print "Balanse for kto: $account, saldo: $sumAccountH[$account]<br>";
-            } 
+            }
             elseif($accountWork->AccountPlanType == 'employee') {
                 $saldo                      = 0;
-                $sumAccountH[$account]  	= 0; 
+                $sumAccountH[$account]  	= 0;
 
             } else {
                 print "Denne situasjonen har vi ikke kodet for kto mangler type: " . $accountWork->AccountPlanID;
@@ -332,7 +331,7 @@ print $_lib['sess']->doctype ?>
         $saldo                  += ($voucher->AmountIn - $voucher->AmountOut);
         $_lib['message']->add("$i Saldo: $voucher->VoucherType$voucher->JournalID $voucher->AccountPlanID - $voucher->VoucherPeriod : $voucher->AmountIn - $voucher->AmountOut = $saldo");
         $quantitysum += $voucher->Quantity;
-        
+
         #Foreign currency
         $foreign_amount_in  = 0;
         $foreign_amount_out = 0;
@@ -349,7 +348,6 @@ print $_lib['sess']->doctype ?>
         } else {
             $foreign_currency = '';
         }
-
         ?>
             <tr class="voucher">
                 <td><nobr><? print $i    ?> <? print $voucher->VoucherDate    ?></nobr></td>
@@ -426,7 +424,6 @@ print $_lib['sess']->doctype ?>
         </tr>
 </table>
 </form>
-
   <script>
     var error_count = <? print $error_count; ?>;
     var error_links_div = document.getElementById("error_links");

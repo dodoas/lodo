@@ -65,7 +65,7 @@ class lodo_fakturabank_fakturabank {
 
         $page       = "rest/invoices.xml";
 
-        $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
+        $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=200, otherwise we only get one record
         $params     .= "&supplier_status=" . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
         $params     .= "&order=invoiceno&sord=asc&type=outgoing&lodo=true";
 
@@ -447,7 +447,6 @@ class lodo_fakturabank_fakturabank {
             if($size) {
                 includelogic('xmldomtoobject/xmldomtoobject');
                 $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag, 'attributesOfInterest' => $this->attributesOfInterest));
-                #print "\n<hr>$xml_data\n<hr>";
                 $invoiceO    = $domtoobject->convert($xml_data);
             } else {
                 $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");
@@ -459,8 +458,9 @@ class lodo_fakturabank_fakturabank {
 
     ################################################################################################
     # Sets the given status and comment on an invoice in Fakturabank with a given internal FakturabankID
-    #input: id (FakturabankI internal ID, status[registered], comment (without & signs)
-    #outoupt: changed status event in Fakturabank
+    # input: id (FakturabankI internal ID, status[registered], comment (without & signs)
+    # outoupt: changed status event in Fakturabank
+    # Used to set an indicator in fakturaBank that an invoice has been bookkept in LODO
     private function setEvents($events) {
         global $_lib;
         $retstatus = true;
@@ -513,7 +513,8 @@ class lodo_fakturabank_fakturabank {
 
             if ($acc_cost_params['departmentcode'] != '') {
                 if (!is_numeric($DepartmentID = $acc_cost_params['departmentcode'])) {
-                    $InvoiceO->Status     .= "Faktura har feil i avdelingskode (departmentcode " . $acc_cost_params['departmentcode'] . " must be empty or a number for incoming invoices)";
+                    # Invoice has an error in department code (departmentcode __ must be empty or a number for outgoing invoices)
+                    $InvoiceO->Status     .= "Faktura har feil i avdelingskode (avdelingskode " . $acc_cost_params['departmentcode'] . " m&aring; v&aelig;re tom eller et nummer for utg&aring;nde fakturaer)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -521,7 +522,8 @@ class lodo_fakturabank_fakturabank {
                 if (is_numeric($this->find_department_by_id($acc_cost_params['departmentcode']))) {
                     $InvoiceO->DepartmentID = $DepartmentID;
                 } else {
-                    $InvoiceO->Status     .= "Fant ikke intern avdeling for kode " . $DepartmentID . " (departmentcode does not match any internal departments)";
+                    # Internal department for code __ not found (departmentcode does not match any internal departments)
+                    $InvoiceO->Status     .= "Fant ikke intern avdeling for kode " . $DepartmentID . " (avdelingskode er ikke lik noen intern avdeling)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -534,7 +536,8 @@ class lodo_fakturabank_fakturabank {
 
             if ($acc_cost_params['projectcode'] != "") {
                 if (!is_numeric($acc_cost_params['projectcode'])) {
-                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (projectcode must be empty or a number for incoming invoices)";
+                    # Invoice has an error in project code (projectcode must be empty or a number for outgoing invoices)
+                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (prosjektkode m&aring; v&aelig;re tom eller et nummer for utg&aring;nde fakturaer)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -542,7 +545,8 @@ class lodo_fakturabank_fakturabank {
                 if (is_numeric($ProjectID = $this->find_project_by_id($acc_cost_params['projectcode']))) {
                     $InvoiceO->ProjectID = $ProjectID;
                 } else {
-                    $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (projectcode does not match any internal projects)";
+                    # Customer project for code __ not found (projectcode does not match any internal projects)
+                    $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (prosjektkode er ikke lik noen intern prosjekt)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -607,6 +611,7 @@ class lodo_fakturabank_fakturabank {
 			}
 
             if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                # Invoice missing customer number
                 $InvoiceO->Status     .= "Faktura mangler kundenummer";
                 $InvoiceO->Journal     = false;
                 $InvoiceO->Class       = 'red';
@@ -626,10 +631,11 @@ class lodo_fakturabank_fakturabank {
                 $InvoiceO->AccountPlanID = $account->AccountPlanID;
 
                 if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
-                    #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
+                    #Find last and first open period could have been an own accountperiod object.
 
                     $PeriodOld         = $InvoiceO->Period;
                     $InvoiceO->Period  = $accounting->get_first_open_accountingperiod($PeriodOld);
+                    # The period __ is locked, changing to __
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
 
@@ -652,6 +658,7 @@ class lodo_fakturabank_fakturabank {
                 #print "$query<br>\n";
                 $voucherexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                 if($voucherexists) {
+                    # Invoice is downloaded
                     $InvoiceO->Status     .= "Faktura er lastet ned";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Journaled   = true;
@@ -688,17 +695,19 @@ class lodo_fakturabank_fakturabank {
                                 if($productexists->AccountPlanID) {
                                     $line->Item->SellersItemIdentification->ProductID = $productexists->ProductID;
                                 } else {
+                                    # Account not set on product: __
                                     $InvoiceO->Status     .= "Konto ikke satt p&aring; produkt: " . $line->Item->SellersItemIdentification->ID;
                                     $InvoiceO->Journal     = false;
                                     $InvoiceO->Class       = 'red';
                                 }
                             } else {
+                                # Product number: __ does not exist.
                                 $InvoiceO->Status     .= "Produktnr: " . $line->Item->SellersItemIdentification->ID . " eksisterer ikke. ";
                                 $InvoiceO->Journal     = false;
                                 $InvoiceO->Class       = 'red';
                             }
                         }
-                        #Vi kunne ha auto opprettet produkter ogsŒ.....
+                        #We could have auto create of product as well...
                     }
 
                     if (!empty($InvoiceO->AllowanceCharge)) {
@@ -719,10 +728,13 @@ class lodo_fakturabank_fakturabank {
                 }
 
                 if($InvoiceO->Journal) {
+                    # Ready to bookkeep based on customer number
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: Kundenummer";
                 }
             } else {
+                # Could not find customer based on customer number __
                 $InvoiceO->Status     .= "Finner ikke kunde basert p&aring; kundenummer: " . $customernumber . ". ";
+                # Create on customer number
                 $msg = "Opprett p&aring; kundenr";
                 $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
                 $InvoiceO->Journal = false;
@@ -732,7 +744,7 @@ class lodo_fakturabank_fakturabank {
         return $invoicesO;
     }
 
-    private function extractLineAccountingCost(&$line, &$InvoiceO) { 
+    private function extractLineAccountingCost(&$line, &$InvoiceO) {
       global $_lib;
       includelogic("car/car");
       if ($line->AccountingCost) {
@@ -795,7 +807,8 @@ class lodo_fakturabank_fakturabank {
 
             if ($acc_cost_params['customerdepartmentcode'] != "") {
                 if (!is_numeric($acc_cost_params['customerdepartmentcode'])) {
-                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (customerdepartmentcode must be empty or a number for incoming invoices)";
+                    # Invoice has an error in department code (customer departmentcode must be empty or a number for incoming invoices)
+                    $InvoiceO->Status     .= "Faktura har feil i avdelingskode (kunde avdelingskode m&aring; v&aelig;re tom eller et nummer for ing&aring;nde fakturaer)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -803,7 +816,8 @@ class lodo_fakturabank_fakturabank {
                 if (is_numeric($DepartmentID = $this->find_department_by_id($acc_cost_params['customerdepartmentcode']))) {
                     $InvoiceO->Department = $DepartmentID;
                 } else {
-                    $InvoiceO->Status     .= "Fant ikke intern avdeling for kode $DepartmentID (customerdepartmentcode does not match any internal departments)";
+                    # Internal department for code __ not found (customer departmentcode does not match any internal departments)
+                    $InvoiceO->Status     .= "Fant ikke intern avdeling for kode $DepartmentID (avdelingskode er ikke lik noen intern avdeling)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -828,7 +842,8 @@ class lodo_fakturabank_fakturabank {
 
             if ($acc_cost_params['customerprojectcode'] != "") { // "0" is a valid value
                 if (!is_numeric($acc_cost_params['customerprojectcode'])) {
-                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (customerprojectcode must be empty or a number for incoming invoices)";
+                    # Invoice has an error in project code (customer projectcode must be empty or a number for incoming invoices)
+                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (kunde prosjektkode m&aring; v&aelig;re tom eller et nummer for ing&aring;nde fakturaer)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -836,7 +851,8 @@ class lodo_fakturabank_fakturabank {
                 if (is_numeric($ProjectID = $this->find_project_by_id($acc_cost_params['customerprojectcode']))) {
                     $InvoiceO->Project = $ProjectID;
                 } else {
-                    $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (customerprojectcode does not match any internal projects)";
+                    # Customer project for code __ not found (customer projectcode does not match any internal projects)
+                    $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (kunde prosjektkode er ikke lik noen intern prosjekt)";
                     $InvoiceO->Journal     = false;
                     $InvoiceO->Class       = 'red';
                     return false;
@@ -924,7 +940,7 @@ class lodo_fakturabank_fakturabank {
             #print "URL: " . $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL . "<br>\n";
             #print "FB ID:   $InvoiceO->FakturabankID<br>\n";
 
-            //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
+            //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
 
             // We are changing an incomig EHF CreditNote to a negative invoice so this amount needs to be
             // negated to be saved in LODO correctly as a negative invoice
@@ -952,6 +968,7 @@ class lodo_fakturabank_fakturabank {
                 if($invoiceexists) {
                     $InvoiceO->Journal = false;
                     $InvoiceO->Class   = 'red';
+                    # Invoice is already downloaded
                     $InvoiceO->Status .= 'Faktura er allerede lastet ned';
                 }
 
@@ -970,6 +987,7 @@ class lodo_fakturabank_fakturabank {
                 $InvoiceO->MotkontoAccountName = $acc->AccountName;
 
                 if(!$InvoiceO->MotkontoAccountPlanID) {
+                    # Counterpart accountplan result/balance not set for accountplan _
                     $InvoiceO->Status   .= sprintf(
                         'Motkonto resultat/balanse ikke satt for konto <a href="%s&t=accountplan.reskontro&AccountPlanID=%s&inline=show" target="_blank">%s</a>',
                         $_lib['sess']->dispatch,
@@ -982,32 +1000,37 @@ class lodo_fakturabank_fakturabank {
                 }
 
                 if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
-                    #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
+                    # Find last and first open period could have been in own accountperiod object.
 
                     $PeriodOld         = $InvoiceO->Period;
                     $InvoiceO->Period  = $accounting->get_first_open_accountingperiod($PeriodOld);
+                    # The period __ is locked, changing to __
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
                 if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency() && !exchange::getConversionRate($InvoiceO->DocumentCurrencyCode)) {
                     $InvoiceO->Journal = false;
                     $InvoiceO->Class   = 'red';
+                    # Could not find currency value for __
                     $InvoiceO->Status .= 'Finner ikke valutaverdi for '. $InvoiceO->DocumentCurrencyCode;
                 }
 
                 if ($InvoiceO->IssueDate == '0000-00-00') {
                     $InvoiceO->Journal = false;
                     $InvoiceO->Class   = 'red';
+                    # Date cannot be __
                     $InvoiceO->Status .= 'Dato kan ikke v&aelig;re '. $InvoiceO->IssueDate;
                 }
                 if ($InvoiceO->LegalMonetaryTotal->PayableAmount == 0) {
+                    # Do you want invoice amount crowns __?
                     $InvoiceO->Status .= "Vil du ha fakturabel&oslash;p kr " . $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) . '? ';
                 }
 
-                #Check that we have not journaled the same invoices earlier. C
+                #Check that we have not journaled the same invoices earlier.
                 $query          = "select * from invoicein where SupplierAccountPlanID='" . $InvoiceO->AccountPlanID . "' and InvoiceNumber='" . $InvoiceO->ID . "' and Active=1";
                 #print "$query<br>\n";
                 $voucherexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                 if($voucherexists) {
+                    # Invoice is downloaded
                     $InvoiceO->Status     .= "Faktura er lastet ned";
                     $InvoiceO->Journal     = false;
 
@@ -1051,13 +1074,15 @@ class lodo_fakturabank_fakturabank {
                   $this->extractLineAccountingCost($line, $InvoiceO);
                 }
                 if($InvoiceO->Journal) {
-                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
+                    # Ready to bookkeep based on Firma ID __
+                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: FirmaID: $SchemeID";
                 }
 
                 #$this->registerincoming($InvoiceO);
             } else {
                 $scheme_value = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
                 $scheme_type  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+                # Could not find supplier based on PartyIdentification __
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " .
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
 
@@ -1068,9 +1093,9 @@ class lodo_fakturabank_fakturabank {
                     $org = new lodo_orgnumberlookup_orgnumberlookup();
                     $org->getOrgNumberByScheme($scheme_value, $scheme_type);
                     $starting_id = 100000001;
-                    
+
                     if ($_lib['sess']->get_companydef('BaseAccountIDOnMotkonto')) $starting_id += $org->MotkontoResultat1 * 10000;
-                    
+
                     for ($i = $starting_id; $i <= 999999999; $i++) {
                       if (!isset($used_accounts_hash[$i])) break;
                     }
@@ -1135,8 +1160,8 @@ class lodo_fakturabank_fakturabank {
     }
 
     ################################################################################################
-    # Try to find the reskontro in the following sequenze: OrgNumber, E-Mail, Phone, AccountPlanID/Customer number
-    # It will be possible to add a lot of mappings here - but it will be a lot of manuell adminsitration to get it working
+    # Try to find the ledger(reskontro) in the following sequence: OrgNumber, E-Mail, Phone, AccountPlanID/Customer number
+    # It will be possible to add a lot of mappings here - but it will be a lot of manual adminsitration to get it working
     private function find_reskontro($PartyIdentification, $type, $SchemeType = '') {
         global $_lib;
 
@@ -1175,7 +1200,7 @@ class lodo_fakturabank_fakturabank {
                 $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                 if($account) {
                     $SchemeID  = $key;
-                    #print "Fant den med $SchemeID: $PartyIdentification<br />\n";
+                    #print "Found it with $SchemeID: $PartyIdentification<br />\n";
                     break;
                 }
             }
@@ -1201,7 +1226,7 @@ class lodo_fakturabank_fakturabank {
             }
 
         }
-        #Forutsatt antall bare 1.
+        #Assuming we only set the account once
 
         return array($account, $SchemeID);
     }
@@ -1225,6 +1250,7 @@ class lodo_fakturabank_fakturabank {
         $org->getOrgNumberByScheme($scheme_value, $scheme_type);
 
         if($org->success) {
+          # Inforamtion is fetched automatically based on organisation number
           $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
 
           // Only update if the fields contains a value
@@ -1285,6 +1311,7 @@ class lodo_fakturabank_fakturabank {
             }
 
             if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                # Not possible to auto create because customer number is missing
                 $_lib['message']->add("Ikke mulig &aring; auto-opprette fordi kundenr mangler.");
                 continue;
             }
@@ -1300,9 +1327,9 @@ class lodo_fakturabank_fakturabank {
                 $dataH = array();
 
                 if($customernumber > 10000) {
-                    #Vi burde visst SchemeID - slik at vi kan bestemme om kontoplan skal telles automatisk eller ikke > 10000 pga norsk kontoplan
+                    #We should have known SchemeID - so we can decide if accountplan should be counted automatically or not > 10000 because of norwegian accountplan
 
-                    #Vi mŒ uansett sjekke at den foreslŒtte kontoplanen ikke eksiterer fra f¿r.
+                    #We must anyway check that the suggested accountplan does not exist from before.
 
 
                     $dataH['AccountPlanID']     = $customernumber;
@@ -1337,14 +1364,15 @@ class lodo_fakturabank_fakturabank {
 
                     $dataH['EnablePostPost']    = 1;
 
-                    #burde kj¿rt oppslag fra brreg samtidig med denne registreringen, men vi fŒr ganske mye info fra fakturaen
-                    #Kan vi sette en default motkonto som vil v¾re "grei???"
-                    #Vi mŒ kopiere defaultdata fra mor kategorien til denne - mŒ sentralisere opprettelse av kontoplaner i eget objekt
+                    #Should have done a lookup from brreg as the same time as this registration, but we get pretty much all the info from the invoice
+                    #Can we set a default counterpart accountplan that will be ok?
+                    #We must copy default data from the parent category to this - must centralize creation of accountplans in own object
                     #print_r($dataH);
                     $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
                     #exit;
                     $count++;
                 } else {
+                    # Ledger(reskontro) with number lower than 10000 must be created manually: __
                     $_lib['message']->add("Reskontro med nummer lavere enn 10.000 mŒ opprettes manuelt: " . $customernumber);
                 }
             }
@@ -1353,84 +1381,9 @@ class lodo_fakturabank_fakturabank {
                 break; // finished since we have processed the only one we wanted
             }
         }
+        # __ accountplans automatically created - counterpart accountplan must be set manually
         $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
-
-    # TODO(mladjo2505): Remove, since it is not used anymore
-    #Only for adding new suppliers at this point in time.
-    public function incomingaddmissingaccountplan($single_invoice_id = false) {
-        global $_lib;
-
-        $invoicesO  = $this->incoming();
-        $count      = 0;
-
-        foreach($invoicesO->Invoice as $InvoiceO) {
-            if (!empty($single_invoice_id) && $InvoiceO->ID != $single_invoice_id) {
-                continue; // this is not the droid you are looking for
-            }
-
-            if (empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID)) {
-              $_lib['message']->add("Ikke mulig &aring; auto-opprette fordi leverand&oslash;rnr mangler.");
-                continue;
-            }
-
-            list($SchemeID, $SchemeIDType) = $this->extractSupplierSchemeID($InvoiceO);
-            list($account, $_SchemeID)  = $this->find_reskontro($SchemeID, 'supplier', $SchemeIDType);
-            if($account) {
-                continue; // exists already
-            } else {
-                if ($SchemeIDType == 'NO:ORGNR') $AccountPlanID = $SchemeID;
-                else {
-                  // the first available account plan id
-                  $used_accounts_hash = array_keys($_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplan where AccountPlanType = 'supplier' order by AccountPlanID")));
-                  for ($i = 100000000, $j = 0; $i <= 999999999; $i++) if ($i != $used_accounts_hash[$j++]) break;
-                  $AccountPlanID = $i;
-                }
-                $dataH = array();
-                $dataH['AccountPlanID']     = $AccountPlanID;
-                $dataH['AccountName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
-                $dataH['AccountPlanType']   = 'supplier';
-
-                $dataH['Address']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
-                $dataH['City']              = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
-                $dataH['ZipCode']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
-
-                $dataH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
-                $dataH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
-                $dataH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
-                $dataH['Active']            = 1;
-
-                #creditdays
-                $dataH['EnableCredit']      = 1;
-                $dataH['CreditDays']        = $_lib['date']->dateDiff($InvoiceO->PaymentMeans->PaymentDueDate, $InvoiceO->IssueDate);
-
-                #Credit/debit color and text
-                $dataH['debittext']         = 'Salg';
-                $dataH['credittext']        = 'Betal';
-                $dataH['DebitColor']        = 'debitblue';
-                $dataH['CreditColor']       = 'creditred';
-
-                $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
-                $FakturabankScheme = $_lib['storage']->get_row(array('query' => "select FakturabankSchemeID from fakturabankscheme where SchemeType = '$SchemeIDType'"));
-                $FakturabankSchemeID = $FakturabankScheme->FakturabankSchemeID;
-                $schemedataH = array();
-                $schemedataH['FakturabankSchemeID'] = $FakturabankSchemeID;
-                $schemedataH['SchemeValue'] = $SchemeID;
-                $schemedataH['AccountPlanID'] = $AccountPlanID;
-                $_lib['storage']->store_record(array('data' => $schemedataH, 'table' => 'accountplanscheme', 'action' => 'auto', 'debug' => false));
-                # after creating the account plan update it from fakturabank
-                $this->update_accountplan_from_fakturabank($AccountPlanID);
-                #exit;
-                $count++;
-            }
-
-            if (!empty($single_invoice_id) && $InvoiceO->ID == $single_invoice_id) {
-                break; // finished since we have processed the only one we wanted
-            }
-        }
-        $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
-    }
-
 
     ################################################################################################
     public function registerincoming() {
@@ -1568,7 +1521,7 @@ class lodo_fakturabank_fakturabank {
                         $Quantity   = 1;
                         $CustPrice  = $line->LineExtensionAmount;
 
-                        // If this is MVA only line, save this field to true. 
+                        // If this is MVA only line, save this field to true.
                         // We later use it to bookkeep this line to tax account.
                         if($line->Price->PriceAmount == 0 && preg_match("/^MVA/", $line->Item->Name)) {
                             $IsOnlyTax = true;
@@ -1608,7 +1561,7 @@ class lodo_fakturabank_fakturabank {
 
                         $datalineH['TaxAmount']         = $line->TaxTotal->TaxAmount;
                         $datalineH['Vat']               = $line->Item->ClassifiedTaxCategory->Percent;
-                        #$datalineH['VatID']             = $line->Price->PriceAmount; #Denne mŒ nok mappes
+                        #$datalineH['VatID']             = $line->Price->PriceAmount; #This must probably be mapped
 
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
@@ -1653,7 +1606,7 @@ class lodo_fakturabank_fakturabank {
                 $events[] = array( 'id' => $InvoiceO->FakturabankID, 'status' => $_SETUP['FB_INVOICE_UPDATE_STATUS'], 'comment' => $comment);
 
             } else {
-                #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
+                #print "Invoice found: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
             }
           }
           $this->setEvents($events);
@@ -1765,7 +1718,7 @@ class lodo_fakturabank_fakturabank {
                         }
                     }
 
-                    #MŒ sjekke at produktnummer stemmer og matcher
+                    #Must check that product number is correct and matching
                     foreach($InvoiceO->InvoiceLine as $line) {
 
                         #preprocess price/quantity - because inconsistent data can appear
@@ -1795,7 +1748,7 @@ class lodo_fakturabank_fakturabank {
 
                             $datalineH['TaxAmount']         = $line->TaxTotal->TaxAmount;
                             $datalineH['Vat']               = $line->Item->ClassifiedTaxCategory->Percent;
-                            #$datalineH['VatID']             = $line->Price->VatID; #Denne mŒ nok mappes
+                            #$datalineH['VatID']             = $line->Price->VatID; #This must probably be mapped
 
                             $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                             $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
@@ -1840,7 +1793,7 @@ class lodo_fakturabank_fakturabank {
                     $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => $_SETUP['FB_INVOICE_UPDATE_STATUS'], 'comment' => $comment);
 
                 } else {
-                    #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
+                    #print "Invoice found: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
                 }
                 $invoice = new invoice(array('CustomerAccountPlanID' => $dataH['CustomerAccountPlanID'], 'VoucherType' => 'S', 'InvoiceID' => $dataH['InvoiceID']));
                 $invoice->init(array());
@@ -2007,7 +1960,7 @@ class lodo_fakturabank_fakturabank {
                             $id_attributes = array('schemeID' => 'NO:SUP-ACCNT-RE');
                             self::createElementIfNotEmpty($doc, $identification, 'cbc:ID', $schemaValue, $id_attributes);
                         }
-                        
+
                         // Not by EHF standard, but we always want to send this customer number to FB
                         $customer_number = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
                         self::createElementIfNotEmpty($doc, $identification, 'cbc:CustomerNumber', $customer_number);
@@ -2046,6 +1999,7 @@ class lodo_fakturabank_fakturabank {
                         $company_id_attributes = array('schemeID' => utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID));
                         self::createElementIfNotEmpty($doc, $legalentity, 'cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID, $company_id_attributes);
                 } else {
+                    # Customer not chosen, or FirmaID is invalid. The invoice was not sent.
                     $_lib['message']->add("Kunde ikke valgt, eller Firma ID er ugyldig. Fakturaen ble ikke sendt.");
                     return false; // stop from sending, crucial field missing
                 }
@@ -2236,6 +2190,7 @@ class lodo_fakturabank_fakturabank {
                         }
             }
         } else {
+            # No invoice lines found. The invoice was not sent.
             $_lib['message']->add('Ingen fakturalinjer funnet. Fakturaen ble ikke sendt.');
             return false;
         }
@@ -2295,6 +2250,7 @@ class lodo_fakturabank_fakturabank {
         }
         $invoice_type = $_SESSION['altinn_invoice_type'] ? $_SESSION['altinn_invoice_type'].": " : "";
         $_SESSION['oauth_invoice_error'][] = $invoice_type."Error: " . $data['result'];
+        # Error: Insufficient rights in fakturaBank
         if ($data['code'] == 403) $_SESSION['oauth_invoice_error'][] = $invoice_type. "Error: Utilstrekkelige rettigheter i fakturabank!";
       }
       else {
@@ -2391,12 +2347,4 @@ class lodo_fakturabank_fakturabank {
     }
 }
 
-####################################################################################################
-#STATISTICS
-
-#print "\n\nVeldig bra<br>\nExectid: $diffexectime\n\n";
-#print "starttime:     $starttime\n";
-#print "startexectime: $startexectime\n";
-#print "startexectime: $stopexectime\n";
-#print "stoptime :     $stoptime\n";
 ?>

@@ -24,7 +24,6 @@ includealogic('lonnogtrekkoppgavekalk');
 includealogic('aarsoppgavekalk');
 includealogic('oppstillingsplansmastoreselskaperkalk');
 
-
 ################################################################################
 class GeneralReport
 {
@@ -45,7 +44,7 @@ class GeneralReport
     private $_fromPeriod;
     private $_toPeriod;
     private $_enableLastYear;
-    
+
     /* General reports */
     private $_OFFISIELTREGNSKAP                 = 1;
     private $_SELVANGIVELSENAERINGSDRIVENDE     = 2;
@@ -58,7 +57,7 @@ class GeneralReport
     private $_GENERAL_REPORT_9                  ='9';
     private $_GENERAL_REPORT_10                 ='10';
 
-    private $_MOMSOPPGAVE                       = '0002';  
+    private $_MOMSOPPGAVE                       = '0002';
     private $_AVSKRIVNINGER                     = '1084';
     //var $_PERSONINNTEKT1                  = 66;
     //var $_PERSONINNTEKT2                  = 6;
@@ -79,9 +78,8 @@ class GeneralReport
     private $_SPEKAVINNTEKTOGFRADRAGUTLANDET    ='1231';
     private $_REGISTRERTEOGINNBERETTEDE         ='1022';
     private $_AKSJONAERREGISTEROPPGAVE          ='1086';
-    
     private $_companyType                       ='AS';
-    
+
     private $SelvangivelseNrKalk                =null;
     private $SelvangivelseASKalk                =null;
     private $NaeringsOppgave1Kalk               =null;
@@ -103,8 +101,6 @@ class GeneralReport
     private $InntektOgFradragUtlandetKalk       =null;
     private $RegistrerteOgInnberettedeKalk      =null;
     private $AksjonaerRegisterKalk              =null;
-    
-    
 
     ############################################################################
     function __construct($args)
@@ -117,16 +113,12 @@ class GeneralReport
             $this->_enableLastYear = $args['enableLastYear'];
         if(isset($args['report']))
             $this->_report = $args['report'];
-            
+
         //print ("Report : " . $args['report']);
-        
+
         //The arguments input from the schema_general_class.class
         if (!$args['company_type'] || $args['company_type']<=0)
         	$this->companyType='';
-        	
-        
-            
-        
     }
 
     ############################################################################
@@ -135,8 +127,8 @@ class GeneralReport
         global $_lib;
 
         $ThisYear = $_lib['date']->get_this_year($this->_toPeriod);
-        #print "Dette: $Year ($this->_toPeriod)<br>";
-        
+        #print "This: $Year ($this->_toPeriod)<br>";
+
         switch ($this->_report) {
             case $this->_GENERAL_REPORT_6;
             case $this->_GENERAL_REPORT_7;
@@ -153,32 +145,32 @@ class GeneralReport
         	    //print("Anh this year: ".$this->_report);
 		        $this->result($this->_fromPeriod, $this->_toPeriod, $ThisYear);
 		        $this->balance($this->_toPeriod, $ThisYear);
-		
+
 		        $this->HeadLogic($ThisYear); #Special calculations
-		
+
 		        if($this->_enableLastYear == 1)
 		        {
 		            #For report 3 and 5
 		            $PrevYear = $_lib['date']->get_this_year($_lib['date']->get_this_period_last_year($this->_toPeriod));
-		            
-		            #print "Forrige: $PrevYear<br>";
+
+		            #print "Last: $PrevYear<br>";
 		            $this->result($_lib['date']->get_this_period_last_year($this->_fromPeriod), $_lib['date']->get_this_period_last_year($this->_toPeriod), $PrevYear);
 		            $this->balance($_lib['date']->get_this_period_last_year($this->_toPeriod), $PrevYear);
 		            $this->HeadLogic($PrevYear); #Special calculations
-		            
-		            //Special calculation for the personinntekt report
+
+		            //Special calculation for the personal income report
 		            if ($this->_report == $this->_PERSONINNTEKT1 || $this->_report == $this->_PERSONINNTEKT2) {
 		            	$this->_sumPart['2.10'][$ThisYear]['saldo']=$this->_sumPart['2.9'][$ThisYear]['saldo']+
 		            	                                            $this->_sumPart['2.9'][$PrevYear]['saldo'];
-		            	                                            
+
 		                $this->_sumPart['3'][$ThisYear]['saldo']=$this->_sumGroup['1.21'][$ThisYear]['saldo']-
 		                											$this->_sumPart['2.12'][$ThisYear]['saldo'];
 		            }
-		     
+
 		        }//if $this->_enableLastYear == 1
 		     break;
 		     default: break;
-        }//switch 
+        }//switch
     }
 
     ############################################################################
@@ -190,18 +182,18 @@ class GeneralReport
 
         switch ($this->_report) {
         	case $this->_NAERINGSOPPGAVE1:
-        		//Start the calculation of the 'N�ringsoppgaver1' report 
+            //Start the calculation of the 'Næringsoppgaver1' report
         		if ($this->NaeringsOppgave1Kalk==null)
         			$this->NaeringsOppgave1Kalk = new NaeringsOppgave1Kalk(array());
-        		
+
         		$this->NaeringsOppgave1Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
-        	
+
         		//Get the result after the calculations
         		$this->_sumPart=$this->NaeringsOppgave1Kalk->getSumPart();
         		$this->_sumGroup=$this->NaeringsOppgave1Kalk->getSumGroup();
         	     break;
         	case $this->_NAERINGSOPPGAVE2:
-        		//Start the calculation of the 'N�ringsoppgaver2' report 
+            //Start the calculation of the 'Næringsoppgaver2' report
         		if ($this->NaeringsOppgave2Kalk==null)
         			$this->NaeringsOppgave2Kalk = new NaeringsOppgave2Kalk(array());
         		$this->NaeringsOppgave2Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
@@ -209,110 +201,105 @@ class GeneralReport
         		$this->_sumGroup=$this->NaeringsOppgave2Kalk->getSumGroup();
         	     break;
         	case $this->_SELVANGIVELSENAERINGSDRIVENDE:
-        			//Start the calculation of the 'selvangivelse for aksjeselskap' report 
+        			//Start the calculation of the 'selvangivelse for aksjeselskap' report
         		if ($this->SelvangivelseNrKalk==null)
 	    			$this->SelvangivelseNrKalk= new SelvangivelseNrKalk(array());
 	    		$this->SelvangivelseNrKalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
-	    	
+
 	    		//Get the result after the calculations
 	    		$this->_sumPart=$this->SelvangivelseNrKalk->getSumPart();
 	    		$this->_sumGroup=$this->SelvangivelseNrKalk->getSumGroup();
         	  break;
         	case $this->_SELVANGIVELDEAKSJESELSKAP:
-        	    //Start the calculation of the 'selvangivelse for aksjeselskap' report 
+        	    //Start the calculation of the 'selvangivelse for aksjeselskap' report
             	if ($this->SelvangivelseASKalk==null)
 	    			$this->SelvangivelseASKalk= new SelvangivelseASKalk(array());
-	    		
+
 	    		$this->SelvangivelseASKalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup, $_lib['sess']->get_companydef('ShareNumber'));
-	    	
+
 	    			//Get the result after the calculations
 	    		$this->_sumPart=$this->SelvangivelseASKalk->getSumPart();
 	    		$this->_sumGroup=$this->SelvangivelseASKalk->getSumGroup();
         	     break;
         	case $this->_PERSONINNTEKT1:
-        		//Start the calculation of the 'N�ringsoppgaver1' report 
+        		//Start the calculation of the 'Næringsoppgaver1' report
         		if ($this->NaeringsOppgave1Kalk==null)
         			$this->NaeringsOppgave1Kalk = new NaeringsOppgave1Kalk(array());
-        		
+
         		$this->NaeringsOppgave1Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
-        	
+
         		//Get the result after the calculations
         		$this->_sumPart=$this->NaeringsOppgave1Kalk->getSumPart();
         		$this->_sumGroup=$this->NaeringsOppgave1Kalk->getSumGroup();
-            
-            	//If this is a personinntekt report then start the .
-            	//Start the calculation of the 'PersonInntekt' report 
+
+              //Start the calculation of the 'PersonInntekt' report
             	if ($this->PersonInntektKalk==null)
 	        		$this->PersonInntektKalk = new PersonInntektKalk(array());
 	        	$this->PersonInntektKalk->calculateNr($ThisYear, $this->_sumPart, $this->_sumGroup);
-	        	
+
 	        	//Get the result after the calculations
 	        	$this->_sumPart=$this->PersonInntektKalk->getSumPart();
 	        	$this->_sumGroup=$this->PersonInntektKalk->getSumGroup();
-            
+
         	     break;
         	case $this->_PERSONINNTEKT2:
-        		//Start the calculation of the 'N�ringsoppgaver2' report 
+        		//Start the calculation of the 'Næringsoppgaver2' report
         		if ($this->NaeringsOppgave2Kalk==null)
         			$this->NaeringsOppgave2Kalk = new NaeringsOppgave2Kalk(array());
         		$this->NaeringsOppgave2Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
         		$this->_sumPart=$this->NaeringsOppgave2Kalk->getSumPart();
         		$this->_sumGroup=$this->NaeringsOppgave2Kalk->getSumGroup();
-        	
+
         		//Get the result after the calculations
-            
-             	//If this is a personinntekt report then start the ..
-            	//if ($this->_report == $this->_PERSONINNTEKT2) {
-            		//Start the calculation of the 'PersonInntekt' report 
+            		//Start the calculation of the 'PersonInntekt' report
             		if ($this->PersonInntektKalk==null)
 	        			$this->PersonInntektKalk = new PersonInntektKalk(array());
 	        		$this->PersonInntektKalk->calculateAS($ThisYear, $this->_sumPart, $this->_sumGroup);
-	        	
+
 	        		//Get the result after the calculations
 	        		$this->_sumPart=$this->PersonInntektKalk->getSumPart();
 	        		$this->_sumGroup=$this->PersonInntektKalk->getSumGroup();
-            	//}//if report==personinntekt
         	     break;
         	case $this->_AVSKRIVNINGER:
-        		//Start the calculation of the 'avskrivninger' report 
+        		//Start the calculation of the 'avskrivninger' report
             	if ($this->AvskrivningerKalk==null)
 	    			$this->AvskrivningerKalk= new AvskrivningerKalk(array());
-	    		
+
 	    		$this->AvskrivningerKalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup, $_lib['sess']->get_companydef('ShareNumber'));
-	    	
+
 	    		//Get the result after the calculations
 	    		$this->_sumPart=$this->AvskrivningerKalk->getSumPart();
 	    		$this->_sumGroup=$this->AvskrivningerKalk->getSumGroup();
         	    break;
         	case $this->_BILBRUKSOPPLYSNINGER:
-        		//Start the calculation of the 'bilbruksopplysninger' report 
+        		//Start the calculation of the 'bilbruksopplysninger' report
             	if ($this->BilbruksOpplysningerKalk==null)
 	    			$this->BilbruksOpplysningerKalk= new BilbruksOpplysningerKalk(array());
-	    		
+
 	    		$this->BilbruksOpplysningerKalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup, $_lib['sess']->get_companydef('ShareNumber'));
-	    	
+
 	    		//Get the result after the calculations
 	    		$this->_sumPart=$this->BilbruksOpplysningerKalk->getSumPart();
 	    		$this->_sumGroup=$this->BilbruksOpplysningerKalk->getSumGroup();
         	     break;
         	case $this->_FORSKJELLERREGNSKAPOGSKATTE:
-        		//Start the calculation of the 'forskjeller mellom regnskap og skatte' report 
+        		//Start the calculation of the 'forskjeller mellom regnskap og skatte' report
             	if ($this->ForskjellerRegnskapOgSkatteKalk==null)
 	    			$this->ForskjellerRegnskapOgSkatteKalk= new ForskjellerRegnskapOgSkatteKalk(array());
-	    		
+
 	    		$this->ForskjellerRegnskapOgSkatteKalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup, $_lib['sess']->get_companydef('ShareNumber'));
-	    	
+
 	    		//Get the result after the calculations
 	    		$this->_sumPart=$this->ForskjellerRegnskapOgSkatteKalk->getSumPart();
 	    		$this->_sumGroup=$this->ForskjellerRegnskapOgSkatteKalk->getSumGroup();
         	     break;
         	case $this->_TILLEGGSSKJEMA1:
-        		//Start the calculation of the 'forskjeller mellom regnskap og skatte' report 
+        		//Start the calculation of the 'forskjeller mellom regnskap og skatte' report
             	if ($this->Tilleggsskjema1Kalk==null)
 	    			$this->Tilleggsskjema1Kalk= new Tilleggsskjema1Kalk(array());
-	    		
+
 	    		$this->Tilleggsskjema1Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup, $_lib['sess']->get_companydef('ShareNumber'));
-	    	
+
 	    		//Get the result after the calculations
 	    		$this->_sumPart=$this->Tilleggsskjema1Kalk->getSumPart();
 	    		$this->_sumGroup=$this->Tilleggsskjema1Kalk->getSumGroup();
@@ -320,34 +307,33 @@ class GeneralReport
         	case $this->_TILLEGGSSKJEMA2:
         	     break;
         	case $this->_EGENKAPITALAVSTEMMING:
-        	     //Start the calculation of the 'N�ringsoppgaver2' report 
+        	     //Start the calculation of the 'Næringsoppgaver2' report
         		if ($this->NaeringsOppgave2Kalk==null)
         			$this->NaeringsOppgave2Kalk = new NaeringsOppgave2Kalk(array());
         		$this->NaeringsOppgave2Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
         		$this->_sumPart=$this->NaeringsOppgave2Kalk->getSumPart();
         		$this->_sumGroup=$this->NaeringsOppgave2Kalk->getSumGroup();
-        	
+
         		//Get the result after the calculations
-            
-             	//If this is a personinntekt report then start the ..
-            	
-            		//Start the calculation of the 'egenkapitalavstemming' report 
+
+            		//Start the calculation of the 'egenkapitalavstemming' report
+
             	if ($this->EgenkapitalAvstemmingKalk==null)
 	        		$this->EgenkapitalAvstemmingKalk = new EgenkapitalAvstemmingKalk(array());
-	        		
+
 	            $this->EgenkapitalAvstemmingKalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup);
-	        	
+
 	            //Get the result after the calculations
 	        	$this->_sumPart=$this->EgenkapitalAvstemmingKalk->getSumPart();
 	        	$this->_sumGroup=$this->EgenkapitalAvstemmingKalk->getSumGroup();
                  break;
             case $this->_TILLEGGSSKJEMA2:
-                 //Start the calculation of the 'forskjeller mellom regnskap og skatte' report 
+                 //Start the calculation of the 'forskjeller mellom regnskap og skatte' report
             	if ($this->Tilleggsskjema2Kalk==null)
 	    			$this->Tilleggsskjema2Kalk= new Tilleggsskjema2Kalk(array());
-	    		
+
 	    		$this->Tilleggsskjema2Kalk->calculate($ThisYear, $this->_sumPart, $this->_sumGroup, $_lib['sess']->get_companydef('ShareNumber'));
-	    	
+
 	    		//Get the result after the calculations
 	    		$this->_sumPart=$this->Tilleggsskjema2Kalk->getSumPart();
 	    		$this->_sumGroup=$this->Tilleggsskjema2Kalk->getSumGroup();
@@ -362,7 +348,7 @@ class GeneralReport
                  break;
            	case $this->_DELTAKERENSOPPGAVE:
                  break;
-            case $this->_TERMINOPPGAVE:   
+            case $this->_TERMINOPPGAVE:
                  break;
             case $this->_AARSOPPGAVE:
                  break;
@@ -373,12 +359,8 @@ class GeneralReport
             case $this->_AKSJONAERREGISTEROPPGAVE:
                  break;
             default: break;
-        	  	  
         }
-        
-      
     }//function HeadLogic
-
 
     ############################################################################
     function result($FromPeriod, $ToPeriod, $Year)
@@ -444,14 +426,11 @@ class GeneralReport
             $this->_sumTotal[$Year]['in']                               += $reportHash['AmountIn'];
             $this->_sumTotal[$Year]['out']                              += $reportHash['AmountOut'];
             $this->_sumTotal[$Year]['saldo']                            += $reportHash['AmountIn'] - $reportHash['AmountOut'];
-            
+
             $this->sumGroupLogic_($oldLine, $Year, $reportHash);
-        	
+
             //$this->sumGroupLogic($oldLine, $Year, $reportHash);
-            
-           
         }//foreach
-        
     }//function result
 
     ############################################################################
@@ -524,36 +503,12 @@ class GeneralReport
             $this->_sumTotal[$Year]['saldo']                            += $reportHash['AmountIn'] - $reportHash['AmountOut'];
 
              $this->sumGroupLogic_($oldLine, $Year, $reportHash);
-          
+
             //$this->sumGroupLogic($oldLine, $Year, $reportHash);
         }
 
         $this->_Total = $this->_sumTotal[$Year]['saldo'];
     }//function balance
-    
-    ############################################################################
-    function getAvskrivningerData($ToPeriod, $Year)
-    {
-       
-    }//getAvskrivninger
-    
-     ############################################################################
-    function getBrukAvBilOpplysningerData($ToPeriod, $Year)
-    {	
-       
-    }//getTerminOppgave
-    
-    ############################################################################
-    function getSelskapOppgaveData($ToPeriod, $Year)
-    {
-       
-    }//getTerminOppgave
-    
-     ############################################################################
-    function getTerminOppgaveData($ToPeriod, $Year)
-    {
-       
-    }//getTerminOppgave
 
     ############################################################################
     function sumGroup($LineNum, $Year, $reportHash)
@@ -562,182 +517,182 @@ class GeneralReport
         $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
         $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
     }
-    
+
     ############################################################################
     function sumGroupLogic_($Line, $Year, $reportHash) {
     	switch ($this->_report){
         	case $this->_SELVANGIVELDEAKSJESELSKAP:
         	     if ($this->SelvangivelseASKalk == null)
-        	         $this->SelvangivelseASKalk=new SelvangivelseASKalk(array());  
+        	         $this->SelvangivelseASKalk=new SelvangivelseASKalk(array());
         		 $this->SelvangivelseASKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup=$this->SelvangivelseASKalk->getSumGroup();
                  break;
             case $this->_SELVANGIVELSENAERINGSDRIVENDE:
         	     if ($this->SelvangivelseNrKalk == null)
         	         $this->SelvangivelseNrKalk=new SelvangivelseNrKalk(array());
-        	         
+
         		 $this->SelvangivelseNrKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->SelvangivelseNrKalk->getSumGroup();
                  break;
             case $this->_NAERINGSOPPGAVE1:
         	     if ($this->NaeringsOppgave1Kalk == null)
         	         $this->NaeringsOppgave1Kalk=new NaeringsOppgave1Kalk(array());
-        	         
+
         		 $this->NaeringsOppgave1Kalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->NaeringsOppgave1Kalk->getSumGroup();
                  break;
              case $this->_NAERINGSOPPGAVE2:
         	     if ($this->NaeringsOppgave2Kalk == null)
         	         $this->NaeringsOppgave2Kalk=new NaeringsOppgave2Kalk(array());
-        	         
+
         		 $this->NaeringsOppgave2Kalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->NaeringsOppgave2Kalk->getSumGroup();
-        				 
+
                  break;
              case $this->_PERSONINNTEKT1 :
              	 if ($this->NaeringsOppgave1Kalk == null)
             	 	$this->NaeringsOppgave1Kalk=new NaeringsOppgave1Kalk(array());
-            	         
+
 	             $this->NaeringsOppgave1Kalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
 	             $this->_sumGroup =$this->NaeringsOppgave1Kalk->getSumGroup();
-	             
+
 	             if ($this->PersonInntektKalk == null)
         	         $this->PersonInntektKalk=new PersonInntektKalk(array());
-        	         
+
         		  $this->PersonInntektKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		  $this->_sumGroup =$this->PersonInntektKalk->getSumGroup();
              	 break;
              case $this->_PERSONINNTEKT2 :
-             	 
+
                   if ($this->NaeringsOppgave2Kalk == null)
             	  		$this->NaeringsOppgave2Kalk=new NaeringsOppgave2Kalk(array());
-            	      
+
 	              $this->NaeringsOppgave2Kalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
-	              
+
 	              $this->_sumGroup =$this->NaeringsOppgave2Kalk->getSumGroup();
-                 
+
                   if ($this->PersonInntektKalk == null)
         	         $this->PersonInntektKalk=new PersonInntektKalk(array());
-        	         
+
         		  $this->PersonInntektKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		  $this->_sumGroup =$this->PersonInntektKalk->getSumGroup();
                  break;
             case $this->_AVSKRIVNINGER:
                   if ($this->AvskrivningerKalk == null)
         	         $this->AvskrivningerKalk=new AvskrivningerKalk(array());
-        	         
+
         		 $this->AvskrivningerKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->AvskrivningerKalk->getSumGroup();
                  break;
             case $this->_BILBRUKSOPPLYSNINGER:
                   if ($this->BilbruksOpplysningerKalk == null)
         	         $this->BilbruksOpplysningerKalk=new BilbruksOpplysningerKalk(array());
-        	         
+
         		 $this->BilbruksOpplysningerKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->BilbruksOpplysningerKalk->getSumGroup();
                  break;
             case $this->_FORSKJELLERREGNSKAPOGSKATTE:
                   if ($this->ForskjellerRegnskapOgSkatteKalk == null)
         	         $this->ForskjellerRegnskapOgSkatteKalk=new ForskjellerRegnskapOgSkatteKalk(array());
-        	         
+
         		 $this->ForskjellerRegnskapOgSkatteKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->ForskjellerRegnskapOgSkatteKalk->getSumGroup();
                  break;
             case $this->_TILLEGGSSKJEMA1:
                   if ($this->Tilleggsskjema1Kalk == null)
         	         $this->Tilleggsskjema1Kalk=new Tilleggsskjema1Kalk(array());
-        	         
+
         		 $this->Tilleggsskjema1Kalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->Tilleggsskjema1Kalk->getSumGroup();
                  break;
             case $this->_EGENKAPITALAVSTEMMING:
                   if ($this->EgenkapitalAvstemmingKalk == null)
         	         $this->EgenkapitalAvstemmingKalk=new EgenkapitalAvstemmingKalk(array());
-        	         
+
         		 $this->EgenkapitalAvstemmingKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->EgenkapitalAvstemmingKalk->getSumGroup();
                  break;
             case $this->_TILLEGGSSKJEMA2:
                   if ($this->Tilleggsskjema2Kalk == null)
         	         $this->Tilleggsskjema2Kalk=new Tilleggsskjema2Kalk(array());
-        	         
+
         		 $this->Tilleggsskjema2Kalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->Tilleggsskjema2Kalk->getSumGroup();
                  break;
             case $this->_GEVINSTOGTAPSKONTO:
                   if ($this->GevinstOgTapskontoKalk == null)
         	         $this->GevinstOgTapskontoKalk=new GevinstOgTapskontoKalk(array());
-        	         
+
         		 $this->GevinstOgTapskontoKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->GevinstOgTapskontoKalk->getSumGroup();
                  break;
             case $this->_REALISASJONAVAKSJEOPPGAVE:
                   if ($this->AksjeRealisasjonsKalk == null)
         	         $this->AksjeRealisasjonsKalk=new AksjeRealisasjonsKalk(array());
-        	         
+
         		 $this->AksjeRealisasjonsKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->AksjeRealisasjonsKalk->getSumGroup();
                  break;
            case $this->_BEREGNINGAVRISK:
                   if ($this->RISKBeregningsKalk == null)
         	         $this->RISKBeregningsKalk=new RISKBeregningsKalk(array());
-        	         
+
         		 $this->RISKBeregningsKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->RISKBeregningsKalk->getSumGroup();
                  break;
            case $this->_SELSKAPSOPPGAVE:
                   if ($this->SelskapOppgaveKalk == null)
         	         $this->SelskapOppgaveKalk=new SelskapOppgaveKalk(array());
-        	         
+
         		 $this->SelskapOppgaveKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->SelskapOppgaveKalk->getSumGroup();
                  break;
            case $this->_DELTAKERENSOPPGAVE:
                   if ($this->DeltakerensOppgaveKalk == null)
         	         $this->DeltakerensOppgaveKalk=new DeltakerensOppgaveKalk(array());
-        	         
+
         		 $this->DeltakerensOppgaveKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->DeltakerensOppgaveKalk->getSumGroup();
                  break;
             case $this->_TERMINOPPGAVE:
                   if ($this->TerminOppgaveKalk == null)
         	         $this->TerminOppgaveKalk=new TerminOppgaveKalk(array());
-        	         
+
         		 $this->TerminOppgaveKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->TerminOppgaveKalk->getSumGroup();
                  break;
              case $this->_AARSOPPGAVE:
                   if ($this->AArgsoppgaveKalk == null)
         	         $this->AArgsoppgaveKalk=new AArgsoppgaveKalk(array());
-        	         
+
         		 $this->AArgsoppgaveKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->AArgsoppgaveKalk->getSumGroup();
                  break;
              case $this->_SPEKAVINNTEKTOGFRADRAGUTLANDET:
                   if ($this->InntektOgFradragUtlandetKalk == null)
         	         $this->InntektOgFradragUtlandetKalk=new InntektOgFradragUtlandetKalk(array());
-        	         
+
         		 $this->InntektOgFradragUtlandetKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->InntektOgFradragUtlandetKalk->getSumGroup();
                  break;
               case $this->_REGISTRERTEOGINNBERETTEDE:
                   if ($this->RegistrerteOgInnberettedeKalk == null)
         	         $this->RegistrerteOgInnberettedeKalk=new RegistrerteOgInnberettedeKalk(array());
-        	         
+
         		 $this->RegistrerteOgInnberettedeKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->RegistrerteOgInnberettedeKalk->getSumGroup();
                  break;
               case $this->_AKSJONAERREGISTEROPPGAVE:
                   if ($this->AksjonaerRegisterKalk == null)
         	         $this->AksjonaerRegisterKalk=new AksjonaerRegisterKalk(array());
-        	         
+
         		 $this->AksjonaerRegisterKalk->sumGroupLogic($Line, $Year, $reportHash, $this->_sumGroup);
         		 $this->_sumGroup =$this->AksjonaerRegisterKalk->getSumGroup();
                  break;
             default: break;
-            
+
         }//witch case
-    	
+
     }//function sumGroupLogic_
 
     ############################################################################
@@ -749,11 +704,11 @@ class GeneralReport
 	               $Line == "0150"  || $Line == "0160" )
 	            {
 	                $this->sumGroup('0170', $Year, $reportHash);
-	        } 
+	        }
         	elseif($Line >= 3000 and $Line <= 3900)
             {
                 $this->sumGroup('9900', $Year, $reportHash);
-            } 
+            }
             elseif($Line >= 4005 and $Line <= 7897)
             {
                 $this->sumGroup('9910', $Year, $reportHash);
@@ -783,7 +738,7 @@ class GeneralReport
                 $this->sumGroup('9990', $Year, $reportHash);
             }
         }
-        elseif($this->_report == $this->_NAERINGSOPPGAVE2 || 
+        elseif($this->_report == $this->_NAERINGSOPPGAVE2 ||
         		($this->_report == $this->_PERSONINNTEKT2 and $this->_companyType == 'AS'))
         {   if($Line == "0110" || $Line == "0120" || $Line == "0130" || $Line == "0140" ||
 	               $Line == "0150"  || $Line == "0160" ){
@@ -833,10 +788,10 @@ class GeneralReport
             {
                 //$this->sumGroup('9200', $Year, $reportHash);
             }
-            
-            //find out if this  a personinntekt report that has been associated with
-            //the n�ringsoppgave2
-             //If this is a personinntekt report then start the ..
+
+            //find out if this  a personal income report that has been associated with
+            //the næringsoppgave2
+            //If this is a personal income report then start the ..
             if ($this->_report == $this->_PERSONINNTEKT2) {
             	if ($Line == '1.11' || $Line == '1.12' || $Line == '1.13' || $Line == '1.14' ||
             	    $Line == '1.15' || $Line == '1.16' || $Line == '1.17' || $Line == '1.18' ||
@@ -846,12 +801,10 @@ class GeneralReport
                    $Line == '2.1e' || $Line == '2.1f' || $Line == '2.1g' || $Line == '2.1h' ||
                    $Line == '2.1j' || $Line == '2.2' || $Line == '2.3' || $Line == '2.4' ||
                    $Line == '2.5' || $Line == '2.6'){
-                 	$this->sumGroup('2.7', $Year, $reportHash);	  
+                 	$this->sumGroup('2.7', $Year, $reportHash);
                  }
-            	 
-            	
             }
-        }//
+        }
         ########################################################################
         elseif($this->_report ==$this->_SELVANGIVELSENAERINGSDRIVENDE)
         {
@@ -891,12 +844,7 @@ class GeneralReport
             {
                 $this->sumGroup('470', $Year, $reportHash);
             }
-            
-            
-        }//
-        
-       
-        
+        }
     }//sumGroupLogic
 
     ############################################################################

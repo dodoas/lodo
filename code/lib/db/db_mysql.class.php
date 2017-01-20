@@ -50,7 +50,7 @@ class db_mysql {
 
    #################################################################
    # $_lib['db']->db_query($sql);
-   # Kun for å hente data
+   # Only to fetch data
    function db_query($db_query) {
        global $_sess;
        #print "$db_query<br>\n";
@@ -79,7 +79,7 @@ class db_mysql {
         return $result;
     }
 
-   #hasher er fine dyr
+   #hashes are nice animals
    function db_query3($args)
    {
       global $_sess;
@@ -218,7 +218,7 @@ class db_mysql {
    # $_lib['storage']->db_update_hash($request, 'request', $pk);
    function db_update_hash($input, $table, $primarykey) {
      global $_error, $_sess, $_cache;
-     #Shoudl also be able to find primary key data if empty
+     #Should also be able to find primary key data if empty
      if($_sess->get_tableaccess($table) >= 2 or !$_SETUP['SECURITY']['ROLE']) {
        $where = "where ";
        foreach ($primarykey as $key => $value) {
@@ -311,7 +311,7 @@ class db_mysql {
         $result = $this->db_delete($query);
         #print "Slettet $value fra $table<br>";
       } else {
-          $_sess->warning("Your role is not permitted to create records in: $table");
+          $_sess->warning("Your role is not permitted to delete records in: $table");
       }
     }
 
@@ -385,7 +385,8 @@ class db_mysql {
           #What about embedded html?
           #Does the user have the role rights to save the data
           #If so we use it
-          #Why is . translated to _?
+          #Why is . translated to _? EDIT: See http://php.net/manual/en/language.variables.external.php -> Dots in incoming variable names
+          #Basically if we wanted to transform the param names into vars ex. name.one is not a valid name for a var but name_one is
           if(preg_match("/^$table\_/", $key))
           {
             $key = preg_replace("/$table\_/i", "", $key);
@@ -428,8 +429,7 @@ class db_mysql {
            {
              if(preg_match("/\(\)$/", $value) or preg_match("/\'\)$/", $value))
              {
-               #If it contains parenthesis, its a function
-               #print "ikke fnutt: $field<br>";
+               #If it contains parentheses, its a function
                $fields[$field] = $value;
              }
              else
@@ -444,7 +444,7 @@ class db_mysql {
 
                $value  = $hash['value'];
                $error  = $hash['error'];
-               //$fields = $hash['fields']; #Trenger ikke, dette blir gjort i input nå.
+               //$fields = $hash['fields']; # Not needed, this happens in input now.
                #####################################
                if($error)
                {
@@ -460,14 +460,16 @@ class db_mysql {
            else
            {
              if(!$table) {
+               # Table missing to db_update/db_new
                print "Tabell mangler til db_update/db_new: $table.$field<br />\n";
              }
              if(!$field) {
+               # Field missing to db_update/db_new
                print "Felt mangler til db_update/db_new: $table.$field<br />\n";
              }
              print "Finnes ikke: $table.$field<br />\n";
              unset($fields[$field]); #remove it
-             $_sess->warning("FIeldname does not exist: $field");
+             $_sess->warning("Fieldname does not exist: $field");
            }
          } #End foreach
 
@@ -488,7 +490,8 @@ class db_mysql {
     function db_update_multi_record($input, $table, $primarykey) {
       #print "Multi update<br>";
       if(!$table){
-        print "Empty table in db_update_multi_record<br>";
+        #Empty table in db_update_multi_record
+        print "Tom tabell i db_update_multi_record<br>";
       }
 
       foreach ($input as $key => $value) {
@@ -503,7 +506,7 @@ class db_mysql {
             $newinput = array();
             $newinput[$key] = $value;
 
-            #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreasch exiting, so new_pk does not get a new id.
+            #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreach exiting, so new_pk does not get a new id.
             #Should probably be a multidimensional array with input, table and pk refs
             #if(!$pk_old) { $pk_old = $pk_new; }
             #print "pk_old: $pk_old = pk_new: $pk_new<br>";
@@ -523,7 +526,7 @@ class db_mysql {
     }
 
     #################################################################
-    #Multi record update function in same table: form name requirement: tablename_fieldname_pkvalue
+    #Multi record update function in multiple tables: form name requirement: tablename_fieldname_pkvalue
     #$input     = hash with input (table.field)
     #$table      = hash with tables (table) as key and primary key as value $tables['tabellnavn'] = 'pk';
     #$databases  = hash with databases
@@ -545,7 +548,7 @@ class db_mysql {
                 $newinput = array();
                 $newinput[$key] = $value;
 
-                #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreasch exiting, so new_pk does not get a new id.
+                #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreach exiting, so new_pk does not get a new id.
                 #Should probably be a multidimensional array with input, table and pk refs
                 #if(!$pk_old) { $pk_old = $pk_new; }
                 #print "pk_old: $pk_old = pk_new: $pk_new<br>";
@@ -643,7 +646,7 @@ class db_mysql {
         //print_r($args);
 
         $field = $args['field'];
-        #Kunne vært enda bedre bruk av cache
+        #Could have been even better with use of cache
         $this->_validatehash = $_cache->table(array('table' => $args['table'], 'field' => $field));
         //print_r($this->_validatehash);
 
@@ -651,12 +654,12 @@ class db_mysql {
         $type = $this->_validatehash[$field]['InputValidation'];
         //print $args['table']." $field : type: $type<br>\n";
         #$_sess->debug($args['field']]['InputValidation']);
-        //print("valider: table: $args[table], field: $args[field] : $type: value: $args[value]<br>");
+        //print("validate: table: $args[table], field: $args[field] : $type: value: $args[value]<br>");
         if($type)
         {
             if($this->_validatehash[$field]['Required'] == 1 and strlen($args['value']) == 0) {
                #Check for required fields
-               $_error .= "P&aring;krevet";
+               $_error .= "Required";
             }
             elseif (method_exists($_convert, $type))
             {
@@ -673,7 +676,7 @@ class db_mysql {
                     $_sess->warning($_error);
                 }
 
-                #print "valider: $table, $field required: " . $this->_validatehash[$field]['Required'] . "<br>";
+                #print "validate: $table, $field required: " . $this->_validatehash[$field]['Required'] . "<br>";
             }
             else
             {
@@ -684,7 +687,7 @@ class db_mysql {
         {
             #print "field:#$args[field]#";
             #print_r($this->_validatehash[$args[field]]);
-            $value = $args['value']; #JUst return what you get inside
+            $value = $args['value']; #Just return what you get inside
             $_sess->warning("Input validation setup missing for " . $args['table'] . "." . $args['field'] . ". Type: $type. Syncronize db model.");
         }
         #} else {
@@ -712,7 +715,7 @@ class db_mysql {
          }
        }
      }
-     #Find primary keys (Could in fact guess them from table names, but problem guessing upper camel cas
+     #Find primary keys (Could in fact guess them from table names, but problem guessing upper camel case
        foreach ($tables as $table => $tmp) {
          $tables[$table] = $this->find_table_pk($table);
        }

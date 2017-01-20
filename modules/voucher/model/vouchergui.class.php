@@ -4,18 +4,13 @@ includelogic('exchange/exchange');
 
 ##################################
 #
-# Funksjoner som brukes i bilagsregistreringsskjermbildet journal/edit
+# Functions used in the bookkeeping register view journal/edit
 #
 ##################################
 
 class framework_logic_vouchergui
 {
-    /***************************************************************************
-    * comment
-    * @param
-    * @return
-    */
-    #comments to posteringslinjer
+    #comments to voucher lines
     function comment($voucher) {
         $commentstring =  "Postering: ".$voucher->VoucherID;
         if($voucher->AutomaticReason)
@@ -36,12 +31,7 @@ class framework_logic_vouchergui
         return $commentstring;
     }
 
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
-    //#Vat fields in posteringslinjer
+    # Vat fields in voucher lines
     function vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, $closed = false) {
         global $_lib;
         $html = '';
@@ -80,11 +70,7 @@ class framework_logic_vouchergui
         return $html;
     }
 
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
+    # Currency fields in voucher lines
     function currency($voucher, $accountplan, $vb, $class) {
         global $_lib, $tabindex;
 
@@ -94,12 +80,10 @@ class framework_logic_vouchergui
             $tabindexout = '';
             if($AmountField == 'in')
             {
-              $tabindexout = '';
               $tabindexin  = $tabindex++;
             }
             else
             {
-              $tabindexin  = '';
               $tabindexout = $tabindex++;
             }
         }
@@ -191,12 +175,7 @@ class framework_logic_vouchergui
         return $html;
     }
 
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
-    //#Print accout menu on line
+    # Print accout menu on line
     function account($VoucherPeriod, $new, $db_table, $voucher, $AccountPlanID, $autosubmit, $disabled = false) {
         global $_lib, $accounting, $tabindex;
         $html = '';
@@ -227,15 +206,10 @@ class framework_logic_vouchergui
         return $html . "\n";
     }
 
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
-    //#Print credit/debit fields in td menu on line
+    # Print credit/debit fields in td on line
     function creditdebitfield($AmountField, $accountplan, $AmountIn, $AmountOut, $closed = false) {
         global $_lib, $tabindex;
-        
+
         $tabindexin  = '';
         $tabindexout = '';
         if($closed) {
@@ -263,11 +237,6 @@ class framework_logic_vouchergui
         return $html;
     }
 
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
     #Buttons on line
     function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type, $button) {
         global $_lib, $accounting, $tabindex, $MY_SELF;
@@ -289,10 +258,6 @@ class framework_logic_vouchergui
                         $html .= '<input type="submit" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
                     }
                 }
-                else
-                {
-                    //print "Kan ikke endres";
-                }
             }
             elseif($voucher->VoucherType == 'A') {
                 if($button != 'update') {
@@ -307,6 +272,7 @@ class framework_logic_vouchergui
         return $html;
     }
 
+    # Marks the active line with >>
     function active_line($VoucherID1, $VoucherID2) {
         global $voucher_input;
 
@@ -316,11 +282,6 @@ class framework_logic_vouchergui
         return $html;
     }
 
-    /***************************************************************************
-    * Beregn postering
-    * @param
-    * @return
-    */
     #Buttons on head
     function update_journal_button_head($voucherHead, $VoucherPeriod, $VoucherType, $JournalID, $new, $rowCount, $button) {
         global $_lib, $tabindex, $accounting, $MY_SELF;

@@ -29,7 +29,7 @@ elseif($AccountPlanID) #since this is automatically created
 $account = $_lib['storage']->get_row(array('query' => $query));
 
 /*
- * Hack for √• f√• korrekt info ved opprettelse av ny konto 
+ * Hack to get the correct information when creating new account plan
  */
 if(!$account && $_lib['input']->getProperty('NewAccount'))
 {
@@ -37,12 +37,12 @@ if(!$account && $_lib['input']->getProperty('NewAccount'))
     $query = sprintf("SELECT * FROM accountplantemplate WHERE AccountPlanType = '%s'", $AccountPlanType);
     $template_r = $_lib['db']->db_query($query);
     $template = $_lib['db']->db_fetch_assoc($template_r);
-    
+
     if($template) {
         foreach($template as $k => $v) {
-            if($k == "AccountPlanID") 
+            if($k == "AccountPlanID")
                 continue;
-            
+
             $account->$k = $v;
         }
     }
@@ -72,7 +72,7 @@ $swift_r = $_lib['db']->db_query($swift_q);
 $swift_row = $_lib['db']->db_fetch_assoc($swift_r);
 $swift_number = $swift_row['Swift'];
 $swift_number_account = $swift_row['SwiftAccount'];
-    
+
 print $_lib['sess']->doctype ?>
 
 <head>
@@ -116,7 +116,7 @@ if($JournalID) {
     <li><a href="<? print $_lib['sess']->dispatch ?>t=postmotpost.list&report_Sort=JournalID&AccountPlanID=2400&ReskontroFromAccount=<? print $AccountPlanID ?>&ReskontroToAccount=<? print $AccountPlanID ?>">&Aring;pne poster for <? print $account->AccountName ?></a></li>
     <li><a href="<? print $_lib['sess']->dispatch ?>t=report.reskontrovoucherprint&report.Type=reskontro&report.Sort=VoucherDate&report.selectedAccount=2400&report.FromAccount=<? print $AccountPlanID ?>&report.ToAccount=<? print $AccountPlanID ?>&report.FromPeriod=<? print $_lib['sess']->get_session('PeriodStartYear') ?>&report.ToPeriod=<? print $_lib['sess']->get_session('PeriodEndYear') ?>">Bilagsutskrift innev&aelig;rende &aring;r for <? print $account->AccountName ?></a></li>
 
-<? } else { ?> 
+<? } else { ?>
     <li><a href="<? print $_lib['sess']->dispatch ?>t=postmotpost.list&report_Sort=JournalID&AccountPlanID=1500&ReskontroFromAccount=<? print $AccountPlanID ?>&ReskontroToAccount=<? print $AccountPlanID ?>">&Aring;pne poster for <? print $account->AccountName ?></a></li>
     <li><a href="<? print $_lib['sess']->dispatch ?>t=report.reskontrovoucherprint&report.Type=reskontro&report.Sort=VoucherDate&report.selectedAccount=1500&report.FromAccount=<? print $AccountPlanID ?>&report.ToAccount=<? print $AccountPlanID ?>&report.FromPeriod=<? print $_lib['sess']->get_session('PeriodStartYear') ?>&report.ToPeriod=<? print $_lib['sess']->get_session('PeriodEndYear') ?>">Bilagsutskrift innev&aelig;rende &aring;r for <? print $account->AccountName ?></a></li>
 
@@ -283,21 +283,6 @@ if($JournalID) {
     <td style="text-align:right" colspan="2">Farge:</td>
     <td><? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'CreditColor', 'value'=>$account->CreditColor, 'type'=>'CreditColor', 'required' => 1)) ?></td>
   </tr>
-  <!--<tr>
-    <td class="menu">KID referanse</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnablePostPost",$account->EnablePostPost,''); ?></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>-->
-  <!--tr>VAT should only be set on hovedbok, not on reskontro.
-    <td class="menu">Mva kode</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableVAT", $account->EnableVAT,''); ?></td>
-    <td><? print $_lib['form3']->vat_menu3(array('table'=>$db_table, 'field'=>'VatID', 'value'=>$account->VatID, 'vatid'=>'1', 'disabled' => true)) ?></td>
-    <td>Mva kode kan overstyres:</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableVATOverride", $account->EnableVATOverride,'') ?></td>
-    </td>
-  </tr-->
   <tr>
     <td class="menu">Mengde</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableQuantity", $account->EnableQuantity,'') ?></td>
@@ -340,7 +325,7 @@ if($JournalID) {
     <td colspan="4">
     <?
         $aconf = array();
-        $aconf['type'][]  		= 'result';
+        $aconf['type'][]        = 'result';
         $aconf['table']         = 'accountplan';
         $aconf['field']         = 'MotkontoResultat1';
         $aconf['value']         = $account->MotkontoResultat1;
@@ -360,7 +345,7 @@ if($JournalID) {
     <td colspan="4">
     <?
         $aconf = array();
-        $aconf['type'][]  		= 'balance';
+        $aconf['type'][]        = 'balance';
         $aconf['table']         = 'accountplan';
         $aconf['field']         = 'MotkontoBalanse1';
         $aconf['value']         = $account->MotkontoBalanse1;
@@ -381,12 +366,6 @@ if($JournalID) {
     <td colspan="2">Brukes av bankavstemming/kontoutskrift importen for &aring; automatisk<br /> sette dette kontonummeret p&aring; en transaksjon som har en matchende tekst</td>
     <td></td>
   </tr>
-  <!--tr>Pengeflyt bilr alltid overstyrt fra respektive hovedbokskonto - så ingen grunn til å kunne endre det her.
-    <td class="menu">Pengeflyt</td>
-    <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'EnableMoneyFlow', 'value'=>$account->EnableMoneyFlow, 'disabled' => true)) ?></td>
-    <td>Oppstartsaldo <? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'EnableSaldo', 'value'=>$account->EnableSaldo)) ?></td>
-  </tr-->
-
   <tr class="result">
     <th colspan="6">Logg</th>
   </tr>
@@ -427,16 +406,15 @@ if($JournalID) {
   <tr>
     <td colspan="5" align="right">
         <form name="delete" action="<? print $_SETUP['DISPATCH'] ?>t=accountplan.list&accountplan_type=hovedbok" method="post">
-        <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID)) ?>
-        <? print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D')) ?>
-        <? if($_lib['sess']->get_person('AccessLevel') > 3) {
+        <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID))
+           print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D'))
+           if($_lib['sess']->get_person('AccessLevel') > 3) {
             print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>'', 'confirm' => 'Er du sikker p&aring; at du vil slette denne?'));
         } ?>
         </form>
     </td>
   </tr>
   <? } ?>
-
 
 </table>
 </form>

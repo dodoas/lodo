@@ -38,14 +38,11 @@ if(strlen($account->AccountPlanType) > 0) {
 <? includeinc('left'); ?>
 
 <?
-if(isset($JournalID))
-{ ?>
+if(isset($JournalID)) { ?>
    <a href="<? print $_lib['sess']->dispatch ?>t=journal.edit&JournalID=<? print $JournalID ?>">Tilbake til bilag <? print $JournalID ?></a>
-<?
-}
+<? }
 
 print '<h1>' . $_lib['message']->get() . '</h1>';
-
 ?>
 
 <table class="lodo_data">
@@ -97,7 +94,6 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   <tr>
     <td class="menu">Mengde</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableQuantity", $account->EnableQuantity,'') ?></td>
-
   </tr>
   <tr>
     <td class="menu">Prosjekt</td>
@@ -206,9 +202,8 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     <td>
     <? $_lib['form2']->checkbox2($db_table, "EnableMotkontoResultat", $account->EnableMotkontoResultat,'');
         $aconf = array();
-        $aconf['type'][]  	= 'result';
+        $aconf['type'][]        = 'result';
         $aconf['table']         = 'accountplantemplate';
-
         $aconf['field']         = 'MotkontoResultat1';
         $aconf['value']         = $account->MotkontoResultat1;
         print $_lib['form3']->accountplan_number_menu($aconf);
@@ -226,9 +221,9 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     <td>
     <? $_lib['form2']->checkbox2($db_table, "EnableMotkontoBalanse", $account->EnableMotkontoBalanse,'');
         $aconf = array();
-        $aconf['type'][]  	= 'balance';        
+        $aconf['type'][]        = 'balance';
         $aconf['table']         = 'accountplantemplate';
-        
+
         $aconf['field']         = 'MotkontoBalanse1';
         $aconf['value']         = $account->MotkontoBalanse1;
         print $_lib['form3']->accountplan_number_menu($aconf);
