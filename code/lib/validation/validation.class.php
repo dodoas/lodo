@@ -35,5 +35,25 @@ class validation {
 
         return true;
     }
+
+    // takes an array in form of ["society_number"=>number, "birth_date"=>date]
+    function personal_number_birthday_match($args) {
+        $society_number = $args['society_number'];
+        $birth_date = $args['birth_date'];
+
+        $day = substr($society_number, 0, 2);
+        $month = substr($society_number, 2, 2);
+        $year = substr($society_number, 4, 2);
+
+        // in case that this was a society number for someone who is not NO citizen. They have 4 added to the first digit.
+        if($day > 40) {
+            $day -= 40;
+            if($day < 10) $day = '0'.$day;
+        }
+
+        $regex = "/".$year."-".$month."-".$day."/";
+
+        return preg_match($regex, $birth_date);
+    }
 }
 ?>
