@@ -199,8 +199,8 @@ $accountplan = accountplan($AccountPlanID);
   <tr>
     <td><u>M</u>VA%
     <td>M<u>e</u>ngde
-    <td>A<u>v</u>d.
     <td><u>P</u>rosjekt
+    <td>A<u>v</u>d.
     <td><u>F</u>orfallsdato
     <td><u>R</u>ef.
     <td colspan="2">Te<u>k</u>st
@@ -215,8 +215,8 @@ $accountplan = accountplan($AccountPlanID);
         }
       } ?>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" name="voucher.Quantity" accesskey="Q" value="<? print "$voucher->Quantity"; ?>"><? } ?>
-    <td><? if($accountplan->EnableDepartment) { department_menu2($db_table, 'DepartmentID', $voucher->DepartmentID, $tabindex++, 'V',''); } ?>
     <td><? if($accountplan->EnableProject)    { project_menu2($db_table,    'ProjectID',    $voucher->ProjectID, $tabindex++, 'P','');    } ?>
+    <td><? if($accountplan->EnableDepartment) { department_menu2($db_table, 'DepartmentID', $voucher->DepartmentID, $tabindex++, 'V',''); } ?>
     <td><input class="voucher" type="text" size="10" tabindex="<? print $tabindex++; ?>" accesskey="F" name="voucher.DueDate"       value="<? print $DueDate; ?>">
     <td><input class="voucher" type="text" size="5" tabindex="<? print $tabindex++; ?>"  accesskey="R" name="voucher.KID"         value="<? print "$voucher->KID"; ?>">
     <td><? Type_menu2('Description', $voucher->DescriptionID, 'VoucherDescriptionID', $db_table, $tabindex++, 'E'); ?>

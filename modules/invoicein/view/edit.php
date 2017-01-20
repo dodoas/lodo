@@ -242,10 +242,10 @@ function updateAndPerformAction(link_button) {
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'RefInternal', 'pk'=>$ID, 'value'=>$invoicein->RefInternal, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Avdeling</td>
-      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'Department', 'pk'=>$ID, 'value' => $invoicein->Department)); ?></td>
       <td>Prosjekt</td>
       <td><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'Project', 'pk'=>$ID,  'value' =>  $invoicein->Project)) ?></td>
+      <td>Avdeling</td>
+      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'Department', 'pk'=>$ID, 'value' => $invoicein->Department)); ?></td>
     </tr>
     <tr>
       <td>Leverings betingelse</td>

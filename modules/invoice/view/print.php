@@ -135,16 +135,16 @@ print $_lib['sess']->doctype ?>
         <td><? if (!empty($row->IVatNo)) print $row->IVatNo ?></td>
     </tr>
     <tr>
-      <td>Avdeling</td>
-      <td><? if($row->DepartmentID) print $row->DepartmentID ?></td>
-      <td>Avdeling</td>
-      <td><? print $row->DepartmentCustomer ?></td>
-    </tr>
-    <tr>
       <td>Prosjekt</td>
       <td><? if($row->ProjectID) print $row->ProjectID ?></td>
       <td>Prosjekt</td>
       <td><? print $row->ProjectNameCustomer ?></td>
+    </tr>
+    <tr>
+      <td>Avdeling</td>
+      <td><? if($row->DepartmentID) print $row->DepartmentID ?></td>
+      <td>Avdeling</td>
+      <td><? print $row->DepartmentCustomer ?></td>
     </tr>
 
     <tr height="20">

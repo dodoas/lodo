@@ -324,8 +324,8 @@ $formname = "salaryUpdate";
     <th>Bel&oslash;p hittil i &aring;r</th>
     <th>Konto</th>
     <th>Bil</th>
-    <th>Avdeling</th>
     <th>Prosjekt</th>
+    <th>Avdeling</th>
     <th>Skatt</th>
     <th>Arb. giv.</th>
     <th>Feriep.</th>
@@ -463,8 +463,8 @@ $formname = "salaryUpdate";
         ?>
         </td>
         <td><? if($accountplan->EnableCar)     { $_lib['form2']->car_menu2(array('table' => 'salaryline', 'field' => 'CarID', 'value' => $line->CarID, 'tabindex' => $tabindex++, 'pk' => $line->SalaryLineID, 'active_reference_date' => $head->JournalDate)); } ?></td>
-        <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
         <td><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
+        <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
 
         <td><? print $line->MandatoryTaxSubtraction ? "ja" : "nei" ?></td>
         <td><? print $line->EnableEmployeeTax ? "ja" : "nei" ?></td>

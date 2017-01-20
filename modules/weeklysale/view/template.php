@@ -108,7 +108,8 @@ $aconf['num_letters']   = 10;
         ?>
       </tr>
 
-        <th class="sub">Avdeling</th>
+      <tr>
+        <th class="sub">Bil</th>
         <?
         for ($i = 1; $i <= 10; $i++) {
         ?>
@@ -116,10 +117,10 @@ $aconf['num_letters']   = 10;
             <?
                 if($row->{"Group". $i ."Account"} > 0)
                 {
-                    $queryCheck="select EnableDepartment from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
+                    $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
-                    if($rowCheck->EnableDepartment == 1)
-                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID));
+                    if($rowCheck->EnableCar == 1)
+                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
                 }
             ?></td>
         <?
@@ -145,8 +146,7 @@ $aconf['num_letters']   = 10;
         }
         ?>
       </tr>
-      <tr>
-        <th class="sub">Bil</th>
+      <th class="sub">Avdeling</th>
         <?
         for ($i = 1; $i <= 10; $i++) {
         ?>
@@ -154,16 +154,17 @@ $aconf['num_letters']   = 10;
             <?
                 if($row->{"Group". $i ."Account"} > 0)
                 {
-                    $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
+                    $queryCheck="select EnableDepartment from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
-                    if($rowCheck->EnableCar == 1)
-                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
+                    if($rowCheck->EnableDepartment == 1)
+                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID));
                 }
             ?></td>
         <?
         }
         ?>
       </tr>
+      
       <tr>
         <th class="sub"></th>
         <?
@@ -211,7 +212,7 @@ $aconf['num_letters']   = 10;
         ?>
       </tr>
       <tr>
-        <th class="sub">Avdeling</th>
+        <th class="sub">Bil</th>
         <?
         for ($i = 11; $i <= 20; $i++) {
         ?>
@@ -219,10 +220,10 @@ $aconf['num_letters']   = 10;
             <?
                 if($row->{"Group". $i ."Account"} > 0)
                 {
-                    $queryCheck="select EnableDepartment from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
+                    $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
-                    if($rowCheck->EnableDepartment == 1)
-                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID));
+                    if($rowCheck->EnableCar == 1)
+                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
                 }
             ?></td>
         <?
@@ -249,7 +250,7 @@ $aconf['num_letters']   = 10;
         ?>
       </tr>
       <tr>
-        <th class="sub">Bil</th>
+        <th class="sub">Avdeling</th>
         <?
         for ($i = 11; $i <= 20; $i++) {
         ?>
@@ -257,16 +258,17 @@ $aconf['num_letters']   = 10;
             <?
                 if($row->{"Group". $i ."Account"} > 0)
                 {
-                    $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
+                    $queryCheck="select EnableDepartment from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
-                    if($rowCheck->EnableCar == 1)
-                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
+                    if($rowCheck->EnableDepartment == 1)
+                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID));
                 }
             ?></td>
         <?
         }
         ?>
       </tr>
+
       <?
     }
     ?>

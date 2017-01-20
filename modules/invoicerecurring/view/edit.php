@@ -193,16 +193,16 @@ print $_lib['sess']->doctype ?>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'RefInternal', 'pk'=>$RecurringID, 'value'=>$row->RefInternal, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Avdeling</td>
-      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$RecurringID, 'value' => $row->DepartmentID)); ?></td>
-      <td>Avdeling</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DepartmentCustomer', 'pk'=>$RecurringID, 'value'=>$row->DepartmentCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
-    </tr>
-    <tr>
       <td>Prosjekt</td>
       <td><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$RecurringID,  'value' =>  $row->ProjectID)) ?></td>
       <td>Prosjekt</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$RecurringID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
+    </tr>
+    <tr>
+      <td>Avdeling</td>
+      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$RecurringID, 'value' => $row->DepartmentID)); ?></td>
+      <td>Avdeling</td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DepartmentCustomer', 'pk'=>$RecurringID, 'value'=>$row->DepartmentCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
       <td>Leveringsbetingelse</td>

@@ -345,19 +345,16 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td></td>
                 <td colspan="4"></td>
             </tr>
-            <? if(is_array($weeklysale->salehead['department'])) { ?>
             <tr>
-                <td colspan="3">Avdelinger</td>
+                <td colspan="3">Bil</td>
                 <td></td>
-                
-                <? foreach($weeklysale->salehead['department'] as $i => $name) { ?>
-                <td align="left"><nobr><? print $name ?></nobr></td>
+                <? foreach($weeklysale->salehead['groups'] as $name => $id) { ?>
+                    <? $car = $cars[$sales_group_conf_object->{"Group".$id."CarID"}] ?>
+                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
                 <? } ?>
-                
                 <td></td>
                 <td colspan="4"></td>
             </tr>
-            <? } ?>
             <? if(is_array($weeklysale->salehead['project'])) { ?>
             <tr>
                 <td colspan="3">Prosjekter</td>
@@ -370,13 +367,16 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td></td>
                 <td colspan="4"></td>
             </tr>
+            <? } ?>
+            <? if(is_array($weeklysale->salehead['department'])) { ?>
             <tr>
-                <td colspan="3">Bil</td>
+                <td colspan="3">Avdelinger</td>
                 <td></td>
-                <? foreach($weeklysale->salehead['groups'] as $name => $id) { ?>
-                    <? $car = $cars[$sales_group_conf_object->{"Group".$id."CarID"}] ?>
-                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
+                
+                <? foreach($weeklysale->salehead['department'] as $i => $name) { ?>
+                <td align="left"><nobr><? print $name ?></nobr></td>
                 <? } ?>
+                
                 <td></td>
                 <td colspan="4"></td>
             </tr>
@@ -489,15 +489,14 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="10"></td>
             </tr>
             <tr>
-                <td colspan="2">Avdelinger</td>
+                <td colspan="2">Bil</td>
                 <td></td>
-                <? if(is_array($weeklysale->revenuehead['department'])) {
-                    foreach($weeklysale->revenuehead['department'] as $i => $name) { ?>
-                    <td align="left"><nobr><? print $name ?></nobr></td>
-                <? }
-                } ?>
-                <td>
-                <td colspan="9">
+                <? foreach($weeklysale->revenuehead['project'] as $i => $name) { ?>
+                    <? $car = $cars[$credit_group_conf_object->{"Group".$i."CarID"}] ?>
+                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
+                <? } ?>
+                <td></td>
+                <td colspan="4"></td>
             </tr>
             <tr>
                 <td colspan="2">Prosjekter</td>
@@ -510,14 +509,15 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="10"></td>
             </tr>
             <tr>
-                <td colspan="2">Bil</td>
+                <td colspan="2">Avdelinger</td>
                 <td></td>
-                <? foreach($weeklysale->revenuehead['project'] as $i => $name) { ?>
-                    <? $car = $cars[$credit_group_conf_object->{"Group".$i."CarID"}] ?>
-                    <td><? print $car->CarCode == "0" ? $car->CarName : $car->CarCode ?></td>
-                <? } ?>
-                <td></td>
-                <td colspan="4"></td>
+                <? if(is_array($weeklysale->revenuehead['department'])) {
+                    foreach($weeklysale->revenuehead['department'] as $i => $name) { ?>
+                    <td align="left"><nobr><? print $name ?></nobr></td>
+                <? }
+                } ?>
+                <td>
+                <td colspan="9">
             </tr>
             <tr>
                 <td class="menu" colspan="3">Kontant inn</td>
