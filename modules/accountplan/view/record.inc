@@ -21,6 +21,10 @@ function validate_employee($employee) {
         $errors[] = "Ugyldig personlig epost.";
     }
 
+    if(!empty($employee->SocietyNumber) && !$_lib['validation']->personal_number_birthday_match(array("society_number"=>$employee->SocietyNumber, "birth_date"=>$employee->BirthDate))) {
+        $errors[] = "Personnr m&aring; stemme med f&oslash;dselsdag.";
+    }
+
     $fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $employee->AccountPlanID;
     $fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
 

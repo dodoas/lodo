@@ -1238,13 +1238,14 @@ class invoice {
         $this->invoiceO = new stdClass();
         $this->taxH     = array();
 
-        $sql_invoice    = "select invoiceout.*, P.Email as SavedByInLodo from invoiceout left outer join person P ON invoiceout.UpdatedByPersonID = P.PersonID where invoiceout.InvoiceID='$this->InvoiceID'";
+        $sql_invoice    = "select invoiceout.*, P.Email as SavedByInLodo, IOP.InvoicePrintDate from invoiceout left outer join person P ON invoiceout.UpdatedByPersonID = P.PersonID left outer join invoiceoutprint IOP on invoiceout.InvoiceID = IOP.InvoiceID where invoiceout.InvoiceID='$this->InvoiceID'";
         #print "$sql_invoice<br>\n";
         $invoice        = $_lib['storage']->get_row(array('query' => $sql_invoice));
 
         ############################################################################################
         $this->invoiceO->ID                   = $invoice->InvoiceID;
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
+        $this->invoiceO->DateOfIssue          = $invoice->InvoicePrintDate; // not by EHF, per Arnt's instructions
         $this->invoiceO->InvoiceTypeCode      = '380';
         $this->invoiceO->Note                 = $invoice->CommentCustomer;
         $this->invoiceO->LodoSavedBy          = $invoice->SavedByInLodo;

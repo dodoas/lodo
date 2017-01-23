@@ -118,6 +118,7 @@ class altinn_report {
     elseif ($type == 'name') $is_empty = !preg_match(utf8_encode('/^([A-Za-zæøåäöÆØÅÄÖ\s]+)$/'), utf8_encode($field));
     elseif ($type == 'boolean') $is_empty = $field;
     elseif ($type == 'personal_number') $is_empty = !$_lib['validation']->mod11_personal($field);
+    elseif ($type == 'personal_birthday_match') $is_empty = !$_lib['validation']->personal_number_birthday_match($field);
     else {
       $error_message = 'Unknown type ' . $type;
       $is_empty = true;
@@ -332,6 +333,8 @@ class altinn_report {
     // Error is: Birth date not set for employee ' . self::fullNameForErrorMessage($employee)
     self::checkIfEmpty($birth_date, 'Ansatt: Mangler f&oslash;dselsdag for ' . self::fullNameForErrorMessage($employee), 'date');
     $inntektsmottaker['inntektsmottaker']['identifiserendeInformasjon']['foedselsdato'] = strftime('%F', strtotime($birth_date));
+
+    if(!empty($society_number)) self::checkIfEmpty(array("society_number"=>$society_number, "birth_date"=>$birth_date), "Ansatt: Personnr m&aring; stemme med f&oslash;dselsdag for " . self::fullNameForErrorMessage($employee), 'personal_birthday_match');
 
     // generate work relation array
     if ($use_only_employee_info) {

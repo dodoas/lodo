@@ -201,7 +201,18 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
 // create_span is a helper function highlighting matching lines
 function create_span($value, $ID){
     return "<span class=\"navigate to\" id=$ID>$value</span>";
-}?>
+}
+
+function create_diff($InvoiceID, $KID, $JournalID, $AccountPlanID, $BankVoucherAmount, $bank){
+    global $_lib;
+    $HighlightID = (empty($InvoiceID) && empty($KID)) ? "empty$EmptyHighlightCount" : "$JournalID-$InvoiceID-$KID";
+    if($bank->is_closeable($AccountPlanID, $KID, $InvoiceID, $JournalID)){
+        return create_span("Lukket", $HighlightID);
+    } else {
+        $DiffAmount = $_lib['format']->Amount($bank->getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $BankVoucherAmount, (($BankVoucherAmount > 0) ? "inn" : "out"), 'voucher'));
+        return create_span("Diff (" . $DiffAmount . ")", $HighlightID);
+    }
+} ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
@@ -425,9 +436,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
                                             'pk' => $bank->bankvotingperiod->BankVotingPeriodID,
                                             'value' =>$_lib['format']->Amount($bankin),      'class' => 'number')) ?></td>
     <td colspan="14"></td>
-    <td colspan="4" class="sub"></td>
-    <td class="number sub"><? print $_lib['format']->Amount($bank->voucher->saldo) ?></td>
     <td colspan="5" class="sub"></td>
+    <td class="number sub"><? print $_lib['format']->Amount($bank->voucher->saldo) ?></td>
+    <td colspan="4" class="sub"></td>
   </tr>
 
 <?
@@ -488,6 +499,7 @@ if(is_array($bank->bankaccount)) {
         } else{
             $BankHiglightClass = "column_$row->JournalID-$row->InvoiceNumber-$row->KID";
         }
+
         if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
             // if it has been closed then JournalID should not be red.
             $JournalIDColColor = '';
@@ -495,7 +507,6 @@ if(is_array($bank->bankaccount)) {
         } else {
             $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID, ($row->AmountIn - $row->AmountOut), (($row->AmountIn > 0) ? "inn" : "out"), "bank")) . ")";
         }
-
 
         if (!($i % 3)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
@@ -602,9 +613,9 @@ if(is_array($bank->bankaccount)) {
             }
             ?>
         </td>
-        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID', 'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
-        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
-        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
+        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar)        { ?><? $_lib['form2']->car_menu2(array(       'table' => 'accountline', 'field' => 'CarID',        'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
+        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID', 'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
+        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',    'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
         <td class="<?=$BankHiglightClass?>">
           <?= create_span($matchCaption, ((empty($row->InvoiceNumber) && empty($row->KID)) ? "empty$EmptyHighlightCount" : "$row->JournalID-$row->InvoiceNumber-$row->KID")); ?>
         </td>
@@ -622,18 +633,12 @@ if(is_array($bank->bankaccount)) {
             $VoucherHiglightClass = "column_$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID";
         }
 
-        $HighlightID = (empty($bankvoucher->InvoiceID) && empty($bankvoucher->KID)) ? "empty$EmptyHighlightCount" : "$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID";
-        if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)){
-            $VoucherDiff = create_span("Lukket", $HighlightID);
-        } else {
-            $BankVoucherAmount =  $bankvoucher->AmountIn - $bankvoucher->AmountOut;
-            $DiffAmount = $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID, $BankVoucherAmount, (($BankVoucherAmount > 0) ? "inn" : "out"), 'voucher'));
-            $VoucherDiff = create_span("Diff (" . $DiffAmount . ")", $HighlightID);
-        } ?>
-        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-        <td class="sub <?=$VoucherHiglightClass ?>"><?= $VoucherDiff ?></td>
+        $VoucherDiff = create_diff($bankvoucher->InvoiceID, $bankvoucher->KID, $bankvoucher->JournalID, $bankvoucher->AccountPlanID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut), $bank);
+        ?>
+        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',       'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         <td class="sub <?=$VoucherHiglightClass ?>"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
+        <td class="sub <?=$VoucherHiglightClass ?>"><?= $VoucherDiff ?></td>
         <td class="<?="$VoucherHiglightClass $bankvoucher->classAmountIn $bank->DebitColor" ?>">
         <? if($bankvoucher->AmountIn > 0) {
             print $_lib['format']->Amount($bankvoucher->AmountIn);
@@ -669,22 +674,31 @@ if(is_array($bank->bankvoucher_this_hash)) {
     foreach($bank->bankvoucher_this_hash as $bankvoucher) {
 
         if (!($i % 2)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
+
+        if(empty($bankvoucher->InvoiceID) && empty($bankvoucher->KID)){
+            $EmptyHighlightCount ++;
+            $VoucherHiglightClass = "column_empty$EmptyHighlightCount";
+        } else{
+            $VoucherHiglightClass = "column_$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID";
+        }
+
+        $VoucherDiff = create_diff($bankvoucher->InvoiceID, $bankvoucher->KID, $bankvoucher->JournalID, $bankvoucher->AccountPlanID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut), $bank);
         ?>
       <tr class="<? print $sec_color ?>">
         <td colspan="20"></td>
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',           'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',     'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
-        <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
-        <td class="sub"><? if($bank->is_closeable($bankvoucher->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID, $bankvoucher->JournalID)) print "Lukket"?></td>
-        <td class="<? print $bank->DebitColor ?>">
+        <td class="sub <?= $VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td class="sub <?= $VoucherHiglightClass ?>"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',       'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td class="sub <?= $VoucherHiglightClass ?>"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
+        <td class="sub <?= $VoucherHiglightClass ?>"><?= $VoucherDiff ?></td>
+        <td class='<?= "$VoucherHiglightClass $bank->DebitColor" ?>'>
         <? print $_lib['format']->Amount($bankvoucher->AmountIn) ?>
         <? #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=voucher&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')); ?>
         </td>
-        <td class="<? print $bank->CreditColor ?>">
+        <td class='<?= "$VoucherHiglightClass $bank->CreditColor" ?>'>
         <? print $_lib['format']->Amount($bankvoucher->AmountOut) ?>
         <? #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=voucher&amp;side=AmountOut&amp;searchstring=' . $row->AmountOut, 'description' => '<img src="/lib/icons/search.gif">')); ?>
         </td>
-        <td class="sub"><? print $bankvoucher->VoucherDate ?></td>
+        <td class="sub <?= $VoucherHiglightClass ?>"><? print $bankvoucher->VoucherDate ?></td>
       </tr>
     <?
         $sumin  += $row->AmountIn;
@@ -729,6 +743,9 @@ if(is_array($bank->bankvoucher_this_hash)) {
     <? } ?>
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) {
     print $_lib['form3']->submit(array('name' => 'action_bank_periodremove', 'value' => 'Slett hele perioden', 'confirm' => 'Er du sikker p&aring; at du vil slette hele perioden', 'accesskey' => 'D', 'confirm' => "Vil du virkelig slette kontoutskriften for perioden " . $bank->ThisPeriod));
+      if($_lib['sess']->get_person('AccessLevel') >= 2) {
+        ?><input type="submit" name="action_bank_automatching" value="Auto match (A)" accesskey="A"><?
+      }
         print $_lib['form3']->submit(array('name' => 'action_bank_periodlock', 'value' => 'L&aring;s', 'accesskey' => 'L', 'confirm' => "Vil du virkelig l&aring;se perioden " . $bank->ThisPeriod, 'disabled' => ($bankvotingsum_entry != 0 || $bankvotingsum_last != 0) ? true : false));
     } ?>
     </td>
