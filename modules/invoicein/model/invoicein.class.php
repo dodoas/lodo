@@ -203,6 +203,84 @@ class logic_invoicein_invoicein implements Iterator {
         }
     }
 
+    // expects that line allowance charges are normalized (set to positive)
+    function calculatePriceAmountQuantity(&$args) {
+        global $_lib;
+
+        // get all invoiceinline ids
+        $invoiceinline_ids = array();
+        foreach ($args as $arg_key => $arg_val) {
+            preg_match("/^invoiceinline_.*_(\d*)$/", $arg_key, $matches);
+            $invoiceinline_id = $matches[1];
+            if($invoiceinline_id && !in_array($invoiceinline_id, $invoiceinline_ids)) {
+                $invoiceinline_ids[] = $invoiceinline_id;
+            }
+        }
+
+        $total_invoice_sum = 0;
+
+        foreach ($invoiceinline_ids as $line_id) {
+            $fields = array();
+            $line_allowance_charge_sum = 0;
+
+            // get invoice line allowancecharge sums
+            foreach ($args as $arg_key => $arg_val) {
+                if(preg_match("/^invoiceinline_(.*)_".$line_id."$/", $arg_key, $matches)) {
+                    $args[$arg_key] = $_lib['convert']->Amount($arg_val);
+                    if(in_array($matches[1], array("TotalWithoutTax", "UnitCustPrice", "QuantityDelivered", "TotalWithTax", "Vat"))) {
+                        $fields[$matches[1]] = (float)$args["invoiceinline_$matches[1]_$line_id"];
+                    }
+                }
+                if(preg_match("/^invoicelineallowancecharge_InvoiceLineID_(.*)$/", $arg_key, $matches)) {
+                    $invoicelineallowancecharge_id = $matches[1];
+                    if( $args["invoicelineallowancecharge_InvoiceLineID_$invoicelineallowancecharge_id"] == $line_id &&
+                        $args["invoicelineallowancecharge_AllowanceChargeType_$invoicelineallowancecharge_id"] == "line") {
+                            $amount = (float)$_lib['convert']->Amount($args["invoicelineallowancecharge_Amount_$invoicelineallowancecharge_id"]);
+                            if($args["invoicelineallowancecharge_ChargeIndicator_$invoicelineallowancecharge_id"]) {
+                                $line_allowance_charge_sum += $amount;
+                            } else {
+                                $line_allowance_charge_sum -= $amount;
+                            }
+                    }
+                }
+            }
+
+            if($fields["TotalWithTax"]) { // this is in current invoice's currency
+                if(!$fields["TotalWithoutTax"]) {
+                    $fields["TotalWithoutTax"] = round($fields["TotalWithTax"] / (1 + $fields["Vat"] / 100), 2);
+                }
+                $fields["TaxAmount"] = round($fields["TotalWithTax"] - $fields["TotalWithoutTax"], 2);
+
+                if (!$fields["QuantityDelivered"] && $fields["UnitCustPrice"]) {
+                    $fields["QuantityDelivered"] = round(($fields["TotalWithoutTax"] - $line_allowance_charge_sum) / $fields["UnitCustPrice"], 2);
+                } else if($fields["QuantityDelivered"]) {
+                    $fields["UnitCustPrice"] = round(($fields["TotalWithoutTax"] - $line_allowance_charge_sum) / $fields["QuantityDelivered"], 2);
+                }
+            } else {
+                if($fields["TotalWithoutTax"]) {
+                    if (!$fields["QuantityDelivered"] && $fields["UnitCustPrice"]) {
+                        $fields["QuantityDelivered"] = round(($fields["TotalWithoutTax"] - $line_allowance_charge_sum) / $fields["UnitCustPrice"], 2);
+                    } else if($fields["QuantityDelivered"]) {
+                        $fields["UnitCustPrice"] = round(($fields["TotalWithoutTax"] - $line_allowance_charge_sum) / $fields["QuantityDelivered"], 2);
+                    }
+                } else {
+                    $fields["TotalWithoutTax"] = round($fields["QuantityDelivered"] * $fields["UnitCustPrice"] + $line_allowance_charge_sum, 2);
+                }
+                $fields["TotalWithTax"] = round($fields["TotalWithoutTax"] * (1 + $fields["Vat"] / 100), 2);
+                $fields["TaxAmount"] = round($fields["TotalWithTax"] - $fields["TotalWithoutTax"], 2);
+            }
+
+
+            foreach ($fields as $key => $value) {
+                $args["invoiceinline_".$key."_".$line_id] = $value;
+            }
+
+            $total_invoice_sum += $fields["TotalWithTax"];
+        }
+
+        $args["invoicein_TotalCustPrice_".$args["ID"]] = $total_invoice_sum;
+    }
+
     function update($args) {
         global $_lib, $_SETUP, $accounting;
 
@@ -213,6 +291,7 @@ class logic_invoicein_invoicein implements Iterator {
 
         self::addVATPercentToAllowanceCharge($args);
         self::invertAllAllowanceAmounts($args);
+        self::calculatePriceAmountQuantity($args);
         if(!$invoicein->IZipCode) {
             if($accountplan->ZipCode) {
                 $args['invoicein_IZipCode_' . $ID] = $accountplan->ZipCode;
@@ -498,39 +577,13 @@ class logic_invoicein_invoicein implements Iterator {
                         $result = $_lib['storage']->get_row(array('query' => $query));
                         $sum_line_allowance_charge = $result->sum;
 
-                        $TotalPrice = round(($line->QuantityDelivered * $line->UnitCustPrice + $sum_line_allowance_charge), 2);
-                        $TotalForeignPrice = round($line->ForeignAmount + $sum_line_allowance_charge, 2);
+                        $TotalPrice         = round($line->TotalWithTax, 2);
+                        $TotalForeignPrice  = round($line->ForeignAmount, 2);
 
-                        if($line->Vat > 0) {
-                            //Add VAT to the price - since it is ex VAT
-
-                            // $TotalPrice = round(($TotalPrice * (($line->Vat/100) +1)), 2);
-                            // $TotalForeignPrice = round(($TotalForeignPrice * (($line->Vat/100) +1)), 2);
-                            // We already have tax amount given to us by fakturabank.
-                            // So why recalculate, and possibly make 0.01 error in recalculation?
-                            // Just add them up and get the correct amount.
-                            if ($VoucherH['voucher_ForeignCurrencyID'] != '') {
-                              $TaxAmount = (!empty($line->TaxAmount)) ? $line->TaxAmount : $TotalForeignPrice * $line->Vat / 100.0;
-                              // Using $TotalPrice since we already have that amount converted to local currency on download of this invoice
-                              $TotalPrice = round(($TotalPrice + exchange::convertToLocal($VoucherH['voucher_ForeignCurrencyID'], $TaxAmount)), 2);
-                            }
-                            else {
-                              $TaxAmount = (!empty($line->TaxAmount)) ? $line->TaxAmount : $TotalPrice * $line->Vat / 100.0;
-                              $TotalPrice = round(($TotalPrice + $TaxAmount), 2);
-                            }
-                            $invoice_line_sum += $TotalPrice;
-                        } else {
-                            $invoice_line_sum += $TotalPrice;
-                        }
+                        $invoice_line_sum += $TotalPrice;
 
                         if ($last_line) {
-                            if ($invoice_line_sum != $InvoiceO->TotalCustPrice) {
-                                if ($invoice_line_sum < $InvoiceO->TotalCustPrice) {
-                                    $TotalPrice += ($InvoiceO->TotalCustPrice - $invoice_line_sum);
-                                } else {
-                                    $TotalPrice -= ($invoice_line_sum - $InvoiceO->TotalCustPrice);
-                                }
-                            }
+                            $TotalPrice += ($InvoiceO->TotalCustPrice - $invoice_line_sum);
                         }
 
                         if($TotalPrice > 0) {
@@ -542,7 +595,7 @@ class logic_invoicein_invoicein implements Iterator {
                             $VoucherH['voucher_AmountIn']   = 0;
                         }
 
-                        if ($VoucherH['voucher_ForeignCurrencyID'] != '') $VoucherH['voucher_ForeignAmount']   = abs($TotalForeignPrice);
+                        $VoucherH['voucher_ForeignAmount']   = abs($TotalForeignPrice);
 
                         $VoucherH['voucher_Vat']            = $line->Vat;
                         //#$VoucherH['voucher_VatID']         = $line->VatID; Has to be mapped properly
@@ -584,7 +637,9 @@ class logic_invoicein_invoicein implements Iterator {
                             unset($VoucherH['voucher_ProjectID']);
                         }
 
-                        $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
+                        $in_or_out = ($line->TotalWithTax > 0 ? 'in' : 'out');
+
+                        $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank', 'in_or_out' => $in_or_out));
                     }
 
                     /* here a fetch from the fakturaBank table is needed that fixes the reason lines, for example: cahs from cash register(kontant fra kasse) and similar */
