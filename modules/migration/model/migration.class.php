@@ -165,24 +165,15 @@ class migration_system {
     return $differences;
   }
 
-  // expect $words to be an array
-  function get_migrations_including($words) {
+  function get_migration_contents() {
     global $_SETUP;
-    $migration_names = array();
+    $migrations = array();
     $migration_file_names = array_slice(scandir($_SETUP['HOME_DIR'] ."/db/changes/"), 2);
-
-    $regex = "/.*";
-    foreach ($words as $word) { $regex .= $word .".*"; }
-    $regex .= "/is";
-
     foreach($migration_file_names as $migration_name) {
       $content = file_get_contents($_SETUP['HOME_DIR'] ."/db/changes/". $migration_name);
-
-      if(preg_match($regex, $content, $matches)) {
-        $migration_names["db/changes/". $migration_name] = $content;
-      }
+      $migrations["db/changes/". $migration_name] = $content;
     }
-    return $migration_names;
+    return $migrations;
   }
 
   static function get_good_db_name() {

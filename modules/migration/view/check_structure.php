@@ -12,6 +12,7 @@ if($_REQUEST["db_name"]) {
 } else {
   $databases = $migration_system->get_database_names();
 }
+$all_migrations = $migration_system->get_migration_contents();
 ?>
 <html>
 <head>
@@ -22,6 +23,15 @@ if($_REQUEST["db_name"]) {
 
   table {
     border-collapse: collapse;
+  }
+
+  .sign_field {
+    text-align: center;
+    width: 10px;
+  }
+
+  .wide_field {
+    width: 150px;
   }
 
   .green {
@@ -51,13 +61,65 @@ if($_REQUEST["db_name"]) {
 
 <script type="text/javascript"  src='/lib/js/jquery.js'></script>
 <script type="text/javascript">
-  function toggleRow(row) {
+  var all_migrations = {};
+    <?
+      foreach ($all_migrations as $filename => $content) {
+        $content = str_replace('"','\"', str_replace(array("\n", "\r"), '', nl2br($content)));
+        print "all_migrations[\"$filename\"] = { content: \"".$content."\" };";
+      }
+    ?>
+
+  var migration_search_cache = {};
+
+  function searchMigrations(words) {
+    if(migration_search_cache[words]) {
+      return migration_search_cache[words];
+    }
+
+    var regex_string = "";
+    for(var i=0; i<words.length; i++) {
+      regex_string += words[i] + ".*";
+    }
+    var regex = new RegExp(regex_string, "i");
+
+    var possible_migrations = [];
+    for(var filename in all_migrations) {
+      var migration = all_migrations[filename];
+      if(migration["content"].match(regex)) {
+        possible_migrations.push(filename);
+      }
+    }
+
+    migration_search_cache[words] = possible_migrations;
+
+    return possible_migrations;
+  }
+
+  function insertMigrationLines(button, migrations) {
+    var row = $(button).parents("tr");
+    var diff_details = row.next();
+    var migration_list = diff_details.find("#migration_list");
+
+    if(migration_list.html()) return;
+
+    for(var i = 0; i<migrations.length; i++) {
+      var filename = migrations[i];
+      migration_list.append("<br><span class='dotted' onclick='toggleMigration(this)'>- " + filename + "</span><pre class='hidden migration_details'>" + all_migrations[filename]["content"] + "</pre>");
+    }
+  }
+
+  function toggleDiff(button) {
+    var row = $(button).parents("tr");
+    var diff_details = row.next();
+
     if($(row).hasClass("expanded")) {
-      $(row).removeClass("expanded");
-      $(row).parents("table").find(".for_" + row.id).addClass("hidden");  
+      $(button).text("Expand");
+      row.removeClass("expanded");
+      diff_details.addClass("hidden");
     } else {
-      $(row).addClass("expanded");
-      $(row).parents("table").find(".for_" + row.id).removeClass("hidden");
+      $(button).text("Hide");
+      row.addClass("expanded");
+      diff_details.removeClass("hidden");
     }
   }
   function toggleMigration(row) {
@@ -108,26 +170,21 @@ foreach ($databases as $db_name) {
       <?php
       foreach ($differences as $diff) {
         print "
-          <tr id='". $diff["ConfDBFieldID"] ."' class='". ($diff["Status"] == "missing" ? "red" : "green" ) ."'>
-            <td style='text-align: center; width: 10px;'><b>". ($diff["Status"] == "missing" ? "-" : "+") ."</b></td>
-            <td style='width: 150px;'>". $diff["TableName"] ."</td>
-            <td style='width: 150px;'>". $diff["TableField"] ."</td>
-            <td style='width: 150px;'>". $diff["FieldType"] ."</td>
-            <td style='width: 150px;'>". ($diff["Status"] == "missing" ? "<button onclick='toggleRow($(this).parents(\"tr\")[0])'>Expand</button>" : "") ."</td>
+          <tr class='". ($diff["Status"] == "missing" ? "red" : "green" ) ."'>
+            <td class='sign_field'><b>". ($diff["Status"] == "missing" ? "-" : "+") ."</b></td>
+            <td class='wide_field'>". $diff["TableName"] ."</td>
+            <td class='wide_field'>". $diff["TableField"] ."</td>
+            <td class='wide_field'>". $diff["FieldType"] ."</td>
+            <td class='wide_field'>". ($diff["Status"] == "missing" ? "<button onclick='toggleDiff(this); insertMigrationLines(this, searchMigrations([\"". $diff["TableName"] ."\", \"". $diff["TableField"] ."\"]))'>Expand</button>" : "") ."</td>
           </tr>";
 
         if($diff["Status"] == "missing") {
           print "
-            <tr class='hidden for_". $diff["ConfDBFieldID"] ."'>
+            <tr class='hidden'>
               <td colspan='6'>
                 Added to skeleton DB at: <b>". $diff["TS"] ."</b><br>
-                Migrations which include '<b>". $diff["TableName"] ."</b>' and '<b>". $diff["TableField"] ."</b>':";
-                $possible_migrations = $migration_system->get_migrations_including(array($diff["TableName"], $diff["TableField"]));
-                foreach ($possible_migrations as $migration_name => $content) {
-                  print "<br><span class='dotted' onclick='toggleMigration(this)'>- ". $migration_name ."</span>";
-                  print "<pre class='hidden migration_details'>". $content ."</pre>";
-                }
-          print "
+                Migrations which include '<b>". $diff["TableName"] ."</b>' and '<b>". $diff["TableField"] ."</b>':
+                <div id='migration_list'></div>
               </td>
             </tr>
           ";
