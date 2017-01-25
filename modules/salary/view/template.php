@@ -73,8 +73,8 @@ print $_lib['sess']->doctype ?>
     <th class="sub">Bel&oslash;p denne periode</th>
     <th class="sub">Konto</th>
     <th class="sub">Bil</th>
-    <th class="sub">Avdeling</th>
     <th class="sub">Prosjekt</th>
+    <th class="sub">Avdeling</th>
     <th class="sub">Trekkpliktig</th>
     <th class="sub">Arb. giv. avg.</th>
     <th class="sub">Ferie.Gr</th>
@@ -219,9 +219,9 @@ print $_lib['sess']->doctype ?>
             print "<td class=\"debitred\">";
         else
             print "<td>";
-        if($accountplan->EnableDepartment == 1)
+        if($accountplan->EnableProject == 1)
         {
-            print $_lib['form3']->Avd_menu3(array('table'=>$db_table2, 'field'=>'DepartmentID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->DepartmentID));
+            print $_lib['form3']->project_menu(array('table'=>$db_table2, 'field'=>'ProjectID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->ProjectID));
         }
     ?>
     </td>
@@ -230,9 +230,9 @@ print $_lib['sess']->doctype ?>
             print "<td class=\"debitred\">";
         else
             print "<td>";
-        if($accountplan->EnableProject == 1)
+        if($accountplan->EnableDepartment == 1)
         {
-            print $_lib['form3']->project_menu(array('table'=>$db_table2, 'field'=>'ProjectID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->ProjectID));
+            print $_lib['form3']->Avd_menu3(array('table'=>$db_table2, 'field'=>'DepartmentID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->DepartmentID));
         }
     ?>
     </td>

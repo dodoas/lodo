@@ -842,16 +842,16 @@ foreach ($currencies as $currency) {
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'RefInternal', 'pk'=>$InvoiceID, 'value'=>$row->RefInternal, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
-      <td>Avdeling</td>
-      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$InvoiceID, 'value' => $row->DepartmentID)); ?></td>
-      <td>Avdeling</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DepartmentCustomer', 'pk'=>$InvoiceID, 'value'=>$row->DepartmentCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
-    </tr>
-    <tr>
       <td>Prosjekt</td>
       <td><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$InvoiceID,  'value' =>  $row->ProjectID)) ?></td>
       <td>Prosjekt</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProjectNameCustomer', 'pk'=>$InvoiceID, 'value'=>$row->ProjectNameCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
+    </tr>
+    <tr>
+      <td>Avdeling</td>
+      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$InvoiceID, 'value' => $row->DepartmentID)); ?></td>
+      <td>Avdeling</td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DepartmentCustomer', 'pk'=>$InvoiceID, 'value'=>$row->DepartmentCustomer, 'width'=>'30', 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
       <? if($row->DeliveryCondition){ ?>

@@ -261,8 +261,8 @@ if(is_array($bank->bankaccount)) {
     <td class="menu">MVA</td>
     <td class="menu">Mengde</td>
     <td class="menu">Bil</td>
-    <td class="menu">Avdeling</td>
     <td class="menu">Prosjekt</td>
+    <td class="menu">Avdeling</td>
     <td class="menu"></td>
   </tr>
   <tr>
@@ -504,8 +504,8 @@ if(is_array($bank->unvotedaccount)) {
             ?>
         </td>
         <td><? if($resultaccountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => 'accountline', 'field' => 'CarID',  'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
-        <td><? if($resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? if($resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
+        <td><? if($resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td class="<? print $classWarning ?>">
             <? print $warning ?>
         </td>

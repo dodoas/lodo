@@ -133,8 +133,8 @@ if(isset($limitSet))
     <th class="menu">Kredit tekst</th>
     <th class="menu">MVA kode</th>
     <th class="menu">Bil</th>
-    <th class="menu">Avdeling</th>
     <th class="menu">Prosjekt</th>
+    <th class="menu">Avdeling</th>
     <th class="menu">Motkontobalanse</th>
     <th class="menu">Motkontoresultat</th>
     <th class="menu">Firma ID</th>
@@ -191,11 +191,11 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           ?>
           </td>
 
-          <? // forandret fra DepartmentID til EnableDepartment 6/1-2005 ?>
-          <td align="right"><? if($row->EnableDepartment) { print $row->DepartmentID; } ?></td>
-
           <? // forandret fra ProjectID til EnableProject 6/1-2005 ?>
           <td align="right"><? if($row->EnableProject)    { print $row->ProjectID; } ?></td>
+
+          <? // forandret fra DepartmentID til EnableDepartment 6/1-2005 ?>
+          <td align="right"><? if($row->EnableDepartment) { print $row->DepartmentID; } ?></td>
           <td align="right"><? if($row->EnableMotkontoBalanse)    { print $row->MotkontoBalanse1; } ?></td>
           <td align="right"><? if($row->EnableMotkontoResultat)    { print $row->MotkontoResultat1; } ?></td>
           <td><? print $firmaID ?></td>

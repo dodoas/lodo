@@ -59,8 +59,8 @@ print $_lib['sess']->doctype ?>
                 <a href="<? print $_lib['sess']->dispatch ?>t=occupation.list">Yrke</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=company.employees&CompanyID=<? print $_SETUP[COMPANY_ID] ?>">Systembrukere</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=car.list">Bil</a>
-                <a href="<? print $_lib['sess']->dispatch ?>t=department.list">Avdeling</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=project.list">Prosjekt</a>
+                <a href="<? print $_lib['sess']->dispatch ?>t=department.list">Avdeling</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=subcompany.list">Virksomhet</a>
                 <a href="<? print $_lib['sess']->dispatch ?>t=shelf.list">Hyller</a>
             </td>

@@ -81,8 +81,8 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
     <th>MotkontoNavn</th>
     <th class="number">Forfallsdato</th>
     <th class="number">Bel&oslash;p</th>
-    <th>Avdeling</th>
     <th>Prosjekt</th>
+    <th>Avdeling</th>
     <th>&Aringrsaksinformasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">KID</th>
@@ -273,8 +273,8 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number">
         <? print $invoice_amount_string; ?>
       </td>
-      <td class="number"><? print $InvoiceO->Department ?></td>
       <td class="number"><? print $InvoiceO->Project ?></td>
+      <td class="number"><? print $InvoiceO->Department ?></td>
       <td class="number" title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';
