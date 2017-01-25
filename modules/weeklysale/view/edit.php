@@ -59,6 +59,14 @@ $formname = "Update";
     <? includeinc('top') ?>
     <? includeinc('left') ?>
 
+    <?
+    foreach($weeklysale->sale as $WeeklySaleDayID => $line) {
+        if(round($line->ZnrTotalAmount,2) != round($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID],2)) {
+            $_lib['message']->add('Znr '. $line->Znr .': Znr total stemmer ikke med summen av gruppene');
+        }
+    }
+    ?>
+
     <?if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
 
 <?php
