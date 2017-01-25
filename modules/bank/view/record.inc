@@ -127,15 +127,9 @@ if($_lib['input']->getProperty('action_bank_periodlock')) {
 function do_action($ActionName, $AccounID, $Period){
     global $_lib;
 
-    $PrevPeriod     = $_lib['date']->get_prev_period(array('value' => $Period . '-01', 'realPeriod' => 1));
-    $PrevPrevPeriod = $_lib['date']->get_prev_period(array('value' => $PrevPeriod . '-01', 'realPeriod' => 1));
-    $moneyflow  = new moneyflow(array('StartDate' =>  $PrevPrevPeriod . '-01'));
-
     //#Automatically update and increment JournalIDs thats missing
     $DataH = $_lib['input']->get_data();
-    // get fakturabank
-    $fbvoting         = new lodo_fakturabank_fakturabankvoting();
-    $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
+
     foreach($DataH as $server_name => $server_data) {
         foreach($server_data as $database_name => $database_data) {
             foreach($database_data as $table_name => $table_data) {
@@ -143,9 +137,9 @@ function do_action($ActionName, $AccounID, $Period){
 
                     $accountline = &$DataH[$server_name][$database_name][$table_name][$pk_name];
                     if($ActionName == 'do_bank_update'){
-                        do_bank_update($table_name, $accountline);
+                        do_bank_update($table_name, $accountline, $Period);
                     } elseif ($ActionName == 'auto_matching') {
-                        auto_matching($accountline, $Period, $AccountID, $pk_name, $moneyflow, $fbvoting, $fbreconcilationreason);
+                        auto_matching($accountline, $Period, $AccountID, $pk_name);
                     } else {
                       return;
                       // We know nothing about this action
@@ -158,9 +152,8 @@ function do_action($ActionName, $AccounID, $Period){
     $_lib['storage']->update($DataH);
 }
 
-function do_bank_update($table_name, &$accountline) {
-    global $_lib;
-
+function do_bank_update($table_name, &$accountline, $Period) {
+    global $_lib, $accounting, $PrevJournalID;
     $debugline = 99999999999999999;
 
     foreach($accountline as $field => $value) {
@@ -237,11 +230,57 @@ function do_bank_update($table_name, &$accountline) {
         }
 
         if($accountline['Priority'] == $debugline) print_r($accountline);
+
+        if($accountline['AutoResultAccount'] && $accountline['ReskontroAccountPlanID']) {
+            if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "AutoResultAccount<br>\n";
+            // Reset to the
+            $reskontroaccountplan   = $accounting->get_accountplan_object($accountline['ReskontroAccountPlanID']);
+            if($reskontroaccountplan->MotkontoResultat1) {
+                $accountline['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoResultat1;
+            } else {
+                $accountline['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoBalanse1;
+            }
+        }
+
+        if($accountline['Approved'] && !$accountline['ReskontroAccountPlanID'] && !$accountline['ResultAccountPlanID']) {
+            // If no reskontro and no result accountplan - set Approved to 0
+            if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "Remove Approved<br>";
+            // sprint "Remove approved<br>\n";
+            $accountline['Approved'] = 0;
+        }
+
+        // Used for simple bankavstemming
+        // print "ReskontroAccountPlanID: " . $accountline['ReskontroAccountPlanID'] . " && ReskontroOrgNumber: " . !$accountline['ReskontroOrgNumber'] . "<br>\n";
+        // Hvis Reskontrorgnummer ikke er satt og rekontrokonto er satt- så setter vi det nå (uansett)
+        if($accountline['ReskontroAccountPlanID'] && !$accountline['ReskontroOrgNumber']) {
+            if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "ReskontroAccountPlanID og ikke ReskontroOrgNummer<br>\n";
+
+            $accountplan = $accounting->get_accountplan_object($accountline['ReskontroAccountPlanID']);
+            $accountline['ReskontroOrgNumber']       = $accountplan->OrgNumber; #$match[0]->OrgNumber;
+
+        } elseif($accountline['ReskontroOrgNumber'] && !$accountline['ReskontroAccountPlanID']) {
+            if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "ReskontroOrgNummer og ikke ReskontroAccountPlanID<br>\n";
+
+            // Hvis reskontro er satt og ikke reskontrokontoorgnummer er satt - så setter vi den nå
+            $accountplan = $accounting->getAccountPlanFromOrgNumber($accountline['ReskontroOrgNumber']);
+            $accountline['ReskontroAccountPlanID']   = $accountplan->AccountPlanID;
+        } else {
+            // We know nothing about this reskontro.
+        }
     }
 }
 
-function auto_matching(&$accountline, $Period, $AccountID, $pk_name, $moneyflow, $fbvoting, $fbreconcilationreason){
-  global $accounting;
+function auto_matching(&$accountline, $Period, $AccountID, $pk_name){
+  global $_lib, $accounting;
+
+    $PrevPeriod     = $_lib['date']->get_prev_period(array('value' => $Period . '-01', 'realPeriod' => 1));
+    $PrevPrevPeriod = $_lib['date']->get_prev_period(array('value' => $PrevPeriod . '-01', 'realPeriod' => 1));
+    $moneyflow  = new moneyflow(array('StartDate' =>  $PrevPrevPeriod . '-01'));
+
+    // get fakturabank
+    $fbvoting         = new lodo_fakturabank_fakturabankvoting();
+    $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
+
     /* if we are missing account then look for matches in bank transaction relations */
     if(
         ($accountline['AmountIn'] > 0 || $accountline['AmountOut'] > 0) &&
@@ -365,43 +404,6 @@ function auto_matching(&$accountline, $Period, $AccountID, $pk_name, $moneyflow,
         if(!$accountline['ReskontroOrgNumber']) {
             $accountline['ReskontroOrgNumber']     = $voucher->OrgNumber;
         }
-    }
-
-    if($accountline['AutoResultAccount'] && $accountline['ReskontroAccountPlanID']) {
-        if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "AutoResultAccount<br>\n";
-        // Reset to the
-        $reskontroaccountplan   = $accounting->get_accountplan_object($accountline['ReskontroAccountPlanID']);
-        if($reskontroaccountplan->MotkontoResultat1) {
-            $accountline['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoResultat1;
-        } else {
-            $accountline['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoBalanse1;
-        }
-    }
-
-    if($accountline['Approved'] && !$accountline['ReskontroAccountPlanID'] && !$accountline['ResultAccountPlanID']) {
-        // If no reskontro and no result accountplan - set Approved to 0
-        if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "Remove Approved<br>";
-        // sprint "Remove approved<br>\n";
-        $accountline['Approved'] = 0;
-    }
-
-    // Used for simple bankavstemming
-    // print "ReskontroAccountPlanID: " . $accountline['ReskontroAccountPlanID'] . " && ReskontroOrgNumber: " . !$accountline['ReskontroOrgNumber'] . "<br>\n";
-    // Hvis Reskontrorgnummer ikke er satt og rekontrokonto er satt- så setter vi det nå (uansett)
-    if($accountline['ReskontroAccountPlanID'] && !$accountline['ReskontroOrgNumber']) {
-        if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "ReskontroAccountPlanID og ikke ReskontroOrgNummer<br>\n";
-
-        $accountplan = $accounting->get_accountplan_object($accountline['ReskontroAccountPlanID']);
-        $accountline['ReskontroOrgNumber']       = $accountplan->OrgNumber; #$match[0]->OrgNumber;
-
-    } elseif($accountline['ReskontroOrgNumber'] && !$accountline['ReskontroAccountPlanID']) {
-        if($accountline['Priority'] == $debugline) print "P: " . $accountline['Priority'] . "ReskontroOrgNummer og ikke ReskontroAccountPlanID<br>\n";
-
-        // Hvis reskontro er satt og ikke reskontrokontoorgnummer er satt - så setter vi den nå
-        $accountplan = $accounting->getAccountPlanFromOrgNumber($accountline['ReskontroOrgNumber']);
-        $accountline['ReskontroAccountPlanID']   = $accountplan->AccountPlanID;
-    } else {
-        // We know nothing about this reskontro.
     }
 }
 ?>
