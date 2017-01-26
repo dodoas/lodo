@@ -117,8 +117,8 @@ print $_lib['sess']->doctype; ?>
     <th>MotkontoNavn</th>
     <th class="number">Forfallsdato</th>
     <th class="number">Bel&oslash;p</th>
-    <th>Avdeling</th>
     <th>Prosjekt</th>
+    <th>Avdeling</th>
     <th>&Aring;rsaksinformasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">Betaling</th>
@@ -180,8 +180,8 @@ foreach($invoicein as $InvoiceO) {
            print $_lib['format']->Amount($InvoiceO->TotalCustPrice);
         ?>
       </td>
-      <td><? print $InvoiceO->Department ?></td>
       <td><? print $InvoiceO->Project ?></td>
+      <td><? print $InvoiceO->Department ?></td>
       <td title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';

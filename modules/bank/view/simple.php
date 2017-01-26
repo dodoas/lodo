@@ -84,8 +84,8 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Hovedbokskonto</td>
     <td class="menu">MVA</td>
     <td class="menu">Mengde</td>
-    <td class="menu">Avdeling</td>
     <td class="menu">Prosjekt</td>
+    <td class="menu">Avdeling</td>
     <td class="menu">KID match</td>
     <td class="menu"></td>
     <td class="menu">KID</td>
@@ -209,8 +209,8 @@ if(is_array($bank->bankaccount)) {
             }
             ?>
         </td>
-        <td><? if($resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? if($resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
+        <td><? if($resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? 
             if(strlen($row->KID)) { 
                 if($bank->is_closeable($row->KID)) { 

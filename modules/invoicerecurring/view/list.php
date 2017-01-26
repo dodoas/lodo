@@ -162,8 +162,8 @@ $db_sum   = $row->sum;
     <!--<th>OrdreRef-->
     <th align="right">Kunde nr</th>
     <th>Firmanavn</th>
-    <th>Avdeling</th>
     <th>Prosjekt</th>
+    <th>Avdeling</th>
     <th>Kommentar</th>
     <th align="right">Forrige gikk</th>
     <th align="right">Neste g&aring;r</th>
@@ -240,8 +240,8 @@ title="Vis/Endre faktura informasjon"><? print $row->RecurringID ?></a></td>
       <!--<td><? print $row->OrderRef; ?>-->
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&accountplan.AccountPlanID=<? print $row->CustomerAccountPlanID ?>&inline=show"><? print $row->CustomerAccountPlanID ?></a></td></td>
       <td>&nbsp;<a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&accountplan.AccountPlanID=<? print $row->CustomerAccountPlanID ?>&inline=show"><? print substr($row->IName,0,30) ?></a></td>
-      <td><? $department = $accounting->get_department_object($row->DepartmentID); print "$department->CompanyDepartmentID - $department->DepartmentName"; ?></td>
       <td><? $project    = $accounting->get_project_object($row->ProjectID); print "$project->ProjectID - $project->Heading"; ?></td>
+      <td><? $department = $accounting->get_department_object($row->DepartmentID); print "$department->CompanyDepartmentID - $department->DepartmentName"; ?></td>
       <td><? print substr($row->CommentCustomer,0,30) ?></td>
       <td class="number"><b><? echo $lastDate ?></b></td>
       <td class="number"><b><? echo $nextDate ?></b></td>

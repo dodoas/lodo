@@ -72,15 +72,6 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->car_menu2($aconf);
             ?>
         </td>
-        <td>Avdeling</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'DepartmentID';
-            $aconf['accesskey']     = 'D';
-            $_lib['form2']->department_menu2($aconf);
-            ?>
-        </td>
         <td>Prosjekt</td>
         <td><?
             $aconf = array();
@@ -88,6 +79,15 @@ print $_lib['sess']->doctype ?>
             $aconf['field']         = 'ProjectID';
             $aconf['accesskey']     = 'P';
             $_lib['form2']->project_menu2($aconf);
+            ?>
+        </td>
+        <td>Avdeling</td>
+        <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'DepartmentID';
+            $aconf['accesskey']     = 'D';
+            $_lib['form2']->department_menu2($aconf);
             ?>
         </td>
     </tr>
@@ -158,15 +158,6 @@ print $_lib['sess']->doctype ?>
             $_lib['form2']->car_menu2($aconf);
             ?>
         </td>
-        <td>Avdeling</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'DepartmentID';
-            $aconf['accesskey']     = 'D';
-            $_lib['form2']->department_menu2($aconf);
-            ?>
-        </td>
         <td>Prosjekt</td>
         <td><?
             $aconf = array();
@@ -174,6 +165,15 @@ print $_lib['sess']->doctype ?>
             $aconf['field']         = 'ProjectID';
             $aconf['accesskey']     = 'P';
             $_lib['form2']->project_menu2($aconf);
+            ?>
+        </td>
+        <td>Avdeling</td>
+        <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'DepartmentID';
+            $aconf['accesskey']     = 'D';
+            $_lib['form2']->department_menu2($aconf);
             ?>
         </td>
     </tr>
@@ -235,15 +235,6 @@ print $_lib['sess']->doctype ?>
     </td>
     </tr>
     <tr>
-        <td>Avdeling</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'DepartmentID';
-            $aconf['accesskey']     = 'D';
-            $_lib['form2']->department_menu2($aconf);
-            ?>
-        </td>
         <td>Prosjekt</td>
         <td><?
             $aconf = array();
@@ -251,6 +242,15 @@ print $_lib['sess']->doctype ?>
             $aconf['field']         = 'ProjectID';
             $aconf['accesskey']     = 'P';
             $_lib['form2']->project_menu2($aconf);
+            ?>
+        </td>
+        <td>Avdeling</td>
+        <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'DepartmentID';
+            $aconf['accesskey']     = 'D';
+            $_lib['form2']->department_menu2($aconf);
             ?>
         </td>
         <td>Art</td>
@@ -307,15 +307,6 @@ print $_lib['sess']->doctype ?>
 </tr>
 <tr class="r0">
     <td colspan='2'></td>
-    <td>Avdeling</td>
-    <td><?
-        $aconf = array();
-        $aconf['table']         = 'report';
-        $aconf['field']         = 'DepartmentID';
-        $aconf['accesskey']     = 'D';
-        $_lib['form2']->department_menu2($aconf);
-        ?>
-    </td>
     <td>Prosjekt</td>
     <td><?
         $aconf = array();
@@ -323,6 +314,15 @@ print $_lib['sess']->doctype ?>
         $aconf['field']         = 'ProjectID';
         $aconf['accesskey']     = 'P';
         $_lib['form2']->project_menu2($aconf);
+        ?>
+    </td>
+    <td>Avdeling</td>
+    <td><?
+        $aconf = array();
+        $aconf['table']         = 'report';
+        $aconf['field']         = 'DepartmentID';
+        $aconf['accesskey']     = 'D';
+        $_lib['form2']->department_menu2($aconf);
         ?>
     </td>
   </tr>
@@ -358,15 +358,6 @@ print $_lib['sess']->doctype ?>
         </tr>
         <tr>
           <td colspan='2'></td>
-        <td>Avdeling</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'DepartmentID';
-            $aconf['accesskey']     = 'D';
-            $_lib['form2']->department_menu2($aconf);
-            ?>
-        </td>
         <td>Prosjekt</td>
         <td><?
             $aconf = array();
@@ -374,6 +365,15 @@ print $_lib['sess']->doctype ?>
             $aconf['field']         = 'ProjectID';
             $aconf['accesskey']     = 'P';
             $_lib['form2']->project_menu2($aconf);
+            ?>
+        </td>
+        <td>Avdeling</td>
+        <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'DepartmentID';
+            $aconf['accesskey']     = 'D';
+            $_lib['form2']->department_menu2($aconf);
             ?>
         </td>
     </tr>
@@ -643,6 +643,17 @@ print $_lib['sess']->doctype ?>
       $_lib['form2']->car_menu2($aconf);
         ?>
     </td>
+    <td>Prosjekt</td>
+     <td><?
+         $aconf = array();
+         $aconf['table']         = 'report';
+         $aconf['field']         = 'ProjectID';
+         $aconf['accesskey']     = 'P';
+         $_lib['form2']->project_menu2($aconf);
+         ?>
+    </td>
+</tr>
+<tr>
     <td>Avdeling
     <td><?
         $aconf = array();
@@ -652,17 +663,6 @@ print $_lib['sess']->doctype ?>
         $_lib['form2']->department_menu2($aconf);
         ?>
      </td>
-</tr>
-<tr>
-     <td>Prosjekt</td>
-     <td><?
-         $aconf = array();
-         $aconf['table']         = 'report';
-         $aconf['field']         = 'ProjectID';
-         $aconf['accesskey']     = 'P';
-         $_lib['form2']->project_menu2($aconf);
-         ?>
-    </td>
 </tr>
 <tr>
     <td>Fra bilagsnummer</td>

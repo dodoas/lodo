@@ -68,8 +68,8 @@ while($row = $_lib['db']->db_fetch_object($result2)) {
               <th class="sub" align="right">Kostpris</th>
               <th class="sub" align="right">Pris</th>
               <th class="sub" align="right">Hovedbok</th>
-              <th class="sub" align="right">Avdeling</th>
               <th class="sub" align="right">Prosjekt</th>
+              <th class="sub" align="right">Avdeling</th>
             </tr>
             <?
               if (!empty($products)) {
@@ -92,8 +92,8 @@ while($row = $_lib['db']->db_fetch_object($result2)) {
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCostPrice, 'return'=>'value')) ?></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCustPrice, 'return'=>'value')) ?></td>
                         <td align="left"><? if($row->AccountPlanID) { $query="select AccountName from accountplan where AccountPlanID=$row->AccountPlanID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->AccountPlanID." ".$row2->AccountName; } ?></td>
-                        <td align="left"><? if($row->CompanyDepartmentID) { $query="select DepartmentName from companydepartment where CompanyDepartmentID=$row->CompanyDepartmentID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->CompanyDepartmentID." ".$row2->DepartmentName; } ?></td>
                         <td align="left"><? if($row->ProjectID) { $query="select Heading from project where ProjectID=$row->ProjectID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->ProjectID." ".$row2->Heading; } ?></td>
+                        <td align="left"><? if($row->CompanyDepartmentID) { $query="select DepartmentName from companydepartment where CompanyDepartmentID=$row->CompanyDepartmentID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->CompanyDepartmentID." ".$row2->DepartmentName; } ?></td>
                     </tr>
                     <?
                 }

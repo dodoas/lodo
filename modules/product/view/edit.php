@@ -94,12 +94,12 @@ if (!empty($row->AccountPlanID)) {
         <td colspan="2"><? if($VAT->Percent) { print "$VAT->Percent%"; } ?></td>
     </tr>
     <tr>
-        <td>Avdeling</td>
-        <td colspan="2"><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'CompanyDepartmentID', 'pk'=>$row->ProductID, 'value' => $row->CompanyDepartmentID, 'tabindex' => '5')) ?></td>
-    </tr>
-    <tr>
         <td>Prosjekt</td>
         <td colspan="2"><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$row->ProductID,  'value' =>  $row->ProjectID, 'tabindex' => '5')) ?></td>
+    </tr>
+    <tr>
+        <td>Avdeling</td>
+        <td colspan="2"><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'CompanyDepartmentID', 'pk'=>$row->ProductID, 'value' => $row->CompanyDepartmentID, 'tabindex' => '5')) ?></td>
     </tr>
     <tr>
         <td>Hylle</td>

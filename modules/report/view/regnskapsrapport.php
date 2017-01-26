@@ -39,8 +39,8 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
                 <th>Fra Periode</th>
                 <th>Til Periode</th>
                 <th>Bil</th>
-                <th>Avdeling</th>
                 <th>Prosjekt</th>
+                <th>Avdeling</th>
                 <th>Detaljer</th>
                 <th>Til m&aring;ned</th>
             </tr>
@@ -60,19 +60,19 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
                 <th><?
                     $aconf = array();
                     $aconf['table']         = 'report';
-                    $aconf['field']         = 'DepartmentID';
-                    $aconf['accesskey']     = 'D';
-                    $aconf['value']         = $DepartmentID;
-                    $_lib['form2']->department_menu2($aconf);
+                    $aconf['field']         = 'ProjectID';
+                    $aconf['accesskey']     = 'P';
+                    $aconf['value']         = $ProjectID;
+                    $_lib['form2']->project_menu2($aconf);
                     ?>
                 </th>
                 <th><?
                     $aconf = array();
                     $aconf['table']         = 'report';
-                    $aconf['field']         = 'ProjectID';
-                    $aconf['accesskey']     = 'P';
-                    $aconf['value']         = $ProjectID;
-                    $_lib['form2']->project_menu2($aconf);
+                    $aconf['field']         = 'DepartmentID';
+                    $aconf['accesskey']     = 'D';
+                    $aconf['value']         = $DepartmentID;
+                    $_lib['form2']->department_menu2($aconf);
                     ?>
                 </th>
                 <th><? print $_lib['form3']->checkbox(array('name' => 'detail', 'value' => $detail)); ?></th>

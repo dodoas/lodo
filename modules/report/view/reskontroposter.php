@@ -45,8 +45,8 @@ $result_voucher = $_lib['db']->db_query($query_voucher);
     <th class="sub">Valuta ut</th>
     <th class="sub">MVA%</th>
     <th class="sub">Mengde</th>
-    <th class="sub">Avd.</th>
     <th class="sub">Prosjekt</th>
+    <th class="sub">Avd.</th>
     <th class="sub">Forfall</th>
     <th class="sub">KID</th>
     <th class="sub">Faktura</th>
@@ -66,8 +66,8 @@ $result_voucher = $_lib['db']->db_query($query_voucher);
 <td><? print $_lib['format']->Amount(array('value'=>$voucher->ForeignAmountOut, 'return'=>'value')); ?></td>
 <td><? print $voucher->VAT;             ?></td>
 <td><? if($voucher->Quantity) {     print $voucher->Quantity; }     ?></td>
-<td><? if($voucher->DepartmentID) { print $voucher->DepartmentID; } ?></td>
 <td><? if($voucher->ProjectID) {    print $voucher->ProjectID; }    ?></td>
+<td><? if($voucher->DepartmentID) { print $voucher->DepartmentID; } ?></td>
 <td><? if($voucher->DueDate)   {    print $voucher->DueDate;   }    ?></td>
 <td><? if($voucher->KID)       {    print $voucher->KID; }    ?></td>
 <td><? if($voucher->InvoiceID) {    print $voucher->InvoiceID; }    ?></td>

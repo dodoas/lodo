@@ -87,12 +87,12 @@ function setAllowanceToNegativeAmountIfFirstTime() {
         <td colspan="2"><? if(!is_null($vat_out->Percent)) { print "$vat_out->Percent%"; } ?></td>
     </tr>
     <tr>
-        <td>Avdeling</td>
-        <td colspan="2"><? print $_lib['form2']->department_menu2(array('table'=>$db_table, 'field'=>'DepartmentID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->DepartmentID)) ?></td>
-    </tr>
-    <tr>
         <td>Prosjekt</td>
         <td colspan="2"><? print $_lib['form2']->project_menu2(array('table'=>$db_table, 'field'=>'ProjectID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->ProjectID)) ?></td>
+    </tr>
+    <tr>
+        <td>Avdeling</td>
+        <td colspan="2"><? print $_lib['form2']->department_menu2(array('table'=>$db_table, 'field'=>'DepartmentID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->DepartmentID)) ?></td>
     </tr>
 </tbody>
 <tfoot>

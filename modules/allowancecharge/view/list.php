@@ -61,8 +61,8 @@ while($row = $_lib['db']->db_fetch_object($result2)) {
               <th class="sub" align="right">Bel&oslash;p</th>
               <th class="sub" align="right">Resultat konto</th>
               <th class="sub" align="right">MVA</th>
-              <th class="sub">Avdeling</th>
               <th class="sub">Prosjekt</th>
+              <th class="sub">Avdeling</th>
             </tr>
             <?
               if (!empty($allowances_charges)) {
@@ -76,8 +76,8 @@ while($row = $_lib['db']->db_fetch_object($result2)) {
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->Amount, 'return'=>'value')) ?></td>
                         <td align="left"><? if($row->OutAccountName) print $row->OutAccountPlanID." ".$row->OutAccountName; ?></td>
                         <td align="right"><? if (!is_null($row->OutPercent)) print $_lib['format']->Percent(array('value'=>$row->OutPercent*1, 'return'=>'value')); ?></td>
-                        <td><? print $row->DepartmentName; ?></td>
                         <td><? print $row->ProjectName; ?></td>
+                        <td><? print $row->DepartmentName; ?></td>
                     </tr>
                     <?
                 }
