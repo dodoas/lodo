@@ -1452,7 +1452,7 @@ class invoice {
 
         ############################################################################################
         $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN, p.ProductNumber, v.Category from invoiceoutline as il left outer join product as p on il.ProductID=p.ProductID left outer join vat as v on il.VatID=v.VatID and (
-          il.Vat = v.Percent or (il.Vat = 0 and v.Percent is null)) where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.Active <> 0 order by il.LineID asc";
+          il.Vat = v.Percent or (il.Vat = 0 and v.Percent is null)) and v.ValidFrom <= '".$this->headH["InvoiceDate"]."' and v.ValidTo >= '".$this->headH["InvoiceDate"]."' where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.Active <> 0 order by il.LineID asc";
         #print "$query_invoiceline\n";
         $result2                = $_lib['db']->db_query($query_invoiceline);
 
