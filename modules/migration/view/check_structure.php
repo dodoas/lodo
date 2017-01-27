@@ -148,7 +148,7 @@ if($_REQUEST["db_name"]) {
 foreach ($databases as $db_name) {
   $differences = $migration_system->check_database($db_name);
   ?>
-
+  <hr>
   <h2>Comparing '<? print $db_name; ?>' to a good database ('<? print migration_system::get_good_db_name(); ?>')</h2>
   <?
     if(count($differences) == 0 || $db_name == migration_system::get_good_db_name()) {
