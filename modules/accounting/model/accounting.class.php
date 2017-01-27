@@ -1176,6 +1176,7 @@ class accounting {
                 $field['voucher_DisableAutoVat']            = 1;
                 $field['voucher_AutomaticReason']           = "Automatisk oppdatert hovedboks postering fra kto: $AccountPlanID Postering: $VoucherID";
                 $field['voucher_UpdatedByPersonID']         = $_lib['sess']->get_person('PersonID');
+                $field['voucher_AddedByAutoBalance']        = 0;
 
                 #print "Automatisk oppdatert hovedboks postering fra kto: $AccountPlanID Postering: $VoucherID<br/>\n";
 
