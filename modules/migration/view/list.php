@@ -54,8 +54,16 @@ $current_page = $MY_SELF . ($show_all ? "show_all=1&" : "") . ($db_name_restrict
   Table filter: <input type="text" name="migration_tablefilter">
 </form>
 <? } ?>
+
+<? if($show_all) { ?>
+<form action="<? print $_lib['sess']->dispatch ."t=migration.check_structure" ?>" method="post">
+  <input type="submit" name="action_scheck_schema" value="Check structure integrity for all DBs"/>
+</form> 
+<? } ?>
+
 <?
 foreach ($all_migrations as $database => $migrations) {
+  if(!$show_only_database_names) print "<hr>";
   print "<h2><a href='". $MY_SELF ."db_name=". $database."&". ($show_only_failed ? "show_only_failed=1&" : "") ."'>". $database ."</a></h2>";
   if(!$show_only_database_names) {
   ?>
@@ -63,6 +71,10 @@ foreach ($all_migrations as $database => $migrations) {
       <input type="hidden" name="migration_Database" value="<? print $database; ?>">
       <input type="submit" name="action_update_schema" value="Update schema information"/>
       Table filter: <input type="text" name="migration_tablefilter">
+    </form>
+    <form action="<? print $_lib['sess']->dispatch ."t=migration.check_structure" ?>" method="post">
+      <input type="hidden" name="db_name" value="<? print $database; ?>">
+      <input type="submit" name="action_scheck_schema" value="Check structure integrity"/>
     </form>
     <?
     print "<table>";
