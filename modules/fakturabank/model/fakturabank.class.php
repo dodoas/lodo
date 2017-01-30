@@ -814,7 +814,7 @@ class lodo_fakturabank_fakturabank {
                     return false;
                 }
                 if (is_numeric($DepartmentID = $this->find_department_by_id($acc_cost_params['customerdepartmentcode']))) {
-                    $InvoiceO->Department = $DepartmentID;
+                    $InvoiceO->DepartmentID = $DepartmentID;
                 } else {
                     # Internal department for code __ not found (customer departmentcode does not match any internal departments)
                     $InvoiceO->Status     .= "Fant ikke intern avdeling for kode $DepartmentID (avdelingskode er ikke lik noen intern avdeling)";
@@ -849,7 +849,7 @@ class lodo_fakturabank_fakturabank {
                     return false;
                 }
                 if (is_numeric($ProjectID = $this->find_project_by_id($acc_cost_params['customerprojectcode']))) {
-                    $InvoiceO->Project = $ProjectID;
+                    $InvoiceO->ProjectID = $ProjectID;
                 } else {
                     # Customer project for code __ not found (customer projectcode does not match any internal projects)
                     $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (kunde prosjektkode er ikke lik noen intern prosjekt)";
@@ -1424,8 +1424,8 @@ class lodo_fakturabank_fakturabank {
                 $dataH['FakturabankID']         = $InvoiceO->FakturabankID;
                 $dataH['Period']                = $InvoiceO->Period;
                 $dataH['InvoiceDate']           = $InvoiceO->IssueDate;
-                $dataH['Department']            = $InvoiceO->Department;
-                $dataH['Project']               = $InvoiceO->Project;
+                $dataH['DepartmentID']            = $InvoiceO->DepartmentID;
+                $dataH['ProjectID']               = $InvoiceO->ProjectID;
                 $dataH['ProjectNameInternal']               = $InvoiceO->ProjectNameInternal;
                 $dataH['ProjectNameCustomer']               = $InvoiceO->ProjectNameCustomer;
                 $dataH['isReisegarantifond']    = $InvoiceO->Reisegarantifond;
@@ -1871,7 +1871,7 @@ class lodo_fakturabank_fakturabank {
 
         /* gather data to be sent in AccountCost element */
         $acc_cost = '';
-        $acc_types = array('Department', 'DepartmentCode', 'Project', 'ProjectCode', 'CustomerDepartment', 'CustomerProject');
+        $acc_types = array('DepartmentID', 'DepartmentCode', 'ProjectID', 'ProjectCode', 'CustomerDepartment', 'CustomerProject');
         foreach ($acc_types as $acc_type) {
             if ($InvoiceO->$acc_type != "") {
                 if (!empty($acc_cost)) {

@@ -136,10 +136,16 @@ class recurring {
             }
         }
 
-        if(!$headH['ProjectID'] && $accountplan->ProjectID)
+        $ProjectID = $args['recurringout_ProjectID_' . $this->RecurringID];
+        $headH['ProjectID'] = $ProjectID;
+
+        if(($headH['ProjectID'] === DB_NULL_PLACEHOLDER) && $accountplan->EnableProject == 1 && isset($accountplan->ProjectID))
             $headH['ProjectID'] = $accountplan->ProjectID;
 
-        if(!$headH['DepartmentID'] && $accountplan->DepartmentID)
+        $DepartmentID = $args['recurringout_DepartmentID_' . $this->RecurringID];
+        $headH['DepartmentID'] = $DepartmentID;
+
+        if(($headH['DepartmentID'] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
             $headH['DepartmentID'] = $accountplan->DepartmentID;
 
         /*$args['invoiceout_ICountry_'.$this->RecurringID] = $accountplan->address;

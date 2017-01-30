@@ -10,6 +10,15 @@ $recurring = new recurring(array('CustomerAccountPlanID' => $CustomerAccountPlan
 
 if($_lib['input']->getProperty('action_invoicerecurring_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
     print "Oppdaterer faktura";
+    // Allow unsetting a Department
+    if (($_POST['recurringout_DepartmentID_'.$RecurringID] === "unset")) {
+        $_POST['recurringout_DepartmentID_'.$RecurringID] = DB_NULL_PLACEHOLDER;
+    }
+
+    // Allow unsetting a Project
+    if (($_POST['recurringout_ProjectID_'.$RecurringID] === "unset")) {
+        $_POST['recurringout_ProjectID_'.$RecurringID] = DB_NULL_PLACEHOLDER;
+    }
     $recurring->update($_POST);
     $recurring->create_recurring($_POST, true);
 }

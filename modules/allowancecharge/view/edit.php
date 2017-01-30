@@ -88,11 +88,11 @@ function setAllowanceToNegativeAmountIfFirstTime() {
     </tr>
     <tr>
         <td>Prosjekt</td>
-        <td colspan="2"><? print $_lib['form2']->project_menu2(array('table'=>$db_table, 'field'=>'ProjectID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->ProjectID)) ?></td>
+        <td colspan="2"><? print $_lib['form2']->project_menu2(array('table'=>$db_table, 'field'=>'ProjectID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->ProjectID, 'unset' => true)) ?></td>
     </tr>
     <tr>
         <td>Avdeling</td>
-        <td colspan="2"><? print $_lib['form2']->department_menu2(array('table'=>$db_table, 'field'=>'DepartmentID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->DepartmentID)) ?></td>
+        <td colspan="2"><? print $_lib['form2']->department_menu2(array('table'=>$db_table, 'field'=>'DepartmentID', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->DepartmentID, 'unset' => true)) ?></td>
     </tr>
 </tbody>
 <tfoot>

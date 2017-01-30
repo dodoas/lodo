@@ -209,7 +209,7 @@ print $_lib['sess']->doctype ?>
             print "<td>";
         if($accountplan->EnableCar == 1)
         {
-            print $_lib['form3']->Car_menu3(array('table'=>$db_table2, 'field'=>'CarID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->CarID, 'active_reference_date'=>$_lib['sess']->get_session('LoginFormDate')));
+            print $_lib['form2']->Car_menu2(array('table'=>$db_table2, 'field'=>'CarID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->CarID, 'active_reference_date'=>$_lib['sess']->get_session('LoginFormDate'), 'unset' => true));
         }
     ?>
     </td>
@@ -221,7 +221,7 @@ print $_lib['sess']->doctype ?>
             print "<td>";
         if($accountplan->EnableProject == 1)
         {
-            print $_lib['form3']->project_menu(array('table'=>$db_table2, 'field'=>'ProjectID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->ProjectID));
+            print $_lib['form2']->project_menu2(array('table'=>$db_table2, 'field'=>'ProjectID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->ProjectID, 'unset' => true));
         }
     ?>
     </td>
@@ -232,7 +232,7 @@ print $_lib['sess']->doctype ?>
             print "<td>";
         if($accountplan->EnableDepartment == 1)
         {
-            print $_lib['form3']->Avd_menu3(array('table'=>$db_table2, 'field'=>'DepartmentID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->DepartmentID));
+            print $_lib['form2']->department_menu2(array('table'=>$db_table2, 'field'=>'DepartmentID', 'pk'=>$line->SalaryConfLineID, 'value'=>$line->DepartmentID, 'unset' => true));
         }
     ?>
     </td>

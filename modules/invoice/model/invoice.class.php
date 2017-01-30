@@ -166,10 +166,16 @@ class invoice {
             }
         }
 
-        if(!$headH['ProjectID'] && $accountplan->ProjectID)
+        $ProjectID = $args['invoiceout_ProjectID_' . $this->InvoiceID];
+        $headH['ProjectID'] = $ProjectID;
+
+        if(($headH['ProjectID'] === DB_NULL_PLACEHOLDER) && $accountplan->EnableProject == 1 && isset($accountplan->ProjectID))
             $headH['ProjectID'] = $accountplan->ProjectID;
 
-        if(!$headH['DepartmentID'] && $accountplan->DepartmentID)
+        $DepartmentID = $args['invoiceout_DepartmentID_' . $this->InvoiceID];
+        $headH['DepartmentID'] = $DepartmentID;
+
+        if(($headH['DepartmentID'] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
             $headH['DepartmentID'] = $accountplan->DepartmentID;
 
         /*$args['invoiceout_ICountry_'.$this->InvoiceID] = $accountplan->address;

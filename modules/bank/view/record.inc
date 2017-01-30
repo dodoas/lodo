@@ -194,6 +194,21 @@ function do_bank_update($table_name, &$accountline, $Period) {
             $accountline['ResultAccountPlanID'] = DB_NULL_PLACEHOLDER;
         }
 
+        // Allow unsetting a Car
+        if (!isset($accountline['CarID'])) {
+            $accountline['CarID'] = DB_NULL_PLACEHOLDER;
+        }
+
+        // Allow unsetting a Department
+        if (!isset($accountline['DepartmentID'])) {
+            $accountline['DepartmentID'] = DB_NULL_PLACEHOLDER;
+        }
+
+        // Allow unsetting a Project
+        if (!isset($accountline['ProjectID'])) {
+            $accountline['ProjectID'] = DB_NULL_PLACEHOLDER;
+        }
+
         if($accountline['Priority'] == $debugline) print_r($accountline);
 
         // These fields are generated from a drop down with alternatives

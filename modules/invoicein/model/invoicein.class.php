@@ -244,6 +244,12 @@ class logic_invoicein_invoicein implements Iterator {
             }
         }
 
+        if(($args['invoicein_DepartmentID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
+            $args['invoicein_DepartmentID_'.$ID] = $accountplan->DepartmentID;
+
+        if(($args['invoicein_ProjectID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableProject == 1 && isset($accountplan->ProjectID))
+            $args['invoicein_ProjectID_'.$ID] = $accountplan->ProjectID;
+
         #print_r($accountplan);
         #print_r($args);
 

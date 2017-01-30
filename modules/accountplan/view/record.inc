@@ -125,6 +125,19 @@ if($AccountPlanID) {
 if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->getProperty('action_accountplan_updateautomatic') || $_lib['input']->getProperty('action_add_scheme') || ($_lib['input']->getProperty('action_save_scheme') && !$accountexist))
 {
 
+        // Allow unsetting a Car
+        if (($_POST['accountplan_CarID']) === "unset") {
+            $_POST['accountplan_CarID'] = DB_NULL_PLACEHOLDER;
+        }
+        // Allow unsetting a Department
+        if (($_POST['accountplan_DepartmentID']) === "unset") {
+            $_POST['accountplan_DepartmentID'] = DB_NULL_PLACEHOLDER;
+        }
+        // Allow unsetting a Project
+        if (($_POST['accountplan_ProjectID']) === "unset") {
+            $_POST['accountplan_ProjectID'] = DB_NULL_PLACEHOLDER;
+        }
+
     // If new firmaID is created and account doesnt exist, accountplan should be saved.
     if(!($_lib['input']->getProperty('action_add_scheme') && $accountexist)) {
         if(isset($_POST['timesheetpasswords_Password']))

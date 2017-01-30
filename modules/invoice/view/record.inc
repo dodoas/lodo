@@ -19,6 +19,17 @@ $invoice = new invoice(array('CustomerAccountPlanID' => $CustomerAccountPlanID, 
 
 if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
     #print "Oppdaterer faktura";
+
+        // Allow unsetting a Department
+        if (($_POST['invoiceout_DepartmentID_'.$InvoiceID] === "unset")) {
+            $_POST['invoiceout_DepartmentID_'.$InvoiceID] = DB_NULL_PLACEHOLDER;
+        }
+
+        // Allow unsetting a Project
+        if (($_POST['invoiceout_ProjectID_'.$InvoiceID] === "unset")) {
+            $_POST['invoiceout_ProjectID_'.$InvoiceID] = DB_NULL_PLACEHOLDER;
+        }
+
     $invoice_date = $_POST['invoiceout_InvoiceDate_'.$InvoiceID];
     if (!validDate($invoice_date)) {
       $_lib['message']->add('Ugyldig fakturadato '.$invoice_date.'!');

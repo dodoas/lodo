@@ -495,7 +495,7 @@ class form2 {
       if($conf['value']) {
         print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
       } else {
-        print "<option value=\"\">" . substr('Velg prosjekt',0, $num_letters);
+        print "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg prosjekt',0, $num_letters);
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
           if($_row->ProjectID == $args[value])
@@ -569,11 +569,10 @@ class form2 {
           print "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
         }
       }
-      print "Greit<br>";
       if($conf['value']) {
         print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
       } else {
-        print "<option value=\"\">" . substr('Velg avdeling',0, $num_letters);
+        print "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg avdeling',0, $num_letters);
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
           if($_row->CompanyDepartmentID == $args[value])
@@ -625,10 +624,10 @@ class form2 {
         if(!$car_exists) {
           $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
         } else {
-          $print .= "<option value=\"\">" . substr('Velg bil',0, $num_letters);
+          $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
         }
       } else {
-        $print .= "<option value=\"\">" . substr('Velg bil',0, $num_letters);
+        $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
           $inaktive = ($_row->Active) ? '' : 'INAKTIV ';
