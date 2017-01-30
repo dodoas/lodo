@@ -300,8 +300,7 @@ class pdfInvoice
           $deliverTo = $this->splitString($params["delivery"]["name"], 100);
 
           $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart - 3 + ($this->lineHeight * $lineNumber));
-          $this->pdf->SetFillColor(240,240,240);
-          $this->pdf->Cell($this->invoiceHeadAdressWidth, 4, "Leveringsadresse", $this->showMyFrame, 0, 'L', 1);
+          $this->pdf->Cell($this->invoiceHeadAdressWidth, 4, "Leveringsadresse", $this->showMyFrame, 0, 'L');
           $lineNumber++;
 
           for ($i =0; $i < count($deliverTo); $i++)
@@ -416,6 +415,10 @@ class pdfInvoice
         $this->pdf->SetFont($this->invoiceFont,'B',$this->invoiceHeaderFont);
         $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin, $this->invoiceHeadCompanyInfoStart - 5);
         $this->pdf->Cell($this->invoiceHeaderWidth, $this->invoiceHeaderHeight, $this->korriger($params["fakturatype"]),$this->showMyFrame);
+
+        $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin + $this->invoiceHeadCompanyInfoWidth, $this->invoiceHeadCompanyInfoStart - 5);
+        $this->pdf->Cell($this->invoiceHeaderWidth, $this->invoiceHeaderHeight, $this->korriger($params['invoiceData']['Fakturanr']),$this->showMyFrame);
+
         $this->pdf->Line(130, 20, 200, 20);
     }
 /**
@@ -453,9 +456,6 @@ class pdfInvoice
  */
     function addInvoiceLineAllowanceCharge($params)
     {
-      $this->pdf->SetLineWidth(0.2);
-      $this->pdf->Line(14, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)), 198, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)));
-
       foreach ($params as $allowance_charge) {
         $myLeft = "invoiceLineHeadLeft2";
         $myRight = "invoiceLineHeadLeft3";
@@ -519,6 +519,11 @@ class pdfInvoice
         }
         $this->invoiceLineCurrentLine += (count($prodTekstArray) > 1) ? count($prodTekstArray) : 1;
       }
+      // print line separator
+      if (((count($params) > 0) && (!empty($params[0]['AllowanceChargeType'])))) {
+        $this->pdf->SetLineWidth(0.2);
+        $this->pdf->Line($this->invoiceLineHeadLeft2, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)) - 0.2, $this->invoiceLineHeadLeft3, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)) - 0.2);
+      }
     }
 
 /**
@@ -543,13 +548,6 @@ class pdfInvoice
             $params["linjesum"] = $params["enhetspris"] * $params["antall"];
         if ($params["mvabelop"] == "")
             $params["mvabelop"] = $params["linjesum"] * $params["mva"] / 100;
-
-        // print background for entire line
-        $hlLeft = "invoiceLineHeadLeft1";
-        $hlRight = "invoiceLineHeadLeft8";
-        $this->pdf->SetFillColor(240,240,240);
-        $this->pdf->SetXY($this->{$hlLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * $this->invoiceLineCurrentLine));
-        $this->pdf->Cell($this->{$hlRight} - $this->{$hlLeft} - 1, $this->lineHeight, $this->korriger(""), $this->showMyFrame, 0, "L", 1);
 
         $myLeft = "invoiceLineHeadLeft2";
         $myRight = "invoiceLineHeadLeft3";
@@ -586,14 +584,6 @@ class pdfInvoice
                     if ($j == 0) {
                         $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $prodTekstArray[$j], $this->showMyFrame, 0, $this->{$myAlignment});
                     } else {
-
-                        // print background for entire line
-                        $hlLeft = "invoiceLineHeadLeft1";
-                        $hlRight = "invoiceLineHeadLeft8";
-                        $this->pdf->SetFillColor(240,240,240);
-                        $this->pdf->SetXY($this->{$hlLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine + $j)));
-                        $this->pdf->Cell($this->{$hlRight} - $this->{$hlLeft} - 1, $this->lineHeight, $this->korriger(""), $this->showMyFrame, 0, "L", 1);
-
                         $this->pdf->SetXY($this->{$myLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine + $j)));
                         $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $prodTekstArray[$j], $this->showMyFrame, 0, $this->{$myAlignment});
                     }
@@ -609,12 +599,6 @@ class pdfInvoice
             }
         }
         $this->invoiceLineCurrentLine += (count($prodTekstArray) > 1) ? count($prodTekstArray) : 1;
-        // line delimiter for each invoice line
-        if (!$params['first_line']) {
-            $this->pdf->SetLineWidth(0.2);
-            $this->pdf->Line(14, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine-$j)), 198, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine-$j)));
-        }
-
     }
 /**
  * Burde vært privat. Kalles av addInvoiceLine og addTextLine og kanskje noen til. Lager ny side for fakturaen.
@@ -664,8 +648,7 @@ class pdfInvoice
         $myLeft = "invoiceLineHeadLeft1";
         $myRight = "invoiceLineHeadLeft8";
         $this->pdf->SetXY($this->{$myLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * $this->invoiceLineCurrentLine));
-        $this->pdf->SetFillColor(240,240,240);
-        $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $this->korriger($params["tekst"]), $this->showMyFrame, 0, "L", 1);
+        $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $this->korriger($params["tekst"]), $this->showMyFrame, 0, "L");
         $this->invoiceLineCurrentLine++;
     }
 /**

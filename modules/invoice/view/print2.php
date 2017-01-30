@@ -153,6 +153,7 @@ $params["comment"] = $row->CommentCustomer;
 // Legg til en ny faktura, lage header med sender og mottaker av fakturaen.
 $myFakutra->newInvoice($params);
 $myFakutra->setPrintGiro($row_company->InvoicePDFPrintGiroInfo);
+$myFakutra->invoiceLinesPerSite -= count(split("\n", $params['comment']));
 
 
 $sumlines = 0;
