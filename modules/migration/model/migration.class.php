@@ -120,4 +120,64 @@ class migration_system {
       $model_tablemetadata_tablemetadata->update_db($params);
     }
   }
+
+  static function get_database_names() {
+    $dbs = self::database_list();
+    foreach ($dbs as $db) {
+      $ret[] = $db->Database;
+    }
+    return $ret;
+  }
+
+  function check_database($db_name) {
+    global $_SETUP;
+    global $_lib;
+    $_lib['storage'] = $_lib['db'] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'],
+                                                        'database' => $db_name,
+                                                        'username' => $_SETUP['DB_USER_DEFAULT'],
+                                                        'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
+
+    $query = "SELECT *
+              FROM (
+                SELECT 'missing' as Status, base.*
+                FROM ". self::get_good_db_name() .".confdbfields as base
+                LEFT JOIN ". $db_name .".confdbfields as comp ON base.TableField = comp.TableField AND base.TableName = comp.TableName AND base.FieldType = comp.FieldType
+                WHERE comp.ConfDBFieldID is null
+
+                UNION ALL
+
+                SELECT 'excess' as Status, comp.* 
+                FROM ". self::get_good_db_name() .".confdbfields as base
+                RIGHT JOIN ". $db_name .".confdbfields as comp ON base.TableField = comp.TableField AND base.TableName = comp.TableName AND base.FieldType = comp.FieldType
+                WHERE base.ConfDBFieldID is null
+              ) as Results
+              ORDER BY
+                TableName ASC,
+                TableField ASC
+              ";
+
+    $differences = array();
+    $rs = $_lib['db']->db_query($query);
+    while($row = $_lib['db']->db_fetch_assoc($rs)) {
+      $differences[] = $row;
+    }
+
+    return $differences;
+  }
+
+  function get_migration_contents() {
+    global $_SETUP;
+    $migrations = array();
+    $migration_file_names = array_slice(scandir($_SETUP['HOME_DIR'] ."/db/changes/"), 2);
+    foreach($migration_file_names as $migration_name) {
+      $content = file_get_contents($_SETUP['HOME_DIR'] ."/db/changes/". $migration_name);
+      $migrations["db/changes/". $migration_name] = $content;
+    }
+    return $migrations;
+  }
+
+  static function get_good_db_name() {
+    global $_SETUP;
+    return $_SETUP['DB_CHECKER_GOOD_DB'];
+  }
 }
