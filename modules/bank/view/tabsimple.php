@@ -83,6 +83,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Dag</td>
     <td class="menu">Ut av konto</td>
     <td class="menu">Inn p&aring; konto</td>
+    <td class="menu">Fakturanr</td>
     <td class="menu">KID</td>
     <td class="menu">Tekst</td>
     <td class="menu">Mengde</td>
@@ -140,6 +141,10 @@ if(is_array($bank->bankaccount)) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountIn', 'pk' => $row->AccountLineID, 'value' => '',     'class' => $row->classAmountIn));
     
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=bank&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')) ?>
+        </td>
+        <td><?
+            print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber, 'class' => 'number', 'width' => 20, 'maxlength' => 25));
+        ?>
         </td>
         <td>
             <? 
