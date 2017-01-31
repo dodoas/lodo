@@ -59,6 +59,14 @@ $formname = "Update";
     <? includeinc('top') ?>
     <? includeinc('left') ?>
 
+    <?
+    foreach($weeklysale->sale as $WeeklySaleDayID => $line) {
+        if(round($line->ZnrTotalAmount,2) != round($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID],2)) {
+            $_lib['message']->add('Znr '. $line->Znr .': Znr total stemmer ikke med summen av gruppene');
+        }
+    }
+    ?>
+
     <?if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
 
 <?php
@@ -444,7 +452,13 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                         <td class="number"><!-- diff --><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { print "<font color=\"red\">"; } ?><? print $_lib['format']->Amount($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID]) ?><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { print "</font>"; } ?></td>
                         <td><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { ?><input <? print $readonly ?> type="text" name="weeklysaleday.CashAmountExplanation.<? print $line->WeeklySaleDayID ?>" value="<? print $line->CashAmountExplanation ?>" size="20"><? } ?>
                         <td><? print $line->Person ?><? //$_lib['form2']->CompanyContactMenu( array('table' => 'weeklysaleday', 'field' => 'PersonID', 'value' => $line->PersonID, 'pk' => $line->WeeklySaleDayID, 'disabled'=>$line->Locked)); ?>
-                        <td><? if($line->Znr != 0) { print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>($_lib['sess']->get_person('AccessLevel') >= 3)?'0':$line->Locked)); } ; ?>
+                        <td><? 
+                            if($line->Znr != 0) {
+                                $enabled = round($weeklysale->sale[$line->ParentWeeklySaleDayID]->ZnrTotalAmount,2) == round($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID],2) &&
+                                           ($_lib['sess']->get_person('AccessLevel') >= 3 || !$line->Locked);
+                                           
+                                print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>!$enabled));
+                            } ?>
                         <td><? if ($line->Locked && $line->PersonID) print $line->TS; ?></td>
                         <td></td>
                     </tr>

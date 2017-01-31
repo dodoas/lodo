@@ -518,7 +518,21 @@ function update_weeklysale($post, $pk){
     
         if(isset($post["weeklysaleday_Locked_".$revenue->WeeklySaleDayID]) and strlen($post["weeklysaleday_Locked_".$revenue->WeeklySaleDayID]) > 0)
         {
-            $post["weeklysaleday_Locked_".$sale->WeeklySaleDayID] = $post["weeklysaleday_Locked_".$revenue->WeeklySaleDayID];
+            $locked = $post["weeklysaleday_Locked_".$revenue->WeeklySaleDayID];
+
+            $sum = 0;
+            for($i=0; $i<=20; $i++) {
+                if($group_amount = $post["weeklysaleday_Group".$i."Amount_".$sale->WeeklySaleDayID]) {
+                    $sum += (float)$group_amount;
+                }
+            }
+
+            if($sum != (float)$post["weeklysaleday_ZnrTotalAmount_".$sale->WeeklySaleDayID]) {
+                $locked = '0';
+            }
+
+            $post["weeklysaleday_Locked_".$revenue->WeeklySaleDayID] = $locked;
+            $post["weeklysaleday_Locked_".$sale->WeeklySaleDayID]    = $locked;
         }
     
         #Må oppdatere dagid og znr fra topp linje basert på parentweeklysaledayid. Denne algoritmen forusetter like mange på begge sider for å fungere parentweeklysale kan brukes for å gjøre det mer robust
