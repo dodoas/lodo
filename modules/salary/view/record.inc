@@ -1,5 +1,284 @@
 <?
 
+function salary_journal($SalaryID) {
+  global $_lib;
+  global $accounting;
+  global $lineInFrom;
+  global $lineInTo;
+  global $lineOutFrom;
+  global $lineOutTo;
+
+  ################################################################
+  #Get head and lines
+  $query_salary         = "select * from salary where SalaryID = '$SalaryID'";
+  $result_salary        = $_lib['db']->db_query($query_salary);
+  $salary               = $_lib['db']->db_fetch_object($result_salary);
+
+  $query_salaryline     = "select * from salaryline where SalaryID = '$SalaryID'";
+  $result_salaryline    = $_lib['db']->db_query($query_salaryline);
+
+  $query_salaryline_sumtotal = "SELECT SUM( IF(LineNumber >= $lineInFrom AND LineNumber < $lineInTo, AmountThisPeriod, IF( LineNumber >= $lineOutFrom AND LineNumber <= $lineOutTo, -AmountThisPeriod, 0)) ) as sumTotal FROM salaryline WHERE SalaryID = '$SalaryID'";
+  $result_salaryline_sumtotal = $_lib['db']->db_query($query_salaryline_sumtotal);
+
+  ################################################################
+  #Then calcultate the different lines hittil i Œr, and update the fields
+  #Find first period this year
+  if(!$salary->PayDate)
+  {
+    $_lib['sess']->error("Pay date is required");
+    print "Pay date is required";
+    exit;
+  }
+
+  /* start accounting */
+
+  ################################################################
+  #Get or update journal id
+  $VoucherType = 'L';
+  if($salary->JournalID)
+  {
+    includelogic('postmotpost/postmotpost');
+    $postmotpost = new postmotpost(array());
+    $postmotpost->openPostJournal($salary->JournalID, $VoucherType);
+
+    #Delete old accounting and insert new
+    $accounting->delete_journal($salary->JournalID, $VoucherType);
+  }
+
+  ################################################################
+  #Insert salary lines as voucher for this employee
+  $result_salaryline    = $_lib['db']->db_query($query_salaryline);
+  
+  $fields = array();
+  $fields['voucher_JournalID']       = $salary->JournalID;
+  $fields['voucher_Reference']       = $salary->JournalID;
+  $fields['voucher_VoucherPeriod']   = $salary->Period;
+  $fields['voucher_VoucherDate']     = $salary->JournalDate;
+  $fields['voucher_DueDate']         = $salary->PayDate;
+  $fields['voucher_Active']          = 1;
+  $fields['voucher_AutomaticReason'] = "L&oslash;nnsslipp: $SalaryID, Ansatt: $salary->AccountPlanID ";
+  $fields['voucher_Description']     = 'Periode: ' . $salary->Period . ' ansatt: ' . $salary->AccountPlanID;
+  $fields['voucher_InvoiceID']       = $VoucherType . $salary->JournalID;
+  $fields['voucher_VoucherType']     = $VoucherType;
+
+  unset($fields['voucher_AmountIn']);
+  unset($fields['voucher_AmountOut']);
+
+  $sumTotal = $_lib['db']->db_fetch_object($result_salaryline_sumtotal)->sumTotal;
+
+  if($sumTotal >= 0)
+    $fields['voucher_AmountIn'] = $sumTotal;
+  else
+    $fields['voucher_AmountOut'] = -$sumTotal;
+
+  $VoucherID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$salary->AccountPlanID, 'type'=>'reskontro', 'VoucherType'=>$VoucherType));
+
+  while($salaryline = $_lib['db']->db_fetch_object($result_salaryline))
+  {
+    unset($fields['voucher_AmountIn']);
+    unset($fields['voucher_AmountOut']);
+    # DO not isernt poseringer with 0 value
+    if($salaryline->AmountThisPeriod != 0)
+    {
+      if( ($salaryline->LineNumber >= $lineInFrom) and ($salaryline->LineNumber < $lineInTo) )
+      {
+        $fields['voucher_AmountIn']   = $salaryline->AmountThisPeriod;
+      }
+      elseif( ($salaryline->LineNumber >= $lineOutFrom) and ($salaryline->LineNumber <= $lineOutTo) )
+      {
+        $fields['voucher_AmountOut']  = $salaryline->AmountThisPeriod;
+      }
+      $fields['voucher_ProjectID']      = $salaryline->ProjectID;
+      $fields['voucher_DepartmentID']   = $salaryline->DepartmentID;
+      $account = $salaryline->AccountPlanID;
+      if ($salaryline->LineNumber == 100) $fields['voucher_InvoiceID'] .= "-F";
+
+      $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$account, 'VoucherType'=>$VoucherType));
+    }
+  }
+
+  $fields['voucher_AccountPlanID'] = $account;
+
+  $accounting->correct_journal_balance($fields, $salary->JournalID, $VoucherType);
+  $accounting->set_journal_motkonto(array('post'=>$fields, 'VoucherType'=>$VoucherType));
+}
+
+function salary_update($SalaryID, $SalaryConfID) {
+  global $_lib;
+  global $lineInFrom;
+  global $lineInTo;
+  global $lineOutFrom;
+  global $lineOutTo;
+
+  $SalaryLineIDs = array();
+  $SalaryLinesCount = $_REQUEST["fieldcount"];
+  for ($i = 1; $i <= $SalaryLinesCount; $i++) { $SalaryLineIDs[] = $_REQUEST[$i]; }
+
+  if (!($_lib['input']->getProperty('action_salary_new')) && CheckIfAnythingChanged($SalaryID, $SalaryLineIDs)) {
+    // set who updated and when if anything changed
+    $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
+
+    // To show history of changed salaries on altinn salary page
+    $update_query = "UPDATE
+      altinnReport1salary AS ars
+    JOIN
+      altinnReport1 AS ar
+      ON ars.AltinnReport1ID = ar.AltinnReport1ID
+    SET
+      Changed = '1'
+    WHERE
+      ReplacedByMeldindsID IS NULL AND
+      SalaryId = '".$SalaryID."';";
+    $_lib['db']->db_query($update_query);
+  }
+  if ($_lib['input']->getProperty('action_salary_new') || ($_lib['input']->getProperty('action_salary_journal') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'. $SalaryID]))) {
+    // set who updated altinn fields
+    $_POST["salary_AltinnFieldsUpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_AltinnFieldsUpdatedAt_".$SalaryID] = strftime("%F %T");
+  }
+
+  // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
+  if ($_lib['input']->getProperty('action_salary_new')) {
+    $_POST['SalaryID'] = $SalaryID;
+
+    $query="select * from salary where SalaryID=".$_POST['SalaryID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['salary_JournalDate_'.$SalaryID] = $row->JournalDate;
+    $_POST['salary_Period_'.$SalaryID] = $row->Period;
+    $_POST['AccountPlanID'] = $_POST['salary_AccountPlanID_'.$SalaryID] = $row->AccountPlanID;
+    $_POST['salary_ValidFrom_'.$SalaryID] = $row->ValidFrom;
+    $_POST['salary_ValidTo_'.$SalaryID] = $row->ValidTo;
+    $_POST['salary_PayDate_'.$SalaryID] = $row->PayDate;
+    $_POST['salary_DomesticBankAccount_'.$SalaryID] = $row->DomesticBankAccount;
+    $_POST['salary_Comment_'.$SalaryID] = $row->Comment;
+    $_POST['salary_InternComment_'.$SalaryID] = $row->InternComment;
+    $_POST['salary_VacationPayment_'.$SalaryID] = $row->VacationPayment;
+    // set who updated salary
+    $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
+
+    $query="select count(*) as fieldcount from salaryline where SalaryID=".$_POST['SalaryID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['fieldcount'] = $row->fieldcount;
+
+    $query="select * from salaryline where SalaryID=".$_POST['SalaryID'];
+    $result=$_lib['db']->db_query($query);
+    $icount = 0;
+    while ($row = $_lib['db']->db_fetch_object($result)) {
+      $i++;
+      $_POST[$i] = $row->SalaryLineID;
+      $_POST['salaryline_LineNumber_'.$row->SalaryLineID] = $row->LineNumber;
+      $_POST['salaryline_NumberInPeriod_'.$row->SalaryLineID] = $row->NumberInPeriod;
+      $_POST['salaryline_Rate_'.$row->SalaryLineID] = $row->Rate;
+      $_POST['salaryline_AmountThisPeriod_'.$row->SalaryLineID] = $row->AmountThisPeriod;
+      $_POST['EnableVacationPayment_'.$row->SalaryLineID] = $row->EnableVacationPayment;
+      $_POST['EnableEmployeeTax_'.$row->SalaryLineID] = $row->EnableEmployeeTax;
+      $_POST['MandatoryTaxSubtraction_'.$row->SalaryLineID] = $row->MandatoryTaxSubtraction;
+      $_POST['SendToAltinn_'.$row->SalaryLineID] = $row->SendToAltinn;
+      $_POST['Fordel_'.$row->SalaryLineID] = $row->Fordel;
+    }
+  }
+  ################################################################
+  #First save the content of the forms
+  $counter = $_POST['fieldcount'];
+
+  $tables['salary']     = 'SalaryID';
+  $tables['salaryline'] = 'SalaryLineID';
+
+  if( ($_POST['salary_DomesticBankAccount_'.$SalaryID] == 0) || ($_POST['salary_DomesticBankAccount_'.$SalaryID] == "") )
+  {
+    $query="select DomesticBankAccount from accountplan where AccountPlanID=".$_POST['AccountPlanID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['salary_DomesticBankAccount_'.$SalaryID] = $row->DomesticBankAccount;
+
+    $_lib['sess']->debug($query);
+  }
+
+  $accountplanid = $_POST['AccountPlanID'];
+  unset($_POST['AccountPlanID']);
+
+  $sumTotal = 0;
+  for($i=1; $i<=$counter; $i++)
+  {
+    $lineID = $_POST[$i];
+    $AmountThisPeriod = $_POST['salaryline_AmountThisPeriod_'.$lineID];
+    $ValueHash = $_lib['convert']->Amount(array('value'=>$AmountThisPeriod));
+    $AmountThisPeriod = $ValueHash['value'];
+    $NumberInPeriod = $_POST['salaryline_NumberInPeriod_'.$lineID];
+    $ValueHash = $_lib['convert']->Amount(array('value'=>$NumberInPeriod));
+    $NumberInPeriod = $ValueHash['value'];
+    $Rate = $_POST['salaryline_Rate_'.$lineID];
+    $ValueHash = $_lib['convert']->Amount(array('value'=>$Rate));
+    $Rate = $ValueHash['value'];
+    if( ($_POST['salaryline_AmountThisPeriod_'.$lineID] == "") || ($_POST['salaryline_AmountThisPeriod_'.$lineID] == 0) )
+    {
+        $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_NumberInPeriod_'.$lineID]));
+        $tmpvalue1 = $hash['value'];
+
+        $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_Rate_'.$lineID]));
+        $tmpvalue2 = $hash['value'];
+
+        $_POST['salaryline_AmountThisPeriod_'.$lineID] = ($tmpvalue1 * $tmpvalue2);
+    }
+    elseif(($AmountThisPeriod != ($NumberInPeriod * $Rate) && !isset($_POST['floor_'.$lineID])) || (isset($_POST['floor_'.$lineID]) && (floor($AmountThisPeriod) != floor($NumberInPeriod * $Rate))))
+    {
+        $message = "<font color=\"red\">OBS! Feil utregning.</font>";
+    }
+
+    $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_AmountThisPeriod_'.$lineID]));
+    $_POST['salaryline_AmountThisPeriod_'.$lineID] = (isset($_POST['floor_'.$lineID])) ? floor($hash['value']) : $hash['value'];
+
+    if( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineInFrom) and ($_POST['salaryline_LineNumber_'.$lineID] < $lineInTo) )
+    {
+      $sumTotal += $_POST['salaryline_AmountThisPeriod_'.$lineID];
+    }
+    elseif( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineOutFrom) and ($_POST['salaryline_LineNumber_'.$lineID] <= $lineOutTo) )
+    {
+      $sumTotal -= $_POST['salaryline_AmountThisPeriod_'.$lineID];
+    }
+    if($_POST['salaryline_LineNumber_'.$lineID] == 100)
+    {
+      $_POST['salaryline_AccountPlanID_'.$lineID] = $_POST['salary_AccountPlanID_'.$_POST['SalaryID']];
+    }
+
+    if($_POST['EnableVacationPayment_'.$lineID] == 1) {
+      $VacationPayment += $_POST['salaryline_AmountThisPeriod_'.$lineID];
+    }
+
+    unset($_POST[$i]);
+  }
+  unset($_POST['fieldcount']);
+
+  $_POST['salary_AmountThisPeriod_'.$_POST['SalaryID']] = $sumTotal;
+
+  if(CheckIfAccountPlanChanged($SalaryID)){
+    // Update SalaryConfLine if AccountPlanID is updated
+    $q = "SELECT * FROM salaryconf WHERE AccountPlanID = ". $_POST["salary_AccountPlanID_". $SalaryID]." LIMIT 1";
+    $salaryConf = $_lib['storage']->get_row(array('query' => $q));
+    $_POST["salary_SalaryConfID_". $SalaryID] = $salaryConf->SalaryConfID;
+  }
+
+  if (!$_lib['input']->getProperty('action_salary_new') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'.$SalaryID])) {
+    $work_relation_query = "SELECT * FROM workrelation WHERE WorkRelationID = '".$_POST['salary_WorkRelationID_'.$SalaryID]."'";
+    $work_relation = $_lib['storage']->get_row(array('query' => $work_relation_query));
+    $_POST['salary_ShiftType_'.$SalaryID]              = $work_relation->ShiftType;
+    $_POST['salary_WorkTimeScheme_'.$SalaryID]         = $work_relation->WorkTimeScheme;
+    $_POST['salary_TypeOfEmployment_'.$SalaryID]       = $work_relation->TypeOfEmployment;
+    $_POST['salary_OccupationID_'.$SalaryID]           = $work_relation->OccupationID;
+    $_POST['salary_SubcompanyID_'.$SalaryID]           = $work_relation->SubcompanyID;
+    $_POST['salary_WorkStart_'.$SalaryID]              = $work_relation->WorkStart;
+    $_POST['salary_WorkStop_'.$SalaryID]               = $work_relation->WorkStop;
+    $_POST['salary_InCurrentPositionSince_'.$SalaryID] = $work_relation->InCurrentPositionSince;
+    $_POST['salary_WorkPercent_'.$SalaryID]            = $work_relation->WorkPercent;
+    $_POST['salary_WorkPercentUpdatedAt_'.$SalaryID]   = $work_relation->WorkPercentUpdatedAt;
+    $_POST['salary_WorkMeasurement_'.$SalaryID]        = $work_relation->WorkMeasurement;
+    $_POST['salary_SalaryDateChangedAt_'.$SalaryID]    = $work_relation->SalaryDateChangedAt;
+  }
+
+  $_lib['storage']->db_update_multi_table($_POST, $tables);
+}
+
 function CheckIfWorkRelationChanged($SalaryID, $WorkRelationID) {
   global $_lib;
   $Changed = false;
@@ -606,296 +885,6 @@ elseif($_lib['input']->getProperty('action_salary_internal')) {
 }
 
 if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new')){
-  function salary_update($SalaryID, $SalaryConfID) {
-  global $_lib;
-  global $accounting;
-  global $lineInFrom;
-  global $lineInTo;
-  global $lineOutFrom;
-  global $lineOutTo;
-
-  $SalaryLineIDs = array();
-  $SalaryLinesCount = $_REQUEST["fieldcount"];
-  for ($i = 1; $i <= $SalaryLinesCount; $i++) { $SalaryLineIDs[] = $_REQUEST[$i]; }
-
-  if (!($_lib['input']->getProperty('action_salary_new')) && CheckIfAnythingChanged($SalaryID, $SalaryLineIDs)) {
-    // set who updated and when if anything changed
-    $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
-    $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
-
-    // To show history of changed salaries on altinn salary page
-    $update_query = "UPDATE
-      altinnReport1salary AS ars
-    JOIN
-      altinnReport1 AS ar
-      ON ars.AltinnReport1ID = ar.AltinnReport1ID
-    SET
-      Changed = '1'
-    WHERE
-      ReplacedByMeldindsID IS NULL AND
-      SalaryId = '".$SalaryID."';";
-    $_lib['db']->db_query($update_query);
-  }
-  if ($_lib['input']->getProperty('action_salary_new') || ($_lib['input']->getProperty('action_salary_journal') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'. $SalaryID]))) {
-    // set who updated altinn fields
-    $_POST["salary_AltinnFieldsUpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
-    $_POST["salary_AltinnFieldsUpdatedAt_".$SalaryID] = strftime("%F %T");
-  }
-
-  // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
-  if ($_lib['input']->getProperty('action_salary_new')) {
-    $_POST['SalaryID'] = $SalaryID;
-
-    $query="select * from salary where SalaryID=".$_POST['SalaryID'];
-    $row = $_lib['storage']->get_row(array('query' => $query));
-    $_POST['salary_JournalDate_'.$SalaryID] = $row->JournalDate;
-    $_POST['salary_Period_'.$SalaryID] = $row->Period;
-    $_POST['AccountPlanID'] = $_POST['salary_AccountPlanID_'.$SalaryID] = $row->AccountPlanID;
-    $_POST['salary_ValidFrom_'.$SalaryID] = $row->ValidFrom;
-    $_POST['salary_ValidTo_'.$SalaryID] = $row->ValidTo;
-    $_POST['salary_PayDate_'.$SalaryID] = $row->PayDate;
-    $_POST['salary_DomesticBankAccount_'.$SalaryID] = $row->DomesticBankAccount;
-    $_POST['salary_Comment_'.$SalaryID] = $row->Comment;
-    $_POST['salary_InternComment_'.$SalaryID] = $row->InternComment;
-    $_POST['salary_VacationPayment_'.$SalaryID] = $row->VacationPayment;
-    // set who updated salary
-    $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
-    $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
-
-    $query="select count(*) as fieldcount from salaryline where SalaryID=".$_POST['SalaryID'];
-    $row = $_lib['storage']->get_row(array('query' => $query));
-    $_POST['fieldcount'] = $row->fieldcount;
-
-    $query="select * from salaryline where SalaryID=".$_POST['SalaryID'];
-    $result=$_lib['db']->db_query($query);
-    $icount = 0;
-    while ($row = $_lib['db']->db_fetch_object($result)) {
-      $i++;
-      //echo "row"; var_dump($row);
-      $_POST[$i] = $row->SalaryLineID;
-      $_POST['salaryline_LineNumber_'.$row->SalaryLineID] = $row->LineNumber;
-      $_POST['salaryline_NumberInPeriod_'.$row->SalaryLineID] = $row->NumberInPeriod;
-      $_POST['salaryline_Rate_'.$row->SalaryLineID] = $row->Rate;
-      $_POST['salaryline_AmountThisPeriod_'.$row->SalaryLineID] = $row->AmountThisPeriod;
-      $_POST['EnableVacationPayment_'.$row->SalaryLineID] = $row->EnableVacationPayment;
-      $_POST['EnableEmployeeTax_'.$row->SalaryLineID] = $row->EnableEmployeeTax;
-      $_POST['MandatoryTaxSubtraction_'.$row->SalaryLineID] = $row->MandatoryTaxSubtraction;
-      $_POST['SendToAltinn_'.$row->SalaryLineID] = $row->SendToAltinn;
-      $_POST['Fordel_'.$row->SalaryLineID] = $row->Fordel;
-    }
-  }
-  ################################################################
-  #First save the content of the forms
-  $counter = $_POST['fieldcount'];
-
-  $tables['salary']     = 'SalaryID';
-  $tables['salaryline'] = 'SalaryLineID';
-
-  if( ($_POST['salary_DomesticBankAccount_'.$SalaryID] == 0) || ($_POST['salary_DomesticBankAccount_'.$SalaryID] == "") )
-  {
-    $query="select DomesticBankAccount from accountplan where AccountPlanID=".$_POST['AccountPlanID'];
-    $row = $_lib['storage']->get_row(array('query' => $query));
-    $_POST['salary_DomesticBankAccount_'.$SalaryID] = $row->DomesticBankAccount;
-
-    $_lib['sess']->debug($query);
-  }
-
-  $accountplanid = $_POST['AccountPlanID'];
-  unset($_POST['AccountPlanID']);
-
-  $sumTotal = 0;
-  for($i=1; $i<=$counter; $i++)
-  {
-      $lineID = $_POST[$i];
-      $AmountThisPeriod = $_POST['salaryline_AmountThisPeriod_'.$lineID];
-      $ValueHash = $_lib['convert']->Amount(array('value'=>$AmountThisPeriod));
-      $AmountThisPeriod = $ValueHash['value'];
-      $NumberInPeriod = $_POST['salaryline_NumberInPeriod_'.$lineID];
-      $ValueHash = $_lib['convert']->Amount(array('value'=>$NumberInPeriod));
-      $NumberInPeriod = $ValueHash['value'];
-      $Rate = $_POST['salaryline_Rate_'.$lineID];
-      $ValueHash = $_lib['convert']->Amount(array('value'=>$Rate));
-      $Rate = $ValueHash['value'];
-      if( ($_POST['salaryline_AmountThisPeriod_'.$lineID] == "") || ($_POST['salaryline_AmountThisPeriod_'.$lineID] == 0) )
-      {
-          $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_NumberInPeriod_'.$lineID]));
-          $tmpvalue1 = $hash['value'];
-
-          $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_Rate_'.$lineID]));
-          $tmpvalue2 = $hash['value'];
-
-          $_POST['salaryline_AmountThisPeriod_'.$lineID] = ($tmpvalue1 * $tmpvalue2);
-      }
-      elseif(($AmountThisPeriod != ($NumberInPeriod * $Rate) && !isset($_POST['floor_'.$lineID])) || (isset($_POST['floor_'.$lineID]) && (floor($AmountThisPeriod) != floor($NumberInPeriod * $Rate))))
-      {
-          $message = "<font color=\"red\">OBS! Feil utregning.</font>";
-      }
-
-      $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_AmountThisPeriod_'.$lineID]));
-      $_POST['salaryline_AmountThisPeriod_'.$lineID] = (isset($_POST['floor_'.$lineID])) ? floor($hash['value']) : $hash['value'];
-
-      if( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineInFrom) and ($_POST['salaryline_LineNumber_'.$lineID] < $lineInTo) )
-      {
-        $sumTotal += $_POST['salaryline_AmountThisPeriod_'.$lineID];
-      }
-      elseif( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineOutFrom) and ($_POST['salaryline_LineNumber_'.$lineID] <= $lineOutTo) )
-      {
-        $sumTotal -= $_POST['salaryline_AmountThisPeriod_'.$lineID];
-      }
-      if($_POST['salaryline_LineNumber_'.$lineID] == 100)
-      {
-        $_POST['salaryline_AccountPlanID_'.$lineID] = $_POST['salary_AccountPlanID_'.$_POST['SalaryID']];
-      }
-
-	  if($_POST['EnableVacationPayment_'.$lineID] == 1) {
-	  	#print "Feriepengerja<br>";
-	  	$VacationPayment += $_POST['salaryline_AmountThisPeriod_'.$lineID];
-	  }
-
-      unset($_POST[$i]);
-  }
-  unset($_POST['fieldcount']);
-
-  #$_POST['salary_VacationPayment_'.$SalaryID]           = $VacationPayment; 
-  $_POST['salary_AmountThisPeriod_'.$_POST['SalaryID']] = $sumTotal;
-
-  if(CheckIfAccountPlanChanged($SalaryID)){
-    // Update SalaryConfLine if AccountPlanID is updated
-    $q = "SELECT * FROM salaryconf WHERE AccountPlanID = ". $_POST["salary_AccountPlanID_". $SalaryID]." LIMIT 1";
-    $salaryConf = $_lib['storage']->get_row(array('query' => $q));
-    $_POST["salary_SalaryConfID_". $SalaryID] = $salaryConf->SalaryConfID;
-  }
-
-  if (!$_lib['input']->getProperty('action_salary_new') && CheckIfWorkRelationChanged($SalaryID, $_POST['salary_WorkRelationID_'.$SalaryID])) {
-    $work_relation_query = "SELECT * FROM workrelation WHERE WorkRelationID = '".$_POST['salary_WorkRelationID_'.$SalaryID]."'";
-    $work_relation = $_lib['storage']->get_row(array('query' => $work_relation_query));
-    $_POST['salary_ShiftType_'.$SalaryID]              = $work_relation->ShiftType;
-    $_POST['salary_WorkTimeScheme_'.$SalaryID]         = $work_relation->WorkTimeScheme;
-    $_POST['salary_TypeOfEmployment_'.$SalaryID]       = $work_relation->TypeOfEmployment;
-    $_POST['salary_OccupationID_'.$SalaryID]           = $work_relation->OccupationID;
-    $_POST['salary_SubcompanyID_'.$SalaryID]           = $work_relation->SubcompanyID;
-    $_POST['salary_WorkStart_'.$SalaryID]              = $work_relation->WorkStart;
-    $_POST['salary_WorkStop_'.$SalaryID]               = $work_relation->WorkStop;
-    $_POST['salary_InCurrentPositionSince_'.$SalaryID] = $work_relation->InCurrentPositionSince;
-    $_POST['salary_WorkPercent_'.$SalaryID]            = $work_relation->WorkPercent;
-    $_POST['salary_WorkPercentUpdatedAt_'.$SalaryID]   = $work_relation->WorkPercentUpdatedAt;
-    $_POST['salary_WorkMeasurement_'.$SalaryID]        = $work_relation->WorkMeasurement;
-    $_POST['salary_SalaryDateChangedAt_'.$SalaryID]    = $work_relation->SalaryDateChangedAt;
-  }
-
-  #print_r($_POST);
-  $_lib['storage']->db_update_multi_table($_POST, $tables);
-
-  }
-
-  function salary_journal($SalaryID) {
-  global $_lib;
-  global $accounting;
-  global $lineInFrom;
-  global $lineInTo;
-  global $lineOutFrom;
-  global $lineOutTo;
-
-  ################################################################
-  #Get head and lines
-  $query_salary         = "select * from salary where SalaryID = '$SalaryID'";
-  $result_salary        = $_lib['db']->db_query($query_salary);
-  $salary               = $_lib['db']->db_fetch_object($result_salary);
-
-  $query_salaryline     = "select * from salaryline where SalaryID = '$SalaryID'";
-  $result_salaryline    = $_lib['db']->db_query($query_salaryline);
-
-  $query_salaryline_sumtotal = "SELECT SUM( IF(LineNumber >= $lineInFrom AND LineNumber < $lineInTo, AmountThisPeriod, IF( LineNumber >= $lineOutFrom AND LineNumber <= $lineOutTo, -AmountThisPeriod, 0)) ) as sumTotal FROM salaryline WHERE SalaryID = '$SalaryID'";
-  $result_salaryline_sumtotal = $_lib['db']->db_query($query_salaryline_sumtotal);
-
-  ################################################################
-  #Then calcultate the different lines hittil i Œr, and update the fields
-  #Find first period this year
-  if(!$salary->PayDate)
-  {
-    $_lib['sess']->error("Pay date is required");
-    print "Pay date is required";
-    exit;
-  }
-
-  /* start accounting */
-
-  ################################################################
-  #Get or update journal id
-  $VoucherType = 'L';
-  if($salary->JournalID)
-  {
-      includelogic('postmotpost/postmotpost');
-      $postmotpost = new postmotpost(array());
-      $postmotpost->openPostJournal($salary->JournalID, $VoucherType);
-  
-      #Delete old accounting and insert new
-      $accounting->delete_journal($salary->JournalID, $VoucherType);
-  }
-
-  ################################################################
-  #Insert salary lines as voucher for this employee
-  $result_salaryline    = $_lib['db']->db_query($query_salaryline);
-  
-  $fields = array();
-  $fields['voucher_JournalID']       = $salary->JournalID;
-  $fields['voucher_Reference']       = $salary->JournalID;
-  $fields['voucher_VoucherPeriod']   = $salary->Period;
-  $fields['voucher_VoucherDate']     = $salary->JournalDate;
-  $fields['voucher_DueDate']         = $salary->PayDate;
-  $fields['voucher_Active']          = 1;
-  $fields['voucher_AutomaticReason'] = "L&oslash;nnsslipp: $SalaryID, Ansatt: $salary->AccountPlanID ";
-  $fields['voucher_Description']     = 'Periode: ' . $salary->Period . ' ansatt: ' . $salary->AccountPlanID;
-  $fields['voucher_InvoiceID']       = $VoucherType . $salary->JournalID;
-
-  unset($fields['voucher_AmountIn']);
-  unset($fields['voucher_AmountOut']);
-
-  $sumTotal = $_lib['db']->db_fetch_object($result_salaryline_sumtotal)->sumTotal;
-
-  if($sumTotal >= 0)
-    $fields['voucher_AmountIn'] = $sumTotal;
-  else
-    $fields['voucher_AmountOut'] = -$sumTotal;
-
-  $VoucherID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$salary->AccountPlanID, 'type'=>'reskontro', 'VoucherType'=>$VoucherType));
-
-  #Update hovedbokskonto for this postering, it may have changed
-  $tmp = $fields['voucher_AmountIn'];
-  $fields['voucher_AmountIn'] 		= $fields['voucher_AmountOut'];
-  $fields['voucher_AmountOut']		= $tmp;
-  $fields['voucher_VoucherType'] 	= $VoucherType;
-
-  while($salaryline = $_lib['db']->db_fetch_object($result_salaryline))
-  {
-    unset($fields['voucher_AmountIn']);
-    unset($fields['voucher_AmountOut']);
-    # DO not isernt poseringer with 0 value
-    if($salaryline->AmountThisPeriod != 0)
-    {
-      if( ($salaryline->LineNumber >= $lineInFrom) and ($salaryline->LineNumber < $lineInTo) )
-      {
-        $fields['voucher_AmountIn'] 	= $salaryline->AmountThisPeriod;
-      }
-      elseif( ($salaryline->LineNumber >= $lineOutFrom) and ($salaryline->LineNumber <= $lineOutTo) )
-      {
-        $fields['voucher_AmountOut'] 	= $salaryline->AmountThisPeriod;
-      }
-      $fields['voucher_ProjectID']      = $salaryline->ProjectID;
-      $fields['voucher_DepartmentID']   = $salaryline->DepartmentID;
-      $account = $salaryline->AccountPlanID;
-      #print "insert voucherline<br>\n";
-      if ($salaryline->LineNumber == 100) $fields['voucher_InvoiceID'] .= "-F";
-      $tmpID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$account, 'VoucherType'=>$VoucherType));
-    }
-  }
-
-  $fields['voucher_AccountPlanID'] = $account;
-
-  $accounting->correct_journal_balance($fields, $salary->JournalID, $VoucherType);
-  $accounting->set_journal_motkonto(array('post'=>$fields, 'VoucherType'=>$VoucherType));
-  }
-
   salary_update($SalaryID, $SalaryConfID);
   salary_journal($SalaryID);
 }
