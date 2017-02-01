@@ -606,6 +606,14 @@ elseif($_lib['input']->getProperty('action_salary_internal')) {
 }
 
 if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new')){
+  function salary_update($SalaryID, $SalaryConfID) {
+  global $_lib;
+  global $accounting;
+  global $lineInFrom;
+  global $lineInTo;
+  global $lineOutFrom;
+  global $lineOutTo;
+
   $SalaryLineIDs = array();
   $SalaryLinesCount = $_REQUEST["fieldcount"];
   for ($i = 1; $i <= $SalaryLinesCount; $i++) { $SalaryLineIDs[] = $_REQUEST[$i]; }
@@ -744,10 +752,6 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
 	  	$VacationPayment += $_POST['salaryline_AmountThisPeriod_'.$lineID];
 	  }
 
-      /*$query = "select sum(AmountThisPeriod) as sum from salaryline where SalaryID=".$_REQUEST['SalaryID']." and LineNumber=".$_POST['salaryline_LineNumber_'.$lineID];
-      $sum = $_lib['storage']->get_row(array('query' => $query));
-      $_POST['salaryline_AmountThisYear_'.$lineID] = $sum->sum;*/
-
       unset($_POST[$i]);
   }
   unset($_POST['fieldcount']);
@@ -782,14 +786,27 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
   #print_r($_POST);
   $_lib['storage']->db_update_multi_table($_POST, $tables);
 
+  }
+
+  function salary_journal($SalaryID) {
+  global $_lib;
+  global $accounting;
+  global $lineInFrom;
+  global $lineInTo;
+  global $lineOutFrom;
+  global $lineOutTo;
+
   ################################################################
-  #Get had and lines
+  #Get head and lines
   $query_salary         = "select * from salary where SalaryID = '$SalaryID'";
   $result_salary        = $_lib['db']->db_query($query_salary);
   $salary               = $_lib['db']->db_fetch_object($result_salary);
 
   $query_salaryline     = "select * from salaryline where SalaryID = '$SalaryID'";
   $result_salaryline    = $_lib['db']->db_query($query_salaryline);
+
+  $query_salaryline_sumtotal = "SELECT SUM( IF(LineNumber >= $lineInFrom AND LineNumber < $lineInTo, AmountThisPeriod, IF( LineNumber >= $lineOutFrom AND LineNumber <= $lineOutTo, -AmountThisPeriod, 0)) ) as sumTotal FROM salaryline WHERE SalaryID = '$SalaryID'";
+  $result_salaryline_sumtotal = $_lib['db']->db_query($query_salaryline_sumtotal);
 
   ################################################################
   #Then calcultate the different lines hittil i Œr, and update the fields
@@ -800,51 +817,25 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
     print "Pay date is required";
     exit;
   }
-  /*$first_period = $_lib['date']->get_this_year($salary->PayDate) . "-01";
-  while($salaryline = $_lib['db']->db_fetch_object($result_salaryline))
-  {
-    $query_account  = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from voucher where AccountPlanID = '$salaryline->AccountPlanID' and Description = '$salary->AccountPlanID' and VoucherPeriod >= '$first_period' and VoucherPeriod <= '$salary->Period' group by AccountPlanID";
-    #print "$query_account<br>";
-    $result_account = $_lib['db']->db_query($query_account);
-    $account        = $_lib['db']->db_fetch_object($result_account);
-
-    $pksalary['SalaryLineID']                  = $salaryline->SalaryLineID;
-    $fieldssalary['salaryline_AmountThisYear'] = abs($account->sumin - $account->sumout);
-    //print_r($fieldssalary);
-    //print_r($pksalary);
-    $_lib['db']->db_update_hash($fieldssalary, 'salaryline', $pksalary);
-  }*/
 
   /* start accounting */
 
-    #print "Bilagsnummer: $salary->JournalID<br>\n";
+  ################################################################
+  #Get or update journal id
+  $VoucherType = 'L';
+  if($salary->JournalID)
+  {
+      includelogic('postmotpost/postmotpost');
+      $postmotpost = new postmotpost(array());
+      $postmotpost->openPostJournal($salary->JournalID, $VoucherType);
+  
+      #Delete old accounting and insert new
+      $accounting->delete_journal($salary->JournalID, $VoucherType);
+  }
 
-    ################################################################
-    #Get or update journal id
-    $VoucherType = 'L';
-    if($salary->JournalID)
-    {
-        includelogic('postmotpost/postmotpost');
-        $postmotpost = new postmotpost(array());
-        $postmotpost->openPostJournal($salary->JournalID, $VoucherType);
-    
-        #Delete old accounting and insert new
-        $accounting->delete_journal($salary->JournalID, $VoucherType);
-    }
-    /*else
-    {
-      #Get a new available journal id
-      list($JournalID, $message) = $accounting->get_next_available_journalid($_sess, array('available' => true, 'update' => true, 'type' => $VoucherType));
-  
-      #Update journal id on salary
-      $pk['SalaryID']                     = $SalaryID;
-      $salaryfield['salary_JournalID']    = $JournalID;
-      $_lib['storage']->db_update_hash($salaryfield, 'salary', $pk);
-    }*/
-  
-    ################################################################
-    #Insert salary lines as voucher for this employee
-    $result_salaryline    = $_lib['db']->db_query($query_salaryline);
+  ################################################################
+  #Insert salary lines as voucher for this employee
+  $result_salaryline    = $_lib['db']->db_query($query_salaryline);
   
   $fields = array();
   $fields['voucher_JournalID']       = $salary->JournalID;
@@ -860,12 +851,12 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
   unset($fields['voucher_AmountIn']);
   unset($fields['voucher_AmountOut']);
 
+  $sumTotal = $_lib['db']->db_fetch_object($result_salaryline_sumtotal)->sumTotal;
+
   if($sumTotal >= 0)
     $fields['voucher_AmountIn'] = $sumTotal;
   else
     $fields['voucher_AmountOut'] = -$sumTotal;
-
-  //print_r($fields);
 
   $VoucherID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$salary->AccountPlanID, 'type'=>'reskontro', 'VoucherType'=>$VoucherType));
 
@@ -874,12 +865,6 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
   $fields['voucher_AmountIn'] 		= $fields['voucher_AmountOut'];
   $fields['voucher_AmountOut']		= $tmp;
   $fields['voucher_VoucherType'] 	= $VoucherType;
-  #$accounting->voucher_to_hovedbok_auto($salary->AccountPlanID, $fields, $VoucherID);
-
-  #print_r($salary);
-  #print_r($fields);
-  unset($fields['voucher_AmountIn']);
-  unset($fields['voucher_AmountOut']);
 
   while($salaryline = $_lib['db']->db_fetch_object($result_salaryline))
   {
@@ -902,20 +887,17 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
       #print "insert voucherline<br>\n";
       if ($salaryline->LineNumber == 100) $fields['voucher_InvoiceID'] .= "-F";
       $tmpID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$account, 'VoucherType'=>$VoucherType));
-
-      #Update hovedbokskonto for this postering, it may have changed
-      #$fields['voucher_VoucherType'] = $VoucherType;
-      #$accounting->voucher_to_hovedbok_auto($account, $fields, $tmpID);
     }
   }
 
   $fields['voucher_AccountPlanID'] = $account;
 
-  #print "insert voucherline5<br>\n";
   $accounting->correct_journal_balance($fields, $salary->JournalID, $VoucherType);
-
-  #print "insert voucherline10<br>\n";
   $accounting->set_journal_motkonto(array('post'=>$fields, 'VoucherType'=>$VoucherType));
+  }
+
+  salary_update($SalaryID, $SalaryConfID);
+  salary_journal($SalaryID);
 }
 
 
