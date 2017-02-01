@@ -460,6 +460,7 @@ elseif($_lib['input']->getProperty('action_salaryline_new'))
     // set who updated and when, since we added a line
     $sql_update = "UPDATE salary SET UpdatedAt = NOW(), UpdatedBy = '" . $_lib['sess']->get_person('PersonID') . "' WHERE SalaryID = '$SalaryID'";
     $_lib['db']->db_update($sql_update);
+    salary_journal($SalaryID);
 }
 elseif($_lib['input']->getProperty('action_defconf_save'))
 {
@@ -898,6 +899,7 @@ elseif($_lib['input']->getProperty('action_salaryline_delete'))
     // set who updated and when, since we removed a line
     $sql_update = "UPDATE salary SET UpdatedAt = NOW(), UpdatedBy = '" . $_lib['sess']->get_person('PersonID') . "' WHERE SalaryID = '$SalaryID'";
     $_lib['db']->db_update($sql_update);
+    salary_journal($SalaryID);
 }
 elseif($_lib['input']->getProperty('action_salaryconfline_delete'))
 {
