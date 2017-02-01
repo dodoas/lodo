@@ -711,12 +711,19 @@ class altinn_report {
           self::checkIfEmpty($car->OfficalPrice, 'Bil: Listepris er ikke satt p&aring; bil id ' . $salary_line->FreeCarID, "number");
           $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['listeprisForBil'] = $car->OfficalPrice;
 
-          // Error is: Car registration no is not set for car id' . $salary_line->FreeCarID;
-          self::checkIfEmpty($car->CarCode, 'Bil: Registerings nr er ikke satt p&aring; bil id ' . $salary_line->FreeCarID);
-          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['bilregistreringsnummer'] = $car->CarCode;
+          // If the car is in a car pool you don't have a registration number because
+          // you have a car renting program and different car depending on whats
+          // available.
+          if ($salary_line->Carpool) {
+            // erBilpool, is car pool, it is allways set, 99% for false, default value in db
+            $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['erBilpool'] = 'true';
+          } else {
+            // if it isn't a car pool you must have a registration number
+            // Error is: Car registration number is not set for car id' . $salary_line->FreeCarID;
+            self::checkIfEmpty($car->CarCode, 'Bil: Registerings nr er ikke satt p&aring; bil id ' . $salary_line->FreeCarID);
+            $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['bilregistreringsnummer'] = $car->CarCode;
+          }
 
-          // erBilpool, is car pool, it is allways set, 99% for false, default value in db
-          $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['erBilpool'] = $salary_line->Carpool ? 'true' : 'false';
         }
         // there can be multiple entries for one salary so we add to an array
         $inntekt_tmp[] = $inntekt;
