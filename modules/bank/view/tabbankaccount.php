@@ -636,7 +636,7 @@ if(is_array($bank->bankaccount)) {
          } ?></td>
         <td class="<?=$BankHiglightClass?>">
         <? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment || !empty($reskontroaccountplan) && $reskontroaccountplan->EnableDepartment) {
-          array(
+          $department_menu_conf = array(
             'table' => 'accountline',
             'field' => 'DepartmentID',
             'pk' => $row->AccountLineID,

@@ -96,6 +96,10 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     <td><? $_lib['form2']->checkbox2($db_table, "EnableQuantity", $account->EnableQuantity,'') ?></td>
   </tr>
   <tr>
+    <td class="menu">Bil</td>
+    <td><? $_lib['form2']->checkbox2($db_table, "EnableCar",$account->EnableCar,'') ?> Default: <? $_lib['form2']->car_menu2(array('table' => $db_table,  'field' =>  'CarID',  'value' =>  $account->CarID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?></td>
+  </tr>
+  <tr>
     <td class="menu">Prosjekt</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableProject",$account->EnableProject,'') ?> Default: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?>
   </tr>

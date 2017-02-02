@@ -13,7 +13,11 @@ if(!$AccountPlanID && $AccountPlanType) {
 
 if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->getProperty('action_accountplan_updateautomatic'))
 {
-    // Allow unsetting a Department
+    // Allow unsetting a Car
+    if (($_POST['accountplantemplate_CarID']) === "unset") {
+        $_POST['accountplantemplate_CarID'] = DB_NULL_PLACEHOLDER;
+    }
+     // Allow unsetting a Department
     if (($_POST['accountplantemplate_DepartmentID']) === "unset") {
         $_POST['accountplantemplate_DepartmentID'] = DB_NULL_PLACEHOLDER;
     }
