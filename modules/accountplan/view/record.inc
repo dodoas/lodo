@@ -59,6 +59,28 @@ function clean_org_number($orgnr) {
     return preg_replace('/\s/', '', $orgnr);
 }
 
+// updates OrgNumber and VatNumber from firmaids
+function update_orgnr_vat_from_firmaid() {
+    global $_lib;
+
+    $q_orgnr = "UPDATE accountplan ap
+                LEFT JOIN accountplanscheme aps
+                  ON ap.AccountPlanID = aps.AccountPlanID AND
+                     aps.FakturabankSchemeID = (SELECT FakturabankSchemeID from fakturabankscheme WHERE SchemeType = 'NO:ORGNR')
+                SET ap.OrgNumber = aps.SchemeValue
+                WHERE ap.AccountPlanID = '". $_POST["accountplan_AccountPlanID"] ."';";
+
+    $q_vat = "UPDATE accountplan ap
+              LEFT JOIN accountplanscheme aps
+                ON ap.AccountPlanID = aps.AccountPlanID AND
+                   aps.FakturabankSchemeID = (SELECT FakturabankSchemeID from fakturabankscheme WHERE SchemeType = 'NO:VAT')
+              SET ap.VatNumber = aps.SchemeValue
+              WHERE ap.AccountPlanID = '". $_POST["accountplan_AccountPlanID"] ."';";
+
+    $_lib['db']->db_query($q_orgnr);
+    $_lib['db']->db_query($q_vat);
+}
+
 if(!$AccountPlanID && $AccountPlanType) {
     // If accountplan id is not given - we make a new one by max old + 1
     $query_accountplan    = "select max(AccountPlanID)+1 as AccountPlanID from accountplan where AccountPlanType = '$AccountPlanType'";
@@ -324,6 +346,7 @@ elseif($_lib['input']->getProperty('action_del_scheme')) {
         $query = sprintf("delete from accountplanscheme where AccountPlanSchemeID = %d", $id);
         $_lib['db']->db_query($query);
     }
+    update_orgnr_vat_from_firmaid();
 }
 elseif($_lib['input']->getProperty('action_save_scheme')) {
     foreach($_POST as $key => $value) {
@@ -331,6 +354,7 @@ elseif($_lib['input']->getProperty('action_save_scheme')) {
       if (strpos($key, 'accountplanscheme_SchemeValue') !== false) $_POST[$key] = str_replace(' ', '', $_POST[$key]);
     }
     $_lib['storage']->db_update_multi_table($_POST, array('accountplanscheme' => 'AccountPlanSchemeID'));
+    update_orgnr_vat_from_firmaid();
 }
 elseif($_lib['input']->getProperty('action_refresh_sheme')) {
   $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
