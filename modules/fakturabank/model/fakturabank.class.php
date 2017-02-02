@@ -732,6 +732,54 @@ class lodo_fakturabank_fakturabank {
         return $invoicesO;
     }
 
+    private function extractLineAccountingCost(&$line, &$InvoiceO) { 
+      global $_lib;
+      includelogic("car/car");
+      if ($line->AccountingCost) {
+        $acc_cost_params = explode(";", $line->AccountingCost);
+        foreach($acc_cost_params as $param) {
+          list($key, $value) = explode("=", $param);
+          if ($key == 'Bil') { // CarID info
+            $query = "select * from car where CarCode='" . $value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
+            $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+            if($carexists) {
+              $line->CarID   = $carexists->CarID;
+              $line->CarCode = $carexists->CarCode;
+            }
+            else {
+              $InvoiceO->Status .= "Bil: " . $value . " eksisterer ikke. ";
+              $InvoiceO->Journal = false;
+              $InvoiceO->Class   = 'red';
+            }
+          }
+          if ($key == 'Avd') { // DepartmentID info
+            $query = "select * from companydepartment where CompanyDepartmentID='" . $value . "'";
+            $department_exists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+            if($department_exists) {
+              $line->DepartmentID = $department_exists->CompanyDepartmentID;
+            }
+            else {
+              $InvoiceO->Status .= "Avdeling: " . $value . " eksisterer ikke. ";
+              $InvoiceO->Journal = false;
+              $InvoiceO->Class   = 'red';
+            }
+          }
+          if ($key == 'Prosj') { // ProjectID info
+            $query = "select * from project where ProjectID='" . $value . "'";
+            $project_exists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+            if($project_exists) {
+              $line->ProjectID = $project_exists->ProjectID;
+            }
+            else {
+              $InvoiceO->Status .= "Prosjekt: " . $value . " eksisterer ikke. ";
+              $InvoiceO->Journal = false;
+              $InvoiceO->Class   = 'red';
+            }
+          }
+        }
+      }
+    }
+
     private function extractIncomingAccountingCost(&$InvoiceO) {
         // we support using ; instead of &
         parse_str(str_replace(";", "&", $InvoiceO->AccountingCost), $acc_cost_params);
@@ -1000,28 +1048,7 @@ class lodo_fakturabank_fakturabank {
                     }
                   }
 
-                  if ($line->Item->AdditionalItemProperty) {
-                    if(!is_array($line->Item->AdditionalItemProperty)) {
-                      $line->Item->AdditionalItemProperty = array($line->Item->AdditionalItemProperty);
-                    }
-                    includelogic("car/car");
-                    foreach($line->Item->AdditionalItemProperty as $additional_item_property) {
-                      if ($additional_item_property->Name == 'Car') {
-                        $query = "select * from car where CarCode='" . $additional_item_property->Value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
-                        $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
-                        if($carexists) {
-                          $line->Item->CarID   = $carexists->CarID;
-                          $line->Item->CarCode = $carexists->CarCode;
-                        }
-                        else {
-                          $InvoiceO->Status .= "Bil: " . $additional_item_property->Value . " eksisterer ikke. ";
-                          $InvoiceO->Journal = false;
-                          $InvoiceO->Class   = 'red';
-                        }
-                      }
-                    }
-                  }
-
+                  $this->extractLineAccountingCost($line, $InvoiceO);
                 }
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
@@ -1557,7 +1584,9 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['LineNum']           = $LineNum;
                         $datalineH['ProductName']       = $line->Item->Name;
                         $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
-                        $datalineH['CarID']             = $line->Item->CarID;
+                        $datalineH['CarID']             = $line->CarID;
+                        $datalineH['DepartmentID']      = $line->DepartmentID;
+                        $datalineH['ProjectID']         = $line->ProjectID;
                         $datalineH['Comment']           = $line->Item->Description;
                         $datalineH['QuantityOrdered']   = $Quantity;
                         $datalineH['QuantityDelivered'] = $Quantity;

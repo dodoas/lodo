@@ -985,8 +985,6 @@ class invoice {
         $fields['voucher_ExternalID']     = $this->headH['ExternalID'];
         $fields['voucher_KID']            = $this->headH['KID'];
         $fields['voucher_InvoiceID']      = $this->InvoiceID;
-        $fields['voucher_ProjectID']      = $this->headH['ProjectID'];
-        $fields['voucher_DepartmentID']   = $this->headH['DepartmentID'];
         $fields['voucher_VoucherPeriod']  = $this->headH['Period'];
         $fields['voucher_VoucherDate']    = $this->headH['InvoiceDate'];
         $fields['voucher_VoucherType']    = $this->VoucherType;
@@ -1029,6 +1027,7 @@ class invoice {
 
             $query = "select ProductID, ProductName, AccountPlanID, CompanyDepartmentID, ProjectID from product where productID=".$row->ProductID;
             $productRow = $_lib['storage']->get_row(array('query' => $query));
+            $productAccountPlan = $accounting->get_accountplan_object($productRow->AccountPlanID);
             #print_r($productRow);
 
             $fieldsline['voucher_AutomaticReason']  = "Faktura: $this->JournalID";
@@ -1060,15 +1059,20 @@ class invoice {
             $fieldsline['voucher_VatID']            = $row->VatID;
             $fieldsline['voucher_Vat']              = $row->Vat;
 
+            // If value(department/project) sent use that, othewise use defaults from product's accountplan (if set and enabled)
             if(isset($this->headH['DepartmentID']) && $this->headH['DepartmentID'] > 0)
                 $fieldsline['voucher_DepartmentID']     = $this->headH['DepartmentID'];
+            elseif ($productAccountPlan->EnableDepartment == 1 && isset($productAccountPlan->DepartmentID))
+                $fieldsline['voucher_DepartmentID']     = $productAccountPlan->DepartmentID;
             else
-                $fieldsline['voucher_DepartmentID']     = $productRow->CompanyDepartmentID;
+                unset($fieldsline['voucher_DepartmentID']);
 
             if(isset($this->headH['ProjectID']) && $this->headH['ProjectID'] > 0)
                 $fieldsline['voucher_ProjectID']        = $this->headH['ProjectID'];
+            elseif ($productAccountPlan->EnableProject == 1 && isset($productAccountPlan->ProjectID))
+                $fieldsline['voucher_ProjectID']        = $productAccountPlan->ProjectID;
             else
-                $fieldsline['voucher_ProjectID']        = $productRow->ProjectID;
+                unset($fieldsline['voucher_ProjectID']);
 
             $fieldsline['voucher_Description']      = $this->headH['CommentCustomer']; # Take the description from the head to each line. $row->Comment;
             $fieldsline['voucher_VoucherText']      = $row->ProductID;
