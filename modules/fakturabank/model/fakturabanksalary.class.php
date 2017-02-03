@@ -217,7 +217,7 @@ class lodo_fakturabank_fakturabanksalary {
         $xml_content .= "<employee_number>" . $head->AccountPlanID . "</employee_number>\n";
 		$xml_content .= "<first_name>" . $head->FirstName . "</first_name>\n";
 		$xml_content .= "<last_name>" . $head->LastName . "</last_name>\n";
-        $xml_content .= "<scheme>FAKTURABANK:EMAIL</scheme>\n";
+        $xml_content .= "<scheme>NO:EMAIL</scheme>\n";
         $xml_content .= "<identifier>" . $head->FakturabankEmail . "</identifier>\n";
         $xml_content .= "<official_id_number>" . (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber) . "</official_id_number>\n";
         $xml_content .= "<email>" . $head->Email . "</email>\n";
