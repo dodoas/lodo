@@ -17,10 +17,10 @@ function createSchemeOptions($selected, $country) {
         $tmp_str = explode(':', $type['SchemeType']);
         $scheme_type_country = $tmp_str[0];
         $schemeTypeOptions .= 
-            sprintf("<option value='%d' class='%s' %s>%s</option>\n",
+            sprintf("<option value='%d' %s %s>%s</option>\n",
                     $type['FakturabankSchemeID'],
-                    ($country == $scheme_type_country || $scheme_type_country == 'FAKTURABANK' || $type['FakturabankSchemeID'] == $selected ? "active" : "inactive"),
                     ($type['FakturabankSchemeID'] == $selected ? "selected" : ""),
+                    ($country == $scheme_type_country || $scheme_type_country == 'FAKTURABANK' || $type['FakturabankSchemeID'] == $selected ? "" : "hidden"),
                     $type['SchemeType']
                 );
     }
@@ -28,11 +28,6 @@ function createSchemeOptions($selected, $country) {
     return $schemeTypeOptions;
 }
 ?>
-<style>
-option.inactive {
-  display: none;
-}
-</style>
 <script>
 function filterSchemesByCountryCode(country) {
   var selected_country_code = country.value;
@@ -41,9 +36,9 @@ function filterSchemesByCountryCode(country) {
   options = ap_scheme_fbschemeid_select.options;
   for(i = 0; i < options.length; i++) {
     if (options[i].text.match(selected_country_code) || options[i].text.match('FAKTURABANK') || options[i].selected) {
-      options[i].setAttribute("class", "active");
+      options[i].hidden = false;
     } else {
-      options[i].setAttribute("class", "inactive");
+      options[i].hidden = true;
     }
   }
 }
