@@ -81,6 +81,27 @@ function update_orgnr_vat_from_firmaid() {
     $_lib['db']->db_query($q_vat);
 }
 
+// Removes all the firmaids whose accountplan is missing. This is useful in cases
+// when we go to create a new customer (as a side effect we immediately save two
+// firmaids in database via create_new_noorgnr_and_vat() function), but we decide
+// not to create it after all and don't save it.
+function remove_hanging_firmaids() {
+    global $_lib;
+    $query = "DELETE aps.*
+              FROM accountplanscheme aps
+              LEFT JOIN accountplan ap ON aps.AccountPlanID = ap.AccountPlanID
+              WHERE ap.AccountPlanID is null;";
+    $_lib['db']->db_query($query);
+}
+
+function create_new_noorgnr_and_vat($AccountPlanID, $OrgNumber = '') {
+    global $_lib;
+    $query = "INSERT INTO accountplanscheme (AccountPlanID, FakturabankSchemeID, SchemeValue, CountryCode) VALUES
+              ('". $AccountPlanID ."', (SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = 'NO:ORGNR'), '". $OrgNumber ."', 'NO'),
+              ('". $AccountPlanID ."', (SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = 'NO:VAT'), '', 'NO');";
+    $_lib['db']->db_query($query);
+}
+
 if(!$AccountPlanID && $AccountPlanType) {
     // If accountplan id is not given - we make a new one by max old + 1
     $query_accountplan    = "select max(AccountPlanID)+1 as AccountPlanID from accountplan where AccountPlanType = '$AccountPlanType'";
@@ -88,11 +109,21 @@ if(!$AccountPlanID && $AccountPlanType) {
     $AccountPlanID        = $accountplanavailable->AccountPlanID;
 }
 
-if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->getProperty('action_accountplan_updateautomatic') || $_lib['input']->getProperty('action_add_scheme'))
-{
+if($_lib['input']->getProperty('action_accountplan_new')) {
+    if (in_array($AccountPlanType, array('supplier', 'customer'))) {
+        remove_hanging_firmaids();
+        create_new_noorgnr_and_vat($AccountPlanID);
+    }
+}
+
+if($AccountPlanID) {
     // Check of this is a new and usaved account, if so - just create it
     $queryexist   = "select * from accountplan where AccountPlanID = $AccountPlanID";
     $accountexist = $_lib['storage']->get_row(array('query' => $queryexist));
+}
+
+if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->getProperty('action_accountplan_updateautomatic') || $_lib['input']->getProperty('action_add_scheme') || ($_lib['input']->getProperty('action_save_scheme') && !$accountexist))
+{
 
     // If new firmaID is created and account doesnt exist, accountplan should be saved.
     if(!($_lib['input']->getProperty('action_add_scheme') && $accountexist)) {
@@ -141,7 +172,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             $_POST['accountplan_OrgNumber'] = clean_org_number($_POST['accountplan_OrgNumber']);
         }
      
-        if((!$accountexist || $_lib['input']->getProperty('action_accountplan_updateautomatic'))) {
+        if($_lib['input']->getProperty('action_accountplan_updateautomatic')) {
           $fb = new lodo_fakturabank_fakturabank();
           if (in_array($AccountPlanType, array('supplier', 'customer'))) $fb->update_accountplan_from_fakturabank($AccountPlanID);
         }
@@ -355,6 +386,10 @@ elseif($_lib['input']->getProperty('action_save_scheme')) {
     }
     $_lib['storage']->db_update_multi_table($_POST, array('accountplanscheme' => 'AccountPlanSchemeID'));
     update_orgnr_vat_from_firmaid();
+    if(!$accountexist) {
+        $fb = new lodo_fakturabank_fakturabank();
+        if (in_array($AccountPlanType, array('supplier', 'customer'))) $fb->update_accountplan_from_fakturabank($AccountPlanID);
+    }
 }
 elseif($_lib['input']->getProperty('action_refresh_sheme')) {
   $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
