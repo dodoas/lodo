@@ -181,11 +181,11 @@ class framework_logic_voucherinput
         elseif($this->VoucherType == 'B')
             $this->type="bank_in";
         elseif($this->VoucherType == 'U')
-            $this->type="buycash_out";
+            $this->type="buycredit_out";
         elseif($this->VoucherType == 'L')
             $this->type="salary";
         elseif($this->VoucherType == 'S')
-            $this->type="salecash_in";
+            $this->type="salecredit_in";
 
 
         ########################################################################
