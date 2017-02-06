@@ -329,22 +329,17 @@ function allowOnlyCreditOrDebit(element, credit_or_debit) {
 
   var in_amount    = tr_element.getElementsByTagName('input')[1];
   var out_amount   = tr_element.getElementsByTagName('input')[2];
-  var f_in_amount  = tr_element.getElementsByTagName('input')[3];
-  var f_out_amount = tr_element.getElementsByTagName('input')[4];
-
-  var val_in_amount    = toNumber(in_amount.value);
-  var val_out_amount   = toNumber(out_amount.value);
-  var val_f_in_amount  = toNumber(f_in_amount.value);
-  var val_f_out_amount = toNumber(f_out_amount.value);
+  var f_in_amount  = tr_element.getElementsByClassName('currency_field')[0];
+  var f_out_amount = tr_element.getElementsByClassName('currency_field')[1];
 
   if (credit_or_debit == 'credit') {
     out_amount.value = toAmountString(0, 2);
-    f_out_amount.value = toAmountString(0, 2);
+    if(f_out_amount) f_out_amount.value = toAmountString(0, 2);
     in_amount.value = toAmountString(toNumber(in_amount.value), 2);
   }
   else if (credit_or_debit == 'debit') {
     in_amount.value = toAmountString(0, 2);
-    f_in_amount.value = toAmountString(0, 2);
+    if(f_in_amount) f_in_amount.value = toAmountString(0, 2);
     out_amount.value = toAmountString(toNumber(out_amount.value), 2);
   }
 }
