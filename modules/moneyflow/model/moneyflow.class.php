@@ -112,7 +112,7 @@ class moneyflow {
         #    print "find: $balance<br>\n";
         #    print_r($this->amountH);
         #}
-        $this->query_expected();
+        mysqli_data_seek($this->expected,0);
 
         $return_array = array();
         while($expected = $_lib['db']->db_fetch_object($this->expected)) {
