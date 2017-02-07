@@ -56,7 +56,7 @@ class moneyflow {
 
         #Gruppering pŒ datoer og summering    
         if ($this->pengeflyt_page) {
-          while($expected = $_lib['db']->db_fetch_object($result)) {
+          while($expected = $_lib['db']->db_fetch_object($this->expected)) {
             $expected->AmountBalance = $expected->AmountIn - $expected->AmountOut;
             $this->sumBalance       += $expected->AmountBalance;
             $expected->sumBalance    = $this->sumBalance;
