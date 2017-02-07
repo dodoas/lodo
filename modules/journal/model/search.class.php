@@ -8,6 +8,7 @@ class search_class {
     */
     function search_openpost_accountplan($args)
     {
+      return NULL; // for now we return null since this function makes journal.edit save functionality slow
         global $_lib, $_MY_SELF, $accounting;
 
         if($args['VoucherID'] > 0) {
