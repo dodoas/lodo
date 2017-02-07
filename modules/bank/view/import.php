@@ -29,7 +29,7 @@ $account = $_lib['storage']->get_row(array('query' => $query));
 # Http file upload
 
 if($_FILES['bankaccountfile']['size'] > 0 ) {
-    $import = new accountline_import($Bank, $AccountID, $Period, $_FILES['bankaccountfile']['tmp_name']);
+    $import = new accountline_import($Bank, $AccountID, $Period, $_FILES['bankaccountfile']['tmp_name'], $account);
 }
 
 class accountline_import {
@@ -242,7 +242,7 @@ class accountline_import {
     //#Sort = '' - Use the sorting from the file
     //#ThousandSep = '' Do not touch, but if given the separator will be removed before processing
 
-    function __construct($Bank, $AccountID, $Period, $filename) {
+    function __construct($Bank, $AccountID, $Period, $filename, $account) {
         global $_lib;
                 
         ini_set('auto_detect_line_endings', true);
@@ -364,7 +364,7 @@ class accountline_import {
         foreach($linesA as $lineH) {                            
             $Priority++;
 
-
+            $lineH['Currency']               = $account->Currency;
             $lineH['Priority']               = $Priority;
             //print_r($lineH);
             $postvl['AccountLineID'] = $_lib['storage']->store_record(array('table' => 'accountline', 'data' => $lineH, 'debug' => $this->debug));

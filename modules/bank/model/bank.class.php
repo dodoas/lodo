@@ -982,6 +982,7 @@ class framework_logic_bank {
             if($unvoted->Approved && !$accounting->IsJournalIDInUse($unvoted->JournalID, $this->VoucherType) && ($unvoted->ReskontroAccountPlanID || $unvoted->ResultAccountPlanID) && $unvoted->Day >= 1 && $unvoted->Day <= 31 && $unvoted->JournalID > 0) {
 
                 #print_r($unvoted);
+                $unvoted->Currency = isset($unvoted->Currency) ? $unvoted->Currency : $this->Currency;
 
                 $VoucherH = array();
                 $VoucherH['voucher_JournalID']           = $unvoted->JournalID;
@@ -999,12 +1000,12 @@ class framework_logic_bank {
                 $VoucherH['voucher_DueDate']             = $VoucherH['voucher_VoucherDate']; #Same as voucher date since this is bank account direct transactions
                 $VoucherH['voucher_InvoiceID']           = $unvoted->InvoiceNumber;
                 $VoucherH['voucher_KID']                 = $unvoted->KID;
+                $VoucherH['voucher_Currency']            = $unvoted->Currency;
 
                 if(!$unvoted->InvoiceNumber && !$unvoted->KID) {
                     #If InvoiceNumber and KID is empty - we put JournalID in InvoiceID field for bankavstemming
                     $VoucherH['voucher_InvoiceID']           = $unvoted->JournalID;
                 }
-
 
                 // mawcode
                 if( substr($unvoted->InvoiceNumber, 0, 2) == "FB" ) {
