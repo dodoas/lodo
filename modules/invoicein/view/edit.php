@@ -542,7 +542,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         ?>
       </td>
       <td colspan="3"></td>
-      <? if ($acrow->AllowanceChargeType == 'line') print '<td colspan="3"></td>'; ?>
+      <? if ($acrow->AllowanceChargeType == 'line') print '<td colspan="4"></td>'; ?>
       <td>
         <?
           print $_lib['form3']->text(array(
@@ -551,6 +551,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'pk'       => $acrow->InvoiceLineAllowanceChargeID,
             'value'    => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->Amount),
             'class'    => 'number',
+            'width'    => '15',
             'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)',
             'tabindex' => $tabindex++));
         ?>
@@ -565,7 +566,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       }
     }
 ?>
-    <tr><td colspan="10"><hr/></td></tr>
+    <tr><td colspan="11"><hr/></td></tr>
 <?
 }
     if (!empty($invoice_allowances_charges)) {
@@ -602,7 +603,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'tabindex'  => $tabindex++));
         ?>
       </td>
-      <td colspan="4"></td>
+      <td colspan="5"></td>
       <td>
         <?
           print '<span id="' . $db_table3 . '.VatPercent.' . $acrow->InvoiceAllowanceChargeID . '" >' . $_lib['format']->Percent($acrow->VatPercent) . '</span>';
@@ -627,6 +628,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'pk'       => $acrow->InvoiceAllowanceChargeID,
             'value'    => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->Amount),
             'class'    => 'number',
+            'width'    => '15',
             'tabindex' => $tabindex++));
         ?>
       </td>
@@ -638,7 +640,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       }
     }
 ?>
-    <tr class="allowance_charge"><td colspan="10"><hr/></td></tr>
+    <tr class="allowance_charge"><td colspan="11"><hr/></td></tr>
 </tbody>
 
 <tfoot>
@@ -666,7 +668,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       <td colspan="7"></td>
     </tr>
     <tr>
-        <td colspan="10" align="right">
+        <td colspan="11" align="right">
         <? if($invoicein->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $invoicein->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?>
 
         <?

@@ -304,7 +304,6 @@ class logic_invoicein_invoicein implements Iterator {
 
         self::addVATPercentToAllowanceCharge($args);
         self::invertAllAllowanceAmounts($args);
-<<<<<<< HEAD
         self::calculatePriceAmountQuantity($args);
         if(!$invoicein->IZipCode) {
             if($accountplan->ZipCode) {
@@ -341,6 +340,7 @@ class logic_invoicein_invoicein implements Iterator {
             } else {
                 $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
             }
+        }
         $changed_supplier_accountplan = $invoicein->SupplierAccountPlanID != $AccountPlanID;
 
         // update all supplier related info on the invoice
@@ -441,16 +441,33 @@ class logic_invoicein_invoicein implements Iterator {
     function recalculate_total_cust_price($id) {
         global $_lib;
 
-        $total_cust_price = 0;
+        $total = 0;
 
         $query_invoicelines = "select * from invoiceinline where ID='$id' and Active <> 0 order by LineID asc";
         $result_invoicelines = $_lib['db']->db_query($query_invoicelines);
         while($invoicein_line = $_lib['db']->db_fetch_object($result_invoicelines)) {
-          $unit_cost_price = $invoicein_line->UnitCostPrice;
+          $unit_cust_price = $invoicein_line->UnitCustPrice;
           $quantity_delivered = $invoicein_line->QuantityDelivered;
-          $total_cust_price += $unit_cost_price * $quantity_delivered;
+          $line_cust_price = $unit_cust_price * $quantity_delivered;
+
+          // include line's allowance/charge
+          $query_invoicelines_allowance_charge = "select * from invoicelineallowancecharge where InvoiceLineID='$invoicein_line->LineID' and InvoiceType = 'in'";
+          $result_invoicelines_allowance_charge = $_lib['db']->db_query($query_invoicelines_allowance_charge);
+          while($line_ac = $_lib['db']->db_fetch_object($result_invoicelines_allowance_charge)) {
+            $line_cust_price += (($line_ac->ChargeIndicator == 1) ? 1 : -1) * $line_ac->Amount;
+          }
+          $line_cost_price  = $line_cust_price * (1 + ($invoicein_line->Vat / 100.0));
+          $total += $line_cost_price;
         }
-        return $total_cust_price;
+
+        // include ivoice's allowance/charge
+        $query_invoice_allowance_charge = "select * from invoiceallowancecharge where InvoiceID='$id' and InvoiceType = 'in'";
+        $result_invoice_allowance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
+        while($ac = $_lib['db']->db_fetch_object($result_invoice_allowance_charge)) {
+          $ac_amount =(($ac->ChargeIndicator == 1) ? 1 : -1) * $ac->Amount * ( 1 + ($ac->VatPercent / 100.0));
+          $total += $ac_amount;
+        }
+        return $total;
     }
 
     function linenew($args) {
