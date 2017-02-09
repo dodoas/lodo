@@ -236,9 +236,11 @@ ICity='" . $args['installation_VCity']. "',
 ICountryCode='NO',
 InvoiceCommentCustomerPosition='top',
 
-Phone='" . $args['installation_Phone']. "', 
-Fax='" . $args['installation_Fax']. "', 
-WWW='" . $args['installation_WWW']. "', 
+Email='" . $args['installation_CompanyEmail']. "',
+CopyFakturaMail='" . $args['installation_CompanyEmail']. "',
+Phone='" . $args['installation_Phone']. "',
+Fax='" . $args['installation_Fax']. "',
+WWW='" . $args['installation_WWW']. "',
 OrgNumber='" . $args['installation_CompanyNumber']. "'";
         if($this->debug) print "$query<br>\n";
         $this->_dbh[$this->dsn_remote]->db_insert2(array('query' => $query, 'insert_id' => false));
