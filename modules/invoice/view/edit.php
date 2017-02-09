@@ -647,7 +647,17 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
 <thead>
     <tr>
         <td>Fakturanummer</td>
-        <td><a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$InvoiceID"; ?>&type=salecash_in"><? print $InvoiceID ?></a></td>
+        <td>
+          <? 
+            $vouchers_exist = $_lib['db']->db_fetch_assoc($_lib['db']->db_query("SELECT count(*) as count FROM voucher WHERE JournalID = $InvoiceID AND VoucherType = 'S' AND Active = 1;"));
+            $vouchers_exist = $vouchers_exist['count'];
+            if($vouchers_exist) {
+              print "<a href='".$_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=".$InvoiceID."&type=salecash_in'>".$InvoiceID."</a>";
+            } else {
+              print $InvoiceID;
+            }
+          ?>
+        </td>
         <td>KID:</td>
         <td><? print $row->KID ?></td>
     </tr>

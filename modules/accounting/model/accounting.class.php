@@ -2127,9 +2127,9 @@ class accounting {
         #Jobb  her
         #sett inactive
 
-        if($voucher && strlen($voucher->VoucherPeriod) == 7) {
+        if($voucher) {
 
-            if($this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
+            if(strlen($voucher->VoucherPeriod) == 7 && $this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) || $voucher->VoucherPeriod == "") {
                 #print "Sletter lonns bilag<br>\n";
 
                 $this->postmotpost->openPostJournal($JournalID, $VoucherType);
