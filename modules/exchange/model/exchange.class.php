@@ -113,7 +113,7 @@ class exchange {
 		global $_lib;
 
 		#Retrieve active currencies
-		$query = "SELECT c.CurrencyISO, c.CurrencyID, e.Amount FROM currency c, exchange e WHERE c.`CurrencyISO`=`e`.`CurrencyID` ORDER BY c.`CurrencyISO`";
+		$query = "SELECT c.CurrencyISO, c.CurrencyID, e.Amount FROM currency c, exchange e WHERE c.`CurrencyISO`=`e`.`CurrencyID` AND e.Amount != '' AND e.Amount != 0 AND e.Amount is not null ORDER BY c.`CurrencyISO`";
 		$result_currency = $_lib['db']->db_query($query);
 		$currencies = array();
 
