@@ -1319,9 +1319,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift')) ?>
         </form>
-        <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift PDF')) ?>
-        </form>
+        <? print $_lib['form3']->Input(array('type'=>'button', 'name'=>'action_invoice_print', 'tabindex' => $tabindex++, 'value'=>'Utskrift PDF', 'OnClick'=>"var win = window.open('". $_lib['sess']->dispatch ."t=invoice.print2&InvoiceID=". $row->InvoiceID ."&inline=show', '_new');")) ?>
     </tr>
     <tr>
         <td colspan="8" align="right">
