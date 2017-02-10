@@ -79,6 +79,26 @@ print $_lib['sess']->doctype ?>
     <title>Empatix - kontoplan - reskontro - <? print $account->AccountPlanType ?></title>
     <meta name="cvs"                content="$Id: reskontro.php,v 1.65 2005/11/03 15:33:11 thomasek Exp $" />
     <? includeinc('head') ?>
+    <style type="text/css">
+      .highlighted {
+        background-color: #FFF655;
+      }
+      .read-only-input {
+        color: gray !important;
+      }
+    </style>
+    <script type="text/javascript">
+      function hightlightFirmaID() {
+        $("#firma_id_fields").addClass("highlighted");
+        setTimeout(function () {
+          $("#firma_id_fields").removeClass("highlighted");
+        }, 1000);
+      }
+      // this functions makes focus on the input next to the select which has selected value same as provided scheme_type
+      function focusFirmaidSchemeWithSchemetype(scheme_type) {
+        $("#firma_id_fields").find('select option:selected:contains("' + scheme_type + '")').parent("select").next("input").focus();
+      }
+    </script>
 </head>
 <body>
 
@@ -135,7 +155,7 @@ if($JournalID) {
     <td></td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.AccountName" value="<? print $account->AccountName  ?>" size="30"><? if($account->AccountName) { ?><a href="http://w2.brreg.no/enhet/sok/treffliste.jsp?navn=<? print urlencode($account->AccountName) ?>" target="top">brreg</a><? } ?></td>
     <td style="text-align:right" colspan="2">Organisasjonsnummer (opplysninger hentes automatisk basert p&aring; orgnummer)</td>
-    <td><input class="lodoreqfelt" type="text" name="accountplan.OrgNumber" value="<? print $account->OrgNumber  ?>" size="30"><? if($account->OrgNumber) { ?><a href="http://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=<? print $account->OrgNumber ?>" target="top">brreg</a><? } ?></td>
+    <td><input class="lodoreqfelt read-only-input" type="text" name="accountplan.OrgNumber" value="<? print $account->OrgNumber  ?>" size="30" readonly="readonly" onclick="this.blur(); hightlightFirmaID(); focusFirmaidSchemeWithSchemetype('NO:ORGNR');"><? if($account->OrgNumber) { ?><a href="http://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=<? print $account->OrgNumber ?>" target="top">brreg</a><? } ?></td>
   </tr>
   </tr>
   <tr>
@@ -143,7 +163,7 @@ if($JournalID) {
     <td><? $_lib['form2']->checkbox2($db_table, "EnableInvoiceAddress", $account->EnableInvoiceAddress,'') ?></td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="40"></td>
     <td style="text-align:right" colspan="2">MVA-nummer</td>
-    <td><input type="text" name="accountplan.VatNumber" value="<? print $account->VatNumber  ?>" size="30"></td>
+    <td><input class="read-only-input" type="text" name="accountplan.VatNumber" value="<? print $account->VatNumber  ?>" size="30" readonly="readonly" onclick="this.blur(); hightlightFirmaID(); focusFirmaidSchemeWithSchemetype('NO:VAT');"></td>
   </tr>
   <tr>
     <td class="menu">Postnummer</td>
@@ -209,7 +229,9 @@ if($JournalID) {
     <td></td>
   </tr>
 
+  <tbody id="firma_id_fields">
   <? include("schemeid.php") ?>
+  </tbody>
 
   <tr class="result">
     <th colspan="6">Bilagsf&oslash;ringsinformasjon</th>
