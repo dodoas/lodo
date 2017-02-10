@@ -176,6 +176,10 @@ foreach ($currencies as $currency) {
         <td><? print $_lib['form3']->text(array('table' => 'installation', 'field' => 'Fax', 'value' => $row->Fax, 'width' => '40')); ?></td>
       </tr>
       <tr>
+        <td class="menu">Epost</td>
+        <td><? print $_lib['form3']->text(array('table' => 'installation', 'field' => 'CompanyEmail', 'value' => $row->CompanyEmail, 'width' => '40')); ?></td>
+      </tr>
+      <tr>
         <td class="menu">Webadresse</td>
         <td><? print $_lib['form3']->text(array('table' => 'installation', 'field' => 'WWW', 'value' => $row->WWW, 'width' => '40')); ?></td>
       </tr>

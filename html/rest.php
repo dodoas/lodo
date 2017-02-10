@@ -109,6 +109,7 @@ $dataH['Email']             = (string) $xml->email;
 $dataH['Password']          = (string) $xml->passord;
 $dataH['MobilePhoneNumber'] = (string) $xml->MobilePhoneNumber;
 $dataH['Version']           = (string) $xml->versjon;
+$dataH['CompanyEmail']      = (string) $xml->Companyemail;
 $dataH['Active']            = 0;
 $dataH['EnableReference']   = 0;
 $dataH['AcceptedLicence']   = 1;
