@@ -239,7 +239,7 @@ class invoice {
           'invoiceallowancecharge'     => 'InvoiceAllowanceChargeID',
           'invoicelineallowancecharge' => 'InvoiceLineAllowanceChargeID');
         $_lib['db']->db_update_multi_table($args, $tables_to_update);
-        
+
         #Then read everything from disk and correct calculations
         $this->init($args);
         $this->make_invoice();
@@ -1161,7 +1161,8 @@ class invoice {
 
             if($reasonID) {
                 $VoucherH['voucher_Description'] = sprintf(
-                    'Reconciliation from reason %d',
+                    // Reconciliation from reason __
+                    'Avstemt med årsak %d',
                     $reasonID
                     );
 
