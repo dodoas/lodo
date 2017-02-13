@@ -1193,8 +1193,7 @@ class lodo_fakturabank_fakturabank {
         $scheme_type = $schemeControl->findScheme($scheme['FakturabankSchemeID']);
         $org = new lodo_orgnumberlookup_orgnumberlookup();
         if (empty($scheme_value)) {
-          if(strlen($_POST['accountplan_OrgNumber']) >= 9) $scheme_value = $_POST['accountplan_OrgNumber'];
-          elseif(strlen($AccountPlanID) >= 9) $scheme_value = $AccountPlanID;
+            continue;
         }
         $org->getOrgNumberByScheme($scheme_value, $scheme_type);
 
