@@ -583,7 +583,8 @@ class logic_invoicein_invoicein implements Iterator {
 
                         if($reasonID) {
                             $VoucherH['voucher_Description'] = sprintf(
-                                'Reconciliation from reason %d',
+                                // Reconciliation from reason __
+                                'Avstemt med årsak %d',
                                 $reasonID
                                 );
 
