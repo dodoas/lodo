@@ -659,10 +659,23 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 <h2><a href="<? print $_lib['sess']->dispatch ?>t=bank.edit&AccountLineID=<? print $voucher_input->AccountLineID; ?>">Tilbake til bankavstemming</a></h2>
 <? } ?>
 
+<? includeinc('bottom'); ?>
+</br>
+</br>
 <?
-if($_showresult) {
-  #print "<br />showresult<br />";
-  print $_showresult;
-}
-
-includeinc('bottom'); ?>
+if($print_postmotpost_matches_button){
+  $search_for = array(
+    'AccountPlanID'                  => $voucher_input->AccountPlanID,
+    'VoucherID'                      => $voucher_input->VoucherIDOld,
+    'JournalID'                      => $voucher_input->JournalID,
+    'VoucherType'                    => $voucher_input->VoucherType,
+    'type'                           => $voucher_input->type,
+    'EnableSingleChoose'             => '1',
+    'From'                           => 'EnablePostMotPost',
+    'action_postmotpost_get_matches' => 1
+    );
+?>
+<div id="postmotpostmatches">
+  <input id="postmotpostmatchesbutton" type="submit" name="action_postmotpost_get_matches" value="Hent &aring;pne poster p&aring; leverand&oslash;ren (Advarsel: kan ta lang tid)" OnClick='get_postmotpost_matches_for_jounal(<? print json_encode($search_for) ?>)') >
+</div>
+<? } ?>

@@ -6,10 +6,9 @@ class search_class {
     * @param $args['AccountPlanID'], $args['EnableSingleChoose'], $args['EnableMultiChoose']
     * @return
     */
-    function search_openpost_accountplan($args)
+    function search_openpost_accountplan($accounting, $args)
     {
-      return NULL; // for now we return null since this function makes journal.edit save functionality slow
-        global $_lib, $_MY_SELF, $accounting;
+        global $_lib, $_MY_SELF;
 
         if($args['VoucherID'] > 0) {
             //print_r($args);
@@ -22,7 +21,7 @@ class search_class {
             $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID, m.MatchNumber from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID) left join vouchermatch as m on v.VoucherID=m.VoucherID where v.AccountPlanID = " . $AccountPlanID . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID and v.Active = 1 ORDER BY v.VoucherDate DESC";
             #print "$query<br>";
             $result = $_lib['db']->db_query($query);
-            if($_lib['db']->db_numrows($result) > 0)
+            if($_lib['db']->db_numrows($result) > 1)
             {
                 $_showresult  = "<br /><br /><fieldset><legend>&Aring;pne poster p&aring; konto: $accountplan->AccountName ($AccountPlanID)</legend><table class=\"lodo_journal\">";
                 $_showresult .= "<tr><th>Type</th><th>Bilag</th><th>Dato</th><th>Konto</th><th>Kontonavn</th><th>" . $accountplan->debittext . "</th><th>" . $accountplan->credittext . "<th>Faktura</th></th><th>KID</th><th>MatchNummer</th>";
