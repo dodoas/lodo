@@ -278,7 +278,11 @@ class db_mysql {
        #print_r($fields);
        $query = "insert into $table set ";
        foreach ($fields as $field => $value) {
-         $query .= "$field = $value, ";
+        if($value === "'" . DB_NULL_PLACEHOLDER . "'") {
+            $query .= "$field = NULL, ";
+        } else {
+            $query .= "$field = $value, ";
+        }
        }
        $query = substr($query, 0, -2);
        #print "$query<br>";

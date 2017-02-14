@@ -393,7 +393,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       <?
       $tmp = ($rowCount > 1 ? '' : $tabindex++);
       if($accountplan->EnableCar) {
-        $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled, 'active_reference_date' => $voucher_input->VoucherDate));
+        $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled, 'active_reference_date' => $voucher_input->VoucherDate, 'unset' => true));
       }
       elseif (isset($voucher_input->CarID)) {
         $car_code_query = "select CarCode from car where CarID = $voucher_input->CarID";
@@ -407,7 +407,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       <?
       $tmp = ($rowCount > 1 ? '' : $tabindex++);
       if($accountplan->EnableProject) {
-        $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $voucher_input->ProjectID, 'tabindex' => $tmp, 'accesskey' => 'P', 'disabled' => $period_disabled));
+        $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $voucher_input->ProjectID, 'tabindex' => $tmp, 'accesskey' => 'P', 'disabled' => $period_disabled, 'unset' => true));
       }
       elseif (isset($voucher_input->ProjectID)) {
         $project_name_query = "select Heading as ProjectName from project where ProjectID = $voucher_input->ProjectID";
@@ -421,7 +421,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       <?
       $tmp = ($rowCount > 1 ? '' : $tabindex++);
       if($accountplan->EnableDepartment) {
-        $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V', 'disabled' => $period_disabled));
+        $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V', 'disabled' => $period_disabled, 'unset' => true));
       }
       elseif (isset($voucher_input->DepartmentID)) {
         $department_name_query = "select DepartmentName from companydepartment where CompanyDepartmentID = $voucher_input->DepartmentID";
@@ -595,7 +595,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       'field'                 => 'CarID',
       'value'                 => $voucher->CarID,
       'tabindex'              => $tabindex++,
-      'active_reference_date' => $voucher_input->VoucherDate
+      'active_reference_date' => $voucher_input->VoucherDate,
+      'unset'                 => true
     );
     $_lib['form2']->car_menu2($car_menu_conf);
   }
@@ -614,7 +615,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       'field'     => 'ProjectID',
       'value'     => $voucher->ProjectID,
       'tabindex'  => $tabindex++,
-      'accesskey' => 'P'
+      'accesskey' => 'P',
+      'unset'                 => true
     );
     $_lib['form2']->project_menu2($project_menu_conf);
   }
@@ -633,7 +635,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       'field'     => 'DepartmentID',
       'value'     => $voucher->DepartmentID,
       'tabindex'  => $tabindex++,
-      'accesskey' => 'V'
+      'accesskey' => 'V',
+      'unset'                 => true
     );
     $_lib['form2']->department_menu2($department_menu_conf);
   }
