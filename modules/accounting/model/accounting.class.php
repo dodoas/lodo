@@ -456,18 +456,18 @@ class accounting {
         ############################################################################################
         if(isset($post['voucher_ProjectID'])) {
           $fields['voucher_ProjectID']        = $post['voucher_ProjectID'];
-        } else {
+        } elseif ($accountplan->EnableProject == 1 && isset($accountplan->ProjectID)) {
           $fields['voucher_ProjectID']        = $accountplan->ProjectID; #Default project
         }
 
         if(isset($post['voucher_DepartmentID'])) {
             $fields['voucher_DepartmentID']     = $post['voucher_DepartmentID'];
-        } else {
+        } elseif ($accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID)) {
             $fields['voucher_DepartmentID']     = $accountplan->DepartmentID; #Default department
         }
         if(isset($post['voucher_CarID'])) {
             $fields['voucher_CarID']     = $post['voucher_CarID'];
-        } else {
+        } elseif ($accountplan->EnableCar == 1 && isset($accountplan->CarID)) {
             $fields['voucher_CarID']     = $accountplan->CarID; #Default car
         }
 
@@ -1515,8 +1515,15 @@ class accounting {
         if($fields['voucher_AccountPlanID'] != $voucher->AccountPlanID)
         {
             $_lib['message']->add(array('message' => 'Default prosjekt og avdeling satt pga bytte av kontoplan'));
-            $fields['voucher_ProjectID']    = $accpl->ProjectID;    #Default project
-            $fields['voucher_DepartmentID'] = $accpl->DepartmentID; #Default department
+            // Default project
+            if ($accpl->EnableProject == 1 && isset($accpl->ProjectID)) $fields['voucher_ProjectID'] = $accpl->ProjectID;
+            else $fields['voucher_ProjectID'] = $voucher->ProjectID;
+            // Default department
+            if ($accpl->EnableDepartment == 1 && isset($accpl->DepartmentID)) $fields['voucher_DepartmentID'] = $accpl->DepartmentID;
+            else $fields['voucher_DepartmentID'] = $voucher->DepartmentID;
+            // Default car
+            if ($accpl->EnableCar == 1 && isset($accpl->CarID)) $fields['voucher_CarID'] = $accpl->CarID;
+            else $fields['voucher_CarID'] = $voucher->CarID;
 
             $this->delete_auto_vat($VoucherID, $fields['voucher_JournalID'], $fields['voucher_VoucherType']);
             $this->postmotpost->openPost($VoucherID);

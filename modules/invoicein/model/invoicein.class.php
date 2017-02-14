@@ -400,8 +400,6 @@ class logic_invoicein_invoicein implements Iterator {
                     $VoucherH['voucher_AutomaticReason']    = "Fra innk faktura ID: " . $InvoiceO->ID;
 
                     $VoucherH['voucher_KID']                = $InvoiceO->KID;
-                    $VoucherH['voucher_DepartmentID']       = $InvoiceO->Department;
-                    $VoucherH['voucher_ProjectID']          = $InvoiceO->Project;
                     $VoucherH['voucher_InvoiceID']          = $InvoiceO->InvoiceNumber;
                     $VoucherH['voucher_AccountPlanID']      = $InvoiceO->SupplierAccountPlanID;
 
@@ -479,6 +477,13 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_Description']    = '';
                         $VoucherH['voucher_AccountPlanID']  = 0;
 
+                        //#Motkonto resultat.
+                        $VoucherH['voucher_AccountPlanID']  = $line->AccountPlanID;
+                        if($line->IsOnlyTax) {
+                            $VoucherH['voucher_AccountPlanID'] = 2710;
+                        }
+                        $line_accountplan = accounting::get_accountplan_object($VoucherH['voucher_AccountPlanID']);
+
                         $query = "select sum(if(ChargeIndicator = 1, Amount, -Amount)) as sum from invoicelineallowancecharge where InvoiceType = 'in' and AllowanceChargeType = 'line' and InvoiceLineID = " . $line->LineID;
                         $result = $_lib['storage']->get_row(array('query' => $query));
                         $sum_line_allowance_charge = $result->sum;
@@ -543,15 +548,32 @@ class logic_invoicein_invoicein implements Iterator {
                             $VoucherH['voucher_Description']    .= $line->ProductName;
                         }
 
+                        // If value(car/department/project) sent use that, otherwise use defaults from this line's accountplan (if set and enabled)
                         if($line->CarID) {
                             $VoucherH['voucher_CarID'] = $line->CarID;
+                        } elseif (!empty($line_accountplan) && $line_accountplan->EnableCar == 1 && isset($line_accountplan->CarID)) {
+                            $VoucherH['voucher_CarID'] = $line_accountplan->CarID;
+                        }
+                        else {
+                            unset($VoucherH['voucher_CarID']);
+                        }
+                        if($line->DepartmentID) {
+                            $VoucherH['voucher_DepartmentID'] = $line->DepartmentID;
+                        } elseif (!empty($line_accountplan) && $line_accountplan->EnableDepartment == 1 && isset($line_accountplan->DepartmentID)) {
+                            $VoucherH['voucher_DepartmentID'] = $line_accountplan->DepartmentID;
+                        }
+                        else {
+                            unset($VoucherH['voucher_DepartmentID']);
+                        }
+                        if($line->ProjectID) {
+                            $VoucherH['voucher_ProjectID'] = $line->ProjectID;
+                        } elseif (!empty($line_accountplan) && $line_accountplan->EnableProject == 1 && isset($line_accountplan->ProjectID)) {
+                            $VoucherH['voucher_ProjectID'] = $line_accountplan->ProjectID;
+                        }
+                        else {
+                            unset($VoucherH['voucher_ProjectID']);
                         }
 
-                        //#Motkonto resultat.
-                        $VoucherH['voucher_AccountPlanID']  = $line->AccountPlanID;
-                        if($line->IsOnlyTax) {
-                            $VoucherH['voucher_AccountPlanID'] = 2710;
-                        }
                         //#print_r($VoucherH);
                         $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
                     }
