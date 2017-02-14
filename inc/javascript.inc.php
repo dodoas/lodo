@@ -8,6 +8,7 @@ else {
 ?>
 
 <script language="javascript1.1">
+sent = false;
 
 /*
  * This function gets a number and returns a string with that number formated

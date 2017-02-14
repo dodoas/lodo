@@ -1079,7 +1079,7 @@ class form3
 
         if($args['autosubmit'])
         {
-          $element .= " onchange=\"submit();\" ";
+          $element .= " onchange=\"if (!sent) { sent = true; submit(); }\" ";
         }
         $element .= ">\n";
 
