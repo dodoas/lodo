@@ -86,7 +86,7 @@ $xml = simplexml_load_string($httprawpostdata);
 
 $old_pattern    = array("/[^a-zA-Z0-9]/", "/_+/", "/_$/");
 $new_pattern    = array("_", "_", "");
-$InstallName    = strtoupper(preg_replace($old_pattern, $new_pattern , (string) $xml->firma)); 
+$InstallName    = strtoupper(preg_replace($old_pattern, $new_pattern , (string) $xml->firma));
 
 $dataH['InstallName']       = $InstallName; #regexp
 $dataH['DealerName']        = 'Marit Telhaug';
@@ -109,7 +109,7 @@ $dataH['Email']             = (string) $xml->email;
 $dataH['Password']          = (string) $xml->passord;
 $dataH['MobilePhoneNumber'] = (string) $xml->MobilePhoneNumber;
 $dataH['Version']           = (string) $xml->versjon;
-$dataH['CompanyEmail']      = (string) $xml->Companyemail;
+$dataH['CompanyEmail']      = (string) $xml->companyemail;
 $dataH['Active']            = 0;
 $dataH['EnableReference']   = 0;
 $dataH['AcceptedLicence']   = 1;

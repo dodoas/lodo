@@ -85,9 +85,9 @@ if(!$voucher_input->VoucherDate) {
     $voucher_input->VoucherDate    = $voucherHead->VoucherDate     ? $voucherHead->VoucherDate     : $date->VoucherDate;
 }
 
-$voucher_input->CarID          = $voucherHead->CarID           ? $voucherHead->CarID           : $accountplan->CarID;
-$voucher_input->ProjectID      = $voucherHead->ProjectID       ? $voucherHead->ProjectID       : $accountplan->ProjectID;
-$voucher_input->DepartmentID   = $voucherHead->DepartmentID    ? $voucherHead->DepartmentID    : $accountplan->DepartmentID;
+$voucher_input->CarID = $voucherHead->CarID ? $voucherHead->CarID : ($accountplan->EnableCar == 1 && isset($accountplan->CarID)) ? $accountplan->CarID : NULL;
+$voucher_input->ProjectID = $voucherHead->ProjectID ? $voucherHead->ProjectID : ($accountplan->EnableProject == 1 && isset($accountplan->ProjectID)) ? $accountplan->ProjectID : NULL;
+$voucher_input->DepartmentID = $voucherHead->DepartmentID ? $voucherHead->DepartmentID : ($accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID)) ? $accountplan->DepartmentID : NULL;
 $voucher_input->AmountIn       = $voucherHead->AmountIn        ? $voucherHead->AmountIn        : $voucher_input->AmountIn;
 $voucher_input->AmountOut      = $voucherHead->AmountOut       ? $voucherHead->AmountOut       : $voucher_input->AmountOut;
 $voucher_input->KID            = $voucherHead->KID             ? $voucherHead->KID             : $voucher_input->KID;
@@ -402,7 +402,13 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       $tmp = ($rowCount > 1 ? '' : $tabindex++);
       if($accountplan->EnableCar) {
         $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled, 'active_reference_date' => $voucher_input->VoucherDate));
-      } ?>
+      }
+      elseif (isset($voucher_input->CarID)) {
+        $car_code_query = "select CarCode from car where CarID = $voucher_input->CarID";
+        $car_code_row = $_lib['storage']->get_row(array('query' => $car_code_query));
+        print $voucher_input->CarID . " " . $car_code_row->CarCode;
+      }
+      ?>
     </td>
 
     <td>
@@ -410,7 +416,13 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       $tmp = ($rowCount > 1 ? '' : $tabindex++);
       if($accountplan->EnableProject) {
         $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $voucher_input->ProjectID, 'tabindex' => $tmp, 'accesskey' => 'P', 'disabled' => $period_disabled));
-      } ?>
+      }
+      elseif (isset($voucher_input->ProjectID)) {
+        $project_name_query = "select Heading as ProjectName from project where ProjectID = $voucher_input->ProjectID";
+        $project_row = $_lib['storage']->get_row(array('query' => $project_name_query));
+        print $voucher_input->ProjectID . " " . $project_row->ProjectName;
+      }
+      ?>
     </td>
 
     <td>
@@ -418,7 +430,13 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       $tmp = ($rowCount > 1 ? '' : $tabindex++);
       if($accountplan->EnableDepartment) {
         $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V', 'disabled' => $period_disabled));
-      } ?>
+      }
+      elseif (isset($voucher_input->DepartmentID)) {
+        $department_name_query = "select DepartmentName from companydepartment where CompanyDepartmentID = $voucher_input->DepartmentID";
+        $department_row = $_lib['storage']->get_row(array('query' => $department_name_query));
+        print $voucher_input->DepartmentID . " " . $department_row->DepartmentName;
+      }
+      ?>
     </td>
 
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
@@ -586,9 +604,63 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <? print $voucher_gui->currency2($voucher, $currency_is_editable) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, !$period_open) ?></td>
       <td><? if($accountplan->EnableQuantity) { if ($voucher->DisableAutoVat != 1) { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity" value="<? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $voucher->Quantity, 'return' => 'value')); ?>"><? } } ?></td>
-      <td><? if($accountplan->EnableCar) { ?><? $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher->CarID, 'tabindex' => $tabindex, 'active_reference_date' => $voucher_input->VoucherDate)); } ?></td>
-      <td><? if($accountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' => 'ProjectID', 'value' => $voucher->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')); } ?></td>
-      <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
+      <td>
+<?
+  if ($accountplan->EnableCar) {
+    $car_menu_conf = array(
+      'table'                 => $db_table,
+      'field'                 => 'CarID',
+      'value'                 => $voucher->CarID,
+      'tabindex'              => $tabindex++,
+      'active_reference_date' => $voucher_input->VoucherDate
+    );
+    $_lib['form2']->car_menu2($car_menu_conf);
+  }
+  elseif (isset($voucher->CarID)) {
+    $car_code_query = "select CarCode from car where CarID = $voucher->CarID";
+    $car_code_row = $_lib['storage']->get_row(array('query' => $car_code_query));
+    print $voucher->CarID . " " . $car_code_row->CarCode;
+  }
+?>
+      </td>
+      <td>
+<?
+  if ($accountplan->EnableProject) {
+    $project_menu_conf = array(
+      'table'     => $db_table,
+      'field'     => 'ProjectID',
+      'value'     => $voucher->ProjectID,
+      'tabindex'  => $tabindex++,
+      'accesskey' => 'P'
+    );
+    $_lib['form2']->project_menu2($project_menu_conf);
+  }
+  elseif (isset($voucher->ProjectID)) {
+    $project_name_query = "select Heading as ProjectName from project where ProjectID = $voucher->ProjectID";
+    $project_row = $_lib['storage']->get_row(array('query' => $project_name_query));
+    print $voucher->ProjectID . " " . substr($project_row->ProjectName, 0, 20);
+  }
+?>
+      </td>
+      <td>
+<?
+  if ($accountplan->EnableDepartment) {
+    $department_menu_conf = array(
+      'table'     => $db_table,
+      'field'     => 'DepartmentID',
+      'value'     => $voucher->DepartmentID,
+      'tabindex'  => $tabindex++,
+      'accesskey' => 'V'
+    );
+    $_lib['form2']->department_menu2($department_menu_conf);
+  }
+  elseif (isset($voucher->DepartmentID)) {
+    $department_name_query = "select DepartmentName from companydepartment where CompanyDepartmentID = $voucher->DepartmentID";
+    $department_row = $_lib['storage']->get_row(array('query' => $department_name_query));
+    print $voucher->DepartmentID . " " . substr($department_row->DepartmentName, 0, 20);
+  }
+?>
+      </td>
       <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.InvoiceID"   accesskey="R" value="<? print $voucher->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
@@ -659,10 +731,23 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
 <h2><a href="<? print $_lib['sess']->dispatch ?>t=bank.edit&AccountLineID=<? print $voucher_input->AccountLineID; ?>">Tilbake til bankavstemming</a></h2>
 <? } ?>
 
+<? includeinc('bottom'); ?>
+</br>
+</br>
 <?
-if($_showresult) {
-  #print "<br />showresult<br />";
-  print $_showresult;
-}
-
-includeinc('bottom'); ?>
+if($print_postmotpost_matches_button){
+  $search_for = array(
+    'AccountPlanID'                  => $voucher_input->AccountPlanID,
+    'VoucherID'                      => $voucher_input->VoucherIDOld,
+    'JournalID'                      => $voucher_input->JournalID,
+    'VoucherType'                    => $voucher_input->VoucherType,
+    'type'                           => $voucher_input->type,
+    'EnableSingleChoose'             => '1',
+    'From'                           => 'EnablePostMotPost',
+    'action_postmotpost_get_matches' => 1
+    );
+?>
+<div id="postmotpostmatches">
+  <input id="postmotpostmatchesbutton" type="submit" name="action_postmotpost_get_matches" value="Hent &aring;pne poster p&aring; leverand&oslash;ren (Advarsel: kan ta lang tid)" OnClick='get_postmotpost_matches_for_jounal(<? print json_encode($search_for) ?>)') >
+</div>
+<? } ?>

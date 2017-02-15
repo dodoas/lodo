@@ -36,15 +36,8 @@ $search_class   = new search_class();
 #Search fasilities
 if(strlen($voucher_input->CustomerNumber) > 0)
 {
-    //print "1";
     $voucher_input->DefAccountPlanID    = $search_class->search_customernumber($voucher_input->CustomerNumber);
     $voucher_input->AccountPlanID       = $voucher_input->DefAccountPlanID;
-    $_showresult                        = $search_class->search_openpost_accountplan(array('AccountPlanID' => $voucher_input->DefAccountPlanID, 'EnableSingleChoose' => true, 'VoucherID' => $voucher_input->VoucherIDOld, 'From' => 'CustomerNumber'));
-}
-elseif(strlen($voucher_input->Amount) > 0)
-{
-    //print "2";
-    $_showresult                        = $search_class->search_openpost_accountplan(array('Amount' => $voucher_input->Amount, 'From' => 'Amount'));
 }
 
 ####################################
@@ -348,15 +341,8 @@ if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_
 if(!empty($voucher_input->AccountPlanID) &&
    $accounting->is_reskontro($voucher_input->AccountPlanID)) {
     $accountplan = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
-    if($accountplan->EnablePostPost)
-    {
-        //print "3";
-        $_showresult        = $search_class->search_openpost_accountplan(array('AccountPlanID' => $voucher_input->AccountPlanID, 'VoucherID'=>$voucher_input->VoucherIDOld, 'JournalID'=>$voucher_input->JournalID, 'VoucherType'=>$voucher_input->VoucherType, 'EnableSingleChoose'=>'1', 'type'=>$voucher_input->type, 'From' => 'EnablePostMotPost'));
-    }
-    else
-    {
-        #Vi viser ikke liste over sï¿½keresultat pï¿½ andre kontoer enn de som har KID definert.
-    }
+    if($accountplan->EnablePostPost) $print_postmotpost_matches_button = true;
+
 }
 
 #Dette m� gj�res til slutt for at ikke linjer med null i debit og credit skal slettes

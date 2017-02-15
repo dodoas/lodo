@@ -222,7 +222,7 @@ function onCurrencyChange(selObj) {
     currency_fields = $(parent).find(".currency_field");
     if (!(currency == "")) currency_fields.show();
     else currency_fields.hide();
-    
+
     if (currency == "") {
         rate = 0;
     } else {
@@ -428,6 +428,16 @@ function getCookie(cookie_name) {
     }
   }
   return "";
+}
+
+function get_postmotpost_matches_for_jounal(params) {
+  $('div#postmotpostmatches').html("Henter data ...");
+
+  $.post('<? print $_lib['sess']->dispatchs; ?>t=journal.ajax', params,
+         function(data, status) {
+          $('div#postmotpostmatches').html(data);
+         });
+  return false;
 }
 
 </script>
