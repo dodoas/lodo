@@ -2,7 +2,7 @@
 
 if(isset($_POST['accountplan_AccountPlanType'])) {
     $accountplan_type = $_POST['accountplan_AccountPlanType'];
-} 
+}
 else if(isset($_GET['accountplan_type'])) {
     $accountplan_type = $_GET['accountplan_type'];
 }
@@ -32,7 +32,7 @@ else
 <tbody>
   <tr>
     <td>
-    Type: 
+    Type:
         <?  print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value'=>$selectedAccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled' => 1))  ?>
     </td>
     <td style="padding-left: 15px;">

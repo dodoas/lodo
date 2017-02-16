@@ -35,7 +35,7 @@ function includeinc($inc) {
 //  if (is_file($_SETUP['HOME_DIR'] . "/inc/" . $inc . ".inc.php"))
     require_once($_SETUP['HOME_DIR'] . "/inc/" . $inc . ".inc.php");
 //  else
-//      print "Filen " . $_SETUP['HOME_DIR'] . "/inc/" . $inc . ".inc.php finnes ikke.";
+//      print "File " . $_SETUP['HOME_DIR'] . "/inc/" . $inc . ".inc.php not found.";
 }
 
 function includealogic($inc) {
@@ -51,13 +51,6 @@ function includecodelib($file) {
     global $_SETUP;
     list($module, $class) = explode('/', $file);
     require_once($_SETUP['HOME_DIR'] . "/code/lib/" . $module . "/" . $class . ".class.php");
-}
-
-if(0)
-{
-    #print_r($_REQUEST);
-    print "\n<br />t:".$_REQUEST['t']."<br />";
-    print "\n<br />interface: ".$_SETUP['ACTIVE_INTERFACE']."<br />";
 }
 
 ############################
@@ -106,10 +99,12 @@ $_action = $_REQUEST['action'];
 
 if($_REQUEST['redirected'] > 2)
 {
-    print "Catched a link loop<br>";
-    print "referer. "   . $_SERVER['HTTP_REFERER'] . "<br>";
-    print "requested: " . $_SERVER['REQUEST_URI']  . "<br>";
+    # Caught a link loop. referer: requested:
+    print "Fanget i en link loop<br>";
+    print "refererer. "   . $_SERVER['HTTP_REFERER'] . "<br>";
+    print "forespurt: " . $_SERVER['REQUEST_URI']  . "<br>";
     $_REQUEST['t'] = "";
+    # Page not found - link loop
     $_REQUEST['message'] .= "Siden finnes ikke - link loop<br>";
     //exit;
 }
@@ -120,10 +115,10 @@ else
 
 if(!$include)
 {
-    #If we are runnign dispatch through a require_once( these are already included
+    #If we are running dispatch through a require_once() these are already included
     require_once("../conf/default.inc");
     #Init the database asked for
-    #hvorfor var dette avsnittet kommentert bort? $_SESSION['DB_NAME'] ble ikke satt noe sted, den må jo bli satt til valgt database?
+    # Why was this paragraph comented out? $_SESSION['DB_NAME'] was not set anywhere, it has to be set to the selected database?
     #---------- START -------------#
     if(isset($_REQUEST['DB_NAME_LOGIN']))
     {
@@ -135,14 +130,14 @@ if(!$include)
         #Should we validate this?
         $_SESSION['DB_NAME'] = $_SETUP['DB_NAME_DEFAULT'];
     }
-    #---------- STOPP -------------#
+    #---------- STOP -------------#
 
     #should we check that this exist?
     $_prefs_file = "../conf/prefs_" . $_SESSION['DB_NAME'] . ".inc";
     include($_prefs_file);
 
     #To free up session lock faster all session handling must be before this
-    require_once($_SETUP['HOME_DIR'] . "/code/lib/session/session.class.php"); #MŒ v¾re etter auth
+    require_once($_SETUP['HOME_DIR'] . "/code/lib/session/session.class.php"); # Has to be after auth
 
     #Get the page asked for
     if($_REQUEST['a'] == 'web' or $_REQUEST['a'] == 'htaccess')
@@ -191,7 +186,6 @@ if(!$include)
 }
 
 //print $_SETUP['ACTIVE_INTERFACE'];
-#print "Her og<br>";
 require_once($_SETUP['HOME_DIR']."/code/lib/db/db_" . $_SETUP['DB_TYPE']['0'] . ".class.php");
 $_dbh = array();
 $_dsn = $_SETUP['DB_SERVER']['0'] . $_SESSION['DB_NAME'] . $_SETUP['DB_TYPE']['0'];
@@ -236,7 +230,7 @@ $_lib['setup']     = new framework_lib_setup(array());
 require_once($_SETUP['HOME_DIR'] . "/code/lib/security/security.class.php");
 
 #
-# TODO: HVOR BÃ˜R DENNE LIGGE - martin 
+# TODO: WHERE SHOULD THIS BE - martin
 #
 require_once($_SETUP['HOME_DIR'] . "/modules/timesheets/model/login.php");
 
@@ -247,8 +241,8 @@ require_once($_SETUP['HOME_DIR'] . "/modules/timesheets/model/login.php");
 #    $lang = 'no';
 #   } else { $lang = 'en';}
 
-#If username, password and db is spesified the user tries to login
-#If login_id is spesified the user has logged in (how to be sure this is not tampered with)
+#If username, password and db is specified the user tries to login
+#If login_id is specified the user has logged in (how to be sure this is not tampered with)
 
 $query = "select * from roletemplate where Interface = '".$_SETUP['ACTIVE_INTERFACE']."' and Module = '".$args['0']."' and Template = '".$args['1']."'";
 //print "$query<br>";
@@ -259,16 +253,15 @@ $auth = $_template->AuthType;
 if(!$_template->AuthType)
 {
     //print "DB_NAME: $_SETUP[DB_NAME_DEFAULT], query: $query<br>";
-    $auth = "web"; #Pga bad session handling
+    $auth = "web"; # because of bad session handling
 }
 if($_a)
 {
-    $auth = $_a; # Override default athentivation mechanism
+    $auth = $_a; # Override default authentication mechanism
 }
 
 require_once($_SETUP['HOME_DIR']."/code/lib/auth/$auth.class.php");
 
-#print "Her og3<br>";
 #require_once( "../code/lib/gui/gui.inc"; #Problem beacuse it added headers - has to be solved - not possible to add timelist entries bacause of this
 #print "lang. #" . $_SESSION['lang'] . "# loginid: # " . $_SESSION['login_id'] . "#<br>\n";
 require_once($_SETUP['HOME_DIR'] . "/code/lib/lang/language.class");
@@ -292,12 +285,11 @@ $_lib['form']       = $_form      = new form(array('_dsn' => $_dsn, '_SETUP' => 
 $_lib['form2']      = $_form2     = new form2(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess));
 $_lib['form3']      = $_form3     = new form3(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess, '_QUERY' => $_QUERY, '_ALTINN' => $_ALTINN));
 #print $_sess->get_person("FirstName");
-#print "Her og4<br>";
 if($searchstring) {
   $_lib['log']->search($_sess, 'table', $searchstring);
 }
 #log_usage($sess, $template);
-#Extra security check. Default no intrantt templates can be viewed by other than internal users, has to be turned off manually.
+#Extra security check. Default no intranett templates can be viewed by other than internal users, has to be turned off manually.
 #if($_SESSION['interface'] == 'intranett' || $_SESSION['interface'] == 'lodo') {
 if($_lib['sess']->get_person('PersonID') > 0 or ($_SETUP['ACTIVE_INTERFACE'] == 'lodo' and $args['0'] == 'lodo' and $args['1'] == 'index'))
 {
@@ -309,19 +301,19 @@ if($_lib['sess']->get_person('PersonID') > 0 or ($_SETUP['ACTIVE_INTERFACE'] == 
 }*/
 elseif(!$_template and $args[0] != 'lib')
 {
-    print "Security error. Unable to find security information for template: ".$_SETUP['ACTIVE_INTERFACE'].".$args[0].$args[1]<br>";
+    # Security error. Unable to find security information for template:
+    print "Sikkerhetsfeilmelding. Sikkerhetsinformasjon for mal ikke funnet: ".$_SETUP['ACTIVE_INTERFACE'].".$args[0].$args[1]<br>";
     exit;
 }
 
 #if(ini_get('magic_quotes_gpc') || ini_get('magic_quotes_sybase') || ini_get('magic_quotes_runtime')) {
 #   print "<b>Warning:</b>We recommend to turn of magic quotes<br>";
 #}
-#Typ
-#Type has to be defined for valid entrypoint. extranett/intranett/internett. Shoul be set in role login.
+#Type has to be defined for valid entrypoint. extranett/intranett/internett. Should be set in role login.
 
 #$list=new ViewList("expences");
-#includeÊ"class.php";
-#$list=ÊnewÊViewList("expences");
+#include "class.php";
+#$list= new ViewList("expences");
 #$list->NoShow("Activity");
 #$list->printHead();
 #$list->printBody();
@@ -331,27 +323,27 @@ elseif(!$_template and $args[0] != 'lib')
 #Parameter in example = t=invoice.edit (no file extension)
 
 #print "int: $int<br>";
-#print "interface index: ny: $int, gammel:" . $_SESSION['interface'] . "login_id: " . $_SESSION['login_id'] . "<br />";
+#print "interface index: new: $int, old:" . $_SESSION['interface'] . "login_id: " . $_SESSION['login_id'] . "<br />";
 
 #Cust is the flag for customized code. It is found on RoleTemplate but not retrieved yet.
 
-# print "Inkluderer: " . $include."<br>";
+# print "Includes: " . $include."<br>";
 if(!$include)
 {
     if($args[0] == 'lib')
     {
         $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].'code'.$_SETUP['SLASH'].$args[0].$_SETUP['SLASH'].$args[1].".php";
-        #print "Er lib: $include<br>\n";
+        #print "Is lib: $include<br>\n";
     }
     else
     {
         #$include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].$code.$_SETUP['SLASH'].$_SETUP['ACTIVE_INTERFACE'].$_SETUP['SLASH'].$args[0].$_SETUP['SLASH'].$args[1].".php";
         $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].'modules'.$_SETUP['SLASH'].$args[0].$_SETUP['SLASH'].'view/'.$args[1].".php";
 
-        #print "ikke lib: $include<br>\n";
+        #print "Not lib: $include<br>\n";
     }
 } else {
-    #print "Fra for: $include<br>\n";
+    #print "From for: $include<br>\n";
 }
 
 #Debug
@@ -363,7 +355,7 @@ if(!$include)
 #session_id has to be kept as secret as possible
 #print $_SETUP['ACTIVE_INTERFACE'];
 $_SETUP['DISPATCHX'] = $_SETUP['ACTIVE_INTERFACE'].".php?t=$args[0].$args[1]";
-$_SETUP['DISPATCHR'] = $_SETUP['ACTIVE_INTERFACE'].".php?SID=".$_lib['sess']->get_session('SID') . $_REQUEST['_Level2ID']."&";        # (R) For refresh only - funker ikke med &amp;
+$_SETUP['DISPATCHR'] = $_SETUP['ACTIVE_INTERFACE'].".php?SID=".$_lib['sess']->get_session('SID') . $_REQUEST['_Level2ID']."&";        # (R) For refresh only - does not work with &amp;
 $_SETUP['DISPATCHS'] = $_SETUP['ACTIVE_INTERFACE'].".php";                                            # (S) Simple - without session, & and other special signs, for form login, etc
 $_lib['sess']->dispatch  = $_SETUP['ACTIVE_INTERFACE'].".php?SID=".$_lib['sess']->get_session('SID') . "&amp;";    #Add session to all URLS cookies could be disabled
 
@@ -380,12 +372,13 @@ $_doctype  = $_SETUP['XML']    . "\n";
 $_doctype .= $_SETUP['DOCTYPE']. "\n";
 $_doctype .= $_SETUP['HTML']   . "\n";
 #}
-#print "her<br>";
 #print "$include<br>";
 if(!$_SETUP['ACTIVE_INTERFACE'])
 {
     $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].$code.$_SETUP['SLASH'].$_SETUP['ACTIVE_INTERFACE'].$_SETUP['SLASH'].$_SETUP['ACTIVE_INTERFACE'].$_SETUP['SLASH'].$_SETUP['FIRSTPAGE'].".php";
-    $_lib['message']->add('Session timeout');
+    # Session timeout
+    $_lib['message']->add('Sesjon utl&oslash;pt');
+    # Missed active interface
     print "Manglet aktivt grensesnitt: $include";
     //exit;
 }
@@ -393,10 +386,11 @@ elseif(file_exists($include) == false)
 {
     #If file does not exist something is wrong about authentication or session handling (or programmer error, reauthenticate)
 
-    $_lib['message']->add("File does not exist: $include");
-    #print "Finnes ikke: $include";
+    # File does not exist
+    $_lib['message']->add("Filen eksisterer ikke: $include");
+    #print "Not found: $include";
     $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].'modules/'.$_SETUP['ACTIVE_INTERFACE'].$_SETUP['SLASH'].'/view/'.$_SETUP['SLASH'].$_SETUP['FIRSTPAGE'].".php";
-    #print "Finnes - reautentiser: $include";
+    #print "Found - reauthenticating: $include";
     #exit;
 }
 
@@ -410,7 +404,7 @@ if($aclev >= 1 or (!$_SETUP['SECURITY']['ROLE'] and $_lib['sess']->login_id > 0)
     {
         foreach($_lib['input']->get_action() as $table => $action)
         {
-            #acess kontroll pŒ table
+            # access control on table
             if($table)
             {
                 $action_file = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].$code.$_SETUP['SLASH'].'lib'.$_SETUP['SLASH'].'action'.$_SETUP['SLASH'].$table.$_SETUP['SLASH'].$action.".inc";
@@ -435,15 +429,14 @@ if($aclev >= 1 or (!$_SETUP['SECURITY']['ROLE'] and $_lib['sess']->login_id > 0)
     {
         $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].$code.$_SETUP['SLASH'].'lib'.$_SETUP['SLASH']."login_screen.php";
     }
-    #print "Her og6: $include<br>";
     #print "$include";
     require_once($include);
-    #print "Her og7<br>";
     #Run condition/event check after
 }
 else
 {
-    $_lib['message']->add("User trying to acess a template without role access");
+    # User trying to acess a template without role access
+    $_lib['message']->add("Bruker pr&oslash;ver &aring; bruke mal uten rettigheter");
     $_lib['log']->accessdenied($_lib['sess'], $_template, $args);
     //print "Access denied to this template: " . $_SETUP['ACTIVE_INTERFACE'] . ".$args[0].$args[1]<br>";exit;
     $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH'].$code.$_SETUP['SLASH'].'lib'.$_SETUP['SLASH']."login_screen.php";
@@ -451,7 +444,7 @@ else
     require_once($include);
 }
 
-#Fang opp at fil ikke finnes, mŒ st¿tte debug flagg.
+#Catch that file does not exist, have to support debug flag.
 
 #Print debug and error information
 $_lib['sess']->debug("Destroy session object");

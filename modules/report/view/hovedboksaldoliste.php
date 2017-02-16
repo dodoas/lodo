@@ -1,6 +1,6 @@
 <?
 ###################################################
-# Henter input verdier
+# Fetching input values
 #
 $_active            = (int) $_REQUEST['accountplan_Active'];
 $EnableBudget       = (int) $_REQUEST['report_EnableBudget'];
@@ -16,7 +16,7 @@ $_to_prev_period     = $_lib['date']->get_this_period_last_year($_REQUEST['repor
 $_result_prev_from   = $_lib['date']->get_this_period_last_year($_REQUEST['report_ResultFromPeriod'] . "-01");
 
 ###################################################
-# Henter og setter project id hvis valgt
+# Fetching and setting project id if it is chosen
 #
 $_department    = $_REQUEST['report_DepartmentID'];
 $_car           = $_REQUEST['report_CarID'];
@@ -59,7 +59,7 @@ else
 }
 
 ###################################################
-# Henter reskontro til hovedbok og event overstyrer hvis det er valgt
+# Fetching ledger for main ledger and event overrides if it is chosen
 #
 $query 			 = "select AccountName, ReskontroAccountPlanType, AccountPlanType, AccountPlanID from accountplan where AccountPlanID='".$_REQUEST['report_selectedAccount']."'";
 $selectedaccount = $_lib['storage']->get_row(array('query' => $query));
@@ -81,8 +81,8 @@ foreach($_POST as $key => $sumO->Amount) {
 }
 
 ###################################################
-# Sjekker om det er valgt for hovedbok eller reskontroer.
-# og spør etter akutelle konto fra databasen.
+# Checking if it is chosen for main ledger or ledgers
+# and asking for possible account plans from the database.
 #
 
 function get_budget($AccountplanID, $FromPeriod, $ToPeriod) {
@@ -113,8 +113,8 @@ function get_budget($AccountplanID, $FromPeriod, $ToPeriod) {
 }
 
 ###################################################
-# Sjekker om det er valgt for hovedbok eller reskontroer.
-# og spør etter akutelle konto fra databasen.
+# Checking if it is chosen for main ledger or ledgers.
+# and asking for possible account plans from the database.
 #
 if($_type == 'hovedbok')
 {
@@ -169,7 +169,7 @@ elseif($_type == 'reskontro')
 #print "$query_balance<br>";
 #print "$query_result<br>";
 ###################################################
-# Her starter selve siden.
+# Here the actual page start.
 #
 print $_lib['sess']->doctype ?>
 
@@ -236,7 +236,7 @@ $sumTotal_new   = 0;
 $sumTotal       = 0;
 
 ################################################################################
-# looper over alle balanse konto
+# looping through all the balance account plans
 #
 $e_from_prev_period = mysql_escape_string($_from_prev_period);
 $e_to_prev_period = mysql_escape_string($_to_prev_period);
@@ -353,7 +353,7 @@ $printtext_prev = "Sum reskontro";
   </tr>
 
 
-    <? // Legger til ekstra summeringslinje i reskontrosaldoliste rapport
+    <? // Adds extra summingline to the 'reskontrosaldoliste' report
     if ($_type == "reskontro")
     {
         if($selectedaccount->AccountPlanType == 'balance')
@@ -390,7 +390,7 @@ $printtext_prev = "Sum reskontro";
         </tr>
         <?
     }
-    // END Legger til ekstra summeringslinje i reskontrosaldoliste rapport
+    // END Adds extra summingline to the 'reskontrosaldoliste' report
     ?>
 <? if($_type == 'hovedbok') { ?>
   <tr class="voucher">
@@ -438,7 +438,7 @@ $printtext_prev = "Sum reskontro";
   $sumTotal_prev        = 0;
 
 ###################################################
-# looper over alle resultat kontoer
+# looping through all the result account plans
 #
   while($account = $_lib['db']->db_fetch_object($result_accounts))
   {

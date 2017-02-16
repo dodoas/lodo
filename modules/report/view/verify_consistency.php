@@ -32,8 +32,6 @@ function hovedbokreskonrooppdateringdiff() {
     if(is_array($hovedboksaldoH)) {
         foreach($hovedboksaldoH as $journal) {
 
-
-
             #print "BILAG H: $journal->Compare : Sum: $journal->saldo<br>\n";
 
             if(!isset($reskontrosaldoH[$journal->Compare])) {
@@ -60,7 +58,6 @@ function hovedbokreskonrooppdateringdiff() {
     if(is_array($reskontrosaldoH)) {
         foreach($reskontrosaldoH as $journal) {
 
-
             #print "BILAG R: $journal->Compare : Sum: $journal->saldo<br>\n";
             if(!isset($hovedboksaldoH[$journal->Compare])) {
                 $saldodiffH[$journal->Compare]            = $journal;
@@ -85,11 +82,9 @@ function hovedbokreskonrooppdateringdiff() {
     return $saldodiffH;
 }
 
-
 $query_voucher_account_0    = "select *, sum(AmountIn) as sumin, sum(AmountOut) as sumout from voucher where AccountPlanID=0 and Active=1 group by JournalID order by JournalID";
 $query_open_period          = "select Period from accountperiod where Status=2 or Status=3";
 $query_hovedbok_reskontro   = "select A.*, sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from accountplan as A, voucher as V where A.EnableReskontro=1 and V.AccountPlanID=A.AccountPlanID and V.Active=1 group by AccountPlanID order by AccountPlanID";
-
 $query_bad_date             = "select * from voucher where (VoucherPeriod = '0000-00' or VoucherPeriod = '' or VoucherDate = '0000-00-00' or VoucherPeriod is null or VoucherDate is null or VoucherDate = ''  or VoucherPeriod = 0 or VoucherPeriod < '2001-01' or VoucherDate < '2001-01-01') and Active=1 order by JournalID";
 $result_bad_date            = $_lib['db']->db_query($query_bad_date);
 $result_voucher             = $_lib['db']->db_query($query_voucher);
@@ -224,7 +219,7 @@ $result_voucher_account_0   = $_lib['db']->db_query($query_voucher_account_0);
 </thead>
 <tbody>
 <?
-#Fin alle Œpne periode
+#Find all open periods
 $result_open_period  = $_lib['db']->db_query($query_open_period);
 
 while($period = $_lib['db']->db_fetch_object($result_open_period)) {
@@ -263,7 +258,7 @@ while($period = $_lib['db']->db_fetch_object($result_open_period)) {
 </thead>
 <tbody>
 <?
-#Fin alle Œpne periode
+#Find all open periods
 $result_open_period  = $_lib['db']->db_query($query_open_period);
 
 while($period = $_lib['db']->db_fetch_object($result_open_period)) {
@@ -614,7 +609,7 @@ $result_salary = $_lib['db']->db_query($query_salary);
 // Select all salaries and their corresponding journal ids that have different lines
 // A bit of an explanation of the below query:
 // First we select the number of active lines for salary in voucher table for all open
-// periodes and compare them to number of lines in salaryline table for all open periodes
+// periods and compare them to number of lines in salary line table for all open periods
 // based on corresponding JournalID
 // if the numbers differ then something is not good
 $query_diff  = "SELECT s.SalaryID, s.JournalID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName
@@ -672,10 +667,8 @@ $result_diff = $_lib['db']->db_query($query_diff);
         <td><a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_VoucherType=L&action_journalid_search=1&voucher_JournalID=".$salary->JournalID; ?>" target="_blank"><? print "L".$salary->JournalID; ?></a></td>
     </tr>
 <? } ?>
-
 </tbody>
 </table>
 </fieldset>
-
 </body>
 </html>

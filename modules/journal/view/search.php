@@ -13,13 +13,13 @@ if(strlen($searchstring) > 0 && 1 != 1)
 {
     #Find amount
     $_showresult = "<table>";
-  
+
     #Find all open posts defined on this customer
     #$query = "select AmountIn, AmountOut, JournalID, KID, InvoiceID, VoucherDate from voucher as v, voucherstruct as s where (v.AmountIn = '$Amount' or v.AmountOut = '$Amount') and (v.JournalID=s.Parent or v.JournalID=s.Child) and Closed=0";
     $_lib['sess']->debug("VoucherSearchType: $VoucherSearchType");
     if($VoucherSearchType == 'Amount') {
         $query = "select v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a, voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID)  where (v.AmountIn = '$searchstring' or v.AmountOut = '$searchstring') and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' || a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID";
-    } 
+    }
     elseif($VoucherSearchType == 'AmountIn') {
         $query = "select v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a, voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID)  where v.AmountIn = '$searchstring and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' || a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID";
     }
@@ -28,15 +28,10 @@ if(strlen($searchstring) > 0 && 1 != 1)
     }
     elseif($VoucherSearchType == 'KID') {
         $query = "select v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a, voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID)  where KID = '$searchstring' and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' || a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID";
-    } 
-    else {
-        print "Missing search type";
     }
-    
-    
-    
-    #print "$query<br>";
-    #$result_searcha = $_lib['db']->db_query($query);
+    else {
+        print "Mangler s&oslash;k type";
+    }
 }
 ?>
 
@@ -74,9 +69,9 @@ if(strlen($searchstring) > 0 && 1 != 1)
 print "<h2>VoucherID: $VoucherID</h2><br>\n";
 if($VoucherID > 0) {
     while($row = $_lib['db']->db_fetch_object($result_searcha))
-    { 
+    {
       #$accounting->sum_journal();
-      #$line = $_lib['storage']->get_row(array('query' => 'select sum(AmountIn) as AmountIn, sum(AmountOut) as AmountOut '));  
+      #$line = $_lib['storage']->get_row(array('query' => 'select sum(AmountIn) as AmountIn, sum(AmountOut) as AmountOut '));
     ?>
         <tr>
             <td><? print $row->VoucherType ?></td>

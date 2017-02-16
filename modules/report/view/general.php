@@ -40,30 +40,13 @@ $EnableOnlyPartSum  = $_REQUEST['report_EnableOnlyPartSum'];
 $ThisYear           = $_lib['date']->get_this_year($ToPeriod);
 $PrevYear           = $_lib['date']->get_this_year($_lib['date']->get_this_period_last_year($ToPeriod));
 
-// includealogic('altinnmapping');
 includelogic('linetextmap/linetextmap');
-#Oversett linjenavn
 $linetext = new linetextmap(array('ReportID' => $reportid));
-
-// $map = new AltinnMapping($reportid);
 
 includelogic('report/general');
 
 $report = new GeneralReport(array());
 list($lineHash, $partHash, $groupHash, $totalHash, $Total) = $report->GetReport(array('fromPeriod'=> $FromPeriod, 'toPeriod'=> $ToPeriod, 'enableLastYear'=> $EnableLastYear, 'report'=> $reportid));
-
-/*
-print_r($lineHash);
-print "<br>";
-print_r($partHash);
-print "<br>";
-print_r($groupHash);
-print "<br>";
-print_r($totalHash);
-print "<br>";
-print_r($Total);
-print "<br>";
-*/
 
 print $_lib['sess']->doctype ?>
 <head>

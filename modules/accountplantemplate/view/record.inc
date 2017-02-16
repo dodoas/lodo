@@ -22,7 +22,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
     $accountexist = $_lib['storage']->get_row(array('query' => $queryexist));
     
     if((!$accountexist || $_lib['input']->getProperty('action_accountplan_updateautomatic'))) {
-        // Hvis kontoen ikke finnes fra før eller vi har bedt om en automatisk oppdatering - så kjører vi orgnummer lookup mot integrasjonspunktet
+        // If the account plan does not exist or we have asked for a automatic update - we look up orgnumber against our integration
         includelogic('orgnumberlookup/orgnumberlookup');
         $org = new lodo_orgnumberlookup_orgnumberlookup();
         if(strlen($_POST['accountplantemplate_OrgNumber']) >= 9) 
@@ -143,7 +143,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
     }
     
     if($_POST['accountplantemplate_EnableReskontro'] == 1) {
-        // Update all reskontros with this information
+        // Update all ledgers with this information
         $query_ins = "update accountplantemplate set EnablePostPost=".$_POST['accountplan_EnablePostPost'].", EnableMoneyFlow=".
             $_POST['accountplan_EnableMoneyFlow']." where AccountPlanType = '".$_POST['accountplan_ReskontroAccountPlanType'] . "'";
 

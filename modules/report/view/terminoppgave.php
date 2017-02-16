@@ -53,7 +53,7 @@ print $_lib['sess']->doctype;
       </tr>
       <?
       foreach($Zone as $KommuneID => $Kommune) {
-      #print "Kommune: $KommuneID<br>\n";
+      #print "Municipality: $KommuneID<br>\n";
       #print_r($Kommune);
         ?>
         <tr>

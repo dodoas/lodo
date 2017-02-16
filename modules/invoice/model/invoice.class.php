@@ -12,17 +12,17 @@
 * $invoice->create();
 * $invoiceH['invoice_InvoiceID_' . $InvoiceID] = $InvoiceID;
 * $line1ID = $invoice->linenew();
-* $invoiceH['invoice_InvoiceID_' . $Line1ID] = $InvoiceID;
-* #Mere data
-* $line2ID = $invoice->linenew();
-* $invoiceH['invoice_InvoiceID_' . $Line1ID] = $InvoiceID;
-* #Mere data
-* $line3ID = $invoice->linenew();
-* $invoiceH['invoice_InvoiceID_' . $Line1ID] = $InvoiceID;
-* #Mere data
-* $line4ID = $invoice->linenew();
-* $invoiceH['invoice_InvoiceID_' . $Line1ID] = $InvoiceID;
-* #Mere data
+* $invoiceH['invoiceline_InvoiceID_' . $Line1ID] = $InvoiceID;
+* #More data
+* $Line2ID = $invoice->linenew();
+* $invoiceH['invoiceline_InvoiceID_' . $Line2ID] = $InvoiceID;
+* #More data
+* $Line3ID = $invoice->linenew();
+* $invoiceH['invoiceline_InvoiceID_' . $Line3ID] = $InvoiceID;
+* #More data
+* $Line4ID = $invoice->linenew();
+* $invoiceH['invoiceline_InvoiceID_' . $Line4ID] = $InvoiceID;
+* #More data
 * $invoice->update($invoiceH);
 */
 
@@ -61,7 +61,6 @@ class invoice {
 
         if(!$this->JournalID)
             $this->JournalID = $this->InvoiceID;
-        #print "ferdig<br />\n";
     }
 
     function init($args) {
@@ -101,7 +100,7 @@ class invoice {
             $headH['UpdatedByPersonID']      = $_lib['sess']->get_person('PersonID');
             $headH['SalePersonID']           = $_lib['sess']->get_person('PersonID');
 
-            #print "\n\nFantes ikke: " . $_lib['sess']->get_companydef('CompanyID');
+            #print "\n\nDoes not exits: " . $_lib['sess']->get_companydef('CompanyID');
             #print_r($headH);
 
             $headH['Active']                 = 1;
@@ -205,6 +204,7 @@ class invoice {
         }
         #print_r($headH);
         if(!$headH['CustomerAccountPlanID'])
+            # You must choose the customer which will recieve the invoice
             $_lib['message']->add(array('message' => "Du m&aring; velge kunden som skal motta fakturaen"));
 
         unset($headH['TotalCustPrice']);
@@ -219,7 +219,7 @@ class invoice {
     }
 
     /*******************************************************************************
-    * Update invoice based on std
+    * Update invoice based on standard
     * @param array
     * @return
     */
@@ -425,7 +425,7 @@ class invoice {
 
         #print_r($this->lineH);
 
-        if(count($this->lineH) > 0) #det må minst være en linje i fakturaen
+        if(count($this->lineH) > 0) # it has to be at least one line on the invoice
         {
             #if($this->InvoiceID) { #Delete old invoice
             #    $this->delete_invoice();
@@ -469,6 +469,7 @@ class invoice {
             if((count($this->lineH) == 1 && $this->lineH[0]['ProductID'] > 0 && $this->lineH[0]['QuantityDelivered'] != 0) || count($this->lineH) > 1) {
                 $this->journal();
             } else {
+                # It's missing too many informations so the invoice can't be accounted
                 $_lib['message']->add(array('message' => 'Det mangler for mange opplysninger til at fakturaen kan bli bilagsf&oslash;rt'));
             }
 
@@ -476,13 +477,14 @@ class invoice {
         else
         {
 
-            #print "Sletter bilag pga mangel pŒ linjer: $this->JournalID, $this->VoucherType<br />";
-            #Slett billag hvis det ikke har noen linjer
+            #print "Delete journal because of missing on lines: $this->JournalID, $this->VoucherType<br />";
+            #Delete journal if it deosn't have any lines
             $accounting->delete_journal($this->JournalID, $this->VoucherType);
 
             // update Total sums for invoice to 0
             $this->InvoiceID = $_lib['storage']->store_record(array('data' => $this->headH, 'table' => $this->table_head, 'debug' => false));
 
+            # No invoice lines registered, invoice journal not created
             $_lib['message']->add(array('message' => 'Ingen fakturalinjer registrert, fakturabilag ikke opprettet'));
             $this->success = true;
         }
@@ -494,7 +496,7 @@ class invoice {
 
 
     /*******************************************************************************
-    * Create a new invoice and a empty invoice line
+    * Create a new invoice and an empty invoice line
     * @param array(Date, Status, Active, FromCompanyID, InvoiceDate, PaymentDate, DeliveryDate);
     * @return InvoiceID
     */
@@ -531,7 +533,7 @@ class invoice {
         global $_lib, $accounting;
         $this->OldInvoiceID = $this->InvoiceID;
 
-        /* henter recurring-linjen */
+        /* gets the recurring line */
         $s = "SELECT * FROM recurring WHERE RecurringID = '$recurring_id'";
         $r = $_lib['db']->db_query($s);
         $recurring = $_lib['db']->db_fetch_assoc($r);
@@ -561,7 +563,7 @@ class invoice {
         $headH['CreatedDateTime']     = $_lib['sess']->get_session('Date');
         $headH['InvoiceDate']         = $_lib['sess']->get_session('LoginFormDate');
 
-        /* legger pÃ¥ print-intervalet om det finnes for denne recurringinvoice'en */
+        /* adds to the print interval if it exists for this recurring invoice */
         if($recurring['PrintInterval'])
         {
 //            $headH['InvoiceDate'] = $_lib['date']->add_Days( $recurring['LastDate'], $recurring['PrintInterval'] );
@@ -577,11 +579,10 @@ class invoice {
         if( ($accountplan->EnableCredit == 1) )
         {
             if($accountplan->CreditDays <= 0) {
+              # Customer number: __ has 0 credit days
               $message .= "Kundenummer: $this->CustomerAccountPlanID har 0 dagers kreditt";
             }
             $headH['DueDate'] = $_lib['date']->add_Days($headH['InvoiceDate'], $accountplan->CreditDays);
-            // Rettet av Geir 06.02.2006. Den gamle (linjen nedenfor) beregnet feil.
-            // $_lib['date']->add_Days($row_head->InvoiceDate, $accountplan->CreditDays);
         }
         elseif( ($accountplan->EnableCredit == 0) )
         {
@@ -597,10 +598,8 @@ class invoice {
         $result2 = $_lib['db']->db_query($query_invoiceline);
         while($lineH = $_lib['db']->db_fetch_assoc($result2))
         {
-            unset($lineH['LineID']); #This id is pk so we cannot copy it.
+            unset($lineH['LineID']); #This id is a primary key so we cannot copy it.
             unset($lineH['RecurringID']);
-            #print "linje\n";
-            #print_r($lineH);
             $this->set_line($lineH);
         }
 
@@ -644,11 +643,10 @@ class invoice {
         if( ($accountplan->EnableCredit == 1) )
         {
             if($accountplan->CreditDays <= 0) {
+              # Customer number: __ has 0 credit days
               $message .= "Kundenummer: $this->CustomerAccountPlanID har 0 dagers kreditt";
             }
             $headH['DueDate'] = $_lib['date']->add_Days($headH['InvoiceDate'], $accountplan->CreditDays);
-            // Rettet av Geir 06.02.2006. Den gamle (linjen nedenfor) beregnet feil.
-            // $_lib['date']->add_Days($row_head->InvoiceDate, $accountplan->CreditDays);
         }
         elseif( ($accountplan->EnableCredit == 0) )
         {
@@ -686,10 +684,8 @@ class invoice {
             }
             $i++;
 
-            unset($lineH['LineID']); #This id is pk so we cannot copy it.
+            unset($lineH['LineID']); #This id is a primary key so we cannot copy it.
             unset($lineH['InvoiceID']);
-            #print "linje\n";
-            #print_r($lineH);
             $this->set_line($lineH, false);
         }
 
@@ -743,6 +739,7 @@ class invoice {
         $query="update $this->table_line set Active=0 where LineID=" . $LineID;
         $ret = $_lib['db']->db_update($query);
 
+        # Line __ on invoice __ has been deleted.
         $_lib['message']->add(array('message' => "Linje $LineID p&aring; faktura $this->InvoiceID er slettet"));
 
         if($this->CustomerAccountPlanID == 0) {
@@ -785,8 +782,7 @@ class invoice {
     }
 
     /***************************************************************************
-    * Insert invoice line
-    * @param $line - hash containing invoice line data
+    * Clears invoice line
     */
     function clear_line()
     {
@@ -806,7 +802,7 @@ class invoice {
     function set_line($line, $update_totals = true)
     {
         global $_lib, $accounting;
-        #What about setting line num automatically? Could trigger automatic preprosessing on a field basis
+        #What about setting line num automatically? Could trigger automatic preprocessing on a field basis
 
         $lineH = array();
 
@@ -827,7 +823,7 @@ class invoice {
 
         #print_r($product);
 
-        if($line['QuantityDelivered'] == 0) #Rettet av Geir. Maa vare mulig aa lage kreditnota med minus i antall.
+        if($line['QuantityDelivered'] == 0)
             $lineH['QuantityDelivered'] = 0;
 
         if($line['UnitCustPrice'] == 0)
@@ -840,13 +836,16 @@ class invoice {
         if(!$line['ProductName'])
             $lineH['ProductName'] = $product->ProductName;
         } else {
+            # You must choose products for all invoice lines
             $_lib['message']->add(array('message' => 'InvoiceID ' . $this->InvoiceID . ':Du m&aring; velge produkter til alle fakturalinjene'));
         }
 
         if($lineH['QuantityDelivered'] == 0)
+            # You must set quantity of product for the invoice line
             $_lib['message']->add(array('message' => 'InvoiceID ' . $this->InvoiceID . ':Du m&aring; taste Antall produkter p&aring; fakturalinjen'));
 
         if($lineH['UnitCustPrice'] == 0)
+            # You must set a unit price for the invoice line
             $_lib['message']->add(array('message' => 'InvoiceID ' . $this->InvoiceID . ':Du m&aring; sette en Enhetspris p&aring; fakturalinjen'));
 
         #exit;
@@ -915,6 +914,7 @@ class invoice {
         #print "Sletter: $this->InvoiceID, $this->VoucherType<br>\n";
         $accounting->delete_journal($this->InvoiceID, $this->VoucherType);
 
+        # Invoice __ has been deleted
         $_lib['message']->add(array('message' => "Faktura $this->InvoiceID er slettet"));
 
         return true;
@@ -967,7 +967,7 @@ class invoice {
         global $_lib, $accounting;
 
         /**********************************************************************/
-        #Regnskapsf¿ringne begynner
+        #The accounting starts
         if(isset($this->headH['InvoiceID']))
         {
             $this->JournalID = $this->headH['InvoiceID'];
@@ -976,10 +976,10 @@ class invoice {
             $accounting->delete_journal($this->JournalID, $this->VoucherType);
         }
 
-        #print "<h1>Bilagsf¿rer: JournalID: $this->JournalID</h1>\n";
+        #print "<h1>Accounts: JournalID: $this->JournalID</h1>\n";
 
         /**********************************************************************/
-        /* Generate the accounting new */
+        /* Generate the new accounting */
         $fields = array();
         $fields['voucher_JournalID']      = $this->JournalID;
         $fields['voucher_ExternalID']     = $this->headH['ExternalID'];
@@ -1008,10 +1008,6 @@ class invoice {
         $query_setup    = "select name, value from setup";
         $setup = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
 
-        #print_r($this->headH);
-        #print "hode: $this->CustomerAccountPlanID<br>\n";
-        #print_r($fields);
-
         $VoucherID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=> $this->headH['CustomerAccountPlanID'], 'type'=>'reskontro', 'VoucherType'=> $this->VoucherType, 'invoice'=>'1', 'debug' => true));
 
         $query_invoiceline = "select * from $this->table_line where InvoiceID='$this->InvoiceID' and Active=1 order by LineID asc";
@@ -1030,6 +1026,7 @@ class invoice {
             $productAccountPlan = $accounting->get_accountplan_object($productRow->AccountPlanID);
             #print_r($productRow);
 
+            # Invoice __
             $fieldsline['voucher_AutomaticReason']  = "Faktura: $this->JournalID";
 
             $sumprice = round($row->UnitCustPrice * $row->QuantityDelivered, 2);
@@ -1044,18 +1041,14 @@ class invoice {
 
             $fieldsline['voucher_AmountOut']        = round($sumprice * (1 + ($row->Vat/100)), 2 );
 
-            #print "verdi: " . $fieldsline['voucher_AmountOut'] . "<br>";
             if($fieldsline['voucher_AmountOut'] < 0)
             {
                 $fieldsline['voucher_AmountIn'] = abs($fieldsline['voucher_AmountOut']);
                 unset($fieldsline['voucher_AmountOut']);
             }
 
-            #print "verdi ut: " . $fieldsline['voucher_AmountOut'] . "<br>";
-            #print "verdi inn: " . $fieldsline['voucher_AmountIn'] . "<br>";
-
             $fieldsline['voucher_JournalID']        = $this->JournalID;
-            #$fieldsline['voucher_KID']       = $this->JournalID; #Ikke kid Œ linjer
+            #$fieldsline['voucher_KID']       = $this->JournalID; # No KID on line
             $fieldsline['voucher_VatID']            = $row->VatID;
             $fieldsline['voucher_Vat']              = $row->Vat;
 
@@ -1074,7 +1067,7 @@ class invoice {
             else
                 unset($fieldsline['voucher_ProjectID']);
 
-            $fieldsline['voucher_Description']      = $this->headH['CommentCustomer']; # Take the description from the head to each line. $row->Comment;
+            $fieldsline['voucher_Description']      = $this->headH['CommentCustomer']; # Take the description from the head of each line. $row->Comment;
             $fieldsline['voucher_VoucherText']      = $row->ProductID;
             $fieldsline['voucher_VoucherPeriod']    = $this->headH['Period'];
             $fieldsline['voucher_VoucherDate']      = $this->headH['InvoiceDate'];
@@ -1091,8 +1084,6 @@ class invoice {
 
            $fieldsline['voucher_AccountPlanID']    = $line_accountplanid;
 
-            #print_r($fieldsline);
-            #print "linje: $line_accountplanid<br>\n";
             $accounting->insert_voucher_line(array('post'=>$fieldsline, 'accountplanid'=>$line_accountplanid, 'type'=>'result1', 'VoucherType'=>$this->VoucherType, 'invoice'=>'1', 'debug' => true));
         }
 
@@ -1181,6 +1172,7 @@ class invoice {
 
                 $reason_row = $_lib['storage']->get_row(array('query' => $reasonQuery, 'debug' => true));
                 if(!$reason_row) {
+                    # Something wrong with reconciliation reason _
                     $_lib['message']->add(sprintf("Noe galt med reconciliationreason %d", $reasonID));
                 }
                 else {
@@ -1222,21 +1214,17 @@ class invoice {
             }
         }
 
-
-        #print "PosteringsID: $VoucherID<br>\n";
         $AmountIn                       = $fields['voucher_AmountIn'];
         $fields['voucher_AmountIn']     = $fields['voucher_AmountOut'];
         $fields['voucher_AmountOut']    = $AmountIn;
-        #print "<hr>";
-        #print_r($fields);
-        #print "Hovedbok auto: AccountPlanID, $this->AccountPlanID, VoucherID: $VoucherID, VoucherType: $this->VoucherType, JournalID: $this->JournalID<br>\n";
+        #print "Main ledger auto: AccountPlanID, $this->AccountPlanID, VoucherID: $VoucherID, VoucherType: $this->VoucherType, JournalID: $this->JournalID<br>\n";
         #$accounting->voucher_to_hovedbok_auto($this->AccountPlanID, $fields, $VoucherID);
         $accounting->set_journal_motkonto(array('post'=>$fields, 'VoucherType'=>$this->VoucherType));
         $accounting->correct_journal_balance($fields, $this->JournalID, $this->VoucherType);
     }
 
     ################################################################################################
-    #Legger fakturadata over i fakturabank dataformat og sender det over fakturabank.
+    # Saves invoice data to fakturaBank data format and sends it to fakturaBank.
     function fakturabank_send() {
         global $_lib;
 
@@ -1518,7 +1506,6 @@ class invoice {
         ############################################################################################
         $this->invoiceO->TaxTotal['TaxAmount'] = $taxtotal + $invoice_charge_tax_total - $invoice_allowance_tax_total;
 
-        #TODO: Subtotal should be repeated for each tax amount - forach - and function
         foreach($this->taxH as $VatPercent => $vat) {
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxableAmount                = $vat->TaxableAmount;
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxAmount                    = $vat->TaxAmount;
@@ -1619,6 +1606,7 @@ class invoice {
       $altinn_file = new altinn_file($altinn_report4_row->Folder);
       $file_contents = $altinn_file->readFile("tilbakemelding" . $altinn_report4_row->AltinnReport4ID . ".xml");
       if (!$file_contents) {
+        # Response message cannot be read
         $_lib['message']->add('Tilbakemeldingen kan ikke leses');
         return false; // File can't be read
       } else {
@@ -1642,6 +1630,7 @@ class invoice {
       $kommune = new kommune();
       $kommune->load_by_field_value(array('BankAccountNumber' => $bank_account_number));
       if (is_null($kommune->KommuneNumber)) {
+        # Bank account not found in the municipality list, contact administrator before you can send to fakturaBank
         $_lib['message']->add('Finner ikke bankkonto in kommunelisten, ta kontakt med administrator før du kan sende til fakturaBank');
         return false;
       }

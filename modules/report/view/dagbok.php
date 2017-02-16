@@ -1,6 +1,4 @@
 <?
-#table
-
 $select = "select v.* from voucher as v, accountplan as a ";
 
 if($_REQUEST['report_Type'] == 'dagbok') {
@@ -18,16 +16,16 @@ if($_REQUEST['report_Type'] == 'dagbok') {
     }
     if($_REQUEST['report_VatID']) {
       $where .= " v.VatID = '" . (int) $_REQUEST['report_VatID'] . "' and ";
-    }   
+    }
     if($_REQUEST['report_KID']) {
       $where .= " v.KID = '" . (int) $_REQUEST['report_KID'] . "' and ";
-    }   
+    }
     if($_REQUEST['report_InvoiceID']) {
       $where .= " v.InvoiceID = '" . (int) $_REQUEST['report_InvoiceID'] . "' and ";
-    }   
+    }
     if($_REQUEST['report_Amount']) {
       $where .= " (v.AmountIn = '" . (int) $_REQUEST['report_Amount'] . "' or v.AmountOut = '" . (int) $_REQUEST['report_Amount'] . "') and ";
-    }   
+    }
 
     if($_REQUEST['report_FromAccount']) {
       if(!$_REQUEST['report_ToAccount']) {
@@ -85,8 +83,7 @@ if($where) {
 } else {
   $query_voucher  = $select . " where v.Active=1 order by v." . $_REQUEST['report_Sort'];
 }
-#print "$query_voucher<br>";
-#$_lib['sess']->debug("$query_voucher<br>");
+
 $result_voucher = $_lib['db']->db_query($query_voucher);
 $numrows        = $_lib['db']->db_numrows($result_voucher);
 ?>
@@ -147,7 +144,6 @@ Dato: <? print $_REQUEST['report_FromDate'] ?> - <? print $_REQUEST['report_ToDa
     <th class="sub">KID</th>
     <th class="sub">Faktura</th>
     <th class="sub">Bruker</th>
-    <!-- <th class="sub" colspan="2">Tekst</th> -->
     <th class="sub">Tekst</th>
   </tr>
     <?
@@ -173,7 +169,6 @@ Dato: <? print $_REQUEST['report_FromDate'] ?> - <? print $_REQUEST['report_ToDa
             <td><? print $voucher->KID       ?></td>
             <td><? print $voucher->InvoiceID    ?></td>
             <td><? print $voucher->InsertedByPersonID; ?></td>
-            <!-- <td><? print $voucher->DescriptionID ?></td> -->
             <td><? print $voucher->Description ?></td>
         </tr>
     <?

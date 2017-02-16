@@ -102,8 +102,6 @@ class logic_invoicein_invoicein implements Iterator {
         $query  = substr($query, 0, -4);
         $query .= " order by i.InvoiceDate asc";
 
-		#Cleaning after prior developer. -eirhje 23.01.10
-        #print "$query<br>\n";
         $result     = $_lib['db']->db_query($query);
         list($NextAvailableJournalID) = $this->accounting->get_next_available_journalid(array('available' => true, 'update' => false, 'type' => $this->VoucherType, 'reuse' => false, 'from' => 'Invoicein'));
 
@@ -112,14 +110,13 @@ class logic_invoicein_invoicein implements Iterator {
             $row->Journal   = true;
             $row->Journaled = false;
 
-            # Mer feilsjekking
-            # At sum/bel¿p stemmer
-            # At perioden er Œpen
+            # More fail checking that sum/amount is correct and that the period is open
 
             if($row->JournalID) {
                 $row->Journal = false;
                 $row->Class   = 'red';
                 $row->Journaled = true;
+                # Is already bookkept
                 $row->Status .= "Er allerede bilagsf&oslash;rt";
 
             } else {
@@ -132,7 +129,7 @@ class logic_invoicein_invoicein implements Iterator {
             #print "$query<br>\n";
             $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => true));
 
-            #Motkonto resultat.
+            #Counterpart accountplan result.
             if($account) {
 
                 if($account->EnableMotkontoResultat && $account->MotkontoResultat1) {
@@ -155,6 +152,7 @@ class logic_invoicein_invoicein implements Iterator {
                 while($line  = $_lib['db']->db_fetch_object($result_line)) {
 
                     if(!$line->AccountPlanID) {
+                        # One or more invoice lines are missing result accountplan
                         $row->Status .= "En eller flere fakturalinjer mangler resultatkonto";
                         $row->Journal = false;
                         $row->Class   = 'red';
@@ -163,6 +161,7 @@ class logic_invoicein_invoicein implements Iterator {
                 }
 
             } else {
+                # Could not find accountplan __
                 $row->Status .= "Finner ikke kontoplan: " . $row->SupplierAccountPlanID;
                 $row->Journal = false;
                 $row->Class   = 'red';
@@ -217,24 +216,30 @@ class logic_invoicein_invoicein implements Iterator {
         if(!$invoicein->IZipCode) {
             if($accountplan->ZipCode) {
                 $args['invoicein_IZipCode_' . $ID] = $accountplan->ZipCode;
+                # ZipCode copied from supplier accountplan
                 $_lib['message']->add('Postnummer kopiert fra leverand&oslash;r kontoplan');
             } else {
+                # ZipCode missing on supplier accountplan
                 $_lib['message']->add('Postnummer mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
         if(!$invoicein->ICity) {
             if($accountplan->City) {
                 $args['invoicein_ICity_' . $ID] = $accountplan->City;
+                # City copied from supplier accountplan
                 $_lib['message']->add('Sted kopiert fra leverand&oslash;r kontoplan');
             } else {
+                # City missing on supplier accountplan
                 $_lib['message']->add('Sted mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
         if(!$invoicein->SupplierBankAccount) {
             if($accountplan->DomesticBankAccount) {
                 $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
+                # Account number copied from supplier accountplan
                 $_lib['message']->add('Kontonummer kopiert fra leverand&oslash;r kontoplan');
             } else {
+                # Account number missing on supplier accountplan
                 $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
@@ -337,7 +342,7 @@ class logic_invoicein_invoicein implements Iterator {
     }
 
     ################################################################################################
-    #Journal the invoices automatic.
+    #Journal the invoices automatically.
     #Set the invoices as registered in fakturabank
     #update the bankaccount in accountplan.
     public function journal() {
@@ -350,11 +355,9 @@ class logic_invoicein_invoicein implements Iterator {
 
                 if($InvoiceO->Journal) {
 
-                    //#print "\n\nNeste faktura\n";
-                    //#print_r($InvoiceO);
                     $countjournaled++;
 
-                    //#ToBe Done: Check Payment means for codes 10, 42, 48 - and change the journaling accorging to this.
+                    //#TODO: Check Payment means for codes 10, 42, 48 - and change the journaling accorging to this.
                     $VoucherH = array();
                     $VoucherH['voucher_ExternalID']         = $InvoiceO->ExternalID;
 
@@ -397,6 +400,7 @@ class logic_invoicein_invoicein implements Iterator {
 
                     $VoucherH['voucher_Active']             = 1;
                     $VoucherH['voucher_Description']        = "";
+                    # From incoming invoice ID
                     $VoucherH['voucher_AutomaticReason']    = "Fra innk faktura ID: " . $InvoiceO->ID;
 
                     $VoucherH['voucher_KID']                = $InvoiceO->KID;
@@ -453,7 +457,7 @@ class logic_invoicein_invoicein implements Iterator {
                     }
 
                     //####################################################################################
-                    //#Each line has a different Vat - motkonto is from supplier
+                    //#Each line has a different Vat - counterpart accountplan is from supplier
                     $query_invoiceline      = "select il.* from invoiceinline as il where il.ID='$InvoiceO->ID' and il.Active <> 0 order by il.LineID asc";
                     //#print "query_invoiceline" . $query_invoiceline . "<br>\n";
                     $result2                = $_lib['db']->db_query($query_invoiceline);
@@ -574,17 +578,10 @@ class logic_invoicein_invoicein implements Iterator {
                             unset($VoucherH['voucher_ProjectID']);
                         }
 
-                        //#print_r($VoucherH);
                         $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
                     }
 
-                    /*
-                       maw
-
-                       her i stroeket trengs det en fetch fra fakturabank-tabellen som fikser
-                       "reason"-linjene, f.eks. kontant fra kasse o.l.
-
-                     */
+                    /* here a fetch from the fakturaBank table is needed that fixes the reason lines, for example: cahs from cash register(kontant fra kasse) and similar */
 
 
                     // Creating vouchers for reconsiliation reasons
@@ -621,6 +618,7 @@ class logic_invoicein_invoicein implements Iterator {
 
                             $reason_row = $_lib['storage']->get_row(array('query' => $reasonQuery, 'debug' => true));
                             if(!$reason_row) {
+                                # Something's wrong with reconciliation reason _
                                 $_lib['message']->add(sprintf("Noe galt med reconciliationreason %d", $reasonID));
                             }
                             else {
@@ -635,6 +633,7 @@ class logic_invoicein_invoicein implements Iterator {
                                     $VoucherH['voucher_AmountIn']   = 0;
                                 }
 
+                                # From fakturabank - reconciliation
                                 $this->accounting->insert_voucher_line(
                                     array(
                                         'post' => $VoucherH,
@@ -650,6 +649,7 @@ class logic_invoicein_invoicein implements Iterator {
                                 $VoucherH['voucher_AmountIn'] = $VoucherH['voucher_AmountOut'];
                                 $VoucherH['voucher_AmountOut'] = $tmp;
 
+                                # From fakturabank - reconciliation
                                 $this->accounting->insert_voucher_line(
                                     array(
                                         'post' => $VoucherH,
@@ -701,8 +701,8 @@ class logic_invoicein_invoicein implements Iterator {
                     $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoicein', 'debug' => false));
 
                     //####################################################################################
-                    //#Update bankaccount on accountplan (for later usage in direkte remittering - could be punched to -
-                    //#Could be erronus i the same accountplan has more than one bank account. We just ignore it for now.
+                    //#Update bankaccount on accountplan (for later usage in direct remittance(direkte remittering) - could be punched to -
+                    //#Could be erronus if the same accountplan has more than one bank account. We just ignore it for now.
                     if($InvoiceO->BankAccount) {
                         $dataH = array();
                         $dataH['DomesticBankAccount']   = $InvoiceO->BankAccount;
@@ -711,6 +711,7 @@ class logic_invoicein_invoicein implements Iterator {
                     }
                 }
                 else {
+                    # Invoice is bookkept
                     print "Fakturaen er bilagsf¿rt<br>";
                 }
             }
@@ -722,6 +723,7 @@ class logic_invoicein_invoicein implements Iterator {
             $this->fill(array()); //#Refresh the list after a new query - because lots of paramters get updated when journaling.
             $this->iteratorH = array_merge($this->iteratorH, $theNewlyJournaled);
 
+            # __ invoices have been bookkept
             $_lib['message']->add("$countjournaled fakturaer er bilagsf&oslash;rt");
         }
     }
