@@ -3,6 +3,9 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
+// The parameters that are used for fetching the numbers on this page are not saved to the database
+// and they shouldn't be. We just save the 'to date' for fetching the bottom part of the report decided 2017-02-03
+
 $Period         = $_REQUEST['Period'];
 $StartPeriod    = $_REQUEST['StartPeriod'];
 $detail         = $_REQUEST['detail'];

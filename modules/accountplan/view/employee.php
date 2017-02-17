@@ -106,10 +106,10 @@ if(!empty($validation_errors)) {
     <td></td>
   </tr>
   <tr>
-                             <td class="menu">Fornavn (Kun for personer)</td>
+    <td class="menu">Fornavn (Kun for personer)</td>
     <td></td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.FirstName" value="<? print $account->FirstName  ?>" size="20"></td>
-                             <td>Etternavn (Kun for personer)</td>
+    <td>Etternavn (Kun for personer)</td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.LastName" value="<? print $account->LastName  ?>" size="20"></td>
   </tr>
   <tr>
@@ -218,7 +218,6 @@ if(!empty($validation_errors)) {
     <td>Farge:</td>
     <td><? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'CreditColor', 'value'=>$account->CreditColor, 'type'=>'CreditColor', 'required' => 1)) ?></td>
   </tr>
-
   <tr class="result">
     <th colspan="5">Ansatte</th>
   </tr>

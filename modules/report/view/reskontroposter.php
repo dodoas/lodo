@@ -11,8 +11,6 @@ if($_REQUEST['report_FromAccount']) {
 $result_voucher = $_lib['db']->db_query($query_voucher);
 ?>
 
-
-
 <? print $_lib['sess']->doctype ?>
 <head>
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Reskontroposter</title>

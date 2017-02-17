@@ -59,6 +59,7 @@ function update_reference(element, formname, fromfieldname, tofieldname){
     var journalID = element.value;
     if(!journalID)
     {
+        // You have to type journal number
         alert("Du må taste inn Bilagsnr");
     }
     //alert(journalID);
@@ -71,6 +72,7 @@ function update_period(element, formname, fromfieldname, tofieldname){
    var date = element.value;
    if(!date)
    {
+     // You have to type journal date
      alert("Du må taste inn bilagsdato");
    }
    /* var pattern = new RegExp("/(\\d+)-(\\d+)-(\\d+)/"); */
@@ -107,6 +109,7 @@ function update_period(element, formname, fromfieldname, tofieldname){
          }
          else
          {
+           // Date is malformed, example on correct date is: YYYY-MM-DD (ISO) - 2004-12-04, DD-MM - 04-12 , DD - 04
            alert('Dato er feilformatert, eksempel på riktig dato er: YYYY-MM-DD (ISO) - 2004-12-04, DD-MM - 04-12 , DD - 04');
          }
        }
@@ -125,16 +128,19 @@ function place_period(period, date, formname, fromfieldname, tofieldname)
       if(result != null)
       {
         if(result[2] <= 0 || result[2] > 12) {
+          // Month is invalid
           alert("Måned er ikke gyldig: " + result[2]);
           date = '';
         }
         if(result[3] <= 0 || result[3] > 31) {
+          // Day is invalid
           alert("Dag er ikke gyldig: " + result[3]);
           date = '';
         }
       }
       else
       {
+        // Date is not valid converted
         alert("Dato er ikke gyldig konvertert")
       }
 
@@ -172,6 +178,7 @@ function place_period(period, date, formname, fromfieldname, tofieldname)
       }
       else
       {
+          // The date is not in a valid period
         alert("Datoen er ikke i en gyldig periode");
       }
       document.forms[formname].elements[fromfieldname].value = date;
@@ -231,7 +238,7 @@ function onCurrencyChange(selObj) {
 
     var currency_rate_input = $(parent).find("input.currency_rate")[0];
 
-    currency_rate_input.value = toAmountString(rate);    
+    currency_rate_input.value = toAmountString(rate);
 }
 
 function disableEnterKey(e)
@@ -267,8 +274,9 @@ function exchangeFindRate(btn)
     }
     var currency = currency_id_input[currency_id_input.selectedIndex].value;
     if (currency == "") {
-	    alert("Velg en valuta");
-	    return false;
+        // Choose a currency
+        alert("Velg en valuta");
+        return false;
     }
 
     var googleQuery = '100 NOK in ' + currency;

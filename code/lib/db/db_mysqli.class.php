@@ -86,7 +86,7 @@ class db_mysql {
         return $result;
     }
 
-   #hasher er fine dyr
+   #hashes are nice animals
    function db_query3($args)
    {
       global $_lib;;
@@ -214,7 +214,7 @@ class db_mysql {
 
     #print_r($input);
 
-     #Shoudl also be able to find primary key data if empty
+     #Should also be able to find primary key data if empty
      #print "db_update_hash" . print_r($primarykey) . print "<br />";
      if($_lib['sess']->get_tableaccess($table) >= 2 or !$_SETUP['SECURITY']['ROLE']) {
        $where = "where ";
@@ -308,7 +308,7 @@ class db_mysql {
         $result = $this->db_delete($query);
         #print "Slettet $value fra $table<br>";
       } else {
-          $_lib['sess']->warning("Your role is not permitted to create records in: $table");
+          $_lib['sess']->warning("Your role is not permitted to delete records in: $table");
       }
     }
 
@@ -340,7 +340,7 @@ class db_mysql {
 
                 foreach($pk_data as $field => $value) {
                     #print "$field = $value<br>\n";
-                  #Should we check if it is funsctions here? no.
+                  #Should we check if it is functions here? no.
                     if ($value == DB_NULL_PLACEHOLDER) {
                         $query_set .= "$field = NULL,";
                     } else {
@@ -360,7 +360,7 @@ class db_mysql {
                 }
               }
             } else {
-              #print "Ikke tilgang";
+              #print "No access";
               $_lib['sess']->debug("Access denied: $table_name");
             }
             #print "Loop4<br>";
@@ -389,7 +389,8 @@ class db_mysql {
           #What about embedded html?
           #Does the user have the role rights to save the data
           #If so we use it
-          #Why is . translated to _?
+          #Why is . translated to _? EDIT: See http://php.net/manual/en/language.variables.external.php -> Dots in incoming variable names
+          #Basically if we wanted to transform the param names into vars ex. name.one is not a valid name for a var but name_one is
           if(preg_match("/^$table\_/", $key))
           {
             $key = preg_replace("/$table\_/i", "", $key);
@@ -432,8 +433,7 @@ class db_mysql {
            {
              if(preg_match("/\(\)$/", $value) or preg_match("/\'\)$/", $value))
              {
-               #If it contains parenthesis, its a function
-               #print "ikke fnutt: $field<br>";
+               #If it contains parentheses, its a function
                $fields[$field] = $value;
              }
              else
@@ -449,7 +449,7 @@ class db_mysql {
 
                $value  = $hash['value'];
                $error  = $hash['error'];
-               //$fields = $hash['fields']; #Trenger ikke, dette blir gjort i input nå.
+               //$fields = $hash['fields']; # Not needed, this happens in input now.
                #####################################
                if($error)
                {
@@ -465,14 +465,16 @@ class db_mysql {
            else
            {
              if(!$table) {
+               # Table missing to db_update/db_new
                print "Tabell mangler til db_update/db_new: $table.$field<br />\n";
              }
              if(!$field) {
+               # Field missing to db_update/db_new
                print "Felt mangler til db_update/db_new: $table.$field<br />\n";
              }
              print "Finnes ikke: $table.$field<br />\n";
              unset($fields[$field]); #remove it
-             $_lib['sess']->warning("FIeldname does not exist: $field");
+             $_lib['sess']->warning("Fieldname does not exist: $field");
            }
          } #End foreach
 
@@ -493,7 +495,8 @@ class db_mysql {
     function db_update_multi_record($input, $table, $primarykey) {
       #print "Multi update<br>";
       if(!$table){
-        # print "Empty table in db_update_multi_record<br>";
+        #Empty table in db_update_multi_record
+        print "Tom tabell i db_update_multi_record<br>";
       }
 
       foreach ($input as $key => $value) {
@@ -508,7 +511,7 @@ class db_mysql {
             $newinput = array();
             $newinput[$key] = $value;
 
-            #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreasch exiting, so new_pk does not get a new id.
+            #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreach exiting, so new_pk does not get a new id.
             #Should probably be a multidimensional array with input, table and pk refs
             #if(!$pk_old) { $pk_old = $pk_new; }
             #print "pk_old: $pk_old = pk_new: $pk_new<br>";
@@ -528,7 +531,7 @@ class db_mysql {
     }
 
     #################################################################
-    #Multi record update function in same table: form name requirement: tablename_fieldname_pkvalue
+    #Multi record update function in multiple tables: form name requirement: tablename_fieldname_pkvalue
     #$input     = hash with input (table.field)
     #$table      = hash with tables (table) as key and primary key as value $tables['tabellnavn'] = 'pk';
     #$databases  = hash with databases
@@ -557,7 +560,7 @@ class db_mysql {
                         $newinput = array();
                         $newinput[$key] = $value;
                         #print "Hit<br>";
-                        #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreasch exiting, so new_pk does not get a new id.
+                        #Now we will run an update pr field (should be optimized to record), but we will accept it for now (the commented out method would never update the last record in the form because of the foreach exiting, so new_pk does not get a new id.
                         #Should probably be a multidimensional array with input, table and pk refs
                         #if(!$pk_old) { $pk_old = $pk_new; }
                         #print "pk_old: $pk_old = pk_new: $pk_new<br>";
@@ -709,7 +712,7 @@ class db_mysql {
         //print_r($args);
 
         $field = $args['field'];
-        #Kunne vært enda bedre bruk av cache
+        #Could have been even better with use of cache
 
         $this->_validatehash = $_lib['cache']->table(array('table' => $args['table'], 'field' => $field));
         //print_r($this->_validatehash);
@@ -718,13 +721,13 @@ class db_mysql {
         $type = $this->_validatehash[$field]['InputValidation'];
         //print $args['table']." $field : type: $type<br>\n";
         #$_lib['sess']->debug($args['field']]['InputValidation']);
-        #print("valider: table: $args[table], field: $args[field] : $type: value: $args[value]<br>\n");
+        #print("validate: table: $args[table], field: $args[field] : $type: value: $args[value]<br>\n");
 
         if($type)
         {
             if($this->_validatehash[$field]['Required'] == 1 and strlen($args['value']) == 0) {
                #Check for required fields
-               $_error .= "P&aring;krevet";
+               $_error .= "Required";
             }
             elseif (method_exists($_lib['convert'], $type))
             {
@@ -740,10 +743,10 @@ class db_mysql {
                 if($error)
                 {
                     $_error .= "$args[field] = $args[value]: $error";
-                    #$_lib['sess']->warning($_error); #Bør kunne stå påslått
+                    #$_lib['sess']->warning($_error); # Should be able to be turned on
                 }
 
-                #print "valider: $table, $field required: " . $this->_validatehash[$field]['Required'] . "<br>";
+                #print "validate: $table, $field required: " . $this->_validatehash[$field]['Required'] . "<br>";
             }
             else
             {
@@ -757,7 +760,7 @@ class db_mysql {
         {
             #print "field:#$args[field]#";
             #print_r($this->_validatehash[$args[field]]);
-            $value = $args['value']; #JUst return what you get inside
+            $value = $args['value']; #Just return what you get inside
             #$_lib['sess']->warning("Input validation setup missing for " . $args['table'] . "." . $args['field'] . ". Type: $type. Syncronize db model.");
         }
         #} else {
@@ -785,7 +788,7 @@ class db_mysql {
          }
        }
      }
-     #Find primary keys (Could in fact guess them from table names, but problem guessing upper camel cas
+     #Find primary keys (Could in fact guess them from table names, but problem guessing upper camel case
        foreach ($tables as $table => $tmp) {
          $tables[$table] = $this->find_table_pk($table);
        }
@@ -802,13 +805,13 @@ class db_mysql {
     /***************************************************************************
     * Preferred new function
     * Updates or stores a single record automatically, deletes a record with optinal parameter, or could be forced to only update or insert.
-    * If no parameters are given a tabe description containing a PK will be updated and records not containing a pk will be inserted and pk will be set and returned.
+    * If no parameters are given a table description containing a PK will be updated and records not containing a pk will be inserted and pk will be set and returned.
     * @param array('data' => $fieldHash, 'table' => 'name', action=>'auto/insert/update/delete', debug=>true/false, verify (def:true)where = array('field' => 'operator')
-    * @return PrimaryKey / status - what as done
-    * ToDO: Bare returnere auto_id hvis tabellen har en autoincrement (det må da gå an å finne ut)
-    * Støtte tabeller med mer en en primærnøkkel (foreach loop)
-    * Hvis bare primærnøkkel er tilgjengelig og komplett - slette alle data.
-    * Should be possible to define another where clause than the automatically deducted (for updating and deleting purposes. where =>
+    * @return PrimaryKey / status - what is done
+    * TODO: Should return auto_id if the table has an autoincrement (it has to be possible to find out)
+    * Supports tables with more than one primary key (foreach loop)
+    * If only primary key is accessible and complete - delete all data.
+    * Should be possible to define another where clause than the automatically deduced (for updating and deleting purposes. where =>
     */
     function store_record($args)
     {
@@ -817,7 +820,6 @@ class db_mysql {
         $foundpk    = false;
         $success    = true;
 
-        #print "Her<br>";
         # if($args['debug']) print_r($args);
 
         if(isset($args['verify']))
@@ -834,7 +836,7 @@ class db_mysql {
         $pkfield = $this->find_table_pk($args['table']); #Works because all PKs are single in Empatix
         if(isset($args['data'][$pkfield]) && strlen($args['data'][$pkfield]) > 0)
         {
-            #Finn ut om denne tabellen har en primærnøkkel, hvis den har det så sjekk om den er satt i input nå.
+            #Find out if this table has a primary key,  if it has then check if it's set in the input now.
             #We found a set primary key, so we update the record
             $args['where'] = array($pkfield => '=');
         }
@@ -863,7 +865,7 @@ class db_mysql {
             }
         }
 
-        #Avgjør om vi skal lagre/slette eller oppdatere informasjonen
+        #Decide if we should save/delete or update the information
         if($action == 'delete')
             $action = 'delete';
         elseif($action == 'insert' || ($action='auto' && (!$foundpk || !$record_exist)))
@@ -878,17 +880,17 @@ class db_mysql {
 ;
 
 
-        #Sjekk om brukeren har aksess til å oppdatere tabellen
-        #FIX FIX IMPORTEANT SECURITY HOLE 1 == 1
+        #Check if the user has access to update the table
+        #FIX IMPORTANT SECURITY HOLE 1 == 1
         if($_lib['sess']->get_tableaccess($table) >= 2 || 1 == 1)
         {
-            #Sjekk at det faktisk er oppgitt minst ett felt for oppdatering
+            #Check that it's actually given at least one field for updating
             if(count($args['data']) > 0)
             {
-                #Loop igjennom alle feltene
+                #Loop through all fields
                 foreach($args['data'] as $field => $value)
                 {
-                    #Sjekk om feltet eksisterer i databasen
+                    #Check if fields exists in the database
                     if($_lib['cache']->field_exist(array('table' => $args['table'], 'field' => $field))){
                         #if($args['table'] == 'mediastorage') print "$field => $value\n";
                         #If it contains parenthesis, its a function (not good enough for safety? Needs prepared statements
@@ -896,7 +898,7 @@ class db_mysql {
                             #noop
                         }
                         else {
-                            #Verifiser og konverter innholdet i feltene ihenhold til confdbfields
+                            #Verify and convert the content in the fields based on the fields in confdbfields table
                             if($this->verify) {
                                 $hash   = $this->verify_field(array('table' => $args['table'], 'field' => $field, 'value' => $value));
                                 $value  = $hash['value'];
@@ -921,7 +923,7 @@ class db_mysql {
                 $query_update = substr($query_update, 0, -2);
                 #print "<h2>" . $args['table'] . " $query_update</h2>";
 
-                #Sjekk at det finnes data eller en where del av spørringen
+                #Check that the data exists or where part of the query
                 if((strlen($query_update) || strlen($query_where)) &&  strlen($args['table'])) {
                     if($action == 'update') {
                         $query = "update " . $args['table'] . " set " . $query_update . " where " . $query_where;
@@ -935,12 +937,12 @@ class db_mysql {
                     if($args['debug'] || $this->debug) print "$query\n";
                     #$_lib['sess']->debug("store_record($query)");
                     $result     = $_lib['db']->{'db_' . $action}($query);
-                    if($action == 'insert' && !isset($args['data'][$pkfield])) { #Og det er en auotincrement i tabellen. Insert_id finnes i input, da kan vi ikke be om den etterpå
+                    if($action == 'insert' && !isset($args['data'][$pkfield])) { #And it is an autoincrement in the table. Insert_id exists in input, then we can't ask for it afterwards
                         $success  = $_lib['db']->db_insert_id();
                         #print "Last insert id: $success\n";
                     }
                     elseif(isset($where[$pkfield])) {
-                        #print "PK fantes<br>\n";
+                        #print "PK exists<br>\n";
                         $success  = $where[$pkfield];
                     }
                     #print_r($where);

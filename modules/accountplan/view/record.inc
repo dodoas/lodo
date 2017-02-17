@@ -7,7 +7,7 @@ function validate_employee($employee) {
     global $_lib;
 
     if(!$employee->AccountPlanID) return null;
-    
+
     $errors = array();
     if(empty($employee->FirstName)) {
         $errors[] = "Fornavn kan ikke v&aelig;re blank.";
@@ -127,7 +127,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
 
     // If new firmaID is created and account doesnt exist, accountplan should be saved.
     if(!($_lib['input']->getProperty('action_add_scheme') && $accountexist)) {
-        if(isset($_POST['timesheetpasswords_Password'])) 
+        if(isset($_POST['timesheetpasswords_Password']))
         {
             $password_sql = sprintf("DELETE FROM timesheetpasswords WHERE AccountPlanID = %d", $AccountPlanID);
             $_lib['db']->db_query($password_sql);
@@ -135,12 +135,12 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
       		VALUES ('%d', '%s');", $AccountPlanID, mysql_escape_string($_POST['timesheetpasswords_Password']));
             $_lib['db']->db_query($password_sql);
         }
-        
+
         if(isset($_POST['fakturabankemail_Email'])) {
             $fakturabankemail_query = sprintf("DELETE FROM fakturabankemail WHERE AccountPlanID = %d", $AccountPlanID);
             $_lib['db']->db_query($fakturabankemail_query);
-            
-            $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`) 
+
+            $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`)
         						VALUES('%d', '%s');",
                                               $AccountPlanID, mysql_escape_string($_POST['fakturabankemail_Email']));
             $_lib['db']->db_query($fakturabankemail_query);
@@ -158,10 +158,10 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         if(isset($_POST['accountplanswift_SWIFT'])) {
             $swift_query = sprintf("DELETE FROM accountplanswift WHERE AccountPlanID = %d", $AccountPlanID);
             $_lib['db']->db_query($swift_query);
-            
-            $swift_query = sprintf("INSERT INTO accountplanswift (`AccountPlanID`, `Swift`, `SwiftAccount`) 
+
+            $swift_query = sprintf("INSERT INTO accountplanswift (`AccountPlanID`, `Swift`, `SwiftAccount`)
                                       VALUES ('%d', '%s', '%s');",
-                                   $AccountPlanID, 
+                                   $AccountPlanID,
                                    mysql_escape_string($_POST['accountplanswift_SWIFT']),
                                    mysql_escape_string($_POST['accountplanswift_SWIFTACCOUNT']));
             $_lib['db']->db_query($swift_query);
@@ -171,29 +171,29 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         if (!empty($_POST['accountplan_OrgNumber'])) {
             $_POST['accountplan_OrgNumber'] = clean_org_number($_POST['accountplan_OrgNumber']);
         }
-     
+
         if($_lib['input']->getProperty('action_accountplan_updateautomatic')) {
           $fb = new lodo_fakturabank_fakturabank();
           if (in_array($AccountPlanType, array('supplier', 'customer'))) $fb->update_accountplan_from_fakturabank($AccountPlanID);
         }
-        
+
         if(!$accountexist) {
-            
+
         	$newH = array();
         	$newH['AccountPlanID'] 	= $AccountPlanID;
         	$newH['Active'] 		= 1;
-            
+
             $_lib['storage']->store_record(array('data' => array('AccountPlanID' => $AccountPlanID, 'Active' => 1), 'table' => 'accountplan', 'debug' => false));
             $_POST['accountplan_Active'] = 1;
     	$_POST['accountplan_EnablePostPost'] = 1;
-            
+
             // Possible to extend or alter parameters here
             $query   = "select * from $db_table where AccountPlanID = $AccountPlanID";
             $account = $_lib['storage']->get_row(array('query' => $query));
-    	
+
             $_POST['accountplan_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
             $_POST['accountplan_InsertedDateTime']   = $_lib['sess']->get_session('Datetime');
-            
+
             if($AccountPlanType == 'employee') {
                 /* Create a new salaryconfig for an employee based on the hovedmal (Id:1) */
                 $query = "SELECT * FROM salaryconfline WHERE SalaryConfID = 1";
@@ -208,25 +208,25 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
                 if (empty($salaryconf)) {
                     $query = "INSERT INTO salaryconf VALUES (NULL, $AccountPlanID, 0, NULL); ";
                     $id = $_lib['db']->db_insert($query);
-                
+
                     foreach($hovedmal as $line) {
                         $q = "INSERT INTO salaryconfline VALUES (";
                         $i = 0;
                         foreach($line as $k => $v) {
                             if($k == "SalaryConfLineID") {
                                 $v = "NULL";
-                            } 
+                            }
                             else if($k == "SalaryConfID") {
                                 $v = $id;
                             }
-                        
-                            if($i++ != 0) 
+
+                            if($i++ != 0)
                                 $q .= ",";
-                        
+
                             $q .= "'" .  $_lib['db']->db_escape($v) . "'";
                         }
                         $q .= ")";
-                    
+
                         $_lib['db']->db_query($q);
                     }
 
@@ -245,29 +245,32 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             if($AccountPlanType == 'customer' || $AccountPlanType == 'supplier') {
                 $query = "select AccountPlanID, EnablePostPost, EnableMoneyFlow from accountplan where EnableReskontro=1 and Active=1 and ReskontroAccountPlanType='" . $AccountPlanType . "'";
                 $account = $_lib['storage']->get_row(array('query' => $query));
-                
+
                 $_POST['accountplan_EnablePostPost'] 	= $account->EnablePostPost;
                 $_POST['accountplan_EnableMoneyFlow'] 	= $account->EnableMoneyFlow;
             }
         }
 
         $_POST['accountplan_UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
-        
+
         if($_POST['accountplan_EnableReskontro']==1 and !isset($_POST['accountplan_ReskontroAccountPlanType']))
         {
+            // You must choose one ledger area when you checked of for ledger
             $_lib['message']->add("Du m&aring; velge ett reskontro omr&aring;de n&aring;r du har haket av for reskontro");
         }
-        
+
         if( (isset($_POST['accountplan_EnableMotkontoResultat'])) and (!isset($_POST['accountplan_MotkontoResultat1'])) )
         {
+            // You must choose one ledger counterpart account plan when you checked of for ledger counterpart account plan
             $_lib['message']->add("Du m&aring; velge en resultatmotkonto n&aring;r du har haket av for resultatmotkonto");
         }
-        
+
         if( (isset($_POST['accountplan_EnableMotkontoBalanse'])) and (!isset($_POST['accountplan_MotkontoBalanse1'])) )
         {
-            $_lib['message']->add("Du m&aring; velge en balansemotkonto n�r du har haket av for balansemotkonto");
+            // You must choose one Balance counterpart account plan when you checked of for Balance counterpart account plan
+            $_lib['message']->add("Du m&aring; velge en balansemotkonto n&aring;r du har haket av for balansemotkonto");
         }
-        
+
         if($_POST['accountplan_EnableReskontro'] == 1 && $_POST['accountplan_ReskontroAccountPlanType'])
         {
             $query = "select AccountPlanID from accountplan where AccountPlanID!=$AccountPlanID and EnableReskontro=1 and ReskontroAccountPlanType = '" . $_POST['accountplan_ReskontroAccountPlanType'] . "'";
@@ -277,34 +280,38 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             if($rowCount > 0)
             {
                 $row = $_lib['db']->db_fetch_object($result);
+                // The ledger you chose is in use by account plan __
                 $_lib['message']->add(array('message' => "Reskontro omr&aring;det du valgte er i bruk av konto $row->AccountPlanID"));
             }
         }
-        
+
         if( (strlen($_POST['accountplan_Currency']) < 1) and ($_POST['accountplan_EnableCurrency'] == 1) )
         {
+            // You must choose currency when you have checked of for currency
             $_lib['message']->add("Du m&aring; velge valuta n&aring;r du har haket av for valuta");
         }
-        
+
         if( ($_POST['accountplan_VatID'] == 0) and ($_POST['accountplan_EnableVAT'] == 1) )
         {
+            // You must choose VAT when you have checked of for VAT
             $_lib['message']->add("Du m&aring; velge mva n&aring;r du har haket av for mva");
         }
-        
+
         if($AccountPlanType == 'employee' && !$_POST['accountplan_KommuneID']) {
+            // You must add Municipality
             $_lib['message']->add("Du m&aring; legge inn kommune");
         }
-        
+
         if($_POST['accountplan_EnableVAT'] != 1)
         {
             $_POST['accountplan_VatID'] = null;
         }
-        
+
         if($_POST['accountplan_EnableCurrency'] != 1)
         {
             $_POST['accountplan_Currency'] = null;
         }
-        
+
         if($_POST['accountplan_EnableReskontro'] == 1) {
             // Update all reskontros with this information
             $query_ins = "update accountplan set EnablePostPost=".$_POST['accountplan_EnablePostPost'].", EnableMoneyFlow=".

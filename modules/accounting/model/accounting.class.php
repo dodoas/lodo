@@ -29,7 +29,7 @@ class accounting {
     private $cached_valid_accountperiod = array(); # Caching valid periods to remove 1+N query
 
     /***************************************************************************
-    * Konstruktor
+    * Constructor
     * @param
     * @return
     */
@@ -39,8 +39,8 @@ class accounting {
     }
 
     /***************************************************************************
-    * Destruktor
-    * Run clean up and caløculations only to be run once - here
+    * Destructor
+    * Run clean up and calculations only to be run once - here
     * @param
     * @return
     */
@@ -55,7 +55,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Finn neste tilgjengelig bilagsnummer
+    * Find next accessable voucher number
     * @param $args['JournalID'], $args['type'], $args['AutoFromWeeklySaleID'], $args['reuse'] (If we reuse, we dont find the next available, and we dont update, but search it) ,$args['available'], $args['update'], $args['verify'] (Verify the journalID),
     * @return
     */
@@ -113,7 +113,7 @@ class accounting {
                 {
                     if($args['reuse'])
                     { #If we reuse, we dont find the next available, and we dont update, but search it
-                        $args['available'] = true; #To get the next available to hget a diff
+                        $args['available'] = true; #To get the next available to get a diff
                         $args['update']    = false;
                     }
                     else
@@ -143,8 +143,8 @@ class accounting {
 
             if(isset($row->JournalID))
             {
-              #Dette journalnummeret er tidligere brukt og firma info er ikke oppdatert
-              #Vi finner neste ledige i rekken
+              #This journal number is earlier used and company info is not updated
+              #We find next free in the order
               $select_newjournalid  = "select MAX(JournalID) as JournalID from voucher where VoucherType='" . $args['type'] . "' and Active=1;";
               $_lib['sess']->debug($select_newjournalid);
 
@@ -165,7 +165,6 @@ class accounting {
             $primarykeycompany['CompanyID']     = exchange::getLocalCurrency();
 
             $fields["company_" . $sequencefield[$args['type']]] = $args['JournalID'] + 1;
-            #print "HER35<BR>";
 
             #print_r($fields);
             $_lib['storage']->db_update_hash($fields, 'company', $primarykeycompany);
@@ -193,7 +192,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Beregn postering
+    * Calculate journal lines
     * @param
     * @return
     */
@@ -201,15 +200,15 @@ class accounting {
     {
         global $_lib;
 
-        #Finn alle linjer i bilaget - ikke prøv å join i tilfelle noen avhengigheter mangler
+        #Find all lines in the journal - do not try to join in case some dependencies are missing
         $select_voucher_sql = "select AmountIn, AmountOut, AccountPlanID, VoucherID, ForeignAmount from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and Active=1";
         $_lib['sess']->debug($select_voucher_sql);
         $voucherH = $_lib['storage']->get_hashhash(array('query' => $select_voucher_sql, 'key' => 'VoucherID'));
 
-        #Finn alle hovedbokskontoer med reskontroer - disse skal vi ikke summere over - da vi ikke summerer disse i grensesnittet.
+        #Find all main bookkeeping accounts with ledger - we should not sum these - since we don't sum these in the user interface.
         $hovedbokmedreskontroH = $_lib['storage']->get_hash(array('query' => 'select * from accountplan where EnableReskontro=1', 'key' => 'AccountPlanID', 'value' => 'AccountPlanID'));
 
-        #loop over og summer alle linjer som ikke har match i reskontroer
+        #loop over and sum all lines that don't have a match in ledger
         $sum = 0;
         $fsum = 0;
         foreach($voucherH as $voucher) {
@@ -240,7 +239,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Hent konto
+    * Get accountplan
     * @param
     * @return
     */
@@ -267,7 +266,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Hent MVA konto informasjon basert pï¿½ MVA kode
+    * Get VAT account information based on VAT code
     * @param [VatID, AccountPlanID]
     * @return
     */
@@ -280,7 +279,7 @@ class accounting {
           $date = $_lib['sess']->get_session('LoginFormDate');
         }
         if(!isset($args['VatID']) and !isset($args['AccountPlanID'])) {
-          $args['VatID'] = 11; #Default to vatid 11 if nothing else spesified
+          $args['VatID'] = 11; #Default to vat_id 11 if nothing else specified
         }
         if(isset($args['VatID'])) {
           $query_vat  = "select * from vat where Active=1 and VatID='".$args['VatID']."' and '$date' >= ValidFrom  and '$date' <= ValidTo limit 1";
@@ -292,9 +291,10 @@ class accounting {
         #print "$query_vat<br>\n";
 
         $vat = $_lib['storage']->get_row(array('query' => $query_vat));
-        #Det trenger ikke v?re konto oppsett p? 30, 32, 60 og 62
-        #Merk atVatID null bør sjekkes for opprinnelsen, dette bare demper feilmeldingene.
+        #It doesn't need our accountplan setup on vat_id 30, 32, 60 and 62
+        #Mark that VatID null should be checked at the begginging, this just suppresses the error messages.
         if(!$vat->AccountPlanID && $args['VatID'] != 30 && $args['VatID'] != 32 && $args['VatID'] != 60 && $args['VatID'] != 62 && $args['VatID'] != 0) {
+            # The VAT setup for code __ and accountplan __ and date __
             $_lib['message']->add(array('message' => 'Det finnes ikke MVA oppsett for kode: ' . $args['VatID'] . ' og konto ' . $args['AccountPlanID'] . ' og dato: ' . $date));
         }
 
@@ -302,7 +302,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * MVA konto hash
+    * VAT account hash
     * @param
     * @return
     */
@@ -323,7 +323,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * MVA prosent hash
+    * VAT percent hash
     * @param
     * @return
     */
@@ -361,7 +361,6 @@ class accounting {
         if($args['sale'] == 1)
             $where .= " and VatID < 40";
 
-        //$date = $_lib['sess']->get_session('LoginFormDate'); # tatt vekk 19/05-05 for ï¿½ respektere dato pï¿½ bilag og ikke login dato
         $query_vat  = "select Percent, VatID from vat where VatID <= 62 and '$date' >= ValidFrom  and '$date' <= ValidTo and AccountPlanID > 0 and Active=1 $where order by VatID asc";
         $_lib['sess']->debug($query_vat);
 
@@ -382,7 +381,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Sett inn linjer i ett bilag. MVA, Hovedboksposteringer o.l.skjer automatisk
+    * Insert lines in a voucher VAT, Main bookkeeping accountplan and similar happens automatically
     * $post, $account, $type, $VoucherType
     * @param Examople Array
     *  (
@@ -447,9 +446,10 @@ class accounting {
         }
 
         ############################################################################################
-        #Bï¿½r det vï¿½re periodesjekk her?
+        #Should a preiod check be done here?
         $accountplan = $this->get_accountplan_object($args['accountplanid']);
         if(!$accountplan) {
+          # Accountplan __ does not exist
           $_lib['sess']->warning("Konto: $account eksisterer ikke<br>");
         }
 
@@ -474,7 +474,7 @@ class accounting {
         $this->calculate_amount_foreign_and_rate($post, $args['in_or_out']);
 
         ############################################################################################
-        #Deault values
+        #Default values
         $fields['voucher_JournalID']          = $post['voucher_JournalID'];
         $fields['voucher_VoucherPeriod']      = $post['voucher_VoucherPeriod'];
         $fields['voucher_VoucherType']        = $args['VoucherType'];
@@ -506,7 +506,6 @@ class accounting {
 
         ############################################################################################
         #Vat handling
-        #print "Dette er en test1<br>\n";
         $VAT = $this->vat_input_control($args['accountplanid'], $post['voucher_Vat'], $fields['voucher_VoucherDate']);
 
         if(!$args['NoVatCalculation']) {
@@ -524,11 +523,12 @@ class accounting {
             }
         }
 
-        #Overstyring og spesialhï¿½ndtering
+        #Overriding and special handling
         ############################################################################################
         if($type == 'reskontro')
         {
             if(!$fields['voucher_AutomaticReason']) {
+                # Automatically created ledger
                 $fields['voucher_AutomaticReason'] = "Automatisk opprettet reskontro";
             }
 
@@ -556,9 +556,10 @@ class accounting {
         }
 
         #####################
-        #"Ny auto postering: konto: $account - type: $type, tabell: $db_table<br>";
+        #New auto journal line: accountplan: $account - type: $type, table: $db_table
         if(!$fields['voucher_AutomaticReason'])
         {
+          # Automatically created journal line $type
           $fields['voucher_AutomaticReason'] = "Automatisk opprettet postering: $type";
         }
 
@@ -590,7 +591,7 @@ class accounting {
           }
         }
 
-        #print "<h2>For opprett linje: $VoucherID , ref: " . $fields['voucher_KID'] . " Inn: " . $fields['voucher_AmountIn'] . " Ut: " . $fields['voucher_AmountOut'] . " VatID: " . $fields['voucher_VatID'] . " Vat: " . $fields['voucher_Vat'] . "%</h2>";
+        #print "<h2>For created line: $VoucherID , ref: " . $fields['voucher_KID'] . " In: " . $fields['voucher_AmountIn'] . " Out: " . $fields['voucher_AmountOut'] . " VatID: " . $fields['voucher_VatID'] . " Vat: " . $fields['voucher_Vat'] . "%</h2>";
         if($run_update == 1)
         {
 
@@ -601,11 +602,11 @@ class accounting {
 
 
             $VoucherID = $_lib['storage']->db_new_hash($fields, $db_table);
-            #print "<h2>Opprett linje: $VoucherID , ref: " . $fields['voucher_KID'] . "</h2>";
+            #print "<h2>Create line: $VoucherID , ref: " . $fields['voucher_KID'] . "</h2>";
 
             unset($fields['voucher_KID']);
             unset($fields['voucher_InvoiceID']);
-            $this->voucher_to_hovedbok_auto($fields['voucher_AccountPlanID'], $fields, $VoucherID); #New. We update the hovedbok whenever we insert a new postering
+            $this->voucher_to_hovedbok_auto($fields['voucher_AccountPlanID'], $fields, $VoucherID); #We update the hovedbok whenever we insert a new journal line
 
             $fields['VoucherType'] = $args['VoucherType'];
 
@@ -619,7 +620,7 @@ class accounting {
                   $post['voucher_AmountIn']     = $post['voucher_AmountOut'];
                   $post['voucher_AmountOut']    = $post['voucher_AmountIn'];
               }
-              #print "Beregner MVA<br>";
+              #print "Calculates VAT";
               $this->sub_mva_voucher(array('action'=>'new', 'AccountPlan'=>$accountplan, 'fields'=>$fields, 'VoucherID'=>$VoucherID, 'post'=>$fields));
             }
 
@@ -629,44 +630,48 @@ class accounting {
     }
 
     /***************************************************************************
-    * Oppdater konto
+    * Update accountplan
     * @param
     * @return
     */
     private function update_vat_smart($args)
     {
         global $_lib;
-        $_lib['sess']->debug("update_vat_smart kalt fra : " . $args['comment']);
+        $_lib['sess']->debug("update_vat_smart called from: " . $args['comment']);
 
         if($args['VoucherID']) {
-            #sjekke om globalt flagg er satt for autovoucher i company tabellen.
+            #Check if global flag is set for autovoucher in the company table.
             if($_lib['sess']->get_companydef('VATDuty') == 1)
             {
                 $voucher = $this->get_voucher_object(array('voucherID'=>$args['VoucherID']));
+                # From update_account for loop
                 $this->sub_AutoVat(array('voucher'=>$voucher, 'post'=>$args['post'], 'comment' => 'Fra update_account før loop'));
 
-                #gï¿½ i lï¿½kke til !isset($voucher->AutomaticVatVoucherID);
+                #do until !isset($voucher->AutomaticVatVoucherID);
                 while(isset($voucher->AutomaticVatVoucherID))
                 {
-                    #hent neste autoPostering
+                    #Get next automatic journal line
                     $voucher = $this->get_voucher_object(array('voucherID'=>$voucher->AutomaticVatVoucherID));
                     $_lib['sess']->debug("get_voucher_object3");
 
                     if (!empty($voucher)) {
+                        # From update_account for loop
                         $this->sub_AutoVat(array('voucher'=>$voucher, 'post'=>$args['post'], 'comment' => 'Fra update account i loop'));
                     }
                 }
             } else {
+                # Customer doesn't have to pay VAT
                 $_lib['sess']->debug("Kunde er ikke MVA pliktig");
             }
         } else {
-            print "<h1>ERRROR: VoucherID missing to update_account</h1>";
+            #print "<h1>ERROR: VoucherID missing to update_account</h1>";
+            print "<h1>ERROR: VoucherID mangler for &aring; update_account</h1>";
         }
         #$this->false = true;
     }
 
     /***************************************************************************
-    * Find lines with empty credit and debit sides and delte them
+    * Find lines with empty credit and debit sides and delete them
     * @param JournalID, VoucherType
     * @return
     */
@@ -686,7 +691,7 @@ class accounting {
         ###########################################
         # Delete posible voucherlines connected to this line.
         $query           = "select AutomaticVatVoucherID from voucher where VoucherID=" . (int) $VoucherID . " and JournalID=" . (int) $JournalID . " and VoucherType='" . $VoucherType . "' and Active=1";
-        $_lib['sess']->debug("utenfor: $query");
+        $_lib['sess']->debug("outside: $query");
         $voucherline     = $_lib['storage']->get_row(array('query' => $query));
         $VoucherIDtmp    = $voucherline->AutomaticVatVoucherID;
 
@@ -716,7 +721,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Automatisk opprettet MVA
+    * Automatically created VAT
     * @param
     * @return
     */
@@ -731,62 +736,62 @@ class accounting {
         #print "<h2>sub_AutoVat: VoucherID: $voucher->VoucherID, comment: " . $args['comment'] . "</h2><br>\n";
         #print "<h2>sub_AutoVat args[voucher]</h2>\n"; print_r($args); print "\n###############################\n";
 
-        if($voucher->DisableAutoVat != 1) #ja, vi skal utfï¿½re AutoVat pï¿½ denne posteringen.
+        if($voucher->DisableAutoVat != 1) #yes, we should use AutoVAT on this journal line.
         {
-            #$_lib['message']->add(array('message' => 'sub_AutoVat for'));
+            #$_lib['message']->add(array('message' => 'sub_AutoVat before'));
             $account = $this->get_accountplan_object($voucher->AccountPlanID);
-            #$_lib['message']->add(array('message' => 'sub_AutoVat etter'));
+            #$_lib['message']->add(array('message' => 'sub_AutoVat after'));
 
-            #if($this->debug) { print "Henter kto plan: "; print_r($account) ; print "<br>\n"; }
+            #if($this->debug) { print "Gets accountplan: "; print_r($account) ; print "<br>\n"; }
 
-            #Hvis MVA er overstyrt - så skal vi godta dette og sjekke ihht til det.
-            #print "<h2>sub_AutoVat voucher - sjekk etter overstyring?</h2><br>\n";
+            #IF VAT is overriden - then we should accept this and check based on it.
+            #print "<h2>sub_AutoVat voucher - check after override?</h2><br>\n";
             #print "EnableVAT: $account->EnableVAT, Vat: $voucher->Vat, VatID: $voucher->VatID, AutomaticVatVoucherID: $voucher->AutomaticVatVoucherID<br>\n";
             #print_r($voucher);
 
-            #$voucher->Vat == 0 og det er lov å overstyre.?
-            if($account->EnableVAT == 1 && $voucher->Vat > 0) #sjekker om det er aktivert MVA på denne konto og at det er definert en MVA sats (Nytt)
+            #$voucher->Vat == 0 and it is allowed to override?
+            if($account->EnableVAT == 1 && $voucher->Vat > 0) #Check if VAT is activated on this accountplan and it is defined with a VAT rate
             {
-                #if($this->debug) print "det er moms pï¿½ denne kontoen<br>\n";
-                if($voucher->AutomaticVatVoucherID) #sjekker om det eksisterer autoposteringer
+                #if($this->debug) print "vat is enabled on this accountplan<br>\n";
+                if($voucher->AutomaticVatVoucherID) #check if the automatically created journal lines exist
                 {
-                    $_lib['sess']->debug("det er autoposteringer pï¿½ denne linjen AutomaticVatVoucherID: $voucher->AutomaticVatVoucherID");
+                    $_lib['sess']->debug("There are automatically created journal lines on this line AutomaticVatVoucherID: $voucher->AutomaticVatVoucherID");
                     #print "get_voucher_object4\n";
                     $voucherAUTO = $this->get_voucher_object(array('voucherID'=>$voucher->AutomaticVatVoucherID));
 
-                    if($voucherAUTO->DisableAutoVat != 1) #sjekker om dette er autopostering, hvis sï¿½ er det moms posteringer
+                    if($voucherAUTO->DisableAutoVat != 1) #checks if this is an automatically created journal line, if it is - is it the vat journal line
                     {
-                        #innsett moms posteringer
-                        #print "<h2>Ny MVA postering mot VoucherID: $voucher->VoucherID, Vat: $voucher->Vat</h2><br>\n";
+                        #insert vat journal lines
+                        #print "<h2>New VAT journal line against VoucherID: $voucher->VoucherID, Vat: $voucher->Vat</h2><br>\n";
                         $this->sub_mva_voucher(array('action'=>'new', 'VoucherID'=>$voucher->VoucherID, 'AccountPlan'=>$account, 'post'=>$args['post'], 'voucher'=>$voucher));
                     }
                     else
                     {
-                        #oppdater moms posteringer
-                        #print "<h2>Oppdater MVA postering; voucherAUTO:</h2>";
+                        #update vat journal lines
+                        #print "<h2>Update VAT journal line; voucherAUTO:</h2>";
                         // print_r($voucherAUTO) . "<br>\n";
                         $this->sub_mva_voucher(array('action'=>'update', 'voucher'=>$voucher, 'voucherAV'=>$voucherAUTO, 'AccountPlan'=>$account, 'post'=>$args['post']));
                     }
                 }
                 else
                 {
-                    #ny moms postering
-                    #print "<h2>Ny2 MVA postering mot: VoucherID: $voucher->VoucherID VAT: $voucher->Vat, AutomaticVatVoucherID: $voucher->AutomaticVatVoucherID</h2><br>\n";
+                    #new vat journal line
+                    #print "<h2>New2 VAT journal line against VoucherID: $voucher->VoucherID VAT: $voucher->Vat, AutomaticVatVoucherID: $voucher->AutomaticVatVoucherID</h2><br>\n";
                     $this->sub_mva_voucher(array('action'=>'new', 'VoucherID'=>$voucher->VoucherID, 'AccountPlan'=>$account, 'post'=>$args['post'], 'voucher'=>$voucher));
-                    #print "<h2>Ferdig MVA postering mot: VoucherID: $voucher->VoucherID</h2><br>\n";
+                    #print "<h2>Finished VAT journal line against: VoucherID: $voucher->VoucherID</h2><br>\n";
                 }
             }
             else
             {
-                #det er ikke moms pï¿½ denne kontoen
-                #print "det er ikke moms på denne kontoen eller MVA manuelt overstyrt, slett posteringer<br>\n";
+                #there is no VAT on this accountplan
+                #print "There is no VAT on this accountplan or VAT manually overriden, delete journal lines<br>\n";
                 if($voucher->AutomaticVatVoucherID)
                 {
                     #print "get_voucher_object5\n";
                     $voucherAUTO = $this->get_voucher_object(array('voucherID'=>$voucher->AutomaticVatVoucherID));
                     if($voucherAUTO->DisableAutoVat == 1)
                     {
-                        #slette moms posteringer
+                        #delete vat journal lines
                         $this->sub_mva_voucher(array('action'=>'delete', 'voucher'=>$voucher, 'voucherAV'=>$voucherAUTO));
                     }
                 }
@@ -795,7 +800,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * sub_mva_voucher: Lag MVA til postering
+    * sub_mva_voucher: Make VAT to journal line
     * @param
     * @return
     */
@@ -803,15 +808,14 @@ class accounting {
     {
         global $_lib;
 
-        unset($args['post']['voucher_Quantity']); #Quantity should bever be updated on a vat line.
-        unset($args['fields']['voucher_Quantity']); #Quantity should bever be updated on a vat line.
-        unset($args['post']['voucher_ProjectID']); #Quantity should bever be updated on a vat line.
-        unset($args['post']['voucher_DepartmentID']); #Quantity should bever be updated on a vat line.
+        #Quantity should never be updated on a vat line.
+        unset($args['post']['voucher_Quantity']);
+        unset($args['fields']['voucher_Quantity']);
+        unset($args['post']['voucher_ProjectID']);
+        unset($args['post']['voucher_DepartmentID']);
 
-        #print "Finnes VATID fra forrige postering her<br>\n";
+        #print "Does VAT ID exist from last journal line here<br>\n";
         #print_r($args);
-
-        $_lib['sess']->debug('');
 
         if(isset($args['post']['voucher_AmountIn']) && $args['post']['voucher_AmountIn'] == 0 && isset($args['post']['voucher_AmountOut']) && $args['post']['voucher_AmountOut'] == 0)
             return;
@@ -825,20 +829,21 @@ class accounting {
             $args['voucher'] = $this->get_voucher_object(array('voucherID'=>$args['VoucherID']));
         }
 
-        if($args['AccountPlan']->VatID != 30 && $args['AccountPlan']->VatID != 32 && $args['AccountPlan']->VatID != 60 && $args['AccountPlan']->VatID != 62 && $args['action'] != 'delete') #dette er avgiftftitt salg, ikke no vits og fï¿½re linjer her
+        if($args['AccountPlan']->VatID != 30 && $args['AccountPlan']->VatID != 32 && $args['AccountPlan']->VatID != 60 && $args['AccountPlan']->VatID != 62 && $args['action'] != 'delete') #it is a tax free sale, no point filtering lines here
         {
             ##################################
             if( ($args['action'] == 'new') || ($args['action'] == 'update') )
             {
                 if($this->debug) {
-                    print "New eller Update MVA postering<br>\n";
+                    # new or update VAT journal line
+                    print "Ny eller oppdater MVA postering<br>\n";
                     #print_r($args);
                 }
                 $fields = $args['fields'];
 
                 $vat = $this->get_vataccount_object(array('VatID'=>$args['post']['voucher_VatID'], 'date' => $args['voucher']->VoucherDate));
                 $fields['voucher_AccountPlanID']  = $vat->AccountPlanID;
-                $_lib['sess']->debug("Kontoplan: $vat->AccountPlanID fra VatID" . $args['post']['voucher_VatID'] . "dato: " . $args['voucher']->VoucherDate);
+                $_lib['sess']->debug("Accountplan: $vat->AccountPlanID from VatID" . $args['post']['voucher_VatID'] . "date: " . $args['voucher']->VoucherDate);
 
                 if($vat->Percent > 0)
                     $percent = $vat->Percent;
@@ -882,11 +887,11 @@ class accounting {
             if($args['action'] == 'new')
             {
 
-                #print "New MVA postering<br>\n";
+                #print "New VAT journal line<br>\n";
                 #print_r($fields);
                 if(!isset($fields['voucher_JournalID']))
                 {
-                    $_lib['sess']->debug("JournalID ikke satt henter fra args[voucher]");
+                    $_lib['sess']->debug("JournalID not set gets from args[voucher]");
                     $fields['voucher_JournalID']          = $args['voucher']->JournalID;
                     $fields['voucher_VoucherPeriod']      = $args['voucher']->VoucherPeriod;
                     $fields['voucher_VoucherType']        = $args['voucher']->VoucherType;
@@ -906,78 +911,83 @@ class accounting {
                 $fields['voucher_DepartmentID']     = $args['voucher']->DepartmentID;
                 $fields['voucher_CarID']            = $args['voucher']->CarID;
 
+                # Automatically created VAT journal line
                 $fields['voucher_AutomaticReason'] = "Automatisk opprettet MVA postering $fields[voucher_Vat]";
                 $fields['voucher_DisableAutoVat'] = 1; #setter disable autovat til true, fordi dette er en autovat linje
 
                 if(!$fields['voucher_JournalID']) {
+                    # ERROR: Voucher number is not allowed to be 0
                     print "ERROR: Bilagsnummer har ikke lov til ï¿½ vï¿½re 0<br>\n";
                 }
 
                 if($fields['voucher_AmountIn'] > 0 or  $fields['voucher_AmountOut'] > 0) {
-                    #print "Oppretter ny VAT<br>\n";
+                    #print "Create new VAT<br>\n";
                     $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
                 } else {
-                    #print "MVA belï¿½p ikke funnet<br>\n";
+                    #print "VAT amount not found<br>\n";
                 }
 
-                #setter link fra posteringslinje til automoms posteringslinje
+                #sets link from journal line to auto vat journal line
                 $this->update_voucher_line(array('voucher_AutomaticVatVoucherID' => $VoucherID), $args['VoucherID'], 'sub_mva_voucher1', $args['voucher']->VoucherPeriod);
 
                 #######################
-                #Motsatt pï¿½ samme konto
+                #Set counterpart on same accountplan
                 $fields['voucher_AccountPlanID'] = $args['AccountPlan']->AccountPlanID;
                 $tmpIn                           = $fields['voucher_AmountIn'];
                 $fields['voucher_AmountIn']      = $fields['voucher_AmountOut'];
                 $fields['voucher_AmountOut']     = $tmpIn;
+                # Automatically created VAT counterpart journal line
                 $fields['voucher_AutomaticReason'] = "Automatisk opprettet MVA motpostering $fields[voucher_Vat]";
 
-                #print "Ny MVA motsatt samme linje<br>";
+                #print "New VAT counterpart for same line<br>";
                 #print_r($fields);
                 $VoucherID2 = $_lib['storage']->db_new_hash($fields, 'voucher');
 
-                #setter link fra fï¿½rste mva postering til mva motpostering
+                #sets link from first vat journal line to vat counterpart journal line
                 $fields2['voucher_AutomaticVatVoucherID'] = $VoucherID2;
-				// use voucher period as mva period
+                // use voucher period as mva period
                 $this->update_voucher_line($fields2, $VoucherID, 'sub_mva_voucher2', $args['voucher']->VoucherPeriod);
             }
 
             ##################################
             elseif($args['action'] == 'update')
             {
-                $_lib['sess']->debug("Update MVA postering");
+                $_lib['sess']->debug("Update VAT journal line");
+                # Automatically updated VAT journal line
                 $fields['voucher_AutomaticReason'] = "Automatisk oppdatert MVA postering $fields[voucher_Vat]";
-                $fields['voucher_DisableAutoVat'] = 1; #setter disable autovat til true, fordi dette er en autovat linje
+                $fields['voucher_DisableAutoVat'] = 1; #sets disable autovat to true, because it is an auto vat line
 
                 $fields['voucher_ProjectID']        = $args['voucher']->ProjectID;
                 $fields['voucher_DepartmentID']     = $args['voucher']->DepartmentID;
                 $fields['voucher_CarID']            = $args['voucher']->CarID;
                 $fields['voucher_VoucherPeriod']     = $args['voucher']->VoucherPeriod;
 
-                #print "Oppdater MVA postering pk VoucherID: " . $args['voucherAV']->VoucherID; print_r($fields) ; print "<br>\n";
+                #print "Updates VAT journal line primary key VoucherID: " . $args['voucherAV']->VoucherID; print_r($fields) ; print "<br>\n";
                 $this->update_voucher_line($fields, $args['voucherAV']->VoucherID, 'sub_mva_voucher3');
 
-                #Motsatt pï¿½ samme konto
+                #Counterpart on same accountplan
                 $fields['voucher_AccountPlanID'] = $args['AccountPlan']->AccountPlanID;
                 $tmpIn                           = $fields['voucher_AmountIn'];
                 $fields['voucher_AmountIn']      = $fields['voucher_AmountOut'];
                 $fields['voucher_AmountOut']     = $tmpIn;
+                # Automatically updated VAT journal line
                 $fields['voucher_AutomaticReason'] = "Automatisk oppdatert MVA motpostering $fields[voucher_Vat]";
 
-                #gjï¿½r ingenting med linken. lar den vï¿½re som den er
+                #does nothin with the link. lets it be like it is
                 //$fields['voucher_AutomaticVatVoucherID'] = $VoucherID;
 
-                if($args['voucherAV']->AutomaticVatVoucherID) #hvis det eksisterer en motpostering oppdateres denne
+                if($args['voucherAV']->AutomaticVatVoucherID) #if the counterpart journal line exists it gets updated
                 {
                     $fields['voucher_ProjectID']        = $args['voucher']->ProjectID;
                     $fields['voucher_DepartmentID']     = $args['voucher']->DepartmentID;
 
-                    $_lib['sess']->debug("Oppdater MVA motpost");#print "<br>";
+                    $_lib['sess']->debug("Update VAT counterpart line");#print "<br>";
                     #print_r($fields);
                     $this->update_voucher_line($fields, $args['voucherAV']->AutomaticVatVoucherID, 'sub_mva_voucher4', $args['voucher']->VoucherPeriod);
                 }
-                else #hvis det ikke eksisterer en motpostering, lages en motpostering.
+                else #if a counterpart journal line does not exist it will be created.
                 {
-                    $_lib['sess']->debug("Ny MVA motpost");
+                    $_lib['sess']->debug("New VAT counterpart line");
                     #generate voucher information
                     $fields['voucher_JournalID']          = $args['voucherAV']->JournalID;
                     $fields['voucher_VoucherPeriod']      = $args['voucherAV']->VoucherPeriod;
@@ -996,11 +1006,12 @@ class accounting {
                     $fields['voucher_DepartmentID']       = $args['voucher']->DepartmentID;
                     $fields['voucher_CarID']              = $args['voucher']->CarID;
 
+                    # Created new VAT counterpart journal line
                     print "Opprett ny MVA motpostering<br>";
                     #print_r($fields);
                     $voucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
 
-                    #setter link fra fï¿½rste mva postering til mva motpostering
+                    #sets link from first VAT journal line to VAT counterpart journal line
                     $fields2['voucher_AutomaticVatVoucherID'] = $voucherID;
                     $this->update_voucher_line($fields2, $args['voucherAV']->VoucherID, 'sub_mva_voucher5');
                 }
@@ -1010,7 +1021,7 @@ class accounting {
         ##################################
         elseif($args['action'] == 'delete')
         {
-            if($args['voucherAV']) #parameteret mï¿½ vï¿½re satt for at vi skal kunne slette
+            if($args['voucherAV']) #the parameter must be set before we can delete
             {
                 $this->delete_voucher_line($args['voucherAV']->VoucherID, $args['voucher']->JournalID, $args['voucher']->VoucherType, 'sub_mva_voucher');
 
@@ -1029,10 +1040,10 @@ class accounting {
 
                 if($AutomaticVatVoucherID)
                 {
-                    #oppdatere $args['voucher']->AutomaticVatVoucherID = $AutomaticVatVoucherID;
-                    $fields['voucher_AutomaticVatVoucherID'] = $AutomaticVatVoucherID; #setter link til neste auto-postering
-                    $fields['voucher_Vat']      = ''; #setter vat til null pï¿½ postering
-                    $fields['voucher_VatID']    = ''; #setter vat til null pï¿½ postering
+                    #update $args['voucher']->AutomaticVatVoucherID = $AutomaticVatVoucherID;
+                    $fields['voucher_AutomaticVatVoucherID'] = $AutomaticVatVoucherID; #sets link to next automatic journal line
+                    $fields['voucher_Vat']      = ''; #sets vat to null on journal line
+                    $fields['voucher_VatID']    = ''; #sets vat to null on journal line
 
                     $this->update_voucher_line($fields, $args['voucher']->VoucherID, 'sub_mva_voucher6', $args['voucher']->VoucherPeriod);
                 }
@@ -1041,7 +1052,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Tilgjengelig bilagsnummer
+    * Get voucher object
     * @param
     * @return
     */
@@ -1063,7 +1074,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Tilgjengelig bilagsnummer
+    * Get journal head data(main vaoucher line in the journal)
     * @param JournalID, VoucherType
     * @return JournalID, VoucherType, VoucherDate, VoucherPeriod for a given journal
     */
@@ -1092,7 +1103,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Tilgjengelig bilagsnummer
+    * Get currency object
     * @param
     * @return
     */
@@ -1108,7 +1119,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Find which Accountplan is hovedbok to this accountplanid
+    * Find which Accountplan is main ledger(hovedbok) to this accountplanid
     * @param $AccountPlanID
     * @return $Hovedbok object
     */
@@ -1129,7 +1140,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Motkonto
+    * Counterpart accountplan
     * @param
     * @return
     */
@@ -1137,14 +1148,15 @@ class accounting {
         global $_lib;
 
         if(!$VoucherID || !$field['voucher_JournalID'] || !$field['voucher_VoucherType']) {
+            # Missing input to voucher to main ledger:
             $_lib['sess']->warning("Mangler input til voucher to hovedbok: AccountPlanID: #$AccountPlanID#, VoucherID: #$VoucherID#, voucher_JournalID: #" . $field['voucher_JournalID'] . '# x type: #' . $field['voucher_VoucherType']);
         }
 
-        #print "Hovedbok autoposteringer: Postering: $VoucherID, Konto: $AccountPlanID<br>\n";
+        #print "Main ledger automatic journal lines: Journal line: $VoucherID, Accountplan: $AccountPlanID<br>\n";
         if($this->is_reskontro($AccountPlanID))
         {
-          #print "Det er en reskontro: $AccountPlanID<br>\n";
-          #This is a reskontro - find out which hovedbokskonto it belongs to
+          #print "it is a ledger(reskontro): $AccountPlanID<br>\n";
+          #This is a reskontro - find out which main ledger account it belongs to
 
           $query_voucher    = "select vat.Percent, V.VatID from voucher as V, vat where V.VoucherID='$VoucherID' and V.VatID=vat.VatID and V.Active=1";
           $_lib['sess']->debug($query_voucher);
@@ -1159,7 +1171,7 @@ class accounting {
           {
 
             if(!isset($this->voucher_to_hovedbok[$VoucherID])) {
-                #print "Vi fant hovedboka: $hovedbok->AccountPlanID<br>\n";
+                #print "We found main ledger: $hovedbok->AccountPlanID<br>\n";
                 #$query_mot = "select VoucherID from voucher where AutomaticFromVoucherID='$VoucherID' and AccountPlanID='$hovedbok->AccountPlanID' and JournalID='".$field['voucher_JournalID']."' and VoucherType='".$field['VoucherType']."'"; #Feiler hvis den har med kto. Kunne evt brukt OldAccountPlanID
                 $query_mot = "select VoucherID from voucher where AutomaticFromVoucherID='$VoucherID' and JournalID='".$field['voucher_JournalID']."' and VoucherType='".$field['voucher_VoucherType']."' and Active=1";
                 $_lib['sess']->debug($query_mot);
@@ -1169,28 +1181,27 @@ class accounting {
                 #print "$query_mot<br>\n";
                 $mot       = $_lib['storage']->get_row(array('query' => $query_mot));
 
-                #print "ID: $hovedbok->AccountPlanID, mot: $mot->VoucherID<br>";
-                #We only continue if the reskontro has a assigned hovedbok.
+                #print "ID: $hovedbok->AccountPlanID, against: $mot->VoucherID<br>";
+                #We only continue if the ledger(reskontro) has a assigned main ledger.
                 $field['voucher_AccountPlanID']             = $hovedbok->AccountPlanID;
                 $field['voucher_AutomaticFromVoucherID']    = $VoucherID;
                 $field['voucher_DisableAutoVat']            = 1;
+                # Automatically updated main ledger's journal line from accountplan: __ Journal line __
                 $field['voucher_AutomaticReason']           = "Automatisk oppdatert hovedboks postering fra kto: $AccountPlanID Postering: $VoucherID";
                 $field['voucher_UpdatedByPersonID']         = $_lib['sess']->get_person('PersonID');
                 $field['voucher_AddedByAutoBalance']        = 0;
 
-                #print "Automatisk oppdatert hovedboks postering fra kto: $AccountPlanID Postering: $VoucherID<br/>\n";
-
                 if($mot->VoucherID > 0)
                 {
-                    #We update an existing hovedboks entry, should be similar to updated postering
+                    #We update an existing main ledger entry, should be similar to updated journal line
                     $this->update_voucher_line_smart($field, $mot->VoucherID, 'voucher_to_hovedbok_auto1');
                 }
                 else
                 {
-                    #We insert a new hovedboks entry
-                    #Det er en reskontro. Reskontroen har denne hovedboken. Fï¿½r postering mot denne hovedboken automatisk
+                    #We insert a new main ledger entry
+                    #It is a ledger(reskontro). The ledger(Reskontroen) has this main ledger. Account this journal line against this main ledger automatically
                     $field['voucher_AutomaticFromVoucherID'] = $VoucherID;
-                    #print "Automatisk opprettet hovedboks postering<br>\n";
+                    #print "Automatically created main ledger's journal line";
                     #print_r($field);
                     $hovedboknew = $_lib['storage']->db_new_hash($field, 'voucher');
 
@@ -1212,15 +1223,15 @@ class accounting {
                             $field['voucher_AmountOut'] = 0;
                         }
 
+                        # Automatically created main ledger's VAT journal line
                         $field['voucher_AutomaticReason'] = "Automatisk opprettet hovedboks mva postering";
                         $field['voucher_AutomaticFromVoucherID'] = $hovedboknew;
-                        #print "Automatisk opprettet hovedboks mva postering<br>\n";
                         #print_r($field);
                         $_lib['storage']->db_new_hash($field, 'voucher');
                     }
                 }
             } else {
-                #print "<h2>Denne linjen er allerede poster mot hovedbok: $VoucherID</h2>";
+                #print "<h2>This line is already marked against main ledger: $VoucherID</h2>";
             }
         }
         else
@@ -1230,9 +1241,8 @@ class accounting {
       }
       else
       {
-        #dette er ikke noen reskontro. sï¿½ vi mï¿½ sjekke om det finnes hovedboksposteringer mot denne linjen fra fï¿½r
-        #lagt til: 22/10-04
-        #print "Det er ikke en reskontro: $AccountPlanID<br>\n";
+        #This is not any ledger(reskontro). so we have to check if it is main ledger's jouranl lines against this line from before
+        #print "This is not any ledger(reskontro): $AccountPlanID<br>\n";
 
         $query = "select VoucherID from voucher where AutomaticFromVoucherID='$VoucherID' and Active=1";
         $_lib['sess']->debug($query);
@@ -1243,11 +1253,11 @@ class accounting {
             $this->delete_voucher_line($old->VoucherID, $field['voucher_JournalID'], $field['voucher_VoucherType'], 'voucher_to_hovedbok_auto');
         }
       }
-      #print "Ferdig hovedbok auto: $message<br>\n";
+      #print "Finished main ledger auto: $message<br>\n";
     }
 
     /***************************************************************************
-    * Oppdater hovedboksmotkontoer for resultat og balanse. Oftest kto 2090 og 8800
+    * Update main ledger's counterpart accountplans for result and balance. Usually accountplan 2090 and 8800
     * @param post[voucher_VoucherPeriod, AccountPlanID or AccountPlanType, AccountAuto]
     * @return
     */
@@ -1264,7 +1274,8 @@ class accounting {
         $periodexist = $period = $post['voucher_VoucherPeriod'];
 
         if(strlen($periodexist) != 7 || $periodexist == '0000-00') {
-            $_lib['message']->add(array('message' => "VoucherPeriod wrong in function update_motkonto: #$periodexist#. Aborting update"));
+            #VoucherPeriod wrong in function update_motkonto: #$periodexist#. Aborting update
+            $_lib['message']->add(array('message' => "VoucherPeriod feil i funksjon update_motkonto: #$periodexist#. Stopper oppdateringen"));
             return;
         }
 
@@ -1289,19 +1300,18 @@ class accounting {
                 print "Missing AccountPlanID or AccountPlanType ";
             }
 
-            $_lib['sess']->debug("Beregning av saldo til automatisk hovedboksmotkonto: $sql_saldo");
+            $_lib['sess']->debug("The calculation of balance to automatic main ledger counterpart accountplan: $sql_saldo");
 
             $saldo = $_lib['storage']->get_row(array('query' => $sql_saldo));
             $sum_balance = round($saldo->AmIn - $saldo->AmOut, 2);
-            $_lib['sess']->debug("<b>Balanse sporring: $sql_saldo<br>\nsum:$sum_balance = in:$saldo->AmIn - out:$saldo->AmOut</b>");
+            $_lib['sess']->debug("<b>Balance query: $sql_saldo<br>\nsum:$sum_balance = in:$saldo->AmIn - out:$saldo->AmOut</b>");
         } else {
-            #Tallet er ferdig beregnet fra forrige runde, s? da bruker vi det.
-            #Ny tilpasning. TE 2006-05-26
+            #The number was calculated before, so then we use it.
             $sum_balance = $args['Amount'];
         }
 
         ########################################################################
-        #Check if balanse motkonto exists (returns changed)
+        #Check if balance counterpart accountplan exists (returns changed)
         if($sum_balance >= 0)
         {
             $fieldsbalance['voucher_AmountIn'] = 0;
@@ -1324,7 +1334,7 @@ class accounting {
         }
 
         ########################################################################
-        #Finn  prim?rn?kkel for oppdastering av motkonto.
+        #Find primary key for updating counterpart accountplan.
         $primarykeybalance['AccountPlanID']   = $args['AccountAuto'];
         $primarykeybalance['VoucherType']     = $VoucherType;
         $primarykeybalance['VoucherPeriod']   = $post['voucher_VoucherPeriod']; #Should use period here
@@ -1338,14 +1348,14 @@ class accounting {
         ########################################################################
         if($row_balance->VoucherID)
         {
-            $_lib['sess']->debug("Oppdater periodevismotkonto");
+            $_lib['sess']->debug("Update periodic counterpart accountplan");
             $this->update_voucher_line($fieldsbalance, $row_balance->VoucherID, "Updated from update_motkonto ");
         }
         else
         {
-            #Oppretter ny postering, da den ikke fantes fra f?r.
+            #Creates new journal line, when it doesn't exist from before.
             #Get the fields we need, could be a more fancy hash map
-            #Opprett voucher id, returner den ogsï¿½.
+            #Create voucher id, returns it also.
 
             if(isset($args['JournalID']))
             {
@@ -1360,12 +1370,12 @@ class accounting {
 
             $fieldsbalance['voucher_Active']              = 1;
             $fieldsbalance['voucher_AddedByAutoBalance']  = 0;
-            #$fieldsbalance['voucher_DisableAutoVat']     = 0; #mï¿½ jeg ha denne her?
+            #$fieldsbalance['voucher_DisableAutoVat']     = 0; #Do I have to have this one here?
 
-            #This period postering does not exist, insert it
+            #This period journal line does not exist, insert it
             $fieldsbalance['voucher_AutomaticReason']     = $args['Reason'];
             $fieldsbalance['voucher_AccountPlanID']       = $args['AccountAuto'];
-            $_lib['sess']->debug("Setter inn periodevis motkonto");
+            $_lib['sess']->debug("Sets in periodic counterpart accountplan");
             $this->insert_voucher_line(array('post' => $fieldsbalance, 'accountplanid' => $fieldsbalance['voucher_AccountPlanID'], 'VoucherType' => $VoucherType));
         }
 
@@ -1382,41 +1392,41 @@ class accounting {
 
         if($this->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
 
-            #print "Oppdaterer hodet<br>\n";
+            #print "Updates head<br>\n";
             #print_r($voucher_input);
             $query_voucher  = "select* from voucher where VoucherID='" . $voucher_input->VoucherIDOld . "'";
             $_lib['sess']->debug($query_voucher);
             $old            = $_lib['storage']->get_row(array('query' => $query_voucher));
 
-            #Merk at det er viktig at dette kommer tidlig
-            #Should probably update motkonto balanse and result for old and new period?
+            #Mark that it is important that this comes early
+            #Should probably update counterpart accountplan balance and result for old and new period?
 
             $fieldshead['voucher_VoucherDate']      = $voucher_input->VoucherDate;
             $fieldshead['voucher_VoucherPeriod']    = $voucher_input->VoucherPeriod;
             $fieldshead['voucher_UpdatedByPersonID']= $_lib['sess']->get_person('PersonID');
 
-            #$fieldshead['voucher_JournalID']        = $voucher_input->JournalID; #Eller skal dette v?re lov
+            #$fieldshead['voucher_JournalID']        = $voucher_input->JournalID; #Or should this be allowed
 
             $primarykeyhead['JournalID']    = $voucher_input->JournalID;
             $primarykeyhead['VoucherType']  = $voucher_input->VoucherType;
             $_lib['db']->db_update_hash($fieldshead, 'voucher', $primarykeyhead);
 
             ########################################
-            #Oppdater balanse og resultat
+            #Update balance and result
             $post = array();
             $post['voucher_VoucherPeriod'] = $voucher_input->VoucherPeriod;
             $this->set_journal_motkonto(array('post' => $post));
 
-            #Should probably look if accountplan / period is changed from befor - and update both the new and previous correctly
+            #Should probably look if the accountplan/period is changed from before - and update both the new and the previous correctly
 
             #########################################
             #Update line values
             $this->update_voucher_line_smart($voucher_input->request('voucher_head_update'), $voucher_input->VoucherIDOld, 'update_voucher_head');
 
             ########################################
-            #oppdatere motkontoer hvis vi har byttet periode
+            #update counterpart accountplan if we have changed period
             if($old->VoucherPeriod != $voucher_input->VoucherPeriod){
-                #print "Periode er endret: Oppdaterer motkonto på den gamle perioden<br>\n";
+                #print "Period is changed: Updating counterpart accountplan on the old period<br>\n";
                 $post = array();
                 $post['voucher_VoucherPeriod']      = $old->VoucherPeriod;
                 $post['voucher_VoucherDate']        = $old->VoucherDate;
@@ -1427,11 +1437,13 @@ class accounting {
                 $post['voucher_VoucherDate']        = $voucher_input->VoucherDate;
                 $this->set_journal_motkonto(array('post'=>$post));
 
+                # Period is changed. Calculate the last periode over again
                 $_lib['message']->add(array('message' => "Periode er byttet. Kalkuler forrige periode på nytt"));
             }
             ########################################
-            #Ferdig
+            #Finished
         } else {
+            # Not allowed to change data in a closed period in voucher head
             print "Ikke lov &aring; endre data i en stengt periode i bilags hodet<br>\n";
         }
     }
@@ -1447,8 +1459,8 @@ class accounting {
             return;
         }
 
-        unset($fields['voucher_VoucherID']); #If voucher id is set, we risk that we change it. This will prevent voucherid change it permanently.
-        #Find the old values of this line. Could have checked for active.........
+        unset($fields['voucher_VoucherID']); #If voucher id is set, we risk that we change it. This will prevent voucher id change permanently.
+        #Find the old values of this line. Could have checked for active...
         $voucher = $this->get_voucher_object(array('voucherID' => $VoucherID));
 
         #Find the accountplan we are talking about
@@ -1460,17 +1472,17 @@ class accounting {
         /**************************************************************************/
         #print "Kid match: " . $_REQUEST['voucher_KID'] . 'AutoKid: ' .  $voucher_line->AutoKID . 'kto enable kid:' . $accountplan->EnablePostPost;
         if(isset($fields['voucher_KID']) && $fields['voucher_KID'] > 0 && !$voucher->AutoKID) {
-            #Det ma vare en kid oppgitt, vi maa ikke ha funnet kid match tidligere og kontoen vi f maa ha kid sto skrudd
+            #KID has to be supplied, we must not have found kid match earlier and accountplan must have kid
             #We only do if if we have a KID, and the voucher line is not automatically updated from this KID before.
-            #print "Kid oppgitt og kontoen st√Ø¬ø¬Ωtter kid<br>\n";
+            #print "KID is supplied and the accountplan supports KID";
             if(!$fields['voucher_AccountPlanID'] || !$sum) {
                 #print "findOpenPostKid2: VoucherID: $VoucherID<br>\n";
                 list($status, $refH) = $this->postmotpost->findOpenPostKid($fields['voucher_KID'], $VoucherID, $fields['voucher_AccountPlanID']);
-                #print "Status finn KID: $status<br>";
+                #print "Status find KID: $status<br>";
                 if($status) {
                     #Exactly one KID ref match, update the voucher AmountIn, AmountOut and Accountplan ID only if not updated before.
-                    list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $this->postmotpost->getKIDInfo($refH); #finn linje som har en reskontro (det m√Ø¬ø¬Ω v√Ø¬ø¬Ωre kunde)
-                    #print "Status finn KIDInfo: $KIDstatus<br>\n";
+                    list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $this->postmotpost->getKIDInfo($refH); #find line that has a ledger(reskontro) (it has to be customer)
+                    #print "Status find KIDInfo: $KIDstatus<br>\n";
                     if($KIDstatus) {
                         $fields['voucher_AccountPlanID']    = $KIDAccountPlanID;
                         $fields['voucher_AmountIn']         = 0;
@@ -1489,8 +1501,8 @@ class accounting {
         }
 
         ########################################
-        #sjekke om det er moms p√Ø¬ø¬Ω denne kontoen
-        #print "<b>update_voucher_line2: $VoucherID fra $comment VAT: " . $fields['voucher_Vat'] . " VatID: " . $fields['voucher_VatID'] . "</b><br>\n";
+        #check that there is VAT on this accountplan
+        #print "<b>update_voucher_line2: $VoucherID from $comment VAT: " . $fields['voucher_Vat'] . " VatID: " . $fields['voucher_VatID'] . "</b><br>\n";
 
         if($accpl->EnableVAT == 1) {
             #print "running: vat_line_update<br>\n";
@@ -1502,12 +1514,13 @@ class accounting {
         }
 
         if($fields['voucher_Vat'] != $voucher->Vat && !$fields['voucher_Vat']) {
-            #VI sletter VAT linjer hvis VAT=0 og den er endret siden sist
+            #We delete VAT lines if VAT = 0 and it's editad last
             $this->delete_auto_vat($VoucherID, $fields['voucher_JournalID'], $fields['voucher_VoucherType']);
+            # Delete VAT because it's changed to empty
             $vatreason = 'Sletter VAT pga at den er endret til tom';
         }
 
-        #print "<h2>update_voucher_line2: $VoucherID fra $comment, reason: #$vatreason# VAT: " . $fields['voucher_Vat'] . " VatID: " . $fields['voucher_VatID'] . "</h2>\n";
+        #print "<h2>update_voucher_line2: $VoucherID from $comment, reason: #$vatreason# VAT: " . $fields['voucher_Vat'] . " VatID: " . $fields['voucher_VatID'] . "</h2>\n";
 
         ########################################
         #Deault values project and department. New functionality AT 2004-10-15
@@ -1543,11 +1556,10 @@ class accounting {
     }
 
     #This is the function that actually carries out the dirty work. Can not be called from outside this library
-    #Will not check or update anything - it i the smart version that is for normal usage.
-	# $check_only_period is a period which is supplied for allowing a period check to go through without
-	# actually updating the voucherPeriod (i.e. without having voucherPeriod in fields array).
-    # This was added as a quick solution to avoid unintended
-	# consequences when fixing
+    #Will not check or update anything - that is the smart version which should be used for normal usage.
+    # $check_only_period is a period which is supplied for allowing a period check to go through without
+    # actually updating the voucherPeriod (i.e. without having voucherPeriod in fields array).
+    # This was added as a quick solution to avoid unintended consequences when fixing
     private function update_voucher_line($fields, $VoucherID, $comment, $check_only_period = false) {
         global $_lib;
 
@@ -1568,6 +1580,7 @@ class accounting {
             #print "<br>\n<b>update_voucher_line - finished: $VoucherID AmountIn: " . $fields['voucher_AmountIn'] . ", AmountOut: " . $fields['voucher_AmountOut'] . ", Vat: " . $fields['voucher_Vat'] . ", VatID: " . $fields['voucher_VatID'] . "</b><br>\n";
             $_lib['storage']->db_update_hash($fields, 'voucher', $primarykey);
         } else {
+            # Not allowed to update the voucher line in a closed periode: __ Line number __ comment __
             print "Ikke lov &aring; oppdatere en bilagslinje i en stengt periode: " . $fields['voucher_VoucherPeriod'] . " - Linjenummer: $VoucherID - kommentar: $comment<br>\n";
         }
     }
@@ -1612,21 +1625,21 @@ class accounting {
     }
 
     /***************************************************************************
-    * sjekker om balansen til bilaget er 0
-    * hvis ikke sï¿½ legger funksjonen til en ny linje hvor den foreslï¿½r motpostering
+    * checks if balance to voucher is 0, if not then we add a new line
+    * which would be the counterpart journal line
     * @param
     * @return
     */
     public function correct_journal_balance($fields, $JournalID, $VoucherType) {
         global $_lib;
-        #print "<b>Korriger balanse automatisk</b><br>";
+        #print "<b>Correct balance automatically</b><br>";
 
         #$fields['voucher_KID']         = '';
         $fields['voucher_AutoKID']            = '';#We empty kid
         $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
 
 
-        #Hvis bilagets balanse ikke er 0 blir det foreslï¿½tt en motpostering automatisk.
+        #If the voucher's balance is not 0 a counterpart journal line will automatically be created.
         list($sum, $fsum) = $this->sum_journal($JournalID, $VoucherType);
         $absSum = abs($sum);
         $fabsSum = abs($fsum);
@@ -1649,7 +1662,7 @@ class accounting {
             $updatedsum             = $sum + $sumbalance; #Fix if this is 0 delete it.
             $fupdatedsum             = $fsum + $fsumbalance; #Fix if this is 0 delete it.
 
-            #print "ny sum: $updatedsum             = sumbilag:$sum + sumbalansepostering:$sumbalance<br>\n";
+            #print "new sum: $updatedsum = sum_voucher: $sum + sum_balance_journal_line: $sumbalance<br>\n";
 
             $fields['voucher_VoucherType'] = $VoucherType;
             if($updatedsum < 0) {
@@ -1668,7 +1681,7 @@ class accounting {
               $fields['voucher_ForeignAmount'] = 0;
               $fields['voucher_Active']    = 0;
               $this->delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, 'correct_journal_balance'); #Sjekk
-              #print "Den er null, vi kan bare slette den<br>\n";
+              #print "It is 0, we can just delete it<br>\n";
               #return;
             }
 
@@ -1676,10 +1689,11 @@ class accounting {
             unset($fields['voucher_DescriptionID']);
             unset($fields['voucher_VoucherID']);
 
+            # Automatic balance in the voucher from:
             $fields['voucher_AutomaticReason']      = "Automatisk balanse i bilaget fra: correct_journal_balance";
 
             if($VoucherID) {
-                #Finnes, s? vi bare oppdaterer
+                #Exists, so we just update
                 #print "auto: update<br>";
 
                 $fields['voucher_EnableAutoBalance']    = 1;
@@ -1785,18 +1799,19 @@ class accounting {
         #print "MVA<br>\n";
         $vat = $this->get_vataccount_object(array('VatID' => $accpl->VatID, 'date' => $fields['voucher_VoucherDate']));
 
-        #Det er alltid lov  bytte kontoer, og gjr man det skal MVA hentes fra oppsettet til kontoen man bytter til
-        #Skal det vre mulig  bde endre kto og ikke endre VAT m vi i s fall kikke p hva VAT er satt opp til standard p denne kontoen og s endre den etter det.
+        #It is always allowed to change accountplans, and when that happens the VAT gets picked up from the setup to the accountplan you change to
+        #Should it be possible to change accountplan and not to change VAT in that case we should not pick up standard for this accountplan and change it after that
         if($fields['voucher_AccountPlanID'] != $old->AccountPlanID)
         {
-            $_lib['sess']->debug("Kontoplan byttet - default MVA endres automatisk");
+            $_lib['sess']->debug("Accountplan changed - default VAT changes automatically");
             $Vat        = $vat->Percent;
             $VatID      = $vat->VatID;
+            # Change of accountplan
             $vatreason  = "Bytte av kontoplan";
         }
         elseif($accpl->EnableVATOverride || $vat->EnableVatOverride)
         {
-            $_lib['sess']->debug("Overstyr MVA");
+            $_lib['sess']->debug("Override VAT");
             if($fields['voucher_Vat'] > 0) {
                 $VatControlO = $this->vat_input_control($accpl->AccountPlanID, $fields['voucher_Vat'], $fields['voucher_VoucherDate']);
                 $VatID      = $VatControlO->VatID;
@@ -1806,7 +1821,7 @@ class accounting {
             elseif(($fields['voucher_Vat'] == 0) and (strlen($fields['voucher_Vat']) > 0) )
             {
                 $query = "select VoucherID, AutomaticVatVoucherID from voucher where VoucherID=" . (int) $old->VoucherID . " and JournalID=" . (int) $fields['voucher_JournalID'] . " and VoucherType='" . $fields['voucher_VoucherType'] . "' and Active=1";
-                #print "vat slett loop: $query<br>\n";
+                #print "VAT delete loop: $query<br>\n";
                 $hovedbok = $_lib['storage']->get_row(array('query' => $query));
                 $this->update_voucher_line(array('voucher_AutomaticVatVoucherID' => 0), $old->VoucherID, 'slett loop nullstiller automatic vat', $fields['voucher_VoucherPeriod']);
                 while($hovedbok->AutomaticVatVoucherID > 0)
@@ -1814,28 +1829,29 @@ class accounting {
                     $VoucherIDtmp = $hovedbok->AutomaticVatVoucherID;
 
                     $query       = "select VoucherID, AutomaticVatVoucherID from voucher where VoucherID=" . (int) $VoucherIDtmp . " and JournalID=" . (int) $fields['voucher_JournalID'] . " and VoucherType='" . $fields['voucher_VoucherType'] . "' and Active=1";
-                    #print "vat inne i loop $query<br>\n";
+                    #print "VAT inside in loop $query<br>\n";
                     $hovedbok    = $_lib['storage']->get_row(array('query' => $query));
 
-                    #print "For sletting: VoucherID: $hovedbok->VoucherID, JournalID: " . $fields['voucher_JournalID'] . ", type: " . $fields['voucher_VoucherType'] . "<br>\n";
+                    #print "For deleting: VoucherID: $hovedbok->VoucherID, JournalID: " . $fields['voucher_JournalID'] . ", type: " . $fields['voucher_VoucherType'] . "<br>\n";
                     $this->delete_voucher_line_smart($hovedbok->VoucherID, $fields['voucher_JournalID'], $fields['voucher_VoucherType'], 'vat_line_update');
                 }
                 if($accpl->VatID < 40) {
-                    $VatID        = 10;  #Fritt Salg, ikke MVA
+                    $VatID        = 10;  #Free Sale, no VAT
                     $vatreason    = 'Fritt salg ikke MVA';
                     $Vat          = '';
 
                 } else {
-                    $VatID = 40;  #Fritt kjï¿½p, ikke MVA
+                    $VatID = 40;  #Free purchase, no VAT
                     $Vat   = '';
                     $vatreason = "Fritt kj&oslash;p ikke MVA";
                 }
             }
             elseif($fields['voucher_Vat'] < 0) {
+              # VAT can't be negative
               $_lib['sess']->warning("MVA kan ikke v&aelig;re negativ");
             }
             else {
-              #$vat = $this->get_vataccount_object(array('VatID'=>$accpl->VatID)); #Blir hentet hï¿½yere opp
+              #$vat = $this->get_vataccount_object(array('VatID'=>$accpl->VatID)); #Gets fetched before
               $VatID     = $vat->VatID;
               $Vat       = $vat->Percent;
               $vatreason = "Ikke noe";
@@ -1843,14 +1859,15 @@ class accounting {
 
             #print "Final VatID: " . $_REQUEST['voucher_VatID'] . ', Vat: ' . $_REQUEST['voucher_Vat'] . ", $vatreason<br>\n";
         }
-        #hvis det ikke er lov og oversyter vat i kontoplan, bruke mva satt pï¿½ kontoplan
+        #if there it is not allowed to override VAT on accountplan, use the VAT set on accountplan
         else
         {
-            #$vat = $this->get_vataccount_object(array('VatID'=>$accpl->VatID)); #Blir hentet hï¿½yere opp
-            #print "IKke overstyrt";
+            #$vat = $this->get_vataccount_object(array('VatID'=>$accpl->VatID)); #Gets fetched before
+            #print "Not overriden";
             $VatID      = $vat->VatID;
             $Vat        = $vat->Percent;
-            $vatreason  = "Ikke lov  overstyre p denne kontoen";
+            # Not allowed to override on this accountplan
+            $vatreason  = "Ikke lov overstyre paa denne kontoen";
         }
 
         $_lib['sess']->debug("MVA vat_line_update: $VatID, $Vat, $vatreason");
@@ -1866,41 +1883,44 @@ class accounting {
         $accountplan = $this->get_accountplan_object($AccountPlanID); #Get all info about this account
 
         if($accountplan->EnableVAT && $accountplan->EnableVATOverride && strlen($VatPercent)) {
-            #If vat is enabled and override is ok and a percent is defined - check if the ovverride is valid
+            #If vat is enabled and override is ok and a percent is defined - check if the override is valid
             #If vatpercent has a length - we assume it is manually assigned at will.
 
             $vathash      = $this->get_vatpercenthash(array('accountVatID' => $accountplan->VatID, 'date' => $VoucherDate, 'decimal' => 2));
-            $VatPercent   = $_lib['format']->Amount($VatPercent); #trenger ikke (int) forran her hvis vi sender med decimal i linjen over
+            $VatPercent   = $_lib['format']->Amount($VatPercent); #Doesn't need (int) in front if we send it with the decimal in the line above
 
-            $_lib['sess']->debug("VatOverride: OK, VatPercent: #" . $VatPercent . "# - finnes i hash?");
+            $_lib['sess']->debug("VatOverride: OK, VatPercent: #" . $VatPercent . "# - exists in hash?");
 
             if($vathash[$VatPercent])
             {
-              #print "HASH treff<br>\n";
-              $vat->VatID       = $vathash[$VatPercent]; #Find  MVAID basert pï¿½ hash med Prosentsatser
+              #print "HASH hit<br>\n";
+              $vat->VatID       = $vathash[$VatPercent]; #Find VAT ID based on hash with Percent rates
               $vat->Percent     = $VatPercent;
+              # Overridden VAT rate __ approved
               $vat->VatReason   = "Overstyrt MVA sats $VatPercent% godkjent";
             }
             elseif($accountplan->VatID > 30)
             {
-              #print "40 ja det tror jeg ja<br>\n";
-              $vat->VatID       = 40; #Udefinert MVA ID
+              $vat->VatID       = 40; #Udefined VAT ID
               $vat->Percent     = $VatPercent;
+              # Undefined purchase VAT ID
               $vat->VatReason   = "Udefinert Kj&oslash;p VatID";
             }
             elseif($accountplan->VatID <= 30)
             {
-              $vat->VatID       = 10; #Udefinert MVA ID
+              $vat->VatID       = 10; #Udefined VAT ID
               $vat->Percent     = $VatPercent;
+              # Undefined sale VAT ID
               $vat->VatReason   = "Udefinert Salg VatID";
             }
         } elseif($accountplan->EnableVAT) {
 
             $vat = $this->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $VoucherDate));
+            # VAT rates picked up from accountplan
             $vat->VatReason   = "MVA sats plukket fra kontoplan";
 
         } else {
-
+            # This accountplan has no VAT defined
             $vat->VatReason   = "Denne kontoen har ikke MVA definert";
         }
 
@@ -1910,7 +1930,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * If period is empty, it is set to to days period. New 2004-08-12 TE
+    * If period is empty, it is set to todays period. New 2004-08-12 TE
     * @param
     * @return
     */
@@ -1959,7 +1979,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Hent siste periode, dette ï¿½ret
+    * Get last period, this year
     * @param
     * @return
     */
@@ -1974,7 +1994,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Tilgjengelig bilagsnummer
+    * Get a hash of all open account periods
     * @param
     * @return hash with active periods
     */
@@ -2008,7 +2028,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Tilgjengelig bilagsnummer
+    * Set that the accountplan was used now
     * @param
     * @return
     */
@@ -2047,7 +2067,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Sett motkonto
+    * Set counterpart accountplan
     * @param $args['voucher_VoucherPeriod'], $args['voucher_VoucherDate'] + $args['VoucherType']
     * @return
     */
@@ -2059,30 +2079,31 @@ class accounting {
         $accountresult  = $_lib['sess']->get_companydef('VoucherResultAccount');
         $accountbalance = $_lib['sess']->get_companydef('VoucherBalanceAccount');
         if($accountbalance && $accountresult) {
+          # Automatically created balance counterpart accountplan for period
           list($JID, $amount) = $this->update_motkonto(array('post' => $args['post'], 'AccountPlanType' => 'balance', 'AccountAuto' => $_lib['sess']->get_companydef('VoucherBalanceAccount'), 'Reason' => 'Automatisk opprettet balanse motkonto for periode'));
+          # Automatically created balance counterpart accountplan for period sum from line __
           list($JID, $amount) = $this->update_motkonto(array('post' => $args['post'], 'AccountPlanType' => 'result',  'AccountAuto' => $_lib['sess']->get_companydef('VoucherResultAccount'), 'JournalID' => $JID, 'Reason' => "Automatisk opprettet resultat motkonto for periode sum fra linje $JID", 'Amount' => $amount));
         }
         else {
-            #gi en feilmelding om at firmaoppsett ikke er satt
+            #Give an error that company setup is not correct
             $_lib['message']->add("Firmaoppsett ikke ok");
         }
     }
 
     /***************************************************************************
-    * Brukt for ï¿½ ta inpiut en liste med posteringslinjenummer og lage nye posteringer av dem (pï¿½ motsatt side) pï¿½ ett nytt bilag som summeres opp basert pï¿½ disse verdiene.
+    * Used to take input in a list with journal line's line number and make new journal lines of them(on the opposite side) on a new voucher that summes up based on these values.
     * @param post + VoucherType
     * @return
     */
     function makejournal_from_voucherid($VoucherIDS, $JournalID, $type) {
 
         foreach($VoucherIDS as $VoucherID) {
-
                $VoucherID = $this->insert_voucher_line(array('post'=>$_REQUEST, 'accountplanid'=>$_REQUEST['voucher_AccountPlanID'], 'type'=>'first', 'VoucherType'=>$VoucherType, 'comment' => 'Fra makejournal_from_voucher_id'));
         }
     }
 
     /***************************************************************************
-    * Returnerer true hvis den oppgitte kontoen er en reskontro
+    * Returnes true if the supplier accountplan is a ledger(reskontro)
     * @param AccountPlanID
     * @return
     */
@@ -2104,13 +2125,14 @@ class accounting {
     }
 
     /***************************************************************************
-    * Returnerer true hvis den oppgitte kontoen er en reskontro
+    * Returnes true if the supplied accountplan is a main ledger
     * @param AccountPlanID
     * @return
     */
     function is_hovedbok($AccountPlanID) {
         global $_lib;
 
+        # TODO(mladjo2505): Add test if empty AccountPlanID supplied
         $account = $this->get_accountplan_object($AccountPlanID);
         if($account->AccountPlanType == 'balance' || $account->AccountPlanType == 'result') {
             $status = true;
@@ -2121,7 +2143,7 @@ class accounting {
     }
 
     /***************************************************************************
-    * Slett ett komplett bilag
+    * Delete a whole journal
     * @param JournalID, Type
     * @return
     */
@@ -2137,7 +2159,7 @@ class accounting {
         if($voucher) {
 
             if(strlen($voucher->VoucherPeriod) == 7 && $this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) || $voucher->VoucherPeriod == "") {
-                #print "Sletter lonns bilag<br>\n";
+                #print "Delete salary journal<br>\n";
 
                 $this->postmotpost->openPostJournal($JournalID, $VoucherType);
 
@@ -2145,21 +2167,23 @@ class accounting {
                 $primarykey['VoucherType']   = $VoucherType;
 
                 #print_r($primarykey);
-                $_lib['storage']->db_update_hash(array('voucher_Active' => 0, 'voucher_UpdatedByPersonID' => $_lib['sess']->get_person('PersonID')), 'voucher', $primarykey); #Inactivate instead
+                $_lib['storage']->db_update_hash(array('voucher_Active' => 0, 'voucher_UpdatedByPersonID' => $_lib['sess']->get_person('PersonID')), 'voucher', $primarykey); #Make inactive instead
 
                 $this->set_journal_motkonto(array('post'=> array('voucher_VoucherPeriod' => $voucher->VoucherPeriod)));
 
             } else {
+                # Tries to delete a period that is closed. Report this error and how it happened.
                 $_lib['message']->add(array('message' => 'Pr&oslash;ver &aring; slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
             }
         } else {
+            # There was nothing to delete
             #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));
         }
 
     }
 
     /***************************************************************************
-    * Sletter en bilagslinje med alle automatisk opprettede posteringer
+    * Deletes a voucher line with all automatically created journal lines
     * Function changed with more input parameters for security reasons
     * @param VoucherID
     * @return
@@ -2176,32 +2200,28 @@ class accounting {
         $this->set_journal_motkonto(array('post'=>$post));
         $this->postmotpost->openPost($voucher_input->VoucherID);
 
-        #print "Sletter1 smart VoucherID: $VoucherID<br>\n";
         $this->delete_auto_vat($VoucherID, $JournalID, $VoucherType, "delete_voucher_line_smart: VoucherID: $VoucherID");
-        #print "Sletter2 smart VoucherID: $VoucherID<br>\n";
         $this->delete_autofrom_line($VoucherID, $JournalID, $VoucherType, "delete_voucher_line_smart: VoucherID: $VoucherID");
-        #print "Sletter3 smart VoucherID: $VoucherID<br>\n";
         $this->delete_voucher_line($VoucherID, $JournalID, $VoucherType, "delete_voucher_line_smart: VoucherID: $VoucherID");
-        #print "Sletter4 smart VoucherID: $VoucherID<br>\n";
     }
 
     /***************************************************************************
-    * Slettt en bilagslinje og ikke bry deg om den har opprettet andre
+    * Deletes a voucher line and doesn't care if the line has created others linked to it
     * This is a function that deactivates the contents
     * Opens posts
-    * New security check addes JournalID and Voucher type - and will automatically see if period is open
+    * New security check adds JournalID and Voucher type - and will automatically see if period is open
     * @param VoucherID
     * @return
     */
     private function delete_voucher_line($VoucherID, $JournalID, $VoucherType, $comment) {
         global $_lib;
 
-        #Den må finne periode selv, og se om den er åpen for det spesifiserte bilaget
-        #Select for å finne perioden til spesifiserte data
+        #It has to find its own period, and see if it is open for the specific voucher
+        #Find the specified voucher
         $voucher = $this->get_voucher_object(array('voucherID' => $VoucherID));
 
         #print_r($voucher);
-        $_lib['sess']->debug("Sletter linje: Periode: #" . $voucher->VoucherPeriod . "# strlen(" . strlen($voucher->VoucherPeriod) . "), VoucherID: $VoucherID, comment: $comment");
+        $_lib['sess']->debug("Deletes line: Period: #" . $voucher->VoucherPeriod . "# strlen(" . strlen($voucher->VoucherPeriod) . "), VoucherID: $VoucherID, comment: $comment");
 
         if($voucher && strlen($voucher->VoucherPeriod) == 7) {
             if($this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
@@ -2210,22 +2230,24 @@ class accounting {
                 $primarykey['VoucherType']  = $VoucherType;
                 $primarykey['JournalID']    = $JournalID;
 
-                #print "Sletter VoucherID: $VoucherID<br>\n";
+                #print "Delete VoucherID: $VoucherID<br>\n";
                 #debug_print_backtrace();
                 #$_lib['storage']->db_delete_hash('voucher', $primarykey);
-                $this->update_voucher_line(array('voucher_Active' => 0), $VoucherID, 'delete_voucher_line', $voucher->VoucherPeriod); #Inactivate instead
+                $this->update_voucher_line(array('voucher_Active' => 0), $VoucherID, 'delete_voucher_line', $voucher->VoucherPeriod); #Make inactive instead
             } else {
-                #print "Sletter ikke2<br>\n";
+                #print "Doesn't delete 2<br>\n";
+                # Tries to delete a period that is closed. Report this error and how it happened.
                 $_lib['message']->add(array('message' => 'Pr&oslash;ver &aring; slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
             }
         } else {
-            #print "Sletter ikke1 : VoucherID: $VoucherID, Periode: $voucher->VoucherPeriod<br>\n";
-            #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));
+            #print "Doesn't delete 1 : VoucherID: $VoucherID, Periode: $voucher->VoucherPeriod<br>\n";
+            # There was nothing to delete
+            #$_lib['message']->add(array('message' => 'Here var det ikke noe å slette'));
         }
     }
 
     /***************************************************************************
-    * Slett en bilagslinje og ikke bry deg om den har opprettet andre
+    * Delete automatically linked lines on a journal line
     * @param VoucherID
     * @return
     */
@@ -2293,7 +2315,7 @@ class accounting {
         }
     }
 
-    #It could be a problem that this function is not locked to a time period, if two reskontros have the same KID it can fail
+    #It could be a problem that this function is not locked to a time period, if two ledgers have the same KID it can fail
     public function FindJournalWithKid($KID) {
         global $_lib;
         $query = "select v.AccountPlanID, a.OrgNumber from voucher as v, accountplan as a where v.KID='$KID' and v.KID != '' and a.EnablePostPost=1 and v.AccountPlanID=a.AccountPlanID and (a.AccountPlanType='customer' or a.AccountPlanType='supplier' or a.AccountPlanType='employee') and v.Active=1 order by v.VoucherDate desc limit 1";
@@ -2301,7 +2323,7 @@ class accounting {
         return $_lib['storage']->get_row(array('query' => $query));
     }
 
-    #It could be a problem that this function is not locked to a time period, if two reskontros have the same InvoiceID it can fail
+    #It could be a problem that this function is not locked to a time period, if two ledgers have the same InvoiceID it can fail
     public function FindJournalWithInvoiceID($InvoiceID) {
         global $_lib;
         $query = "select v.AccountPlanID, a.OrgNumber from voucher as v, accountplan as a where v.InvoiceID='$InvoiceID' and v.InvoiceID != '' and a.EnablePostPost=1 and v.AccountPlanID=a.AccountPlanID and (a.AccountPlanType='customer' or a.AccountPlanType='supplier' or a.AccountPlanType='employee') and v.Active=1 order by v.VoucherDate desc limit 1";
@@ -2344,38 +2366,35 @@ class accounting {
         return ($_lib['db']->db_numrows($r) != 0);
     }
 
-	public function invoiceIDAvailable($JournalID,
-									   $AccountPlanID,
-									   $InvoiceID,
-									   $VoucherType) {
-		if (!is_numeric($JournalID)) {
-			return false;
-		}
+    public function invoiceIDAvailable($JournalID, $AccountPlanID, $InvoiceID, $VoucherType) {
+      if (!is_numeric($JournalID)) {
+        return false;
+      }
 
-		if (!is_numeric($AccountPlanID)) {
-			return false;
-		}
+      if (!is_numeric($AccountPlanID)) {
+        return false;
+      }
 
-		if (!is_numeric($InvoiceID)) {
-			return false;
-		}
+      if (!is_numeric($InvoiceID)) {
+        return false;
+      }
 
-		if ($VoucherType == "" || strlen($VoucherType) != 1) {
-			return false;
-		}
+      if ($VoucherType == "" || strlen($VoucherType) != 1) {
+        return false;
+      }
 
 
-		global $_lib;
-        $query = "select COUNT(*) AS cnt from voucher as v
+      global $_lib;
+      $query = "select COUNT(*) AS cnt from voucher as v
                 where v.InvoiceID='$InvoiceID' AND
                 v.InvoiceID != '' AND
                 v.VoucherType='$VoucherType' AND
                 v.JournalID != '$JournalID' AND
                 v.AccountPlanID='$AccountPlanID'";
         #print "$query<br>\n";
-        $row = $_lib['storage']->get_row(array('query' => $query));
-		return $row->cnt == 0;
-	}
+      $row = $_lib['storage']->get_row(array('query' => $query));
+      return $row->cnt == 0;
+    }
 
 }
 ?>

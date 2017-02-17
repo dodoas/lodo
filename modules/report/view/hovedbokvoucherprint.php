@@ -92,7 +92,7 @@ $numrows        = $_lib['db']->db_numrows($result_voucher);
 
 function setdiffKID($result_voucher) {
     global $_lib, $kidmatchH;
-    
+
     while($voucher = $_lib['db']->db_fetch_object($result_voucher)) {
         $kidmatchH[$voucher->AccountPlanID][$voucher->KID] += $voucher->AmountIn - $voucher->AmountOut;
     }
@@ -187,7 +187,7 @@ print $_lib['sess']->doctype ?>
             <?
           }
           else echo "<tr><td></td></tr>";
-        
+
             if ($account != $voucher->AccountPlanID) {
               $quantityAccountH[$voucher->AccountPlanID] = 0;
             ?>
@@ -200,7 +200,7 @@ print $_lib['sess']->doctype ?>
             <?
             $period = 0;
             $account = $voucher->AccountPlanID;
-            
+
             $accountWork = $accounting->get_accountplan_object($account); #Hovedbokskontoer
 
             #print "AccountPlanType: " . $accountWork->AccountPlanType . "<br>";
@@ -293,7 +293,7 @@ print $_lib['sess']->doctype ?>
     if($_REQUEST['report_Type'] == 'reskontro')
     {
         ?>
-                
+
         <tr>
             <th colspan="9"><? print $selectedAccount->AccountPlanID . " " . $selectedAccount->AccountName ?></th>
             <th class="number"><nobr><? list($sumhoved, $quantity) = get_saldo($selectedAccount->AccountPlanID, $_fromperiod, $_lib['date']->get_next_period($_toperiod)); print $_lib['format']->Amount($sumhoved) ?></nobr></th>

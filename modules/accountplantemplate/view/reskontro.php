@@ -30,7 +30,7 @@ elseif($AccountPlanID) #since this is automatically created
 $account = $_lib['storage']->get_row(array('query' => $query));
 
 /*
- * Hack for √• f√• korrekt info ved opprettelse av ny konto 
+ * Hack to fetch information when creating new account plan
  */
 if($OrgNumber && $_lib['input']->getProperty('NewAccount'))
 {
@@ -44,7 +44,7 @@ if($account->AccountPlanID){
 if($account->AccountPlanType) {
     $AccountPlanType = $account->AccountPlanType;
 }
-    
+
 print $_lib['sess']->doctype ?>
 
 <head>
@@ -58,11 +58,11 @@ print $_lib['sess']->doctype ?>
 includeinc('top');
 includeinc('left');
 
-if($JournalID) {
-  ?><a href="<? print $_lib['sess']->dispatch ?>t=journal.edit&JournalID=<? print "$JournalID"; ?>">Tilbake til bilag <? print $JournalID ?></a>
-<? } ?>
-
-<? print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
+if($JournalID) { ?>
+  <a href="<? print $_lib['sess']->dispatch ?>t=journal.edit&JournalID=<? print "$JournalID"; ?>">Tilbake til bilag <? print $JournalID ?></a>
+<? }
+  print '<h1>' . $_lib['message']->get() . '</h1>';
+?>
 
 <table class="lodo_data">
 <form name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=accountplantemplate.reskontro" method="post">
@@ -115,21 +115,6 @@ if($JournalID) {
     <td>Farge:</td>
     <td><? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'CreditColor', 'value'=>$account->CreditColor, 'type'=>'CreditColor', 'required' => 1)) ?></td>
   </tr>
-  <!--<tr>
-    <td class="menu">KID referanse</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnablePostPost",$account->EnablePostPost,''); ?></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>-->
-  <!--tr>VAT should only be set on hovedbok, not on reskontro.
-    <td class="menu">Mva kode</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableVAT", $account->EnableVAT,''); ?></td>
-    <td><? print $_lib['form3']->vat_menu3(array('table'=>$db_table, 'field'=>'VatID', 'value'=>$account->VatID, 'vatid'=>'1', 'disabled' => true)) ?></td>
-    <td>Mva kode kan overstyres:</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableVATOverride", $account->EnableVATOverride,'') ?></td>
-    </td>
-  </tr-->
   <tr>
     <td class="menu">Mengde</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableQuantity", $account->EnableQuantity,'') ?></td>
@@ -140,14 +125,14 @@ if($JournalID) {
   <tr>
     <td class="menu">Prosjekt</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableProject",$account->EnableProject,'') ?></td>
-    <td>Default: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')) ?></td>
+    <td>Standard: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')) ?></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableDepartment",$account->EnableDepartment,'') ?></td>
-    <td>Default: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')) ?></td>
+    <td>Standard: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')) ?></td>
     <td></td>
     <td></td>
   </tr>
@@ -165,7 +150,7 @@ if($JournalID) {
     <td colspan="3">
     <?
         $aconf = array();
-        $aconf['type'][]  		= 'result';
+        $aconf['type'][]        = 'result';
         $aconf['table']         = 'accountplantemplate';
         $aconf['field']         = 'MotkontoResultat1';
         $aconf['value']         = $account->MotkontoResultat1;
@@ -185,7 +170,7 @@ if($JournalID) {
     <td colspan="3">
     <?
         $aconf = array();
-        $aconf['type'][]  		= 'balance';
+        $aconf['type'][]        = 'balance';
         $aconf['table']         = 'accountplantemplate';
         $aconf['field']         = 'MotkontoBalanse1';
         $aconf['value']         = $account->MotkontoBalanse1;
@@ -206,11 +191,6 @@ if($JournalID) {
     <td>Brukes av bankavstemming/kontoutskrift importen for &aring; automatisk<br /> sette dette kontonummeret p&aring; en transaksjon som har en matchende tekst</td>
     <td></td>
   </tr>
-  <!--tr>Pengeflyt bilr alltid overstyrt fra respektive hovedbokskonto - så ingen grunn til å kunne endre det her.
-    <td class="menu">Pengeflyt</td>
-    <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'EnableMoneyFlow', 'value'=>$account->EnableMoneyFlow, 'disabled' => true)) ?></td>
-    <td>Oppstartsaldo <? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'EnableSaldo', 'value'=>$account->EnableSaldo)) ?></td>
-  </tr-->
   <tr class="result">
     <th colspan="5">Logg</th>
   </tr>

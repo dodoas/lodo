@@ -1,7 +1,7 @@
 <?
 ##################################
 #
-# Funksjoner som brukes i bilagsregistreringsskjermbildet journal/edit
+# Functions used in the bookkeeping register view journal/edit
 #
 ##################################
 
@@ -63,12 +63,6 @@ class framework_logic_voucherinput
     public $DefAccountPlanID    = 0;
     public $AmountField         = 'out';
     public $autovoucher         = array();
-
-    /***************************************************************************
-    * comment
-    * @param
-    * @return
-    */
 
     function __construct($args) {
         global $_lib;
@@ -134,7 +128,7 @@ class framework_logic_voucherinput
         elseif(isset($_REQUEST['VoucherType']))
             $this->VoucherType        = strip_tags($args['VoucherType']);
 
-        $this->KID                = $args['voucher_KID']; #Burde ikke trenge 2 referanser
+        $this->KID                = $args['voucher_KID']; # Should not need 2 references
         $this->InvoiceID          = $args['voucher_InvoiceID'];
 
         if ($foreign_converted_amount) {
@@ -174,7 +168,7 @@ class framework_logic_voucherinput
         #print "VoucherIDOld: $this->VoucherIDOld = VoucherID:$this->VoucherID<br>\n";
 
         ########################################################################
-        if($this->type = $args['type']) #Type overstyrer alt
+        if($this->type = $args['type']) #Type overrides everything
             $this->type = strip_tags($args['type']);
         elseif($this->VoucherType == 'K')
             $this->type="cash_in";
@@ -216,15 +210,12 @@ class framework_logic_voucherinput
         if(!$this->action['voucher_new'] && !$this->action['voucher_head_update'] && !$this->action['journal_currency_update'] && $this->VoucherID)
         {
             #We default to voucgher update because post exist, probably javascript autosubmit
-            #Vil dette v¾re feil i noen sammenhenger?
+            #Will this be wrong in some cases?
             $this->action['voucher_update'] = true;
         }
 
         $this->logic($args);
         $this->record();
-
-        #print "Opprinnelige inn verdier\n";
-        #print_r($this);
     }
 
     function convert($args) {
@@ -378,7 +369,7 @@ class framework_logic_voucherinput
 
             }
             elseif($this->type == "salecash_in") {
-              #Salg faktura kontant
+              #Sale invoice cash
               $this->DefAccountPlanID                 = $setup['salecashut'];
               $this->autovoucher['balanse1']          = $setup['salecashut'];
               $this->autovoucher['balanse']           = true;
@@ -395,7 +386,7 @@ class framework_logic_voucherinput
               }
             }
             elseif($this->type == "salecredit_in") {
-              #Salg faktura kontant
+              #Sale invoice cash
               $this->DefAccountPlanID                 = $setup['salecreditreskontro'];
               $this->autovoucher['resultat1']         = $setup['salecreditinntekt'];
               $this->autovoucher['resultat']          = true;
@@ -448,7 +439,8 @@ class framework_logic_voucherinput
               $this->AmountField                      = 'out';
             }
             else {
-              $_lib['message']->add(array('message' =>'Error: Missing type parameter'));
+              # Error: Missing type parameter
+              $_lib['message']->add(array('message' =>'Error: Mangler type parameter'));
               $status = false;
             }
         }
@@ -463,7 +455,7 @@ class framework_logic_voucherinput
             $this->accountplan = $accounting->get_accountplan_object($this->AccountPlanID);
 
         ####################################
-        #Calculate credit days on sale and purchase posterings
+        #Calculate credit days on sale and purchase vouchers
 
         if($this->accountplan->EnableCredit && ($this->DueDate == '0000-00-00' || $this->DueDate == '')) {
             #Calculate DueDate form accountplan given
@@ -524,54 +516,49 @@ class framework_logic_voucherinput
         }
 
         #################################################################################################################
-        #Sjekk om bilagsnummer finnes fra fÃ¯Â¿Â½r, default er neste ledige bilagsnummer
+        # Check if journal number exists from before, default is next available journal number
         #################################################################################################################
 
-        #print "fjerner: voucherinput2   : VoucherID: " . $this->VoucherID . "<br>";
-        $this->VoucherID = ''; #Sjekk TE. Ikke riktig Œ fjerne denne i alle sammenhenger.
+        #print "removes: voucherinput2   : VoucherID: " . $this->VoucherID . "<br>";
+        $this->VoucherID = ''; #Check, think about. Not correct to delete this one in all cases.
 
         ####################################
-        #Check the validity og Voucher date compared to period
-        #
-        #Changed 29/11-04
+        #Check the validity of voucher date compared to period
         if($this->action['voucher_head_update'] and $_lib['date']->get_this_period($this->VoucherDate) != $this->VoucherPeriod) {
+          # The voucher is saved, but note that the date is not valid in the period you chose
           $_lib['message']->add(array('message' => "Bilag er lagret, men merk at dato ikke er gyldig i perioden du valgte<br>"));
-          //$exit = 0;
         }
 
         ####################################
-        #Get default posteringer for balanse (overwrite from main menu if anything exists there
+        #Get default vouchers for balance (overwrite from main menu if anything exists there)
         if($this->accountplan->EnableMotkontoBalanse == 1 && $this->accountplan->MotkontoBalanse1 > 0 && isset($this->autovoucher['balanse']))
         {
-            #print "Overstyrer balanse regler: MotkontoBalanse1: $accountplan->MotkontoBalanse1<br>\n";
+            #print "Overwrites balance settings: (Counterpart balance)MotkontoBalanse1: $accountplan->MotkontoBalanse1<br>\n";
             $this->autovoucher['balanse1']  = $this->accountplan->MotkontoBalanse1;
             $this->autovoucher['balanse2']  = $this->accountplan->MotkontoBalanse2;
             $this->autovoucher['balanse3']  = $this->accountplan->MotkontoBalanse3;
             $this->autovoucher['reskontro'] = "";
         } else {
-            #print "Overstyrer ikke balanse regler<br>\n";
+            #print "Does not overwrite balance settings<br>\n";
         }
 
         ####################################
-        #Get default posteringer for resultat (overwrite from main menu if anything exists there
+        #Get default vouchers for result (overwrite from main menu if anything exists there)
         if($this->accountplan->EnableMotkontoResultat == 1 && $this->accountplan->MotkontoResultat1 > 0 && isset($this->autovoucher['resultat']))
         {
-            #print "Overstyrer resultat regler<br>\n";
+            #print "Overwrites result settings<br>\n";
             $this->autovoucher['resultat1'] = $this->accountplan->MotkontoResultat1;
             $this->autovoucher['resultat2'] = $this->accountplan->MotkontoResultat2;
             $this->autovoucher['resultat3'] = $this->accountplan->MotkontoResultat3;
             $this->autovoucher['reskontro'] = "";
         } else {
-            #print "Overstyrer ikke resultat regler<br>\n";
+            #print "Does not overwrite result settings<br>\n";
         }
 
-        #Det blir vel riktig at denne alltid hardkodes til valget som er gjort i registreringsbildet.
+        #This will be correct to hardcode to the value from the register view, right?
         if($this->type == "buycash_out" || $this->type == "buynotacash_out" || $this->type == "salecash_in" || $this->type == "salenotacash_in") {
             $this->autovoucher['reskontro'] = $this->AccountPlanID;
         }
-        #}
-
-        #print_r($autovoucher);
 
         #################################################################################################################
         #Check that the period is open
@@ -586,19 +573,19 @@ class framework_logic_voucherinput
             $this->exit = true;
 
           } elseif($row_period->Status == 3 && $_lib['sess']->get_person('AccessLevel') < 3) {
-            $_lib['message']->add(array('message' => "Denne perioden er lukket og mÃ¯Â¿Â½ Ã¯Â¿Â½pnes av regnskapsfÃ¯Â¿Â½rer<br>"));
+            $_lib['message']->add(array('message' => "Denne perioden er lukket og m&aring; &aring;pnes av regnskapsf&oslash;rer<br>"));
             $this->exit = true;
 
-          } elseif($row_period->Status == 1 && $_lib['sess']->get_person('AccessLevel') < 3) { #Access lever 3=higest Administrator
-            $_lib['message']->add(array('message' => "Denne perioden er lukket, men kan fÃ¯Â¿Â½res pÃ¯Â¿Â½ av regnskapsfÃ¯Â¿Â½rer med hÃ¯Â¿Â½yere autorisasjon enn deg"));
+          } elseif($row_period->Status == 1 && $_lib['sess']->get_person('AccessLevel') < 3) { #Access level 3 = Administrator
+            $_lib['message']->add(array('message' => "Denne perioden er lukket, men kan f&oslash;res p&aring; av regnskapsf&oslash;rer med h&oslash;yere autorisasjon enn deg"));
             $this->exit = true;
           }
         } else {
-            #Her mangler det egentlig mye periodedata. Da er den Œpen.
+            #Here we are missing a lot of period data. Then its open.
         }
 
         if($this->exit) {
-            #Hvis det er en brŒ slutt sŒ markerer vi den som ny
+            # If this is an end case then we mark it as new
             $this->setNew(1, 'exit setter new');
         }
 
@@ -607,21 +594,17 @@ class framework_logic_voucherinput
 
     function setNew($new, $from) {
         $this->new     = $new;
-        #print "setter new: $this->new: $from<br>\n";
     }
 
 
     function setAmountIn($amount) {
-        #print "<h2>Setter AmountIn: $amount</h2>";
         $this->AmountIn     = $amount;
         $this->AmountOut    = 0;
     }
 
     function setAmountOut($amount) {
-        #print "<h2>Setter AmountOut: $amount</h2>";
         $this->AmountOut    = $amount;
         $this->AmountIn     = 0;
-        #print_r($this);
     }
 
     function  currency() {
@@ -639,6 +622,7 @@ class framework_logic_voucherinput
                     $this->AmountIn  = $this->ForeignAmountIn  * $currency->ExchangeRate;
                 }
               } else {
+                  # Warning: The exchange rate for currency not given
                   $_lib['message']->add(array('message' => "Advarsel: Det er ikke oppgitt omregningsfaktor for valuta handel<br>"));
               }
         }
@@ -650,36 +634,37 @@ class framework_logic_voucherinput
     ############################################################################
     function request($calledfrom) {
         global $_lib, $accounting;
-        #Builds a has similar to request for db updates and the likes
-        #NŒr vi oppretter en ny linje, sŒ mŒ den fŒ v¾re 0. MŒ gj¿res til slutt da amountin/out nkan v¾re satt fra kid ref s¿k og oppslag
+        #Builds a hash similar to request for db updates and the likes
+        #Now we are creating a new line, then it must be 0. It has to be ended since amountin/out, can be set from KID reference search and lookup
         if($this->AmountIn == 0 && $this->AmountOut == 0 && !$this->action['voucherline_new'] && !$this->action['voucher_delete'] && !$this->action['voucher_head_delete'] && !$this->new && !($this->ForeignAmount && $this->ForeignConvRate)) {
+            # Either credit or debit needs to be filled out in a voucher
             $_lib['message']->add(array('message' => "Det m&aring; v&aelig;re fylt ut enten credit eller debit i en postering<br>"));
             $this->exit = 1;
         }
 
         $request = array();
-        #Hode informasjon, burde ikke bli oppdatert hver gang vi kj¿rer update? Hvis info ikke finnes burde den hentes fra f¿rste posteringslinje med en select for Œ sette riktige default verdier.
-        #Vi kunne hentetut opplysninger pŒ JournalID
-        $request['voucher_JournalID']           = $this->JournalID; #Denne burde egentlig ikke bli oppdatert her heller
+        # Head information, should not be updated every time we run update? If info does not exist it should be fetched from the first journal line with a select to set the correct default values.
+        # We could fetch the information on JournalID
+        $request['voucher_JournalID']           = $this->JournalID; # This shouldn't be updated here either
         $request['voucher_VoucherType']         = $this->VoucherType;
 
         if($this->action['voucher_head_update'] || $this->action['voucher_new']) {
             #If we asked to change the head, allow these values to be changed.
-            $request['voucher_VoucherDate']         = $this->VoucherDate; #Denne skal ikke oppdateres her, da den kun blir satt ved spesielle anlednginer
+            $request['voucher_VoucherDate']         = $this->VoucherDate; # This one should not be updated here, because it is just set on special cases
             $request['voucher_VoucherPeriod']       = $this->VoucherPeriod;
         } else {
-            #Hent opplysningene fra den f¿rste linjen, de skal aldri endres hvis det ikke er hode. En bedre datamodell hadde v¾rt Œ hatt periode, dato og type i en egen tabell.
+            # Fetch the information from the first line, they should never be changed if they are not head. A better model would have been to have period, date and type in another table.
             $head = $accounting->get_journal_head_data(array('JournalID' => $this->JournalID, 'VoucherType' => $this->VoucherType));
-            $request['voucher_VoucherDate']         = $head->VoucherDate; #Denne skal ikke oppdateres her, da den kun blir satt ved spesielle anlednginer
+            $request['voucher_VoucherDate']         = $head->VoucherDate; # This one should not be updated here, because it is just set on special cases
             $request['voucher_VoucherPeriod']       = $head->VoucherPeriod;
         }
-        #Linje informasjon, kan oppdateres hver gang.
+        # Line information, can be updated every time.
         $request['voucher_AccountPlanID']       = $this->AccountPlanID;
         $request['voucher_Currency']            = $this->Currency;
         $request['voucher_UpdatedByPersonID']   = $this->UpdatedByPersonID;
         $request['voucher_Vat']                 = $this->Vat;
         $request['voucher_VatID']               = $this->VatID;
-        #Denne mŒ alltid settes - fordi den skal nulle ut flagg evd manuell hŒndtering
+        # This must always be sent - because it should null out flags
         $request['voucher_AddedByAutoBalance']  = $this->AddedByAutoBalance;
         $request['voucher_DisableAutoVat']      = $this->DisableAutoVat;
         $request['voucher_Active']              = $this->Active;
@@ -696,7 +681,7 @@ class framework_logic_voucherinput
         if (!is_null($this->matched_by)) $request['voucher_matched_by'] = $this->matched_by;
         else $request['voucher_matched_by'] = '0';
 
-        #Myst always be present. Both cannot contain a value
+        # Must always be present. Both cannot contain a value
         if($this->AmountIn > 0) {
             $request['voucher_AmountIn']            = $this->AmountIn;
             $request['voucher_AmountOut']           = 0;
@@ -709,7 +694,8 @@ class framework_logic_voucherinput
             $request['voucher_VoucherID']       = $this->VoucherID;
 
         if($this->AmountIn > 0 && $this->AmountOut > 0) {
-            print "<h1>Critical error. Both credit and debit sides are set</h1>";
+            // Critical error. Both credit and debit sides are set
+            print "<h1>Kritisk feil. B&oslash;de kredit og debit sider er satt</h1>";
         }
 
         if($this->JournalID)
@@ -736,10 +722,6 @@ class framework_logic_voucherinput
             $request['voucher_ForeignConvRate']   = $this->ForeignConvRate;
             $request['voucher_ForeignAmount']     = $this->ForeignAmount;
         }
-
-
-        #print "<h2>Output fra voucher objektet kalt fra: $calledfrom</h2>";
-        #print_r($request);
 
         return $request;
     }

@@ -139,7 +139,7 @@ class framework_logic_regnskapsrapport {
             ksort($this->lineH[$linenum], SORT_REGULAR);
         }
 
-        #Oversett linjenavn
+        # Translate line name
         $linetext = new linetextmap(array('ReportID' => 100));
 
         foreach($this->lineSumH as $LineID => $tmp) {

@@ -92,13 +92,13 @@ if($JournalID) { ?>
     <tr>
       <td>
         Type:
-    	<? print $_lib['form3']->Type_menu3(array('table' => accountplan, 'field'=>'type', 'value' => $accountplan_type, 'type' => 'AccountPlanType', 'required' => 0)) ?>
+        <? print $_lib['form3']->Type_menu3(array('table' => accountplan, 'field'=>'type', 'value' => $accountplan_type, 'type' => 'AccountPlanType', 'required' => 0)) ?>
       </td>
 
       <td style="padding-left: 15px;">
-        Fritekst: <input type="text"   name="searchstring" value="<? print $searchstring ?>" />
-        <input type="hidden" name="JournalID"    value="<? print $JournalID ?>"    />
-        <input type="hidden" name="report.Sort"  value="AccountPlanID"  			/>
+        Fritekst: <input type="text"   name="searchstring" value="<? print $searchstring ?>"/>
+        <input type="hidden" name="JournalID"    value="<? print $JournalID ?>"/>
+        <input type="hidden" name="report.Sort"  value="AccountPlanID"/>
         <input type="hidden" name="limit"        value="1"  />
       </td>
 
@@ -191,10 +191,8 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           ?>
           </td>
 
-          <? // forandret fra ProjectID til EnableProject 6/1-2005 ?>
           <td align="right"><? if($row->EnableProject)    { print $row->ProjectID; } ?></td>
 
-          <? // forandret fra DepartmentID til EnableDepartment 6/1-2005 ?>
           <td align="right"><? if($row->EnableDepartment) { print $row->DepartmentID; } ?></td>
           <td align="right"><? if($row->EnableMotkontoBalanse)    { print $row->MotkontoBalanse1; } ?></td>
           <td align="right"><? if($row->EnableMotkontoResultat)    { print $row->MotkontoResultat1; } ?></td>

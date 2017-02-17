@@ -33,7 +33,7 @@ class SessionNew
   public $doctype   = "";
   public $headH     = array();
 
-  public function __construct($args) { #Konstruktor
+  public function __construct($args) {
     global $_SETUP;
     $this->interface = $args['interface'];
     $this->module    = $args['module'];
@@ -53,7 +53,7 @@ class SessionNew
 
 
     $this->dispatchx = "/lodo.php?t=$this->module.$this->template";
-    $this->dispatchr = "/lodo.php?SID=".$this->get_session('SID') . "&amp;";        # (R) For refresh only - funker ikke med &amp;
+    $this->dispatchr = "/lodo.php?SID=".$this->get_session('SID') . "&amp;";        # (R) For refresh only - does not work with &amp;
     $this->dispatchs = "/lodo.php?";                                            # (S) Simple - without session, & and other special signs, for form login, etc
     $this->dispatch  = "/lodo.php?SID=".$this->get_session('SID') . "&";    #Add session to all URLS cookies could be disabled
 
@@ -100,6 +100,7 @@ class SessionNew
 
   ############################################################
   function get_interface() {
+    # Session: You are not logged in (get interface)
     if(!$this->login_id) { print "Session: Du er ikke logget inn (get interface)"; exit;};
 
     $interface = Array();
@@ -213,7 +214,7 @@ class SessionNew
     }
     else
     {
-        #Tempolates with accesslevel=0 is public - everybody can see them without logging in
+        #Templates with accesslevel=0 is public - everybody can see them without logging in
         #Fastest to implement role control
         if($this->login_id)
         {
@@ -252,7 +253,7 @@ class SessionNew
     #    return 0;
     #  }
   }
-    #Litt voldsom med full backtrace i noen sammnhenger
+    # A little bit violent with a full backtrace in some events
     private function backtrace($backtrace) {
 
        #print_r($backtrace);
@@ -263,16 +264,16 @@ class SessionNew
        } // for
        return $backtrace;
     }
-    
+
     private function backtraceline($backtraceH) {
         $MAXSTRLEN = 150;
-    
+
         $backtraceH['time'] = $this->get_microtime();
-        unset($backtraceH['object']); #her ligger faktisk hele objektet til det som blir dumpet.
+        unset($backtraceH['object']); # here lays actually the whole object that is being dumped.
 
         $backtraceH['file'] = basename($backtraceH['file']);
         $args               = "";
-        
+
         if(!empty($backtraceH['args'])) {
             foreach($backtraceH['args'] as $v) {
                 if (is_null($v)) $args = '';
@@ -302,7 +303,7 @@ class SessionNew
     }
 
     ############################################################
-    public function debug($text) {        
+    public function debug($text) {
         global $_SETUP;
 
         $this->d_count++;
@@ -311,14 +312,14 @@ class SessionNew
         if(empty($_SETUP['DEBUG'])) {
             return;
         }
-        
+
         $backtraceA = debug_backtrace();
         array_shift($backtraceA);
         $backtraceH = array_shift($backtraceA); #Element 2 is the calling function.
         $backtraceH = $this->backtraceline($backtraceH);
         $backtraceH['type'] = 'DEBUG';
         $backtraceH['text'] = $text;
-        unset($backtraceH['object']); #her ligger faktisk hele objektet til det som blir dumpet.
+        unset($backtraceH['object']); # here lays actually the whole object that is being dumped.
 
         array_push($this->debug_hash, $backtraceH);
     }
@@ -333,7 +334,7 @@ class SessionNew
         $backtraceH = $this->backtraceline($backtraceH);
         $backtraceH['type'] = 'WARNING';
         $backtraceH['text'] = $text;
- 
+
         array_push($this->debug_hash, $backtraceH);
 
         if ( method_exists($this->db, db_insert) ){
@@ -353,7 +354,7 @@ class SessionNew
         $backtraceH = $this->backtraceline($backtraceH);
         $backtraceH['type'] = 'ERROR';
         $backtraceH['text'] = $text;
- 
+
         array_push($this->debug_hash, $backtraceH);
 
         if ( method_exists($this->db, db_insert) ){
@@ -441,13 +442,13 @@ class SessionNew
         $dbh          = $this->dbh;
         $query        = "select * from person where PersonID='$this->login_id'";
         $person       = $this->db->get_row(array('query' => $query));
-  
+
         if($person->Debug || !empty($_SETUP['DEBUG_FOR_ALL_PERSONS'])) {
             $this->debug = true;
             ini_set('display_errors',1);
 	    error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
         }
-  
+
         //print $query;
         return $person;
     }
@@ -625,40 +626,6 @@ class SessionNew
             #strip_tags(substr(trim($rawpostcontent),0,250)));
           }
     }
-
-
-  function required($post, $required)
-  {
-    global $_lib;
-
-    foreach($required as $field => $type)
-    {
-        if(!$post['$field'])
-        {
-            $this->error("Missing required field: $field of type: $type");
-        }
-        else
-        {
-            #Try to convert:
-            if(method_exists($_convert, $type))
-            {
-                $hash = $_lib['convert']->{$type}(array('value'=>$post[$field]));
-                $post[$field] = $hash['value'];
-                $_error = $hash['error'];
-                if($_error)
-                { #Should we fill the global error hash like this: [args][field]
-                    $_error[args][$field] = $_error;
-                    $this->error($_error);
-                }
-            }
-            else
-            {
-                $this->error("Convert type: $type does not exist for field: $field");
-            }
-        }
-    }
-    return $post;
-  }
 
     /***************************************************************************
     * setHTTPHeader
