@@ -46,6 +46,8 @@ if($allow_changes) {
 
 $formname = "Update";
 
+$weeklysaleday_error = array();
+
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -63,6 +65,7 @@ $formname = "Update";
     foreach($weeklysale->sale as $WeeklySaleDayID => $line) {
         if(round($line->ZnrTotalAmount,2) != round($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID],2)) {
             $_lib['message']->add('Znr '. $line->Znr .': Znr total stemmer ikke med summen av gruppene');
+            $weeklysaleday_error[$line->Znr] = 'Znr total stemmer ikke med summen av gruppene';
         }
     }
     ?>
@@ -93,7 +96,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
         <table class="lodo_data">
             <thead>
             <tr>
-                <th colspan="15">Ukeomsetning: <? print $WeeklySaleID ?></th>
+                <th colspan="18">Ukeomsetning: <? print $WeeklySaleID ?></th>
             </tr>
             <tr class="voucher">
                 <th colspan="2">Bilagsnr</th>
@@ -102,7 +105,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <th colspan="2">Avdeling</th>
                 <th>Mal</th>
                 <th colspan="3"><? print $weeklysale->head->CompanyName ?></th>
-                <th colspan="4"></th>
+                <th colspan="7"></th>
             </tr>
             <tr class="voucher">
                 <td colspan="2"><nobr><? if ($weeklysale->head->JournalID) { ?>
@@ -153,14 +156,14 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 </td>
                 <td><? print $weeklysale->head->Name ?></td>
                 <td colspan="3"><? print $weeklysale->head->CompanyAddress ?></td>
-                <td colspan="4"></td>
+                <td colspan="5"></td>
             </tr>
             <tr>
                 <td colspan="1"></td>
                 <td colspan="3"><?php if($is_dup) echo "<b>Bilagsnummeret er allerede registrert!</b>"; ?></td>
                 <td colspan="3"></td>
                 <td colspan="3"><? print $weeklysale->head->CompanyZipCode ?> <? print $weeklysale->head->CompanyCity ?></td>
-                <td colspan="5"></td>
+                <td colspan="8"></td>
             </tr>
             <tr>
                 <td colspan="1">Uke</td>
@@ -180,14 +183,14 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="1">Fast kasse</td>
                 <td colspan="1"><? print $_lib['format']->Amount($weeklysale->head->PermanentCash) ?></td>
                 <td colspan="3">Tlf: <? print $weeklysale->head->CompanyPhone ?></td>
-                <td colspan="5"></td>
+                <td colspan="8"></td>
             </tr>
             <tr>
                 <td colspan="1"></td>
                 <td colspan="3"></td>
                 <td colspan="3"></td>
                 <td colspan="3">Mob: <? print $weeklysale->head->CompanyMobile ?></td>
-                <td colspan="5"></td>
+                <td colspan="8"></td>
             </tr>
         <tbody>
             <tr>
@@ -460,7 +463,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                                 print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>!$enabled));
                             } ?>
                         <td><? if ($line->Locked && $line->PersonID) print $line->TS; ?></td>
-                        <td></td>
+                        <td class="red"><? if ($weeklysaleday_error[$line->Znr]) print $weeklysaleday_error[$line->Znr]; ?></td>
                     </tr>
                     <?
                     $counter += 1;

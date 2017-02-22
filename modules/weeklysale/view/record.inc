@@ -536,11 +536,11 @@ function update_weeklysale($post, $pk){
             $sum = 0;
             for($i=0; $i<=20; $i++) {
                 if($group_amount = $post["weeklysaleday_Group".$i."Amount_".$sale->WeeklySaleDayID]) {
-                    $sum += (float)$group_amount;
+                    $sum += $_lib['convert']->Amount($group_amount);
                 }
             }
 
-            if($sum != (float)$post["weeklysaleday_ZnrTotalAmount_".$sale->WeeklySaleDayID]) {
+            if($sum != $_lib['convert']->Amount($post["weeklysaleday_ZnrTotalAmount_".$sale->WeeklySaleDayID])) {
                 $locked = '0';
             }
 
@@ -551,7 +551,7 @@ function update_weeklysale($post, $pk){
         #MŒ oppdatere dagid og znr fra topp linje basert pŒ parentweeklysaledayid. Denne algoritmen forusetter like mange pŒ begge sider for Œ fungere parentweeklysale kan brukes for Œ gj¿re det mer robust
         #MŒ i sŒ fall kj¿res til slutt etter at alt er lagret.
     
-        if(isset($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]) and strlen($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]) > 0)
+        if(!$post["weeklysaleday_Locked_".$sale->WeeklySaleDayID] and isset($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]) and strlen($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]) > 0)
         {
             if($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID] > 0) {
                 $weeklysale = new weeklysale($post['WeeklySaleID'], $post['WeeklySaleConfID']);
@@ -560,8 +560,8 @@ function update_weeklysale($post, $pk){
                 $template               = $_lib['db']->db_fetch_object($result_template);
                 $countznr = $weeklysale->isUniqueZnr($template->Name, $post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]);
                 if($countznr > 1) {
-                    $_lib['message']->add(array('message' => "Dette Znr: " . $post["weeklysaleday_Znr_".$sale->WeeklySaleDayID] . " er brukt $countznr ganger tidligere i denne malen"));
                     $znrwrong[$sale->WeeklySaleDayID] = "Dette Znr: " . $post["weeklysaleday_Znr_".$sale->WeeklySaleDayID] . " er brukt $countznr ganger tidligere i denne malen";
+                    $_lib['message']->add(array('message' => $znrwrong[$sale->WeeklySaleDayID]));
                 }
             }
         }
