@@ -519,8 +519,13 @@ class pdfInvoice
         }
         $this->invoiceLineCurrentLine += (count($prodTekstArray) > 1) ? count($prodTekstArray) : 1;
       }
-      // print line separator
-      if (((count($params) > 0) && (!empty($params[0]['AllowanceChargeType'])))) {
+    }
+
+    function printLineSeparator ($params) {
+    // commented out because the allowances and charges are moved from the bottom.
+    // maybe check if we have either an allowance charge or line comment?
+    // if (((count($params[1]['allowancecharges']) > 0) && (!empty($params[1]['allowancecharges'][0]['AllowanceChargeType'])))) {
+    if (true) {
         $this->pdf->SetLineWidth(0.2);
         $this->pdf->Line($this->invoiceLineHeadLeft2, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)) - 0.2, $this->invoiceLineHeadLeft3, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)) - 0.2);
       }
@@ -620,7 +625,7 @@ class pdfInvoice
  */
     function addLongTextLine($params)
     {
-        $lines = $this->splitString($params["tekst"], 135);
+        $lines = $this->splitString($params["tekst"], 110);
         for($i = 0; $i < count($lines); $i++)
         {
             $params["tekst"] = $lines[$i];
@@ -645,7 +650,7 @@ class pdfInvoice
             // Her tror jeg vi må legge opp til at det lages ny header igjen.
             $this->sideskift();
         }
-        $myLeft = "invoiceLineHeadLeft1";
+        $myLeft = "invoiceLineHeadLeft2";
         $myRight = "invoiceLineHeadLeft8";
         $this->pdf->SetXY($this->{$myLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * $this->invoiceLineCurrentLine));
         $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $this->korriger($params["tekst"]), $this->showMyFrame, 0, "L");
