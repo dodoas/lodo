@@ -880,6 +880,16 @@ elseif($_lib['input']->getProperty('action_salaryconf_update'))
   # Hvis det er en delmal
   if($_POST['SalaryConfID'] != 1)
   {
+    foreach($_POST as $key => $value) {
+      if($value === "unset") {
+        // Allow unsetting a Car, Project and Department
+        if (preg_match("/salaryconfline_CarID_\d+/", $key) &&
+            preg_match("/salaryconfline_ProjectID_\d+/", $key) &&
+            preg_match("/salaryconfline_DepartmentID_\d+/", $key)) {
+          $_POST[$key] = DB_NULL_PLACEHOLDER;
+        }
+      }
+    }
     $query = "select SalaryConfID from salaryconf where AccountPlanID='".$_REQUEST['salaryconf_AccountPlanID_'.$_REQUEST['SalaryConfID']]."' and SalaryConfID!=1";
     $salary = $_lib['storage']->get_row(array('query' => $query));
     if(isset($salary->SalaryConfID) and strlen($salary->SalaryConfID)>0 and $salary->SalaryConfID!=$_lib['input']->getProperty('SalaryConfID'))

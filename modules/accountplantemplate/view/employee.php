@@ -80,12 +80,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Prosjekt</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableProject",$account->EnableProject,'') ?></td>
-    <td>Default: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?>
+    <td>Standard: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableDepartment",$account->EnableDepartment,'') ?></td>
-    <td>Default: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V', 'unset' => true)) ?></td>
+    <td>Standard: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V', 'unset' => true)) ?></td>
   </tr>
   <tr>
     <td class="menu">Debit tekst</td>

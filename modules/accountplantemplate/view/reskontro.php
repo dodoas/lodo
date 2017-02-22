@@ -125,7 +125,7 @@ if($JournalID) { ?>
   <tr>
     <td class="menu">Bil</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableCar",$account->EnableCar,'') ?></td>
-    <td>Default: <? $_lib['form2']->car_menu2(array('table' => $db_table,  'field' =>  'CarID',  'value' =>  $account->CarID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?></td>
+    <td>Standard: <? $_lib['form2']->car_menu2(array('table' => $db_table,  'field' =>  'CarID',  'value' =>  $account->CarID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?></td>
     <td colspan="2"></td>
   </tr>
   <tr>

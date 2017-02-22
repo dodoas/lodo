@@ -348,7 +348,7 @@ class db_mysql {
 
                 foreach($pk_data as $field => $value) {
                     #print "$field = $value<br>\n";
-                    #Should we check if it is funsctions here? no.
+                    #Should we check if it is functions here? no.
                     if ($value === DB_NULL_PLACEHOLDER) {
                         $query_set .= "$field = NULL,";
                     } else {
