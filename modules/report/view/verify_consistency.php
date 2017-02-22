@@ -628,8 +628,7 @@ $salary_lines_subquery = "SELECT
                                 -- all salary lines
                                 SELECT SalaryID,
                                        AccountPlanID,
-                                       IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0)) as 
-                                       AmountThisPeriod
+                                       round(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0)), 2) as AmountThisPeriod
                                 FROM salaryline
                                 WHERE AmountThisPeriod != 0
 
@@ -637,24 +636,22 @@ $salary_lines_subquery = "SELECT
                                 -- salary 'head' line, which is sum of all salary lines
                                 SELECT SalaryID,
                                        (SELECT AccountPlanID FROM salary WHERE SalaryID = sldeep.SalaryID) as AccountPlanID,
-                                       -sum(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0))) as AmountThisPeriod
+                                       -sum(round(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0)), 2)) as AmountThisPeriod
                                 FROM salaryline sldeep
                                 WHERE AmountThisPeriod != 0
                                 GROUP BY SalaryID
-                                HAVING sum(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0))) != 0
+                                HAVING sum(round(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0)), 2)) != 0
                           ) sl JOIN salary s ON s.SalaryID = sl.SalaryID
                           GROUP BY s.JournalID, sl.AccountplanID";
 
 $voucher_lines_subquery = "SELECT
                              count(*) as NumberOfLinesJournal,
-                             sum(v.AmountIn - v.AmountOut) as SumOfLinesJournal,
+                             sum(round(v.AmountIn, 2) - round(v.AmountOut,2)) as SumOfLinesJournal,
                              v.AccountPlanID as ForAccountPlanIDJournal,
                              v.JournalID
                            FROM voucher v JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
                            WHERE v.VoucherType = 'L' AND v.Active = 1 AND ap.EnableReskontro = 0
                            GROUP BY v.JournalID, v.AccountPlanID";
-
-
 
 $query_diff  = "SELECT
                   SUM(ABS(IFNULL(NumberOfLinesSalary, 0) - IFNULL(NumberOfLinesJournal, 0))) as LineDifference,
