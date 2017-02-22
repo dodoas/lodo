@@ -95,11 +95,11 @@ if (!empty($row->AccountPlanID)) {
     </tr>
     <tr>
         <td>Prosjekt</td>
-        <td colspan="2"><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$row->ProductID,  'value' =>  $row->ProjectID, 'tabindex' => '5')) ?></td>
+        <td colspan="2"><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$row->ProductID,  'value' =>  $row->ProjectID, 'tabindex' => '5', 'unset' => true)) ?></td>
     </tr>
     <tr>
         <td>Avdeling</td>
-        <td colspan="2"><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'CompanyDepartmentID', 'pk'=>$row->ProductID, 'value' => $row->CompanyDepartmentID, 'tabindex' => '5')) ?></td>
+        <td colspan="2"><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'CompanyDepartmentID', 'pk'=>$row->ProductID, 'value' => $row->CompanyDepartmentID, 'tabindex' => '5', 'unset' => true)) ?></td>
     </tr>
     <tr>
         <td>Hylle</td>

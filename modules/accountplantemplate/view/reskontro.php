@@ -123,16 +123,22 @@ if($JournalID) { ?>
     <td></td>
   </tr>
   <tr>
+    <td class="menu">Bil</td>
+    <td><? $_lib['form2']->checkbox2($db_table, "EnableCar",$account->EnableCar,'') ?></td>
+    <td>Standard: <? $_lib['form2']->car_menu2(array('table' => $db_table,  'field' =>  'CarID',  'value' =>  $account->CarID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
     <td class="menu">Prosjekt</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableProject",$account->EnableProject,'') ?></td>
-    <td>Standard: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')) ?></td>
+    <td>Standard: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableDepartment",$account->EnableDepartment,'') ?></td>
-    <td>Standard: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')) ?></td>
+    <td>Standard: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V', 'unset' => true)) ?></td>
     <td></td>
     <td></td>
   </tr>

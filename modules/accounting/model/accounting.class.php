@@ -1715,6 +1715,17 @@ class accounting {
                 $fields['voucher_ForeignAmount']        = 0;
                 $fields['voucher_ForeignCurrencyID']    = '';
                 #print_r($fields);
+
+               if($fields['voucher_CarID'] === null) {
+                     $fields['voucher_CarID'] = DB_NULL_PLACEHOLDER;
+                }
+               if($fields['voucher_DepartmentID'] === null) {
+                $fields['voucher_DepartmentID'] = DB_NULL_PLACEHOLDER;
+                }
+                if($fields['voucher_ProjectID'] === null) {
+                  $fields['voucher_ProjectID'] = DB_NULL_PLACEHOLDER;
+                }
+
                 $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
                 $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);
             }

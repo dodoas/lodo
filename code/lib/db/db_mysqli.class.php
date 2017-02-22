@@ -238,7 +238,11 @@ class db_mysql {
          $query = "update $table set ";
          foreach ($fields as $field => $value) {
            #print "felt: $field = $value,<br>\n";
-           $query .= "$field = $value,";
+            if($value === "'" . DB_NULL_PLACEHOLDER . "'"){
+                $query .= "$field = NULL,";
+            } else {
+                $query .= "$field = $value,";
+            }
          }
          $query = substr($query, 0, -1);
          #print "#$where#<br>\n";
@@ -274,7 +278,11 @@ class db_mysql {
        #print_r($fields);
        $query = "insert into $table set ";
        foreach ($fields as $field => $value) {
-         $query .= "$field = $value, ";
+        if($value === "'" . DB_NULL_PLACEHOLDER . "'") {
+            $query .= "$field = NULL, ";
+        } else {
+            $query .= "$field = $value, ";
+        }
        }
        $query = substr($query, 0, -2);
        #print "$query<br>";
@@ -340,12 +348,12 @@ class db_mysql {
 
                 foreach($pk_data as $field => $value) {
                     #print "$field = $value<br>\n";
-                  #Should we check if it is functions here? no.
-                    if ($value == DB_NULL_PLACEHOLDER) {
+                    #Should we check if it is functions here? no.
+                    if ($value === DB_NULL_PLACEHOLDER) {
                         $query_set .= "$field = NULL,";
                     } else {
                         //$query_set .= "$field = '$value',";
-			$query_set .= sprintf("%s = '%s',", $field, $this->db_escape($value)); // OK?
+                        $query_set .= sprintf("%s = '%s',", $field, $this->db_escape($value)); // OK?
                     }
                 }
                 $query_set   = substr($query_set, 0, -1);
@@ -914,7 +922,11 @@ class db_mysql {
                             $field = $_lib['db']->db_escape(trim($field));
                             $value = "'" . $_lib['db']->db_escape(trim($value)) . "'";
                         }
-                        $query_update .= $field . "=" . $value . ", ";
+                        if($value === "'" . DB_NULL_PLACEHOLDER . "'"){
+                          $query_update .= $field . "= NULL, ";
+                        } else {
+                          $query_update .= $field . "=" . $value . ", ";
+                        }
                     } else {
                         # print "Field does not exist: " . $args['table'] . ".$field";
                         $_lib['sess']->warning("Field does not exist: " . $args['table'] . ".$field");

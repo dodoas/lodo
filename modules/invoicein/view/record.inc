@@ -4,6 +4,17 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
     $invoicein->journal();
 
 } elseif($_lib['input']->getProperty('action_invoicein_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
+
+        // Allow unsetting a Department
+        if (($_POST['invoicein_DepartmentID_'.$invoicein->ID] === "unset")) {
+            $_POST['invoicein_DepartmentID_'.$invoicein->ID] = DB_NULL_PLACEHOLDER;
+        }
+
+        // Allow unsetting a Project
+        if (($_POST['invoicein_ProjectID_'.$invoicein->ID] === "unset")) {
+            $_POST['invoicein_ProjectID_'.$invoicein->ID] = DB_NULL_PLACEHOLDER;
+        }
+
     $invoicein->update($_POST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_remittance')) {

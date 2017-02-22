@@ -243,9 +243,9 @@ function updateAndPerformAction(link_button) {
     </tr>
     <tr>
       <td>Prosjekt</td>
-      <td><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'Project', 'pk'=>$ID,  'value' =>  $invoicein->Project)) ?></td>
+      <td><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$ID,  'value' =>  $invoicein->ProjectID, 'unset' => true)) ?></td>
       <td>Avdeling</td>
-      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'Department', 'pk'=>$ID, 'value' => $invoicein->Department)); ?></td>
+      <td><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$ID, 'value' => $invoicein->DepartmentID, 'unset' => true)); ?></td>
     </tr>
     <tr>
       <td>Leverings betingelse</td>

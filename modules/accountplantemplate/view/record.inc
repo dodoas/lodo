@@ -13,6 +13,19 @@ if(!$AccountPlanID && $AccountPlanType) {
 
 if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->getProperty('action_accountplan_updateautomatic'))
 {
+    // Allow unsetting a Car
+    if (($_POST['accountplantemplate_CarID']) === "unset") {
+        $_POST['accountplantemplate_CarID'] = DB_NULL_PLACEHOLDER;
+    }
+     // Allow unsetting a Department
+    if (($_POST['accountplantemplate_DepartmentID']) === "unset") {
+        $_POST['accountplantemplate_DepartmentID'] = DB_NULL_PLACEHOLDER;
+    }
+    // Allow unsetting a Project
+    if (($_POST['accountplantemplate_ProjectID']) === "unset") {
+        $_POST['accountplantemplate_ProjectID'] = DB_NULL_PLACEHOLDER;
+    }
+
     if (!empty($_POST['accountplan_OrgNumber'])) {
         $_POST['accountplan_OrgNumber'] = clean_org_number($_POST['accountplan_OrgNumber']);
     }

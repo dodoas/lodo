@@ -96,12 +96,16 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     <td><? $_lib['form2']->checkbox2($db_table, "EnableQuantity", $account->EnableQuantity,'') ?></td>
   </tr>
   <tr>
+    <td class="menu">Bil</td>
+    <td><? $_lib['form2']->checkbox2($db_table, "EnableCar",$account->EnableCar,'') ?> Standard: <? $_lib['form2']->car_menu2(array('table' => $db_table,  'field' =>  'CarID',  'value' =>  $account->CarID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?></td>
+  </tr>
+  <tr>
     <td class="menu">Prosjekt</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableProject",$account->EnableProject,'') ?> Default: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')) ?>
+    <td><? $_lib['form2']->checkbox2($db_table, "EnableProject",$account->EnableProject,'') ?> Standard: <? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $account->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'unset' => true)) ?>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableDepartment",$account->EnableDepartment,'') ?> Default: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')) ?></td>
+    <td><? $_lib['form2']->checkbox2($db_table, "EnableDepartment",$account->EnableDepartment,'') ?> Standard: <? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $account->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V', 'unset' => true)) ?></td>
   </tr>
   <tr class="result">
     <th colspan="5">Rapporter (som hovedbokskontoen skal brukes i)</th>

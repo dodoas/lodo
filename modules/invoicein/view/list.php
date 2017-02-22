@@ -180,8 +180,8 @@ foreach($invoicein as $InvoiceO) {
            print $_lib['format']->Amount($InvoiceO->TotalCustPrice);
         ?>
       </td>
-      <td><? print $InvoiceO->Project ?></td>
-      <td><? print $InvoiceO->Department ?></td>
+      <td><? print $InvoiceO->ProjectID ?></td>
+      <td><? print $InvoiceO->DepartmentID ?></td>
       <td title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';
