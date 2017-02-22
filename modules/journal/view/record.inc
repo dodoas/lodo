@@ -23,6 +23,18 @@ if ((isset($_REQUEST['action_voucher_new']) || isset($_REQUEST['action_voucher_h
 includelogic('journal/search');
 $search_class   = new search_class();
 
+// Allow unsetting a Car
+if ($voucher_input->CarID === "unset") {
+    $voucher_input->CarID = DB_NULL_PLACEHOLDER;
+}
+// Allow unsetting a Project
+if ($voucher_input->ProjectID === "unset") {
+    $voucher_input->ProjectID = DB_NULL_PLACEHOLDER;
+}
+// Allow unsetting a Department
+if ($voucher_input->DepartmentID === "unset") {
+    $voucher_input->DepartmentID = DB_NULL_PLACEHOLDER;
+}
 #################################################################################################################
 #Search fasilities
 if(strlen($voucher_input->CustomerNumber) > 0)

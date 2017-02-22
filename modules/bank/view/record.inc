@@ -182,16 +182,53 @@ function do_bank_update($table_name, &$accountline, $Period) {
 
         // Allow unsetting a reskontro
         if (!isset($accountline['ReskontroAccountPlanID'])) {
-            // set value to "" to not trigger errors like:
-            // get_accountplan_object(): Mangler AccountplanID
+            unset($accountline['CarID']);
+            unset($accountline['ProjectID']);
+            unset($accountline['DepartmentID']);
             $accountline['ReskontroAccountPlanID'] = DB_NULL_PLACEHOLDER;
         }
 
         // Allow unsetting a resultaccount
         if (!isset($accountline['ResultAccountPlanID'])) {
-            // set value to "" to not trigger errors like:
-            // get_accountplan_object(): Mangler AccountplanID
+            unset($accountline['CarID']);
+            unset($accountline['ProjectID']);
+            unset($accountline['DepartmentID']);
             $accountline['ResultAccountPlanID'] = DB_NULL_PLACEHOLDER;
+        }
+
+        $reskontroaccountplan = $accounting->get_accountplan_object($accountline['ReskontroAccountPlanID']);
+        $resultaccountplan = $accounting->get_accountplan_object($accountline['ResultAccountPlanID']);
+        // Allow unsetting a Car, unless there is a default on one of the accountplans
+        if (!isset($accountline['CarID'])) {
+            if(intval($reskontroaccountplan->EnableCar) === 1 && isset($reskontroaccountplan->CarID)) {
+                $accountline['CarID'] = $reskontroaccountplan->CarID;
+            } elseif(intval($resultaccountplan->EnableCar) === 1 && isset($resultaccountplan->CarID)) {
+                $accountline['CarID'] = $resultaccountplan->CarID;
+            } else {
+                $accountline['CarID'] = DB_NULL_PLACEHOLDER;
+            }
+        }
+
+        // Allow unsetting a Project, unless there is a default on one of the accountplans
+        if (!isset($accountline['ProjectID'])) {
+            if(intval($reskontroaccountplan->EnableProject) === 1 && isset($reskontroaccountplan->ProjectID)) {
+                $accountline['ProjectID'] = $reskontroaccountplan->ProjectID;
+            } elseif(intval($resultaccountplan->EnableProject) === 1 && isset($resultaccountplan->ProjectID)) {
+                $accountline['ProjectID'] = $resultaccountplan->ProjectID;
+            } else {
+                $accountline['ProjectID'] = DB_NULL_PLACEHOLDER;
+            }
+        }
+
+        // Allow unsetting a Department, unless there is a default on one of the accountplans
+        if (!isset($accountline['DepartmentID'])) {
+            if(intval($reskontroaccountplan->EnableDepartment) === 1 && isset($reskontroaccountplan->DepartmentID)) {
+                $accountline['DepartmentID'] = $reskontroaccountplan->DepartmentID;
+            } elseif(intval($resultaccountplan->EnableDepartment) === 1 && isset($resultaccountplan->DepartmentID)) {
+                $accountline['DepartmentID'] = $resultaccountplan->DepartmentID;
+            } else {
+                $accountline['DepartmentID'] = DB_NULL_PLACEHOLDER;
+            }
         }
 
         if($accountline['Priority'] == $debugline) print_r($accountline);
@@ -213,7 +250,6 @@ function do_bank_update($table_name, &$accountline, $Period) {
             if(!$accountline['InvoiceNumber']) {
                 $accountline['InvoiceNumber']          = $InvoiceNumber;
             }
-            #print_r($accountline);
         }
 
         // Add a zero of the day is only one char.

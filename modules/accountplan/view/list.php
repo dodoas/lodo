@@ -132,7 +132,7 @@ if(isset($limitSet))
     <th class="menu">Debet tekst</th>
     <th class="menu">Kredit tekst</th>
     <th class="menu">MVA kode</th>
-    <th class="menu">Bil</th>
+    <?if ($func !== "employee") echo "<th class='menu'>Bil</th>" ?>
     <th class="menu">Prosjekt</th>
     <th class="menu">Avdeling</th>
     <th class="menu">Motkontobalanse</th>
@@ -181,15 +181,17 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           <td><? print $row->credittext ?></td>
           <td align="right"><? if($row->EnableVAT)    { print $row->VatID; } ?></td>
 
-          <td align="right">
           <?
-            if ($row->EnableCar) {
-              $query = "select * from car where CarID = $row->CarID";
-              $car   = $_lib['storage']->get_row(array('query' => $query));
-              print $car->CarCode;
+            if ($func !== "employee") {
+              if ($row->EnableCar) {
+                $query = "select * from car where CarID = $row->CarID";
+                $car   = $_lib['storage']->get_row(array('query' => $query));
+                echo "<td align='right'>";
+                print $car->CarCode;
+                echo "</td>";
+              }
             }
           ?>
-          </td>
 
           <td align="right"><? if($row->EnableProject)    { print $row->ProjectID; } ?></td>
 

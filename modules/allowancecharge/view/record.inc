@@ -24,6 +24,15 @@ if($_lib['input']->getProperty('action_charge_new') || $_lib['input']->getProper
 }
 elseif($_lib['input']->getProperty('action_allowancecharge_update'))
 {
+  // Allow unsetting a Department
+  if (($_POST['allowancecharge_DepartmentID_' . $AllowanceChargeID ]) === "unset") {
+      $_POST['allowancecharge_DepartmentID_' . $AllowanceChargeID ] = DB_NULL_PLACEHOLDER;
+  }
+  // Allow unsetting a Project
+  if (($_POST['allowancecharge_ProjectID_' . $AllowanceChargeID]) === "unset") {
+      $_POST['allowancecharge_ProjectID_' . $AllowanceChargeID] = DB_NULL_PLACEHOLDER;
+  }
+
   $tables['allowancecharge'] = 'AllowanceChargeID';
 
   $date = $_lib['sess']->get_session('LoginFormDate');

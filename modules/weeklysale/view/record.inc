@@ -135,6 +135,19 @@ elseif($_REQUEST['action_weeklysaleconf_update'])
         {
             if(!($j==2 and ($i==19 or $i==20)))
             {
+              // Allow unsetting a Car
+              if (($_POST['weeklysalegroupconf_Group'.$i.'CarID_'.$_POST[$j]]) === "unset") {
+                  $_POST['weeklysalegroupconf_Group'.$i.'CarID_'.$_POST[$j]] = DB_NULL_PLACEHOLDER;
+              }
+              // Allow unsetting a Project
+              if (($_POST['weeklysalegroupconf_Group'.$i.'ProjectID_'.$_POST[$j]]) === "unset") {
+                  $_POST['weeklysalegroupconf_Group'.$i.'ProjectID_'.$_POST[$j]] = DB_NULL_PLACEHOLDER;
+              }
+              // Allow unsetting a Department
+              if (($_POST['weeklysalegroupconf_Group'.$i.'DepartmentID_'.$_POST[$j]]) === "unset") {
+                  $_POST['weeklysalegroupconf_Group'.$i.'DepartmentID_'.$_POST[$j]] = DB_NULL_PLACEHOLDER;
+              }
+
 
                 if($j == 1) {
                   $groupname = "Inntekt";

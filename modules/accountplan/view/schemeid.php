@@ -20,7 +20,7 @@ function createSchemeOptions($selected, $country) {
             sprintf("<option value='%d' %s %s>%s</option>\n",
                     $type['FakturabankSchemeID'],
                     ($type['FakturabankSchemeID'] == $selected ? "selected" : ""),
-                    ($country == $scheme_type_country || $scheme_type_country == 'FAKTURABANK' || $type['FakturabankSchemeID'] == $selected ? "" : "hidden"),
+                    ($country == $scheme_type_country || $type['FakturabankSchemeID'] == $selected ? "" : "hidden"),
                     $type['SchemeType']
                 );
     }
@@ -35,7 +35,7 @@ function filterSchemesByCountryCode(country) {
   var ap_scheme_fbschemeid_select = document.getElementById('accountplanscheme.FakturabankSchemeID.'+ap_schemeid);
   options = ap_scheme_fbschemeid_select.options;
   for(i = 0; i < options.length; i++) {
-    if (options[i].text.match(selected_country_code) || options[i].text.match('FAKTURABANK') || options[i].selected) {
+    if (options[i].text.match(selected_country_code) || options[i].selected) {
       options[i].hidden = false;
     } else {
       options[i].hidden = true;

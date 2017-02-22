@@ -120,7 +120,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableCar == 1)
-                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
+                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true, 'unset' => true));
                 }
             ?></td>
         <?
@@ -139,7 +139,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableProject from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableProject == 1)
-                        print $_lib['form3']->project_menu(array('pk' => $row->WeeklySaleGroupConfID, 'field' => 'Group'. $i .'ProjectID', 'value' => $row->{"Group". $i ."ProjectID"}, 'table' => 'weeklysalegroupconf', 'num_letters' => $aconf['num_letters']  ));
+                        print $_lib['form2']->project_menu2(array('pk' => $row->WeeklySaleGroupConfID, 'field' => 'Group'. $i .'ProjectID', 'value' => $row->{"Group". $i ."ProjectID"}, 'table' => 'weeklysalegroupconf', 'num_letters' => $aconf['num_letters'], 'unset' => true));
                 }
             ?></td>
         <?
@@ -157,7 +157,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableDepartment from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableDepartment == 1)
-                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID));
+                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'unset' => true));
                 }
             ?></td>
         <?
@@ -223,7 +223,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableCar from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableCar == 1)
-                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true));
+                        $_lib['form2']->car_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'CarID', 'value'=>$row->{"Group". $i ."CarID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'all_cars' => true, 'unset' => true));
                 }
             ?></td>
         <?
@@ -242,7 +242,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableProject from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableProject == 1)
-                        print $_lib['form3']->project_menu(array('pk' => $row->WeeklySaleGroupConfID, 'field' => 'Group'. $i .'ProjectID', 'value' => $row->{"Group". $i ."ProjectID"}, 'table' => 'weeklysalegroupconf', 'num_letters' => $aconf['num_letters']));
+                        print $_lib['form2']->project_menu2(array('pk' => $row->WeeklySaleGroupConfID, 'field' => 'Group'. $i .'ProjectID', 'value' => $row->{"Group". $i ."ProjectID"}, 'table' => 'weeklysalegroupconf', 'num_letters' => $aconf['num_letters'], 'unset' => true));
                 }
             ?></td>
         <?
@@ -261,7 +261,7 @@ $aconf['num_letters']   = 10;
                     $queryCheck="select EnableDepartment from accountplan where AccountPlanID=". $row->{"Group". $i ."Account"};
                     $rowCheck = $_lib['storage']->get_row(array('query' => $queryCheck));
                     if($rowCheck->EnableDepartment == 1)
-                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID));
+                        $_lib['form2']->department_menu2(array('table'=>'weeklysalegroupconf', 'field'=>'Group'. $i .'DepartmentID', 'accesskey'=>'D', 'value'=>$row->{"Group". $i ."DepartmentID"}, 'pk'=>$row->WeeklySaleGroupConfID, 'unset' => true));
                 }
             ?></td>
         <?

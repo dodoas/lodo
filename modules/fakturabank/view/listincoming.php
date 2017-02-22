@@ -273,8 +273,8 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number">
         <? print $invoice_amount_string; ?>
       </td>
-      <td class="number"><? print $InvoiceO->Project ?></td>
-      <td class="number"><? print $InvoiceO->Department ?></td>
+      <td class="number"><? print $InvoiceO->ProjectID ?></td>
+      <td class="number"><? print $InvoiceO->DepartmentID ?></td>
       <td class="number" title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';

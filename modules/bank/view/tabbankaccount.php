@@ -613,9 +613,37 @@ if(is_array($bank->bankaccount)) {
             }
             ?>
         </td>
-        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar)        { ?><? $_lib['form2']->car_menu2(array(       'table' => 'accountline', 'field' => 'CarID',        'pk' => $row->AccountLineID, 'value' => $row->CarID, 'active_reference_date' => $bank->ThisPeriod."-".$row->Day)); } ?></td>
-        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',    'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
-        <td class="<?=$BankHiglightClass?>"><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID', 'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
+        <td class="<?=$BankHiglightClass?>">
+        <? if(!empty($resultaccountplan) && $resultaccountplan->EnableCar || !empty($reskontroaccountplan) && $reskontroaccountplan->EnableCar) {
+          $car_menu_conf = array(
+            'table' => 'accountline',
+            'field' => 'CarID',
+            'pk' => $row->AccountLineID,
+            'value' => $row->CarID,
+            'unset' => true,
+            'active_reference_date' => $bank->ThisPeriod."-".$row->Day);
+         $_lib['form2']->car_menu2($car_menu_conf);
+        } ?></td>
+        <td class="<?=$BankHiglightClass?>">
+        <? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject || !empty($reskontroaccountplan) && $reskontroaccountplan->EnableProject) {
+          $project_menu_conf = array(
+            'table' => 'accountline',
+            'field' => 'ProjectID',
+            'pk' => $row->AccountLineID,
+            'value' => $row->ProjectID,
+            'unset' => true);
+           $_lib['form2']->project_menu2($project_menu_conf);
+         } ?></td>
+        <td class="<?=$BankHiglightClass?>">
+        <? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment || !empty($reskontroaccountplan) && $reskontroaccountplan->EnableDepartment) {
+          $department_menu_conf = array(
+            'table' => 'accountline',
+            'field' => 'DepartmentID',
+            'pk' => $row->AccountLineID,
+            'value' => $row->DepartmentID,
+            'unset' => true);
+            $_lib['form2']->department_menu2($department_menu_conf);
+        } ?></td>
         <td class="<?=$BankHiglightClass?>">
           <?= create_span($matchCaption, ((empty($row->InvoiceNumber) && empty($row->KID)) ? "empty$EmptyHighlightCount" : "$row->JournalID-$row->InvoiceNumber-$row->KID")); ?>
         </td>
