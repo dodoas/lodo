@@ -612,26 +612,76 @@ $result_salary = $_lib['db']->db_query($query_salary);
 // periods and compare them to number of lines in salary line table for all open periods
 // based on corresponding JournalID
 // if the numbers differ then something is not good
-$query_diff  = "SELECT s.SalaryID, s.JournalID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName
-                FROM salary s JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID JOIN kommune k ON ap.KommuneID = k.KommuneID
-                WHERE SalaryID IN (
-                  SELECT p1.SalaryID
-                  FROM (
-                    -- number of non-zero lines in salaryline table
-                    SELECT count(*) as NumberOfLines, s.JournalID, s.SalaryID
-                    FROM salaryline sl JOIN salary s ON s.SalaryID = sl.SalaryID
-                    WHERE sl.AmountThisPeriod != 0
-                    AND s.Period IN ( SELECT Period FROM accountperiod WHERE Status < 4 )
-                    GROUP BY s.JournalID
-                  ) p1 JOIN (
-                    -- number of active lines in voucher table, -1 is for the total sum line
-                    SELECT count(*) - 1 as NumberOfLines, v.JournalID
-                    FROM voucher v JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
-                    WHERE v.VoucherType = 'L' AND v.Active = 1 AND ap.EnableReskontro = 0 AND v.VoucherPeriod IN ( SELECT Period FROM accountperiod WHERE Status < 4 )
-                    GROUP BY v.JournalID
-                  ) p2 ON p1.JournalID = p2.JournalID
-                  WHERE p1.NumberOfLines != p2.NumberOfLines
-                )";
+
+// same line limits as in salary/edit
+$lineInFrom  =  10;
+$lineInTo    =  69;
+$lineOutFrom =  70;
+$lineOutTo   = 100;
+
+$salary_lines_subquery = "SELECT 
+                            count(*) as NumberOfLinesSalary,
+                            sum(sl.AmountThisPeriod) as SumOfLinesSalary,
+                            sl.AccountPlanID as ForAccountPlanIDSalary,
+                            s.JournalID
+                          FROM (
+                                -- all salary lines
+                                SELECT SalaryID,
+                                       AccountPlanID,
+                                       IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0)) as 
+                                       AmountThisPeriod
+                                FROM salaryline
+                                WHERE AmountThisPeriod != 0
+
+                                UNION ALL
+                                -- salary 'head' line, which is sum of all salary lines
+                                SELECT SalaryID,
+                                       (SELECT AccountPlanID FROM salary WHERE SalaryID = sldeep.SalaryID) as AccountPlanID,
+                                       -sum(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0))) as AmountThisPeriod
+                                FROM salaryline sldeep
+                                WHERE AmountThisPeriod != 0
+                                GROUP BY SalaryID
+                                HAVING sum(IF(LineNumber >= $lineInFrom and LineNumber <= $lineInTo, AmountThisPeriod, IF(LineNumber >= $lineOutFrom and LineNumber <= $lineOutTo, -AmountThisPeriod, 0))) != 0
+                          ) sl JOIN salary s ON s.SalaryID = sl.SalaryID
+                          GROUP BY s.JournalID, sl.AccountplanID";
+
+$voucher_lines_subquery = "SELECT
+                             count(*) as NumberOfLinesJournal,
+                             sum(v.AmountIn - v.AmountOut) as SumOfLinesJournal,
+                             v.AccountPlanID as ForAccountPlanIDJournal,
+                             v.JournalID
+                           FROM voucher v JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+                           WHERE v.VoucherType = 'L' AND v.Active = 1 AND ap.EnableReskontro = 0
+                           GROUP BY v.JournalID, v.AccountPlanID";
+
+
+
+$query_diff  = "SELECT
+                  SUM(ABS(IFNULL(NumberOfLinesSalary, 0) - IFNULL(NumberOfLinesJournal, 0))) as LineDifference,
+                  SUM(ABS(IFNULL(SumOfLinesSalary, 0) - IFNULL(SumOfLinesJournal, 0))) as SumDifference,
+                  sal.SalaryID, sal.JournalID , sal.JournalDate, sal.Period, sal.AccountPlanID, sal.ValidFrom, sal.ValidTo, sal.PayDate, ap.DomesticBankAccount, ap.AccountName, k.KommuneNumber, k.KommuneName
+                FROM (
+                    SELECT IF(p1.JournalID is not null, p1.JournalID, p2.JournalID) as JournalID, p2.NumberOfLinesJournal, p2.SumOfLinesJournal, p1.SumOfLinesSalary, p1.NumberOfLinesSalary
+                    FROM (
+                          ". $salary_lines_subquery ."
+                    ) p1 LEFT JOIN (
+                          ". $voucher_lines_subquery ."
+                    ) p2 ON p1.JournalID = p2.JournalID AND p1.ForAccountPlanIDSalary = p2.ForAccountPlanIDJournal
+
+                    UNION
+
+                    SELECT IF(p1.JournalID is not null, p1.JournalID, p2.JournalID) as JournalID, p2.NumberOfLinesJournal, p2.SumOfLinesJournal, p1.SumOfLinesSalary, p1.NumberOfLinesSalary
+                    FROM (
+                          ". $salary_lines_subquery ."
+                    ) p1 RIGHT JOIN (
+                          ". $voucher_lines_subquery ."
+                    ) p2 ON p1.JournalID = p2.JournalID AND p1.ForAccountPlanIDSalary = p2.ForAccountPlanIDJournal
+                ) result
+                JOIN salary sal ON sal.JournalID = result.JournalID LEFT JOIN accountplan ap ON sal.AccountPlanID = ap.AccountPlanID LEFT JOIN kommune k ON ap.KommuneID = k.KommuneID
+
+                WHERE IFNULL(NumberOfLinesSalary, 0) != IFNULL(NumberOfLinesJournal, 0) || IFNULL(SumOfLinesSalary, 0) != IFNULL(SumOfLinesJournal, 0)
+                GROUP BY JournalID;";
+
 $result_diff = $_lib['db']->db_query($query_diff);
 
   while($salary = $_lib['db']->db_fetch_object($result_salary)) { ?>
@@ -663,7 +713,10 @@ $result_diff = $_lib['db']->db_query($query_diff);
         <td><? print $salary->PayDate; ?></td>
         <td><? print $salary->DomesticBankAccount; ?></td>
         <td><? print $salary->KommuneNumber . " " . $salary->KommuneName; ?></td>
-        <td>Linjer avvike</td>
+        <td>
+            <? print "Det er forskjellig antall linjer <span style='color: red;'>". $salary->LineDifference ."</span style='color: red;'>. " ?>
+            <? print "Det er forskjell p&aring; bel&oslash;p <span style='color: red;'>". $_lib['format']->Amount($salary->SumDifference) ."</span style='color: red;'>. " ?>
+        </td>
         <td><a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_VoucherType=L&action_journalid_search=1&voucher_JournalID=".$salary->JournalID; ?>" target="_blank"><? print "L".$salary->JournalID; ?></a></td>
     </tr>
 <? } ?>
