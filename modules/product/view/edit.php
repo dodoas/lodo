@@ -89,6 +89,18 @@ if (!empty($row->AccountPlanID)) {
         <td>Resultat konto</td>
         <td colspan="2"><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'AccountPlanID', 'pk'=>$row->ProductID, 'value'=>$row->AccountPlanID, 'tabindex'=>'5', 'type' => array(0 => 'result', 1 => 'balance'), 'required' => 1)) ?></td>
     </tr>
+<?php
+    if ($row->AccountPlanID < 3000 || $row->AccountPlanID > 3999) {
+?>
+    <tr>
+        <td></td>
+        <td colspan="4">
+            <div class="warning">Denne kontoen er ikke blant salgskontoene 3000-3999, kontroll&eacute;r.</div>
+        </td>
+    </tr>
+<?php
+    }
+?>
     <tr>
         <td>MVA</td>
         <td colspan="2"><? if($VAT->Percent) { print "$VAT->Percent%"; } ?></td>
