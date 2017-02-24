@@ -470,6 +470,19 @@ elseif($_REQUEST['action_weeklysale_journal']) {
       $post['voucher_VoucherDate'] = $_POST['weeklysale_JournalDate_'.$POST['WeeklySaleID']];
       $accounting->set_journal_motkonto(array('post'=>$post, 'VoucherType'=>$VoucherType));
   }
+} else {
+  $query_sale = "select * from weeklysaleday where WeeklySaleID='".$WeeklySaleID."' and Type=1";
+  $result_sale = $_lib['db']->db_query($query_sale);
+  while($sale = $_lib['db']->db_fetch_object($result_sale)){
+    check_znr_count(
+      $sale->Locked,
+      $sale->Znr,
+      $WeeklySaleID,
+      $sale->WeeklySaleDayID,
+      $WeeklySaleConfID,
+      $znrwrong
+    );
+  }
 }
 
 function update_weeklysale($post, $pk){
@@ -551,20 +564,14 @@ function update_weeklysale($post, $pk){
         #MŒ oppdatere dagid og znr fra topp linje basert pŒ parentweeklysaledayid. Denne algoritmen forusetter like mange pŒ begge sider for Œ fungere parentweeklysale kan brukes for Œ gj¿re det mer robust
         #MŒ i sŒ fall kj¿res til slutt etter at alt er lagret.
     
-        if(!$post["weeklysaleday_Locked_".$sale->WeeklySaleDayID] and isset($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]) and strlen($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]) > 0)
-        {
-            if($post["weeklysaleday_Znr_".$sale->WeeklySaleDayID] > 0) {
-                $weeklysale = new weeklysale($post['WeeklySaleID'], $post['WeeklySaleConfID']);
-                $query_template         = "select wsc.* from weeklysale as ws, weeklysaleconf as wsc where wsc.WeeklySaleConfID=ws.WeeklySaleConfID and ws.WeeklySaleID=" . (int) $post['WeeklySaleID'] . "";
-                $result_template        = $_lib['db']->db_query($query_template);
-                $template               = $_lib['db']->db_fetch_object($result_template);
-                $countznr = $weeklysale->isUniqueZnr($template->Name, $post["weeklysaleday_Znr_".$sale->WeeklySaleDayID]);
-                if($countznr > 1) {
-                    $znrwrong[$sale->WeeklySaleDayID] = "Dette Znr: " . $post["weeklysaleday_Znr_".$sale->WeeklySaleDayID] . " er brukt $countznr ganger tidligere i denne malen";
-                    $_lib['message']->add(array('message' => $znrwrong[$sale->WeeklySaleDayID]));
-                }
-            }
-        }
+        check_znr_count(
+          $post["weeklysaleday_Locked_".$sale->WeeklySaleDayID],
+          $post["weeklysaleday_Znr_".$sale->WeeklySaleDayID],
+          $post["WeeklySaleID"],
+          $sale->WeeklySaleDayID,
+          $post["WeeklySaleConfID"],
+          $znrwrong
+        );
     
         #print_r($sale); print "<br>";
     
@@ -705,6 +712,21 @@ function new_weeklysaleday($args) {
 	} else {
 		print "Missing DayID parameter<br>\n";
 	}
+}
+
+function check_znr_count($locked, $znr, $weeklysale_id, $weeklysaleday_id, $weeklysaleconf_id, &$znrwrong) {
+  global $_lib;
+  if(!$locked and strlen($znr) > 0 and $znr > 0) {
+    $weeklysale = new weeklysale($weeklysale_id, $weeklysaleconf_id);
+    $query_template         = "select wsc.* from weeklysale as ws, weeklysaleconf as wsc where wsc.WeeklySaleConfID=ws.WeeklySaleConfID and ws.WeeklySaleID=" . (int) $weeklysale_id . "";
+    $result_template        = $_lib['db']->db_query($query_template);
+    $template               = $_lib['db']->db_fetch_object($result_template);
+    $countznr = $weeklysale->isUniqueZnr($template->Name, $znr);
+    if($countznr > 1) {
+      $znrwrong[$weeklysaleday_id] = "Dette Znr: " . $znr . " er brukt $countznr ganger tidligere i denne malen";
+      $_lib['message']->add(array('message' => $znrwrong[$weeklysaleday_id]));
+    }
+  }
 }
 
 ?>

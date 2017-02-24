@@ -307,8 +307,11 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.Day.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Day ?>" size="2" class="number" tabindex="<? print $tabno ?>"></td>
 
                 <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
-                <td class="number"><nobr><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.zreport&WeeklySaleID=<? print $WeeklySaleID ?>&WeeklySaleDayID=<? print $line->WeeklySaleDayID?>">Z</a><input type="text" <? print $readonly ?> name="weeklysaleday.Znr.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Znr ?>" size="4" class="<? print $classznr ?>"  title="<? print $titleznr ?>" tabindex="<? print $tabno ?>"></nobr></td>
-
+                <td class="number"><nobr><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.zreport&WeeklySaleID=<? print $WeeklySaleID ?>&WeeklySaleDayID=<? print $line->WeeklySaleDayID?>">Z</a><input type="text" <? print $readonly ?> name="weeklysaleday.Znr.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Znr ?>" size="4" class="<? print $classznr ?>"  title="<? print $titleznr ?>" tabindex="<? print $tabno ?>"></nobr>
+                <? if ($readonly === "disabled") { ?>
+                <input type="hidden" name="weeklysaleday.Znr.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Znr ?>">
+                <? } ?>
+                </td>
                 <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
                 <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.ZnrTotalAmount.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount($line->ZnrTotalAmount) ?>" size="7" class="<? print $classznramount ?>" title="<? print $titleznramount ?>" tabindex="<? print $tabno ?>"> 
 
