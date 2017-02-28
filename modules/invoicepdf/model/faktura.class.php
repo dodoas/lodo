@@ -522,12 +522,11 @@ class pdfInvoice
     }
 
     function printLineSeparator ($params) {
-    // commented out because the allowances and charges are moved from the bottom.
-    // maybe check if we have either an allowance charge or line comment?
-    // if (((count($params[1]['allowancecharges']) > 0) && (!empty($params[1]['allowancecharges'][0]['AllowanceChargeType'])))) {
-    if (true) {
-        $this->pdf->SetLineWidth(0.2);
+      if (((count($params[1]['allowancecharges']) > 0) && (!empty($params[1]['allowancecharges'][0]['AllowanceChargeType'])))) {
+        $this->pdf->SetDrawColor(200, 200, 200);
+        $this->pdf->SetLineWidth(0.1);
         $this->pdf->Line($this->invoiceLineHeadLeft2, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)) - 0.2, $this->invoiceLineHeadLeft3, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine)) - 0.2);
+        $this->pdf->SetDrawColor(0, 0, 0);
       }
     }
 

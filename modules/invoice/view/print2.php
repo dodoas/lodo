@@ -245,6 +245,9 @@ foreach ($myFakutraLines as $params2) {
 
     $myFakutra->addInvoiceLine ($params2[1]);
 
+    if($row_company->InvoiceLineCommentPosition == 'middle' && $params2[0] != "")
+        $myFakutra->addLongTextLine(array('tekst' =>$params2[0]));
+
     $myFakutra->addInvoiceLineAllowanceCharge ($params2[1]['allowancecharges']);
 
     if(($row_company->InvoiceLineCommentPosition == 'bottom' || !$row_company->InvoiceLineCommentPosition) && $params2[0] != "")
