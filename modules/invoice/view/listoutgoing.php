@@ -359,7 +359,10 @@ SELECT DISTINCT(JournalID) FROM (
             WHEN ta.AutomaticReason LIKE 'Automatisk % MVA%' THEN 'VAT'
             WHEN ta.AutomaticReason LIKE 'Faktura rabatt/kostnad%' THEN 'Allowance/Charge'
             WHEN ta.AccountPlanType = 'customer' THEN 'Total'
-            WHEN ta.AutomaticReason LIKE 'Faktura%' AND ta.AccountPlanID >= 3000 && ta.AccountPlanID <= 3999 THEN 'Regular'
+            WHEN ta.AutomaticReason LIKE 'Faktura%' AND ta.AccountPlanID IN (
+              SELECT DISTINCT(AccountPlanID)
+              FROM product
+            ) THEN 'Regular'
             ELSE 'SOMETHING_IS_WRONG'
             END AS Type,
             '' AS LineID,
