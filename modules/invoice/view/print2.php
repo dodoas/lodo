@@ -240,13 +240,20 @@ $myFakutra->fakturaGiro($params);
 
 // printing lines
 foreach ($myFakutraLines as $params2) {
-    if($row_company->InvoiceLineCommentPosition == 'bottom')
-    $myFakutra->addInvoiceLine ($params2[1]);
-    if ($params2[0] != "")
+    if($row_company->InvoiceLineCommentPosition == 'top' && $params2[0] != "")
         $myFakutra->addLongTextLine(array('tekst' =>$params2[0]));
-    if($row_company->InvoiceLineCommentPosition == 'top' || !$row_company->InvoiceLineCommentPosition)
-        $myFakutra->addInvoiceLine ($params2[1]);
+
+    $myFakutra->addInvoiceLine ($params2[1]);
+
+    if($row_company->InvoiceLineCommentPosition == 'middle' && $params2[0] != "")
+        $myFakutra->addLongTextLine(array('tekst' =>$params2[0]));
+
     $myFakutra->addInvoiceLineAllowanceCharge ($params2[1]['allowancecharges']);
+
+    if(($row_company->InvoiceLineCommentPosition == 'bottom' || !$row_company->InvoiceLineCommentPosition) && $params2[0] != "")
+        $myFakutra->addLongTextLine(array('tekst' =>$params2[0]));
+
+    $myFakutra->printLineSeparator ($params2);
     $rowCounter++;
 }
 $myFakutra->addInvoiceLineAllowanceCharge ($params['allowancecharges']);
