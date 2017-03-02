@@ -400,9 +400,16 @@ elseif($_lib['input']->getProperty('action_del_scheme')) {
     update_orgnr_vat_from_firmaid();
 }
 elseif($_lib['input']->getProperty('action_save_scheme')) {
+    $no_sup_accnt_scheme = $_lib['db']->db_fetch_assoc($_lib['db']->db_query("SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = 'NO:SUP-ACCNT-RE';"));
     foreach($_POST as $key => $value) {
       // new issue: On saving firmaID, not all of the scheme values should be formatted like this. Phone number for example can be set as '123 45 678', and wont work if formatted '12345678'
       if (strpos($key, 'accountplanscheme_SchemeValue') !== false) $_POST[$key] = str_replace(' ', '', $_POST[$key]);
+
+      // when saving firmaID with NO:SUP-ACCNT-RE, always set the value to AccountPlanID. This is backend safety measure
+      // We also need this because SchemeValue is not send due to being disabled
+      if(preg_match("/accountplanscheme_FakturabankSchemeID_(\d+)/", $key, $matches) && $value == $no_sup_accnt_scheme["FakturabankSchemeID"]) {
+        $_POST['accountplanscheme_SchemeValue_'. $matches[1]] = $AccountPlanID;
+      }
     }
     $_lib['storage']->db_update_multi_table($_POST, array('accountplanscheme' => 'AccountPlanSchemeID'));
     update_orgnr_vat_from_firmaid();

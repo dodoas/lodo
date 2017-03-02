@@ -1341,8 +1341,13 @@ class invoice {
           $schemeControl = new lodo_accountplan_scheme($invoice->CustomerAccountPlanID);
           $firstFirmaID = $schemeControl->getFirstFirmaID();
         }
-        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = $firstFirmaID['value'];
-        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = $firstFirmaID['type'];
+        if($firstFirmaID) {
+            $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = $firstFirmaID['value'];
+            $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyIDSchemeID = $firstFirmaID['type'];
+        } else {
+            print "Mangler firma id.<br>";
+            return;
+        }
 
         if (!empty($invoice->IVatNo)) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IVatNo;
