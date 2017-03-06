@@ -42,6 +42,15 @@ function filterSchemesByCountryCode(country) {
     }
   }
 }
+function fixNoSupAccntRe(select_element) {
+  var input = $(select_element).next("input");
+  if($(select_element).find("option:selected").text() == "NO:SUP-ACCNT-RE") {
+    input.val(<? print $AccountPlanID; ?>);
+    input.attr("disabled", "disabled");
+  } else {
+    input.removeAttr("disabled");
+  }
+}
 </script>
 <tr class="result">
   <th colspan="6">Fakturabank Firma ID</th>
@@ -55,10 +64,10 @@ function filterSchemesByCountryCode(country) {
     <? print $_lib['form3']->Country_menu3(array('table'=>'accountplanscheme', 'field'=>'CountryCode', 'pk' => $scheme['AccountPlanSchemeID'], 'value'=>$scheme['CountryCode'], 'OnChange' => 'filterSchemesByCountryCode(this)')); ?>
   </td>
   <td>
-    <select id="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>" name="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>">
+    <select id="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>" name="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>" onchange="fixNoSupAccntRe(this);">
       <?= createSchemeOptions($scheme['FakturabankSchemeID'], $scheme['CountryCode']) ?>
     </select>
-    <input type="text" value="<?= $scheme['SchemeValue'] ?>" name="accountplanscheme.SchemeValue.<?= $scheme['AccountPlanSchemeID'] ?>" />
+    <input type="text" value="<?= $scheme['SchemeValue'] ?>" name="accountplanscheme.SchemeValue.<?= $scheme['AccountPlanSchemeID'] ?>" <?= $availableSchemeTypes[$scheme["FakturabankSchemeID"]]["SchemeType"] == "NO:SUP-ACCNT-RE" ? "disabled='disabled'" : "" ?> />
   </td>
   <td></td>
   <td><input type="checkbox" name="schemeid_to_delete[]" value="<?= $scheme['AccountPlanSchemeID'] ?>" /></td>
