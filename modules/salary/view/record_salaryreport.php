@@ -1,8 +1,8 @@
 <?php
 
 if(isset($_POST['add_report'])) {
-    $query = sprintf("INSERT INTO salaryreport (`Date`, `AccountPlanID`, `ReportDate`) VALUES ('%d-01-01', '%d', '%s');", 
-                     $year, $_POST['AccountPlanID'], mysql_escape_string($_POST['add_date']));
+    $query = sprintf("INSERT INTO salaryreport (`Date`, `AccountPlanID`, `ReportDate`, `Comment`) VALUES ('%d-01-01', '%d', '%s', '%s');",
+                     $year, $_POST['AccountPlanID'], mysql_escape_string($_POST['add_date']), mysql_escape_string($_POST['comment']));
 
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
@@ -14,7 +14,7 @@ if(isset($_POST['add_report'])) {
     }
 }
 else if(isset($_POST['edit_report'])) {
-    $query = sprintf("UPDATE salaryreport SET ReportDate = '%s' WHERE SalaryReportID = %d", mysql_escape_string($_POST['edit_date']), $_POST['SalaryReportID']);
+    $query = sprintf("UPDATE salaryreport SET ReportDate = '%s', Comment = '%s' WHERE SalaryReportID = %d", mysql_escape_string($_POST['edit_date']), $_POST['comment'] , $_POST['SalaryReportID']);
     $_lib['db']->db_query($query);
 
     foreach($_POST['edit_amounts'] as $code => $amount) {
@@ -36,8 +36,8 @@ else if(isset($_GET['delete_report'])) {
     $_lib['db']->db_query($query);
 }
 else if(isset($_POST['add_report_account'])) {
-    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`) VALUES ('%s', '%d');", 
-                     mysql_escape_string($_GET['year']), $_POST['reportaccount_accountplanid']);
+    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`) VALUES ('%s', '%d', '%s');",
+                     mysql_escape_string($_GET['year']), $_POST['reportaccount_accountplanid'], mysql_escape_string($_POST['comment']));
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
 
@@ -49,8 +49,9 @@ else if(isset($_POST['add_report_account'])) {
     
 }
 else if(isset($_POST['edit_report_account'])) {
-    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d WHERE SalaryReportAccountID = %d", 
+    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s' WHERE SalaryReportAccountID = %d",
                      $_POST['reportaccount_accountplanid'],
+                     $_POST['comment'],
                      $_POST['SalaryReportAccountID']);
     $_lib['db']->db_query($query);
 

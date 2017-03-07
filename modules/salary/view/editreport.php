@@ -20,10 +20,11 @@ $amounts = array();
 while($row = $_lib['db']->db_fetch_assoc($res)) {
     $amounts[ $row['Code'] ] = $row['Amount'];
 }
-$query = sprintf("SELECT `ReportDate` FROM salaryreport WHERE SalaryReportID = %d", $_GET['SalaryReportID']);
+$query = sprintf("SELECT `ReportDate`, `Comment` FROM salaryreport WHERE SalaryReportID = %d", $_GET['SalaryReportID']);
 $res = $_lib['db']->db_query($query);
 $row = $_lib['db']->db_fetch_assoc($res);
 $report_date = $row['ReportDate'];
+$Comment = $row['Comment'];
 
 $query = sprintf("SELECT A.AccountName FROM accountplan A, salaryreport S WHERE A.AccountPlanID = S.AccountPlanID AND SalaryReportID = %d", $_GET["SalaryReportID"]);
 $res = $_lib['db']->db_query($query);
@@ -41,6 +42,7 @@ foreach($codes as $code) {
     printf("<th>%s</th>", $code);
 }    
 ?>
+      <th>Kommentar</td>
     </tr>
     <tr>
       <td><input type="text" name="edit_date" value="<?= $report_date ?>" />
@@ -53,6 +55,7 @@ foreach($codes as $code) {
     } 
 
   ?>
+    <td><input type="text" name="comment" value="<?= $Comment ?>" /></td>
     </tr>
 
   </table>

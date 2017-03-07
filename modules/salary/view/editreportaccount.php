@@ -21,6 +21,7 @@ $query = sprintf("SELECT * FROM salaryreportaccount WHERE SalaryReportAccountID 
 $query_r = $_lib['db']->db_query($query);
 $accountplanid_row = $_lib['db']->db_fetch_assoc($query_r);
 $accountplanid = $accountplanid_row['AccountPlanID'];
+$accountComment = $accountplanid_row['Comment'];
 
 printf('<form action="%st=salary.employeereport&year=%d" method="post">', $_lib['sess']->dispatch, $year);
 printf('<input type="hidden" value="%d" name="SalaryReportAccountID" />', $salaryreportaccountid);
@@ -43,15 +44,17 @@ foreach($data as $c => $a) {
     printf("<th>%s</th>", $c);
 }
 
+print('<th>Kommentar</th>');
 printf("</tr><tr>");
 
 print("<td>");
-print $_lib['form3']->accountplan_number_menu(array('table' => 'reportaccount', 'field' => 'accountplanid', 
-                                                    'value' => $accountplanid, 'type' => array(0 => 'balance', 1 => 'result')));
+print $_lib['form3']->accountplan_number_menu(array('table' => 'reportaccount', 'field' => 'accountplanid',
+                                                    'value' => $accountplanid, 'type' => array(0 => 'balance', 1 => 'result', 2 => 'employee')));
 print('</td>');
 
 foreach($data as $c => $a)
     printf('<td><input style="text-align: right;" type="input" name="amounts[%s]" value="%s" /></td>', $c, $_lib['format']->Amount($a));
 
+print("<td><input type=\"text\" name=\"comment\" value=\"$accountComment\" /></td>");
 print('<tr><td><input type="submit" name="edit_report_account" value="Save" /></td></tr>');
 
