@@ -547,9 +547,9 @@ class lodo_logic_zreportimport
                 }
             }*/
 
-            includelogic('postmotpost/postmotpost');
-            $postmotpost = new postmotpost(array());
-            $postmotpost->openPostJournal($week->JournalID, $VoucherType);
+            includelogic('reconciliation/reconciliation');
+            $reconciliation = new reconciliation(array());
+            $reconciliation->openPostJournal($week->JournalID, $VoucherType);
             $JournalID = $week->JournalID;
 
             #Delete old accounting

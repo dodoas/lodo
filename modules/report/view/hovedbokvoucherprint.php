@@ -6,9 +6,9 @@ $accounting = new accounting();
 $kidmatchH  = array();
 
 if($_REQUEST['action_postmotpost_open']) {
-    includelogic('postmotpost/postmotpost');
-    $postmotpost = new postmotpost(array());
-    $postmotpost->openPost((int) $_REQUEST['VoucherID']);
+    includelogic('reconciliation/reconciliation');
+    $reconciliation = new reconciliation(array());
+    $reconciliation->openPost((int) $_REQUEST['VoucherID']);
 }
 
 if($_REQUEST['report_selectedAccount'])

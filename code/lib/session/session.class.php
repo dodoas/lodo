@@ -35,9 +35,11 @@ class SessionNew
 
   public function __construct($args) {
     global $_SETUP;
-    $this->interface = $args['interface'];
-    $this->module    = $args['module'];
-    $this->template  = $args['template'];
+    if (isset($args['interface'])) $this->interface = $args['interface'];
+    if (isset($args['module'])) $this->module = $args['module'];
+    if (isset($args['template'])) $this->template = $args['template'];
+    $LoginFormDate = NULL;
+    if (isset($args['LoginFormDate'])) $LoginFormDate = $args['LoginFormDate'];
     #print "#$this->module, $this->template#<br>";
 
     #The first possible init of Empatix
@@ -47,7 +49,7 @@ class SessionNew
     }
     $this->defcompany_id = $args['company_id'];
 
-    $this->_mysession         = $this->set_session($args['interface'], $args['module'], $args['template'], $args['LoginFormDate']);
+    $this->_mysession         = $this->set_session($this->interface, $this->module, $this->template, $LoginFormDate);
     $this->glob               = $this->set_glob();
     $this->args               = $this->set_args();
 
@@ -57,14 +59,18 @@ class SessionNew
     $this->dispatchs = "/lodo.php?";                                            # (S) Simple - without session, & and other special signs, for form login, etc
     $this->dispatch  = "/lodo.php?SID=".$this->get_session('SID') . "&";    #Add session to all URLS cookies could be disabled
 
-    if($_SETUP['XML']) {
+    if(isset($_SETUP['XML'])) {
         $this->doctype  = $_SETUP['XML']."\n";
     }
-    $this->doctype .= $_SETUP['DOCTYPE']."\n";
-    $this->doctype .= $_SETUP['HTML']."\n";
+    if(isset($_SETUP['DOCTYPE'])) {
+        $this->doctype .= $_SETUP['DOCTYPE']."\n";
+    }
+    if(isset($_SETUP['HTML'])) {
+        $this->doctype .= $_SETUP['HTML']."\n";
+    }
 
     #_MY_SELF used for forms posting to the same page, simulates $_PHP_SELF
-    $this->my_self  = '/'.$_SETUP['ACTIVE_INTERFACE'].'/'."index.php?SID=".$this->get_session('SID') . "&amp;t=" . $this->module . "." . $this->template . "&amp;_Level1ID=".$_REQUEST['_Level1ID']."&amp;_Level2ID=".$_REQUEST['_Level2ID']."&amp;";
+    $this->my_self  = '/'.$_SETUP['ACTIVE_INTERFACE'].'/'."index.php?SID=".$this->get_session('SID') . "&amp;t=" . $this->module . "." . $this->template . "&amp;_Level1ID=".(isset($_REQUEST['_Level1ID']) ? $_REQUEST['_Level1ID'] : "")."&amp;_Level2ID=".(isset($_REQUEST['_Level2ID']) ? $_REQUEST['_Level2ID'] : "")."&amp;";
   }
 
   public function SessionInit($args) {
@@ -473,7 +479,7 @@ class SessionNew
     ############################################################
     function set_session($interface, $module, $_template, $formdate) {
       #From session information
-      global $_SETUP, $_SERVER;
+      global $_SETUP, $_SERVER, $_lib;
       $sid              = session_id();
       $date             = date("Y-m-d");
       $datetime         = date("Y-m-d H:m:s");
@@ -498,17 +504,17 @@ class SessionNew
         'DateEndYear'       => $dateendyear,
         'PeriodStartYear'   => $periodstartyear,
         'PeriodEndYear'     => $periodendyear,
-        'SECURITY_IP_CHECK' => $_SETUP['SECURITY_IP_CHECK'],
-        'SessionTimeout'    => $_SETUP['SECURITY_TIMEOUT'],
-        'RemoteAddr'        => $_SERVER['REMOTE_ADDR'],
+        'SECURITY_IP_CHECK' => (isset($_SETUP['SECURITY_IP_CHECK']) ? $_SETUP['SECURITY_IP_CHECK'] : NULL),
+        'SessionTimeout'    => (isset($_SETUP['SECURITY_TIMEOUT']) ? $_SETUP['SECURITY_TIMEOUT'] : NULL),
+        'RemoteAddr'        => (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : NULL),
         'Template'          => $_template,
         'Module'            => $module,
         'Interface'         => $interface,
-        'HttpReferer'       => $_SERVER['HTTP_REFERER'],
-        'HttpUserAgent'     => $_SERVER['HTTP_USER_AGENT'],
-        'RedirectUrl'       => $_SERVER['REDIRECT_URL'],
-        'RequestURI'        => $_SERVER['REQUEST_URI'],
-        'Dispatch'          => $_lib['sess']->dispatch,
+        'HttpReferer'       => (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : NULL),
+        'HttpUserAgent'     => (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : NULL),
+        'RedirectUrl'       => (isset($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : NULL),
+        'RequestURI'        => (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : NULL),
+        'Dispatch'          => (isset($_lib['sess']) ? $_lib['sess']->dispatch : ''),
         'LoginFormDate'     => $formdate,
         'TabJournalSort'    => (isset($_SESSION['TabJournalSort']) ? $_SESSION['TabJournalSort'] : 0)
       );
@@ -523,27 +529,27 @@ class SessionNew
 
     ############################################################
     function set_glob() {
-      global $_SETUP;
+      global $_SETUP, $_lib;
       #From global preferences file and other globals
 
       $glob = array(
-        "HOME_DIR"              => $_SETUP['HOME_DIR'],
-        "DOWNLOAD_DIR"          => $_SETUP['DOWNLOAD_DIR'],
-        "XML_VERSION"           => $_SETUP['XML_VERSION'],
-        "CSS"                   => $_SETUP['CSS'],
-        "DISPATCH"              => $_lib['sess']->dispatch,
-        "DEBUG"                 => $_SETUP['DEBUG'],
-        "TEMPLATE_DIR"          => $_SETUP['TEMPLATE_DIR'],
-        "FILE_MAX_HEIGHT"       => $_SETUP['FILE_MAX_HEIGHT'],
-        "FILE_MAX_WIDTH"        => $_SETUP['FILE_MAX_WIDTH'],
-        "SERVER_ADMIN"          => $_SETUP['SERVER_ADMIN'],
-        "font_width"            => $font_width,
-        "form_heading_vert"     => $form_heading_vert,
-        "form_ingress_vert"     => $form_ingress_vert,
-        "form_description_vert" => $form_description_vert,
-        "form_width"            => $form_width,
-        "table_width"           => $table_width,
-        "frames"                => $frames
+        "HOME_DIR"              => (isset($_SETUP['HOME_DIR']) ? $_SETUP['HOME_DIR'] : NULL),
+        "DOWNLOAD_DIR"          => (isset($_SETUP['DOWNLOAD_DIR']) ? $_SETUP['DOWNLOAD_DIR'] : NULL),
+        "XML_VERSION"           => (isset($_SETUP['XML_VERSION']) ? $_SETUP['XML_VERSION'] : NULL),
+        "CSS"                   => (isset($_SETUP['CSS']) ? $_SETUP['CSS'] : NULL),
+        "DISPATCH"              => (isset($_lib['sess']) ? $_lib['sess']->dispatch : ''),
+        "DEBUG"                 => (isset($_SETUP['DEBUG']) ? $_SETUP['DEBUG'] : NULL),
+        "TEMPLATE_DIR"          => (isset($_SETUP['TEMPLATE_DIR']) ? $_SETUP['TEMPLATE_DIR'] : NULL),
+        "FILE_MAX_HEIGHT"       => (isset($_SETUP['FILE_MAX_HEIGHT']) ? $_SETUP['FILE_MAX_HEIGHT'] : NULL),
+        "FILE_MAX_WIDTH"        => (isset($_SETUP['FILE_MAX_WIDTH']) ? $_SETUP['FILE_MAX_WIDTH'] : NULL),
+        "SERVER_ADMIN"          => (isset($_SETUP['SERVER_ADMIN']) ? $_SETUP['SERVER_ADMIN'] : NULL),
+        "font_width"            => (isset($font_width) ? $font_width : NULL),
+        "form_heading_vert"     => (isset($form_heading_vert) ? $form_heading_vert : NULL),
+        "form_ingress_vert"     => (isset($form_ingress_vert) ? $form_ingress_vert : NULL),
+        "form_description_vert" => (isset($form_description_vert) ? $form_description_vert : NULL),
+        "form_width"            => (isset($form_width) ? $form_width : NULL),
+        "table_width"           => (isset($table_width) ? $table_width : NULL),
+        "frames"                => (isset($frames) ? $frames : NULL)
         );
       return $glob;
     }

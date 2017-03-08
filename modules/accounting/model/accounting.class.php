@@ -14,12 +14,12 @@
 * @copyright http://www.empatix.com/ Empatix AS, 1994-2005, post@empatix.no
 */
 
-includelogic('postmotpost/postmotpost');
+includelogic('reconciliation/reconciliation');
 includelogic('exchange/exchange');
 
 class accounting {
     public  $debug               = false;
-    public  $postmotpost         = array();
+    public  $reconciliation         = array();
     private $accountplan_usednow = array(); #Hash to not upate used accounts more often than needed. Once pr page
     private $voucher_to_hovedbok = array();
     private $accountplanH        = array(); #Accountplan cache to not ask to frequently in the database
@@ -35,7 +35,7 @@ class accounting {
     */
     function __construct() {
         #Empty
-        $this->postmotpost = new postmotpost(array());
+        $this->reconciliation = new reconciliation(array());
     }
 
     /***************************************************************************
@@ -1477,11 +1477,11 @@ class accounting {
             #print "KID is supplied and the accountplan supports KID";
             if(!$fields['voucher_AccountPlanID'] || !$sum) {
                 #print "findOpenPostKid2: VoucherID: $VoucherID<br>\n";
-                list($status, $refH) = $this->postmotpost->findOpenPostKid($fields['voucher_KID'], $VoucherID, $fields['voucher_AccountPlanID']);
+                list($status, $refH) = $this->reconciliation->findOpenPostKid($fields['voucher_KID'], $VoucherID, $fields['voucher_AccountPlanID']);
                 #print "Status find KID: $status<br>";
                 if($status) {
                     #Exactly one KID ref match, update the voucher AmountIn, AmountOut and Accountplan ID only if not updated before.
-                    list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $this->postmotpost->getKIDInfo($refH); #find line that has a ledger(reskontro) (it has to be customer)
+                    list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $this->reconciliation->getKIDInfo($refH); #find line that has a ledger(reskontro) (it has to be customer)
                     #print "Status find KIDInfo: $KIDstatus<br>\n";
                     if($KIDstatus) {
                         $fields['voucher_AccountPlanID']    = $KIDAccountPlanID;
@@ -1539,14 +1539,14 @@ class accounting {
             else $fields['voucher_CarID'] = $voucher->CarID;
 
             $this->delete_auto_vat($VoucherID, $fields['voucher_JournalID'], $fields['voucher_VoucherType']);
-            $this->postmotpost->openPost($VoucherID);
+            $this->reconciliation->openPost($VoucherID);
         }
 
         // Open voucher/Unlock if anything of the following differs:
         // Amounts(In/Out), InvoiceID, KID, matched_by
         if(round($fields['voucher_AmountIn'], 2) != round($voucher->AmountIn, 2) || round($fields['voucher_AmountOut'], 2) != round($voucher->AmountOut, 2) ||
           $fields['voucher_InvoiceID'] != $voucher->InvoiceID || $fields['voucher_KID'] != $voucher->KID || $fields['voucher_matched_by'] != $voucher->matched_by) {
-            $this->postmotpost->openPost($VoucherID);
+            $this->reconciliation->openPost($VoucherID);
         }
 
         $this->update_voucher_line($fields, $VoucherID, $comment);
@@ -2172,7 +2172,7 @@ class accounting {
             if(strlen($voucher->VoucherPeriod) == 7 && $this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) || $voucher->VoucherPeriod == "") {
                 #print "Delete salary journal<br>\n";
 
-                $this->postmotpost->openPostJournal($JournalID, $VoucherType);
+                $this->reconciliation->openPostJournal($JournalID, $VoucherType);
 
                 $primarykey['JournalID']     = $JournalID;
                 $primarykey['VoucherType']   = $VoucherType;
@@ -2209,7 +2209,7 @@ class accounting {
         $post = array();
         $post['voucher_VoucherPeriod'] = $voucher_input->VoucherPeriod;
         $this->set_journal_motkonto(array('post'=>$post));
-        $this->postmotpost->openPost($voucher_input->VoucherID);
+        $this->reconciliation->openPost($voucher_input->VoucherID);
 
         $this->delete_auto_vat($VoucherID, $JournalID, $VoucherType, "delete_voucher_line_smart: VoucherID: $VoucherID");
         $this->delete_autofrom_line($VoucherID, $JournalID, $VoucherType, "delete_voucher_line_smart: VoucherID: $VoucherID");

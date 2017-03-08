@@ -2,14 +2,13 @@
 // lagt til 05/01-2005 for � hente hovedbokskontonavn
 #ResultFromPeriod
 includelogic('accounting/accounting');
-includelogic('postmotpost/postmotpost');
+includelogic('reconciliation/reconciliation');
 $accounting = new accounting();
 $kidmatchH  = array();
 
 if($_REQUEST['action_postmotpost_open']) {
-    includelogic('postmotpost/postmotpost');
-    $postmotpost = new postmotpost(array());
-    $postmotpost->openPost((int) $_REQUEST['VoucherID']);
+    $reconciliation = new reconciliation(array());
+    $reconciliation->openPost((int) $_REQUEST['VoucherID']);
 }
 
 if($_REQUEST['report_selectedAccount'])
@@ -130,8 +129,8 @@ print $_lib['sess']->doctype ?>
 <h2><? print $_lib['sess']->get_companydef('CompanyName') ?> - <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> (<? print $_lib['sess']->get_session('Date') ?>)</h2>
 
 <?
-    $postmotpost = new postmotpost(array('AccountPlanID' => $selectedAccount->AccountPlanID));
-    $postmotpost->getopenpost();
+    $reconciliation = new reconciliation(array('AccountPlanID' => $selectedAccount->AccountPlanID));
+    $reconciliation->getopenpost();
     $error_count = 0;
     print "<h2> Hovedbokskonto " . $selectedAccount->AccountPlanID . " type " .  $selectedaccount->ReskontroAccountPlanType;
     if($_reskontroFrom)
@@ -381,7 +380,7 @@ print $_lib['sess']->doctype ?>
                     }
                     ?></td>
                 <td class="noprint align-right"><nobr><?
-                  $amount_to_show = $postmotpost->getDiff($voucher->AccountPlanID, $voucher->KID, $voucher->InvoiceID, $match_number, $voucher);
+                  $amount_to_show = $reconciliation->getDiff($voucher->AccountPlanID, $voucher->KID, $voucher->InvoiceID, $match_number, $voucher);
                   print $_lib['format']->Amount($amount_to_show)
                   ?></nobr></td>
                 <td class="noprint"><? if ($is_closed) { ?><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_postmotpost_open=1" title="&Aring;pne post">&Aring;pne post</a><? } ?></td>

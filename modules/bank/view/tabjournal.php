@@ -3,12 +3,12 @@
 includelogic('bank/bank');
 includemodel('bank/bankaccount');
 includelogic('accounting/accounting');
-includelogic('postmotpost/postmotpost');
+includelogic('reconciliation/reconciliation');
 includelogic('fakturabank/fakturabankvoting');
 
 $accounting     = new accounting();
 $bank           = new framework_logic_bank($_lib['input']->request);
-$postmotpost    = new postmotpost(array());
+$reconciliation    = new reconciliation(array());
 //$bank->init(); #Read data
 $fbbank = new lodo_fakturabank_fakturabankvoting();
 require_once "record.inc";
@@ -361,7 +361,7 @@ if(is_array($bank->unvotedaccount)) {
         }
 
         if(!$row->Approved && $row->KID != '') {
-            list($pmp_status, $pmp_possible_invoices) = $postmotpost->findOpenPostKid($row->KID, 0);
+            list($pmp_status, $pmp_possible_invoices) = $reconciliation->findOpenPostKid($row->KID, 0);
             $pmp_found = false;
 
             if($pmp_status) {
