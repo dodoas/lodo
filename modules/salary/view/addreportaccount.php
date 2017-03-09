@@ -26,15 +26,17 @@ foreach($codes as $c) {
     printf('<th>%s</th>', $c);
 }
 
+print('<th>Kommentar</th>');
 print('</tr><tr><td>');
 
-print $_lib['form3']->accountplan_number_menu(array('table' => 'reportaccount', 'field' => 'accountplanid', 
-                                                    'value' => 10001, 'type' => array(0 => 'balance', 1 => 'result') ));
+print $_lib['form3']->accountplan_number_menu(array('table' => 'reportaccount', 'field' => 'accountplanid',
+                                                    'value' => 10001, 'type' => array(0 => 'balance', 1 => 'result', 2 => 'employee')));
 print('</td>');
 
 foreach($codes as $c) {
     printf('<td><input type="input" name="amounts[%s]" value="" /></td>', $c);
 }
 
+print('<td><input type="text" name="comment" value="" /></td>');
 print('<tr><td><input type="submit" name="add_report_account" value="Save" /></td></tr>');
 
