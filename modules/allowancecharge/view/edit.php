@@ -22,19 +22,42 @@ if(!$vat_out) $_lib['message']->add("Feil utg&aring;ende konto valg");
 <body>
 <script>
 
-var first_time = true;
+var first_time_amount = true;
 function setAllowanceToNegativeAmountIfFirstTime() {
-
   var charge_indicator_element = document.getElementById("allowancecharge.ChargeIndicator.<? print $AllowanceChargeID; ?>");
   var charge_indicator = charge_indicator_element.value;
   var amount_element = document.getElementById("allowancecharge.Amount.<? print $AllowanceChargeID; ?>");
   var amount = toNumber(amount_element.value);
-  if (charge_indicator == 0 && amount > 0 && first_time) {
-    first_time = false;
+  if (charge_indicator == 0 && amount > 0 && first_time_amount) {
+    first_time_amount = false;
     amount = -amount;
-    amount_element.value = toAmountString(amount);
   }
-  return true;
+  amount_element.value = toAmountString(amount);
+}
+var first_time_percent = true;
+function setAllowanceToNegativePercentIfFirstTime() {
+  var charge_indicator_element = document.getElementById("allowancecharge.ChargeIndicator.<? print $AllowanceChargeID; ?>");
+  var charge_indicator = charge_indicator_element.value;
+  var percent_element = document.getElementById("allowancecharge.PercentAmount.<? print $AllowanceChargeID; ?>");
+  var percent = toNumber(percent_element.value);
+  if (charge_indicator == 0 && percent > 0 && first_time_percent) {
+    first_time_percent = false;
+    percent = -percent;
+  }
+  percent_element.value = toAmountString(percent);
+}
+
+function onlyPercentOrAmount(percent_or_amount) {
+    var amount_element = document.getElementById("allowancecharge.Amount.<? print $AllowanceChargeID; ?>");
+    var percent_element = document.getElementById("allowancecharge.PercentAmount.<? print $AllowanceChargeID; ?>");
+    if(percent_or_amount == 'percent') {
+        amount_element.value = toAmountString(0);
+    } else {
+        percent_element.value = toAmountString(0);
+    }
+    
+    var is_percentage_element = document.getElementById("allowancecharge.IsPercentage.<? print $AllowanceChargeID; ?>");
+    is_percentage_element.value = (percent_or_amount == 'percent' ? '1' : '0');
 }
 </script>
 <?
@@ -50,6 +73,7 @@ function setAllowanceToNegativeAmountIfFirstTime() {
 
 <form name="allowancecharge" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="AllowanceChargeID" value="<? print $row->AllowanceChargeID ?>">
+<input id="allowancecharge.IsPercentage.<? print $AllowanceChargeID; ?>" type="hidden" name="allowancecharge.IsPercentage.<? print $AllowanceChargeID; ?>" value="<? print $row->IsPercentage ?>">
 <table cellspacing="0">
 <thead>
     <tr>
@@ -75,8 +99,12 @@ function setAllowanceToNegativeAmountIfFirstTime() {
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Reason', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->Reason)) ?></td>
     </tr>
     <tr>
+        <td>Percent</td>
+        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'PercentAmount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->PercentAmount), 'OnChange' => 'onlyPercentOrAmount(\'percent\'); setAllowanceToNegativePercentIfFirstTime();', 'width'=>'5')) ?>%
+    </tr>
+    <tr>
         <td>Bel&oslash;p</td>
-        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Amount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->Amount), 'OnChange' => 'setAllowanceToNegativeAmountIfFirstTime()')) ?>
+        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Amount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->Amount), 'OnChange' => 'onlyPercentOrAmount(\'amount\'); setAllowanceToNegativeAmountIfFirstTime()')) ?>
     </tr>
     <tr>
         <td>Resultat konto</td>

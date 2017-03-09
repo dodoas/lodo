@@ -268,6 +268,11 @@ class invoice {
             $amount = $_lib['convert']->Amount($args[$arg_key]);
             if ($charge_indicator == 0) $args[$arg_key] = -$amount;
           }
+          if ((strpos($arg_key, 'invoiceallowancecharge_PercentAmount_') !== false) || (strpos($arg_key, 'invoicelineallowancecharge_PercentAmount_') !== false)) {
+            $charge_indicator = $args[preg_replace('/PercentAmount/', 'ChargeIndicator', $arg_key)];
+            $percent = $_lib['convert']->Amount($args[$arg_key]);
+            if ($charge_indicator == 0) $args[$arg_key] = -$percent;
+          }
         }
     }
 
