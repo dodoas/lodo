@@ -15,6 +15,8 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
             $_POST['invoicein_ProjectID_'.$invoicein->ID] = DB_NULL_PLACEHOLDER;
         }
 
+    $invoice_date = $_POST['invoicein_InvoiceDate_' . $invoicein->ID];
+    $_POST['invoicein_Period_' . $invoicein->ID] = substr($invoice_date, 0, 7);
     $invoicein->update($_POST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_remittance')) {
