@@ -29,6 +29,7 @@ foreach($codes as $code) {
 }
 
 ?>
+    <th>Kommentar</th>
     <th></th>
     </tr>
     <tr>
@@ -46,6 +47,7 @@ foreach($codes as $code) {
 
   ?>
     <td>
+      <input type="text" name="comment" value="" />
       <input type="hidden" value="<?= $_GET['AccountPlanID'] ?>" name="AccountPlanID" />
       <input type="submit" value="Lagre" name="add_report" />
     </td>

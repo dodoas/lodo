@@ -135,11 +135,11 @@ class feriepenger_grid
         
         $firstDate = $this->year . "-01-01";
         $lastDate = $this->year . "-12-31";
-        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and S.JournalDate>='$firstDate' and S.JournalDate<='$lastDate' and SL.LineNumber < 70 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
+        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and S.ActualPayDate>='$firstDate' and S.ActualPayDate<='$lastDate' and SL.LineNumber < 70 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
         if($this->debug) print "$query<br>";
         $totalThisYear = $_lib['storage']->get_row(array('query' => $query));
-        
-        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID = SL.SalaryID and S.JournalDate >= '$firstDate' and S.JournalDate <= '$lastDate' and SL.LineNumber > 69 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
+
+        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID = SL.SalaryID and S.ActualPayDate >= '$firstDate' and S.ActualPayDate <= '$lastDate' and SL.LineNumber > 69 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
         if($this->debug) print "$query<br>";
         $totalThisYearFradrag = $_lib['storage']->get_row(array('query' => $query));
         

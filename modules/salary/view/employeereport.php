@@ -9,6 +9,8 @@ function print_values($codes, $line, $print_extra = true) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($line['amounts'][$code]));
     }
 
+    printf("<td>%s</td>", $line['Comment']);
+
     if($print_extra) {
         if($line['Locked'] == 0) {
             printf("<td><a href='%st=salary.editreport&SalaryReportID=%d&year=%d'>edit</a></td>
@@ -53,7 +55,7 @@ function print_sums($employee_id, $codes, $report) {
     }
 
     if($employee_id && $_lib['sess']->get_person('AccessLevel') > 1)
-        printf("<td><a href='%st=salary.addreport&AccountPlanID=%d&year=%d'>+</td>", $_lib['sess']->dispatch, $employee_id, $year);
+        printf("<td></td><td><a href='%st=salary.addreport&AccountPlanID=%d&year=%d'>+</td>", $_lib['sess']->dispatch, $employee_id, $year);
 }
 
 ?>
@@ -92,6 +94,7 @@ print('<table class="lodo_data" border=1">
 foreach($codes as $code) {
     printf('<th>%s</th>', $code);
 }
+    print('<th>Kommentar</th>');
 
 print('</tr>');
 
@@ -133,6 +136,7 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
             'Locked' => $report['Locked'], 
             'LockedBy' => $report['LockedBy'], 
             'ID' => $report['SalaryReportID'],
+            'Comment' => $report['Comment'],
             'Employee' => $employee
             );
         $report_amounts = array();
@@ -205,6 +209,7 @@ print('<tr><th></th><th></th><th></th>');
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
 }
+print("<th><b>Kommentar</b></th>");
 print('</tr>');
 
 foreach($all_reports as $report) {
@@ -219,12 +224,14 @@ print('<tr>');
 print('<td></td>');
 print('<td></td>');
 print_sums(0, $codes, $all_reports);
+print('<td></td>');
 print('</tr>');
 print('<tr><td></td><td></td><td>diff</td>');
 foreach($codes as $c) {
     print('<td>0</td>');
 }
-print('</tr></table>');	
+print('<td></td>');
+print('</tr></table>');
 
 /*
  * Kontosum
@@ -239,6 +246,7 @@ print('
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
 }
+print("<th><b>Kommentar</b></th>");
 print('</tr>');
 
 $accountreports = array();
@@ -260,8 +268,9 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
         'SalaryReportAccountID' => $row['SalaryReportAccountID'], 
         'Account' => $account['AccountName'], 
         'AccountPlanID' => $row['AccountPlanID'],
-        'Locked' => $row['Locked'], 
-        'LockedBy' => $row['LockedBy'], 
+        'Locked' => $row['Locked'],
+        'LockedBy' => $row['LockedBy'],
+        'Comment' => $row['Comment'],
         'amounts' => $amounts
         );
 
@@ -275,6 +284,7 @@ foreach($accountreports as $accountreport) {
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
+        printf("<td style='text-align: right'>%s</td>", $accountreport['Comment']);
 
     if($accountreport['Locked'] == 0) {
         printf(
@@ -324,7 +334,7 @@ foreach($codes as $c) {
 
 if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
     printf('
-    <td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
+    <td></td><td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
     ', $_lib['sess']->dispatch, $year);
 }
 
