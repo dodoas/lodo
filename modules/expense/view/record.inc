@@ -135,15 +135,22 @@
   # Create group and project reports if they don't exist
   # Executed on each request
   function create_defaults($period_id, $department_id, $db) {
-    $groups = $db->db_numrows($db->db_query("SELECT * FROM expense_groups WHERE department_id=$department_id AND expense_period_id=$period_id"));
+    $department_id_query_part = "";
+    if (!is_null($department_id)) {
+      $department_id_query_part = "department_id = $department_id AND ";
+    }
+    $groups = $db->db_numrows($db->db_query("SELECT * FROM expense_groups WHERE $department_id_query_part expense_period_id=$period_id"));
 
     if($groups != 3) {
+      if (!$department_id) {
+        $department_id = 0;
+      }
       $db->db_insert("INSERT INTO expense_groups (group_id, department_id, expense_period_id) VALUES (1, " . $department_id . ", " . $period_id . ")");
       $db->db_insert("INSERT INTO expense_groups (group_id, department_id, expense_period_id) VALUES (2, " . $department_id . ", " . $period_id . ")");
       $db->db_insert("INSERT INTO expense_groups (group_id, department_id, expense_period_id) VALUES (3, " . $department_id . ", " . $period_id . ")");
     }
 
-    $projects = $db->db_numrows($db->db_query("SELECT * FROM expense_projects WHERE department_id=$department_id AND expense_period_id=$period_id"));
+    $projects = $db->db_numrows($db->db_query("SELECT * FROM expense_projects WHERE $department_id_query_part expense_period_id=$period_id"));
 
     if($projects <= 0) {
       $projects = $db->db_query("SELECT * FROM project");

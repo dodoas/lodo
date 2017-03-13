@@ -9,7 +9,9 @@ class framework_logic_regnskapsrapport {
         global $_lib;
 
         foreach($args as $key => $value) {
-            $this->{$key} = $value;
+            if (!is_null($value)) {
+              $this->{$key} = $value;
+            }
         }
 
         if(!$this->Period) {
