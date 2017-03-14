@@ -56,7 +56,7 @@
     includeinc('left');
   ?>
 
-  <h2>Expenses <?php if ($department) echo 'for ' . $department->DepartmentName; ?> for year <?= $year ?> - &Aring;ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
+  <h2>Utgifter <?php if (!is_null($department)) echo 'for ' . $department->DepartmentName; ?> for &aring;r <?= $year ?> - &Aring;ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
 
 <form name="velg" action="<?= $MY_SELF ?>" method="post">
     <table border="0" cellspacing="0">
@@ -95,7 +95,7 @@
       <thead>
         <tr>
           <th></th>
-          <th class="number">Supplier name</th>
+          <th class="number">Leverand&oslash;r</th>
           <th class="number">&Oslash;l 2,5% til 4,7%</th>
           <th class="number">Vin 4,7% til 21%</th>
           <th class="number">Brennevin 22% til 60%</th>
@@ -123,7 +123,7 @@
             echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'spirits_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->spirits_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1])) . "</td>";
 
             echo "<td class=\"number\">" . $_lib['format']->Amount($line->beer_purchased + $line->wine_purchased + $line->spirits_purchased) . "</td>";
-            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . ($department ? "&Department=" . $department->CompanyDepartmentID : '') . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
+            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . ((!is_null($department)) ? "&Department=" . $department->CompanyDepartmentID : '') . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
             echo "</tr>";
             $tabindexH[1]++;
           }
