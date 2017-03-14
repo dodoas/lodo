@@ -14,7 +14,7 @@ class feriepenger_grid
      */
     function __construct()
     {
-        
+
     }
 
     /**
@@ -26,33 +26,33 @@ class feriepenger_grid
     {
         $tableName  = "feriepenger";
         $myFK       = $tableName . "_" . $midparams . "feriepengerID";
-	
+
         if($this->debug) print "FK: #$myFK#, params liste<br>\n";
         if($this->debug) print_r($params);
-	
+
         $myTab      = new SaveTable($tableName, $params[$myFK]);
         $myFieldList = $myTab->getFields();
         foreach ($myFieldList as $field)
         {
             $fieldname = $field["name"];
             $key = $tableName . "_" . $midparams . $fieldname;
-            
+
             if (substr($field["type"], 0,3) == "dec")
             {
 				$params[$key] = $this->unformatNumber($params[$key]);
             }
             if ($fieldname != "ts_created" && $fieldname != "ts_modified" && $fieldname != "modified_by")
-                
+
                 $myTab->set($fieldname, $params[$key]);
             if($this->debug) print "Setter " . $fieldname . " til: " . $params[$key] . " #$key#<br>\n";
         }
-        
+
         $myTab->set("ts_modified", time());
         $myTab->set("modified_by", "");
         if ($params[$myFK] == "")
             $myTab->set("ts_created", time());
         return $myTab->save();
-	
+
     }
 
     /**
@@ -79,7 +79,7 @@ class feriepenger_grid
         }
         return $ret;
     }
-    
+
     function selectYear ($aar)
     {
         $this->year = $aar;
@@ -102,9 +102,9 @@ class feriepenger_grid
     {
         global $_lib;
         $this->queryYear = "select fp.*, ap.AccountPlanID, ap.AccountName from feriepenger fp, accountplan ap where fp.year='" . $this->year . "' and fp.AccountPlanID = ap.AccountPlanID and ap.AccountPlanID = '" . $person . "';";
-        
+
         if($this->debug) print "$this->queryYear<br>\n";
-        
+
         $this->resultYear = $_lib['db']->db_query($this->queryYear);
         $res =  $_lib['db']->db_fetch_object($this->resultYear);
 
@@ -132,31 +132,38 @@ class feriepenger_grid
         $ret["nr"] = $res->$myVar;
         $myVar = "Grunnlag";
 //         $ret[$myVar] = $res->$myVar;
-        
+
         $firstDate = $this->year . "-01-01";
         $lastDate = $this->year . "-12-31";
-        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and S.ActualPayDate>='$firstDate' and S.ActualPayDate<='$lastDate' and SL.LineNumber < 70 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
+
+        if(intval($this->year) >= 2016) {
+            $query_where = "S.ActualPayDate>='$firstDate' and S.ActualPayDate<='$lastDate'";
+        } else {
+            $query_where = "S.JournalDate>='$firstDate' and S.JournalDate<='$lastDate'";
+        }
+
+        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and " . $query_where . " and SL.LineNumber < 70 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
         if($this->debug) print "$query<br>";
         $totalThisYear = $_lib['storage']->get_row(array('query' => $query));
 
-        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID = SL.SalaryID and S.ActualPayDate >= '$firstDate' and S.ActualPayDate <= '$lastDate' and SL.LineNumber > 69 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
+        $query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID = SL.SalaryID and " . $query_where . " and SL.LineNumber > 69 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '$person';";
         if($this->debug) print "$query<br>";
         $totalThisYearFradrag = $_lib['storage']->get_row(array('query' => $query));
-        
+
         $fpGrunnlag = $totalThisYear->total - $totalThisYearFradrag->total;
         $ret[$myVar] = $fpGrunnlag;
-        
+
         $myVar = "Prosentsats";
-        
+
         if ($res->$myVar != "" || $person == 1000)
             $ret[$myVar] = $res->$myVar;
         else
             $ret[$myVar] = 10.2;
-        
+
         $myVar = "Utbetalt";
         $ret[$myVar] = $res->$myVar;
         $myVar = "ArbeidsgiveravgSats";
-        
+
         if ($person != 1000)
         {
             $query = "select ag.Percent, a.BirthDate from accountplan a, kommune k, arbeidsgiveravgift ag where a.KommuneID = k.KommuneID and ag.Code = k.Sone and a.AccountPlanID = '$person';";
@@ -168,22 +175,22 @@ class feriepenger_grid
             list($y, $m, $d) = split("-", $fDato);
 
             $ret[$myVar] = $agPercent->Percent;
-        }	
-        
+        }
+
         if ($res->$myVar != "")
             $ret[$myVar] = $res->$myVar;
-        
+
         $myVar = "AccountName";
         $ret["Navn"]    = $res->$myVar;
         $ret["Feriepenger"] = $ret["Grunnlag"] * $ret["Prosentsats"] / 100;
         $ret["Rest"]    = $ret["Feriepenger"] - $ret["Utbetalt"];
         $ret["ArbeidsgiveravgiftBelop"] = $ret["Rest"] * $ret["ArbeidsgiveravgSats"] / 100;
-        
+
         if ($ret["Prosentsats"] == 0)
             $ret["SkyldigFeriepengeGrunnlag"] = 0;
         else
             $ret["SkyldigFeriepengeGrunnlag"] = $ret["Rest"] / ($ret["Prosentsats"] / 100);
-        
+
         $this->sumUtbetalt += $ret["Utbetalt"];
         $this->sumGrunnlang += $ret["Grunnlag"];
         $this->sumSkyldig += $ret["SkyldigFeriepengeGrunnlag"];
