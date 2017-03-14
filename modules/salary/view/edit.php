@@ -661,11 +661,18 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7">
   <?
-    if($_lib['sess']->get_person('AccessLevel') > 1 && $head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
+    if($_lib['sess']->get_person('AccessLevel') > 1 && $head->ActualPayDateUpdatedBy) echo $head->ActualPayDateUpdatedAt . " altinndato lagret av " . $_lib['format']->PersonIDToName($head->ActualPayDateUpdatedBy);
   ?>
   </td>
   <? $personal_number = empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber; ?>
   <td colspan = "4">Personnummer: <? echo $personal_number ?></td>
+</tr>
+<tr>
+  <td colspan = "11">
+  <?
+    if($_lib['sess']->get_person('AccessLevel') > 1 && $head->LockedBy) echo $head->LockedDate . " l&aring;st av " . $head->LockedBy;
+  ?>
+  </td>
 </tr>
 
 <tr>
