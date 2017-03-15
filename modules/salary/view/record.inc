@@ -137,6 +137,11 @@ function salary_update($SalaryID, $SalaryConfID) {
     $_POST["salary_AltinnFieldsUpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
     $_POST["salary_AltinnFieldsUpdatedAt_".$SalaryID] = strftime("%F %T");
   }
+  $ActualPayDate = $_POST["salary_ActualPayDate_".$SalaryID];
+  if (!empty($ActualPayDate) && $ActualPayDate !== '0000-00-00' && CheckIfActualPayDateChanged($SalaryID, $ActualPayDate)) {
+    $_POST["salary_ActualPayDateUpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_ActualPayDateUpdatedAt_".$SalaryID] = strftime("%F %T");
+  }
 
   // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
   if ($_lib['input']->getProperty('action_salary_new')) {
@@ -359,6 +364,12 @@ function CheckIfAccountPlanChanged($SalaryID) {
   // Check if AccountPlanID change,
 
   return $_POST["salary_AccountPlanID_". $SalaryID] != $Salary->AccountPlanID;
+}
+
+function CheckIfActualPayDateChanged($SalaryID, $ActualPayDate) {
+  global $_lib;
+  $Salary = $_lib['storage']->get_row(array('query' => "SELECT ActualPayDate FROM salary WHERE SalaryID = " . $SalaryID));
+  return $ActualPayDate != $Salary->ActualPayDate;
 }
 
 $debug = false;
@@ -1092,7 +1103,7 @@ elseif($_lib['input']->getProperty('action_salary_update_extra')) {
 }
 elseif($_lib['input']->getProperty('action_altindato_update')) {
   if (isset($_POST['salary_ActualPayDate_'.$SalaryID])) {
-    $query_update_altinn_date = "UPDATE salary SET ActualPayDate = '". $_POST['salary_ActualPayDate_'.$SalaryID] ."' where SalaryID = " . $SalaryID;
+    $query_update_altinn_date = "UPDATE salary SET ActualPayDate = '" . $_POST['salary_ActualPayDate_' . $SalaryID] . "', ActualPayDateUpdatedBy = '" . $_lib['sess']->get_person('PersonID') . "', ActualPayDateUpdatedAt = '" . strftime("%F %T") . "' where SalaryID = " . $SalaryID;
     $_lib['db']->db_query($query_update_altinn_date);
   }
 }
