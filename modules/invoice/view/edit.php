@@ -99,7 +99,7 @@ var first_time_array = [];
 // needed so we can update invoice allowance/charge line without reloading the page
 var allowances_charges = [];
 <?
-$allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, OutVatPercent, OutVatID
+$allowancecharge_query = "SELECT AllowanceChargeID, ChargeIndicator, OutAccountPlanID, Reason, Amount, OutVatPercent, OutVatID, PercentAmount, IsPercentage
                   FROM allowancecharge
                   WHERE Active = 1";
 $allowancecharge_result = $_lib['db']->db_query($allowancecharge_query);
@@ -107,7 +107,7 @@ $allowances_charges = array();
 while($allowance_charge = $_lib['db']->db_fetch_assoc($allowancecharge_result)) {
   $allowances_charges[$allowance_charge["AllowanceChargeID"]] = $allowance_charge;
 ?>
-allowances_charges['<? print $allowance_charge['AllowanceChargeID']; ?>'] = {ChargeIndicator: '<? print $allowance_charge['ChargeIndicator']; ?>', Reason: '<? print $allowance_charge['Reason']; ?>', AccountPlanID: '<? print $allowance_charge['OutAccountPlanID']; ?>', Amount: parseFloat('<? print $allowance_charge['Amount']; ?>'), VatPercent: parseFloat('<? print $allowance_charge['OutVatPercent']; ?>'), VatID: '<? print $allowance_charge['OutVatID']; ?>'};
+allowances_charges['<? print $allowance_charge['AllowanceChargeID']; ?>'] = {ChargeIndicator: '<? print $allowance_charge['ChargeIndicator']; ?>', Reason: '<? print $allowance_charge['Reason']; ?>', AccountPlanID: '<? print $allowance_charge['OutAccountPlanID']; ?>', Amount: parseFloat('<? print $allowance_charge['Amount']; ?>'), VatPercent: parseFloat('<? print $allowance_charge['OutVatPercent']; ?>'), VatID: '<? print $allowance_charge['OutVatID']; ?>', IsPercentage: '<? print $allowance_charge['IsPercentage'] ? '1' : '0' ?>', PercentAmount: parseFloat('<? print $allowance_charge['PercentAmount'] ?>')};
 <?
 }
 ?>
@@ -150,7 +150,7 @@ function newInvoiceLineAllowanceCharge(InvoiceID, CustomerAccountPlanID, Invoice
   $.post('<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax', params,
          function(data, status) {
            var InvoiceLineAllowanceChargeID = $($.parseHTML(data)).filter("#line_allowance_charge_id").text();
-           var newInvoiceLineAllowanceChargeHTML='<tr class="allowance_charge line_invoice_allowancecharge_'+InvoiceLineID+'" id="invoiceline_allowancecharge_fields_'+InvoiceLineAllowanceChargeID+'"><td><? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('data' => array('1' => 'Kostnad', '0' => 'Rabatt'), 'table' => $db_table5, 'field' => 'ChargeIndicator', 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)', 'pk' => 'placeholder_id', 'value' => '0', 'tabindex' => '0'))); ?> <? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('data' => array('line' => 'Linje', 'price' => 'Pris'), 'table' => $db_table5, 'field' => 'AllowanceChargeType', 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)', 'pk' => 'placeholder_id', 'value' => 'line', 'tabindex' => '0'))); ?></td> <td><? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table5, 'field' => 'AllowanceChargeReason', 'pk' => 'placeholder_id', 'width' => '20', 'maxlength' => '255', 'tabindex' => '0'))); ?></td> <td></td> <td id="<? print $db_table5; ?>.AmountPaddingForLineType.placeholder_id" colspan="3"></td> <td> <span style="display: none;" id="<? print "$db_table5.InvoiceLineID.placeholder_id"; ?>">'+InvoiceLineID+'</span> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table5, 'field' => 'Amount', 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)', 'pk' => 'placeholder_id', 'value' => $_lib['format']->Amount(0), 'class' => 'number', 'width' => '15', 'tabindex' => '0'))); ?></td> <td id="<? print $db_table5; ?>.AmountPaddingForPriceType.placeholder_id" colspan="3" hidden></td> <td><input type="button" class="button" onclick="deleteInvoiceLineAllowanceCharge(<? print $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . ", "; ?>'+InvoiceLineAllowanceChargeID+', '+InvoiceLineID+'); return false;" value="Slett" /></td></tr>';
+           var newInvoiceLineAllowanceChargeHTML='<tr class="allowance_charge line_invoice_allowancecharge_'+InvoiceLineID+'" id="invoiceline_allowancecharge_fields_'+InvoiceLineAllowanceChargeID+'"><td><? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('data' => array('1' => 'Kostnad', '0' => 'Rabatt'), 'table' => $db_table5, 'field' => 'ChargeIndicator', 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)', 'pk' => 'placeholder_id', 'value' => '0', 'tabindex' => '0'))); ?> <? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('data' => array('line' => 'Linje', 'price' => 'Pris'), 'table' => $db_table5, 'field' => 'AllowanceChargeType', 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)', 'pk' => 'placeholder_id', 'value' => 'line', 'tabindex' => '0'))); ?></td> <td><? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table5, 'field' => 'AllowanceChargeReason', 'pk' => 'placeholder_id', 'width' => '20', 'maxlength' => '255', 'tabindex' => '0'))); ?></td> <td class="number"> <? print str_replace("\n", "", $_lib['form3']->text(array('table' => $db_table5, 'field' => 'PercentAmount', 'class' => 'number', 'pk' => 'placeholder_id', 'value' => 0, 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this);', 'width' => '8', 'maxlength' => '255', 'tabindex' => $tabindex++))) ?> <? print str_replace("\n", "", $_lib['form3']->hidden(array('table' => $db_table5,'field' => 'IsPercentage','class' => 'is_line_percentage_input','pk' => 'placeholder_id','value' => 0))) ?> </td> <td id="<? print $db_table5; ?>.AmountPaddingForLineType.placeholder_id" colspan="3"></td> <td> <span style="display: none;" id="<? print "$db_table5.InvoiceLineID.placeholder_id"; ?>">'+InvoiceLineID+'</span> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table5, 'field' => 'Amount', 'OnChange' => 'updateInvoiceLineAllowanceChargeData(this)', 'pk' => 'placeholder_id', 'value' => $_lib['format']->Amount(0), 'class' => 'number', 'width' => '15', 'tabindex' => '0'))); ?></td> <td id="<? print $db_table5; ?>.AmountPaddingForPriceType.placeholder_id" colspan="3" hidden></td> <td><input type="button" class="button" onclick="deleteInvoiceLineAllowanceCharge(<? print $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . ", "; ?>'+InvoiceLineAllowanceChargeID+', '+InvoiceLineID+'); return false;" value="Slett" /></td></tr>';
            newInvoiceLineAllowanceChargeHTML = newInvoiceLineAllowanceChargeHTML.replace(/placeholder_id/g, InvoiceLineAllowanceChargeID);
            $(newInvoiceLineAllowanceChargeHTML).insertBefore($('#allowance_placeholder_'+InvoiceLineID));
            validateBeforeSave();
@@ -174,7 +174,7 @@ function newInvoiceAllowanceCharge(InvoiceID, CustomerAccountPlanID) {
   $.post('<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax', params,
          function(data, status) {
            var InvoiceAllowanceChargeID = $($.parseHTML(data)).filter("#allowance_charge_id").text();
-           var newInvoiceAllowanceChargeHTML='<tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_'+InvoiceAllowanceChargeID+'"><td><? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('query' => "select AllowanceChargeID, CONCAT(IF(ChargeIndicator, 'Kostnad - ', 'Rabatt - '), Reason) from allowancecharge where Active = 1", 'table' => $db_table4, 'field' => 'AllowanceChargeID', 'width' => 40, 'value' => $acrow->AllowanceChargeID, 'tabindex' => '0', 'pk' => 'placeholder_id', 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this, true)'))); print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'ChargeIndicator', 'pk' => 'placeholder_id', 'value' => 0))); ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'AllowanceChargeReason', 'pk' => 'placeholder_id', 'value' => '', 'width' => '20', 'maxlength' => '255', 'tabindex' => '0'))); ?></td> <td colspan="2"></td> <td> <? print '<span id="' . $db_table4 . '.VatPercent.' . 'placeholder_id" >' . $_lib['format']->Percent('0,00') . '</span>'; print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'VatID', 'pk' => 'placeholder_id', 'value' => null))); ?></td> <td class="number"> <? print '<span id="' . $db_table4 . '.VatAmount.' . 'placeholder_id" >' . $_lib['format']->Amount(0) . '</span>'; ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'Amount', 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this)', 'class' => 'number', 'width' => '15', 'pk' => 'placeholder_id', 'value' => $_lib['format']->Amount(0), 'tabindex' => '0'))); ?></td> <td><input type="button" class="button" onclick="deleteInvoiceAllowanceCharge(<? print $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . ", "; ?>'+InvoiceAllowanceChargeID+'); return false;" value="Slett" /></td></tr>';
+           var newInvoiceAllowanceChargeHTML='<tr class="allowance_charge global_invoice_allowancecharge" id="invoice_allowancecharge_fields_'+InvoiceAllowanceChargeID+'"><td><? print str_replace("\n", '', $_lib['form3']->Generic_menu3(array('query' => "select AllowanceChargeID, CONCAT(IF(ChargeIndicator, 'Kostnad - ', 'Rabatt - '), Reason) from allowancecharge where Active = 1", 'table' => $db_table4, 'field' => 'AllowanceChargeID', 'width' => 40, 'value' => $acrow->AllowanceChargeID, 'tabindex' => '0', 'pk' => 'placeholder_id', 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this, true)'))); print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'ChargeIndicator', 'pk' => 'placeholder_id', 'value' => 0))); ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'AllowanceChargeReason', 'pk' => 'placeholder_id', 'value' => '', 'width' => '20', 'maxlength' => '255', 'tabindex' => '0'))); ?></td> <td class="number"><? print str_replace("\n", "", $_lib['form3']->text(array('table' => $db_table4,'field' => 'PercentAmount','class' => 'number','pk' => 'placeholder_id','value' => 0,'OnChange' => 'updateInvoiceAllowanceChargeLineData(this);','width' => '8','maxlength' => '255','tabindex' => $tabindex++))) ?> <? print str_replace("\n", "", $_lib['form3']->hidden(array('table' => $db_table4,'field' => 'IsPercentage','class' => 'is_invoice_percentage_input','pk' => 'placeholder_id','value' => 0))) ?> </td><td></td> <td> <? print '<span id="' . $db_table4 . '.VatPercent.' . 'placeholder_id" >' . $_lib['format']->Percent('0,00') . '</span>'; print str_replace("\n", '', $_lib['form3']->hidden(array('table' => $db_table4, 'field' => 'VatID', 'pk' => 'placeholder_id', 'value' => null))); ?></td> <td class="number"> <? print '<span id="' . $db_table4 . '.VatAmount.' . 'placeholder_id" >' . $_lib['format']->Amount(0) . '</span>'; ?></td> <td> <? print str_replace("\n", '', $_lib['form3']->text(array('table' => $db_table4, 'field' => 'Amount', 'OnChange' => 'updateInvoiceAllowanceChargeLineData(this)', 'class' => 'number', 'width' => '15', 'pk' => 'placeholder_id', 'value' => $_lib['format']->Amount(0), 'tabindex' => '0'))); ?></td> <td><input type="button" class="button" onclick="deleteInvoiceAllowanceCharge(<? print $InvoiceID . ", " . ($row->CustomerAccountPlanID ? $row->CustomerAccountPlanID : 0) . ", "; ?>'+InvoiceAllowanceChargeID+'); return false;" value="Slett" /></td></tr>';
            newInvoiceAllowanceChargeHTML = newInvoiceAllowanceChargeHTML.replace(/placeholder_id/g, InvoiceAllowanceChargeID);
            $(newInvoiceAllowanceChargeHTML).insertBefore($('#allowance_placeholder'));
            validateBeforeSave();
@@ -366,6 +366,7 @@ function updateInvoiceAllowanceChargeLineData(element, update_amount) {
   update_amount = typeof update_amount !== 'undefined' ? update_amount : false;
   var id = element.id;
   var name = element.id.split('.');
+  var original_name = element.id.split('.');
 
   name[1] = 'AllowanceChargeID';
   var allowance_charge_id_element = document.getElementById(name.join('.'));
@@ -383,15 +384,36 @@ function updateInvoiceAllowanceChargeLineData(element, update_amount) {
   var reason_element = document.getElementById(name.join('.'));
   reason_element.value = allowances_charges[allowance_charge_id]['Reason'];
 
+  name[1] = 'IsPercentage';
+  var is_percentage_element = document.getElementById(name.join('.'));
+  name[1] = 'PercentAmount';
+  var percentage_element = document.getElementById(name.join('.'));
   name[1] = 'Amount';
   var amount_element = document.getElementById(name.join('.'));
+  var is_percentage = false;
+  var percentage = 0.0;
   var amount = 0.0;
+
   if (update_amount) {
-    amount = allowances_charges[allowance_charge_id]['Amount'];
+    is_percentage = (allowances_charges[allowance_charge_id]['IsPercentage'] == '1');
+    percentage = allowances_charges[allowance_charge_id]['PercentAmount'];
+    amount = allowances_charges[allowance_charge_id]['Amount']
   } else {
+    is_percentage = (original_name[1] == 'PercentAmount' ? true : (original_name[1] == 'Amount' ? false : (is_percentage_element.value == '1')));
+    percentage = toNumber(percentage_element.value.replace('%', ''));
     amount = toNumber(amount_element.value);
   }
+
+  var total_amount_without_ac = toNumber(document.getElementById("invoiceout.LineExtensionAmount").innerHTML);
+  
+  if (is_percentage) {
+    amount = total_amount_without_ac * percentage / 100;
+  } else {
+    percentage = amount * 100 / total_amount_without_ac;
+  }
+  percentage_element.value = toAmountString(percentage, 2) + '%';
   amount_element.value = toAmountString(amount, 2);
+  is_percentage_element.value = (is_percentage ? '1' : '0');
 
   name[1] = 'VatID';
   var vat_id_element = document.getElementById(name.join('.'));
@@ -442,28 +464,65 @@ function calculateInvoiceLineAllowanceCharge(line_id) {
 // update data for the line's allowance/charge if anything of note changes
 // should only format the amount correctly and move the amount field to
 // the correct place depending if it is a line/price allowance/charge
-function updateInvoiceLineAllowanceChargeData(element) {
+function updateInvoiceLineAllowanceChargeData(element, update_line) {
+  update_line = typeof update_line !== 'undefined' ? update_line : true;
   var id = element.id;
   var name = element.id.split('.');
   var allowance_charge_id = name[2];
+  var original_name = element.id.split('.');
 
   name[1] = 'ChargeIndicator';
   var charge_indicator_element = document.getElementById(name.join('.'));
   charge_indicator = charge_indicator_element.value;
 
+  name[1] = 'IsPercentage';
+  var is_percentage_element = document.getElementById(name.join('.'));
+  var is_percentage = (original_name[1] == 'PercentAmount' ? true : (original_name[1] == 'Amount' ? false : (is_percentage_element.value == '1')));
+
+  name[1] = 'PercentAmount';
+  var percentage_element = document.getElementById(name.join('.'));
+  var percentage = toNumber(percentage_element.value.replace('%', ''));
+
   name[1] = 'Amount';
   var amount_element = document.getElementById(name.join('.'));
   var amount = toNumber(amount_element.value);
-  if (typeof(first_time_array[allowance_charge_id]) == 'undefined') first_time_array[allowance_charge_id] = true;
-  if (charge_indicator == 0 && first_time_array[allowance_charge_id] && amount > 0) {
-    first_time_array[allowance_charge_id] = false;
-    amount = -amount;
-  }
-  amount_element.value = toAmountString(amount, 2);
 
   name[1] = 'AllowanceChargeType';
   allowance_charge_type_element = document.getElementById(name.join('.'));
   allowance_charge_type = allowance_charge_type_element.value;
+
+  var line_tr = $(element).parent().parent().prevAll(".invoiceline_fields")[0];
+  var line_name = $(line_tr).find("select")[0].id.split('.');
+  line_name[1] = 'UnitCustPrice';
+  var line_price = toNumber(document.getElementById(line_name.join('.')).value);
+  line_name[1] = 'QuantityDelivered';
+  var line_quantity = toNumber(document.getElementById(line_name.join('.')).value);
+
+  if (is_percentage) {
+    if(allowance_charge_type == 'price') {
+      if(percentage == -100) var amount = 0;
+      else amount = line_price * percentage / (100 + percentage);
+    } else {
+      amount = line_price * line_quantity * percentage / 100;
+    }
+  } else {
+    if(allowance_charge_type == 'price') {
+      if(line_price == amount) var percentage = 0;
+      else percentage = amount * 100 / (line_price - amount);
+    } else {
+      percentage = amount * 100 / (line_price * line_quantity);
+    }
+  }
+
+  if (typeof(first_time_array[allowance_charge_id]) == 'undefined') first_time_array[allowance_charge_id] = true;
+  if (charge_indicator == 0 && first_time_array[allowance_charge_id] && amount > 0) {
+    first_time_array[allowance_charge_id] = false;
+    amount = -amount;
+    percentage = -percentage;
+  }
+  amount_element.value = toAmountString(amount, 2);
+  percentage_element.value = toAmountString(percentage, 2) + "%";
+  is_percentage_element.value = (is_percentage ? '1' : '0');
 
   name[1] = 'AmountPaddingForLineType';
   var amount_padding_for_line_type_element = document.getElementById(name.join('.'));
@@ -483,7 +542,7 @@ function updateInvoiceLineAllowanceChargeData(element) {
 
   var invoice_line_name = ['invoiceoutline', 'ProductID', invoice_line_id];
   var invoice_line_product_id_element = document.getElementById(invoice_line_name.join('.'));
-  updateInvoiceLineData(invoice_line_product_id_element, false);
+  if(update_line) updateInvoiceLineData(invoice_line_product_id_element, false);
 }
 
 // update data for the line if the product/quantity/price changes
@@ -538,6 +597,18 @@ function updateInvoiceLineData(element, update_amount) {
   var amount_excluding_vat = unit_cust_price * quantity_delivered + sum_allowances_charges;
   amount_excluding_vat_element.innerHTML = toAmountString(amount_excluding_vat, 2);
   updateInvoiceData();
+
+  // if we change invoice lines, this will affect the invoice allowance/charges which are based on percent
+  var invoiceallowancecharge_elements = document.getElementsByClassName('is_invoice_percentage_input');
+  for(var i = 0; i < invoiceallowancecharge_elements.length; i++) {
+    var element = invoiceallowancecharge_elements[i];
+    updateInvoiceAllowanceChargeLineData(element);
+  }
+  var invoicelineallowancecharge_elements = document.getElementsByClassName('is_line_percentage_input');
+  for(var i = 0; i < invoicelineallowancecharge_elements.length; i++) {
+    var element = invoicelineallowancecharge_elements[i];
+    updateInvoiceLineAllowanceChargeData(element, false);
+  }
 }
 
 // hide/show all allowance/charge elements (ones which belong to allowance_charge class)
@@ -1024,7 +1095,28 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'tabindex'  => $tabindex++));
         ?>
       </td>
-      <td></td>
+      <td class="number">
+        <?
+          print $_lib['form3']->text(array(
+            'table'     => $db_table5,
+            'field'     => 'PercentAmount',
+            'class'     => 'number',
+            'pk'        => $acrow->InvoiceLineAllowanceChargeID,
+            'value'     => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->PercentAmount).'%',
+            'OnChange'  => 'updateInvoiceLineAllowanceChargeData(this);',
+            'width'     => '8',
+            'maxlength' => '255',
+            'tabindex'  => $tabindex++));
+        ?>
+        <? 
+          print $_lib['form3']->hidden(array(
+            'table'     => $db_table5,
+            'field'     => 'IsPercentage',
+            'class'     => 'is_line_percentage_input',
+            'pk'        => $acrow->InvoiceLineAllowanceChargeID,
+            'value'     => ($acrow->IsPercentage ? '1' : '0')));
+        ?>
+      </td>
       <td id="<? print "$db_table5.AmountPaddingForLineType.$acrow->InvoiceLineAllowanceChargeID"; ?>" colspan="3" <? if ($acrow->AllowanceChargeType == 'price') print 'hidden'; ?>></td>
       <td>
         <span style="display: none;" id="<? print "$db_table5.InvoiceLineID.$acrow->InvoiceLineAllowanceChargeID"; ?>"><? print $LineID; ?></span>
@@ -1097,7 +1189,29 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             'tabindex'  => $tabindex++));
         ?>
       </td>
-      <td colspan="2"></td>
+      <td class="number">
+        <?
+          print $_lib['form3']->text(array(
+            'table'     => $db_table4,
+            'field'     => 'PercentAmount',
+            'class'     => 'number',
+            'pk'        => $acrow->InvoiceAllowanceChargeID,
+            'value'     => $_lib['format']->Amount(($acrow->ChargeIndicator == 1?1:-1)*$acrow->PercentAmount).'%',
+            'OnChange'  => 'updateInvoiceAllowanceChargeLineData(this);',
+            'width'     => '8',
+            'maxlength' => '255',
+            'tabindex'  => $tabindex++));
+        ?>
+        <? 
+          print $_lib['form3']->hidden(array(
+            'table'     => $db_table4,
+            'field'     => 'IsPercentage',
+            'class'     => 'is_invoice_percentage_input',
+            'pk'        => $acrow->InvoiceAllowanceChargeID,
+            'value'     => ($acrow->IsPercentage ? '1' : '0')));
+        ?>
+      </td>
+      <td></td>
       <td>
         <?
           print '<span id="' . $db_table4 . '.VatPercent.' . $acrow->InvoiceAllowanceChargeID . '" >' . $_lib['format']->Percent($acrow->VatPercent) . '</span>';
