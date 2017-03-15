@@ -99,7 +99,7 @@ function onlyPercentOrAmount(percent_or_amount) {
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Reason', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$row->Reason)) ?></td>
     </tr>
     <tr>
-        <td>Percent</td>
+        <td>Prosent</td>
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'PercentAmount', 'pk'=>$row->AllowanceChargeID, 'tabindex'=>$tabindex++, 'value'=>$_lib['format']->Amount($row->PercentAmount), 'OnChange' => 'onlyPercentOrAmount(\'percent\'); setAllowanceToNegativePercentIfFirstTime();', 'width'=>'5')) ?>%
     </tr>
     <tr>
