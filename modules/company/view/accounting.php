@@ -30,7 +30,7 @@ $result2 = $_lib['db']->db_query($query2);
 <? includeinc('top'); ?>
 <? includeinc('left') ?>
 
-<h2>Firmaopplysninger, <? print $row->VName; ?> (side 2 av 3)</h2>
+<h2>Firmaopplysninger, <? print $row->VName; ?> (side 2 av 4)</h2>
 <? print $message ?>
 <table class="tab">
   <tr>
