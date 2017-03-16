@@ -563,7 +563,7 @@ if(is_array($bank->bankaccount)) {
             if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
                 print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false));
             } else {
-                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25, 'tabindex' => $tabindexH[6]));
+                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 22, 'maxlength' => 25, 'tabindex' => $tabindexH[6]));
             }
             ?>
         </td>
