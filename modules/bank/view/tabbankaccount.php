@@ -200,6 +200,7 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
 <?
 // create_span is a helper function highlighting matching lines
 function create_span($value, $ID){
+    $ID = preg_replace("/[\(\)]/", "_", $ID);
     return "<span class=\"navigate to\" id=$ID>$value</span>";
 }
 
@@ -497,7 +498,7 @@ if(is_array($bank->bankaccount)) {
             $EmptyHighlightCount ++;
             $BankHiglightClass ="column_empty$EmptyHighlightCount";
         } else{
-            $BankHiglightClass = "column_$row->JournalID-$row->InvoiceNumber-$row->KID";
+            $BankHiglightClass = preg_replace("/[\(\)]/", "_", "column_$row->JournalID-$row->InvoiceNumber-$row->KID");
         }
 
         if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, $row->JournalID)) {
@@ -657,8 +658,8 @@ if(is_array($bank->bankaccount)) {
         if(empty($bankvoucher->InvoiceID) && empty($bankvoucher->KID)){
             $EmptyHighlightCount ++;
             $VoucherHiglightClass ="column_empty$EmptyHighlightCount";
-        } else{
-            $VoucherHiglightClass = "column_$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID";
+        } else {
+            $VoucherHiglightClass = preg_replace("/[\(\)]/", "_", "column_$bankvoucher->JournalID-$bankvoucher->InvoiceID-$bankvoucher->KID");
         }
 
         $VoucherDiff = create_diff($bankvoucher->InvoiceID, $bankvoucher->KID, $bankvoucher->JournalID, $bankvoucher->AccountPlanID, ($bankvoucher->AmountIn - $bankvoucher->AmountOut), $bank);
