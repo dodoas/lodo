@@ -213,7 +213,9 @@ function create_diff($InvoiceID, $KID, $JournalID, $AccountPlanID, $BankVoucherA
         $DiffAmount = $_lib['format']->Amount($bank->getDiff($AccountPlanID, $KID, $InvoiceID, $JournalID, $BankVoucherAmount, (($BankVoucherAmount > 0) ? "inn" : "out"), 'voucher'));
         return create_span("Diff (" . $DiffAmount . ")", $HighlightID);
     }
-} ?>
+}
+$CheckedJournalIDs = $bank->checkJournalID($bank->ThisPeriod);
+?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
@@ -491,6 +493,7 @@ if(is_array($bank->bankaccount)) {
         //  and mark it red if it is.
         {
             $JournalIDExists = $accounting->checkJournalID($bank->VoucherType, $row->JournalID);
+            if (intval($CheckedJournalIDs[$row->JournalID]['Count']) > 1) $JournalIDExists = true;
             $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
         }
 
@@ -515,10 +518,7 @@ if(is_array($bank->bankaccount)) {
         <td class="<?=$BankHiglightClass?>">
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Priority', 'pk' => $row->AccountLineID, 'value' => $row->Priority, 'width' => 3, 'tabindex' => $tabindexH[0])); ?>
         </td>
-
-        <?php
-        ?>
-        <td class="<?="$BankHiglightClass $JournalIDColColor" ?>">
+        <td class="<?= $BankHiglightClass ?>" <?= $JournalIDColColor ?>>
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6, 'tabindex' => $tabindexH[1])); ?>
         </td>
         <td class="<?=$BankHiglightClass?>"><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
