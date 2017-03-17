@@ -114,6 +114,13 @@ VALUES
         );
 
     $_lib['db']->db_query($q);
+
+    $q = sprintf(" UPDATE bankvotingperiod SET AmountIn = '%s', AmountOut = '%s' WHERE BankVotingPeriodID = '%d'"
+        ,$_POST['bankin']
+        ,$_POST['bankout']
+        ,$_POST['BankVotingPeriodID']
+        );
+    $_lib['db']->db_query($q);
 }
 
 $BankVotingPeriodID = $_lib['input']->getProperty('BankVotingPeriodID');

@@ -18,6 +18,7 @@ $bank->init(); #Read data
 $bankname = $_lib['db']->db_query("SELECT AccountName FROM accountplan WHERE AccountPlanID = " . $bank->AccountPlanID);
 $bankname = $_lib['db']->db_fetch_assoc($bankname);
 $bankname = $bankname['AccountName'];
+$bankvotingperiod_id = $bank->bankvotingperiod->BankVotingPeriodID;
 
 $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
 
@@ -34,6 +35,7 @@ $params = "/bank_statements/get_bank_statement_for_lodo?identifier=" . $identifi
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - avstemming av bank</title>
     <meta name="cvs"                content="$Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $" />
     <? includeinc('head') ?>
+    <? includeinc('javascript') ?>
 
     <style>
       td.highlighted {
@@ -179,12 +181,13 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
         $resultconf = null;
       ?>
 
-    $(document).ready(function() {
-      $('.navigate.to').click(function(e) {
-        var element = $(e.target);
-        var targetID = element.attr('id');
-        highlight('.column_' + targetID);
-      });
+      function update_hidden_fields() {
+        var bankvotingperiod_id = "<?= $bankvotingperiod_id ?>";
+        var AmountIn  = toNumber($('#bankvotingperiod\\.AmountIn\\.' + bankvotingperiod_id).val());
+        var AmountOut = toNumber($('#bankvotingperiod\\.AmountOut\\.' + bankvotingperiod_id).val());
+        $('input[type=hidden][name=bankin]').val(AmountIn);
+        $('input[type=hidden][name=bankout]').val(AmountOut);
+      }
 
       function highlight(elementid){
         $(elementid).addClass("highlighted");
@@ -192,6 +195,16 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
           $(elementid).removeClass("highlighted");
         } , 5000);
       }
+    $(document).ready(function() {
+      $('input:submit[name=action_save_extras]').click(function () {
+        update_hidden_fields();
+      });
+      $('.navigate.to').click(function(e) {
+        var element = $(e.target);
+        var targetID = element.attr('id');
+        highlight('.column_' + targetID);
+      });
+
     });
     </script>
 </head>
@@ -245,7 +258,7 @@ if(is_array($bank->bankaccount)) {
 <form name="period_choice1" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="AccountID" value="<?= $bank->AccountID ?>">
 <input type="hidden" name="Period" value="<?= $bank->ThisPeriod ?>">
-<input type="hidden" name="BankVotingPeriodID" value="<?= $bank->bankvotingperiod->BankVotingPeriodID ?>">
+<input type="hidden" name="BankVotingPeriodID" value="<?= $bankvotingperiod_id ?>">
 
 Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('VoucherBankNumber'); ?>
 
@@ -283,7 +296,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 <form id="list_form" name="bankvoting" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="AccountID" value="<?= $bank->AccountID ?>">
 <input type="hidden" name="Period" value="<?= $bank->ThisPeriod ?>">
-<input type="hidden" name="BankVotingPeriodID" value="<?= $bank->bankvotingperiod->BankVotingPeriodID ?>">
+<input type="hidden" name="BankVotingPeriodID" value="<?= $bankvotingperiod_id ?>">
 
 <?php
    $extras_r = $_lib['db']->db_query(
@@ -351,6 +364,8 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
                      value="<?= $extraStartAtJournalID ?>">
   <? } ?>
   </td>
+  <input type="hidden" name="bankin" value="<?= $bankin ?>">
+  <input type="hidden" name="bankout" value="<?= $bankout ?>">
   <td><? if($_lib['sess']->get_person('AccessLevel') > 1 && !$bank->bankvotingperiod->Locked) { ?><input type="submit" name="action_save_extras" value="Lagre bank" /><? } ?></td>
 
 </tr>
@@ -375,7 +390,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 <form name="period_choice" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="AccountID" value="<?= $bank->AccountID ?>">
 <input type="hidden" name="Period" value="<?= $bank->ThisPeriod ?>">
-<input type="hidden" name="BankVotingPeriodID" value="<?= $bank->bankvotingperiod->BankVotingPeriodID ?>">
+<input type="hidden" name="BankVotingPeriodID" value="<?= $bankvotingperiod_id ?>">
 <? // added so the default submit action is sent on Enter ?>
 <input type="hidden" name="action_bank_update" value="1">
 
