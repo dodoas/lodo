@@ -680,9 +680,29 @@ function markRed(elements) {
   return all_valid;
 }
 
+function updatePeriodFromInvoiceDate(invoice_date_element) {
+  var invoice_id = invoice_date_element.id.split('.')[2];
+  var invoice_date = invoice_date_element.value;
+  var invoice_period_element = document.getElementById("invoiceout.Period." + invoice_id);
+  var invoice_period = invoice_date.substr(0,7);
+  if (validDate(invoice_date)) {
+    // console.log("InvoiceDate is valid!");
+    for(var i=0; i < invoice_period_element.options.length; i++) {
+      if(invoice_period_element.options[i].value === invoice_period) {
+        invoice_period_element.selectedIndex = i;
+        invoice_period_element.disabled = true;
+        break;
+      }
+    }
+  } else {
+    // console.log("InvoiceDate is NOT valid!");
+  }
+}
+
 $(document).ready(function() {
   setComboboxOnChangeAction();
   validateBeforeSave();
+  updatePeriodFromInvoiceDate(document.getElementById('invoiceout.InvoiceDate.'+<?php echo $InvoiceID; ?>));
 });
 </script>
 
@@ -862,6 +882,9 @@ if($message) { print "<div class='$class'>$message</div><br>"; }
         <td colspan="4"></td>
     </tr>
     <tr>
+      <td>Utskriftsdato</td>
+      <? $print_date_value = ($row_print) ? $row_print->InvoicePrintDate : "0000-00-00"; ?>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($print_date_value, 0, 10), 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
       <td>Valuta</td>
       <td>
 <?php
@@ -879,29 +902,26 @@ foreach ($currencies as $currency) {
 ?>
       </select>
 </td>
-      <td></td>
-      <td></td>
     </tr>
     <tr>
       <td>Fakturadato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$InvoiceID, 'value'=>substr($row->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++, 'OnKeyUp' => "enableOrDisable(validDate(this.value), 'action_invoice_update');")) ?></td>
-      <td>Forfallsdato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$InvoiceID, 'value'=>substr($row->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
-    </tr>
-    <tr>
-        <td>Fakturaperiode</td>
-        <td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$InvoiceID, 'value'=>substr($row->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++, 'OnKeyUp' => "enableOrDisable(validDate(this.value), 'action_invoice_update');", 'OnChange' => 'updatePeriodFromInvoiceDate(this)')) ?></td>
+      <td>Fakturaperiode</td>
+      <td>
         <?
         if($accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) {
-            print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$InvoiceID, 'value' => $row->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
+          print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$InvoiceID, 'value' => $row->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
         } else {
             print $row->Period;
         }
         ?>
-        </td>
-        <? $print_date_value = ($row_print) ? $row_print->InvoicePrintDate : "0000-00-00"; ?>
-        <td>Utskriftsdato</td>
-        <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($print_date_value, 0, 10), 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
+      </td>
+    </tr>
+    <tr>
+      <td>Forfallsdato</td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$InvoiceID, 'value'=>substr($row->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+      <td></td>
+      <td></td>
     </tr>
     <? if($row->Note){ ?>
     <tr>

@@ -155,6 +155,28 @@ function updateAndPerformAction(link_button) {
   $(form).attr('action', link_button_location+'&action_invoicein_update=1');
   form.submit();
 }
+
+function updatePeriodFromInvoiceDate(invoice_date_element) {
+  var invoice_id = invoice_date_element.id.split('.')[2];
+  var invoice_date = invoice_date_element.value;
+  var invoice_period_element = document.getElementById("invoicein.Period." + invoice_id);
+  var invoice_period = invoice_date.substr(0,7);
+  if (validDate(invoice_date)) {
+    // console.log("InvoiceDate is valid!");
+    for(var i=0; i < invoice_period_element.options.length; i++) {
+      if(invoice_period_element.options[i].value === invoice_period) {
+        invoice_period_element.selectedIndex = i;
+        invoice_period_element.disabled = true;
+        break;
+      }
+    }
+  } else {
+    // console.log("InvoiceDate is NOT valid!");
+  }
+}
+$(document).ready(function() {
+  updatePeriodFromInvoiceDate(document.getElementById('invoicein.InvoiceDate.'+<?php echo $ID; ?>));
+});
 </script>
 </head>
 
@@ -216,14 +238,31 @@ function updateAndPerformAction(link_button) {
         <td colspan="4"></td>
     </tr>
     <tr>
-      <td>Faktura dato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$ID, 'value'=>substr($invoicein->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
-      <td>Forfalls dato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$ID, 'value'=>substr($invoicein->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+      <td></td>
+      <td></td>
+      <td>Valuta</td>
+      <td>
+<?php
+#Retrieve all currencies
+
+$currencies = exchange::getAllCurrencies();
+?>
+      <select name="<?php echo $db_table . '.CurrencyID.' . $InvoiceID ?>">
+<?
+foreach ($currencies as $currency) {
+?>
+<option value="<? echo $currency->CurrencyISO; ?>" <?php if ($invoicein->CurrencyID == $currency->CurrencyISO) echo 'selected'; ?>><? echo $currency->CurrencyISO; ?></option>
+<?
+}
+?>
+      </select>
+</td>
     </tr>
     <tr>
-        <td>Faktura periode</td>
-        <td>        
+      <td>Faktura dato</td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$ID, 'value'=>substr($invoicein->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++, 'OnChange' => 'updatePeriodFromInvoiceDate(this)')) ?></td>
+      <td>Faktura periode</td>
+      <td>
         <?
         if($accounting->is_valid_accountperiod($invoicein->Period, $_lib['sess']->get_person('AccessLevel'))) {
             print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$ID, 'value' => $invoicein->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
@@ -231,7 +270,11 @@ function updateAndPerformAction(link_button) {
             print $invoicein->Period;
         }
         ?>
-        </td>
+      </td>
+    </tr>
+    <tr>
+        <td>Forfalls dato</td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$ID, 'value'=>substr($invoicein->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
         <td>Er med i reisegarantifondet</td>
         <td><? print $_lib['form3']->Checkbox(array('table'=>$db_table, 'field'=>'isReisegarantifond', 'pk'=>$ID, 'value'=>$invoicein->isReisegarantifond)) ?></td>
     </tr>
