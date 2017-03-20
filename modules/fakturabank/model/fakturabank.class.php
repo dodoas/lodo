@@ -193,20 +193,20 @@ class lodo_fakturabank_fakturabank {
         }
     }
 
-    private function find_department_by_id($CompanyDepartmentID) {
+    private function find_department_by_id($DepartmentID) {
         global $_lib;
 
-        if (!is_numeric($CompanyDepartmentID)) {
+        if (!is_numeric($DepartmentID)) {
             return false;
         }
 
-        $query = "SELECT `CompanyDepartmentID` FROM companydepartment WHERE `CompanyDepartmentID` = '$CompanyDepartmentID'";
+        $query = "SELECT `DepartmentID` FROM department WHERE `DepartmentID` = '$DepartmentID'";
 		$result = $_lib['storage']->db_query3(array('query' => $query));
 		if (!$result) {
 			return false;
 		}
 		if ($obj = $_lib['storage']->db_fetch_object($result)) {
-			return $CompanyDepartmentID;
+			return $DepartmentID;
 		} else {
             return false;
         }
@@ -765,10 +765,10 @@ class lodo_fakturabank_fakturabank {
             }
           }
           if ($key == 'Avd') { // DepartmentID info
-            $query = "select * from companydepartment where CompanyDepartmentID='" . $value . "'";
+            $query = "select * from department where DepartmentID='" . $value . "'";
             $department_exists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
             if($department_exists) {
-              $line->DepartmentID = $department_exists->CompanyDepartmentID;
+              $line->DepartmentID = $department_exists->DepartmentID;
             }
             else {
               $InvoiceO->Status .= "Avdeling: " . $value . " eksisterer ikke. ";

@@ -24,8 +24,8 @@ if($_lib['input']->getProperty('action_product_new'))
 elseif($_lib['input']->getProperty('action_product_update'))
 {
     // Allow unsetting a Department
-    if (($_POST['product_CompanyDepartmentID_' . $ProductID]) === "unset") {
-        $_POST['product_CompanyDepartmentID_' . $ProductID] = DB_NULL_PLACEHOLDER;
+    if (($_POST['product_DepartmentID_' . $ProductID]) === "unset") {
+        $_POST['product_DepartmentID_' . $ProductID] = DB_NULL_PLACEHOLDER;
     }
     // Allow unsetting a Project
     if (($_POST['product_ProjectID_' . $ProductID]) === "unset") {

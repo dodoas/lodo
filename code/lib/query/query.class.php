@@ -44,7 +44,7 @@ $_QUERY['form']['PaymentMeans']             = "select MenuValue, MenuChoice from
 $_QUERY['form']['BankAccount']              = "select AccountNumber, concat(AccountNumber, ' - ' , AccountDescription) from account where Active=1 order by Sort";
 
 
-$_QUERY['form']['avdmenu']                  = "select CompanyDepartmentID, DepartmentName from companydepartment where Active=1";
+$_QUERY['form']['avdmenu']                  = "select DepartmentID, DepartmentName from department where Active=1";
 $_QUERY['form']['sonemenu']                 = "select Code, concat('Kode: ', Code, ' - ',Percent, '%') from arbeidsgiveravgift";
 $_QUERY['form']['kommunemenu']              = "select KommuneID, KommuneNumber, KommuneName from kommune";
 $_QUERY['form']['periodmenu']               = "select distinct(substring(Period,1,4)) from accountperiod group by Period order by Period desc";

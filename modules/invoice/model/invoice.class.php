@@ -1032,7 +1032,7 @@ class invoice {
             $fieldsline['voucher_AmountOut'] = 0;
             $fieldsline['voucher_AmountIn'] = 0;
 
-            $query = "select ProductID, ProductName, AccountPlanID, CompanyDepartmentID, ProjectID from product where productID=".$row->ProductID;
+            $query = "select ProductID, ProductName, AccountPlanID, DepartmentID, ProjectID from product where productID=".$row->ProductID;
             $productRow = $_lib['storage']->get_row(array('query' => $query));
             $productAccountPlan = $accounting->get_accountplan_object($productRow->AccountPlanID);
             #print_r($productRow);
@@ -1258,7 +1258,7 @@ class invoice {
         if ($invoice->DepartmentID != "" || $invoice->DepartmentID === 0) { // "0" is valid
             $this->invoiceO->DepartmentCode = $invoice->DepartmentID;
 
-            $sql_department = "select * from companydepartment where CompanyDepartmentID=" . (int) $invoice->DepartmentID;
+            $sql_department = "select * from department where DepartmentID=" . (int) $invoice->DepartmentID;
             $department = $_lib['storage']->get_row(array('query' => $sql_department));
 
             if (!empty($department->DepartmentName)) {

@@ -93,16 +93,16 @@ class form {
   <? }
 
   function Avd_menu($name, $value, $form_name, $where, $db_table) {
-      $query = "select CompanyDepartmentID, DepartmentName from companydepartment";
+      $query = "select DepartmentID, DepartmentName from department";
       $result = $this->_dbh[$this->_dsn]->db_query($query);
 
       print "<select name=\"$name\" onChange=\"Auto_Save('$form_name','$db_table','$name','$where')\">\n";
       print "<option value=\"\">Not choosen";
       while($_row = $this->_dbh[$this->_dsn]->db_fetch_object($result)) {
           if($_row->AvdleingsID == $value)
-              print "<option value=\"$_row->CompanyDepartmentID\" selected>$_row->DepartmentName \n";
+              print "<option value=\"$_row->DepartmentID\" selected>$_row->DepartmentName \n";
           else
-              print "<option value=\"$_row->CompanyDepartmentID\">$_row->DepartmentName \n";
+              print "<option value=\"$_row->DepartmentID\">$_row->DepartmentName \n";
       }
 
       print "</select>\n";

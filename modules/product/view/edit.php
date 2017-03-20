@@ -111,7 +111,7 @@ if (!empty($row->AccountPlanID)) {
     </tr>
     <tr>
         <td>Avdeling</td>
-        <td colspan="2"><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'CompanyDepartmentID', 'pk'=>$row->ProductID, 'value' => $row->CompanyDepartmentID, 'tabindex' => '5', 'unset' => true)) ?></td>
+        <td colspan="2"><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'pk'=>$row->ProductID, 'value' => $row->DepartmentID, 'tabindex' => '5', 'unset' => true)) ?></td>
     </tr>
     <tr>
         <td>Hylle</td>
@@ -170,7 +170,7 @@ $(document).ready(function(){
     var dest = $('#product\\.UnitCustPrice\\.<?= $row->ProductID ?>');
     var val = $('#priceincvat').val();
     var mva = <?= 1+(((float)$VAT->Percent)/100) ?>;
-    
+
     var value = String(val/mva);
     var comma = value.indexOf('.');
     if(comma != -1)

@@ -424,7 +424,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
         $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V', 'disabled' => $period_disabled, 'unset' => true));
       }
       elseif (isset($voucher_input->DepartmentID)) {
-        $department_name_query = "select DepartmentName from companydepartment where CompanyDepartmentID = $voucher_input->DepartmentID";
+        $department_name_query = "select DepartmentName from department where DepartmentID = $voucher_input->DepartmentID";
         $department_row = $_lib['storage']->get_row(array('query' => $department_name_query));
         print $voucher_input->DepartmentID . " " . $department_row->DepartmentName;
       }
@@ -641,7 +641,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     $_lib['form2']->department_menu2($department_menu_conf);
   }
   elseif (isset($voucher->DepartmentID)) {
-    $department_name_query = "select DepartmentName from companydepartment where CompanyDepartmentID = $voucher->DepartmentID";
+    $department_name_query = "select DepartmentName from department where DepartmentID = $voucher->DepartmentID";
     $department_row = $_lib['storage']->get_row(array('query' => $department_name_query));
     print $voucher->DepartmentID . " " . substr($department_row->DepartmentName, 0, 20);
   }

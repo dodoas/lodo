@@ -99,9 +99,9 @@ class Install
               $where = "-w \"AccountPlanID >= 1000 and AccountPlanID <= 9999\"";
               $table = "accountplan";
             }
-            elseif($table == "companydepartment")
+            elseif($table == "department")
             {
-              $where = " -w \"CompanyDepartmentID != 0\"";
+              $where = " -w \"DepartmentID != 0\"";
             }
             elseif($table == "project")
             {
@@ -257,11 +257,11 @@ OrgNumber='" . $args['installation_CompanyNumber']. "'";
         if($this->debug) print "$query<br>\n";
         $this->_dbh[$this->dsn_remote]->db_insert2(array('query' => $query, 'insert_id' => false));
 
-        $query = "delete from companydepartment where CompanyDepartmentID=0";
+        $query = "delete from department where DepartmentID=0";
         if($this->debug) print "$query<br>\n";
         $this->_dbh[$this->dsn_remote]->db_delete($query);
 
-        $query = "insert into companydepartment set CompanyDepartmentID=0, DepartmentName='Diverse', Active=1";
+        $query = "insert into department set DepartmentID=0, DepartmentName='Diverse', Active=1";
         if($this->debug) print "$query<br>\n";
         $this->_dbh[$this->dsn_remote]->db_insert2(array('query' => $query, 'insert_id' => false));
 
@@ -324,7 +324,7 @@ OrgNumber='" . $args['installation_CompanyNumber']. "'";
         }
         $query = "select Value from `setup` where Name='localcurrency'";
         $row = $_lib['db']->get_row(array('query' => $query));
-        
+
         if (empty($row)) {
             $query = "INSERT INTO  `setup` (
 `SetupID` ,
