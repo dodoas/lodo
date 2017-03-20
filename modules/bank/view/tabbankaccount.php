@@ -325,6 +325,12 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         $bankin = $bank->bankvotingperiod->AmountIn;
         $bankout = $bank->bankvotingperiod->AmountOut;
     }
+
+    if($extraStartAtJournalID === 0 || $extraStartAtJournalID === NULL ) {
+      $select_maxjournalid   = "select MAX(JournalID) as JournalID from voucher where VoucherType='B' and Active=1;";
+      $maxjournalid          = $_lib['storage']->get_row(array('query' => $select_maxjournalid));
+      $extraStartAtJournalID = intval($maxjournalid->JournalID) + 1;
+    }
 ?>
 
 <table class="lodo_data">
