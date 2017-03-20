@@ -9,7 +9,9 @@ class framework_logic_regnskapsrapport {
         global $_lib;
 
         foreach($args as $key => $value) {
-            $this->{$key} = $value;
+            if (!is_null($value)) {
+              $this->{$key} = $value;
+            }
         }
 
         if(!$this->Period) {
@@ -72,11 +74,12 @@ class framework_logic_regnskapsrapport {
         $this->prevEndPeriod    = $_lib['date']->get_this_period_last_year($this->thisEndPeriod);
         $this->prevYear         = $_lib['date']->get_this_year($this->prevStartPeriod);
 
+        $where = "";
         if(strlen($this->DepartmentID) > 0) {
-            $where = ' V.DepartmentID=' . $this->DepartmentID . ' and ';
+            $where .= ' V.DepartmentID=' . $this->DepartmentID . ' and ';
         }
         if(strlen($this->CarID) > 0) {
-            $where = ' V.CarID=' . $this->CarID . ' and ';
+            $where .= ' V.CarID=' . $this->CarID . ' and ';
         }
         if(strlen($this->ProjectID) > 0) {
             $where .= ' V.ProjectID=' . (int) $this->ProjectID . ' and ';

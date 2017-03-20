@@ -155,6 +155,28 @@ function updateAndPerformAction(link_button) {
   $(form).attr('action', link_button_location+'&action_invoicein_update=1');
   form.submit();
 }
+
+function updatePeriodFromInvoiceDate(invoice_date_element) {
+  var invoice_id = invoice_date_element.id.split('.')[2];
+  var invoice_date = invoice_date_element.value;
+  var invoice_period_element = document.getElementById("invoicein.Period." + invoice_id);
+  var invoice_period = invoice_date.substr(0,7);
+  if (validDate(invoice_date)) {
+    // console.log("InvoiceDate is valid!");
+    for(var i=0; i < invoice_period_element.options.length; i++) {
+      if(invoice_period_element.options[i].value === invoice_period) {
+        invoice_period_element.selectedIndex = i;
+        invoice_period_element.disabled = true;
+        break;
+      }
+    }
+  } else {
+    // console.log("InvoiceDate is NOT valid!");
+  }
+}
+$(document).ready(function() {
+  updatePeriodFromInvoiceDate(document.getElementById('invoicein.InvoiceDate.'+<?php echo $ID; ?>));
+});
 </script>
 </head>
 
@@ -216,14 +238,31 @@ function updateAndPerformAction(link_button) {
         <td colspan="4"></td>
     </tr>
     <tr>
-      <td>Faktura dato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$ID, 'value'=>substr($invoicein->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
-      <td>Forfalls dato</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$ID, 'value'=>substr($invoicein->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+      <td></td>
+      <td></td>
+      <td>Valuta</td>
+      <td>
+<?php
+#Retrieve all currencies
+
+$currencies = exchange::getAllCurrencies();
+?>
+      <select name="<?php echo $db_table . '.CurrencyID.' . $InvoiceID ?>">
+<?
+foreach ($currencies as $currency) {
+?>
+<option value="<? echo $currency->CurrencyISO; ?>" <?php if ($invoicein->CurrencyID == $currency->CurrencyISO) echo 'selected'; ?>><? echo $currency->CurrencyISO; ?></option>
+<?
+}
+?>
+      </select>
+</td>
     </tr>
     <tr>
-        <td>Faktura periode</td>
-        <td>        
+      <td>Faktura dato</td>
+      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'InvoiceDate', 'pk'=>$ID, 'value'=>substr($invoicein->InvoiceDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++, 'OnChange' => 'updatePeriodFromInvoiceDate(this)')) ?></td>
+      <td>Faktura periode</td>
+      <td>
         <?
         if($accounting->is_valid_accountperiod($invoicein->Period, $_lib['sess']->get_person('AccessLevel'))) {
             print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$ID, 'value' => $invoicein->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
@@ -231,7 +270,11 @@ function updateAndPerformAction(link_button) {
             print $invoicein->Period;
         }
         ?>
-        </td>
+      </td>
+    </tr>
+    <tr>
+        <td>Forfalls dato</td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DueDate', 'pk'=>$ID, 'value'=>substr($invoicein->DueDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
         <td>Er med i reisegarantifondet</td>
         <td><? print $_lib['form3']->Checkbox(array('table'=>$db_table, 'field'=>'isReisegarantifond', 'pk'=>$ID, 'value'=>$invoicein->isReisegarantifond)) ?></td>
     </tr>
@@ -336,6 +379,7 @@ function updateAndPerformAction(link_button) {
     <td>MVA</td>
     <td>MVA bel&oslash;p</td>
     <td>Bel&oslash;p U/MVA</td>
+    <td>Bel&oslash;p M/MVA</td>
     <td></td>
   </tr>
 </thead>
@@ -363,8 +407,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
       }
     }
 
-    $sumline = round( $row2->QuantityDelivered * $row2->UnitCustPrice + $charges - $allowances, 2);
-    $vatline = round(($row2->QuantityDelivered * $row2->UnitCustPrice + $charges - $allowances) * ($row2->Vat/100), 2);
+    $sumline = round($row2->TotalWithoutTax,2);
+    $vatline = round($row2->TaxAmount, 2);
     $sumlines += $sumline;
     $vatlines += $vatline;
     $tax_categories[$row2->Vat]->TaxableAmount += $sumline;
@@ -411,8 +455,9 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td align="center"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'UnitCustPrice', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->UnitCustPrice, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>$db_table2, 'field'=>'Vat', 'pk'=>$LineID, 'value'=>$row2->Vat, 'width' => 5, 'maxlength' => 5, 'tabindex'=>$tabindex++)) ?></td>
-        <td align="right"><nobr><? print $_lib['format']->Amount($vatline) ?></nobr></td>
-        <td align="right"><nobr><? print $_lib['format']->Amount($sumline) ?></nobr></td>
+        <td align="right"><nobr><? print $_lib['format']->Amount($row2->TaxAmount) ?></nobr></td>
+        <td align="right"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'TotalWithoutTax', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->TotalWithoutTax, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
+        <td align="right"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'TotalWithTax', 'pk'=>$LineID, 'value'=>$_lib['format']->Amount(array('value'=>$row2->TotalWithTax, 'return'=>'value')), 'width'=>'15', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
         <td>
         <? if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($invoicein->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
           <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_line_allowance_charge_new=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Ny linje rabatt/kostnad</a>
@@ -430,6 +475,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     ?>
     <tr class="allowance_charge line_invoice_allowancecharge_<? print $LineID; ?>" id="invoiceline_allowancecharge_fields_<? print $acrow->InvoiceLineAllowanceChargeID; ?>">
       <td>
+        <? print $_lib['form3']->hidden(array('name'=>('invoicelineallowancecharge.InvoiceLineID.'.$acrow->InvoiceLineAllowanceChargeID), 'value'=>$acrow->InvoiceLineID)) ?>
         <?
           print $_lib['form3']->Generic_menu3(array(
             'data'     => array('1' => 'Kostnad', '0' => 'Rabatt'),
@@ -475,6 +521,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         ?>
       </td>
       <? if ($acrow->AllowanceChargeType == 'price') print '<td colspan="3"></td>'; ?>
+      <td></td>
       <td>
         <a onclick="updateAndPerformAction(this); return false;" href="<? print $_SETUP[DISPATCH]."t=invoicein.edit&ID=$ID&action_invoicein_line_allowance_charge_delete=1&amp;InvoiceLineAllowanceChargeID=$acrow->InvoiceLineAllowanceChargeID&amp;inline=edit" ?>" class="button">Slett</a>
       </td>

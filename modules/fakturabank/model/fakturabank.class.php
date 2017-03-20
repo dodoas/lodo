@@ -1550,8 +1550,12 @@ class lodo_fakturabank_fakturabank {
                             $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
                             $datalineH['ForeignAmount']     = (float)$line->LineExtensionAmount + $line->TaxTotal->TaxAmount;
                             $datalineH['ForeignConvRate']   = $conversion_rate;
+                            $datalineH['TotalWithoutTax']   = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, (float)$line->LineExtensionAmount);
+                            $datalineH['TaxAmount']         = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, (float)$line->TaxTotal->TaxAmount);
                         } else {
                             $datalineH['UnitCostPrice'] = $CustPrice;
+                            $datalineH['TotalWithoutTax']   = (float)$line->LineExtensionAmount;
+                            $datalineH['TaxAmount']         = (float)$line->TaxTotal->TaxAmount;
                         }
 
                         $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
@@ -1559,9 +1563,10 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
                         $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
 
-                        $datalineH['TaxAmount']         = $line->TaxTotal->TaxAmount;
                         $datalineH['Vat']               = $line->Item->ClassifiedTaxCategory->Percent;
                         #$datalineH['VatID']             = $line->Price->PriceAmount; #This must probably be mapped
+
+                        $datalineH['TotalWithTax'] = $datalineH['TotalWithoutTax'] + $datalineH['TaxAmount'];
 
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');

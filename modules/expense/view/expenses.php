@@ -1,18 +1,25 @@
 <?php
+  if (isset($_REQUEST['department_id']) && $_REQUEST['department_id'] === 'unset') {
+    unset($_REQUEST['department_id']);
+  }
   require_once "record.inc";
 
   $login_period = $_lib['date']->get_this_period($_lib['sess']->get_session('LoginFormDate'));
 
   $start_period    = $_REQUEST['start_period'] ? $_REQUEST['start_period'] : $_lib['date']->get_first_period_in_year($login_period);
   $end_period    = $_REQUEST['end_period'] ? $_REQUEST['end_period'] : $login_period;
-  $cid = $_REQUEST['department_id'] ? $_REQUEST['department_id'] : 0;
+  $cid = isset($_REQUEST['department_id']) ? $_REQUEST['department_id'] : null;
   // All logic around this report was made to depend on year and department.
   // Since request is changed to have from - to period (important just for one part of report),
   // we will keep rest of report to have set year dependent on from date.
   $year = $_lib['date']->get_this_year($start_period);
 
-  $departmentQuery = "SELECT * FROM companydepartment WHERE CompanyDepartmentID=$cid";
-  $department = $_lib['db']->db_fetch_object($_lib['db']->db_query($departmentQuery));
+  if (!is_null($cid)) {
+    $departmentQuery = "SELECT * FROM companydepartment WHERE CompanyDepartmentID=$cid";
+    $department = $_lib['db']->db_fetch_object($_lib['db']->db_query($departmentQuery));
+  } else {
+    $department = null;
+  }
 
   create_year($year, $_lib['db']);
 
@@ -20,14 +27,17 @@
   $yearObj = $_lib['db']->db_fetch_object($_lib['db']->db_query($yearQuery));
 
   create_defaults($yearObj->id, $cid, $_lib['db']);
-
-  $linesQuery = "SELECT * FROM expense_lines WHERE department_id=" . $cid . " AND expense_period_id=" . $yearObj->id;
+  $department_id_query_part = "";
+  if (!is_null($cid)) {
+    $department_id_query_part = "department_id=$cid AND ";
+  }
+  $linesQuery = "SELECT * FROM expense_lines WHERE $department_id_query_part expense_period_id=" . $yearObj->id;
   $linesList = $_lib['db']->db_query($linesQuery);
 
-  $groupsQuery = "SELECT * FROM expense_groups WHERE department_id=" . $cid . " AND expense_period_id=" . $yearObj->id . " ORDER BY group_id";
+  $groupsQuery = "SELECT * FROM expense_groups WHERE $department_id_query_part expense_period_id=" . $yearObj->id . " ORDER BY group_id";
   $groupList = $_lib['db']->db_query($groupsQuery);
 
-  $projectsQuery = "SELECT * FROM expense_projects WHERE department_id=" . $cid . " AND expense_period_id=" . $yearObj->id;
+  $projectsQuery = "SELECT * FROM expense_projects WHERE $department_id_query_part expense_period_id=" . $yearObj->id;
   $projectList = $_lib['db']->db_query($projectsQuery);
 
 ?>
@@ -46,7 +56,7 @@
     includeinc('left');
   ?>
 
-  <h2>Expenses for <?= $department->DepartmentName ?> for year <?= $year ?> - &Aring;ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
+  <h2>Utgifter <?php if (!is_null($department)) echo 'for ' . $department->DepartmentName; ?> for &aring;r <?= $year ?> - &Aring;ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
 
 <form name="velg" action="<?= $MY_SELF ?>" method="post">
     <table border="0" cellspacing="0">
@@ -65,6 +75,7 @@
                     $aconf['field']         = 'department_id';
                     $aconf['accesskey']     = 'D';
                     $aconf['value']         = $cid;
+                    $aconf['unset']         = true;
                     $_lib['form2']->department_menu2($aconf);
                     ?>
                 </th>
@@ -84,7 +95,7 @@
       <thead>
         <tr>
           <th></th>
-          <th class="number">Supplier name</th>
+          <th class="number">Leverand&oslash;r</th>
           <th class="number">&Oslash;l 2,5% til 4,7%</th>
           <th class="number">Vin 4,7% til 21%</th>
           <th class="number">Brennevin 22% til 60%</th>
@@ -112,7 +123,7 @@
             echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'spirits_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->spirits_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1])) . "</td>";
 
             echo "<td class=\"number\">" . $_lib['format']->Amount($line->beer_purchased + $line->wine_purchased + $line->spirits_purchased) . "</td>";
-            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . "&Department=" . $department->CompanyDepartmentID . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
+            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . ((!is_null($department)) ? "&Department=" . $department->CompanyDepartmentID : '') . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
             echo "</tr>";
             $tabindexH[1]++;
           }
@@ -182,19 +193,19 @@
 
             switch ($group->group_id) {
               case 1:
-                $sum = $beer_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(beer_purchased) as total FROM `expense_lines` WHERE department_id=$cid AND expense_period_id=" . $yearObj->id));
+                $sum = $beer_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(beer_purchased) as total FROM `expense_lines` WHERE $department_id_query_part expense_period_id=" . $yearObj->id));
                 echo "<td class=\"number\">" . $_lib['format']->Amount($sum->total) . "</td>";
                 echo "<td class=\"number\"></td>";
                 echo "<td class=\"number\"></td>";
                 break;
               case 2:
-                $sum = $wine_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(wine_purchased) as total FROM `expense_lines` WHERE department_id=$cid AND expense_period_id=" . $yearObj->id));
+                $sum = $wine_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(wine_purchased) as total FROM `expense_lines` WHERE $department_id_query_part expense_period_id=" . $yearObj->id));
                 echo "<td class=\"number\"></td>";
                 echo "<td class=\"number\">" . $_lib['format']->Amount($sum->total) . "</td>";
                 echo "<td class=\"number\"></td>";
                 break;
               case 3:
-                $sum = $spirits_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(spirits_purchased) as total FROM `expense_lines` WHERE department_id=$cid AND expense_period_id=" . $yearObj->id));
+                $sum = $spirits_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(spirits_purchased) as total FROM `expense_lines` WHERE $department_id_query_part expense_period_id=" . $yearObj->id));
                 echo "<td class=\"number\"></td>";
                 echo "<td class=\"number\"></td>";
                 echo "<td class=\"number\">" . $_lib['format']->Amount($sum->total) . "</td>";
