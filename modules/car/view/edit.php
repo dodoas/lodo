@@ -67,6 +67,9 @@ foreach($car_milage as $milage_year => $milage) {
           case 'Slepvogn':
             mva_active = true;
           break
+          case 'Moped':
+            mva_active = true;
+          break
         }
 
         if(mva_active != "not_selected") {
@@ -151,7 +154,8 @@ foreach($car_milage as $milage_year => $milage) {
         'Personbil'         => 'Personbil',
         'Varebil(klasse 2)' => 'Varebil(klasse 2)',
         'Lastebil'          => 'Lastebil',
-        'Slepvogn'          => 'Slepvogn'
+        'Slepvogn'          => 'Slepvogn',
+        'Moped'             => 'Moped'
       );
     ?>
     <td><? print $_lib['form3']->Generic_menu3(array('data' => $VehicleTypes, 'table'=> 'car', 'field'=>'VehicleType', 'value'=>$car->VehicleType, 'notChoosenText' => ' ', 'OnChange'=>'setCarEnableVatCheckbox(this.value);')); ?></td>

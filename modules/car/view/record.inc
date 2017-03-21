@@ -4,12 +4,12 @@ $primarykey['CarID'] = $CarID;
 $car_CarID = $_lib['input']->getProperty('car_CarID');
 
 // regex validation for buy/sell date
-if (isset($_POST['car_ValidFrom']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidFrom']))
+if (isset($_POST['car_ValidFrom']) && !empty($_POST['car_ValidFrom']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidFrom']))
   unset($_POST['car_ValidFrom']);
-if (isset($_POST['car_ValidTo']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidTo']))
+if (isset($_POST['car_ValidTo']) && !empty($_POST['car_ValidTo']) && !preg_match('/^([0-9]{4})-([0-1][0-9])-([0-3][0-9])$/', $_POST['car_ValidTo']))
   unset($_POST['car_ValidTo']);
 // regex for year (4 digits)
-if (isset($_POST['car_RegistrationYear']) && !preg_match('/^([0-9]{4})$/', $_POST['car_RegistrationYear']))
+if (isset($_POST['car_RegistrationYear']) && !empty($_POST['car_RegistrationYear']) && !preg_match('/^([0-9]{4})$/', $_POST['car_RegistrationYear']))
   unset($_POST['car_RegistrationYear']);
 // trim car code (registration number)
 $_POST['car_CarCode'] = preg_replace('/\s+/', '', $_POST['car_CarCode']);
@@ -65,7 +65,7 @@ elseif($_lib['input']->getProperty('action_car_update_from_fakturabank')) {
 
 }
 
-// if the action being performed is not delete then update milage table 
+// if the action being performed is not delete then update milage table
 // according to the purchase date(either add missing years or delete the surplus)
 if (!$_lib['input']->getProperty('action_car_delete') && $CarID) {
   $car = $_lib['storage']->get_row(array('query' => "select * from $db_table where CarID = $CarID"));
