@@ -174,9 +174,6 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
     // console.log("InvoiceDate is NOT valid!");
   }
 }
-$(document).ready(function() {
-  updatePeriodFromInvoiceDate(document.getElementById('invoicein.InvoiceDate.'+<?php echo $ID; ?>));
-});
 </script>
 </head>
 
@@ -265,7 +262,7 @@ foreach ($currencies as $currency) {
       <td>
         <?
         if($accounting->is_valid_accountperiod($invoicein->Period, $_lib['sess']->get_person('AccessLevel'))) {
-            print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$ID, 'value' => $invoicein->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
+            print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$ID, 'value' => $invoicein->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'disabled' => true));
         } else {
             print $invoicein->Period;
         }
