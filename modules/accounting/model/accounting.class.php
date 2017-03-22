@@ -2363,20 +2363,6 @@ class accounting {
         }
     }
 
-
-    // Check if JournalID exists with a given VoucherType
-    public function checkJournalID($VoucherType, $JournalID) {
-        global $_lib;
-
-        $q = sprintf("SELECT JournalID FROM voucher
-                      WHERE VoucherType = '%s' AND JournalID = '%s' AND Active = 1
-                      LIMIT 1",
-                     $VoucherType, $JournalID);
-        $r = $_lib['db']->db_query($q);
-
-        return ($_lib['db']->db_numrows($r) != 0);
-    }
-
     public function invoiceIDAvailable($JournalID, $AccountPlanID, $InvoiceID, $VoucherType) {
       if (!is_numeric($JournalID)) {
         return false;

@@ -227,7 +227,8 @@ function create_diff($InvoiceID, $KID, $JournalID, $AccountPlanID, $BankVoucherA
         return create_span("Diff (" . $DiffAmount . ")", $HighlightID);
     }
 }
-$CheckedJournalIDs = $bank->checkJournalID($bank->ThisPeriod);
+$CheckedJournalIDsAccountline = $bank->checkJournalIDAccountline($bank->ThisPeriod);
+$CheckedJournalIDsVoucher     = $bank->checkJournalIDVoucher('B');
 ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
@@ -513,8 +514,8 @@ if(is_array($bank->bankaccount)) {
         // check if journalID is already in use
         //  and mark it red if it is.
         {
-            $JournalIDExists = $accounting->checkJournalID($bank->VoucherType, $row->JournalID);
-            if (intval($CheckedJournalIDs[$row->JournalID]['Count']) > 1) $JournalIDExists = true;
+            if (intval($CheckedJournalIDsAccountline[$row->JournalID]['Count']) > 1) $JournalIDExists = true;
+            if (isset($CheckedJournalIDsVoucher[$row->JournalID])) $JournalIDExists = true;
             $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
         }
 
