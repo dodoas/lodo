@@ -619,15 +619,54 @@ class lodo_fakturabank_fakturabank {
                 continue;
             }
 
-            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            $firma_id_value = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            $firma_id_type = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+            $country = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode;
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerNumber;
 
             if (!$this->extractOutgoingAccountingCost($InvoiceO)) {
                 continue;
             }
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
-            $account = $this->find_customer_reskontro_by_customernumber($customernumber);
-            if ($account) {
+            $accounts = $this->find_customer_reskontros_by_firma_id($firma_id_value, $firma_id_type, $country);
+            if (count($accounts) > 0) {
+                if (count($accounts) == 1) {
+                  $account = $accounts[0];
+                  if ($account->AccountPlanID != $customernumber) {
+                    // customer number different
+                    $EditCustomerAccountLink = sprintf(
+                      '<a href="%s&t=accountplan.reskontro&accountplan.AccountPlanID=%s&accountplan_type=customer" target="_blank">%s</a>',
+                      $_lib['sess']->dispatch,
+                      $account->AccountPlanID,
+                      $account->AccountPlanID
+                    );
+                    $InvoiceO->Status .= "Kundenummer i fakturabank($customernumber) og lodo($EditCustomerAccountLink) er ulike; ";
+                  }
+                } elseif (count($accounts) > 1) {
+                  $match_account_index = -1;
+                  $accounts_links = array();
+                  for($i = 0; $i < count($accounts); $i++) {
+                    $account = $accounts[$i];
+                    $EditCustomerAccountLink = sprintf(
+                      '<a href="%s&t=accountplan.reskontro&accountplan.AccountPlanID=%s&accountplan_type=customer" target="_blank">%s</a>',
+                      $_lib['sess']->dispatch,
+                      $account->AccountPlanID,
+                      $account->AccountPlanID
+                    );
+                    $accounts_links[$i] = $EditCustomerAccountLink;
+                    if ($account->AccountPlanID == $customernumber) {
+                      $match_account_index = $i;
+                    }
+                  }
+                  if ($match_account_index >= 0) {
+                    $account = $accounts[$match_account_index];
+                    $account_link = $accounts_links[$match_account_index];
+                    $InvoiceO->Status .= "Kundenummer i fakturabank($customernumber) og lodo($account_link) er like, fant flere match(" . implode(', ', $accounts_links) . "); ";
+                  } else {
+                    $InvoiceO->Status .= "Kundenummer i fakturabank($customernumber) og lodo er ulike, fant flere men ingen match(" . implode(', ', $accounts_links) . "); ";
+                  }
+                }
                 $InvoiceO->AccountPlanID = $account->AccountPlanID;
 
                 if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
@@ -728,17 +767,32 @@ class lodo_fakturabank_fakturabank {
                 }
 
                 if($InvoiceO->Journal) {
-                    # Ready to bookkeep based on customer number
-                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: Kundenummer";
+                    # Ready to bookkept based on firma id
+                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: Firma ID";
                 }
             } else {
-                # Could not find customer based on customer number __
-                $InvoiceO->Status     .= "Finner ikke kunde basert p&aring; kundenummer: " . $customernumber . ". ";
-                # Create on customer number
-                $msg = "Opprett p&aring; kundenr";
-                $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
-                $InvoiceO->Journal = false;
-                $InvoiceO->Class   = 'red';
+                # Could not find customer based on firma id __
+                $InvoiceO->Status     .= "Finner ikke kunde basert p&aring; Firma ID: " . $firma_id_type . " " . $firma_id_value . ". ";
+                $account_by_customernumber = self::find_customer_reskontro_by_customernumber($customernumber);
+                if (!$account_by_customernumber) {
+                  # Create on customer number
+                  $msg = "Opprett p&aring; kundenr($customernumber)";
+                  $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
+                  $InvoiceO->Journal = false;
+                  $InvoiceO->Class   = 'red';
+                } else {
+                  # Edit customer with that customer number
+                  $msg = "Rediger kunde med kundenr($customernumber)";
+                  $EditCustomerAccountLink = sprintf(
+                    '<a href="%s&t=accountplan.reskontro&accountplan.AccountPlanID=%s&accountplan_type=customer" target="_blank">%s</a>',
+                    $_lib['sess']->dispatch,
+                    $customernumber,
+                    $msg
+                  );
+                  $InvoiceO->Status .= $EditCustomerAccountLink;
+                  $InvoiceO->Journal = false;
+                  $InvoiceO->Class   = 'red';
+                }
             }
         }
         return $invoicesO;
@@ -1145,12 +1199,42 @@ class lodo_fakturabank_fakturabank {
         return array($companyid, $schemeid);
     }
 
+    private function find_customer_reskontros_by_firma_id($firma_id_value, $firma_id_type, $country) {
+      global $_lib;
+
+      $accounts_query = "
+        SELECT *
+        FROM
+          accountplan
+        WHERE
+          AccountPlanType = 'customer' AND
+          AccountPlanID IN (
+            SELECT aps.AccountPlanID
+            FROM
+              accountplanscheme aps
+              JOIN
+              fakturabankscheme fbs
+              ON fbs.FakturabankSchemeID = aps.FakturabankSchemeID
+            WHERE
+              aps.SchemeValue = '$firma_id_value' AND
+              fbs.SchemeType = '$firma_id_type' " .
+              (empty($country) ? "" : "AND aps.CountryCode = '$country'") .
+         ")";
+      $accounts_result = $_lib['db']->db_query($accounts_query);
+      $accounts = array();
+      if ($_lib['db']->db_numrows($accounts_result) > 0) {
+        while ($account = $_lib['db']->db_fetch_object($accounts_result)) {
+          $accounts[] = $account;
+        }
+      }
+      return $accounts;
+    }
 
     private function find_customer_reskontro_by_customernumber($customernumber) {
         global $_lib;
 
 
-        $query                  = "select * from accountplan where (REPLACE(AccountPlanID, ' ', '') like '%" . $customernumber . "%' OR OrgNumber = '" . $customernumber . "') and AccountPlanID <> '' and AccountPlanID is not null and AccountPlanType='customer'";
+        $query                  = "select * from accountplan where REPLACE(AccountPlanID, ' ', '') like '%" . $customernumber . "%' and AccountPlanID <> '' and AccountPlanID is not null and AccountPlanType='customer'";
         $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
         if($account) {
             return $account;
@@ -1310,13 +1394,13 @@ class lodo_fakturabank_fakturabank {
                 continue; // this is not the droid you are looking for
             }
 
-            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerNumber)) {
                 # Not possible to auto create because customer number is missing
                 $_lib['message']->add("Ikke mulig &aring; auto-opprette fordi kundenr mangler.");
                 continue;
             }
 
-            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerNumber;
 
             list($SchemeID, $SchemeIDType) = $this->extractCustomerSchemeID($InvoiceO);
 
@@ -1369,6 +1453,19 @@ class lodo_fakturabank_fakturabank {
                     #We must copy default data from the parent category to this - must centralize creation of accountplans in own object
                     #print_r($dataH);
                     $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
+                    if (!empty($SchemeID) && !empty($SchemeIDType)) {
+                      $Country = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode;
+                      // Default to Norway if none supplied
+                      if (empty($Country)) $Country = 'NO';
+                      $FakturabankScheme = $_lib['storage']->get_row(array('query' => "SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = '" . $SchemeIDType . "'"));
+                      $FirmaIDH = array(
+                        'AccountPlanID' => $customernumber,
+                        'FakturabankSchemeID' => $FakturabankScheme->FakturabankSchemeID,
+                        'SchemeValue' => $SchemeID,
+                        'CountryCode' => $Country
+                      );
+                      $_lib['storage']->store_record(array('data' => $FirmaIDH, 'table' => 'accountplanscheme', 'action' => 'auto', 'debug' => false));
+                    }
                     #exit;
                     $count++;
                 } else {
