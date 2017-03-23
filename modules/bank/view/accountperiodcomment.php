@@ -101,6 +101,7 @@ foreach($data as $year => $accounts) {
               $query_acc_voucher_type = "SELECT VoucherType FROM account WHERE AccountID = " . $d['a'];
               $voucher_type = $_lib['db']->get_row(array("query" => $query_acc_voucher_type))->VoucherType;
               $max_min_voucher = $max_min_vouchers[$apc->AccountH[$d['a']]['AccountPlanID']][$pname][$voucher_type];
+              $max_min_voucher->count = $max_min_voucher->count === NULL ? 0 : $max_min_voucher->count ;
               $_done_journals = "<br>K $max_min->count $voucher_type $max_min->min-$max_min->max";
               $_done_journals .= "<br>R $max_min_voucher->count $voucher_type $max_min_voucher->min-$max_min_voucher->max";
               $comment_input = $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'Comment', 'pk' => $d['pk'], 'value' => $d['value']));

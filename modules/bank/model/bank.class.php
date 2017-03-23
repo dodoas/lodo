@@ -1338,6 +1338,26 @@ class framework_logic_bank {
         return $VoucherH;
     }
 
+    public function checkJournalIDAccountline($Period) {
+      global $_lib;
+      $q = sprintf("SELECT JournalID, COUNT(*) as Count
+                    FROM accountline
+                    WHERE Period = '%s'
+                    AND Active = 1
+                    GROUP BY JournalID"
+                    , $Period);
+      return $_lib['db']->get_hashhash(array('query' => $q, 'key' => 'JournalID'));
+    }
+
+    public function checkJournalIDVoucher($VoucherType) {
+      global $_lib;
+      $q = sprintf("SELECT DISTINCT(JournalID)
+                      FROM voucher
+                      WHERE VoucherType = '%s' AND Active = 1"
+                      ,$VoucherType);
+      return $_lib['db']->get_hash(array('query' => $q, 'key' => 'JournalID', 'value' => 'JournalID'));
+    }
+
     public function __destruct() {
 
         #print "Avslutt<br>\n";

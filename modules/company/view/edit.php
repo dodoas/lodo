@@ -38,7 +38,7 @@ if(!isset($row_comp->CompanyID))
 
 <? if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
 
-<h2>Firmaopplysninger, <? print $row_comp->VName; ?> (side 1 av 3)</h2>
+<h2>Firmaopplysninger, <? print $row_comp->VName; ?> (side 1 av 4)</h2>
 <table class="tab">
   <tr>
   <td><div class="active_tab">Adresser og kontaktinformasjon</div>
