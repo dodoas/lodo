@@ -11,7 +11,7 @@ class weeklysale {
     public $revenue     = array();
 
     function __construct($WeeklySaleID, $WeeklySaleConfID) {
-    
+
         #print "kaller makegroups: WeeklySaleID: $WeeklySaleID, WeeklySaleConfID: $WeeklySaleConfID<br />\n";
         $this->makegroups($WeeklySaleID, $WeeklySaleConfID);
     }
@@ -85,7 +85,7 @@ class weeklysale {
         if($this->revenue_conf->Group15Name) { $this->revenuehead['groups'][$this->revenue_conf->Group15Name] = 15; }
         if($this->revenue_conf->Group16Name) { $this->revenuehead['groups'][$this->revenue_conf->Group16Name] = 16; }
         if($this->revenue_conf->Group17Name) { $this->revenuehead['groups'][$this->revenue_conf->Group17Name] = 17; }
-    
+
         #print_r($this->revenuehead['groups']);
         #print_r($this->salehead['groups']);
         #print "Ferdig med gruppene<br />\n";
@@ -114,7 +114,7 @@ class weeklysale {
         $result_revenue = $_lib['db']->db_query($query_revenue);
 
         #$this->head->Period = $_lib['form3']->AccountPeriod_menu3(array('table' => 'weeklysale', 'field' => 'Period', 'pk'=>$this->head->WeeklySaleID, 'value' => $this->head->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'pk' => $this->head->WeeklySaleID, 'tabindex'=>'3', 'required'=>'1'));
-        $query="select DepartmentName from companydepartment where CompanyDepartmentID='" . $this->head->DepartmentID . "'";
+        $query="select DepartmentName from department where DepartmentID='" . $this->head->DepartmentID . "'";
         #print "q6: $query<br />\n";
 
         $row=$_lib['storage']->get_row(array('query' => $query));
@@ -140,7 +140,7 @@ class weeklysale {
                 $amountfield            = "Group{$i}Amount";
                 $accountfield           = "Group{$i}Account";
                 $quantityfield          = "Group{$i}Quantity";
-                
+
                 $this->salehead['sumday'][$sale->ParentWeeklySaleDayID]   += $sale->{$amountfield}; #MERK: MŒ endres fra dayid for Œ summere riktig
                 $this->salehead['sumgroup'][$i]         += $sale->{$amountfield};
                 $this->salehead['sumquantity'][$i]      += $sale->{$quantityfield};
@@ -196,11 +196,11 @@ class weeklysale {
         #$this->salehead['project'][19] = $this->projectname(19);
         #$this->salehead['project'][20] = $this->projectname(20);
 
-        
+
         /******************************************************************************************/
         /* REVENUE */
         /******************************************************************************************/
-             
+
         $this->sumtot   = 0;
         $this->sum      = array();
         $counter        = 0;
@@ -238,8 +238,8 @@ class weeklysale {
                 $this->revenue[$revenue->WeeklySaleDayID]->Person = $_lib['format']->PersonIDToName(array('value' => $revenue->PersonID, 'return' => 'value'));
             }
             $counter += 43;
-            
-            
+
+
             #extra
             $this->revenuehead['sumcash'][$revenue->ParentWeeklySaleDayID] = $this->salehead['sumday'][$revenue->ParentWeeklySaleDayID]  - $this->revenuehead['sumday'][$revenue->ParentWeeklySaleDayID];
             $this->head->sumcash                        += $this->revenuehead['sumcash'][$revenue->ParentWeeklySaleDayID];
@@ -265,16 +265,16 @@ class weeklysale {
                 $accountfield       = "Group{$i}Account";
                 $projectfield       = "Group{$i}ProjectID";
                 $departmentfield    = "Group{$i}DepartmentID";
-        
+
                 $account = $accounting->get_accountplan_object($this->revenue_conf->{$accountfield});
-    
+
                 $this->revenuehead['account'][$i]     = $account->AccountPlanID . "-" . substr($account->AccountName,0,5);
-                
+
                 if($this->revenue_conf->{$projectfield} && $account->EnableProject)
                     $this->revenuehead['project'][$i]     = $this->projectname($this->revenue_conf->{$projectfield});
                 else 
                     $this->revenuehead['project'][$i] = '';
-                    
+
                 if($this->revenue_conf->{$departmentfield} && $account->EnableDepartment)
                     $this->revenuehead['department'][$i]  = $this->departmentname($this->revenue_conf->{$departmentfield});
                 else 
@@ -284,7 +284,7 @@ class weeklysale {
 
         $account = $accounting->get_accountplan_object($this->revenue_conf->Group18Account);
         $this->revenuehead['account'][18]         = $account->AccountPlanID . "-" . substr($account->AccountName,0,5);
-        
+
         if($this->revenue_conf->Group18ProjectID && $account->EnableProject)
             $this->revenuehead['project'][18]         = $this->projectname($this->revenue_conf->Group18ProjectID);
         else
@@ -306,28 +306,28 @@ class weeklysale {
         return true;
     }
 
-    function departmentname($CompanyDepartmentID) {
+    function departmentname($DepartmentID) {
         global $_lib;
-        
-        if(isset($CompanyDepartmentID)) {
-            $query="select * from companydepartment where CompanyDepartmentID=" . (int) $CompanyDepartmentID;
+
+        if(isset($DepartmentID)) {
+            $query="select * from department where epartmentID=" . (int) $DepartmentID;
             $row = $_lib['storage']->get_row(array('query' => $query));
-            $departmentname = $CompanyDepartmentID ."-" . substr($row->DepartmentName,0,7);
+            $departmentname = $DepartmentID ."-" . substr($row->DepartmentName,0,7);
         }
         return $departmentname;
     }
 
     function projectname($ProjectID) {
         global $_lib;
-        
+
         $query="select Heading from project where ProjectID=" . (int) $ProjectID;
         $row = $_lib['storage']->get_row(array('query' => $query));
         return $ProjectID ."-" . substr($row->Heading,0,7);
     }
-    
+
     function isUniqueZnr($template, $znr) {
         global $_lib;
-    
+
         $query_znr         = "select count(wsd.Znr) as count from weeklysale as ws, weeklysaleconf as wsc, weeklysaleday as wsd where wsc.Name = '" . $_lib['db']->db_escape($template) . "' and wsc.WeeklySaleConfID=ws.WeeklySaleConfID and ws.WeeklySaleID=wsd.WeeklySaleID and wsd.Znr=" . $znr . " and wsd.Type=1";
         #print "isUniqueZnr: $query_znr<br>";
         $result_znr        = $_lib['db']->db_query($query_znr);

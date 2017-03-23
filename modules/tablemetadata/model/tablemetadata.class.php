@@ -234,7 +234,7 @@ class model_tablemetadata_tablemetadata {
 
     function confdbfield_delete($args) {
         global $_lib;
-        
+
         $query = "update $db_table set Active='0' WHERE ConfDBFieldID='" . $args['ConfDBFIeldID'] . "'";
         $result = $_lib['db']->db_query($query);
     }
@@ -256,7 +256,7 @@ class model_tablemetadata_tablemetadata {
             print "Database: $databaseName is not a LODO database" . $this->nl_separator;
             return false;
         }
-    
+
         if (!empty($tableFilter)) {
             $query_update = "update confdbfields SET Active=0 where TableName='$tableFilter'";
         } else {
@@ -270,7 +270,7 @@ class model_tablemetadata_tablemetadata {
             $query_table  = "show tables";
         }
         $result_table = $dbh[$dsn]->db_query($query_table);
-    
+
         $typemap = array(
           10 => 'date',
           12 => 'datetime',
@@ -286,7 +286,7 @@ class model_tablemetadata_tablemetadata {
           2 => 'int',
           7 => 'datetime',
         );
-    
+
 
         $total = 0;
         $updated = 0;
@@ -309,7 +309,7 @@ class model_tablemetadata_tablemetadata {
             }
 
             #print_r($table);
-    
+
             #print "tabell: $table<br>";
             if(!$table) { continue; }
             $query_tableinfo = "SHOW COLUMNS FROM $table"; #Obs
@@ -319,7 +319,7 @@ class model_tablemetadata_tablemetadata {
             #$tablefields = mysql_list_fields($databaseName, $table);
             #$tablefields = mysqli_fetch_fields($row);
             $maxwidth = 80; #Not used yet
-    
+
             if(preg_match("/_/", $table))
             {
                 #$_lib['message']->add("Tables can not contain underscore (reserved by framework_lib_inline): $table");
@@ -328,7 +328,7 @@ class model_tablemetadata_tablemetadata {
             while($row = $dbh[$dsn]->db_fetch_object($result_tableinfo))
             {
                 #print_r($row);
-    
+
                     $FieldExtra = "";
                     $FieldExtraEdit = "";
                     $inputType  = "";
@@ -350,11 +350,11 @@ class model_tablemetadata_tablemetadata {
                     $def        = $row->Default; #Default value
                     $key        = $row->Key;
                     $null       = $row->Null;
-    
+
                     $fieldType = $type;
 
                     $len = null;
-    
+
                     if(preg_match('{(.*)\((.*)\)}', $type, $m)) {
                         if(is_int($m['2'])) {
                           $len          = $m['2'];
@@ -365,16 +365,16 @@ class model_tablemetadata_tablemetadata {
                           $len = 255;
                     }
                     #print "<br>\ntype: $type, $len<br>\n";
-    
+
                     if(preg_match("/_/", $field))
                     {
                         #$_lib['message']->add("Fields can not contain underscore (reserved by framework_lib_inline): $table.$field");
                     }
-    
+
                     #echo $type . " " . $field . " " . $len . " " . $flags . "<br>\n";
-    
+
                     #These if tests should be replaced by a hash.
-    
+
                     if($type == 'date')
                     {
                         $inputType = 'Date';
@@ -518,7 +518,7 @@ class model_tablemetadata_tablemetadata {
                         // $_lib['message']->add("Type not found: $type");
                         // $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
                     }
-    
+
                     if($key == 'PRI')
                     {
                         $pk = 1;
@@ -528,14 +528,14 @@ class model_tablemetadata_tablemetadata {
                     {
                         $pk = 0;
                     }
-    
+
                     #More advanced funstionality added later:
                     #All PersonID references - generate person menu automatically
                     #All timestamps: type show (not edit)
                     #All companyID - company meny automatically
                     #All createdby and changed by: sho (not editable)
                     #All smallint - checkbox
-    
+
                     if(preg_match("/PersonID/", $field))
                     {
                         $FormType = "select";
@@ -631,7 +631,7 @@ class model_tablemetadata_tablemetadata {
                         $FormType  = "text";
                         $inputType = 'Amount';
                     }
-                    if(preg_match("/CompanyDepartmentID/", $field))
+                    if(preg_match("/DepartmentID/", $field))
                     {
                         $FieldExtra = 'form.avdmenu';
                         $FormType   = "select";
@@ -646,7 +646,7 @@ class model_tablemetadata_tablemetadata {
                         $FieldExtra = 'form.invoicestatus';
                         $FormType   = "select";
                     }
-    
+
                     if(preg_match("/ReportsToID/", $field))
                     {
                         $FieldExtra = 'form.companycontact';
@@ -667,7 +667,7 @@ class model_tablemetadata_tablemetadata {
                         $FieldExtra = 'form.typeaccesslevelmenu';
                         $FormType   = "select";
                     }
-    
+
                     ################################ new fields
                     if(preg_match("/FileID/", $field))
                     {
@@ -714,7 +714,7 @@ class model_tablemetadata_tablemetadata {
                             $DefaultValue = '';
                             $FieldExtra = "publish.template";
                     }
-    
+
                     ################################
                     if($table == 'media')
                     {
@@ -774,7 +774,7 @@ class model_tablemetadata_tablemetadata {
                             $FieldExtra = 'form.typeslafrequencymenu';
                             $Required  = 1;
                         }
-    
+
                         if(preg_match("/Region/", $field))
                         {
                             $FormType  = "select";
@@ -782,7 +782,7 @@ class model_tablemetadata_tablemetadata {
                             $FieldExtra = 'form.typeregionmenu';
                             $Required  = 1;
                         }
-    
+
                         if(preg_match("/SalesPersonID/", $field))
                         {
                             $FormType  = "select";
@@ -790,7 +790,7 @@ class model_tablemetadata_tablemetadata {
                             $FieldExtra = 'form.typesalespersonmenu';
                             $Required  = 1;
                         }
-    
+
                         if(preg_match("/SignedDate/", $field))
                         {
                             $Required  = 1;
@@ -890,7 +890,7 @@ class model_tablemetadata_tablemetadata {
                             $FormWidth        = 4;
                         }
                     }
-    
+
                     if($table == 'process')
                     {
                         if(preg_match("/ApprovedByPersonID/", $field))
@@ -900,7 +900,7 @@ class model_tablemetadata_tablemetadata {
                             $Required  = 0;
                         }
                     }
-    
+
                     if($table == 'faq')
                     {
                         if(preg_match("/Category/", $field))
@@ -909,7 +909,7 @@ class model_tablemetadata_tablemetadata {
                             $FieldExtra = "form.faqCategoryMenu";
                         }
                     }
-    
+
                     if($table == 'processprocedure')
                     {
                         if(preg_match("/MadeByPersonID/", $field))
@@ -958,16 +958,16 @@ class model_tablemetadata_tablemetadata {
                             $FieldExtra = "form.templatemenu";
                         }
                     }
-    
+
                     if(!strlen($outputType) > 0)
                     {
                         $outputType = $inputType;
                     }
-    
+
                     #Check if field exists
                     $query = "select * from  confdbfields where TableName='$table' and TableField='$field'";
                     $exists = $dbh[$dsn]->get_row(array('query' => $query));
-    
+
                     $fields    = "Active=1, ";
                     $fieldType = $dbh[$dsn]->db_escape($fieldType);
 
@@ -986,7 +986,7 @@ class model_tablemetadata_tablemetadata {
                         if($exists->FormWidth > $len)
                         {
                             #$FormWidth = $len;
-    
+
                         }
                         $query = "update confdbfields SET TableField='$field', FormWidth='$FormWidth', FormHeight='$FormHeight', FieldType='$fieldType', PrimaryKey=$pk, Active=1, FormType='$FormType', FormTypeEdit='$FormTypeEdit', InputValidation='$inputType',  OutputValidation='$outputType', FormWidth='$FormWidth', FieldExtra='$FieldExtra', FieldExtraEdit='$FieldExtraEdit', Required='$Required', DefaultValue = '$DefaultValue' where TableName='$table' and TableField='$field'";
                         if($table == 'xxx') {
@@ -1003,10 +1003,10 @@ class model_tablemetadata_tablemetadata {
         } #end while table
         $query = "delete from confdbfields where Active=0";
         #print "$query<br>";
-    
+
         $dbh[$dsn]->db_delete($query);
         print "Database: $databaseName,  Field number: $total, updated: $updated, new: $new" . $this->nl_separator . $new_fields . $this->nl_separator;
-    
+
         #mysql_free_result($result);
     }
 }

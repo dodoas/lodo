@@ -93,7 +93,7 @@ while($row = $_lib['db']->db_fetch_object($result2)) {
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCustPrice, 'return'=>'value')) ?></td>
                         <td align="left"><? if($row->AccountPlanID) { $query="select AccountName from accountplan where AccountPlanID=$row->AccountPlanID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->AccountPlanID." ".$row2->AccountName; } ?></td>
                         <td align="left"><? if($row->ProjectID) { $query="select Heading from project where ProjectID=$row->ProjectID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->ProjectID." ".$row2->Heading; } ?></td>
-                        <td align="left"><? if($row->CompanyDepartmentID) { $query="select DepartmentName from companydepartment where CompanyDepartmentID=$row->CompanyDepartmentID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->CompanyDepartmentID." ".$row2->DepartmentName; } ?></td>
+                        <td align="left"><? if($row->DepartmentID) { $query="select DepartmentName from department where DepartmentID=$row->DepartmentID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->DepartmentID." ".$row2->DepartmentName; } ?></td>
                     </tr>
                     <?
                 }

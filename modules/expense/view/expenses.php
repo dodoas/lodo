@@ -15,7 +15,7 @@
   $year = $_lib['date']->get_this_year($start_period);
 
   if (!is_null($cid)) {
-    $departmentQuery = "SELECT * FROM companydepartment WHERE CompanyDepartmentID=$cid";
+    $departmentQuery = "SELECT * FROM department WHERE DepartmentID=$cid";
     $department = $_lib['db']->db_fetch_object($_lib['db']->db_query($departmentQuery));
   } else {
     $department = null;
@@ -123,7 +123,7 @@
             echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'spirits_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->spirits_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1])) . "</td>";
 
             echo "<td class=\"number\">" . $_lib['format']->Amount($line->beer_purchased + $line->wine_purchased + $line->spirits_purchased) . "</td>";
-            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . ((!is_null($department)) ? "&Department=" . $department->CompanyDepartmentID : '') . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
+            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . ((!is_null($department)) ? "&Department=" . $department->DepartmentID : '') . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
             echo "</tr>";
             $tabindexH[1]++;
           }

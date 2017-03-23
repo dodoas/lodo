@@ -3,12 +3,12 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
-if(!$CompanyDepartmentID) {
-  $CompanyDepartmentID = $_REQUEST['CompanyDepartmentID'];
+if(!$DepartmentID) {
+  $DepartmentID = $_REQUEST['DepartmentID'];
 }
-assert(!is_int($CompanyDepartmentID)); #All main input should be int
+assert(!is_int($DepartmentID)); #All main input should be int
 
-$db_table = "companydepartment";
+$db_table = "department";
 require_once "record.inc";
 
 /* sortering og gruppering av data */
@@ -47,7 +47,7 @@ print $_lib['sess']->doctype ?>
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       <form name="department_search" action="<? print $_lib['sess']->dispatch ?>t=department.edit" method="post">
         Nytt nr:
-        <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'CompanyDepartmentID', 'width'=>'10')) ?>
+        <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'DepartmentID', 'width'=>'10')) ?>
         <? print $_lib['form3']->submit(array('name'=>'action_department_new', 'value'=>'Ny avdeling')) ?>
       </form>
   <? } ?>
@@ -66,9 +66,9 @@ $i++;
 if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 ?>
   <tr class="<? print "$sec_color"; ?>">
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=department.edit&companydepartment.CompanyDepartmentID=<? print "$row->CompanyDepartmentID"; ?>"><? print $row->CompanyDepartmentID; ?></a>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=department.edit&companydepartment.CompanyDepartmentID=<? print "$row->CompanyDepartmentID"; ?>"><? print $row->DepartmentName; ?></a>
-      <td><? print $_lib['form3']->checkbox(array('table'=>'project', 'value'=>$row->Active, 'disabled'=>'1')) ?>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=department.edit&department.DepartmentID=<? print "$row->DepartmentID"; ?>"><? print $row->DepartmentID; ?></a>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=department.edit&department.DepartmentID=<? print "$row->DepartmentID"; ?>"><? print $row->DepartmentName; ?></a>
+      <td><? print $_lib['form3']->checkbox(array('table'=>'department', 'value'=>$row->Active, 'disabled'=>'1')) ?>
 <? } ?>
 </tbody>
 </table>

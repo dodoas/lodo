@@ -326,13 +326,13 @@ class timesheet_user
     {
         global $_lib;
 
-        $r = $_lib['db']->db_query("SELECT CompanyDepartmentID, DepartmentName FROM companydepartment WHERE active = 1 ORDER BY DepartmentName");
+        $r = $_lib['db']->db_query("SELECT DepartmentID, DepartmentName FROM department WHERE active = 1 ORDER BY DepartmentName");
 
         $list = array();
 
         while($row = $_lib['db']->db_fetch_assoc($r))
         {
-            $list[ $row['CompanyDepartmentID'] ] = $row['DepartmentName'];
+            $list[ $row['DepartmentID'] ] = $row['DepartmentName'];
         }
 
         return $list;
@@ -1235,7 +1235,7 @@ class timesheet_user_page
 
 
         foreach($sum_fields as $f => $a) {
-            if($f == 'Project' || $f == 'Customer' || $f == 'CompanyDepartment' || $f == 'WorkType')
+            if($f == 'Project' || $f == 'Customer' || $f == 'Department' || $f == 'WorkType')
             {
                 //printf("\n%s - timer\n", $fields[$f]['translation']);
                 printf("<tr><td>%s - timer</td></tr>", $fields[$f]['translation']);
@@ -1269,7 +1269,7 @@ class timesheet_user_page
                     if($c != 0 && isset($_REQUEST['customer_stats']) && $c == $_REQUEST['customer_stats']) {
                         printf($format, $o[$c], $v);
                         $extra = $this->user->extra_customer_info($period, $c);
-                        
+
                         foreach($extra as $extraline) {
                             printf("<tr><td></td><td></td> <td>%s</td><td style='text-align: right;'>%s</td></tr>",
                                    $fields["WorkType"]['options'][$extraline["WorkType"]], $extraline["SumTime"]);
@@ -1287,8 +1287,8 @@ class timesheet_user_page
 
                 $sum += $v;
             }
- 
-            if($f == 'Project' || $f == 'Customer' || $f == 'CompanyDepartment' || $f == 'WorkType')
+
+            if($f == 'Project' || $f == 'Customer' || $f == 'Department' || $f == 'WorkType')
             {
                 printf("<tr><td></td><td>%s</td><td style='text-align: right;'>%2.2f</td></tr>", 
                        "Sum " . $fields[$f]['translation'], $sum);
@@ -1581,9 +1581,9 @@ $(document).ready(function() {
         }
 
         $cols = array('BeginTime', 'EndTime', 'SumTime',
-                      'Project', 'CompanyDepartment', 'WorkType', 'Comment', 
-                      'Diet', 'Accommodation', 'TravelRoute', 
-                      'TravelDesc', 'TravelDistance', 'Toll', 
+                      'Project', 'Department', 'WorkType', 'Comment',
+                      'Diet', 'Accommodation', 'TravelRoute',
+                      'TravelDesc', 'TravelDistance', 'Toll',
                       'Parking', 'Customer', 'DrivingExpenses');
 
 
@@ -1690,7 +1690,7 @@ $(document).ready(function() {
             {
                 if(!isset($entries[$day]))
                     $entries[$day] = array();
-                
+
                 $entry['Day'] = $day;
 
                 $entries[$day][] = $entry;
@@ -1702,7 +1702,7 @@ $(document).ready(function() {
             $d = $i;
             if(strlen("$i") < 2)
                 $d = "0$i";
-            
+
             if(!isset($entries[$d]))
             {
                 $entries[$i] = array();
@@ -1728,7 +1728,7 @@ $(document).ready(function() {
 
         $fields = array(
             'Day'        => array('type' => 'caption', 'size' => '3', 'translation' => 'Dag', 'checked' => true),
-            
+
             'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Start', 'checked' => true),
             'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Slutt', 'checked' => true),
             'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Sum', 'checked' => true),
@@ -1738,7 +1738,7 @@ $(document).ready(function() {
 
             'Customer'   => array('type' => 'select', 'options' => $customers, 'default' => 0, 'translation' => 'Kunde', 'checked' => true),
             'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0, 'translation' => 'Prosjekt', 'checked' => true),
-            'CompanyDepartment'    => array('type' => 'select', 'options' => $departments, 'default' => 0, 'translation' => 'Avdeling', 'checked' => true),
+            'Department'    => array('type' => 'select', 'options' => $departments, 'default' => 0, 'translation' => 'Avdeling', 'checked' => true),
             'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidsart', 'checked' => true),
 
 
@@ -1785,7 +1785,7 @@ $(document).ready(function() {
         {
             if($field == 'Buttons')
                 continue;
-            
+
             if(isset($_POST['report']))
             {
                 if(isset($_POST[$field]))
@@ -1950,7 +1950,7 @@ $(document).ready(function() {
             {
                 if(!isset($entries[$day]))
                     $entries[$day] = array();
-                
+
                 $entry['Day'] = $day;
                 $entries[$day][] = $entry;
             }
@@ -1965,7 +1965,7 @@ $(document).ready(function() {
             'EndTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
             'SumTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
             'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
-            //'CompanyDepartment'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
+            //'Department'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
             'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0),
             'Comment'    => array('type' => 'text', 'size' => '255', 'default' => ""),
             'AccountName' => array('type' => 'text', 'size'=> '255', 'default' => "Unknown"),

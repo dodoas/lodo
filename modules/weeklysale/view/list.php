@@ -54,7 +54,7 @@ function readCookie(name) {
 function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
-   
+
 function swap_checkbox(n) {
 	name = "weeklysale_checkbox_" + n;
 
@@ -264,7 +264,7 @@ while($row = $_lib['db']->db_fetch_object($result_week))
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleID=<? print $row->WeeklySaleID ?>"><? print $row->Period ?></a>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleID=<? print $row->WeeklySaleID ?>"><? print $row->Name ?></a>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleID=<? print $row->WeeklySaleID ?>"><? print $row->Week ?></a>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleID=<? print $row->WeeklySaleID ?>"><nobr><? $query2="select DepartmentName from companydepartment where CompanyDepartmentID='$row->DepartmentID'"; $row2=$_lib['storage']->get_row(array('query' => $query2)); print $row->DepartmentID." ".$row2->DepartmentName; ?></nobr></a>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleID=<? print $row->WeeklySaleID ?>"><nobr><? $query2="select DepartmentName from department where DepartmentID='$row->DepartmentID'"; $row2=$_lib['storage']->get_row(array('query' => $query2)); print $row->DepartmentID." ".$row2->DepartmentName; ?></nobr></a>
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalCash)); print $hash['value']; ?>
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalAmount)); print $hash['value']; ?>
       <td>
@@ -293,7 +293,7 @@ $(document).ready(function(){
       var el = $('#new_weeklysale_' + id);
       var val = $(this).val();
       var err = $('#error_' + id);
- 
+
       if(id_type.length >= 4) {
         if(parseInt(val) != val) {
           el.attr("disabled", "disabled");

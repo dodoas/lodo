@@ -207,16 +207,16 @@ class form2 {
   function Avd_menu2($name, $value, $form_name, $where, $db_table) {
       global $_lib;
 
-      $query = "select CompanyDepartmentID, DepartmentName from companydepartment where Active=1";
+      $query = "select DepartmentID, DepartmentName from department where Active=1";
       $result = $_lib['db']->db_query($query);
 
       print "<select name=\"$name\" onChange=\"Auto_Save('$form_name','$db_table','$name','$where')\">\n";
       print "<option value=\"\">Not choosen";
       while($_row = $_lib['db']->db_fetch_object($result)) {
           if($_row->AvdleingsID == $value)
-              print "<option value=\"$_row->CompanyDepartmentID\" selected>$_row->DepartmentName \n";
+              print "<option value=\"$_row->DepartmentID\" selected>$_row->DepartmentName \n";
           else
-              print "<option value=\"$_row->CompanyDepartmentID\">$_row->DepartmentName \n";
+              print "<option value=\"$_row->DepartmentID\">$_row->DepartmentName \n";
       }
 
       print "</select>\n";
@@ -548,7 +548,7 @@ class form2 {
   function department_menu2($args) {
       global $_lib;
 
-      $query = "select CompanyDepartmentID, DepartmentName from companydepartment where Active='1' order by CompanyDepartmentID";
+      $query = "select DepartmentID, DepartmentName from department where Active='1' order by DepartmentID";
       $result = $_lib['db']->db_query($query);
       if($args['num_letters']) {
         $num_letters = $args['num_letters'];
@@ -575,10 +575,10 @@ class form2 {
         print "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg avdeling',0, $num_letters);
       }
       while($_row = $_lib['db']->db_fetch_object($result)) {
-          if($_row->CompanyDepartmentID == $args[value])
-              print "<option value=\"$_row->CompanyDepartmentID\" selected>" . substr($_row->CompanyDepartmentID." - ".$_row->DepartmentName, 0, $num_letters) . "\n";
+          if($_row->DepartmentID == $args[value])
+              print "<option value=\"$_row->DepartmentID\" selected>" . substr($_row->DepartmentID." - ".$_row->DepartmentName, 0, $num_letters) . "\n";
           else
-              print "<option value=\"$_row->CompanyDepartmentID\">" . substr($_row->CompanyDepartmentID." - ".$_row->DepartmentName, 0, $num_letters) . "\n";
+              print "<option value=\"$_row->DepartmentID\">" . substr($_row->DepartmentID." - ".$_row->DepartmentName, 0, $num_letters) . "\n";
       }
 
       print "</select>\n";

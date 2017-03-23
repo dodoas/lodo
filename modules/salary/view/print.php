@@ -29,11 +29,11 @@ while( $project_line = $_lib['db']->db_fetch_assoc($project_result))
 	$projects[ $project_line['ProjectID'] ] = $project_line['Heading'];
 $projects[0] = "";
 
-$department_query = "select * from companydepartment";
+$department_query = "select * from department";
 $department_result = $_lib['db']->db_query($department_query);
 $departments = array();
 while( $department_line = $_lib['db']->db_fetch_assoc($department_result))
-	$departments[ $department_line['CompanyDepartmentID'] ] = $department_line['DepartmentName'];
+	$departments[ $department_line['DepartmentID'] ] = $department_line['DepartmentName'];
 $departments[0] = "";
 
 $kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommune WHERE KommuneID ='%d'", $head->KommuneID)  ) );
@@ -211,7 +211,7 @@ $kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommun
 
 		$fpGrunnlag_da = $totalThisYear_da->total - $totalThisYearFradrag_da->total;
 
-		
+
 
 		$query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and S.SalaryID = '" . $head->SalaryID . "' and SL.LineNumber < 70 and SL.EnableVacationPayment = 1;";
 		# print "$query<br>";

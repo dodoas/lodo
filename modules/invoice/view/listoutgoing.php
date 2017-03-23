@@ -429,7 +429,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&accountplan.AccountPlanID=<? print $row->CustomerAccountPlanID ?>&inline=show"><? print $row->CustomerAccountPlanID ?></a></td></td>
       <td>&nbsp;<a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&accountplan.AccountPlanID=<? print $row->CustomerAccountPlanID ?>&inline=show"><? print substr($row->IName,0,30) ?></a></td>
       <td><? $project    = $accounting->get_project_object($row->ProjectID); print "$project->ProjectID - $project->Heading"; ?></td>
-      <td><? $department = $accounting->get_department_object($row->DepartmentID); print "$department->CompanyDepartmentID - $department->DepartmentName"; ?></td>
+      <td><? $department = $accounting->get_department_object($row->DepartmentID); print "$department->DepartmentID - $department->DepartmentName"; ?></td>
       <td><? print substr($row->CommentCustomer,0,30) ?></td>
       <td class="number"><b><? print substr($row->DueDate,0,10) ?></b></td>
       <td class="number"><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
