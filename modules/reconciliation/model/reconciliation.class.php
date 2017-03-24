@@ -904,32 +904,45 @@ class reconciliation {
     public function openAllPostsForOpenPeriods() {
       global $_lib;
 
-      $DeleteReconciliationsQuery = "
-        DELETE vr
+      $SelectReconciliationsQuery = "
+        SELECT
+          v.VoucherReconciliationID
         FROM
-          voucherreconciliation vr
-          INNER JOIN
           voucher v
-          ON vr.ID = v.VoucherReconciliationID
-          INNER JOIN
-          accountperiod ap
+          JOIN (
+            SELECT
+              Period
+            FROM
+              accountperiod
+            WHERE
+            Status < 4
+          ) ap
           ON ap.Period = v.VoucherPeriod
-        WHERE
-          v.Active = 1 AND
-          ap.Status < 4";
-      $_lib['db']->db_delete($DeleteReconciliationsQuery);
-      $UpdateVouchersQuery = "
-        UPDATE
-          voucher v
-          INNER JOIN
-          accountperiod ap
-          ON ap.Period = v.VoucherPeriod
-        SET
-          v.VoucherReconciliationID = NULL
-        WHERE
-          v.Active = 1 AND
-          ap.Status < 4";
-      $_lib['db']->db_update($UpdateVouchersQuery);
+        WHERE Active = 1";
+        $SelectReconciliationsResult = $_lib['db']->db_query($SelectReconciliationsQuery);
+        $IDs = array();
+        while($Voucher = $_lib['db']->db_fetch_assoc($SelectReconciliationsResult)) {
+          $ID = $Voucher['VoucherReconciliationID'];
+          if ($ID) array_push($IDs, $ID);
+        }
+        if (!empty($IDs)) {
+          $IDsString = '(' . implode(', ', $IDs) . ')';
+          $DeleteReconciliationsQuery = "
+            DELETE
+            FROM
+              voucherreconciliation
+            WHERE
+              ID IN $IDsString";
+          $_lib['db']->db_delete($DeleteReconciliationsQuery);
+          $UpdateVouchersQuery = "
+            UPDATE
+              voucher
+            SET
+              VoucherReconciliationID = NULL
+            WHERE
+              VoucherReconciliationID IN $IDsString";
+          $_lib['db']->db_update($UpdateVouchersQuery);
+        }
     }
 
     /**

@@ -54,7 +54,7 @@ PRIMARY KEY (ID, Name)
       $groups = array();
       foreach($vouchers as $voucher) {
         // change to ifs for readability
-        $group_id = isset($groups[$voucher['ParentVoucherID']]) ? $voucher['ParentVoucherID'] : (isset($groups[$voucher['ChildVoucherID']]) ? $voucher['ChildVoucherID'] : $voucher['ParentVoucherID']);
+        $group_id = isset($groups[$voucher['ParentVoucherID']]) ? $groups[$voucher['ParentVoucherID']] : (isset($groups[$voucher['ChildVoucherID']]) ? $groups[$voucher['ChildVoucherID']] : $voucher['ParentVoucherID']);
         $groups[$voucher['ParentVoucherID']] = $group_id;
         $groups[$voucher['ChildVoucherID']] = $group_id;
 
@@ -81,7 +81,7 @@ PRIMARY KEY (ID, Name)
       }
       $update_vouchers_query = "UPDATE voucher v INNER JOIN test t ON v.VoucherID = t.ID SET v.VoucherReconciliationID = t.Name";
       $_lib['db']->db_update($update_vouchers_query);
-      $update_vouchers_query = "UPDATE voucher v INNER JOIN vouchermatch vm ON v.VoucherID = vm.VoucherID SET v.MatchNumber = v.MatchNumber";
+      $update_vouchers_query = "UPDATE voucher v INNER JOIN vouchermatch vm ON v.VoucherID = vm.VoucherID SET v.MatchNumber = vm.MatchNumber";
       $_lib['db']->db_update($update_vouchers_query);
       echo "DB: '$db_name'(" . ($current_db_index+1) . "/$number_of_dbs) DONE\n";
       $current_db_index++;
