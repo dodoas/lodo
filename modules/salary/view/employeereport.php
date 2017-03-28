@@ -273,6 +273,8 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
         'LockedBy' => $row['LockedBy'],
         'Comment' => $row['Comment'],
         'DifferentYear' => $row['DifferentYear'],
+        'Feriepengeprosent' => $row['Feriepengeprosent'],
+        'AGAprosent' => $row['AGAprosent'],
         'amounts' => $amounts
         );
 
@@ -387,8 +389,10 @@ print('
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
 }
-print("<th><b>Forskjellige &aring;r</b></th>");
-print("<th><b>Kommentar</b></th>");
+print("<th>Forskjellige &aring;r</th>");
+print("<th>AGA %</th>");
+print("<th>Feriepenger %</th>");
+print("<th>Kommentar</th>");
 print('</tr>');
 
 foreach($accountreports as $accountreport) {
@@ -401,6 +405,8 @@ foreach($accountreports as $accountreport) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
         print("<td><input type=\"checkbox\" name=\"DifferentYear\" checked disabled/></td>");
+        printf("<td>%s</td>", $accountreport['AGAprosent']);
+        printf("<td>%s</td>", $accountreport['Feriepengeprosent']);
         printf("<td>%s</td>", $accountreport['Comment']);
 
     if($accountreport['Locked'] == 0) {
