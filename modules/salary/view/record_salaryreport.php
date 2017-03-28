@@ -6,7 +6,7 @@ if(isset($_POST['add_report'])) {
 
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
- 
+
     foreach($_POST['add_amounts'] as $code => $amount) {
         $query = sprintf("INSERT INTO salaryreportentries (`SalaryReportID`, `Code`, `Amount`) VALUES ('%d', '%s', '%s');", 
                          $id, mysql_escape_string($code), mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)));
@@ -36,8 +36,8 @@ else if(isset($_GET['delete_report'])) {
     $_lib['db']->db_query($query);
 }
 else if(isset($_POST['add_report_account'])) {
-    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`) VALUES ('%s', '%d', '%s');",
-                     mysql_escape_string($_GET['year']), $_POST['reportaccount_accountplanid'], mysql_escape_string($_POST['comment']));
+    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`, `DifferentYear`) VALUES ('%s', '%d', '%s', '%d');",
+                     mysql_escape_string($_GET['year']), $_POST['reportaccount_accountplanid'], mysql_escape_string($_POST['comment']), $_POST['DifferentYear'] === "on" ? 1 : 0);
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
 
@@ -46,12 +46,13 @@ else if(isset($_POST['add_report_account'])) {
                          $id, mysql_escape_string($code), mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)));
         $_lib['db']->db_query($query);
     }
-    
+
 }
 else if(isset($_POST['edit_report_account'])) {
-    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s' WHERE SalaryReportAccountID = %d",
+    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s', DifferentYear = %d WHERE SalaryReportAccountID = %d",
                      $_POST['reportaccount_accountplanid'],
                      $_POST['comment'],
+                     $_POST['DifferentYear'] === "on" ? 1 : 0,
                      $_POST['SalaryReportAccountID']);
     $_lib['db']->db_query($query);
 

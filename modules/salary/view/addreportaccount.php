@@ -26,6 +26,7 @@ foreach($codes as $c) {
     printf('<th>%s</th>', $c);
 }
 
+print('<th>Forskjellige &aring;r</th>');
 print('<th>Kommentar</th>');
 print('</tr><tr><td>');
 
@@ -37,6 +38,7 @@ foreach($codes as $c) {
     printf('<td><input type="input" name="amounts[%s]" value="" /></td>', $c);
 }
 
+print("<td><input type=\"checkbox\" name=\"DifferentYear\"/></td>");
 print('<td><input type="text" name="comment" value="" /></td>');
 print('<tr><td><input type="submit" name="add_report_account" value="Save" /></td></tr>');
 
