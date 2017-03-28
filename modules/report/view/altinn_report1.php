@@ -23,9 +23,45 @@ function relevant_altinn_report_1_query($Period) {
               CancellationStatus = 'pending' OR
               CancellationStatus = 'not_cancelled'
             ) AND
+            ReplacedByMeldindsID IS NULL AND
             Period LIKE '%$Period%'
           ORDER BY AltinnReport1ID DESC";
 }
+
+// Get all reports sent to altinn(for the selected year)
+$altinn_report_1_query  = relevant_altinn_report_1_query("$ReportYear-");
+$altinn_report_1_result = $_lib['db']->db_query($altinn_report_1_query);
+
+// Reported amounts for salary per period
+$salary_amounts = array();
+// Process the file containing the sent data for each sent report that should be counted
+while ($row = $_lib['db']->db_fetch_object($altinn_report_1_result)) {
+  if (!isset($salary_amounts[$row->Period])) {
+    $salary_amounts[$row->Period] = 0;
+  }
+
+  // Get message sent file
+  $altinn_sent_file = new altinn_file($row->Folder);
+  $file_sent_contents = $altinn_sent_file->readFile("req_" . $row->AltinnReport1ID . ".xml");
+
+  // If we can read the file get relevant data(reported amounts for salary) from it, if not add an error
+  $sent_salary_amount = 0;
+  if (!$file_sent_contents) {
+    $altinn_row['error'] = "Filen kan ikke leses for rapport 1 id $row->AltinnReport1ID";
+  } else {
+    $xml_sent = simplexml_load_string($file_sent_contents);
+    $sent_messages = $xml_sent->Leveranse->oppgave->virksomhet;
+    if ($sent_messages) {
+      foreach ($sent_messages as $sent_message) {
+        if ($sent_message->arbeidsgiveravgift) {
+          $sent_salary_amount += (float)$sent_message->arbeidsgiveravgift->loennOgGodtgjoerelse->avgiftsgrunnlagBeloep;
+        }
+      }
+    }
+  }
+  $salary_amounts[$row->Period] += $sent_salary_amount;
+}
+ksort($salary_amounts);
 
 // Get latest report in each period(for the selected year) and its response(which contains the AGA/FTR amounts)
 $altinn_report_4_query  = "SELECT ar1.AltinnReport1ID, ar1.Period, ar4.*
@@ -55,21 +91,7 @@ while($row = $_lib['db']->db_fetch_object($altinn_report_4_result)) {
   $altinn_file = new altinn_file($row->Folder);
   $file_contents = $altinn_file->readFile("tilbakemelding" . $row->AltinnReport4ID . ".xml");
 
-  // Get sum of all salaries reported in this(current report's) period
-  $salary_amount_query  = "SELECT SUM(sl.AmountThisPeriod) AS SalarySum
-                           FROM salaryline sl
-                           WHERE sl.SalaryID IN (
-                              SELECT DISTINCT(SalaryId)
-                              FROM altinnReport1salary ar1s
-                              WHERE ar1s.AltinnReport1ID IN (
-                                SELECT AltinnReport1ID
-                                FROM (" . relevant_altinn_report_1_query($row->Period) . ") ar1_tmp
-                                ) AND
-                                ar1s.Changed = 0
-                             )";
-  $salary_amount_result = $_lib['db']->db_query($salary_amount_query);
-  $salary_amount_row = $_lib['db']->db_fetch_object($salary_amount_result);
-  $altinn_row['salary_amount'] = $salary_amount_row->SalarySum;
+  $altinn_row['salary_amount'] = $salary_amounts[$row->Period];
 
   // Get sum of all OTP reported in this(current report's) period
   $pension_amount_query  = "SELECT SUM(PensionAmount) AS OTPSum
@@ -84,7 +106,7 @@ while($row = $_lib['db']->db_fetch_object($altinn_report_4_result)) {
 
   // If we can read the file get relevant data(reported amounts for AGA/FTR) from it, if not add an error
   if (!$file_contents) {
-    $altinn_row['error'] = "Filen kan ikke leses for id $row->AltinnReport4ID";
+    $altinn_row['error'] = "Filen kan ikke leses for rapport 4 id $row->AltinnReport4ID";
   } else {
     $xml = simplexml_load_string($file_contents);
     $recieved_messages = $xml->Mottak->mottattLeveranse;
@@ -96,7 +118,6 @@ while($row = $_lib['db']->db_fetch_object($altinn_report_4_result)) {
   if (!isset($altinn_rows[$row->Period])) {
     $altinn_rows[$row->Period] = $altinn_row;
   } else {
-    $altinn_rows[$row->Period]['salary_amount'] += $altinn_row['salary_amount'];
     // If error is present we have no data to sum up
     if (isset($altinn_row['error'])) {
       $altinn_rows[$row->Period]['error'] .= '<br/>' . $altinn_row['error'];
