@@ -2,7 +2,7 @@
 $db_table = "allowancecharge";
 require_once "record.inc";
 
-$query = "select ac.*, a.AccountName as OutAccountName, d.DepartmentName, p.Heading as ProjectName from $db_table as ac left join accountplan a on ac.OutAccountPlanID = a.AccountPlanID left join companydepartment d on d.CompanyDepartmentID = ac.DepartmentID left join project p on p.ProjectID = ac.ProjectID";
+$query = "select ac.*, a.AccountName as OutAccountName, d.DepartmentName, p.Heading as ProjectName from $db_table as ac left join accountplan a on ac.OutAccountPlanID = a.AccountPlanID left join department d on d.DepartmentID = ac.DepartmentID left join project p on p.ProjectID = ac.ProjectID";
 $result2 = $_lib['db']->db_query($query);
 $db_total = $_lib['db']->db_numrows($result2);
 

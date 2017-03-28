@@ -113,13 +113,13 @@ $person = $_lib['storage']->get_row(array('query' => $query));
         <td class="BGColorDark">Eksternt ansattnummer</td>
         <td><input type="text" name="<? print $db_table ?>.ExternalID" value="<? print $person->ExternalID ?>" size="24" tabindex="<? echo $tabindex++; ?>" maxlength="50"></td>
         <td class="BGColorDark">Company department</td>
-        <td><input type="text" name="<? print $db_table ?>.CompanyDepartment" value="<? print $person->CompanyDepartment ?>" size="24" tabindex="<? echo $tabindex++; ?>" maxlength="50"></td>
+        <td><input type="text" name="<? print $db_table ?>.Department" value="<? print $person->Department ?>" size="24" tabindex="<? echo $tabindex++; ?>" maxlength="50"></td>
     </tr>
     <tr>
         <td class="BGColorDark">Aktiv</td>
         <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'Active', 'value'=>$person->Active, 'tabindex'=>$tabindex++)) ?></td>
         <td class="BGColorDark">Avdeling<br /></td>
-        <td><? print $_lib['form3']->Avd_menu3(array('table'=>$db_table, 'field'=>'CompanyDepartmentID', 'value'=>$person->CompanyDepartmentID, 'tabindex'=>$tabindex++)) ?></td>
+        <td><? print $_lib['form3']->Avd_menu3(array('table'=>$db_table, 'field'=>'DepartmentID', 'value'=>$person->DepartmentID, 'tabindex'=>$tabindex++)) ?></td>
     </tr>
     <tr>
         <td class="BGColorDark">Tilgangsniv&aring;</td>

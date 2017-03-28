@@ -42,7 +42,7 @@ $warningH = array();
 
       $(document).ready(
         function () {
-          $('input[type="submit"], button').click(
+          $('input[type="submit" name="action_bank_update"]').click(
             saveScrollCookies
           );
           goBack();
@@ -461,7 +461,7 @@ if(is_array($bank->unvotedaccount)) {
             ?>
         </td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22, 'maxlength' => 25)) ?></td>
 
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 25, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
 

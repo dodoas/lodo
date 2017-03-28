@@ -2279,18 +2279,18 @@ class accounting {
         }
     }
 
-    function get_department_object($CompanyDepartmentID) {
+    function get_department_object($DepartmentID) {
         global $_lib;
-        $CompanyDepartmentID = (int) $CompanyDepartmentID;
+        $DepartmentID = (int) $DepartmentID;
 
-        if (isset($this->cached_department[$CompanyDepartmentID])) {
-          return $this->cached_department[$CompanyDepartmentID];
+        if (isset($this->cached_department[$DepartmentID])) {
+          return $this->cached_department[$DepartmentID];
         }
 
-        $query = "select * from companydepartment where CompanyDepartmentID=" . $CompanyDepartmentID;
+        $query = "select * from department where DepartmentID=" . $DepartmentID;
         $result = $_lib['storage']->get_row(array('query' => $query));
 
-        $this->cached_department[$CompanyDepartmentID] = $result;
+        $this->cached_department[$DepartmentID] = $result;
         return $result;
     }
 
@@ -2361,20 +2361,6 @@ class accounting {
         } else {
             return false;
         }
-    }
-
-
-    // Check if JournalID exists with a given VoucherType
-    public function checkJournalID($VoucherType, $JournalID) {
-        global $_lib;
-
-        $q = sprintf("SELECT JournalID FROM voucher
-                      WHERE VoucherType = '%s' AND JournalID = '%s' AND Active = 1
-                      LIMIT 1",
-                     $VoucherType, $JournalID);
-        $r = $_lib['db']->db_query($q);
-
-        return ($_lib['db']->db_numrows($r) != 0);
     }
 
     public function invoiceIDAvailable($JournalID, $AccountPlanID, $InvoiceID, $VoucherType) {

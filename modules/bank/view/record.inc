@@ -73,8 +73,11 @@ elseif($_lib['input']->getProperty('action_bank_accountlinenew')) {
     $bank->AddAccountLinesWithJournalID($_lib['input']->getProperty('numnewlines'), $startat);
 }
 elseif($_lib['input']->getProperty('action_bank_journal')) {
-    $bank->init();
-    $bank->journal();
+    # We create a new bank object since the journal function does something special to the bank object,
+    # and creating a new bank object only slows down the journaling functionality by a hundredth of a second.
+    $bank2 = new framework_logic_bank($_lib['input']->request);
+    $bank2->init();
+    $bank2->journal();
 }
 elseif($_lib['input']->getProperty('action_bank_cardadd')) {
     $bankaccount->cardadd($_lib['input']->getProperty('AccountID'));
@@ -110,6 +113,13 @@ VALUES
                  $_POST['action_bank_accountlinenew_startat']
         );
 
+    $_lib['db']->db_query($q);
+
+    $q = sprintf(" UPDATE bankvotingperiod SET AmountIn = '%s', AmountOut = '%s' WHERE BankVotingPeriodID = '%d'"
+        ,$_POST['bankin']
+        ,$_POST['bankout']
+        ,$_POST['BankVotingPeriodID']
+        );
     $_lib['db']->db_query($q);
 }
 

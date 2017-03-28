@@ -71,7 +71,7 @@ elseif($_REQUEST['action_install_db'])
     }
 
     if(isset($_REQUEST['install_department']) && $_REQUEST['install_department']){
-        $tables['companydepartment']    = true;
+        $tables['department']    = true;
     }
 
     if(isset($_REQUEST['install_salaryconf']) && $_REQUEST['install_salaryconf']){

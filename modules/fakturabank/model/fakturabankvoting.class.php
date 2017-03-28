@@ -193,7 +193,14 @@ class lodo_fakturabank_fakturabankvoting {
             $extra_last_out = 0;
         }
 
-        if (!$account_extra_row) {            
+        $q = sprintf(" UPDATE bankvotingperiod SET AmountIn = '%s', AmountOut = '%s' WHERE AccountID = '%d' AND Period = '%s'"
+            ,$extra_entry_in
+            ,$extra_entry_out
+            ,$account_id
+            ,$period);
+        $_lib['db']->db_query($q);
+
+        if (!$account_extra_row) {
             $q = sprintf("INSERT INTO accountextras
               (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`, `JournalID`)
             VALUES
@@ -389,9 +396,7 @@ class lodo_fakturabank_fakturabankvoting {
 
             /* remove trailing -F from invoices starting with L */
             if($lineH['InvoiceNumber'][0] == 'L') {
-                if(substr($lineH['InvoiceNumber'], -2) == "-F") {
-                    $lineH['InvoiceNumber'] = substr($lineH['InvoiceNumber'], 0, -2);
-                }
+                $lineH['InvoiceNumber'] = preg_replace("/(L\d+)(-F)?-\d+/", "\\1",$lineH['InvoiceNumber']);
             }
 
             $lineH['Comment'] = '';

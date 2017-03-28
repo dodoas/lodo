@@ -255,7 +255,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
                 $_POST['accountplan_EnableReport5'] = 1;
             }
 
-            if($AccountPlanType == 'customer' || $AccountPlanType == 'supplier') {
+            if($AccountPlanType == 'customer' || $AccountPlanType == 'supplier' || $AccountPlanType == 'employee') {
                 $query = "select AccountPlanID, EnablePostPost, EnableMoneyFlow from accountplan where EnableReskontro=1 and Active=1 and ReskontroAccountPlanType='" . $AccountPlanType . "'";
                 $account = $_lib['storage']->get_row(array('query' => $query));
 

@@ -26,7 +26,7 @@ $row = $_lib['storage']->get_row(array('query' => $query));
 <? includeinc('top'); ?>
 <? includeinc('left') ?>
 
-<h2>Firmaopplysninger, <? print $row->VName; ?> (side 3 av 3)</h2>
+<h2>Firmaopplysninger, <? print $row->VName; ?> (side 3 av 4)</h2>
 <table class="tab">
   <tr>
   <td><div class="tab"><a href="<? print $_SETUP['DISPATCH'] ?>&t=company.edit&CompanyID=<? print "$CompanyID" ?>">Adresser og kontaktinformasjon</a></div>

@@ -2,17 +2,17 @@
 
 function query_full_table($table, $index_field) {
     global $_lib;
-    
+
     $query = "SELECT * FROM $table";
     $result = $_lib['db']->db_query($query);
-    
+
     $ret = array();
     while($row = $_lib['db']->db_fetch_assoc($result)) {
         $ret[ $row[$index_field] ] = $row;
     }
-    
+
     ksort($ret);
-    
+
     return $ret;
 }
 
@@ -50,7 +50,7 @@ Varelager er priset og telt av
     $post = array();
     $post['varelagerline_VareLagerID']   = $VareLagerID;
 
-    $departments = query_full_table("companydepartment", "CompanyDepartmentID");
+    $departments = query_full_table("department", "DepartmentID");
     $shelfs = query_full_table("shelf", "ShelfID");
     $projects = query_full_table("project", "ProjectID");
 
@@ -66,7 +66,7 @@ Varelager er priset og telt av
         //if(!$row->ProjectID) $row->ProjectID = 1;
         if(!$row->ShelfID) $row->ShelfID = 1;
 
-        $post['varelagerline_Department'] = $departments[ $row->CompanyDepartmentID ]["DepartmentName"];
+        $post['varelagerline_Department'] = $departments[ $row->DepartmentID ]["DepartmentName"];
         $post['varelagerline_Project'] = $projects[ $row->ProjectID ]["Heading"];
         $post['varelagerline_Shelf'] = $shelfs[ $row->ShelfID ]["Name"];
 
@@ -79,12 +79,12 @@ Varelager er priset og telt av
 }
 
 elseif($_REQUEST['action_varelager_reload_products']) {
-    $departments = query_full_table("companydepartment", "CompanyDepartmentID");
+    $departments = query_full_table("department", "DepartmentID");
     $shelfs = query_full_table("shelf", "ShelfID");
     $projects = query_full_table("project", "ProjectID");
-    
+
     $VareLagerID = $_REQUEST['VareLagerID'];
-    
+
     $query = "select * from product order by ProductID asc";
     $result = $_lib['db']->db_query($query);
     while($row = $_lib['db']->db_fetch_object($result)) {
@@ -99,17 +99,17 @@ elseif($_REQUEST['action_varelager_reload_products']) {
         }
 
         $post['varelagerline_VareLagerID']   = $VareLagerID;
-        
+
         $post['varelagerline_ProductNr']   = $row->ProductID;
         $post['varelagerline_ProductName'] = $row->ProductName;
-        
+
         //if(!$row->ProjectID) $row->ProjectID = 1;
         if(!$row->ShelfID) $row->ShelfID = 1;
 
-        $post['varelagerline_Department'] = $departments[ $row->CompanyDepartmentID ]["DepartmentName"];
+        $post['varelagerline_Department'] = $departments[ $row->DepartmentID ]["DepartmentName"];
         $post['varelagerline_Project'] = $projects[ $row->ProjectID ]["Heading"];
         $post['varelagerline_Shelf'] = $shelfs[ $row->ShelfID ]["Name"];
-        
+
         $post['varelagerline_UnitSize'] = $row->Unitsize;
         $post['varelagerline_BulkSize'] = $row->Bulksize;
         $post['varelagerline_RealProductNumber'] = $row->ProductNumber;
