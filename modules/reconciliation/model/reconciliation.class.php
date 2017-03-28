@@ -170,7 +170,28 @@ class reconciliation {
 
         $VoucherQuery = "
           SELECT
-            v.*
+            v.VoucherID,
+            v.JournalID,
+            v.AccountPlanID,
+            v.InvoiceID,
+            v.KID,
+            v.MatchNumber,
+            v.AmountIn,
+            v.AmountOut,
+            v.ForeignAmount,
+            v.matched_by,
+            v.VoucherType,
+            v.VoucherDate,
+            v.VoucherPeriod,
+            v.Vat as VAT,
+            v.Quantity,
+            v.DepartmentID,
+            v.ProjectID,
+            v.DueDate,
+            v.DescriptionID,
+            v.Description,
+            v.ForeignCurrencyID,
+            v.ForeignConvRate
           FROM
             (
               SELECT
@@ -224,7 +245,28 @@ class reconciliation {
           }
           $VoucherQuery = "
             SELECT
-              v.*
+              v.VoucherID,
+              v.JournalID,
+              v.AccountPlanID,
+              v.InvoiceID,
+              v.KID,
+              v.MatchNumber,
+              v.AmountIn,
+              v.AmountOut,
+              v.ForeignAmount,
+              v.matched_by,
+              v.VoucherType,
+              v.VoucherDate,
+              v.VoucherPeriod,
+              v.Vat as VAT,
+              v.Quantity,
+              v.DepartmentID,
+              v.ProjectID,
+              v.DueDate,
+              v.DescriptionID,
+              v.Description,
+              v.ForeignCurrencyID,
+              v.ForeignConvRate
             FROM
               (
                 SELECT
@@ -322,8 +364,7 @@ class reconciliation {
             $this->MatchH[$AccountPlanID]['KIDJournals'][$Voucher->KID][] =
               array(
                 'JournalID' => $Voucher->JournalID,
-                'VoucherID' => $Voucher->VoucherID,
-                'Match' => 'KID'
+                'VoucherID' => $Voucher->VoucherID
               );
           }
           // Try to match by InvoiceID
@@ -337,8 +378,7 @@ class reconciliation {
             $this->MatchH[$AccountPlanID]['InvoiceIDJournals'][$Voucher->InvoiceID][] =
               array(
                 'JournalID' => $Voucher->JournalID,
-                'VoucherID' => $Voucher->VoucherID,
-                'Match' => 'InvoiceID'
+                'VoucherID' => $Voucher->VoucherID
               );
           }
           // Try to match by MatchNumber, if MatchNumber is 0 this will be skipped
@@ -352,18 +392,17 @@ class reconciliation {
             $this->MatchH[$AccountPlanID]['MatchNumberJournals'][$Voucher->MatchNumber][] =
               array(
                 'JournalID' => $Voucher->JournalID,
-                'VoucherID' => $Voucher->VoucherID,
-                'Match' => 'MatchNumber'
+                'VoucherID' => $Voucher->VoucherID
               );
           }
 
           // Data from each voucher
           $this->VoucherH[$AccountPlanID][$Voucher->VoucherID] = $Voucher;
-          if ($voucher->AmountIn > 0) {
-            $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountIn = $voucher->ForeignAmount;
+          if ($Voucher->AmountIn > 0) {
+            $this->VoucherH[$AccountPlanID][$Voucher->VoucherID]->ForeignAmountIn = $Voucher->ForeignAmount;
           }
-          if ($voucher->AmountOut > 0) {
-            $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountOut = $voucher->ForeignAmount;
+          if ($Voucher->AmountOut > 0) {
+            $this->VoucherH[$AccountPlanID][$Voucher->VoucherID]->ForeignAmountOut = $Voucher->ForeignAmount;
           }
         }
 
@@ -462,14 +501,12 @@ class reconciliation {
               $Used = false;
               $HighlightLinkHTML = array();
               foreach ($Matches[$MatchedBy."Journals"][$MatchKey] as $VoucherListEntry) {
-                if ($VoucherListEntry['Match'] == $MatchedBy ) {
-                  $JournalID = $VoucherListEntry['JournalID'];
-                  $VoucherID = $VoucherListEntry['VoucherID'];
-                  if (in_array($VoucherID, $this->Matched)) {
-                    $Used = true;
-                  }
-                  $HighlightLinkHTML[] = "<span class=\"navigate to\" id=\"$VoucherID\">$JournalID</span>";
+                $JournalID = $VoucherListEntry['JournalID'];
+                $VoucherID = $VoucherListEntry['VoucherID'];
+                if (in_array($VoucherID, $this->Matched)) {
+                  $Used = true;
                 }
+                $HighlightLinkHTML[] = "<span class=\"navigate to\" id=\"$VoucherID\">$JournalID</span>";
               }
               // None of the vouchers in the group were used previously
               if ($Used === false) {
