@@ -12,20 +12,23 @@ $months = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11'
 // Relevant AltinnReport1 entries, non-cancelled and not replaced
 // part of the query to be used in multiple other queries
 function relevant_altinn_report_1_query($Period) {
-  return "SELECT *
-          FROM altinnReport1
-          WHERE (
-              ReceivedStatus IS NULL OR
-              ReceivedStatus = 'received'
-            ) AND
-            (
-              CancellationStatus IS NULL OR
-              CancellationStatus = 'pending' OR
-              CancellationStatus = 'not_cancelled'
-            ) AND
-            ReplacedByMeldindsID IS NULL AND
-            Period LIKE '%$Period%'
-          ORDER BY AltinnReport1ID DESC";
+  return "
+    SELECT *
+    FROM
+      altinnReport1
+    WHERE
+      (
+        ReceivedStatus IS NULL OR
+        ReceivedStatus = 'received'
+      ) AND
+      (
+        CancellationStatus IS NULL OR
+        CancellationStatus = 'pending' OR
+        CancellationStatus = 'not_cancelled'
+      ) AND
+      ReplacedByMeldindsID IS NULL AND
+      Period LIKE '%$Period%'
+    ORDER BY AltinnReport1ID DESC";
 }
 
 // Get all reports sent to altinn(for the selected year)
@@ -64,19 +67,34 @@ while ($row = $_lib['db']->db_fetch_object($altinn_report_1_result)) {
 ksort($salary_amounts);
 
 // Get latest report in each period(for the selected year) and its response(which contains the AGA/FTR amounts)
-$altinn_report_4_query  = "SELECT ar1.AltinnReport1ID, ar1.Period, ar4.*
-                           FROM (
-                             SELECT *
-                             FROM (" . relevant_altinn_report_1_query("$ReportYear-") . ") ar1_tmp
-                             GROUP BY Period
-                           ) ar1
-                           JOIN
-                           altinnReport2 ar2
-                           ON ar1.ReceiptId = ar2.res_ReceiptId
-                           JOIN
-                           ( SELECT * FROM altinnReport4 GROUP BY res_ArchiveReference ) ar4
-                           ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID
-                           ORDER BY ar1.Period";
+$altinn_report_4_query  = "
+  SELECT
+    ar1.AltinnReport1ID,
+    ar1.Period,
+    ar4.*
+  FROM
+    (
+      SELECT
+        *
+      FROM
+        (" .
+          relevant_altinn_report_1_query("$ReportYear-") .
+       ") ar1_tmp
+      GROUP BY Period
+    ) ar1
+    JOIN
+    altinnReport2 ar2
+    ON ar1.ReceiptId = ar2.res_ReceiptId
+    JOIN
+    (
+      SELECT
+        *
+      FROM
+        altinnReport4
+      GROUP BY res_ArchiveReference
+    ) ar4
+    ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID
+    ORDER BY ar1.Period";
 $altinn_report_4_result = $_lib['db']->db_query($altinn_report_4_query);
 
 // Amounts and some info sent to Altinn, one for each period of the year
@@ -94,8 +112,13 @@ while($row = $_lib['db']->db_fetch_object($altinn_report_4_result)) {
   $altinn_row['salary_amount'] = $salary_amounts[$row->Period];
 
   // Get sum of all OTP reported in this(current report's) period
-  $pension_amount_query  = "SELECT SUM(PensionAmount) AS OTPSum
-                            FROM (" . relevant_altinn_report_1_query($row->Period) . ") ar1";
+  $pension_amount_query  = "
+    SELECT
+      SUM(PensionAmount) AS OTPSum
+    FROM
+      (" .
+        relevant_altinn_report_1_query($row->Period) .
+     ") ar1";
   $pension_amount_result = $_lib['db']->db_query($pension_amount_query);
   $pension_amount_row = $_lib['db']->db_fetch_object($pension_amount_result);
   $altinn_row['pension_amount'] = $pension_amount_row->OTPSum;
@@ -197,149 +220,196 @@ foreach($altinn_rows as $period => $row) {
       <th></th>
     </tr>
   </table>
+  <br/>
+  <a href="<?= $_lib['sess']->dispatch; ?>report_Year=<?= $ReportYear; ?>&t=report.altinn_report1_setup">Konto oppsett</a>
+  <br/>
+  <br/>
 
 <?
 
 // Accounts to sum and see how much it is bookkept on each in the periods
 // to compare against what is sent to Altinn
-$ftr_accountplan_id = 2600;
-$accounts_to_sum = array(
-  5000 => 'L&oslash;nn',
-  5050 => 'FP for',
-  5052 => 'FP inn',
-  5440 => 'OTP',
-  $ftr_accountplan_id => 'FTR'
-);
-
-$CompanyID = $_lib['sess']->get_companydef('CompanyID');
-$company_aga_percent_query = "SELECT aga.Percent
-                              FROM
-                                company c
-                                LEFT JOIN
-                                kommune k
-                                ON c.CompanyMunicipalityID = k.KommuneID
-                                LEFT JOIN
-                                arbeidsgiveravgift aga
-                                ON k.Sone = aga.Code
-                              WHERE c.CompanyID = $CompanyID";
-$company_aga_percent_row = $_lib['db']->get_row(array('query' => $company_aga_percent_query));
-$company_aga_percent = $company_aga_percent_row->Percent;
-
-// Sum up
-$voucher_accounts_sum = array();
-$voucher_accounts_aga_sum = array();
-foreach ($accounts_to_sum as $accountplan_id => $accountplan_name) {
-  $voucher_accounts_sum[$accountplan_id] = array();
-  $voucher_accounts_aga_sum[$accountplan_id] = array();
-  $account_sum_query = "SELECT v.VoucherPeriod AS Period, SUM( v.AmountIn - v.AmountOut ) AS Sum,
-                          SUM( (v.AmountIn - v.AmountOut) * IF(v.AccountplanID IN (5000, 5050, 5052), aga.Percent, $company_aga_percent)/100) AS AGASum
-                        FROM voucher v
-                          LEFT JOIN
-                          salary s
-                          ON v.JournalID = s.JournalID
-                          LEFT JOIN
-                          kommune k
-                          ON s.KommuneID = k.KommuneID
-                          LEFT JOIN
-                          arbeidsgiveravgift aga
-                          ON k.Sone = aga.Code
-                        WHERE v.VoucherPeriod LIKE  '$ReportYear-%' AND v.AccountplanID = $accountplan_id AND v.Active = 1
-                        GROUP BY v.VoucherPeriod";
-  $account_sum_result = $_lib['db']->db_query($account_sum_query);
-  while($account_sum_row = $_lib['db']->db_fetch_object($account_sum_result)) {
-    $voucher_accounts_sum[$accountplan_id][$account_sum_row->Period] = $account_sum_row->Sum;
-    $voucher_accounts_aga_sum[$accountplan_id][$account_sum_row->Period] = $account_sum_row->AGASum;
+$balance_accounts_to_sum = array();
+$result_accounts_to_sum = array();
+$accounts_for_report_query = "
+  SELECT
+    ap.AccountPlanID,
+    ap.AccountName,
+    IF(ap.AccountPlanID < 3000, 'balance', 'result') AS AccountPlanType
+  FROM
+    accountsforaltinnreport afar
+    LEFT JOIN
+    accountplan ap
+    ON ap.AccountPlanID = afar.AccountPlanID
+  WHERE
+    afar.Active = 1 AND
+    afar.AccountPlanID != 0";
+$accounts_for_report_result = $_lib['db']->db_query($accounts_for_report_query);
+while($account = $_lib['db']->db_fetch_object($accounts_for_report_result)) {
+  if ($account->AccountPlanType == 'balance') {
+    $balance_accounts_to_sum[$account->AccountPlanID] = $account->AccountName;
+  } else {
+    $result_accounts_to_sum[$account->AccountPlanID] = $account->AccountName;
   }
-  // Add 0 to missing months
-  foreach($months as $month) {
-    if (!isset($voucher_accounts_sum[$accountplan_id][$ReportYear . '-' . $month])) {
-      $voucher_accounts_sum[$accountplan_id][$ReportYear . '-' . $month] = 0;
-    }
-    if (!isset($voucher_accounts_aga_sum[$accountplan_id][$ReportYear . '-' . $month])) {
-      $voucher_accounts_aga_sum[$accountplan_id][$ReportYear . '-' . $month] = 0;
-    }
-  }
-  // Sort by period
-  ksort($voucher_accounts_sum[$accountplan_id]);
-  ksort($voucher_accounts_aga_sum[$accountplan_id]);
 }
-?>
+ksort($balance_accounts_to_sum);
+ksort($result_accounts_to_sum);
+if (current($balance_accounts_to_sum)) {
+  $ftr_accountplan_id = current(array_keys($balance_accounts_to_sum));
 
-  <br/><br/>
+  $CompanyID = $_lib['sess']->get_companydef('CompanyID');
+  $company_aga_percent_query = "
+    SELECT
+      aga.Percent
+    FROM
+      company c
+      LEFT JOIN
+      kommune k
+      ON c.CompanyMunicipalityID = k.KommuneID
+      LEFT JOIN
+      arbeidsgiveravgift aga
+      ON k.Sone = aga.Code
+    WHERE
+      c.CompanyID = $CompanyID";
+  $company_aga_percent_row = $_lib['db']->get_row(array('query' => $company_aga_percent_query));
+  $company_aga_percent = $company_aga_percent_row->Percent;
+
+  // Sum up
+  $voucher_accounts_sum = array();
+  $voucher_accounts_aga_sum = array();
+  foreach (($balance_accounts_to_sum + $result_accounts_to_sum) as $accountplan_id => $accountplan_name) {
+    $voucher_accounts_sum[$accountplan_id] = array();
+    $voucher_accounts_aga_sum[$accountplan_id] = array();
+    $account_sum_query = "
+      SELECT
+        v.VoucherPeriod AS Period,
+        SUM( v.AmountIn - v.AmountOut ) AS Sum,
+        SUM( (v.AmountIn - v.AmountOut) * IF(v.AccountPlanID IN (" . implode(', ', array_keys($balance_accounts_to_sum)) . "), aga.Percent, $company_aga_percent)/100) AS AGASum
+      FROM
+        voucher v
+        LEFT JOIN
+        salary s
+        ON v.JournalID = s.JournalID
+        LEFT JOIN
+        kommune k
+        ON s.KommuneID = k.KommuneID
+        LEFT JOIN
+        arbeidsgiveravgift aga
+        ON k.Sone = aga.Code
+      WHERE
+        v.VoucherPeriod LIKE  '$ReportYear-%' AND
+        v.AccountplanID = $accountplan_id AND
+        v.Active = 1
+      GROUP BY v.VoucherPeriod";
+    $account_sum_result = $_lib['db']->db_query($account_sum_query);
+    while($account_sum_row = $_lib['db']->db_fetch_object($account_sum_result)) {
+      $voucher_accounts_sum[$accountplan_id][$account_sum_row->Period] = $account_sum_row->Sum;
+      $voucher_accounts_aga_sum[$accountplan_id][$account_sum_row->Period] = $account_sum_row->AGASum;
+    }
+    // Add 0 to missing months
+    foreach($months as $month) {
+      if (!isset($voucher_accounts_sum[$accountplan_id][$ReportYear . '-' . $month])) {
+        $voucher_accounts_sum[$accountplan_id][$ReportYear . '-' . $month] = 0;
+      }
+      if (!isset($voucher_accounts_aga_sum[$accountplan_id][$ReportYear . '-' . $month])) {
+        $voucher_accounts_aga_sum[$accountplan_id][$ReportYear . '-' . $month] = 0;
+      }
+    }
+    // Sort by period
+    ksort($voucher_accounts_sum[$accountplan_id]);
+    ksort($voucher_accounts_aga_sum[$accountplan_id]);
+  }
+  ?>
 
   <table class="lodo_data">
     <tr>
       <th class="menu">Period</th>
-<?
-foreach($accounts_to_sum as $accountplan_id => $accountplan_name) {
-  // Skip FTR since it is at the far right, after all other accounts and sum column
-  if ($accountplan_id == $ftr_accountplan_id) continue;
-?>
+  <?
+  foreach($result_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
       <th class="menu"><?= $accountplan_id . " " . $accountplan_name; ?></th>
-<?
-}
-?>
+  <?
+  }
+  ?>
       <th class="menu">Sum</th>
-      <th class="menu"><? print $ftr_accountplan_id . ' ' . $accounts_to_sum[$ftr_accountplan_id]; ?></th>
+  <?
+  foreach($balance_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
+      <th class="menu"><?= $accountplan_id . " " . $accountplan_name; ?></th>
+  <?
+  }
+  ?>
     </tr>
 
-<?
-// Sum of all except FTR
-$sum_all_accounts_for_period = array();
-$sum_all_accounts_aga_for_period = array();
-// Sum by account for all periods
-$yearly_sum_by_account = array();
-// Initiate all sums to 0
-foreach ($months as $month) {
-  $period = $ReportYear . '-' . $month;
-  $sum_all_accounts_for_period[$period] = 0;
-  $sum_all_accounts_aga_for_period[$period] = 0;
-?>
+  <?
+  // Sum of all except FTR
+  $sum_all_accounts_for_period = array();
+  $sum_all_accounts_aga_for_period = array();
+  // Sum by account for all periods
+  $yearly_sum_by_account = array();
+  // Initiate all sums to 0
+  foreach ($months as $month) {
+    $period = $ReportYear . '-' . $month;
+    $sum_all_accounts_for_period[$period] = 0;
+    $sum_all_accounts_aga_for_period[$period] = 0;
+  ?>
     <tr>
       <td><? print $period; ?></td>
-<?
-  foreach ($accounts_to_sum as $accountplan_id => $accountplan_name) {
-    // Get the amount which is bookkept
-    $amount = $voucher_accounts_sum[$accountplan_id][$period];
-    $aga_amount = $voucher_accounts_aga_sum[$accountplan_id][$period];
-    // FTR
-    if ($accountplan_id == $ftr_accountplan_id) $amount = $amount;
-    // If nothing set, set to 0
-    if (!isset($yearly_sum_by_account[$accountplan_id])) $yearly_sum_by_account[$accountplan_id] = 0;
-    $yearly_sum_by_account[$accountplan_id] += $amount;
-    // Skip summing to all accounts if FTR
-    if ($accountplan_id == $ftr_accountplan_id) continue;
-    $sum_all_accounts_for_period[$period] += $amount;
-    $sum_all_accounts_aga_for_period[$period] += $aga_amount;
+  <?
+    foreach ($result_accounts_to_sum as $accountplan_id => $accountplan_name) {
+      // Get the amount which is bookkept
+      $amount = $voucher_accounts_sum[$accountplan_id][$period];
+      $aga_amount = $voucher_accounts_aga_sum[$accountplan_id][$period];
+      // If nothing set, set to 0
+      if (!isset($yearly_sum_by_account[$accountplan_id])) $yearly_sum_by_account[$accountplan_id] = 0;
+      $yearly_sum_by_account[$accountplan_id] += $amount;
+      $sum_all_accounts_for_period[$period] += $amount;
+      $sum_all_accounts_aga_for_period[$period] += $aga_amount;
 
-    
-?>
+      
+  ?>
       <td class="number"><? print $_lib['format']->Amount($amount); ?></td>
-<?
-  }
-  // Sum all
-  if (!isset($yearly_sum_by_account['sum'])) $yearly_sum_by_account['sum'] = 0;
-  $yearly_sum_by_account['sum'] += $sum_all_accounts_for_period[$period];
-?>
+  <?
+    }
+    // Sum all
+    if (!isset($yearly_sum_by_account['sum'])) $yearly_sum_by_account['sum'] = 0;
+    $yearly_sum_by_account['sum'] += $sum_all_accounts_for_period[$period];
+  ?>
       <td class="number"><? print $_lib['format']->Amount($sum_all_accounts_for_period[$period]); ?></td>
-      <td class="number"><? print $_lib['format']->Amount($voucher_accounts_sum[$ftr_accountplan_id][$period]); ?></td>
+  <?
+    foreach ($balance_accounts_to_sum as $accountplan_id => $accountplan_name) {
+      // Get the amount which is bookkept
+      $amount = $voucher_accounts_sum[$accountplan_id][$period];
+      // If nothing set, set to 0
+      if (!isset($yearly_sum_by_account[$accountplan_id])) $yearly_sum_by_account[$accountplan_id] = 0;
+      $yearly_sum_by_account[$accountplan_id] += $amount;
+  ?>
+      <td class="number"><? print $_lib['format']->Amount($amount); ?></td>
+  <?
+    }
+  ?>
     </tr>
-<?
-}
-// Sums for all bookkept amounts
-?>
+  <?
+  }
+  // Sums for all bookkept amounts
+  ?>
     <tr>
       <th>Sum</th>
-<?
-foreach($accounts_to_sum as $accountplan_id => $accountplan_name) {
-  if ($accountplan_id == $ftr_accountplan_id) continue;
-?>
+  <?
+  foreach($result_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
       <th class="number"><? print $_lib['format']->Amount($yearly_sum_by_account[$accountplan_id]); ?></th>
-<?
-}
-?>
+  <?
+  }
+  ?>
       <th class="number"><? print $_lib['format']->Amount($yearly_sum_by_account['sum']); ?></th>
-      <th class="number"><? print $_lib['format']->Amount($yearly_sum_by_account[$ftr_accountplan_id]); ?></th>
+  <?
+  foreach($balance_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
+      <th class="number"><? print $_lib['format']->Amount($yearly_sum_by_account[$accountplan_id]); ?></th>
+  <?
+  }
+  ?>
     </tr>
   </table>
 
@@ -357,40 +427,40 @@ foreach($accounts_to_sum as $accountplan_id => $accountplan_name) {
       <th class="menu">FTR bookkept</th>
       <th class="menu">FTR diff</th>
     </tr>
-<?
-// Differences between what has been reported and what was bookkept
-$altinn_lodo_diff_so_far = 0;
-// Start from 0
-$sums = array(
-  'salary_pension_diff' => 0,
-  'reported_aga' => 0,
-  'bookkept_aga' => 0,
-  'diff_aga' => 0,
-  'reported_ftr' => 0,
-  'bookkept_ftr' => 0,
-  'diff_ftr' => 0
-);
-foreach($altinn_rows as $period => $row) {
-  // Diff between salary and pension reported and bookkept
-  $altinn_salary_and_pension_amount = $row['salary_amount'] + $row['pension_amount'];
-  $lodo_salary_and_pension_amount = $sum_all_accounts_for_period[$period];
-  $altinn_lodo_diff_amount = $lodo_salary_and_pension_amount - $altinn_salary_and_pension_amount;
-  $sums['salary_pension_diff'] += $altinn_lodo_diff_amount;
+  <?
+  // Differences between what has been reported and what was bookkept
+  $altinn_lodo_diff_so_far = 0;
+  // Start from 0
+  $sums = array(
+    'salary_pension_diff' => 0,
+    'reported_aga' => 0,
+    'bookkept_aga' => 0,
+    'diff_aga' => 0,
+    'reported_ftr' => 0,
+    'bookkept_ftr' => 0,
+    'diff_ftr' => 0
+  );
+  foreach($altinn_rows as $period => $row) {
+    // Diff between salary and pension reported and bookkept
+    $altinn_salary_and_pension_amount = $row['salary_amount'] + $row['pension_amount'];
+    $lodo_salary_and_pension_amount = $sum_all_accounts_for_period[$period];
+    $altinn_lodo_diff_amount = $altinn_salary_and_pension_amount - $lodo_salary_and_pension_amount;
+    $sums['salary_pension_diff'] += $altinn_lodo_diff_amount;
 
-  // Diff between AGA/FTR reported and bookkept
-  $reported_aga_amount = $altinn_rows[$period]['aga_amount'];
-  $sums['reported_aga'] += $reported_aga_amount;
-  $bookkept_aga_amount = $sum_all_accounts_aga_for_period[$period];
-  $sums['bookkept_aga'] += $bookkept_aga_amount;
-  $diff_aga_amount = $reported_aga_amount - $bookkept_aga_amount;
-  $sums['diff_aga'] += $diff_aga_amount;
-  $reported_ftr_amount = $altinn_rows[$period]['ftr_amount'];
-  $sums['reported_ftr'] += $reported_ftr_amount;
-  $bookkept_ftr_amount = $voucher_accounts_sum[$ftr_accountplan_id][$period];
-  $sums['bookkept_ftr'] += $bookkept_ftr_amount;
-  $diff_ftr_amount = $reported_ftr_amount - $bookkept_ftr_amount;
-  $sums['diff_ftr'] += $diff_ftr_amount;
-?>
+    // Diff between AGA/FTR reported and bookkept
+    $reported_aga_amount = $altinn_rows[$period]['aga_amount'];
+    $sums['reported_aga'] += $reported_aga_amount;
+    $bookkept_aga_amount = $sum_all_accounts_aga_for_period[$period];
+    $sums['bookkept_aga'] += $bookkept_aga_amount;
+    $diff_aga_amount = $reported_aga_amount - $bookkept_aga_amount;
+    $sums['diff_aga'] += $diff_aga_amount;
+    $reported_ftr_amount = $altinn_rows[$period]['ftr_amount'];
+    $sums['reported_ftr'] += $reported_ftr_amount;
+    $bookkept_ftr_amount = $voucher_accounts_sum[$ftr_accountplan_id][$period];
+    $sums['bookkept_ftr'] += $bookkept_ftr_amount;
+    $diff_ftr_amount = $reported_ftr_amount - $bookkept_ftr_amount;
+    $sums['diff_ftr'] += $diff_ftr_amount;
+  ?>
     <tr>
       <td><? print $period; ?></td>
       <td class="number"><? print $_lib['format']->Amount($altinn_lodo_diff_amount); ?></td>
@@ -402,10 +472,10 @@ foreach($altinn_rows as $period => $row) {
       <td class="number"><? print $_lib['format']->Amount($bookkept_ftr_amount); ?></td>
       <td class="number"><? print $_lib['format']->Amount($diff_ftr_amount); ?></td>
     </tr>
-<?
-}
-// Sum columns for all periods
-?>
+  <?
+  }
+  // Sum columns for all periods
+  ?>
     <tr>
       <th>Sum</th>
       <th class="number"><? print $_lib['format']->Amount($sums['salary_pension_diff']); ?></th>
@@ -418,6 +488,13 @@ foreach($altinn_rows as $period => $row) {
       <th class="number"><? print $_lib['format']->Amount($sums['diff_ftr']); ?></th>
     </tr>
   </table>
+  <?php
+} else {
+?>
+  <h2>Ikke balanse konto velgt i report konto oppsett!</h2>
+<?php
+}
+?>
 
 </body>
 </html>
