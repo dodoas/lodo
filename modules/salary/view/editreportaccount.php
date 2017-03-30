@@ -22,6 +22,7 @@ $query_r = $_lib['db']->db_query($query);
 $accountplanid_row = $_lib['db']->db_fetch_assoc($query_r);
 $accountplanid = $accountplanid_row['AccountPlanID'];
 $accountComment = $accountplanid_row['Comment'];
+$differentYear = intval($accountplanid_row['DifferentYear']) === 1 ? "checked" : "";
 
 printf('<form action="%st=salary.employeereport&year=%d" method="post">', $_lib['sess']->dispatch, $year);
 printf('<input type="hidden" value="%d" name="SalaryReportAccountID" />', $salaryreportaccountid);
@@ -44,6 +45,7 @@ foreach($data as $c => $a) {
     printf("<th>%s</th>", $c);
 }
 
+print('<th>Forskjellige &aring;r</th>');
 print('<th>Kommentar</th>');
 printf("</tr><tr>");
 
@@ -55,6 +57,7 @@ print('</td>');
 foreach($data as $c => $a)
     printf('<td><input style="text-align: right;" type="input" name="amounts[%s]" value="%s" /></td>', $c, $_lib['format']->Amount($a));
 
+print("<td><input type=\"checkbox\" name=\"DifferentYear\" " . $differentYear ." /></td>");
 print("<td><input type=\"text\" name=\"comment\" value=\"$accountComment\" /></td>");
 print('<tr><td><input type="submit" name="edit_report_account" value="Save" /></td></tr>');
 

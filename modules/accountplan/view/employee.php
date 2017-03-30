@@ -242,9 +242,25 @@ if(!empty($validation_errors)) {
   <tr>
     <td class="menu">Kommune</td>
     <td></td>
-    <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table, 'field'=>'KommuneID', 'value'=>$account->KommuneID, 'class'=>'lodoreqfelt')) ?></td>
+    <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table, 'field'=>'KommuneID', 'value'=>$account->KommuneID, 'class'=>'lodoreqfelt'));
+        if ($account->KommuneID){
+            $q = sprintf("SELECT a.Percent
+                FROM kommune AS k
+                LEFT JOIN arbeidsgiveravgift AS a ON k.Sone = a.Code
+                WHERE KommuneID = %d"
+                ,$account->KommuneID);
+            $res = $_lib['db']->db_fetch_object($_lib['db']->db_query($q));
+            print("AGA " . $res->Percent . "%");
+          }
+      ?></td>
     <td></td>
     <td></td>
+  </tr>
+  <tr>
+    <td class="menu">Feriepengeprosent</td>
+    <td></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Feriepengeprosent', 'value'=>$account->Feriepengeprosent, 'class'=>'lodoreqfelt')) ?></td>
+    <td colspan="2"></td>
   </tr>
   <tr>
     <td class="menu">Tabelltrekk:</td>

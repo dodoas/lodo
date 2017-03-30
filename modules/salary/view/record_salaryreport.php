@@ -6,7 +6,7 @@ if(isset($_POST['add_report'])) {
 
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
- 
+
     foreach($_POST['add_amounts'] as $code => $amount) {
         $query = sprintf("INSERT INTO salaryreportentries (`SalaryReportID`, `Code`, `Amount`) VALUES ('%d', '%s', '%s');", 
                          $id, mysql_escape_string($code), mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)));
@@ -36,8 +36,21 @@ else if(isset($_GET['delete_report'])) {
     $_lib['db']->db_query($query);
 }
 else if(isset($_POST['add_report_account'])) {
-    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`) VALUES ('%s', '%d', '%s');",
-                     mysql_escape_string($_GET['year']), $_POST['reportaccount_accountplanid'], mysql_escape_string($_POST['comment']));
+    $q = sprintf("SELECT a.Percent, ap.Feriepengeprosent
+                  FROM accountplan AS ap
+                  LEFT JOIN kommune AS k ON ap.KommuneID = k.KommuneID
+                  LEFT JOIN arbeidsgiveravgift AS a ON k.Sone = a.Code
+                  WHERE ap.AccountplanID = %d"
+                , $_POST['reportaccount_accountplanid']);
+    $res = $_lib['db']->db_fetch_object($_lib['db']->db_query($q));
+
+    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`, `DifferentYear`, `Feriepengeprosent`, `AGAprosent`) VALUES ('%s', '%d', '%s', '%d', '%s', '%s');"
+                    , mysql_escape_string($_GET['year'])
+                    , $_POST['reportaccount_accountplanid']
+                    , mysql_escape_string($_POST['comment'])
+                    , $_POST['DifferentYear'] === "on" ? 1 : 0
+                    , $res->Feriepengeprosent
+                    , $res->Percent);
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
 
@@ -46,13 +59,24 @@ else if(isset($_POST['add_report_account'])) {
                          $id, mysql_escape_string($code), mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)));
         $_lib['db']->db_query($query);
     }
-    
+
 }
 else if(isset($_POST['edit_report_account'])) {
-    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s' WHERE SalaryReportAccountID = %d",
-                     $_POST['reportaccount_accountplanid'],
-                     $_POST['comment'],
-                     $_POST['SalaryReportAccountID']);
+    $q = sprintf("SELECT a.Percent, ap.Feriepengeprosent
+                  FROM accountplan AS ap
+                  LEFT JOIN kommune AS k ON ap.KommuneID = k.KommuneID
+                  LEFT JOIN arbeidsgiveravgift AS a ON k.Sone = a.Code
+                  WHERE ap.AccountplanID = %d"
+                , $_POST['reportaccount_accountplanid']);
+    $res = $_lib['db']->db_fetch_object($_lib['db']->db_query($q));
+
+    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s', DifferentYear = %d, Feriepengeprosent = %s, AGAprosent = %s WHERE SalaryReportAccountID = %d"
+                    , $_POST['reportaccount_accountplanid']
+                    , $_POST['comment']
+                    , $_POST['DifferentYear'] === "on" ? 1 : 0
+                    , $res->Feriepengeprosent
+                    , $res->Percent
+                    , $_POST['SalaryReportAccountID']);
     $_lib['db']->db_query($query);
 
     foreach($_POST['amounts'] as $code => $amount) {
