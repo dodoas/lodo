@@ -616,14 +616,6 @@ if(count($Reconciliation->VoucherH) > 0
     'accesskey' => 'S'
   );
   print $_lib['form3']->submit($ButtonConfArray);
-  if ($_lib['sess']->get_person('AccessLevel') >= 3) {
-    $ButtonConfArray = array(
-      'name' => 'action_reconciliation_openall',
-      'value' => '&Aring;pne alle (O)',
-      'accesskey' => 'O'
-    );
-    print $_lib['form3']->submit($ButtonConfArray);
-  }
   $ButtonConfArray = array(
     'name' => 'action_reconciliation_closeall',
     'value' => 'Lukk alle (L)',
