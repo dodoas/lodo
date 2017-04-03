@@ -76,12 +76,12 @@ class altinn_report {
 
 /* Helper function to add pension amount
  */
-  function addPensionAmount($amount, $percent, $zone, $code) {
+  function addPensionAmount($virksomhet_id, $amount, $percent, $zone, $code) {
     $pension = array("beregningskodeForArbeidsgiveravgift"  => $code,
                      "sone"                                 => $zone,
                      "avgiftsgrunnlagBeloep"                => $amount,
                      "prosentsatsForAvgiftsberegning"       => $percent);
-    array_push($this->pension, $pension);
+    $this->pension[$virksomhet_id] = $pension;
   }
 
 /* Helper function to check if the variable is a valid date
@@ -262,13 +262,15 @@ class altinn_report {
     if ($use_loennOgGodtgjoerelse) {
       $virksomhet['arbeidsgiveravgift'] = $loennOgGodtgjoerelse;
     }
-    if (!empty($this->pension)) $virksomhet['arbeidsgiveravgift']['tilskuddOgPremieTilPensjon'] = $this->pension;
+    if (!empty($this->pension[$key_subcompany])) $virksomhet['arbeidsgiveravgift']['tilskuddOgPremieTilPensjon'] = $this->pension[$key_subcompany];
     foreach($loennOgGodtgjoerelse as $zone_tax_array) {
       $zone_tax = $zone_tax_array['loennOgGodtgjoerelse'];
       $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
     }
-    foreach($this->pension as $zone_tax) {
-      $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
+    if (!empty($this->pension[$key_subcompany])) {
+      foreach($this->pension[$key_subcompany] as $zone_tax) {
+        $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
+      }
     }
     return $virksomhet;
   }

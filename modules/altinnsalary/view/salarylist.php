@@ -8,11 +8,16 @@ else $_periode = $last_periode;
 
 require_once "record.inc";
 
+$salary_virksomhet_array = array();
+$workrelation_virksomhet_array = array();
+$virksomhet_names = array();
+
 print $_lib['sess']->doctype ?>
 
 <head>
     <title>Empatix - Soap 1 List</title>
     <? includeinc('head') ?>
+    <? includeinc('javascript') ?>
 </head>
 
 <body>
@@ -62,6 +67,7 @@ $employee_errors = array();
 $employee_names_list = array();
 while($row = $_lib['db']->db_fetch_object($result_salary))
 {
+    $salary_virksomhet_array[$row->SalaryID] = $row->SubcompanyID;
     $report_for_salary = new altinn_report($_periode, array($row->SalaryID), array(), false);
     $report_for_salary->populateReportArray();
     if (empty($report_for_salary->errors)) $is_ready_for_altinn = 'Klar';
@@ -78,7 +84,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     $report_id = $_lib['db']->db_fetch_object($result_report_id);
     ?>
     <tr class="<? print "$sec_color"; ?>">
-        <td><? print $_lib['form3']->checkbox(array('name' => "use_salary[" . $row->SalaryID . "]", 'disabled'=>$report_id->AltinnReport1ID ? 'disabled' : '')); ?></td>
+        <td><? print $_lib['form3']->checkbox(array('name' => "use_salary[" . $row->SalaryID . "]", 'disabled'=>$report_id->AltinnReport1ID ? 'disabled' : '', 'OnChange' => 'generateOTPInputsFromSelectedSalaries();')); ?></td>
         <td>L <a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalID ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->JournalDate ?></a></td>
         <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&SalaryID=<? print $row->SalaryID ?>"><? print $row->Period ?></a></td>
@@ -100,10 +106,10 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 
 <br/>
 
-<? function print_work_relation_table($report, $employees, $active = true) { 
+<? function print_work_relation_table($report, $employees, &$subcompany_names, &$workrelation_virksomhet_array, $active = true) {
   global $_lib; 
   global $_periode; 
-  global $employee_errors; 
+  global $employee_errors;
   global $employee_names_list; ?>
 <table class="lodo_data">
   <thead>
@@ -122,7 +128,6 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   <tbody>
 <?
   $employee_data = array();
-  $subcompany_names = array();
   foreach ($employees as $employee) {
     if($active) {
       $query_work_relations = "SELECT sc.Name, sc.OrgNumber, wr.* FROM workrelation wr JOIN subcompany sc ON sc.SubcompanyID = wr.SubcompanyID WHERE AccountPlanID = " . $employee->AccountPlanID ." AND (wr.WorkStart <= '". $_periode ."-01' OR wr.WorkStart LIKE '". $_periode ."%') AND (wr.WorkStop >= '". $_periode ."-01' OR wr.WorkStop = '0000-00-00')";
@@ -131,6 +136,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     }
     $result_work_relations = $_lib['db']->db_query($query_work_relations);
     while($work_relation = $_lib['db']->db_fetch_object($result_work_relations)) {
+      $workrelation_virksomhet_array[$work_relation->WorkRelationID] = $work_relation->SubcompanyID;
       $report_for_employee = new altinn_report($report->period, array(), array($work_relation->WorkRelationID), true);
       $employee_names_list[$employee->AccountPlanID] = $report_for_employee->fullNameForErrorMessage($employee);
       $report_for_employee->populateReportArray();
@@ -184,7 +190,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       $list_of_reports = $big_row["list_of_reports"];
 ?>
     <tr>
-      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]")); ?></td>
+      <td><? print $_lib['form3']->checkbox(array('name' => "use_work_relation[" . $work_relation->WorkRelationID . "]", 'OnChange' => 'generateOTPInputsFromSelectedSalaries();')); ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $employee->AccountPlanID ?>"><? print $employee->FirstName . " " . $employee->LastName; ?></a></td>
       <td><? print $work_relation->WorkRelationID . ' - ' . $work_relation->Name . ' (' . $work_relation->WorkStart . ' - ' . $work_relation->WorkStop . ') ' . $employee->FirstName . ' ' . $employee->LastName . '(' . $employee->AccountPlanID . ')'; ?></td>
@@ -222,7 +228,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
     $active_employees[] = $employee;
   }
 
-  print_work_relation_table($report, $active_employees, true);
+  print_work_relation_table($report, $active_employees, $virksomhet_names, $workrelation_virksomhet_array, true);
 
   // all employees employed not in this period
   $address = $_lib["sess"]->dispatchs;
@@ -244,7 +250,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
       $inactive_employees[] = $employee;
     }
 
-    print_work_relation_table($report, $inactive_employees, false);
+    print_work_relation_table($report, $inactive_employees, $virksomhet_names, $workrelation_virksomhet_array, false);
   } else {
     print "<a href='". $address ."&show_inactive=1'>Vis tidligere ansatte</a><br><br>";
   }
@@ -252,10 +258,10 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 
 <br/>
   <input type="hidden" name="altinnReport1_periode" value='<?print $_periode; ?>'>
-  <span>OTP:</span><br/>
-  <span>Sone: <? print $tax_zone . " ($tax_municipality_name)"; ?></span><br/>
-  <span>Prosent: <? print $_lib['format']->Amount($tax_percent); ?>%</span><br/>
-  <span>Bel&oslash;p: </span><input type="text" name="altinnReport1_pensionAmount" value='<? print $_lib['format']->Amount(0); ?>'><br/><br/>
+  <span>OTP:</span>
+  <div id="otp">
+    <span>Ingen l&oslash;nnsslipper/ansatte valgt.</span><br/>
+  </div>
 <?
   print $_lib['form3']->submit(array('name'=>'action_soap1', 'value'=>'Send rapport'));
 ?>
@@ -310,5 +316,101 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   }
 ?>
 
+<script type="text/javascript">
+  var salary_virksomhet_array = [];
+  var work_relation_virksomhet_array = [];
+  var salary_selected = [];
+  var work_relations_selected = [];
+  var virksomhet_names = <?= json_encode($virksomhet_names); ?>;
+  var virksomhet_otp_amounts = [];
+  for(var virksomhet_id in virksomhet_names) {
+    virksomhet_otp_amounts[virksomhet_id] = 0;
+  }
+
+<?php
+foreach ($salary_virksomhet_array as $salary_id => $virksomhet_id) {
+  if ($virksomhet_id) {
+?>
+  salary_virksomhet_array[<?= $salary_id ?>] = <?= $virksomhet_id ?>;
+<?php
+  }
+}
+foreach ($workrelation_virksomhet_array as $work_relation_id => $virksomhet_id) {
+  if ($virksomhet_id) {
+?>
+  work_relation_virksomhet_array[<?= $work_relation_id ?>] = <?= $virksomhet_id ?>;
+<?php
+  }
+}
+?>
+
+  function refreshSelectedWorkRelations() {
+    work_relations_selected = [];
+    work_relation_virksomhet_array.forEach(
+      function (virksomhet_id, work_relation_id) {
+        var work_relation_checkbox_element = document.getElementById('use_work_relation['+work_relation_id+']');
+        work_relations_selected[work_relation_id] = work_relation_checkbox_element.checked;
+      }
+    );
+  }
+
+  function refreshSelectedSalaries() {
+    salary_selected = [];
+    salary_virksomhet_array.forEach(
+      function (virksomhet_id, salary_id) {
+        var salary_checkbox_element = document.getElementById('use_salary['+salary_id+']');
+        salary_selected[salary_id] = salary_checkbox_element.checked;
+      }
+    );
+  }
+
+  function updateVirksomhetOTPAmount(amount_element, virksomhet_id) {
+    var amount = toNumber(amount_element.value);
+    virksomhet_otp_amounts[virksomhet_id] = amount;
+    amount_element.value = toAmountString(amount);
+  }
+
+  function generateOTPInputsFromSelectedSalaries() {
+    refreshSelectedSalaries();
+    refreshSelectedWorkRelations();
+    var otp_form_part_html = "<span>placeholder_name OTP:</span><br/><span>Sone: <? print $tax_zone . " ($tax_municipality_name)"; ?></span><br/><span>Prosent: <? print $_lib['format']->Amount($tax_percent); ?>%</span><br/><span>Bel&oslash;p: </span><input type=\"text\" name=\"altinnReport1_pensionAmount[placeholder_id]\" value=\"placeholder_amount\" OnChange=\"updateVirksomhetOTPAmount(this, placeholder_id);\"><br/><br/>";
+
+    var otp_div_element = document.getElementById('otp');
+    otp_div_element.innerHTML = "";
+    var used_virksomhets = [];
+    salary_virksomhet_array.forEach(
+      function (virksomhet_id, salary_id) {
+        if (salary_selected[salary_id]) {
+          used_virksomhets[virksomhet_id] = true;
+        }
+      }
+    );
+    work_relation_virksomhet_array.forEach(
+      function (virksomhet_id, work_relation_id) {
+        if (work_relations_selected[work_relation_id]) {
+          used_virksomhets[virksomhet_id] = true;
+        }
+      }
+    );
+    used_virksomhets.forEach(
+      function (is_used, virksomhet_id) {
+        if (is_used) {
+          otp_div_element.innerHTML +=
+            otp_form_part_html
+            .replace(/placeholder_id/g, virksomhet_id)
+            .replace(/placeholder_name/g, virksomhet_names[virksomhet_id])
+            .replace(/placeholder_amount/g, toAmountString(virksomhet_otp_amounts[virksomhet_id]));
+        }
+      }
+    );
+    if (otp_div_element.innerHTML == "") {
+      otp_div_element.innerHTML = "<span>Ingen l&oslash;nnsslipper/ansatte valgt.</span><br/>";
+    }
+  }
+
+$(document).ready(function() {
+  generateOTPInputsFromSelectedSalaries();
+});
+</script>
 </body>
 </html>
