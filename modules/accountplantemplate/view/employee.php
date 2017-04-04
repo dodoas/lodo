@@ -113,6 +113,13 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     </td>
   </tr>
   <tr>
+    <td class="menu">Feriepengeprosent</td>
+    <td></td>
+    <td>
+      <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Feriepengeprosent', 'value'=>$account->Feriepengeprosent, 'class'=>'lodoreqfelt')) ?>
+    </td>
+  </tr>
+  <tr>
     <th colspan="5">Logg</th>
   </tr>
   <tr>

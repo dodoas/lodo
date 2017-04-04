@@ -16,7 +16,10 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
         }
 
     $invoice_date = $_POST['invoicein_InvoiceDate_' . $invoicein->ID];
-    $_POST['invoicein_Period_' . $invoicein->ID] = substr($invoice_date, 0, 7);
+    $Period = substr($invoice_date, 0, 7);
+    if ($accounting->is_valid_accountperiod($Period, $_lib['sess']->get_person('AccessLevel'))) {
+      $_POST['invoicein_Period_' . $invoicein->ID] = $Period;
+    }
     $invoicein->update($_POST);
 
 } elseif($_lib['input']->getProperty('action_invoicein_remittance')) {

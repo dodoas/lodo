@@ -35,7 +35,10 @@ if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getPr
       $_lib['message']->add('Ugyldig fakturadato '.$invoice_date.'!');
     } else {
       $updated = false;
-      $_POST['invoiceout_Period_' . $InvoiceID] = substr($invoice_date, 0, 7);
+      $Period = substr($invoice_date, 0, 7);
+      if ($accounting->is_valid_accountperiod($Period, $_lib['sess']->get_person('AccessLevel'))) {
+        $_POST['invoiceout_Period_' . $InvoiceID] = $Period;
+      }
       $InvoiceLineIDs = array();
       for ($i = 1; $i <= $_POST['field_count']; $i++) if (isset($_POST[$i])) $InvoiceLineIDs[] = $_POST[$i];
       if ($invoice->CheckIfAnythingChanged($InvoiceID, $InvoiceLineIDs, $_POST)) {

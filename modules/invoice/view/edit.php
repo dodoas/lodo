@@ -702,7 +702,6 @@ function updatePeriodFromInvoiceDate(invoice_date_element) {
 $(document).ready(function() {
   setComboboxOnChangeAction();
   validateBeforeSave();
-  updatePeriodFromInvoiceDate(document.getElementById('invoiceout.InvoiceDate.'+<?php echo $InvoiceID; ?>));
 });
 </script>
 
@@ -910,7 +909,7 @@ foreach ($currencies as $currency) {
       <td>
         <?
         if($accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) {
-          print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$InvoiceID, 'value' => $row->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
+          print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$InvoiceID, 'value' => $row->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'disabled' => true));
         } else {
             print $row->Period;
         }

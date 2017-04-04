@@ -38,7 +38,7 @@ function print_values($codes, $line, $print_extra = true) {
 
 function print_sums($employee_id, $codes, $report) {
     global $_lib, $year;
- 
+
     $sums = array();
     foreach($codes as $code)
         $sums[$code] = 0;
@@ -246,6 +246,7 @@ print('
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
 }
+print("<th><b>Forskjellige &aring;r</b></th>");
 print("<th><b>Kommentar</b></th>");
 print('</tr>');
 
@@ -271,12 +272,16 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
         'Locked' => $row['Locked'],
         'LockedBy' => $row['LockedBy'],
         'Comment' => $row['Comment'],
+        'DifferentYear' => $row['DifferentYear'],
+        'Feriepengeprosent' => $row['Feriepengeprosent'],
+        'AGAprosent' => $row['AGAprosent'],
         'amounts' => $amounts
         );
 
 }
 
 foreach($accountreports as $accountreport) {
+  if(intval($accountreport['DifferentYear']) === 1) continue;
     printf("
       <tr> 
         <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
@@ -284,7 +289,125 @@ foreach($accountreports as $accountreport) {
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
-        printf("<td style='text-align: right'>%s</td>", $accountreport['Comment']);
+        print("<td><input type=\"checkbox\" name=\"DifferentYear\" disabled/></td>");
+        printf("<td>%s</td>", $accountreport['Comment']);
+
+    if($accountreport['Locked'] == 0) {
+        printf(
+            '<td><a href="%st=salary.editreportaccount&SalaryReportAccountID=%d&year=%d">edit</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>lock</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>delete</a></td>',
+            $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
+            $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
+            $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
+        );
+
+    }
+    else {
+        $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
+        $r = $_lib['db']->db_query($query);
+        $result = $_lib['db']->db_fetch_assoc($r);
+        printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+
+        if($_lib['sess']->get_person('AccessLevel') >= 2) {
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>unlock</a></td>",
+                   $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
+                );
+        }
+
+    }
+
+    print("</tr>");
+}
+
+print('
+<tr>
+  <td><b>sum fratrukkede l&oslash;nnslipper</b></td>
+');
+$sum_account2 = array();
+foreach($codes as $c) {
+    $sum = 0;
+    foreach($accountreports as $accountreport) {
+        if(intval($accountreport['DifferentYear']) === 0) continue;
+        $sum += $accountreport['amounts'][$c];
+    }
+
+    $sum_account2[$c] = $sum;
+
+    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
+}
+    print("<td></td><td></td></tr>");
+
+print('
+<tr>
+  <td><b>sum innberettet</b></td>
+');
+
+$sum_account = array();
+
+foreach($codes as $c) {
+    $sum = 0;
+    foreach($accountreports as $accountreport) {
+        $sum += $accountreport['amounts'][$c];
+    }
+
+    $sum_account[$c] = $sum;
+
+    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
+}
+
+if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
+    printf('
+    <td></td><td></td><td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
+    ', $_lib['sess']->dispatch, $year);
+}
+
+
+print('<tr><td>diff</td>');
+foreach($codes as $c) {
+    $sum = 0;
+
+    foreach($all_reports as $report) {
+        $sum += $report['amounts'][$c];
+    }
+
+    $d = $sum - $sum_account[$c];
+
+    if($d < -0.01 || $d > 0.01)
+        printf("<td style='text-align: right'><span style='color:red'>%s<span></td>", $_lib['format']->Amount($d));
+    else
+        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($d));
+}
+print("</tr></table>");
+
+print('
+<br /><br />
+<table border=1 class="lodo_data">
+  <tr>
+    <th>Konto</th>
+');
+foreach($codes as $c) {
+    printf("<th><b>%s</b></th>", $c);
+}
+print("<th>Forskjellige &aring;r</th>");
+print("<th>AGA %</th>");
+print("<th>Feriepenger %</th>");
+print("<th>Kommentar</th>");
+print('</tr>');
+
+foreach($accountreports as $accountreport) {
+  if(intval($accountreport['DifferentYear']) === 0) continue;
+    printf("
+      <tr>
+        <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
+
+    foreach($codes as $c) {
+        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
+    }
+        print("<td><input type=\"checkbox\" name=\"DifferentYear\" checked disabled/></td>");
+        printf("<td>%s</td>", $accountreport['AGAprosent']);
+        printf("<td>%s</td>", $accountreport['Feriepengeprosent']);
+        printf("<td>%s</td>", $accountreport['Comment']);
 
     if($accountreport['Locked'] == 0) {
         printf(
@@ -318,42 +441,10 @@ print('
 <tr>
   <td><b>sum innberettet</b></td>
 ');
-
-$sum_account = array();
-
 foreach($codes as $c) {
-    $sum = 0;
-    foreach($accountreports as $accountreport) {
-        $sum += $accountreport['amounts'][$c];
-    }
-
-    $sum_account[$c] = $sum;
-
-    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
+        printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum_account2[$c]));
 }
 
-if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
-    printf('
-    <td></td><td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
-    ', $_lib['sess']->dispatch, $year);
-}
-
-
-print('<tr><td>diff</td>');
-foreach($codes as $c) {
-    $sum = 0;
-    
-    foreach($all_reports as $report) {
-        $sum += $report['amounts'][$c];
-    }
-
-    $d = $sum - $sum_account[$c];
-
-    if($d < -0.01 || $d > 0.01)
-        printf("<td style='text-align: right'><span style='color:red'>%s<span></td>", $_lib['format']->Amount($d));
-    else
-        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($d));
-}
-
+print("</tr></table>");
 
 ?>

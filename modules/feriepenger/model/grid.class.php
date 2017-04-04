@@ -101,8 +101,7 @@ class feriepenger_grid
     function gridPerson ($person)
     {
         global $_lib;
-        $this->queryYear = "select fp.*, ap.AccountPlanID, ap.AccountName from feriepenger fp, accountplan ap where fp.year='" . $this->year . "' and fp.AccountPlanID = ap.AccountPlanID and ap.AccountPlanID = '" . $person . "';";
-
+        $this->queryYear = "select fp.*, ap.AccountPlanID, ap.AccountName, ap.Feriepengeprosent as Prosentsats from feriepenger fp, accountplan ap where fp.year='" . $this->year . "' and fp.AccountPlanID = ap.AccountPlanID and ap.AccountPlanID = '" . $person . "';";
         if($this->debug) print "$this->queryYear<br>\n";
 
         $this->resultYear = $_lib['db']->db_query($this->queryYear);
@@ -154,11 +153,7 @@ class feriepenger_grid
         $ret[$myVar] = $fpGrunnlag;
 
         $myVar = "Prosentsats";
-
-        if ($res->$myVar != "" || $person == 1000)
-            $ret[$myVar] = $res->$myVar;
-        else
-            $ret[$myVar] = 10.2;
+        $ret[$myVar] = $res->$myVar;
 
         $myVar = "Utbetalt";
         $ret[$myVar] = $res->$myVar;
