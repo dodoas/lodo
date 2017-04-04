@@ -806,13 +806,13 @@ class altinn_report {
                           SELECT ap.*
                           FROM accountplan ap
                           INNER JOIN workrelation wr ON wr.AccountPlanID = ap.AccountPlanID
-                          WHERE !((wr.WorkStart <= '". $report->period ."-01' OR wr.WorkStart LIKE '". $report->period ."%') AND
-                          (wr.WorkStop >= '". $report->period ."-01' OR wr.WorkStop LIKE '0000-00-00')) AND
+                          WHERE !((wr.WorkStart <= '". $this->period ."-01' OR wr.WorkStart LIKE '". $this->period ."%') AND
+                          (wr.WorkStop >= '". $this->period ."-01' OR wr.WorkStop LIKE '0000-00-00')) AND
                           AccountplanType LIKE '%employee%'
                           UNION
                           SELECT ap.*
                           FROM accountplan ap JOIN salary s ON s.AccountPlanID = ap.AccountPlanID
-                          WHERE s.ActualPayDate LIKE  '". $report->period ."%' ) AS ap_merged
+                          WHERE s.ActualPayDate LIKE  '". $this->period ."%' ) AS ap_merged
                         ORDER BY ap_merged.FirstName";
     return $query_employees;
   }
