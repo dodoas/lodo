@@ -396,9 +396,8 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
         $_lib['form2']->car_menu2(array('table' => $db_table, 'field' => 'CarID', 'value' => $voucher_input->CarID, 'tabindex' => $tmp, 'disabled' => $period_disabled, 'active_reference_date' => $voucher_input->VoucherDate, 'unset' => true));
       }
       elseif (isset($voucher_input->CarID)) {
-        $car_code_query = "select CarCode from car where CarID = $voucher_input->CarID";
-        $car_code_row = $_lib['storage']->get_row(array('query' => $car_code_query));
-        print $voucher_input->CarID . " " . $car_code_row->CarCode;
+        $registration = car::get_registrations($voucher_input->CarID);
+        print $voucher_input->CarID . " " . $registration[0]->RegistrationNumber;
       }
       ?>
     </td>
@@ -601,9 +600,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     $_lib['form2']->car_menu2($car_menu_conf);
   }
   elseif (isset($voucher->CarID)) {
-    $car_code_query = "select CarCode from car where CarID = $voucher->CarID";
-    $car_code_row = $_lib['storage']->get_row(array('query' => $car_code_query));
-    print $voucher->CarID . " " . $car_code_row->CarCode;
+    $registration = car::get_registrations($voucher->CarID);
+    print $voucher->CarID . " " . $registration[0]->RegistrationNumber;
   }
 ?>
       </td>

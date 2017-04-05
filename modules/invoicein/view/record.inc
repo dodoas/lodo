@@ -15,6 +15,19 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
             $_POST['invoicein_ProjectID_'.$invoicein->ID] = DB_NULL_PLACEHOLDER;
         }
 
+    foreach ($_POST as $key => $value) {
+      if (preg_match("/^invoiceinline_CarRegistrationID_(\d+)/", $key, $matches)) {
+        $lineid = $matches[1];
+        if($value) {
+          $car_id_query = "SELECT CarID FROM carregistration WHERE CarRegistrationID = '$value';";
+          $car_id = $_lib["db"]->db_fetch_object($_lib["db"]->db_query($car_id_query))->CarID;
+        } else {
+          $car_id = null;
+        }
+        $_POST["invoiceinline_CarID_$lineid"] = $car_id;
+      }
+    }
+
     $invoice_date = $_POST['invoicein_InvoiceDate_' . $invoicein->ID];
     $Period = substr($invoice_date, 0, 7);
     if ($accounting->is_valid_accountperiod($Period, $_lib['sess']->get_person('AccessLevel'))) {

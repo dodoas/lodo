@@ -720,8 +720,10 @@ class altinn_report {
           } else {
             // if it isn't a car pool you must have a registration number
             // Error is: Car registration number is not set for car id' . $salary_line->FreeCarID;
-            self::checkIfEmpty($car->CarCode, 'Bil: Registerings nr er ikke satt p&aring; bil id ' . $salary_line->FreeCarID);
-            $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['bilregistreringsnummer'] = $car->CarCode;
+            $car_code = car::get_registrations($salary_line->FreeCarID);
+            $car_code = $car_code[0]->RegistrationNumber;
+            self::checkIfEmpty($car_code, 'Bil: Registerings nr er ikke satt p&aring; bil id ' . $salary_line->FreeCarID);
+            $inntekt['inntekt']['loennsinntekt']['tilleggsinformasjon']['bilOgBaat']['bilregistreringsnummer'] = $car_code;
           }
 
         }

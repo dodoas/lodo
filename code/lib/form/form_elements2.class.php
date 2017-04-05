@@ -590,11 +590,18 @@ class form2 {
       global $_lib;
       includelogic("car/car");
       $restrict_car = "";
-      if ($args['value']) $restrict_car = " OR CarID = ". $args['value'];
+      if ($args['value']) {
+        if(!$args['car_registration_menu']) $restrict_car = " OR car.CarID = ". $args['value'];
+        else $restrict_car = " OR reg.CarRegistrationID = ". $args['value'];
+      }
       $reference_date = $args['active_reference_date'] ? $args['active_reference_date'] : date("Y-m-d");
       $active_sql = car::car_active_sql("car.CarID", $reference_date);
       $active_restriction = !$args['all_cars'] ? " AND ". $active_sql ." = 1 " : "";
-      $query = "SELECT CarID, CarName, CarCode, ". $active_sql ." as Active FROM car WHERE 1 = 1 ". $active_restriction . $restrict_car . " ORDER BY CarID";
+      if(!$args['car_registration_menu']) {
+        $query = "SELECT CarID, CarName, (SELECT RegistrationNumber FROM carregistration WHERE CarID = car.CarID ORDER BY CarRegistrationID DESC LIMIT 1) as CarCode, ". $active_sql ." as Active FROM car WHERE 1 = 1 ". $active_restriction . $restrict_car . " ORDER BY CarID";
+      } else {
+        $query = "SELECT car.CarID, car.CarName, reg.CarRegistrationID, reg.RegistrationNumber as CarCode, ". $active_sql ." as Active FROM car JOIN carregistration reg ON car.CarID = reg.CarID WHERE 1 = 1 ". $active_restriction . $restrict_car . " ORDER BY car.CarID, CarRegistrationID DESC";
+      }
       $result = $_lib['db']->db_query($query);
       if($args['num_letters']) {
         $num_letters = $args['num_letters'];
@@ -607,24 +614,35 @@ class form2 {
         if($args[pk]) {
           $print .= "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
         } else {
-          $print .= "<select name=\"$args[table].$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+          $print .= "<select name=\"$args[table].$args[field]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
         }
       } else {
         if($args[pk]) {
           $print .= "<select name=\"$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
         } else {
-          $print .= "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+          $print .= "<select name=\"$args[field]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
         }
       }
 
       if($args['value']) {
-        $car_exists_query = "SELECT * FROM car WHERE CarID = ".$args['value'];
-        $rs = $_lib['db']->db_query($car_exists_query);
-        $car_exists = $_lib['db']->db_fetch_object($rs) != null;
-        if(!$car_exists) {
-          $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
+        if(!$args['car_registration_menu']) {
+          $car_exists_query = "SELECT * FROM car WHERE CarID = ".$args['value'];
+          $rs = $_lib['db']->db_query($car_exists_query);
+          $car_exists = $_lib['db']->db_fetch_object($rs) != null;
+          if(!$car_exists) {
+            $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
+          } else {
+            $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
+          }
         } else {
-          $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
+          $car_exists_query = "SELECT * FROM car JOIN carregistration reg ON car.CarID = reg.CarID WHERE reg.CarRegistrationID = ".$args['value'];
+          $rs = $_lib['db']->db_query($car_exists_query);
+          $car_exists = $_lib['db']->db_fetch_object($rs) != null;
+          if(!$car_exists) {
+            $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
+          } else {
+            $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
+          }
         }
       } else {
         $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
@@ -632,10 +650,17 @@ class form2 {
       while($_row = $_lib['db']->db_fetch_object($result)) {
           $inaktive = ($_row->Active) ? '' : 'INAKTIV ';
           $name     = ($_row->CarID) ? $_row->CarCode : $_row->CarName;
-          if($_row->CarID == $args[value])
-              $print .= "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
-          else
-              $print .= "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+          if(!$args['car_registration_menu']) {
+            if($_row->CarID == $args[value])
+                $print .= "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+            else
+                $print .= "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+          } else {
+            if($_row->CarRegistrationID == $args[value])
+                $print .= "<option value=\"$_row->CarRegistrationID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+            else
+                $print .= "<option value=\"$_row->CarRegistrationID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+          }
       }
 
       $print .= "</select>\n";

@@ -435,18 +435,19 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
   if($accountplan->EnableCar) {
     $car_menu_conf = array(
       'table'                 => $db_table2,
-      'field'                 => 'CarID',
+      'field'                 => 'CarRegistrationID',
       'pk'                    => $LineID,
-      'value'                 => $row2->CarID,
+      'value'                 => $row2->CarRegistrationID,
       'tabindex'              => $tabindex++,
+      'car_registration_menu' => true,
       'active_reference_date' => substr($invoicein->InvoiceDate,0,10)
     );
     $_lib['form2']->car_menu2($car_menu_conf);
   }
   elseif (isset($row2->CarID)) {
-    $car_code_query = "select CarCode from car where CarID = $row2->CarID";
+    $car_code_query = "select RegistrationNumber from carregistration where CarRegistrationID = $row2->CarRegistrationID";
     $car_code_row = $_lib['storage']->get_row(array('query' => $car_code_query));
-    print $row2->CarID . " " . $car_code_row->CarCode;
+    print $row2->CarID . " " . $car_code_row->RegistrationNumber;
   }
 ?></td>
         <td align="center"><? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table2, 'field'=>'QuantityDelivered', 'pk'=>$LineID, 'value'=>$row2->QuantityDelivered, 'width'=>'8', 'tabindex'=>$tabindex++, 'class'=>'number')) ?></td>
