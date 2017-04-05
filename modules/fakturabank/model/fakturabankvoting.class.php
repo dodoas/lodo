@@ -396,7 +396,7 @@ class lodo_fakturabank_fakturabankvoting {
 
             /* remove trailing -F from invoices starting with L */
             if($lineH['InvoiceNumber'][0] == 'L') {
-                $lineH['InvoiceNumber'] = preg_replace("/(L\d+)(-F)?-\d+/", "\\1",$lineH['InvoiceNumber']);
+                $lineH['InvoiceNumber'] = preg_replace("/(L\d+)(-F)?-\d+/", "\\1\\2",$lineH['InvoiceNumber']);
             }
 
             $lineH['Comment'] = '';
