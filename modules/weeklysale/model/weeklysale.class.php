@@ -33,16 +33,16 @@ class weeklysale {
             print "Missing WeeklySaleID or WeeklySaleConfID<br />\n";
             #debug_print_backtrace();            
         }
-        
+
         $query_conf_head        = "select * from weeklysaleconf where WeeklySaleConfID = " . (int) $WeeklySaleConfID . " limit 1";
         #print "q1: $query_conf_head<br />\n";
         $this->sale_conf_head   = $_lib['storage']->get_row(array('query' => $query_conf_head));
-        
+
         $query_sale_conf        = "select * from weeklysalegroupconf where WeeklySaleConfID = " . (int) $WeeklySaleConfID . " and Type=1 limit 1";
         #print "q2: $query_sale_conf<br />\n";
         $this->sale_conf        = $_lib['storage']->get_row(array('query' => $query_sale_conf));
         //$_lib['sess']->debug($query_sale_conf);
-        
+
         $query_revenue_conf     = "select * from weeklysalegroupconf where WeeklySaleConfID = " . (int) $WeeklySaleConfID . " and Type=2 limit 1";
         #print "q3: $query_revenue_conf<br />\n";
         $this->revenue_conf     = $_lib['storage']->get_row(array('query' => $query_revenue_conf));
@@ -178,7 +178,7 @@ class weeklysale {
                 $this->salehead['project'][$i] = $this->projectname($this->sale_conf->{$projectfield}); 
             else
                 $this->salehead['project'][$i] = '';
-          
+
             if($this->sale_conf->{$departmentfield} && $account->EnableDepartment)
                 $this->salehead['department'][$i]  = $this->departmentname($this->sale_conf->{$departmentfield});
             else 
@@ -186,7 +186,7 @@ class weeklysale {
 
             $this->salehead['enablequantity'][$i]   = $account->EnableQuantity;
         }
-        
+
         #Hvorfor skal disse hardkodes? TE
         #$this->salehead['project'][14] = $this->projectname(14);
         #$this->salehead['project'][15] = $this->projectname(15);
@@ -215,12 +215,12 @@ class weeklysale {
 	    if(is_array($this->revenuehead['groups'])) {
 	        foreach($this->revenuehead['groups'] as $name => $i) {
                     $amount = "Group{$i}Amount";
-                
+
                     $this->revenuehead['sumday'][$revenue->ParentWeeklySaleDayID]     += $revenue->{$amount}; #MERK: MŒ endres fra dayid for Œ summere riktig
                     $this->revenuehead['sumgroup'][$i]              += $revenue->{$amount};                
                 }
 	    }
-            
+
             if(!isset($this->revenuehead['sumday'][$revenue->ParentWeeklySaleDayID])) { $this->revenuehead['sumday'][$revenue->ParentWeeklySaleDayID] = 0; };
             $this->head->sum18 = $this->revenuehead['sumday'][$revenue->ParentWeeklySaleDayID] - $this->revenuehead['sumday'][$revenue->ParentWeeklySaleDayID]; #Kontant
 
@@ -310,7 +310,7 @@ class weeklysale {
         global $_lib;
 
         if(isset($DepartmentID)) {
-            $query="select * from department where epartmentID=" . (int) $DepartmentID;
+            $query="select * from department where DepartmentID=" . (int) $DepartmentID;
             $row = $_lib['storage']->get_row(array('query' => $query));
             $departmentname = $DepartmentID ."-" . substr($row->DepartmentName,0,7);
         }
