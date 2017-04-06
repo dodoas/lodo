@@ -134,7 +134,7 @@ while($row = $_lib['db']->db_fetch_object($altinn_report_4_result)) {
     $xml = simplexml_load_string($file_contents);
     $recieved_messages = $xml->Mottak->mottattLeveranse;
     $altinn_row['aga_amount'] = $xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumArbeidsgiveravgift;
-    $altinn_row['ftr_amount'] = $xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumForskuddstrekk;
+    $altinn_row['ftr_amount'] = -$xml->Mottak->mottattPeriode->mottattAvgiftOgTrekkTotalt->sumForskuddstrekk;
   }
 
   // Sum up for all the months
@@ -319,6 +319,74 @@ if (current($balance_accounts_to_sum)) {
     ksort($voucher_accounts_sum[$accountplan_id]);
     ksort($voucher_accounts_aga_sum[$accountplan_id]);
   }
+  // Sum of all except FTR
+  $sum_all_accounts_for_period = array();
+  $sum_all_accounts_aga_for_period = array();
+  // set 0 for extra, salaries from other years
+  $sum_all_accounts_for_period['extra'] = 0;
+  $sum_all_accounts_aga_for_period['extra'] = 0;
+  // Extra salaries amounts by account
+  $extra_salaries_sums_by_account = array();
+  foreach (($balance_accounts_to_sum + $result_accounts_to_sum) as $accountplan_id => $accountplan_name) {
+    $extra_voucher_accounts_sum[$accountplan_id] = 0;
+    $extra_voucher_accounts_aga_sum[$accountplan_id] = 0;
+    $extra_salary_query = "
+      SELECT
+        v.JournalID,
+        YEAR(s.ActualPayDate) AS AltinnReportedYear,
+        v.AmountIn,
+        v.AmountOut,
+        ROUND(IF(v.AccountPlanID IN (" . implode(', ', array_keys($balance_accounts_to_sum)) . "), aga.Percent, $company_aga_percent)/100, 5) AS AGAPercent
+      FROM
+        voucher v
+        LEFT JOIN
+        salary s
+        ON v.JournalID = s.JournalID
+        LEFT JOIN
+        kommune k
+        ON s.KommuneID = k.KommuneID
+        LEFT JOIN
+        arbeidsgiveravgift aga
+        ON k.Sone = aga.Code
+      WHERE
+        v.JournalID IN (
+          SELECT
+            DISTINCT(SalaryJournalID)
+          FROM
+            salaryreportaccount
+          WHERE
+            Year = $ReportYear AND
+            SalaryJournalID IS NOT NULL
+        ) AND
+        v.AccountplanID = $accountplan_id AND
+        v.Active = 1
+    ";
+    $extra_salary_result = $_lib['db']->db_query($extra_salary_query);
+    while($extra_salary = $_lib['db']->db_fetch_object($extra_salary_result)) {
+      $extra_account_sum = $extra_salary->AmountIn - $extra_salary->AmountOut;
+      $extra_account_aga_sum = round($extra_account_sum * $extra_salary->AGAPercent, 2);
+      if ($ReportYear < $extra_salary->AltinnReportedYear) {
+        $extra_account_sum = -$extra_account_sum;
+        $extra_account_aga_sum = -$extra_account_aga_sum;
+      }
+      if ($accountplan_id >= 3000) {
+        $sum_all_accounts_for_period['extra'] += $extra_account_sum;
+        $sum_all_accounts_aga_for_period['extra'] += $extra_account_aga_sum;
+      }
+      if (!isset($extra_voucher_accounts_sum[$accountplan_id])) {
+        $extra_voucher_accounts_sum[$accountplan_id] = 0;
+      }
+      if (!isset($extra_voucher_accounts_aga_sum[$accountplan_id])) {
+        $extra_voucher_accounts_aga_sum[$accountplan_id] = 0;
+      }
+      $extra_voucher_accounts_sum[$accountplan_id] += $extra_account_sum;
+      $extra_voucher_accounts_aga_sum[$accountplan_id] += $extra_account_aga_sum;
+      if (!isset($extra_salaries_sums_by_account[$extra_salary->JournalID])) {
+        $extra_salaries_sums_by_account[$extra_salary->JournalID] = array();
+      }
+      $extra_salaries_sums_by_account[$extra_salary->JournalID][$accountplan_id] = $extra_account_sum;
+    }
+  }
   ?>
 
   <table class="lodo_data">
@@ -342,9 +410,6 @@ if (current($balance_accounts_to_sum)) {
     </tr>
 
   <?
-  // Sum of all except FTR
-  $sum_all_accounts_for_period = array();
-  $sum_all_accounts_aga_for_period = array();
   // Sum by account for all periods
   $yearly_sum_by_account = array();
   // Initiate all sums to 0
@@ -487,7 +552,144 @@ if (current($balance_accounts_to_sum)) {
       <th class="number"><? print $_lib['format']->Amount($sums['bookkept_ftr']); ?></th>
       <th class="number"><? print $_lib['format']->Amount($sums['diff_ftr']); ?></th>
     </tr>
+  <?php
+  // Extra, salaries from other years
+  $period = 'extra';
+  // Diff between salary and pension reported and bookkept
+  $altinn_salary_and_pension_amount = 0;
+  $lodo_salary_and_pension_amount = $sum_all_accounts_for_period[$period];
+  $altinn_lodo_diff_amount = $altinn_salary_and_pension_amount - $lodo_salary_and_pension_amount;
+  $sums['salary_pension_diff'] += $altinn_lodo_diff_amount;
+
+  // Diff between AGA/FTR reported and bookkept
+  $reported_aga_amount = 0;
+  $sums['reported_aga'] += $reported_aga_amount;
+  $bookkept_aga_amount = $sum_all_accounts_aga_for_period[$period];
+  $sums['bookkept_aga'] += $bookkept_aga_amount;
+  $diff_aga_amount = $reported_aga_amount - $bookkept_aga_amount;
+  $sums['diff_aga'] += $diff_aga_amount;
+  $reported_ftr_amount = 0;
+  $sums['reported_ftr'] += $reported_ftr_amount;
+  $bookkept_ftr_amount = $extra_voucher_accounts_sum[$ftr_accountplan_id];
+  $sums['bookkept_ftr'] += $bookkept_ftr_amount;
+  $diff_ftr_amount = $reported_ftr_amount - $bookkept_ftr_amount;
+  $sums['diff_ftr'] += $diff_ftr_amount;
+  ?>
+    <tr>
+      <td>Other years</td>
+      <td class="number"><? print $_lib['format']->Amount($altinn_lodo_diff_amount); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($sums['salary_pension_diff']); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($reported_aga_amount); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($bookkept_aga_amount); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($diff_aga_amount); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($reported_ftr_amount); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($bookkept_ftr_amount); ?></td>
+      <td class="number"><? print $_lib['format']->Amount($diff_ftr_amount); ?></td>
+    </tr>
+  <?
+  // Sum columns for all periods
+  ?>
+    <tr>
+      <th>Sum</th>
+      <th class="number"><? print $_lib['format']->Amount($sums['salary_pension_diff']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['salary_pension_diff']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['reported_aga']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['bookkept_aga']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['diff_aga']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['reported_ftr']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['bookkept_ftr']); ?></th>
+      <th class="number"><? print $_lib['format']->Amount($sums['diff_ftr']); ?></th>
+    </tr>
   </table>
+
+  <br/><br/>
+
+  <table class="lodo_data">
+    <tr>
+      <th class="menu">Salary</th>
+  <?
+  foreach($result_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
+      <th class="menu"><?= $accountplan_id . " " . $accountplan_name; ?></th>
+  <?
+  }
+  ?>
+      <th class="menu">Sum</th>
+  <?
+  foreach($balance_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
+      <th class="menu"><?= $accountplan_id . " " . $accountplan_name; ?></th>
+  <?
+  }
+  ?>
+    </tr>
+
+  <?
+  // Sum by account for all salaries
+  $salary_sum_by_account = array();
+  // Initiate all sums to 0
+  $sum_all_accounts_for_salary = array();
+  foreach ($extra_salaries_sums_by_account as $JournalID => $salary) {
+    $sum_all_accounts_for_salary[$JournalID] = 0;
+  ?>
+    <tr>
+      <td><? print "L".$JournalID; ?></td>
+  <?
+    foreach ($result_accounts_to_sum as $accountplan_id => $accountplan_name) {
+      $amount = -$salary[$accountplan_id];
+      // If nothing set, set to 0
+      if (!isset($salary_sum_by_account[$accountplan_id])) $salary_sum_by_account[$accountplan_id] = 0;
+      $salary_sum_by_account[$accountplan_id] += $amount;
+      $sum_all_accounts_for_salary[$JournalID] += $amount;
+
+      
+  ?>
+      <td class="number"><? print $_lib['format']->Amount($amount); ?></td>
+  <?
+    }
+    // Sum all
+    // If nothing set, set to 0
+    if (!isset($salary_sum_by_account['sum'])) $salary_sum_by_account['sum'] = 0;
+    $salary_sum_by_account['sum'] += $sum_all_accounts_for_salary[$JournalID];
+  ?>
+      <td class="number"><? print $_lib['format']->Amount($sum_all_accounts_for_salary[$JournalID]); ?></td>
+  <?
+    foreach ($balance_accounts_to_sum as $accountplan_id => $accountplan_name) {
+      $amount = -$salary[$accountplan_id];
+      // If nothing set, set to 0
+      if (!isset($salary_sum_by_account[$accountplan_id])) $salary_sum_by_account[$accountplan_id] = 0;
+      $salary_sum_by_account[$accountplan_id] += $amount;
+  ?>
+      <td class="number"><? print $_lib['format']->Amount($amount); ?></td>
+  <?
+    }
+  ?>
+    </tr>
+  <?
+  }
+  // Sums for all extra salaries
+  ?>
+    <tr>
+      <th>Sum extra salaries</th>
+  <?
+  foreach($result_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
+      <th class="number"><? print $_lib['format']->Amount($salary_sum_by_account[$accountplan_id]); ?></th>
+  <?
+  }
+  ?>
+      <th class="number"><? print $_lib['format']->Amount($salary_sum_by_account['sum']); ?></th>
+  <?
+  foreach($balance_accounts_to_sum as $accountplan_id => $accountplan_name) {
+  ?>
+      <th class="number"><? print $_lib['format']->Amount($salary_sum_by_account[$accountplan_id]); ?></th>
+  <?
+  }
+  ?>
+    </tr>
+  </table>
+
+  <br/><br/>
   <?php
 } else {
 ?>
