@@ -114,6 +114,6 @@ print $_lib['form3']->Input($add_account_button_config);
 ?>
   </form>
   <br/><br/>
-  <a href="<?= $_lib['sess']->dispatch; ?>report_Year=<?= $report_year; ?>&t=report.altinn_report1">Tilbake til rapport</a>
+  <a href="<?= $_lib['sess']->dispatch; ?>report_Year=<?= $report_year; ?>&t=report.altinn_yearly_report_amelding">Tilbake til rapport</a>
 </body>
 </html>

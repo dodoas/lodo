@@ -503,7 +503,7 @@ print $_lib['sess']->doctype ?>
 </tr>
 </form>
 
-<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.altinn_report1" method="post" target="_blank">
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.altinn_yearly_report_amelding" method="post" target="_blank">
 <tr>
     <td>Altinn A-melding</td>
     <td>Velg &aring;r</td>

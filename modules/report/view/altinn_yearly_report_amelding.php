@@ -154,6 +154,7 @@ while($row = $_lib['db']->db_fetch_object($altinn_report_4_result)) {
       $altinn_rows[$row->Period]['aga_amount'] += $altinn_row['aga_amount'];
       $altinn_rows[$row->Period]['altinn_reference'] .= ', ' . $altinn_row['altinn_reference'];
       $altinn_rows[$row->Period]['ftr_amount'] += $altinn_row['ftr_amount'];
+      $altinn_rows[$row->Period]['pension_amount'] += $altinn_row['pension_amount'];
     }
   }
 }
@@ -163,6 +164,7 @@ foreach($months as $month) {
   if (!isset($altinn_rows[$ReportYear . '-' . $month])) {
       $altinn_rows[$ReportYear . '-' . $month]['aga_amount'] = 0;
       $altinn_rows[$ReportYear . '-' . $month]['ftr_amount'] = 0;
+      $altinn_rows[$ReportYear . '-' . $month]['pension_amount'] = 0;
   }
 }
 // Sort array by key(period)
@@ -171,7 +173,7 @@ ksort($altinn_rows);
 
 <? print $_lib['sess']->doctype ?>
 <head>
-  <title>Altinn <?= $ReportYear; ?> årlig rapport</title>
+  <title>Altinn A-melding <?= $ReportYear; ?></title>
   <? includeinc('head') ?>
   <style>
     table.lodo_data td, table.lodo_data th {
@@ -182,7 +184,7 @@ ksort($altinn_rows);
 <body>
   <? includeinc('top') ?>
   <? includeinc('left') ?>
-  <h2>Altinn <?= $ReportYear; ?> årlig rapport</h2>
+  <h2>Altinn A-melding <?= $ReportYear; ?></h2>
   <table class="lodo_data">
     <tr>
       <th class="menu">Periode</th>
@@ -232,7 +234,7 @@ foreach($altinn_rows as $period => $row) {
     </tr>
   </table>
   <br/>
-  <a href="<?= $_lib['sess']->dispatch; ?>report_Year=<?= $ReportYear; ?>&t=report.altinn_report1_setup">Kontooppsett</a>
+  <a href="<?= $_lib['sess']->dispatch; ?>report_Year=<?= $ReportYear; ?>&t=report.altinn_yearly_report_amelding_setup">Kontooppsett</a>
   <br/>
   <br/>
 
@@ -250,8 +252,8 @@ $accounts_for_report_query = "
   FROM
     accountsforaltinnreport afar
     LEFT JOIN
-    accountplan ap
-    ON ap.AccountPlanID = afar.AccountPlanID
+      accountplan ap
+      ON ap.AccountPlanID = afar.AccountPlanID
   WHERE
     afar.Active = 1 AND
     afar.AccountPlanID != 0";
@@ -275,11 +277,11 @@ if (current($balance_accounts_to_sum)) {
     FROM
       company c
       LEFT JOIN
-      kommune k
-      ON c.CompanyMunicipalityID = k.KommuneID
+        kommune k
+        ON c.CompanyMunicipalityID = k.KommuneID
       LEFT JOIN
-      arbeidsgiveravgift aga
-      ON k.Sone = aga.Code
+        arbeidsgiveravgift aga
+        ON k.Sone = aga.Code
     WHERE
       c.CompanyID = $CompanyID";
   $company_aga_percent_row = $_lib['db']->get_row(array('query' => $company_aga_percent_query));
@@ -294,19 +296,19 @@ if (current($balance_accounts_to_sum)) {
     $account_sum_query = "
       SELECT
         v.VoucherPeriod AS Period,
-        SUM( v.AmountIn - v.AmountOut ) AS Sum,
-        SUM( (v.AmountIn - v.AmountOut) * IF(v.AccountPlanID IN (" . implode(', ', array_keys($balance_accounts_to_sum)) . "), aga.Percent, $company_aga_percent)/100) AS AGASum
+        SUM(v.AmountIn - v.AmountOut) AS Sum,
+        SUM((v.AmountIn - v.AmountOut) * COALESCE(aga.Percent, $company_aga_percent)/100) AS AGASum
       FROM
         voucher v
         LEFT JOIN
-        salary s
-        ON v.JournalID = s.JournalID
+          salary s
+          ON v.JournalID = s.JournalID
         LEFT JOIN
-        kommune k
-        ON s.KommuneID = k.KommuneID
+          kommune k
+          ON s.KommuneID = k.KommuneID
         LEFT JOIN
-        arbeidsgiveravgift aga
-        ON k.Sone = aga.Code
+          arbeidsgiveravgift aga
+          ON k.Sone = aga.Code
       WHERE
         v.VoucherPeriod LIKE  '$ReportYear-%' AND
         v.AccountplanID = $accountplan_id AND
@@ -356,18 +358,18 @@ if (current($balance_accounts_to_sum)) {
         YEAR(s.JournalDate) AS JournalYear,
         v.AmountIn,
         v.AmountOut,
-        ROUND(IF(v.AccountPlanID IN (" . implode(', ', array_keys($balance_accounts_to_sum)) . "), aga.Percent, $company_aga_percent)/100, 5) AS AGAPercent
+        ROUND(COALESCE(aga.Percent, $company_aga_percent)/100, 5) AS AGAPercent
       FROM
         voucher v
         LEFT JOIN
-        salary s
-        ON v.JournalID = s.JournalID
+          salary s
+          ON v.JournalID = s.JournalID
         LEFT JOIN
-        kommune k
-        ON s.KommuneID = k.KommuneID
+          kommune k
+          ON s.KommuneID = k.KommuneID
         LEFT JOIN
-        arbeidsgiveravgift aga
-        ON k.Sone = aga.Code
+          arbeidsgiveravgift aga
+          ON k.Sone = aga.Code
       WHERE
         v.JournalID IN (
           SELECT
@@ -396,24 +398,12 @@ if (current($balance_accounts_to_sum)) {
           $sum_all_accounts_for_period['extra_prev'] += $extra_account_sum;
           $sum_all_accounts_aga_for_period['extra_prev'] += $extra_account_aga_sum;
         }
-        if (!isset($extra_voucher_accounts_sum['prev'][$accountplan_id])) {
-          $extra_voucher_accounts_sum['prev'][$accountplan_id] = 0;
-        }
-        if (!isset($extra_voucher_accounts_aga_sum['prev'][$accountplan_id])) {
-          $extra_voucher_accounts_aga_sum['prev'][$accountplan_id] = 0;
-        }
         $extra_voucher_accounts_sum['prev'][$accountplan_id] += $extra_account_sum;
         $extra_voucher_accounts_aga_sum['prev'][$accountplan_id] += $extra_account_aga_sum;
       } elseif ($extra_salary->JournalYear == $ReportYear) {
         if ($accountplan_id >= 3000) {
           $sum_all_accounts_for_period['extra_next'] += $extra_account_sum;
           $sum_all_accounts_aga_for_period['extra_next'] += $extra_account_aga_sum;
-        }
-        if (!isset($extra_voucher_accounts_sum['next'][$accountplan_id])) {
-          $extra_voucher_accounts_sum['next'][$accountplan_id] = 0;
-        }
-        if (!isset($extra_voucher_accounts_aga_sum['next'][$accountplan_id])) {
-          $extra_voucher_accounts_aga_sum['next'][$accountplan_id] = 0;
         }
         $extra_voucher_accounts_sum['next'][$accountplan_id] += $extra_account_sum;
         $extra_voucher_accounts_aga_sum['next'][$accountplan_id] += $extra_account_aga_sum;
@@ -468,8 +458,6 @@ if (current($balance_accounts_to_sum)) {
       $yearly_sum_by_account[$accountplan_id] += $amount;
       $sum_all_accounts_for_period[$period] += $amount;
       $sum_all_accounts_aga_for_period[$period] += $aga_amount;
-
-      
   ?>
       <td class="number"><? print $_lib['format']->Amount($amount); ?></td>
   <?
@@ -852,9 +840,6 @@ if (current($balance_accounts_to_sum)) {
   ?>
     </tr>
   </table>
-  <a href="<?= $_lib['sess']->dispatch ?>t=salary.employeereport&year=<?= $ReportYear ?>">L&oslash;nnsrapport for <?= $ReportYear ?></a>
-
-  <br/><br/>
   <?php
 } else {
 ?>
@@ -862,6 +847,6 @@ if (current($balance_accounts_to_sum)) {
 <?php
 }
 ?>
-
+  <a href="<?= $_lib['sess']->dispatch ?>t=salary.employeereport&year=<?= $ReportYear ?>">L&oslash;nnsrapport for <?= $ReportYear ?></a>
 </body>
 </html>
