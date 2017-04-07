@@ -257,7 +257,7 @@ print("<th><b>Kommentar</b></th>");
 print('</tr>');
 
 $accountreports = array();
-$accountreport_query = sprintf("SELECT sra.*, YEAR(s.JournalDate) AS JournalYear, s.SalaryID FROM salaryreportaccount sra JOIN salary s ON s.JournalID = sra.SalaryJournalID WHERE Year = %d", $year);
+$accountreport_query = sprintf("SELECT sra.*, YEAR(s.JournalDate) AS JournalYear, s.SalaryID FROM salaryreportaccount sra LEFT JOIN salary s ON s.JournalID = sra.SalaryJournalID WHERE Year = %d", $year);
 $accountreport_r = $_lib['db']->db_query($accountreport_query);
 while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
     $account_query = sprintf("SELECT AccountName FROM accountplan WHERE AccountPlanID = %d", $row['AccountPlanID']);

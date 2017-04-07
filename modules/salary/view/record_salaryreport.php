@@ -44,14 +44,14 @@ else if(isset($_POST['add_report_account'])) {
                 , $_POST['reportaccount_accountplanid']);
     $res = $_lib['db']->db_fetch_object($_lib['db']->db_query($q));
 
-    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`, `DifferentYear`, `Feriepengeprosent`, `AGAprosent`, `SalaryJournalID`) VALUES ('%s', '%d', '%s', '%d', '%s', '%s', '%s');"
+    $query = sprintf("INSERT INTO salaryreportaccount (`Year`, `AccountPlanID`, `Comment`, `DifferentYear`, `Feriepengeprosent`, `AGAprosent`, `SalaryJournalID`) VALUES ('%s', '%d', '%s', '%d', '%s', '%s', %s);"
                     , mysql_escape_string($_GET['year'])
                     , $_POST['reportaccount_accountplanid']
                     , mysql_escape_string($_POST['comment'])
                     , $_POST['DifferentYear'] === "on" ? 1 : 0
                     , $res->Feriepengeprosent
                     , $res->Percent
-                    , $_POST['reportaccount_SalaryJournalID']);
+                    , (empty($_POST['reportaccount_SalaryJournalID'])) ? 'NULL' : $_POST['reportaccount_SalaryJournalID']);
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
 

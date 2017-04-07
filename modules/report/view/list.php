@@ -505,7 +505,7 @@ print $_lib['sess']->doctype ?>
 
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.altinn_report1" method="post" target="_blank">
 <tr>
-    <td>Altinn report 1</td>
+    <td>Altinn A-melding</td>
     <td>Velg &aring;r</td>
     <td>
         <?
