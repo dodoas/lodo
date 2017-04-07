@@ -133,7 +133,8 @@ print('<td>');
 print $_lib['form3']->text(
   array(
     'table' => 'reportaccount',
-    'field' => 'SalaryJournalID'
+    'field' => 'SalaryJournalID',
+    'tabindex' => 0
   )
 );
 print('</td>');

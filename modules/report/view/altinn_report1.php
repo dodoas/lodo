@@ -173,6 +173,11 @@ ksort($altinn_rows);
 <head>
   <title>Altinn <?= $ReportYear; ?> årlig rapport</title>
   <? includeinc('head') ?>
+  <style>
+    table.lodo_data td, table.lodo_data th {
+      border: 1px solid #888888;
+    }
+  </style>
 </head>
 <body>
   <? includeinc('top') ?>
