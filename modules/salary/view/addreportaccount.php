@@ -65,13 +65,15 @@ function updateAmountsFromSalariesArray() {
       || (salaries[salary_journal_id]['AlltinReportedYear'] != report_year);
     var different_year_checkbox_element = document.getElementById('DifferentYear');
     if (different_year) {
-      different_year_checkbox_element.checked = 'checked';
+      different_year_checkbox_element.checked = true;
       // console.log("Different Year");
+    } else {
+      different_year_checkbox_element.checked = false;
     }
     var negate_amounts = 
       (salaries[salary_journal_id]['VoucherCreatedYear'] == report_year)
       && (salaries[salary_journal_id]['AlltinReportedYear'] > report_year);
-    if (negate_amounts) console.log("Negate");
+    // if (negate_amounts) console.log("Negate");
     var salary_acccountplan_id = salaries[salary_journal_id]['AccountPlanID'];
     var salary_acccountplan_element = document.getElementsByName('reportaccount.accountplanid')[0];
     var accountplan_options = salary_acccountplan_element.options;
@@ -114,7 +116,7 @@ function updateAmountsFromSalariesArray() {
 printf('<form action="%st=salary.employeereport&year=%d" method="post">', $_lib['sess']->dispatch, $year);
 printf('<input type="hidden" value="%d" name="SalaryReportAccountID" />', $salaryreportaccountid);
 
-print('<table><tr><th>konto</th><th>l&oslash;nn</th>');
+print('<table><tr><th>Konto</th><th>L&oslash;nn</th>');
 
 foreach($codes as $c) {
     printf('<th>%s</th>', $c);

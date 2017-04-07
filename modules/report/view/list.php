@@ -514,7 +514,7 @@ print $_lib['sess']->doctype ?>
             $aconf['field']     = 'Year';
             $aconf['type']      = 'PosibleSalaryYears';
             $aconf['required']  = true;
-            $aconf['value']      = $thisYear;
+            $aconf['value']     = $thisYear;
             print $_lib['form3']->Type_menu3($aconf);
         ?>
     </td>

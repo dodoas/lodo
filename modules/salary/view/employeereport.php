@@ -333,18 +333,15 @@ $sum_account_prev = array();
 $sum_account_next = array();
 foreach($codes as $c) {
     $sum_prev = 0;
-    foreach($accountreports as $accountreport) {
-        if(intval($accountreport['DifferentYear']) === 0) continue;
-        if($accountreport['JournalYear'] != ($year-1)) continue;
-        $sum_prev += $accountreport['amounts'][$c];
-    }
     $sum_next = 0;
     foreach($accountreports as $accountreport) {
         if(intval($accountreport['DifferentYear']) === 0) continue;
-        if($accountreport['JournalYear'] != $year) continue;
-        $sum_next += $accountreport['amounts'][$c];
+        if($accountreport['JournalYear'] == ($year-1)) {
+          $sum_prev += $accountreport['amounts'][$c];
+        } elseif($accountreport['JournalYear'] == $year) {
+          $sum_next += $accountreport['amounts'][$c];
+        }
     }
-
     $sum_account_prev[$c] = $sum_prev;
     $sum_account_next[$c] = $sum_next;
 
