@@ -228,7 +228,7 @@ function create_diff($InvoiceID, $KID, $JournalID, $AccountPlanID, $BankVoucherA
     }
 }
 $CheckedJournalIDsAccountline = $bank->checkJournalIDAccountline($bank->ThisPeriod);
-$CheckedJournalIDsVoucher     = $bank->checkJournalIDVoucher('B');
+$CheckedJournalIDsVoucher     = $bank->checkJournalIDVoucher();
 ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
