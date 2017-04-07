@@ -21,6 +21,7 @@ $salary_lines_query = "
     s.AccountPlanID,
     sl.SalaryCode,
     sl.AmountThisPeriod,
+    sl.EnableVacationPayment,
     YEAR(s.JournalDate) AS VoucherCreatedYear,
     YEAR(s.ActualPayDate) AS AlltinReportedYear
   FROM salaryline sl JOIN salary s ON s.SalaryID = sl.SalaryID
@@ -32,6 +33,7 @@ while ($salary_line = $_lib['db']->db_fetch_object($salary_lines_result)) {
 var salary_journal_id = <?= json_encode($salary_line->JournalID); ?>;
 var salary_line_code = <?= json_encode($salary_line->SalaryCode); ?>;
 var salary_line_amount = <?= $salary_line->AmountThisPeriod ?>;
+var salary_line_vacation_money = <?= $salary_line->EnableVacationPayment ?>;
 if (!salaries.hasOwnProperty(salary_journal_id)) {
   salaries[salary_journal_id] = [];
   salaries[salary_journal_id]['AccountPlanID'] = <?= $salary_line->AccountPlanID ?>;
@@ -42,6 +44,12 @@ if (!salaries[salary_journal_id].hasOwnProperty(salary_line_code)) {
   salaries[salary_journal_id][salary_line_code] = 0;
 }
 salaries[salary_journal_id][salary_line_code] += salary_line_amount;
+if (!salaries[salary_journal_id].hasOwnProperty('000')) {
+  salaries[salary_journal_id]['000'] = 0;
+}
+if (salary_line_vacation_money == 1) {
+  salaries[salary_journal_id]['000'] += salary_line_amount;
+}
 <?php
   }
 }

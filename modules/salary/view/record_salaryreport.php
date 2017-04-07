@@ -75,8 +75,8 @@ else if(isset($_POST['edit_report_account'])) {
                     , $_POST['reportaccount_accountplanid']
                     , $_POST['comment']
                     , $_POST['DifferentYear'] === "on" ? 1 : 0
-                    , $res->Feriepengeprosent
-                    , $res->Percent
+                    , (int)$res->Feriepengeprosent
+                    , (int)$res->Percent
                     , $_POST['SalaryReportAccountID']);
     $_lib['db']->db_query($query);
 

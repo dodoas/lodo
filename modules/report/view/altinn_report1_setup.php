@@ -20,13 +20,13 @@ while ($row = $_lib['db']->db_fetch_object($accounts_for_altinn_report_result)) 
 ?>
 <html>
 <head>
-  <title>Altinn årlig rapport oppsett</title>
+  <title>Oppsett for altinnrapport</title>
   <? includeinc('head') ?>
 </head>
 <body>
   <? includeinc('top') ?>
   <? includeinc('left') ?>
-  <h2>Altinn årlig rapport oppsett</h2>
+  <h2>Oppsett for altinnrapport</h2>
   <form method="post">
 <?php
 if (!empty($accounts_for_altinn_report)) {
