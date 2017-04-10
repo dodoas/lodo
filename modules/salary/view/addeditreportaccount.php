@@ -1,6 +1,7 @@
 <?php
 include('reportcodes.php');
 $year = $_REQUEST['year'];
+$action = $_REQUEST['action'];
 $salaryreportaccountid = $_GET['SalaryReportAccountID'];
 ?>
 <head>
@@ -113,6 +114,29 @@ function updateAmountsFromSalariesArray() {
 
 
 <?php
+
+$report_query = sprintf("
+  SELECT *
+  FROM salaryreportaccount
+  WHERE SalaryReportAccountID = %d",
+  $salaryreportaccountid
+);
+$report_result = $_lib['db']->db_query($report_query);
+$report = $_lib['db']->db_fetch_object($report_result);
+$entries_query = sprintf("
+  SELECT *
+  FROM salaryreportaccountentries
+  WHERE SalaryReportAccountID = %d",
+  $salaryreportaccountid
+);
+$entries_result = $_lib['db']->db_query($entries_query);
+
+$entries = array();
+while($entry = $_lib['db']->db_fetch_object($entries_result)) {
+  $entries[$entry->Code] = $entry->Amount;
+}
+ksort($entries);
+
 printf('<form action="%st=salary.employeereport&year=%d" method="post">', $_lib['sess']->dispatch, $year);
 printf('<input type="hidden" value="%d" name="SalaryReportAccountID" />', $salaryreportaccountid);
 
@@ -125,28 +149,48 @@ foreach($codes as $c) {
 print('<th>Forskjellige &aring;r</th>');
 print('<th>Kommentar</th>');
 print('</tr><tr><td>');
-
-print $_lib['form3']->accountplan_number_menu(array('table' => 'reportaccount', 'field' => 'accountplanid',
-                                                    'value' => 10001, 'type' => array(0 => 'balance', 1 => 'result', 2 => 'employee')));
+$account_config = array(
+  'table' => 'reportaccount',
+  'field' => 'accountplanid',
+  'type' => array(
+    0 => 'balance',
+    1 => 'result',
+    2 => 'employee'
+  )
+);
+if ($action == 'edit') {
+  $account_config['value'] = $report->AccountPlanID;
+}
+print $_lib['form3']->accountplan_number_menu($account_config);
 print('</td>');
 
 print('<td>');
 
-print $_lib['form3']->text(
-  array(
-    'table' => 'reportaccount',
-    'field' => 'SalaryJournalID',
-    'tabindex' => 0
-  )
+$salary_journal_conf = array(
+  'table' => 'reportaccount',
+  'field' => 'SalaryJournalID',
+  'tabindex' => 0
 );
+if ($action == 'edit') {
+  $salary_journal_conf['value'] = $report->SalaryJournalID;
+}
+
+print $_lib['form3']->text($salary_journal_conf);
 print('</td>');
 
 foreach($codes as $c) {
-    printf('<td><input type="input" name="amounts[%s]" value="" /></td>', $c);
+  $amount = ($action == 'edit') ? $entries[$c] : '';
+  printf('<td><input type="input" name="amounts[%s]" value="%s" /></td>', $c, $amount);
 }
 
-print("<td><input type=\"checkbox\" id=\"DifferentYear\" name=\"DifferentYear\"/></td>");
-print('<td><input type="text" name="comment" value="" /></td>');
-print('<tr><td><input type="submit" name="add_report_account" value="Save" /></td></tr>');
+$different_year_checkbox_value = (intval($report->DifferentYear) === 1) ? 'checked' : '';
+printf("<td><input type=\"checkbox\" id=\"DifferentYear\" name=\"DifferentYear\" %s /></td>", $different_year_checkbox_value);
+$comment_value = ($action == 'edit') ? $report->Comment : '';
+printf('<td><input type="text" name="comment" value="%s" /></td>', $comment_value);
+$action_name = 'add_report_account';
+if ($action == 'edit') {
+  $action_name = 'edit_report_account';
+}
+printf('<tr><td><input type="submit" name="%s" value="Lagre" /></td></tr>', $action_name);
 print('<tr><td><input type="button" name="update_from_salary_journal_id" value="Oppdater fra l&oslash;nn automatisk" onclick="updateAmountsFromSalariesArray();" /></td></tr>');
 

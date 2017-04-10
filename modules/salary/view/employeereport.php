@@ -31,10 +31,10 @@ function print_values($codes, $line, $print_extra = true) {
             $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $line['LockedBy']);
             $r = $_lib['db']->db_query($query);
             $result = $_lib['db']->db_fetch_assoc($r);
-            printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+            printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
             if($_lib['sess']->get_person('AccessLevel') >= 2) {
-                printf("<td><a href='%st=salary.employeereport&unlock_report&SalaryReportID=%d&year=%d'>unlock</a></td>", 
+                printf("<td><a href='%st=salary.employeereport&unlock_report&SalaryReportID=%d&year=%d'>l&aring;se opp</a></td>",
                      $_lib['sess']->dispatch, $line['ID'], $year
                 );
             }
@@ -303,9 +303,9 @@ foreach($accountreports as $accountreport) {
 
     if($accountreport['Locked'] == 0) {
         printf(
-            '<td><a href="%st=salary.editreportaccount&SalaryReportAccountID=%d&year=%d">edit</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>lock</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>delete</a></td>',
+            '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
@@ -316,10 +316,10 @@ foreach($accountreports as $accountreport) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
-        printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+        printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
         if($_lib['sess']->get_person('AccessLevel') >= 2) {
-            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>unlock</a></td>",
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
@@ -384,7 +384,7 @@ foreach($codes as $c) {
 
 if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
     printf('
-    <td></td><td></td><td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
+    <td></td><td></td><td><a href="%st=salary.addeditreportaccount&year=%s&action=add">+</a></td></tr>
     ', $_lib['sess']->dispatch, $year);
 }
 
@@ -444,9 +444,9 @@ foreach($accountreports as $accountreport) {
 
     if($accountreport['Locked'] == 0) {
         printf(
-            '<td><a href="%st=salary.editreportaccount&SalaryReportAccountID=%d&year=%d">edit</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>lock</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>delete</a></td>',
+            '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
@@ -457,10 +457,10 @@ foreach($accountreports as $accountreport) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
-        printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+        printf("<td>l&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
         if($_lib['sess']->get_person('AccessLevel') >= 2) {
-            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>unlock</a></td>",
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
@@ -518,9 +518,9 @@ foreach($accountreports as $accountreport) {
 
     if($accountreport['Locked'] == 0) {
         printf(
-            '<td><a href="%st=salary.editreportaccount&SalaryReportAccountID=%d&year=%d">edit</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>lock</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>delete</a></td>',
+            '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
@@ -531,10 +531,10 @@ foreach($accountreports as $accountreport) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
-        printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+        printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
         if($_lib['sess']->get_person('AccessLevel') >= 2) {
-            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>unlock</a></td>",
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
