@@ -2408,7 +2408,7 @@ class lodo_fakturabank_fakturabank {
       $codeArray = $CarCodes;
       $codeString = "";
       foreach ($codeArray as &$code) {
-          $code = "&code[]=".$code;
+          $code = "&code[]=".urlencode($code);
       }
       $codeString = join($codeArray);
 
@@ -2447,6 +2447,12 @@ class lodo_fakturabank_fakturabank {
         "description" => "Description",
         "fuel" => "Fuel"
       );
+
+      $xml_key_to_db_fieled_name_registrations = array(
+        "registration-number" => "RegistrationNumber",
+        "active-in-accounting-until" => "ActiveInAccountingUntil"
+      );
+
       if (!$car->error) {
         $this->format_fb_car_parameters($car);
         $car_update_query = "UPDATE car SET ";
@@ -2457,6 +2463,54 @@ class lodo_fakturabank_fakturabank {
         $car_update_query .= join(", ", $set_string);
         $car_update_query .= " WHERE CarID = ". $CarID;
         $_lib['db']->db_query($car_update_query);
+
+        $car_registrations = $car->{"car-registrations"};
+
+        $received_registration_numbers = array();
+        foreach ($car_registrations->{"car-registration"} as $car_registration) {
+          $reg_no = $car_registration->{"registration-number"};
+          $received_registration_numbers[] = $reg_no;
+          $registration_exists  = $_lib['db']->get_row(array('query' => "SELECT * FROM carregistration WHERE RegistrationNumber = '". $reg_no ."';"));
+
+          if($registration_exists) {
+            // update
+            $id = $registration_exists->CarRegistrationID;
+            $query = "UPDATE carregistration SET ";
+            $set_string = "";
+            foreach($xml_key_to_db_fieled_name_registrations as $xml_key => $db_filed_name) {
+              if ($car_registration->{$xml_key}) $set_string[] = $db_filed_name ." = '". $car_registration->{$xml_key} ."'";
+            }
+            $query .= join(", ", $set_string);
+            $query .= " WHERE CarRegistrationID = ". $id;
+            $_lib['db']->db_query($query);
+          } else {
+            // create new
+            $columns = array("CarID" => $CarID);
+            foreach ($xml_key_to_db_fieled_name_registrations as $xml_key => $db_filed_name) {
+              if($car_registration->{$xml_key}) {
+                $columns[$db_filed_name] = $car_registration->{$xml_key};
+              }
+            }
+
+            $query = "INSERT INTO carregistration (". join(", ", array_keys($columns)) .") VALUES (". join(", ", array_map(function($x) { return "'". $x ."'"; }, $columns)) .");";
+            $_lib['db']->db_query($query);
+          }
+        }
+
+        $received_registration_numbers = array_map(function($number) { return "'".$number."'"; }, $received_registration_numbers);
+        $received_registration_numbers = join(', ', $received_registration_numbers);
+        $excess_registrations = $_lib['db']->db_query("SELECT CarRegistrationID, RegistrationNumber FROM carregistration WHERE CarID = ".$CarID." AND RegistrationNumber NOT IN (".$received_registration_numbers.")");
+
+        while($row = $_lib['db']->db_fetch_object($excess_registrations)) {
+          $query_used = "SELECT * FROM invoiceinline WHERE CarRegistrationID = ".$row->CarRegistrationID;
+          $used = $_lib['storage']->db_fetch_object($_lib['storage']->db_query($query_used));
+          if(!$used) {
+            $query_delete = "DELETE FROM carregistration WHERE CarRegistrationID = ".$row->CarRegistrationID;
+            $_lib['db']->db_query($query_delete);
+          } else {
+            print "Registration ".$row->RegistrationNumber." is used and will not be deleted.";
+          }
+        }
       }
       else $_lib['message']->add("ERROR: ". $car->error);
     }

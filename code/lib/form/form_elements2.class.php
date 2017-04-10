@@ -627,22 +627,16 @@ class form2 {
       if($args['value']) {
         if(!$args['car_registration_menu']) {
           $car_exists_query = "SELECT * FROM car WHERE CarID = ".$args['value'];
-          $rs = $_lib['db']->db_query($car_exists_query);
-          $car_exists = $_lib['db']->db_fetch_object($rs) != null;
-          if(!$car_exists) {
-            $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
-          } else {
-            $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
-          }
         } else {
           $car_exists_query = "SELECT * FROM car JOIN carregistration reg ON car.CarID = reg.CarID WHERE reg.CarRegistrationID = ".$args['value'];
-          $rs = $_lib['db']->db_query($car_exists_query);
-          $car_exists = $_lib['db']->db_fetch_object($rs) != null;
-          if(!$car_exists) {
-            $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
-          } else {
-            $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
-          }
+        }
+        $rs = $_lib['db']->db_query($car_exists_query);
+        $car_exists = $_lib['db']->db_fetch_object($rs) != null;
+
+        if(!$car_exists) {
+          $print .= "<option value=\"\">" . substr("Finnes ikke: . $args[value]",0, $num_letters);
+        } else {
+          $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
         }
       } else {
         $print .= "<option value=" . ($args['unset'] === true ? "unset" : "") . ">" . substr('Velg bil',0, $num_letters);
@@ -651,16 +645,14 @@ class form2 {
           $inaktive = ($_row->Active) ? '' : 'INAKTIV ';
           $name     = ($_row->CarID) ? $_row->CarCode : $_row->CarName;
           if(!$args['car_registration_menu']) {
-            if($_row->CarID == $args[value])
-                $print .= "<option value=\"$_row->CarID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
-            else
-                $print .= "<option value=\"$_row->CarID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+            $value = $_row->CarID;
           } else {
-            if($_row->CarRegistrationID == $args[value])
-                $print .= "<option value=\"$_row->CarRegistrationID\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
-            else
-                $print .= "<option value=\"$_row->CarRegistrationID\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+            $value = $_row->CarRegistrationID;
           }
+          if($value == $args["value"])
+              $print .= "<option value=\"$value\" selected>" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
+          else
+              $print .= "<option value=\"$value\">" . $inaktive . substr($_row->CarID." - ".$name, 0, $num_letters) . "\n";
       }
 
       $print .= "</select>\n";

@@ -63,7 +63,7 @@ elseif($_lib['input']->getProperty('action_car_update_from_fakturabank')) {
   includelogic("fakturabank/fakturabank");
   
   $reg_numbers = array();
-  foreach ($_POST as $key => $value) {
+  foreach ($_REQUEST as $key => $value) {
     if (preg_match("/^carregistration_RegistrationNumber/", $key)) {
       if (strlen($value)) array_push($reg_numbers, $value);
     }
@@ -89,7 +89,7 @@ elseif($_lib['input']->getProperty('action_car_delete_registration')) {
 }
 
 // trim car codes (registration number) and save them
-if ($_lib['input']->getProperty('action_car_update') || $_lib['input']->getProperty('action_car_update_from_fakturabank')) {
+if ($_lib['input']->getProperty('action_car_update')) {
   foreach ($_POST as $key => $value) {
     if (preg_match("/^carregistration_RegistrationNumber/", $key)) {
       $_POST[$key] = trim($value);
