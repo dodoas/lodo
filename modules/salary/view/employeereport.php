@@ -290,7 +290,10 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
 }
 
 foreach($accountreports as $accountreport) {
-  if(intval($accountreport['DifferentYear']) === 1) continue;
+  if(intval($accountreport['DifferentYear']) === 1
+    && (($accountreport['JournalYear'] == ($year-1))
+    || ($accountreport['JournalYear'] == ($year)))
+  ) continue;
     printf("
       <tr> 
         <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
@@ -298,7 +301,8 @@ foreach($accountreports as $accountreport) {
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
-        print("<td><input type=\"checkbox\" name=\"DifferentYear\" disabled/></td>");
+        $different_year_checked = (intval($accountreport['DifferentYear']) === 1) ? 'checked' : '';
+        print("<td><input type=\"checkbox\" name=\"DifferentYear\" $different_year_checked disabled/></td>");
         printf("<td>%s</td>", $accountreport['Comment']);
 
     if($accountreport['Locked'] == 0) {
