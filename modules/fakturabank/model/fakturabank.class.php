@@ -2165,7 +2165,7 @@ class lodo_fakturabank_fakturabank {
                           self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:ChargeIndicator', (($allowance_charge->ChargeIndicator == '1')?'true':'false'));
                           self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:AllowanceChargeReason', $allowance_charge->AllowanceChargeReason);
                           $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                          self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', $allowance_charge->Amount, $amount_attributes);
+                          self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', number_format($allowance_charge->Amount, 2, '.', ''), $amount_attributes);
 
                           $tax_category_cac = self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cac:TaxCategory');
                               $id_attributes = array('schemeID' => 'UNCL5305');
@@ -2181,15 +2181,15 @@ class lodo_fakturabank_fakturabank {
         # TaxTotal
         $tax = self::createElementIfNotEmpty($doc, $invoice, 'cac:TaxTotal');
             $tax_amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-            self::createElementIfNotEmpty($doc, $tax, 'cbc:TaxAmount', $InvoiceO->TaxTotal['TaxAmount'], $tax_amount_attributes);
+            self::createElementIfNotEmpty($doc, $tax, 'cbc:TaxAmount', number_format($InvoiceO->TaxTotal['TaxAmount'], 2, '.', ''), $tax_amount_attributes);
 
             if(is_array($InvoiceO->TaxTotal)) {
                 foreach($InvoiceO->TaxTotal as $VatPercent => $Vat) {
                     if(is_numeric($VatPercent)) {
                         $subtotal = self::createElementIfNotEmpty($doc, $tax, 'cac:TaxSubtotal');
                             $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                            self::createElementIfNotEmpty($doc, $subtotal, 'cbc:TaxableAmount', $Vat->TaxSubtotal->TaxableAmount, $amount_attributes);
-                            self::createElementIfNotEmpty($doc, $subtotal, 'cbc:TaxAmount', $Vat->TaxSubtotal->TaxAmount, $amount_attributes);
+                            self::createElementIfNotEmpty($doc, $subtotal, 'cbc:TaxableAmount', number_format($Vat->TaxSubtotal->TaxableAmount, 2, '.', ''), $amount_attributes);
+                            self::createElementIfNotEmpty($doc, $subtotal, 'cbc:TaxAmount', number_format($Vat->TaxSubtotal->TaxAmount, 2, '.', ''), $amount_attributes);
 
                             $category = self::createElementIfNotEmpty($doc, $subtotal, 'cac:TaxCategory');
                                 $id_attributes = array('schemeID' => 'UNCL5305');
@@ -2209,12 +2209,12 @@ class lodo_fakturabank_fakturabank {
         $monetary = self::createElementIfNotEmpty($doc, $invoice, 'cac:LegalMonetaryTotal');
 
             $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-            self::createElementIfNotEmpty($doc, $monetary, 'cbc:LineExtensionAmount', $InvoiceO->LegalMonetaryTotal->LineExtensionAmount, $amount_attributes);
-            self::createElementIfNotEmpty($doc, $monetary, 'cbc:TaxExclusiveAmount', $InvoiceO->LegalMonetaryTotal->TaxExclusiveAmount, $amount_attributes);
-            self::createElementIfNotEmpty($doc, $monetary, 'cbc:TaxInclusiveAmount', $InvoiceO->LegalMonetaryTotal->TaxInclusiveAmount, $amount_attributes);
-            self::createElementIfNotEmpty($doc, $monetary, 'cbc:AllowanceTotalAmount', $InvoiceO->LegalMonetaryTotal->AllowanceTotalAmount, $amount_attributes);
-            self::createElementIfNotEmpty($doc, $monetary, 'cbc:ChargeTotalAmount', $InvoiceO->LegalMonetaryTotal->ChargeTotalAmount, $amount_attributes);
-            self::createElementIfNotEmpty($doc, $monetary, 'cbc:PayableAmount', $InvoiceO->LegalMonetaryTotal->PayableAmount, $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:LineExtensionAmount', number_format($InvoiceO->LegalMonetaryTotal->LineExtensionAmount, 2, '.', ''), $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:TaxExclusiveAmount', number_format($InvoiceO->LegalMonetaryTotal->TaxExclusiveAmount, 2, '.', ''), $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:TaxInclusiveAmount', number_format($InvoiceO->LegalMonetaryTotal->TaxInclusiveAmount, 2, '.', ''), $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:AllowanceTotalAmount', number_format($InvoiceO->LegalMonetaryTotal->AllowanceTotalAmount, 2, '.', ''), $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:ChargeTotalAmount', number_format($InvoiceO->LegalMonetaryTotal->ChargeTotalAmount, 2, '.', ''), $amount_attributes);
+            self::createElementIfNotEmpty($doc, $monetary, 'cbc:PayableAmount', number_format($InvoiceO->LegalMonetaryTotal->PayableAmount, 2, '.', ''), $amount_attributes);
 
         ############################################################################################
         # InvoiceLine (loop)
@@ -2227,7 +2227,7 @@ class lodo_fakturabank_fakturabank {
                     self::createElementIfNotEmpty($doc, $invoiceline, 'cbc:InvoicedQuantity', $line->InvoicedQuantity, $quantity_attributes);
 
                     $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                    self::createElementIfNotEmpty($doc, $invoiceline, 'cbc:LineExtensionAmount', $line->LineExtensionAmount, $amount_attributes);
+                    self::createElementIfNotEmpty($doc, $invoiceline, 'cbc:LineExtensionAmount', number_format($line->LineExtensionAmount, 2, '.', ''), $amount_attributes);
 
                     ############################################################################################
                     # Allowances/Charges on invoice line
@@ -2238,14 +2238,14 @@ class lodo_fakturabank_fakturabank {
                                     self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:ChargeIndicator', (($allowance_charge->ChargeIndicator == '1')?'true':'false'));
                                     self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:AllowanceChargeReason', $allowance_charge->AllowanceChargeReason);
                                     $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                                    self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', $allowance_charge->Amount, $amount_attributes);
+                                    self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', number_format($allowance_charge->Amount, 2, '.', ''), $amount_attributes);
                             }
                         }
                     }
 
                     $cac_tax_total = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:TaxTotal');
                         $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                        self::createElementIfNotEmpty($doc, $cac_tax_total, 'cbc:TaxAmount', $line->TaxTotal->TaxAmount, $amount_attributes);
+                        self::createElementIfNotEmpty($doc, $cac_tax_total, 'cbc:TaxAmount', number_format($line->TaxTotal->TaxAmount, 2, '.', ''), $amount_attributes);
 
                     $item = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:Item');
                         self::createElementIfNotEmpty($doc, $item, 'cbc:Description', $line->Item->Description);
@@ -2273,7 +2273,7 @@ class lodo_fakturabank_fakturabank {
                     # Price
                     $price = self::createElementIfNotEmpty($doc, $invoiceline, 'cac:Price');
                         $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                        self::createElementIfNotEmpty($doc, $price, 'cbc:PriceAmount', $line->Price->PriceAmount, $amount_attributes);
+                        self::createElementIfNotEmpty($doc, $price, 'cbc:PriceAmount', number_format($line->Price->PriceAmount, 2, '.', ''), $amount_attributes);
                         $quantity_attributes = array('unitCode' => 'NAR', 'unitCodeListID' => 'UNECERec20');
                         self::createElementIfNotEmpty($doc, $price, 'cbc:BaseQuantity', $line->Price->BaseQuantity, $quantity_attributes);
 
@@ -2286,7 +2286,7 @@ class lodo_fakturabank_fakturabank {
                                         self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:ChargeIndicator', (($allowance_charge->ChargeIndicator == '1')?'true':'false'));
                                         self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:AllowanceChargeReason', $allowance_charge->AllowanceChargeReason);
                                         $amount_attributes = array('currencyID' => $InvoiceO->DocumentCurrencyCode);
-                                        self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', $allowance_charge->Amount, $amount_attributes);
+                                        self::createElementIfNotEmpty($doc, $allowance_charge_cac, 'cbc:Amount', number_format($allowance_charge->Amount, 2, '.', ''), $amount_attributes);
                                 }
                             }
                         }
