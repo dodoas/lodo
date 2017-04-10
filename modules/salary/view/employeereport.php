@@ -1,6 +1,12 @@
 <?php
 $year = isset($_REQUEST["year"]) ? (int)$_REQUEST["year"] : (isset($_REQUEST["report_year"]) ? (int)$_REQUEST["report_year"] : date("Y"));
 
+function generateSalaryLink($SalaryID, $JournalID){
+  global $_lib;
+
+  return 'L <a href="' . $_lib['sess']->dispatch . 't=salary.edit&SalaryID=' . $SalaryID . '">' . $JournalID . '</a>';
+}
+
 function print_values($codes, $line, $print_extra = true) {
     global $_lib, $year;
 
@@ -25,10 +31,10 @@ function print_values($codes, $line, $print_extra = true) {
             $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $line['LockedBy']);
             $r = $_lib['db']->db_query($query);
             $result = $_lib['db']->db_fetch_assoc($r);
-            printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+            printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
             if($_lib['sess']->get_person('AccessLevel') >= 2) {
-                printf("<td><a href='%st=salary.employeereport&unlock_report&SalaryReportID=%d&year=%d'>unlock</a></td>", 
+                printf("<td><a href='%st=salary.employeereport&unlock_report&SalaryReportID=%d&year=%d'>l&aring;se opp</a></td>",
                      $_lib['sess']->dispatch, $line['ID'], $year
                 );
             }
@@ -251,7 +257,7 @@ print("<th><b>Kommentar</b></th>");
 print('</tr>');
 
 $accountreports = array();
-$accountreport_query = sprintf("SELECT * FROM salaryreportaccount WHERE Year = %d", $year);
+$accountreport_query = sprintf("SELECT sra.*, YEAR(s.JournalDate) AS JournalYear, s.SalaryID FROM salaryreportaccount sra LEFT JOIN salary s ON s.JournalID = sra.SalaryJournalID WHERE Year = %d", $year);
 $accountreport_r = $_lib['db']->db_query($accountreport_query);
 while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
     $account_query = sprintf("SELECT AccountName FROM accountplan WHERE AccountPlanID = %d", $row['AccountPlanID']);
@@ -266,13 +272,16 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
     }
 
     $accountreports[] = array(
-        'SalaryReportAccountID' => $row['SalaryReportAccountID'], 
-        'Account' => $account['AccountName'], 
+        'SalaryReportAccountID' => $row['SalaryReportAccountID'],
+        'SalaryID' => $row['SalaryID'],
+        'SalaryJournalID' => $row['SalaryJournalID'],
+        'Account' => $account['AccountName'],
         'AccountPlanID' => $row['AccountPlanID'],
         'Locked' => $row['Locked'],
         'LockedBy' => $row['LockedBy'],
         'Comment' => $row['Comment'],
         'DifferentYear' => $row['DifferentYear'],
+        'JournalYear' => $row['JournalYear'],
         'Feriepengeprosent' => $row['Feriepengeprosent'],
         'AGAprosent' => $row['AGAprosent'],
         'amounts' => $amounts
@@ -281,7 +290,10 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
 }
 
 foreach($accountreports as $accountreport) {
-  if(intval($accountreport['DifferentYear']) === 1) continue;
+  if(intval($accountreport['DifferentYear']) === 1
+    && (($accountreport['JournalYear'] == ($year-1))
+    || ($accountreport['JournalYear'] == ($year)))
+  ) continue;
     printf("
       <tr> 
         <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
@@ -289,14 +301,15 @@ foreach($accountreports as $accountreport) {
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
-        print("<td><input type=\"checkbox\" name=\"DifferentYear\" disabled/></td>");
+        $different_year_checked = (intval($accountreport['DifferentYear']) === 1) ? 'checked' : '';
+        print("<td><input type=\"checkbox\" name=\"DifferentYear\" $different_year_checked disabled/></td>");
         printf("<td>%s</td>", $accountreport['Comment']);
 
     if($accountreport['Locked'] == 0) {
         printf(
-            '<td><a href="%st=salary.editreportaccount&SalaryReportAccountID=%d&year=%d">edit</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>lock</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>delete</a></td>',
+            '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
@@ -307,10 +320,10 @@ foreach($accountreports as $accountreport) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
-        printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+        printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
         if($_lib['sess']->get_person('AccessLevel') >= 2) {
-            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>unlock</a></td>",
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
@@ -320,23 +333,40 @@ foreach($accountreports as $accountreport) {
     print("</tr>");
 }
 
-print('
-<tr>
-  <td><b>sum fratrukkede l&oslash;nnslipper</b></td>
-');
-$sum_account2 = array();
+$sum_account_prev = array();
+$sum_account_next = array();
 foreach($codes as $c) {
-    $sum = 0;
+    $sum_prev = 0;
+    $sum_next = 0;
     foreach($accountreports as $accountreport) {
         if(intval($accountreport['DifferentYear']) === 0) continue;
-        $sum += $accountreport['amounts'][$c];
+        if($accountreport['JournalYear'] == ($year-1)) {
+          $sum_prev += $accountreport['amounts'][$c];
+        } elseif($accountreport['JournalYear'] == $year) {
+          $sum_next += $accountreport['amounts'][$c];
+        }
     }
+    $sum_account_prev[$c] = $sum_prev;
+    $sum_account_next[$c] = $sum_next;
 
-    $sum_account2[$c] = $sum;
-
-    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
 }
-    print("<td></td><td></td></tr>");
+print('
+<tr>
+  <td><b>sum fratrukkede l&oslash;nnslipper ' . ($year-1) . ' - ' . $year . '</b></td>
+');
+foreach($codes as $c) {
+    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum_account_prev[$c]));
+}
+print("<td></td><td></td></tr>");
+
+print('
+<tr>
+  <td><b>sum fratrukkede l&oslash;nnslipper ' . $year . ' - ' . ($year+1) . '</b></td>
+');
+foreach($codes as $c) {
+    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum_account_next[$c]));
+}
+print("<td></td><td></td></tr>");
 
 print('
 <tr>
@@ -358,7 +388,7 @@ foreach($codes as $c) {
 
 if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
     printf('
-    <td></td><td></td><td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
+    <td></td><td></td><td><a href="%st=salary.addeditreportaccount&year=%s&action=add">+</a></td></tr>
     ', $_lib['sess']->dispatch, $year);
 }
 
@@ -381,10 +411,11 @@ foreach($codes as $c) {
 print("</tr></table>");
 
 print('
-<br /><br />
-<table border=1 class="lodo_data">
+<br /><br />' . ($year-1) . ' - ' . $year
+. '<table border=1 class="lodo_data">
   <tr>
     <th>Konto</th>
+    <th>L&oslash;nn</th>
 ');
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
@@ -397,9 +428,15 @@ print('</tr>');
 
 foreach($accountreports as $accountreport) {
   if(intval($accountreport['DifferentYear']) === 0) continue;
+  if($accountreport['JournalYear'] != ($year-1)) continue;
     printf("
       <tr>
         <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
+    if ($accountreport['SalaryJournalID']) {
+      print("<td>" . generateSalaryLink($accountreport['SalaryID'], $accountreport['SalaryJournalID']) . "</td>");
+    } else {
+      printf("<td></td>");
+    }
 
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
@@ -411,9 +448,9 @@ foreach($accountreports as $accountreport) {
 
     if($accountreport['Locked'] == 0) {
         printf(
-            '<td><a href="%st=salary.editreportaccount&SalaryReportAccountID=%d&year=%d">edit</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>lock</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>delete</a></td>',
+            '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
@@ -424,10 +461,10 @@ foreach($accountreports as $accountreport) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
-        printf("<td>Locked by %s %s</td>", $result['FirstName'], $result['LastName']);
+        printf("<td>l&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
         if($_lib['sess']->get_person('AccessLevel') >= 2) {
-            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>unlock</a></td>",
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
@@ -440,9 +477,84 @@ foreach($accountreports as $accountreport) {
 print('
 <tr>
   <td><b>sum innberettet</b></td>
+  <td></td>
 ');
 foreach($codes as $c) {
-        printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum_account2[$c]));
+        printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum_account_prev[$c]));
+}
+
+print("</tr></table>");
+print('
+<br /><br />' . $year . ' - ' . ($year+1)
+. '<table border=1 class="lodo_data">
+  <tr>
+    <th>Konto</th>
+    <th>L&oslash;nn</th>
+');
+foreach($codes as $c) {
+    printf("<th><b>%s</b></th>", $c);
+}
+print("<th>Forskjellige &aring;r</th>");
+print("<th>AGA %</th>");
+print("<th>Feriepenger %</th>");
+print("<th>Kommentar</th>");
+print('</tr>');
+
+foreach($accountreports as $accountreport) {
+  if(intval($accountreport['DifferentYear']) === 0) continue;
+  if($accountreport['JournalYear'] != $year) continue;
+    printf("
+      <tr>
+        <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
+    if ($accountreport['SalaryJournalID']) {
+      print("<td>" . generateSalaryLink($accountreport['SalaryID'], $accountreport['SalaryJournalID']) . "</td>");
+    } else {
+      printf("<td></td>");
+    }
+
+    foreach($codes as $c) {
+        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
+    }
+        print("<td><input type=\"checkbox\" name=\"DifferentYear\" checked disabled/></td>");
+        printf("<td>%s</td>", $accountreport['AGAprosent']);
+        printf("<td>%s</td>", $accountreport['Feriepengeprosent']);
+        printf("<td>%s</td>", $accountreport['Comment']);
+
+    if($accountreport['Locked'] == 0) {
+        printf(
+            '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
+            $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
+            $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
+            $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
+        );
+
+    }
+    else {
+        $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
+        $r = $_lib['db']->db_query($query);
+        $result = $_lib['db']->db_fetch_assoc($r);
+        printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
+
+        if($_lib['sess']->get_person('AccessLevel') >= 2) {
+            printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
+                   $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
+                );
+        }
+
+    }
+
+    print("</tr>");
+}
+
+print('
+<tr>
+  <td><b>sum innberettet</b></td>
+  <td></td>
+');
+foreach($codes as $c) {
+        printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum_account_next[$c]));
 }
 
 print("</tr></table>");

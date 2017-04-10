@@ -386,7 +386,7 @@ print $_lib['sess']->doctype ?>
 <table class="lodo_data" width="100%">
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.terminoppgave&altinn=1" method="post" target="_blank">
 <tr class="r0">
-	<th rowspan="7">L<br />&Oslash;<br />N<br />N<br /></th>
+	<th rowspan="8">L<br />&Oslash;<br />N<br />N<br /></th>
     <td>Terminoppgave skattetrekk og arbeidsgiveravgift(Altinn)</td>
     <td>Fra periode</td>
     <td>
@@ -502,6 +502,27 @@ print $_lib['sess']->doctype ?>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
+
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.altinn_yearly_report_amelding" method="post" target="_blank">
+<tr>
+    <td>Altinn A-melding</td>
+    <td>Velg &aring;r</td>
+    <td>
+        <?
+            $aconf = array();
+            $aconf['table']     = 'report';
+            $aconf['field']     = 'Year';
+            $aconf['type']      = 'PosibleSalaryYears';
+            $aconf['required']  = true;
+            $aconf['value']     = $thisYear;
+            print $_lib['form3']->Type_menu3($aconf);
+        ?>
+    </td>
+    <td colspan="2"></td>
+    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+</tr>
+</form>
+
 </table>
 
 <hr>
