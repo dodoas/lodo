@@ -139,6 +139,11 @@ foreach($car_milage as $milage_year => $milage) {
     <td class="menu">Registreringsnummer</td>
     <td>
       <table>
+        <tr>
+          <th>Reg No.</th>
+          <th>Active in accounting</th>
+          <td></td>
+        </tr>
         <?
           $registrations = car::get_registrations($car->CarID);
           foreach ($registrations as $car_registration) {
