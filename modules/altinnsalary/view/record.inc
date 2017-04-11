@@ -176,8 +176,6 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
       }
     }
     $xml = $report->generateXML();
-    var_dump($xml);
-    die();
     if (!empty($report->errors)) {
       // Message is: Report not sent, there were some errors.
       $_lib['message']->add('Rapporten er ikke sendt, det er noen mangler.');
@@ -612,7 +610,6 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
   }
   // generate the altinn report object for the selected period
   $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
-  var_dump($pension_amounts);
   foreach ($pension_amounts as $virksomhet_id => $pension_amount) {
     if (!is_null($pension_amount)) {
       $report->addPensionAmount($virksomhet_id, $pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
