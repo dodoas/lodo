@@ -72,8 +72,9 @@ function updateAmountsFromSalariesArray() {
       different_year_checkbox_element.checked = false;
     }
     var negate_amounts = 
-      (salaries[salary_journal_id]['VoucherCreatedYear'] == report_year)
-      && (salaries[salary_journal_id]['AlltinReportedYear'] > report_year);
+      ((salaries[salary_journal_id]['VoucherCreatedYear'] == report_year)
+      && (salaries[salary_journal_id]['AlltinReportedYear'] > report_year))
+      || (salaries[salary_journal_id]['AlltinReportedYear'] == 0);
     // if (negate_amounts) console.log("Negate");
     var salary_acccountplan_id = salaries[salary_journal_id]['AccountPlanID'];
     var salary_acccountplan_element = document.getElementsByName('reportaccount.accountplanid')[0];
