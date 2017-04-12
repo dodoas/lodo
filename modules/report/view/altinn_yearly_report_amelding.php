@@ -389,7 +389,7 @@ if (current($balance_accounts_to_sum)) {
       $salary_ids_by_journal_id[$extra_salary->JournalID] = $extra_salary->SalaryID;
       $extra_account_sum = $extra_salary->AmountIn - $extra_salary->AmountOut;
       $extra_account_aga_sum = round($extra_account_sum * $extra_salary->AGAPercent, 2);
-      if ($ReportYear < $extra_salary->AltinnReportedYear) {
+      if (($ReportYear < $extra_salary->AltinnReportedYear) || ($extra_salary->AltinnReportedYear == 0)) {
         $extra_account_sum = -$extra_account_sum;
         $extra_account_aga_sum = -$extra_account_aga_sum;
       }
@@ -411,7 +411,7 @@ if (current($balance_accounts_to_sum)) {
       if (!isset($extra_salaries_sums_by_account[$extra_salary->JournalID])) {
         $extra_salaries_sums_by_account[$extra_salary->JournalID] = array();
       }
-      $extra_salaries_sums_by_account[$extra_salary->JournalID][$accountplan_id] = -$extra_account_sum;
+      $extra_salaries_sums_by_account[$extra_salary->JournalID][$accountplan_id] += -$extra_account_sum;
       $extra_salaries_sums_by_account[$extra_salary->JournalID]['JournalYear'] = $extra_salary->JournalYear;
     }
   }
