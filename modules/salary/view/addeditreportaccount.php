@@ -33,8 +33,8 @@ while ($salary_line = $_lib['db']->db_fetch_object($salary_lines_result)) {
 ?>
 var salary_journal_id = <?= json_encode($salary_line->JournalID); ?>;
 var salary_line_code = <?= json_encode($salary_line->SalaryCode); ?>;
-var salary_line_amount = <?= $salary_line->AmountThisPeriod ?>;
-var salary_line_vacation_money = <?= $salary_line->EnableVacationPayment ?>;
+var salary_line_amount = <?= (float)$salary_line->AmountThisPeriod ?>;
+var salary_line_vacation_money = <?= ($salary_line->EnableVacationPayment) ? 'true' : 'false'; ?>;
 if (!salaries.hasOwnProperty(salary_journal_id)) {
   salaries[salary_journal_id] = [];
   salaries[salary_journal_id]['AccountPlanID'] = <?= $salary_line->AccountPlanID ?>;
