@@ -71,12 +71,13 @@ else if(isset($_POST['edit_report_account'])) {
                 , $_POST['reportaccount_accountplanid']);
     $res = $_lib['db']->db_fetch_object($_lib['db']->db_query($q));
 
-    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s', DifferentYear = %d, Feriepengeprosent = %s, AGAprosent = %s WHERE SalaryReportAccountID = %d"
+    $query = sprintf("UPDATE salaryreportaccount SET AccountPlanID = %d, Comment = '%s', DifferentYear = %d, Feriepengeprosent = %s, AGAprosent = %s, SalaryJournalID = %s WHERE SalaryReportAccountID = %d"
                     , $_POST['reportaccount_accountplanid']
                     , $_POST['comment']
                     , $_POST['DifferentYear'] === "on" ? 1 : 0
                     , (int)$res->Feriepengeprosent
                     , (int)$res->Percent
+                    , ($_POST['reportaccount_SalaryJournalID']) ? $_POST['reportaccount_SalaryJournalID'] : 'NULL'
                     , $_POST['SalaryReportAccountID']);
     $_lib['db']->db_query($query);
 
