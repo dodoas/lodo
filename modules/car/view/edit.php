@@ -150,7 +150,7 @@ foreach($car_milage as $milage_year => $milage) {
             ?>
             <tr>
               <td><input type="text" name="carregistration.RegistrationNumber.<? print $car_registration->CarRegistrationID; ?>" value="<? print $car_registration->RegistrationNumber; ?>"></td>
-              <td><input type="text" name="carregistration.ActiveInAccountingUntil.<? print $car_registration->CarRegistrationID; ?>" value="<? print $car_registration->ActiveInAccountingUntil; ?>"></td>
+              <td><input type="text" name="carregistration.ActiveInAccountingUntil.<? print $car_registration->CarRegistrationID; ?>" value="<? if((int)($car_registration->ActiveInAccountingUntil) != 0) print $car_registration->ActiveInAccountingUntil; ?>"></td>
               <td><input type="submit" name="action_car_delete_registration" value="Delete" onclick='if(confirm("Er du sikker?")) { $(this.form).append("<input type=\"hidden\" name=\"registration_to_delete\" value=\"<? print $car_registration->CarRegistrationID; ?>\">"); return true; } return false;' /></td>
             </tr>
             <?

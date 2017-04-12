@@ -2467,6 +2467,13 @@ class lodo_fakturabank_fakturabank {
         $car_registrations = $car->{"car-registrations"};
 
         $received_registration_numbers = array();
+
+        // if fakturabank sends multiple registrations, this will be an array
+        // if it sends only one, we transform it into an array with that element
+        if(!is_array($car_registrations->{"car-registration"})) {
+            $car_registrations->{"car-registration"} = array($car_registrations->{"car-registration"});
+        }
+
         foreach ($car_registrations->{"car-registration"} as $car_registration) {
           $reg_no = $car_registration->{"registration-number"};
           $received_registration_numbers[] = $reg_no;
