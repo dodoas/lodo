@@ -8,7 +8,7 @@
 
   $start_period    = $_REQUEST['start_period'] ? $_REQUEST['start_period'] : $_lib['date']->get_first_period_in_year($login_period);
   $end_period    = $_REQUEST['end_period'] ? $_REQUEST['end_period'] : $login_period;
-  $cid = isset($_REQUEST['department_id']) ? $_REQUEST['department_id'] : null;
+  $cid = isset($_REQUEST['department_id']) && !empty($_REQUEST['department_id']) ? $_REQUEST['department_id'] : null;
   // All logic around this report was made to depend on year and department.
   // Since request is changed to have from - to period (important just for one part of report),
   // we will keep rest of report to have set year dependent on from date.
