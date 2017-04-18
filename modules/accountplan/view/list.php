@@ -183,7 +183,7 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
 
           <?
             if ($func !== "employee") {
-              if ($row->EnableCar) {
+              if ($row->EnableCar && $row->CarID) {
                 $query = "select * from car where CarID = $row->CarID";
                 $car   = $_lib['storage']->get_row(array('query' => $query));
                 echo "<td align='right'>";
