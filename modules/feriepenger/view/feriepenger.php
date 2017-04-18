@@ -21,6 +21,7 @@ print $_lib['sess']->doctype; ?>
             <td colspan="5" align="center">Feriepenger</td>
             <td colspan="2" align="center">Arbeidsgiveravgift</td>
             <td align="center">&nbsp;</td>
+            <td colspan="3" align="center">Utbetalt <?= $year+1; ?></td>
         </tr>
         <tr>
             <td class="number">Nr</td>
@@ -33,6 +34,9 @@ print $_lib['sess']->doctype; ?>
             <td class="number">Prosent</td>
             <td class="number">Bel&oslash;p</td>
             <td class="number">Skyldig Feriepenge grunnlag</td>
+            <td class="number">L&oslash;nnsslipp</td>
+            <td class="number">Utbetalt</td>
+            <td class="number">Rest</td>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +51,7 @@ for ($i = 0; $i < count($ansatteList); $i++)
 {
 $ansattID = $ansatteList[$i];
 $result = $grid->gridPerson($ansattID);
+$paid = $result['PaidFeriepenger'];
 $myIndex = "feriepengerID";
 $myIndexNr = $result[$myIndex];
 ?>
@@ -64,6 +69,9 @@ $myIndexNr = $result[$myIndex];
             <td class="number"><input align="right" style="text-align: right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_ArbeidsgiveravgSats"; ?>" value="<?php print $_lib['format']->Amount($result["ArbeidsgiveravgSats"]) ?>"></td>
             <td class="number"><?php print $_lib['format']->Amount($result["ArbeidsgiveravgiftBelop"]) ?></td>
             <td class="number"><?php print $_lib['format']->Amount($result["SkyldigFeriepengeGrunnlag"]) ?></td>
+            <td class="number"><?php if ($paid['salary_journal']) print $paid['salary_journal'] ?></td>
+            <td class="number"><?php print $_lib['format']->Amount($paid['amount']) ?></td>
+            <td class="number"><?php print $_lib['format']->Amount($result['Rest'] - $paid['amount']) ?></td>
         </tr>
 <?php
 }
@@ -79,6 +87,9 @@ $myIndexNr = $result[$myIndex];
             <td class="number">&nbsp;</td>
             <td class="number"><?php print $_lib['format']->Amount($grid->restArbeidsgiveravgift()) ?></td>
             <td class="number"><?php print $_lib['format']->Amount($grid->sumSkyldig()) ?></td>
+            <td class="number">&nbsp;</td>
+            <td class="number"><?php print $_lib['format']->Amount($grid->sumPaidUtbetalt()) ?></td>
+            <td class="number"><?php print $_lib['format']->Amount($grid->sumPaidRest()) ?></td>
         </tr>
 <?php
 $ansattID = 1000;
