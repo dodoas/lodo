@@ -688,7 +688,7 @@ class altinn_report {
           self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall timer");
           $inntekt['inntekt']['loennsinntekt']['antall'] = $salary_line->NumberInPeriod;
         }
-        elseif (in_array($salary_line->SalaryDescription, array('kilometergodtgjoerelseAndreFremkomstmidler', 'kilometergodtgjoerelseBil', 'kilometergodtgjoerelseElBil', 'kilometergodtgjoerelsePassasjertillegg'))) {
+        elseif (in_array($salary_line->SalaryDescription, array('kilometergodtgjoerelseAndreFremkomstmidler', 'kilometergodtgjoerelseBil', 'kilometergodtgjoerelseElBil', 'kilometergodtgjoerelsePassasjertillegg', 'besoeksreiserHjemmetKilometergodtgjoerelseBil'))) {
           // kilometers/quantity for the entry
           // Error is: Salary line quantity(in kilometers) for salary L' . $salary->JournalID . ' not set for line with text \'' . $salary_line->SalaryText . "'");
           self::checkIfEmpty($salary_line->NumberInPeriod, 'L&oslash;nnslipp: L&oslash;nnslipplinje p&aring;  L' . $salary->JournalID . " med text '" . $salary_line->SalaryText . "' har ikke satt antall kilometer");
