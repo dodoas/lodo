@@ -22,7 +22,7 @@ $weekly_sales_groups_result_set = $_lib['db']->db_query($query_sale);
 $sales_group_conf_object = $_lib['db']->db_fetch_object($weekly_sales_groups_result_set);
 $credit_group_conf_object = $_lib['db']->db_fetch_object($weekly_sales_groups_result_set);
 
-$car_query = "select * from car";
+$car_query = "select car.*, (SELECT RegistrationNumber FROM carregistration WHERE CarID = car.CarID ORDER BY CarRegistrationID DESC LIMIT 1) as CarCode from car";
 $cars_result_set = $_lib["db"]->db_query($car_query);
 $cars = array();
 

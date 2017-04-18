@@ -58,7 +58,12 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
   <tr class="<? print "$sec_color"; ?>">
       <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarID; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarName; ?></a></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=car.edit&car.CarID=<? print "$row->CarID"; ?>"><? print $row->CarCode; ?></a></td>
+      <td>
+      <?
+        $registrations = car::get_registrations($row->CarID);
+        if ($registrations) print $registrations[0]->RegistrationNumber;
+      ?>
+      </td>
       <td><? print strftime("%F", strtotime($row->ValidFrom)); ?></td>
       <td><? if ((int)($row->ValidTo) != 0) print strftime("%F", strtotime($row->ValidTo));
              else print "0000-00-00"; ?></td>

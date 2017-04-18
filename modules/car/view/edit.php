@@ -137,7 +137,28 @@ foreach($car_milage as $milage_year => $milage) {
 </tr>
 <tr>
     <td class="menu">Registreringsnummer</td>
-    <td><input type="text" name="car.CarCode" value="<? print $car->CarCode ?>" size="60"></td>
+    <td>
+      <table>
+        <tr>
+          <th>Reg No.</th>
+          <th>Active in accounting</th>
+          <td></td>
+        </tr>
+        <?
+          $registrations = car::get_registrations($car->CarID);
+          foreach ($registrations as $car_registration) {
+            ?>
+            <tr>
+              <td><input type="text" name="carregistration.RegistrationNumber.<? print $car_registration->CarRegistrationID; ?>" value="<? print $car_registration->RegistrationNumber; ?>"></td>
+              <td><input type="text" name="carregistration.ActiveInAccountingUntil.<? print $car_registration->CarRegistrationID; ?>" value="<? if((int)($car_registration->ActiveInAccountingUntil) != 0) print $car_registration->ActiveInAccountingUntil; ?>"></td>
+              <td><input type="submit" name="action_car_delete_registration" value="Delete" onclick='if(confirm("Er du sikker?")) { $(this.form).append("<input type=\"hidden\" name=\"registration_to_delete\" value=\"<? print $car_registration->CarRegistrationID; ?>\">"); return true; } return false;' /></td>
+            </tr>
+            <?
+          }
+        ?>
+      </table>
+      <input type="submit" name="action_car_new_registration" value="New"/>
+    </td>
 </tr>
 <tr>
     <td class="menu">Merke og modell</td>

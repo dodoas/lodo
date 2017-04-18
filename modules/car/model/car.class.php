@@ -38,5 +38,18 @@ class car {
     return $result;
   }
 
+  public static function get_registrations($car_id) {
+    global $_lib;
+    if (empty($car_id) && $car_id != 0) {
+      return null;
+    }
+    $query_result = $_lib['db']->db_query("SELECT * FROM carregistration WHERE CarID = $car_id ORDER BY CarRegistrationID DESC;");
+    $result = array();
+    while($row = $_lib['db']->db_fetch_object($query_result)) {
+      array_push($result, $row);
+    }
+    return $result;
+  }
+
 }
 ?>

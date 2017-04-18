@@ -64,11 +64,15 @@ case 'get_balance_report': // fetch balance report from FB
   redirect();
   break;
 case 'get_car_info': // fetch car info from FB
-  $CarCode = $_SESSION['oauth_car_code'];
-  $CarID   = $_SESSION['oauth_car_id'];
-  unset($_SESSION['oauth_car_code']);
+  $CarCodes = $_SESSION['oauth_car_codes'];
+  foreach ($CarCodes as $key => &$code) {
+    $code = "carregistration.RegistrationNumber.".$key."=".$code; // $key value is not of importance here. We just want to have all parameters, so they have to have different keys
+  }
+  $car_codes_string = join("&", $CarCodes);
+  $CarID = $_SESSION['oauth_car_id'];
+  unset($_SESSION['oauth_car_codes']);
   unset($_SESSION['oauth_car_id']);
-  $_SESSION['oauth_tmp_redirect_back_url'] = $_SETUP['DISPATCH'] . "t=car.edit&car.CarID=". $CarID ."&car.CarCode=". $CarCode ."&action_car_update_from_fakturabank=1";
+  $_SESSION['oauth_tmp_redirect_back_url'] = $_SETUP['DISPATCH'] . "t=car.edit&car.CarID=". $CarID ."&". $car_codes_string ."&action_car_update_from_fakturabank=1";
   redirect();
   break;
 case 'send_paycheck': // sending a paycheck to FB

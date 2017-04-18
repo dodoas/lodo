@@ -4,6 +4,7 @@
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
 includelogic("accountplan/scheme");
+includelogic("car/car");
 $db_table = "accountplan";
 require_once "record.inc";
 
@@ -184,10 +185,9 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           <?
             if ($func !== "employee") {
               if ($row->EnableCar) {
-                $query = "select * from car where CarID = $row->CarID";
-                $car   = $_lib['storage']->get_row(array('query' => $query));
+                $registrations = car::get_registrations($row->CarID);
                 echo "<td align='right'>";
-                print $car->CarCode;
+                print $registrations[0]->RegistrationNumber;
                 echo "</td>";
               }
             }

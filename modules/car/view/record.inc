@@ -11,8 +11,6 @@ if (isset($_POST['car_ValidTo']) && !empty($_POST['car_ValidTo']) && !preg_match
 // regex for year (4 digits)
 if (isset($_POST['car_RegistrationYear']) && !empty($_POST['car_RegistrationYear']) && !preg_match('/^([0-9]{4})$/', $_POST['car_RegistrationYear']))
   unset($_POST['car_RegistrationYear']);
-// trim car code (registration number)
-$_POST['car_CarCode'] = preg_replace('/\s+/', '', $_POST['car_CarCode']);
 
 if($_lib['input']->getProperty('action_car_update')) {
   #Possible to extend or alter parameters here
@@ -57,12 +55,47 @@ elseif($_lib['input']->getProperty('action_car_delete')) {
   # delete all milage for the car
   $query  = "DELETE FROM carmilage WHERE CarID=" . (int) $CarID . "";
   $_lib['db']->db_query($query);
+  # delete all car registrations
+  $query  = "DELETE FROM carregistration WHERE CarID=" . (int) $CarID . "";
+  $_lib['db']->db_query($query);
 }
 elseif($_lib['input']->getProperty('action_car_update_from_fakturabank')) {
   includelogic("fakturabank/fakturabank");
+  
+  $reg_numbers = array();
+  foreach ($_REQUEST as $key => $value) {
+    if (preg_match("/^carregistration_RegistrationNumber/", $key)) {
+      if (strlen($value)) array_push($reg_numbers, $value);
+    }
+  }
+  
   $fakturabank = new lodo_fakturabank_fakturabank();
-  $fakturabank->updateCarFromFakturabank($_REQUEST['car_CarCode'], $CarID);
+  $fakturabank->updateCarFromFakturabank($reg_numbers, $CarID);
 
+}
+elseif($_lib['input']->getProperty('action_car_new_registration')) {
+  $query = "INSERT INTO carregistration (CarID) VALUES (". $CarID .")";
+  $_lib['db']->db_query($query);
+}
+elseif($_lib['input']->getProperty('action_car_delete_registration')) {
+  $query_used = "SELECT * FROM invoiceinline WHERE CarRegistrationID = ".$_POST["registration_to_delete"];
+  $used = $_lib['storage']->db_fetch_object($_lib['storage']->db_query($query_used));
+  if(!$used) {
+    $query_delete = "DELETE FROM carregistration WHERE CarRegistrationID = ".$_POST["registration_to_delete"];
+    $_lib['db']->db_query($query_delete);
+  } else {
+    print "This registration is used";
+  }
+}
+
+// trim car codes (registration number) and save them
+if ($_lib['input']->getProperty('action_car_update')) {
+  foreach ($_POST as $key => $value) {
+    if (preg_match("/^carregistration_RegistrationNumber/", $key)) {
+      $_POST[$key] = trim($value);
+    }
+  }
+  $_lib['storage']->db_update_multi_table($_POST, array('carregistration' => 'CarRegistrationID'));
 }
 
 // if the action being performed is not delete then update milage table

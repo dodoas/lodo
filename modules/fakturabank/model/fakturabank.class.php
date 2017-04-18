@@ -181,7 +181,7 @@ class lodo_fakturabank_fakturabank {
     private function find_car_by_code($CarCode) {
         global $_lib;
 
-        $query = "SELECT `CarID`, `CarCode` FROM car WHERE `CarCode` = '$CarCode'";
+        $query = "SELECT car.CarID, reg.RegistrationNumber FROM car JOIN carregistration reg ON car.CarID = reg.CarID WHERE RegistrationNumber = '$CarCode'";
         $result = $_lib['storage']->db_query3(array('query' => $query));
         if (!$result) {
             return false;
@@ -806,11 +806,11 @@ class lodo_fakturabank_fakturabank {
         foreach($acc_cost_params as $param) {
           list($key, $value) = explode("=", $param);
           if ($key == 'Bil') { // CarID info
-            $query = "select * from car where CarCode='" . $value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
+            $query = "select car.*, reg.CarRegistrationID from car join carregistration reg on car.CarID = reg.CarID where RegistrationNumber='" . $value . "' and ". car::car_active_sql("car.CarID", $InvoiceO->IssueDate) ."=1";
             $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
             if($carexists) {
               $line->CarID   = $carexists->CarID;
-              $line->CarCode = $carexists->CarCode;
+              $line->CarRegistrationID = $carexists->CarRegistrationID;
             }
             else {
               $InvoiceO->Status .= "Bil: " . $value . " eksisterer ikke. ";
@@ -1634,6 +1634,7 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['ProductName']       = $line->Item->Name;
                         $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
                         $datalineH['CarID']             = $line->CarID;
+                        $datalineH['CarRegistrationID'] = $line->CarRegistrationID;
                         $datalineH['DepartmentID']      = $line->DepartmentID;
                         $datalineH['ProjectID']         = $line->ProjectID;
                         $datalineH['Comment']           = $line->Item->Description;
@@ -2401,14 +2402,21 @@ class lodo_fakturabank_fakturabank {
       unset($_SESSION['altinn_invoice_reference']);
     }
 
-    public function updateCarFromFakturabank($CarCode, $CarID) {
+    public function updateCarFromFakturabank($CarCodes, $CarID) {
       global $_lib;
 
-      $page = "rest/cars.xml?orgno=". $this->OrgNumber ."&code=". $CarCode;
+      $codeArray = $CarCodes;
+      $codeString = "";
+      foreach ($codeArray as &$code) {
+          $code = "&code[]=".urlencode($code);
+      }
+      $codeString = join($codeArray);
+
+      $page = "rest/cars.xml?orgno=". $this->OrgNumber . $codeString;
       $url = $this->construct_fakturabank_url($page);
 
-      $_SESSION['oauth_car_code'] = $CarCode;
-      $_SESSION['oauth_car_id']   = $CarID;
+      $_SESSION['oauth_car_codes'] = $CarCodes;
+      $_SESSION['oauth_car_id']    = $CarID;
 
       if (isset($_SESSION['oauth_car_info_fetched'])) {
         unset($_SESSION['oauth_car_info_fetched']);
@@ -2430,18 +2438,102 @@ class lodo_fakturabank_fakturabank {
       $xml_key_to_db_fieled_name = array(
         "name" => "CarName",
         "modelyear" => "RegistrationYear",
+        "enable-vat" => "EnableVAT",
+        "seats" => "NumberOfSeats",
         "purchased-date" => "ValidFrom",
-        "sold-date" => "ValidTo"
+        "purchased-price" => "PurchasePrice",
+        "sold-date" => "ValidTo",
+        "sold-price" => "SalePrice",
+        "description" => "Description",
+        "fuel" => "Fuel"
       );
+
+      $xml_key_to_db_fieled_name_registrations = array(
+        "registration-number" => "RegistrationNumber",
+        "active-in-accounting-until" => "ActiveInAccountingUntil"
+      );
+
       if (!$car->error) {
-        $car_update_query = "UPDATE car SET CarCode = '". $car->code ."'";
+        $this->format_fb_car_parameters($car);
+        $car_update_query = "UPDATE car SET ";
+        $set_string = "";
         foreach($xml_key_to_db_fieled_name as $xml_key => $db_filed_name) {
-          if ($car->{$xml_key}) $car_update_query .= ", ". $db_filed_name ." = '". $car->{$xml_key} ."'";
+          if ($car->{$xml_key}) $set_string[] = $db_filed_name ." = '". $car->{$xml_key} ."'";
         }
+        $car_update_query .= join(", ", $set_string);
         $car_update_query .= " WHERE CarID = ". $CarID;
         $_lib['db']->db_query($car_update_query);
+
+        $car_registrations = $car->{"car-registrations"};
+
+        $received_registration_numbers = array();
+
+        // if fakturabank sends multiple registrations, this will be an array
+        // if it sends only one, we transform it into an array with that element
+        if(!is_array($car_registrations->{"car-registration"})) {
+            $car_registrations->{"car-registration"} = array($car_registrations->{"car-registration"});
+        }
+
+        foreach ($car_registrations->{"car-registration"} as $car_registration) {
+          $reg_no = $car_registration->{"registration-number"};
+          $received_registration_numbers[] = $reg_no;
+          $registration_exists  = $_lib['db']->get_row(array('query' => "SELECT * FROM carregistration WHERE RegistrationNumber = '". $reg_no ."';"));
+
+          if($registration_exists) {
+            // update
+            $id = $registration_exists->CarRegistrationID;
+            $query = "UPDATE carregistration SET ";
+            $set_string = "";
+            foreach($xml_key_to_db_fieled_name_registrations as $xml_key => $db_filed_name) {
+              if ($car_registration->{$xml_key}) $set_string[] = $db_filed_name ." = '". $car_registration->{$xml_key} ."'";
+            }
+            $query .= join(", ", $set_string);
+            $query .= " WHERE CarRegistrationID = ". $id;
+            $_lib['db']->db_query($query);
+          } else {
+            // create new
+            $columns = array("CarID" => $CarID);
+            foreach ($xml_key_to_db_fieled_name_registrations as $xml_key => $db_filed_name) {
+              if($car_registration->{$xml_key}) {
+                $columns[$db_filed_name] = $car_registration->{$xml_key};
+              }
+            }
+
+            $query = "INSERT INTO carregistration (". join(", ", array_keys($columns)) .") VALUES (". join(", ", array_map(function($x) { return "'". $x ."'"; }, $columns)) .");";
+            $_lib['db']->db_query($query);
+          }
+        }
+
+        $received_registration_numbers = array_map(function($number) { return "'".$number."'"; }, $received_registration_numbers);
+        $received_registration_numbers = join(', ', $received_registration_numbers);
+        $excess_registrations = $_lib['db']->db_query("SELECT CarRegistrationID, RegistrationNumber FROM carregistration WHERE CarID = ".$CarID." AND RegistrationNumber NOT IN (".$received_registration_numbers.")");
+
+        while($row = $_lib['db']->db_fetch_object($excess_registrations)) {
+          $query_used = "SELECT * FROM invoiceinline WHERE CarRegistrationID = ".$row->CarRegistrationID;
+          $used = $_lib['storage']->db_fetch_object($_lib['storage']->db_query($query_used));
+          if(!$used) {
+            $query_delete = "DELETE FROM carregistration WHERE CarRegistrationID = ".$row->CarRegistrationID;
+            $_lib['db']->db_query($query_delete);
+          } else {
+            print "Registration ".$row->RegistrationNumber." is used and will not be deleted.";
+          }
+        }
       }
       else $_lib['message']->add("ERROR: ". $car->error);
+    }
+
+    private function format_fb_car_parameters(&$car) {
+      switch ($car->{"fuel"}) {
+        case 'diesel':
+          $car->fuel = "Diesel";
+          break;
+        case 'gasoline':
+          $car->fuel = "Bensin";
+          break;
+        case 'electronic':
+          $car->fuel = "Elektrisk";
+          break;
+      }
     }
 
     public function construct_fakturabank_url($page=''){
