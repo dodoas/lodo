@@ -1483,8 +1483,8 @@ class invoice {
             }
 
             #print_r($line);
-            $linetotal      = $line->UnitCustPrice * $line->QuantityDelivered + $charges - $allowances;
-            $linetaxamount  = $linetotal * ($line->Vat / 100);
+            $linetotal      = round($line->UnitCustPrice * $line->QuantityDelivered + $charges - $allowances, 2);
+            $linetaxamount  = round($linetotal * ($line->Vat / 100), 2);
             $taxtotal      += $linetaxamount;
             $total         += $linetotal;
             $this->taxH[$line->Vat]->TaxableAmount    += $linetotal;
