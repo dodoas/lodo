@@ -70,6 +70,7 @@ class SessionNew
     }
 
     #_MY_SELF used for forms posting to the same page, simulates $_PHP_SELF
+    // TODO: Maybe remove the _LevelXID stuff since it seems like it is not in use
     $this->my_self  = '/'.$_SETUP['ACTIVE_INTERFACE'].'/'."index.php?SID=".$this->get_session('SID') . "&amp;t=" . $this->module . "." . $this->template . "&amp;_Level1ID=".(isset($_REQUEST['_Level1ID']) ? $_REQUEST['_Level1ID'] : "")."&amp;_Level2ID=".(isset($_REQUEST['_Level2ID']) ? $_REQUEST['_Level2ID'] : "")."&amp;";
   }
 

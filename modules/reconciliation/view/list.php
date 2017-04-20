@@ -392,7 +392,7 @@ if(count($Reconciliation->VoucherH) > 0
             <input type="checkbox" class="chk" id="kid" name="chk.kid.<?= $Voucher->VoucherID ?>" value="checked" <?= $Reconciliation->isMatchable($AccountPlanID, $Voucher->KID, $Voucher->InvoiceID, $Voucher->MatchNumber, $Voucher) == 2 ? 'checked'.$automatic_checked_style : '' ?>>
           </td>
           <td class="<? print $Class ?>">
-            <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $Voucher->VoucherID, 'value' =>  $Voucher->MatchNumber == "0" ? "" : $Voucher->MatchNumber, 'width' => 20, 'maxlength' => 25, 'id' => 'match')); ?>
+            <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'MatchNumber', 'pk' => $Voucher->VoucherID, 'value' =>  $Voucher->MatchNumber == "0" ? "" : $Voucher->MatchNumber, 'width' => 20, 'maxlength' => 25, 'id' => 'match')); ?>
             <input type="checkbox" class="chk" id="match" name="chk.match.<?= $Voucher->VoucherID ?>" value="checked" <?= $Reconciliation->isMatchable($AccountPlanID, $Voucher->KID, $Voucher->InvoiceID, $Voucher->MatchNumber, $Voucher) == 3 ? 'checked'.$automatic_checked_style : '' ?>>
           </td>
           <td class="<? print $Class ?>">
@@ -407,7 +407,7 @@ if(count($Reconciliation->VoucherH) > 0
       } else {
         print $_lib['format']->Amount($Reconciliation->getDiff($AccountPlanID, $Voucher->KID, $Voucher->InvoiceID, $Voucher->MatchNumber, $Voucher));
       }
-      print $Reconciliation->voucherMessage($Voucher->VoucherID);
+      print " " . $Reconciliation->voucherMessage($Voucher->VoucherID);
 ?>
           </td>
           <td class="noprint">

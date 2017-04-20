@@ -11,9 +11,6 @@ class model_task_task {
     return $dbs;
   }
 
-  function run_query_on_database($db_name, $query) {
-  }
-
   static function get_database_names() {
     $dbs = self::database_list();
     foreach ($dbs as $db) {
@@ -53,8 +50,13 @@ PRIMARY KEY (ID, Name)
       }
       $groups = array();
       foreach($vouchers as $voucher) {
-        // change to ifs for readability
-        $group_id = isset($groups[$voucher['ParentVoucherID']]) ? $groups[$voucher['ParentVoucherID']] : (isset($groups[$voucher['ChildVoucherID']]) ? $groups[$voucher['ChildVoucherID']] : $voucher['ParentVoucherID']);
+        if (isset($groups[$voucher['ParentVoucherID']])) {
+          $group_id = $groups[$voucher['ParentVoucherID']];
+        } elseif (isset($groups[$voucher['ChildVoucherID']])) {
+          $group_id = $groups[$voucher['ChildVoucherID']];
+        } else {
+          $group_id = $voucher['ParentVoucherID'];
+        }
         $groups[$voucher['ParentVoucherID']] = $group_id;
         $groups[$voucher['ChildVoucherID']] = $group_id;
 
