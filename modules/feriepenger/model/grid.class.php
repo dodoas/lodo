@@ -181,11 +181,42 @@ class feriepenger_grid
         $ret["Rest"]    = $ret["Feriepenger"] - $ret["Utbetalt"];
         $ret["ArbeidsgiveravgiftBelop"] = $ret["Rest"] * $ret["ArbeidsgiveravgSats"] / 100;
 
+        $paid_amount = 0;
+        $paid_salary_journals = array();
+        $paid_vacation_money_query = "
+          SELECT
+            s.JournalID,
+            s.SalaryID,
+            sl.AmountThisPeriod
+          FROM
+            salary s
+              JOIN
+              salaryline sl
+              ON s.SalaryID = sl.SalaryID
+          WHERE
+            s.JournalDate LIKE '" . ($this->year+1) . "-%' AND
+            s.AccountPlanID = $person AND
+            sl.AccountPlanID = 5050 AND
+            sl.AmountThisPeriod != 0
+          ";
+        $paid_vacation_money_result = $_lib['db']->db_query($paid_vacation_money_query);
+        while ($paid_vacation_money = $_lib['db']->db_fetch_object($paid_vacation_money_result)) {
+          $paid_amount += $paid_vacation_money->AmountThisPeriod;
+          $paid_salary_journals[] = 'L <a href="' . $_lib['sess']->dispatch . 't=salary.edit&SalaryID=' . $paid_vacation_money->SalaryID . '">' . $paid_vacation_money->JournalID . '</a>';
+        }
+        $paid_salary_journal = implode(', ' , $paid_salary_journals);
+        $ret["PaidFeriepenger"] = array(
+          'amount' => $paid_amount,
+          'salary_journal' => $paid_salary_journal
+        );
+
         if ($ret["Prosentsats"] == 0)
             $ret["SkyldigFeriepengeGrunnlag"] = 0;
         else
             $ret["SkyldigFeriepengeGrunnlag"] = $ret["Rest"] / ($ret["Prosentsats"] / 100);
 
+        $this->sumPaidUtbetalt += $paid_amount;
+        $this->sumPaidRest += $ret["Rest"] - $paid_amount;
         $this->sumUtbetalt += $ret["Utbetalt"];
         $this->sumGrunnlang += $ret["Grunnlag"];
         $this->sumSkyldig += $ret["SkyldigFeriepengeGrunnlag"];
@@ -194,6 +225,14 @@ class feriepenger_grid
         $this->sumRestArbeidsgiveravgift += $ret["ArbeidsgiveravgiftBelop"];
 
         return $ret;
+    }
+
+    function sumPaidUtbetalt() {
+        return $this->sumPaidUtbetalt;
+    }
+
+    function sumPaidRest() {
+        return $this->sumPaidRest;
     }
 
     function sumUtbetalt() 
