@@ -1,5 +1,31 @@
 <?php
 $year = isset($_REQUEST["year"]) ? (int)$_REQUEST["year"] : (isset($_REQUEST["report_year"]) ? (int)$_REQUEST["report_year"] : date("Y"));
+$period_status_query = "
+  SELECT
+    Status,
+    COUNT(*) AS Count
+  FROM
+    accountperiod
+  WHERE
+    Period LIKE '$year-%'
+  GROUP BY
+    Status";
+$period_status_result = $_lib['db']->db_query($period_status_query);
+$period_status = array();
+$period_total_count = 0;
+while ($period_count = $_lib['db']->db_fetch_object($period_status_result)) {
+  $period_status[$period_count->Status] = $period_count->Count;
+  $period_total_count += $period_count->Count;
+}
+if ($period_status[4] + $period_status[1] == $period_total_count) {
+  $required_access_level = 5;
+} elseif ($period_status[2] > 0) {
+  $required_access_level = 2;
+} elseif ($period_status[3] > 0) {
+  $required_access_level = 3;
+} else {
+  $required_access_level = 5;
+}
 
 function generateSalaryLink($SalaryID, $JournalID){
   global $_lib;
@@ -8,7 +34,7 @@ function generateSalaryLink($SalaryID, $JournalID){
 }
 
 function print_values($codes, $line, $print_extra = true) {
-    global $_lib, $year;
+    global $_lib, $year, $required_access_level;
 
     printf("<td>%s</td>", $line['Date']);
     foreach($codes as $code) {
@@ -17,33 +43,31 @@ function print_values($codes, $line, $print_extra = true) {
 
     printf("<td>%s</td>", $line['Comment']);
 
-    if($print_extra) {
-        if($line['Locked'] == 0) {
-            printf("<td><a href='%st=salary.editreport&SalaryReportID=%d&year=%d'>edit</a></td>
-                    <td><a href='%st=salary.employeereport&lock_report&SalaryReportID=%d&year=%d'  onclick='return confirm(\"Are you sure you want to lock?\")'>lock</a></td>
-                    <td><a href='%st=salary.employeereport&delete_report&SalaryReportID=%d&year=%d' onclick='return confirm(\"Are you sure you want to delete?\")'>delete</a></td>",
-                $_lib['sess']->dispatch, $line['ID'], $year,
-                $_lib['sess']->dispatch, $line['ID'], $year,
-                $_lib['sess']->dispatch, $line['ID'], $year
-            );
+    if ($print_extra) {
+      if (($line['Locked'] == 0) && ($_lib['sess']->get_person('AccessLevel') >= $required_access_level)) {
+        printf("<td><a href='%st=salary.editreport&SalaryReportID=%d&year=%d'>rediger</a></td>
+                <td><a href='%st=salary.employeereport&lock_report&SalaryReportID=%d&year=%d'  onclick='return confirm(\"Er du sikker p&aring; at du vil l&aring;se?\")'>l&aring;s</a></td>
+                <td><a href='%st=salary.employeereport&delete_report&SalaryReportID=%d&year=%d' onclick='return confirm(\"Er du sikker p&aring; at du vil slette?\")'>slett</a></td>",
+            $_lib['sess']->dispatch, $line['ID'], $year,
+            $_lib['sess']->dispatch, $line['ID'], $year,
+            $_lib['sess']->dispatch, $line['ID'], $year
+        );
+      } elseif ($line['Locked'] == 1) {
+        $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $line['LockedBy']);
+        $r = $_lib['db']->db_query($query);
+        $result = $_lib['db']->db_fetch_assoc($r);
+        printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
+        if (($_lib['sess']->get_person('AccessLevel') >= $required_access_level) && ($_lib['sess']->get_person('AccessLevel') == 4)) {
+          printf("<td><a href='%st=salary.employeereport&unlock_report&SalaryReportID=%d&year=%d'>l&aring;se opp</a></td>",
+            $_lib['sess']->dispatch, $line['ID'], $year
+          );
         }
-        else {
-            $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $line['LockedBy']);
-            $r = $_lib['db']->db_query($query);
-            $result = $_lib['db']->db_fetch_assoc($r);
-            printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
-
-            if($_lib['sess']->get_person('AccessLevel') >= 2) {
-                printf("<td><a href='%st=salary.employeereport&unlock_report&SalaryReportID=%d&year=%d'>l&aring;se opp</a></td>",
-                     $_lib['sess']->dispatch, $line['ID'], $year
-                );
-            }
-        }
+      }
     }
 }
 
 function print_sums($employee_id, $codes, $report) {
-    global $_lib, $year;
+    global $_lib, $year, $required_access_level;
 
     $sums = array();
     foreach($codes as $code)
@@ -60,8 +84,12 @@ function print_sums($employee_id, $codes, $report) {
         printf("<td style='text-align: right'><b>%s</b></td>", $_lib['format']->Amount($sums[$code]));
     }
 
-    if($employee_id && $_lib['sess']->get_person('AccessLevel') > 1)
-        printf("<td></td><td><a href='%st=salary.addreport&AccountPlanID=%d&year=%d'>+</td>", $_lib['sess']->dispatch, $employee_id, $year);
+    if($employee_id) {
+      print("<td></td>");
+      if ($_lib['sess']->get_person('AccessLevel') >= $required_access_level) {
+        printf("<td><a href='%st=salary.addreport&AccountPlanID=%d&year=%d'>+</td>", $_lib['sess']->dispatch, $employee_id, $year);
+      }
+    }
 }
 
 ?>
@@ -301,35 +329,31 @@ foreach($accountreports as $accountreport) {
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
-        $different_year_checked = (intval($accountreport['DifferentYear']) === 1) ? 'checked' : '';
-        print("<td><input type=\"checkbox\" name=\"DifferentYear\" $different_year_checked disabled/></td>");
-        printf("<td>%s</td>", $accountreport['Comment']);
+    $different_year_checked = (intval($accountreport['DifferentYear']) === 1) ? 'checked' : '';
+    print("<td><input type=\"checkbox\" name=\"DifferentYear\" $different_year_checked disabled/></td>");
+    printf("<td>%s</td>", $accountreport['Comment']);
 
-    if($accountreport['Locked'] == 0) {
+    if(($accountreport['Locked'] == 0) && ($_lib['sess']->get_person('AccessLevel') >= $required_access_level)) {
         printf(
             '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Er du sikker p&aring; at du vil l&aring;se?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Er du sikker p&aring; at du vil slette?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
         );
-
-    }
-    else {
+    } elseif ($accountreport['Locked'] == 1) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
         printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
-        if($_lib['sess']->get_person('AccessLevel') >= 2) {
+        if (($_lib['sess']->get_person('AccessLevel') >= $required_access_level) && ($_lib['sess']->get_person('AccessLevel') == 4)) {
             printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
-
     }
-
     print("</tr>");
 }
 
@@ -386,9 +410,10 @@ foreach($codes as $c) {
     printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
 }
 
-if ($_lib['sess']->get_person('AccessLevel') > 1 ) {
+print('<td></td><td></td>');
+if ($_lib['sess']->get_person('AccessLevel') >= $required_access_level ) {
     printf('
-    <td></td><td></td><td><a href="%st=salary.addeditreportaccount&year=%s&action=add">+</a></td></tr>
+    <td><a href="%st=salary.addeditreportaccount&year=%s&action=add">+</a></td></tr>
     ', $_lib['sess']->dispatch, $year);
 }
 
@@ -446,31 +471,28 @@ foreach($accountreports as $accountreport) {
         printf("<td>%s</td>", $accountreport['Feriepengeprosent']);
         printf("<td>%s</td>", $accountreport['Comment']);
 
-    if($accountreport['Locked'] == 0) {
+    if(($accountreport['Locked'] == 0) && ($_lib['sess']->get_person('AccessLevel') >= $required_access_level)) {
         printf(
             '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Er du sikker p&aring; at du vil l&aring;se?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Er du sikker p&aring; at du vil slette?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
         );
 
-    }
-    else {
+    } elseif ($accountreport['Locked'] == 1) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
         printf("<td>l&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
-        if($_lib['sess']->get_person('AccessLevel') >= 2) {
+        if (($_lib['sess']->get_person('AccessLevel') >= $required_access_level) && ($_lib['sess']->get_person('AccessLevel') == 4)) {
             printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
-
     }
-
     print("</tr>");
 }
 
@@ -520,31 +542,28 @@ foreach($accountreports as $accountreport) {
         printf("<td>%s</td>", $accountreport['Feriepengeprosent']);
         printf("<td>%s</td>", $accountreport['Comment']);
 
-    if($accountreport['Locked'] == 0) {
+    if(($accountreport['Locked'] == 0) && ($_lib['sess']->get_person('AccessLevel') >= $required_access_level)) {
         printf(
             '<td><a href="%st=salary.addeditreportaccount&SalaryReportAccountID=%d&year=%d&action=edit">rediger</a></td>
-            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Are you sure you want to lock?")\'>l&aring;s</a></td>
-            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Are you sure you want to delete?")\'>slett</a></td>',
+            <td><a href="%slock_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d" onclick=\'return confirm("Er du sikker p&aring; at du vil l&aring;se?")\'>l&aring;s</a></td>
+            <td><a href="%sdelete_account_report&t=salary.employeereport&SalaryReportAccountID=%d&year=%d"  onclick=\'return confirm("Er du sikker p&aring; at du vil slette?")\'>slett</a></td>',
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year,
             $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
         );
 
-    }
-    else {
+    } elseif ($accountreport['Locked'] == 1) {
         $query = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $accountreport['LockedBy']);
         $r = $_lib['db']->db_query($query);
         $result = $_lib['db']->db_fetch_assoc($r);
         printf("<td>L&aring;st av %s %s</td>", $result['FirstName'], $result['LastName']);
 
-        if($_lib['sess']->get_person('AccessLevel') >= 2) {
+        if (($_lib['sess']->get_person('AccessLevel') >= $required_access_level) && ($_lib['sess']->get_person('AccessLevel') == 4)) {
             printf("<td><a href='%st=salary.employeereport&unlock_account_report&SalaryReportAccountID=%d&year=%d'>l&aring;se opp</a></td>",
                    $_lib['sess']->dispatch, $accountreport['SalaryReportAccountID'], $year
                 );
         }
-
     }
-
     print("</tr>");
 }
 
