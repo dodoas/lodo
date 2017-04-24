@@ -201,7 +201,16 @@ if(!$period_open) {
 ?>
 
 <? print exchange::getCurrenciesInJS(); ?>
-
+<?
+$messages = $_lib['message']->get();
+if (!$voucher_input->new && $messages) {
+?>
+<div class="warning">
+  <?= $messages ?>
+</div>
+<?
+}
+?>
 <form class="voucher" name="find_customer" action="<? print $MY_SELF ?>" method="post">
     Kunde/Org-nummer
     <? print $_lib['form3']->hidden(array('name' => 'type'              , 'value' => $voucher_input->type)) ?>
@@ -431,7 +440,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
       ?>
     </td>
 
-<td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+<td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" onchange="enableOrDisable(validDate(this.value), 'save_button_<?= $voucherHead->VoucherID ?>');" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="invoice" onclick="changeMatchBy(this);" <? if ($voucherHead->matched_by == 'invoice') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
@@ -647,7 +656,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
   }
 ?>
       </td>
-      <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+      <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate" onchange="enableOrDisable(validDate(this.value), 'save_button_<?= $voucher->VoucherID ?>');" accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.InvoiceID"   accesskey="R" value="<? print $voucher->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
       <td><input class="voucher match_checkbox" type="checkbox" name="voucher.matched_by" value="invoice" onclick="changeMatchBy(this);" <? if ($voucher->matched_by == 'invoice') print 'checked' ?> <? if(!$period_open) print "disabled='disabled'"; ?>></td>
