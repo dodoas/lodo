@@ -488,7 +488,7 @@ if(count($Reconciliation->VoucherH) > 0
 
 <?
   foreach ($Reconciliation->HiddingAccounts as $Account) {
-    $ShowAccountLink = $_SETUP['DISPATCH'] . "t=reconciliation.list&report_Sort=JournalID&AccountPlanID=$AccountPlanID&ReskontroFromAccount=$ReskontroFromAccount&ReskontroToAccount=$ReskontroToAccount&report.DepartmentID=$DepartmentID&report.ProjectID=$ProjectID&show_report_search=Kj%F8r+rapport&showOnly=" . $Account['AccountPlanID']; 
+    $ShowAccountLink = $_SETUP['DISPATCH'] . "t=reconciliation.list&report_Sort=JournalID&AccountPlanID=" . $Reconciliation->AccountPlanID . "&ReskontroFromAccount=$ReskontroFromAccount&ReskontroToAccount=$ReskontroToAccount&report.DepartmentID=$DepartmentID&report.ProjectID=$ProjectID&show_report_search=Kj%F8r+rapport&showOnly=" . $Account['AccountPlanID'];
 ?>
         <tr>
           <th colspan="20">

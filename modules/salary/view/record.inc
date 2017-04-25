@@ -771,7 +771,7 @@ elseif($_lib['input']->getProperty('action_salary_delete'))
 
   includelogic('reconciliation/reconciliation');
   $reconciliation = new reconciliation(array());
-  $reconciliation->openPostJournal($row_salary->JournalID);
+  $reconciliation->openPostJournal($row_salary->JournalID, $VoucherType);
 
   $VoucherPeriod    = $row_salary->Period;
   $VoucherDate      = $row_salary->JournalDate;

@@ -365,7 +365,7 @@ print $_lib['sess']->doctype ?>
                 <td><? print $voucher->KID ?></td>
                 <td><?
                     $is_closed = !is_null($_lib['db']->get_row(array("query" => "SELECT * FROM voucherstruct WHERE Closed = 1 AND (ParentVoucherID = " . $voucher->VoucherID . " OR ChildVoucherID = " . $voucher->VoucherID . ")"))->VoucherStructID);
-                    $match_number = $_lib['db']->get_row(array("query" => "SELECT MatchNumber FROM vouchermatch WHERE VoucherID = $voucher->VoucherID"))->MatchNumber;
+                    $match_number = $voucher->MatchNumber;
                     if ($is_closed) {
                       if ($voucher->matched_by == 'invoice') print 'FAK ' . $voucher->InvoiceID . " ";
                       elseif ($voucher->matched_by == 'kid') print 'KID ' . $voucher->KID . " ";

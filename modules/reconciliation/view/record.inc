@@ -3,7 +3,7 @@
 foreach ($_POST as $Key => $Value) {
   if ((strstr($Key, "voucher_InvoiceID") !== false)
     || (strstr($Key, "voucher_KID") !== false)
-    || (strstr($Key, "vouchermatch_MatchNumber") !== false))
+    || (strstr($Key, "voucher_MatchNumber") !== false))
   {
     $_POST[$Key] = trim($Value);
   }
@@ -12,13 +12,10 @@ foreach ($_POST as $Key => $Value) {
 if (isset($_REQUEST['action_reconciliation_update'])) {
   $PrimaryKey = "VoucherID";
   $_lib['db']->db_update_multi_record($_POST, $DBTable, $PrimaryKey);
-  $_lib['db']->db_update_multi_record($_POST, 'vouchermatch', 'VoucherMatchID');
 } elseif (isset($_REQUEST['action_reconciliation_close'])) {
   $Reconciliation->closeVoucher($_REQUEST['MatchAccountPlanID'], $_REQUEST['MatchVoucherID']);
 } elseif (isset($_REQUEST['action_reconciliation_closeall'])) {
   $Reconciliation->closeAllPosts();
-} elseif (isset($_REQUEST['action_reconciliation_openall'])) {
-  $Reconciliation->openAllPostsForOpenPeriods();
 } elseif (isset($_REQUEST['action_reconciliation_closeselected'])
   && isset($_REQUEST['selectedClose']))
 {

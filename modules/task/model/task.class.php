@@ -42,6 +42,7 @@ PRIMARY KEY (ID, Name)
 );
       $_lib['db']->db_query("TRUNCATE TABLE test");
       $_lib['db']->db_query("TRUNCATE TABLE voucherreconciliation");
+      $_lib['db']->db_query("UPDATE voucher SET VoucherReconciliationID = NULL, MatchNumber = NULL");
       $query_vouchers = "SELECT ParentVoucherID, ChildVoucherID FROM voucherstruct";
       $result_vouchers = $_lib['db']->db_query($query_vouchers);
       $vouchers = array();

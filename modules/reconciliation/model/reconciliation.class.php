@@ -133,6 +133,55 @@ class reconciliation {
       return array($AccountPlanID, $AmountIn, $AmountOut, $JournalID, $VoucherID, $Status);
     }
 
+    function generateVoucherQuery($Where, $WhereExtra, $AccountPlanRestrinctionExtra) {
+      return "
+        SELECT
+          v.VoucherID,
+          v.JournalID,
+          v.AccountPlanID,
+          v.InvoiceID,
+          v.KID,
+          v.MatchNumber,
+          v.AmountIn,
+          v.AmountOut,
+          v.ForeignAmount,
+          v.matched_by,
+          v.VoucherType,
+          v.VoucherDate,
+          v.VoucherPeriod,
+          v.Vat as VAT,
+          v.Quantity,
+          v.DepartmentID,
+          v.ProjectID,
+          v.DueDate,
+          v.DescriptionID,
+          v.Description,
+          v.ForeignCurrencyID,
+          v.ForeignConvRate
+        FROM
+          (
+            SELECT
+              *
+            FROM
+              voucher
+            WHERE
+              Active = 1 AND
+              VoucherReconciliationID IS NULL
+          ) v,
+          accountplan ap
+        WHERE
+          v.AccountPlanID = ap.AccountPlanID AND
+          $AccountPlanRestrinctionExtra
+          $Where
+          $WhereExtra
+          ap.EnablePostPost = 1
+        ORDER BY
+          v.AccountPlanID ASC,
+          v.VoucherPeriod ASC,
+          v.VoucherDate ASC,
+          v.VoucherID ASC";
+    }
+
     /**
      * Gathers all unreconciled vouchers
      */
@@ -168,51 +217,7 @@ class reconciliation {
         }
         $Where .= " ap.AccountPlanType = '" . $AccountPlan->ReskontroAccountPlanType . "' AND ";
 
-        $VoucherQuery = "
-          SELECT
-            v.VoucherID,
-            v.JournalID,
-            v.AccountPlanID,
-            v.InvoiceID,
-            v.KID,
-            v.MatchNumber,
-            v.AmountIn,
-            v.AmountOut,
-            v.ForeignAmount,
-            v.matched_by,
-            v.VoucherType,
-            v.VoucherDate,
-            v.VoucherPeriod,
-            v.Vat as VAT,
-            v.Quantity,
-            v.DepartmentID,
-            v.ProjectID,
-            v.DueDate,
-            v.DescriptionID,
-            v.Description,
-            v.ForeignCurrencyID,
-            v.ForeignConvRate
-          FROM
-            (
-              SELECT
-                *
-              FROM
-                voucher
-              WHERE
-                Active = 1 AND
-                VoucherReconciliationID IS NULL
-            ) v,
-            accountplan ap
-          WHERE
-            v.AccountPlanID = ap.AccountPlanID AND
-            $Where
-            $WhereExtra
-            ap.EnablePostPost = 1
-          ORDER BY
-            v.AccountPlanID ASC,
-            v.VoucherPeriod ASC,
-            v.VoucherDate ASC,
-            v.VoucherID ASC";
+        $VoucherQuery = self::generateVoucherQuery($Where, $WhereExtra, '');
 
         // Building VoucherQuery, the most time consuming part starts here(tested with benchmark)
         if ($OnlyAccountPlanID) {
@@ -243,52 +248,7 @@ class reconciliation {
           while (($Account = $_lib['db']->db_fetch_assoc($HiddingAccountsResult))) {
             $this->HiddingAccounts[] = $Account;
           }
-          $VoucherQuery = "
-            SELECT
-              v.VoucherID,
-              v.JournalID,
-              v.AccountPlanID,
-              v.InvoiceID,
-              v.KID,
-              v.MatchNumber,
-              v.AmountIn,
-              v.AmountOut,
-              v.ForeignAmount,
-              v.matched_by,
-              v.VoucherType,
-              v.VoucherDate,
-              v.VoucherPeriod,
-              v.Vat as VAT,
-              v.Quantity,
-              v.DepartmentID,
-              v.ProjectID,
-              v.DueDate,
-              v.DescriptionID,
-              v.Description,
-              v.ForeignCurrencyID,
-              v.ForeignConvRate
-            FROM
-              (
-                SELECT
-                  *
-                FROM
-                  voucher
-                WHERE
-                  Active = 1 AND
-                  VoucherReconciliationID IS NULL
-              ) v,
-              accountplan ap
-            WHERE
-              v.AccountPlanID = ap.AccountPlanID AND
-              v.AccountPlanID = $OnlyAccountPlanID AND
-              $Where
-              $WhereExtra
-              ap.EnablePostPost = 1
-            ORDER BY
-              v.AccountPlanID ASC,
-              v.VoucherPeriod ASC,
-              v.VoucherDate ASC,
-              v.VoucherID ASC";
+          $VoucherQuery = self::generateVoucherQuery($Where, $WhereExtra, " v.AccountPlanID = $OnlyAccountPlanID AND ");
         }
         $VoucherResult = $_lib['db']->db_query($VoucherQuery);
         $accounting->cache_all_accountplans();
@@ -296,10 +256,10 @@ class reconciliation {
         // Loop and calculate all data
         $VouchersProcessed = array();
         while ($Voucher = $_lib['db']->db_fetch_object($VoucherResult)) {
-          if (in_array($Voucher->VoucherID, $VouchersProcessed)) {
+          if ($VouchersProcessed[$Voucher->VoucherID]) {
             continue;
           }
-          $VouchersProcessed[] = $Voucher->VoucherID;
+          $VouchersProcessed[$Voucher->VoucherID] = true;
 
           $AccountPlanID = $Voucher->AccountPlanID;
 
@@ -503,7 +463,7 @@ class reconciliation {
               foreach ($Matches[$MatchedBy."Journals"][$MatchKey] as $VoucherListEntry) {
                 $JournalID = $VoucherListEntry['JournalID'];
                 $VoucherID = $VoucherListEntry['VoucherID'];
-                if (in_array($VoucherID, $this->Matched)) {
+                if ($this->Matched[$VoucherID]) {
                   $Used = true;
                 }
                 $HighlightLinkHTML[] = "<span class=\"navigate to\" id=\"$VoucherID\">$JournalID</span>";
@@ -514,7 +474,7 @@ class reconciliation {
                 foreach ($Matches[$MatchedBy."Journals"][$MatchKey] as $VoucherListEntry) {
                   $JournalID = $VoucherListEntry['JournalID'];
                   $VoucherID = $VoucherListEntry['VoucherID'];
-                  $this->Matched[] = $VoucherID;
+                  $this->Matched[$VoucherID] = true;
                   $this->VoucherHighlightLinksHTML[$VoucherID] .= "$MatchedBy ( " . implode(' ', $HighlightLinkHTML) . " )";
                   $this->CloseAgainst[$VoucherID] = $Matches[$MatchedBy."Journals"][$MatchKey];
                 }
@@ -523,7 +483,7 @@ class reconciliation {
                 foreach ($Matches[$MatchedBy."Journals"][$MatchKey] as $VoucherListEntry) {
                   $JournalID = $VoucherListEntry['JournalID'];
                   $VoucherID = $VoucherListEntry['VoucherID'];
-                  if (!in_array($VoucherID, $this->Matched)) {
+                  if (!$this->Matched[$VoucherID]) {
                     $this->VoucherHighlightLinksHTML[$VoucherID] .= "Dobbelmatch$MatchedBy ( " . implode(' ', $HighlightLinkHTML) . " )";
                   }
                 }
@@ -629,7 +589,7 @@ class reconciliation {
      * Is the Voucher already matched
      */
     function isClosableVoucher($VoucherID) {
-      return in_array($VoucherID, $this->Matched);
+      return $this->Matched[$VoucherID];
     }
 
     /**
@@ -734,6 +694,12 @@ class reconciliation {
       // Set to anything different from 0 (here we chose 1) since if Balance is 0 the group can be reconciled
       $Balance = 1;
 
+      // If no KID or InvoiceID, add error message
+      if (!$KID && !$InvoiceID) {
+        $_lib['message']->add('Ingen KID eller fakturanummer');
+        return false;
+      }
+
       if ($KID && $Balance != 0) {
         $VoucherQuery = "
           SELECT
@@ -767,12 +733,6 @@ class reconciliation {
             VoucherDate DESC";
         // Order by date to always choose the newest if there is more than one
         list($Balance, $AmountInH, $AmountOutH) = $this->closeDataStructure($VoucherQuery);
-      }
-
-      // If no KID or InvoiceID, add error message
-      if (!$KID && !$InvoiceID) {
-        $_lib['message']->add('Ingen KID eller fakturanummer');
-        return false;
       }
 
       if ($Balance == 0 &&
@@ -918,71 +878,6 @@ class reconciliation {
     }
 
     /**
-     * Unreconciles all vouchers, in all periods for all account plans
-     */
-    function openAllPosts() {
-      global $_lib;
-
-      $DeleteReconciliationsQuery = "DELETE voucherreconciliation";
-      $_lib['db']->db_delete($DeleteReconciliationsQuery);
-      $UpdateVouchersQuery = "
-        UPDATE
-          voucher
-        SET
-          v.VoucherReconciliationID = NULL
-        WHERE
-          v.Active = 1";
-      $_lib['db']->db_update($UpdateVouchersQuery);
-    }
-
-    /**
-     * Unreconcile all vouchers that are in open peroids.
-     */
-    public function openAllPostsForOpenPeriods() {
-      global $_lib;
-
-      $SelectReconciliationsQuery = "
-        SELECT
-          v.VoucherReconciliationID
-        FROM
-          voucher v
-          JOIN (
-            SELECT
-              Period
-            FROM
-              accountperiod
-            WHERE
-            Status < 4
-          ) ap
-          ON ap.Period = v.VoucherPeriod
-        WHERE Active = 1";
-        $SelectReconciliationsResult = $_lib['db']->db_query($SelectReconciliationsQuery);
-        $IDs = array();
-        while($Voucher = $_lib['db']->db_fetch_assoc($SelectReconciliationsResult)) {
-          $ID = $Voucher['VoucherReconciliationID'];
-          if ($ID) array_push($IDs, $ID);
-        }
-        if (!empty($IDs)) {
-          $IDsString = '(' . implode(', ', $IDs) . ')';
-          $DeleteReconciliationsQuery = "
-            DELETE
-            FROM
-              voucherreconciliation
-            WHERE
-              ID IN $IDsString";
-          $_lib['db']->db_delete($DeleteReconciliationsQuery);
-          $UpdateVouchersQuery = "
-            UPDATE
-              voucher
-            SET
-              VoucherReconciliationID = NULL
-            WHERE
-              VoucherReconciliationID IN $IDsString";
-          $_lib['db']->db_update($UpdateVouchersQuery);
-        }
-    }
-
-    /**
      * Unreconcile all vouchers for a specific account plan.
      */
     public function openAllPostsAccount($AccountPlanID) {
@@ -1016,7 +911,9 @@ class reconciliation {
     public function closeAllPostsAccount($AccountPlanID) {
       global $_lib;
 
-      $this->getopenpost($AccountPlanID);
+      if (empty($this->VoucherH[$AccountPlanID])) {
+        $this->getopenpost($AccountPlanID);
+      }
       $ClosableH = array();
 
       $Account = $this->VoucherH[$AccountPlanID];
@@ -1072,7 +969,9 @@ class reconciliation {
     public function closeAllPosts() {
       global $_lib;
 
-      $this->getopenpost();
+      if (empty($this->VoucherH)) {
+        $this->getopenpost();
+      }
 
       $ClosableH = array();
 
