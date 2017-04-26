@@ -420,7 +420,7 @@ elseif($_lib['input']->getProperty('action_save_scheme')) {
 }
 elseif($_lib['input']->getProperty('action_refresh_sheme')) {
   $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
-  $schemeControl->refreshSchemes($schemeControl->fetchSchemesFromFakturaBank());
+  $schemeControl->refreshSchemes(lodo_accountplan_scheme::fetchSchemesFromFakturaBank());
 }
 
 ?>

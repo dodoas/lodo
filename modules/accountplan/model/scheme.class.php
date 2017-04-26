@@ -130,7 +130,7 @@ class lodo_accountplan_scheme {
             return null;
     }
 
-    function fetchSchemesFromFakturaBank(){
+    static function fetchSchemesFromFakturaBank(){
       includelogic("fakturabank/fakturabank");
         $fakturabank = new lodo_fakturabank_fakturabank();
 
