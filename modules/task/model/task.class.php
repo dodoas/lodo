@@ -34,12 +34,12 @@ class model_task_task {
                                                           'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
       echo "DB: '$db_name'(" . ($current_db_index+1) . "/$number_of_dbs) START\n";
       $_lib['db']->db_query("      
-CREATE TABLE IF NOT EXISTS test (
-ID int(11) NOT NULL,
-Name varchar (25) NOT NULL,
-PRIMARY KEY (ID, Name)
-)"
-);
+        CREATE TABLE IF NOT EXISTS test (
+        ID int(11) NOT NULL,
+        Name varchar (25) NOT NULL,
+        PRIMARY KEY (ID, Name)
+        )"
+      );
       $_lib['db']->db_query("TRUNCATE TABLE test");
       $_lib['db']->db_query("TRUNCATE TABLE voucherreconciliation");
       $_lib['db']->db_query("UPDATE voucher SET VoucherReconciliationID = NULL, MatchNumber = NULL");
@@ -90,5 +90,7 @@ PRIMARY KEY (ID, Name)
       $current_db_index++;
       $_lib['db']->db_query("DROP TABLE test");
     }
+    $end_time = time();
+    echo "Time elapsed for running the task: " . ($end_time - $start_time) . " seconds\n";
   }
 }

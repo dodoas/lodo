@@ -202,8 +202,9 @@ class reconciliation {
       if ($this->AccountPlanID) {
         $AccountPlan = $accounting->get_accountplan_object($this->AccountPlanID);
         $Where = '';
+        $WhereExtra = '';
         if ($this->DepartmentID > 0) {
-          $WhereExtra = ' v.DepartmentID = ' . (int) $this->DepartmentID . ' AND ';
+          $WhereExtra .= ' v.DepartmentID = ' . (int) $this->DepartmentID . ' AND ';
         }
         if ($this->ProjectID > 0) {
           $WhereExtra .= ' v.ProjectID = ' . (int) $this->ProjectID . ' AND ';
@@ -324,7 +325,8 @@ class reconciliation {
             $this->MatchH[$AccountPlanID]['KIDJournals'][$Voucher->KID][] =
               array(
                 'JournalID' => $Voucher->JournalID,
-                'VoucherID' => $Voucher->VoucherID
+                'VoucherID' => $Voucher->VoucherID,
+                'Match' => 'KID'
               );
           }
           // Try to match by InvoiceID
@@ -338,7 +340,9 @@ class reconciliation {
             $this->MatchH[$AccountPlanID]['InvoiceIDJournals'][$Voucher->InvoiceID][] =
               array(
                 'JournalID' => $Voucher->JournalID,
-                'VoucherID' => $Voucher->VoucherID
+                'VoucherID' => $Voucher->VoucherID,
+                'Match' => 'InvoiceID'
+
               );
           }
           // Try to match by MatchNumber, if MatchNumber is 0 this will be skipped
@@ -352,18 +356,20 @@ class reconciliation {
             $this->MatchH[$AccountPlanID]['MatchNumberJournals'][$Voucher->MatchNumber][] =
               array(
                 'JournalID' => $Voucher->JournalID,
-                'VoucherID' => $Voucher->VoucherID
+                'VoucherID' => $Voucher->VoucherID,
+                'Match' => 'MatchNumber'
+
               );
           }
 
           // Data from each voucher
-          $this->VoucherH[$AccountPlanID][$Voucher->VoucherID] = $Voucher;
           if ($Voucher->AmountIn > 0) {
-            $this->VoucherH[$AccountPlanID][$Voucher->VoucherID]->ForeignAmountIn = $Voucher->ForeignAmount;
+            $Voucher->ForeignAmountIn = $Voucher->ForeignAmount;
           }
           if ($Voucher->AmountOut > 0) {
-            $this->VoucherH[$AccountPlanID][$Voucher->VoucherID]->ForeignAmountOut = $Voucher->ForeignAmount;
+            $Voucher->ForeignAmountOut = $Voucher->ForeignAmount;
           }
+          $this->VoucherH[$AccountPlanID][$Voucher->VoucherID] = $Voucher;
         }
 
         // Account sum, what is actually recorded on the general ledger account
@@ -522,9 +528,10 @@ class reconciliation {
       // If the Voucher is supplied it is closeable if its matched_by field is any
       // of the following values ('invoice', 'kid', 'match')
       if (!is_null($Voucher)) {
-        $Success = in_array($Voucher->matched_by, array('invoice', 'kid', 'match'));
+        if (in_array($Voucher->matched_by, array('invoice', 'kid', 'match'))) {
+          $Success = true;
+        }
       }
-
       return $Success;
     }
 

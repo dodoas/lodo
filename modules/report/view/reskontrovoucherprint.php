@@ -6,7 +6,7 @@ includelogic('reconciliation/reconciliation');
 $accounting = new accounting();
 $kidmatchH  = array();
 
-if($_REQUEST['action_postmotpost_open']) {
+if($_REQUEST['action_reconciliation_open']) {
     $reconciliation = new reconciliation(array());
     $reconciliation->openPost((int) $_REQUEST['VoucherID']);
 }
@@ -364,7 +364,7 @@ print $_lib['sess']->doctype ?>
                 <td><? print $voucher->InvoiceID ?></td>
                 <td><? print $voucher->KID ?></td>
                 <td><?
-                    $is_closed = !is_null($_lib['db']->get_row(array("query" => "SELECT * FROM voucherstruct WHERE Closed = 1 AND (ParentVoucherID = " . $voucher->VoucherID . " OR ChildVoucherID = " . $voucher->VoucherID . ")"))->VoucherStructID);
+                    $is_closed = $voucher->VoucherReconciliationID;
                     $match_number = $voucher->MatchNumber;
                     if ($is_closed) {
                       if ($voucher->matched_by == 'invoice') print 'FAK ' . $voucher->InvoiceID . " ";
@@ -383,7 +383,7 @@ print $_lib['sess']->doctype ?>
                   $amount_to_show = $reconciliation->getDiff($voucher->AccountPlanID, $voucher->KID, $voucher->InvoiceID, $match_number, $voucher);
                   print $_lib['format']->Amount($amount_to_show)
                   ?></nobr></td>
-                <td class="noprint"><? if ($is_closed) { ?><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_postmotpost_open=1" title="&Aring;pne post">&Aring;pne post</a><? } ?></td>
+                <td class="noprint"><? if ($is_closed) { ?><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_reconciliation_open=1" title="&Aring;pne post">&Aring;pne post</a><? } ?></td>
             </tr>
         <?
         $i++;
