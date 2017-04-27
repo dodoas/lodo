@@ -85,6 +85,27 @@ $db_sum   = $row->sum;
         <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Invoice List</title>
         <meta name="cvs"                content="$Id: list.php,v 1.38 2005/10/28 17:59:40 thomasek Exp $" />
         <? includeinc('head') ?>
+<script type="text/javascript">
+// fetch line control details for an invoice, using ajax request
+function getLineControlDetails(InvoiceID) {
+  var params = {
+    InvoiceID: InvoiceID,
+    action_invoice_detailed_line_control_check: 1
+  };
+
+  $("#line_control_details_"+InvoiceID).html("Henter");
+  $.post(
+    '<? print $_lib['sess']->dispatchs; ?>t=invoice.ajax',
+    params,
+    function(data, status) {
+      var LineControlDetails = $($.parseHTML(data)).filter("#line_control_details").text();
+
+      $("#line_control_details_"+InvoiceID).html(LineControlDetails.split("\n").join("<br/>"));
+    }
+  );
+  return false;
+}
+</script>
     </head>
 <body>
 
@@ -206,7 +227,7 @@ Faktura nr</th>
     <th align="right">Endre</th>
     <th align="right"></th>
     <th align="right"></th>
-    <th align="right">Linjekontroll</th>
+    <th align="right">Linjekontroll detaljer</th>
     <th align="right"></th>
 </tr>
 </thead>
@@ -380,7 +401,7 @@ SELECT DISTINCT(JournalID) FROM (
             ) ta
           ) taa
           -- Group the same so we can count the duplicates
-          GROUP BY Type, tmpVat, AmountIn, AmountOut
+          GROUP BY Type, tmpVat, AmountIn, AmountOut, JournalID
           -- Leave only the ones that were oddly paired, and the total line that has other than count of 2
           HAVING ((count % 2) = 1) OR (count <> 2 AND Type = 'Total')
           ORDER BY JournalID
@@ -446,7 +467,14 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       </td>
       <td class="number"><? if($row->Locked) { ?>L&aring;st<? } else { ?>&Aring;pen<? } ?></td>
       <td class="number"><? if($row->ExternalID > 0) { ?><a href="<? print $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $row->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
-      <td><? if ($invoices_with_line_control[$row->InvoiceID]) print "Linjekontroll"; ?></td>
+      <td id="line_control_details_<?= $row->InvoiceID; ?>">
+<?php
+  if ($invoices_with_line_control[$row->InvoiceID]) {
+?>
+        <input type="button" class="button" onclick="getLineControlDetails(<?= $row->InvoiceID; ?>);" value="Hent detaljer" />
+<?php
+  }
+?></td>
       <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">feil periode</span><? } ?></td>
   </form>
   </tr>
