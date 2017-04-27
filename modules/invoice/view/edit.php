@@ -89,7 +89,7 @@ while($product = $_lib['db']->db_fetch_assoc($product_result)) {
     $vat = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $row->InvoiceDate));
   }
 ?>
-products['<? print $product['ProductID']; ?>'] = {ProductName: <? print json_encode($product['ProductName']); ?>, UnitCustPrice: parseFloat('<? print $product['UnitCustPrice']; ?>'), VatPercent: parseFloat('<? print ($vat->Percent == '') ? 0 : $vat->Percent; ?>'), AccountPlanID: '<? print $product['AccountPlanID']; ?>'};
+products['<? print $product['ProductID']; ?>'] = {ProductName: <? print json_encode(utf8_encode($product['ProductName'])); ?>, UnitCustPrice: parseFloat('<? print $product['UnitCustPrice']; ?>'), VatPercent: parseFloat('<? print ($vat->Percent == '') ? 0 : $vat->Percent; ?>'), AccountPlanID: '<? print $product['AccountPlanID']; ?>'};
 <?
 }
 ?>
