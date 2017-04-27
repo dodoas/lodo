@@ -1991,15 +1991,20 @@ class accounting {
 
     /***************************************************************************
     * Get last period, this year
+    * $locked - if we are to include the closed and locked periods
     * @param
     * @return
     */
-    function get_last_accountperiod_this_year($date = false)
+    function get_last_accountperiod_this_year($date = false, $locked = true)
     {
         global $_lib;
         if (!$date) $date = $_lib['sess']->get_session('Date');
         $year = $_lib['date']->get_this_year($date);
-        $query = "select Period from accountperiod where substring(Period,1,4)='$year' order by Period desc limit 1";
+        $locked_restrict_part = '';
+        if (!$locked) {
+          $locked_restrict_part = ' Status NOT IN (1, 4) AND ';
+        }
+        $query = "select Period from accountperiod where $locked_restrict_part substring(Period,1,4)='$year' order by Period desc limit 1";
         $row = $_lib['storage']->get_row(array('query' => $query));
         return $row->Period;
     }
