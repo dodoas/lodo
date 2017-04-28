@@ -1,7 +1,7 @@
 <?
 define("CertFile","returdata/file.pem");
 includelogic('bank/bank');
-includelogic('postmotpost/postmotpost');
+includelogic('reconciliation/reconciliation');
 
 class lodo_ocr_ocr {
     private $server = 'https://enett.bbs.no';
@@ -98,7 +98,7 @@ class lodo_ocr_ocr {
     );
     
     function __construct() {
-        $this->postmotpost = new postmotpost(array());
+        $this->reconciliation = new reconciliation(array());
     }
     
     ################################################################################################
@@ -267,7 +267,7 @@ class lodo_ocr_ocr {
                 #Check if we get a kid match $TransactionO->kid
                 #pne poster logikken?
                 #What if KID match has another account than bancaccountmatch
-                list($tmpstatus, $journalH) = $this->postmotpost->findOpenPostKid($TransactionO->kid, 0);
+                list($tmpstatus, $journalH) = $this->reconciliation->findOpenPostKid($TransactionO->kid, 0);
                 if(count($journalH) == 0) {
                     $TransactionO->Status .= 'Ingen KID funnet p&aring; noen &aring;pne bilag. ';
                     $TransactionO->Journal = false;
@@ -422,7 +422,7 @@ class lodo_ocr_ocr {
                     $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $VoucherType, 'comment' => 'Fra OCR'));
 
                     #Close open posts on this KID if it really is closed
-                    $this->postmotpost->closePost($TransactionO->CustomerAccountPlanID, $TransactionO->kid);
+                    $this->reconciliation->closePost($TransactionO->CustomerAccountPlanID, $TransactionO->kid);
 
                     #Insert line in bankavstemming
                     $this->insertBankavstemmingLine($TransactionO);

@@ -37,9 +37,9 @@ function salary_journal($SalaryID) {
   $VoucherType = 'L';
   if($salary->JournalID)
   {
-    includelogic('postmotpost/postmotpost');
-    $postmotpost = new postmotpost(array());
-    $postmotpost->openPostJournal($salary->JournalID, $VoucherType);
+    includelogic('reconciliation/reconciliation');
+    $reconciliation = new reconciliation(array());
+    $reconciliation->openPostJournal($salary->JournalID, $VoucherType);
 
     #Delete old accounting and insert new
     $accounting->delete_journal($salary->JournalID, $VoucherType);
@@ -769,9 +769,9 @@ elseif($_lib['input']->getProperty('action_salary_delete'))
   $query="select JournalID, Period, JournalDate from salary where SalaryID=".$_lib['input']->getProperty('SalaryID');
   $row_salary = $_lib['storage']->get_row(array('query' => $query));
 
-  includelogic('postmotpost/postmotpost');
-  $postmotpost = new postmotpost(array());
-  $postmotpost->openPostJournal($row_salary->JournalID);
+  includelogic('reconciliation/reconciliation');
+  $reconciliation = new reconciliation(array());
+  $reconciliation->openPostJournal($row_salary->JournalID, $VoucherType);
 
   $VoucherPeriod    = $row_salary->Period;
   $VoucherDate      = $row_salary->JournalDate;

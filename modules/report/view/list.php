@@ -187,7 +187,7 @@ print $_lib['sess']->doctype ?>
   <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=report.hovedboksaldoliste" method="post" target="_blank">
   <? print $_lib['form3']->hidden(array('table'=>'report', 'field'=>'type', 'value'=>'reskontro')) ?>
   <tr>
-    <th rowspan="12">
+    <th rowspan="15">
   	R<br />E<br />S<br />K<br />O<br />N<br />T<br />R<br />O<br />
     </th>
   <td rowspan="4">Saldobalanse</td>
@@ -328,57 +328,80 @@ print $_lib['sess']->doctype ?>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
   </tr>
 </form>
-    <tr>
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_SETUP['DISPATCH'] ?>" method="get" target="_blank">
+  <tr>
     <td rowspan="3">&aring;pne poster</td>
-    <form class="voucher" name="<? print $form_name ?>" action="<? print $_SETUP['DISPATCH'] ?>" method="get" target="_blank">
-    <input type="hidden" name="t"           value="postmotpost.list">
+    <input type="hidden" name="t" value="reconciliation.list">
     <input type="hidden" name="report_Sort" value="JournalID">
-        <td>Reskontro fra hovedbok kontonummer</td>
-        <td><?
-            $aconf = array();
-            $aconf['name']            = 'AccountPlanID';
-            $aconf['type'][] 	      = 'hovedbokwreskontro';
-            $aconf['tabindex']        = '';
-            $aconf['accesskey']       = 'K';
-            $aconf['required']        = true;
-            print $_lib['form3']->accountplan_number_menu($aconf);
-            ?>
-        </td>
-        <td>Fra</td>
-        <td>
-        <? print $_lib['form3']->accountplan_number_menu(array('name' => 'ReskontroFromAccount', 'type' => array(0 => 'reskontro', 1 => 'employee'))) ?>
-        </td>
-        <td>Til</td>
-        <td>
-        <? print $_lib['form3']->accountplan_number_menu(array('name' => 'ReskontroToAccount', 'type' => array(0 => 'reskontro', 1 => 'employee'))) ?>
-        </td>
-        </tr>
-        <tr>
-          <td colspan='2'></td>
-        <td>Prosjekt</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'ProjectID';
-            $aconf['accesskey']     = 'P';
-            $_lib['form2']->project_menu2($aconf);
-            ?>
-        </td>
-        <td>Avdeling</td>
-        <td><?
-            $aconf = array();
-            $aconf['table']         = 'report';
-            $aconf['field']         = 'DepartmentID';
-            $aconf['accesskey']     = 'D';
-            $_lib['form2']->department_menu2($aconf);
-            ?>
-        </td>
-    </tr>
-    <tr>
-      <td colspan="5"></td>
-      <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
-    </tr>
-    </form>
+    <td>Reskontro fra hovedbok kontonummer</td>
+    <td>
+<?
+$aconf = array();
+$aconf['name'] = 'AccountPlanID';
+$aconf['type'][] = 'hovedbokwreskontro';
+$aconf['tabindex'] = '';
+$aconf['accesskey'] = 'K';
+$aconf['required'] = true;
+print $_lib['form3']->accountplan_number_menu($aconf);
+?>
+    </td>
+    <td>Fra</td>
+    <td>
+<?
+print $_lib['form3']->accountplan_number_menu(
+  array(
+    'name' => 'ReskontroFromAccount',
+    'type' => array(
+      0 => 'reskontro',
+      1 => 'employee'
+    )
+  )
+);
+?>
+    </td>
+    <td>Til</td>
+    <td>
+<?
+print $_lib['form3']->accountplan_number_menu(
+  array(
+    'name' => 'ReskontroToAccount',
+    'type' => array(
+      0 => 'reskontro',
+      1 => 'employee'
+    )
+  )
+);
+?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan='2'></td>
+    <td>Prosjekt</td>
+    <td>
+<?
+$aconf = array();
+$aconf['table'] = 'report';
+$aconf['field'] = 'ProjectID';
+$aconf['accesskey'] = 'P';
+$_lib['form2']->project_menu2($aconf);
+?>
+    </td>
+    <td>Avdeling</td>
+    <td>
+<?
+$aconf = array();
+$aconf['table'] = 'report';
+$aconf['field'] = 'DepartmentID';
+$aconf['accesskey'] = 'D';
+$_lib['form2']->department_menu2($aconf);
+?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5"></td>
+    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+  </tr>
+</form>
 </table>
 
 <hr>

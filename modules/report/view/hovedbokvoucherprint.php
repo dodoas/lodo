@@ -5,10 +5,10 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 $kidmatchH  = array();
 
-if($_REQUEST['action_postmotpost_open']) {
-    includelogic('postmotpost/postmotpost');
-    $postmotpost = new postmotpost(array());
-    $postmotpost->openPost((int) $_REQUEST['VoucherID']);
+if($_REQUEST['action_reconciliation_open']) {
+    includelogic('reconciliation/reconciliation');
+    $reconciliation = new reconciliation(array());
+    $reconciliation->openPost((int) $_REQUEST['VoucherID']);
 }
 
 if($_REQUEST['report_selectedAccount'])
@@ -271,7 +271,7 @@ print $_lib['sess']->doctype ?>
                 <td><? print $voucher->KID ?></td>
                 <td><? print $voucher->InvoiceID ?></td>
                 <td class="noprint align-right"><nobr><? print $_lib['format']->Amount(getdiffKID($voucher->AccountPlanID, $voucher->KID, $voucher->VoucherID)) ?></nobr></td>
-                <td class="noprint"><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_postmotpost_open=1" title="&Aring;pne post">&Aring;pne post</a></td>
+                <td class="noprint"><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_reconciliation_open=1" title="&Aring;pne post">&Aring;pne post</a></td>
             </tr>
         <?
         $i++;
