@@ -113,11 +113,11 @@ if($JournalID) {
 <ul>
 <? if($account->AccountPlanType == 'supplier') { ?>
 
-    <li><a href="<? print $_lib['sess']->dispatch ?>t=postmotpost.list&report_Sort=JournalID&AccountPlanID=2400&ReskontroFromAccount=<? print $AccountPlanID ?>&ReskontroToAccount=<? print $AccountPlanID ?>">&Aring;pne poster for <? print $account->AccountName ?></a></li>
+    <li><a href="<? print $_lib['sess']->dispatch ?>t=reconciliation.list&report_Sort=JournalID&AccountPlanID=2400&ReskontroFromAccount=<? print $AccountPlanID ?>&ReskontroToAccount=<? print $AccountPlanID ?>">&Aring;pne poster for <? print $account->AccountName ?></a></li>
     <li><a href="<? print $_lib['sess']->dispatch ?>t=report.reskontrovoucherprint&report.Type=reskontro&report.Sort=VoucherDate&report.selectedAccount=2400&report.FromAccount=<? print $AccountPlanID ?>&report.ToAccount=<? print $AccountPlanID ?>&report.FromPeriod=<? print $_lib['sess']->get_session('PeriodStartYear') ?>&report.ToPeriod=<? print $_lib['sess']->get_session('PeriodEndYear') ?>">Bilagsutskrift innev&aelig;rende &aring;r for <? print $account->AccountName ?></a></li>
 
 <? } else { ?>
-    <li><a href="<? print $_lib['sess']->dispatch ?>t=postmotpost.list&report_Sort=JournalID&AccountPlanID=1500&ReskontroFromAccount=<? print $AccountPlanID ?>&ReskontroToAccount=<? print $AccountPlanID ?>">&Aring;pne poster for <? print $account->AccountName ?></a></li>
+    <li><a href="<? print $_lib['sess']->dispatch ?>t=reconciliation.list&report_Sort=JournalID&AccountPlanID=1500&ReskontroFromAccount=<? print $AccountPlanID ?>&ReskontroToAccount=<? print $AccountPlanID ?>">&Aring;pne poster for <? print $account->AccountName ?></a></li>
     <li><a href="<? print $_lib['sess']->dispatch ?>t=report.reskontrovoucherprint&report.Type=reskontro&report.Sort=VoucherDate&report.selectedAccount=1500&report.FromAccount=<? print $AccountPlanID ?>&report.ToAccount=<? print $AccountPlanID ?>&report.FromPeriod=<? print $_lib['sess']->get_session('PeriodStartYear') ?>&report.ToPeriod=<? print $_lib['sess']->get_session('PeriodEndYear') ?>">Bilagsutskrift innev&aelig;rende &aring;r for <? print $account->AccountName ?></a></li>
 
 <? } ?>

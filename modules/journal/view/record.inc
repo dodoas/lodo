@@ -180,11 +180,11 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
         if($debug) print "KID supplied and account plan has KID enabled<br>\n";
         if($debug) print "We are using KID reference for the upcomig searches<br>";
         if($debug) print "findOpenPostKid1<br>";
-        list($status, $refH) = $accounting->postmotpost->findOpenPostKid($voucher_input->KID, $voucher_input->VoucherIDOld, $voucher_input->AccountPlanID);
+        list($status, $refH) = $accounting->reconciliation->findOpenPostKid($voucher_input->KID, $voucher_input->VoucherIDOld, $voucher_input->AccountPlanID);
         if($debug) print "Status find KID: $status<br>";
         if($status) {
             #Exactly one KID ref match, update the voucher AmountIn, AmountOut and Accountplan ID only if not updated before.
-            list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $accounting->postmotpost->getKIDInfo($refH); # find line that has a ledger (it has to be a  customer, supplier or employee)
+            list($KIDAccountPlanID, $KIDAmountIn, $KIDAmountOut, $KIDJournalID, $KIDVoucherID, $KIDstatus) = $accounting->reconciliation->getKIDInfo($refH); # find line that has a ledger (it has to be a  customer, supplier or employee)
             if($debug) print "Status find KID Info: $KIDstatus<br>\n";
             if($KIDstatus) {
 

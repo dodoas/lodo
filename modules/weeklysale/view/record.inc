@@ -73,9 +73,9 @@ elseif($_REQUEST['action_weeklysale_delete'])
     /******************************************************************/
     #Open all closed posts related to invoice. Could be optimized to only close reskontros as pr def
     if($row->JournalID) {
-        includelogic('postmotpost/postmotpost');
-        $postmotpost = new postmotpost(array());
-        $postmotpost->openPostJournal($row->JournalID, $row->VoucherType);
+        includelogic('reconciliation/reconciliation');
+        $reconciliation = new reconciliation(array());
+        $reconciliation->openPostJournal($row->JournalID, $row->VoucherType);
 
         $accounting->delete_journal($row->JournalID, $row->VoucherType);
     }
@@ -315,9 +315,9 @@ elseif($_REQUEST['action_weeklysale_journal']) {
         }
     }*/
 
-    includelogic('postmotpost/postmotpost');
-    $postmotpost = new postmotpost(array());
-    $postmotpost->openPostJournal($week->JournalID, $VoucherType);
+    includelogic('reconciliation/reconciliation');
+    $reconciliation = new reconciliation(array());
+    $reconciliation->openPostJournal($week->JournalID, $VoucherType);
 
     #Delete old accounting
     #vi må bare slette posteringslinjene hvor autoflagg er satt
