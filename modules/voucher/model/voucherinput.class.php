@@ -681,6 +681,10 @@ class framework_logic_voucherinput
         if (!is_null($this->matched_by)) $request['voucher_matched_by'] = $this->matched_by;
         else $request['voucher_matched_by'] = '0';
 
+        // We should only recalculate if no amount is present, either in or out but there is foreing amount in or out
+        // This way wo do not send a voucher with no amounts to be used as a base for VAT voucher or hidden reskontro voucher
+        $recalculate_from_foreign_amount = false;
+
         # Must always be present. Both cannot contain a value
         if($this->AmountIn > 0) {
             $request['voucher_AmountIn']            = $this->AmountIn;
@@ -688,6 +692,8 @@ class framework_logic_voucherinput
         } elseif($this->AmountOut > 0) {
             $request['voucher_AmountIn']            = 0;
             $request['voucher_AmountOut']           = $this->AmountOut;
+        } elseif ($this->ForeignAmountIn > 0 || $this->ForeignAmountOut > 0) {
+          $recalculate_from_foreign_amount = true;
         }
 
         if($this->VoucherID)
@@ -723,6 +729,17 @@ class framework_logic_voucherinput
             $request['voucher_ForeignAmount']     = $this->ForeignAmount;
         }
 
+        if ($recalculate_from_foreign_amount) {
+          $in_or_out = '';
+          // Determine if in our out should be updated
+          if ($this->ForeignAmountIn > 0) {
+            $in_or_out = 'in';
+          } elseif ($this->ForeignAmountOut > 0) {
+            $in_or_out = 'out';
+          }
+          // Recalculate the thing we need
+          $accounting->calculate_amount_foreign_and_rate($request, $in_or_out);
+        }
         return $request;
     }
 }
