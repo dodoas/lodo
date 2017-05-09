@@ -51,6 +51,13 @@ class lodo_fakturabank_fakturabanksalary {
         $result_head    = $_lib['db']->db_query($query_head);
         $head           = $_lib['db']->db_fetch_object($result_head);
 
+        $query_schemes = "select fbs.SchemeType as scheme, aps.SchemeValue as value from accountplanscheme aps join fakturabankscheme fbs on fbs.FakturabankSchemeID = aps.FakturabankSchemeID where AccountPlanID = '$head->AccountPlanID'";
+        $result_schemes = $_lib['db']->db_query($query_schemes);
+        $employee_schemes = array();
+        while($row = $_lib['db']->db_fetch_object($result_schemes)) {
+            $employee_schemes[] = $row;
+        }
+
         $accountplan_edit_url = "/lodo.php?view_mvalines=&view_linedetails=&t=accountplan.employee&accountplan_AccountPlanID=" . $head->AccountPlanID;
 
         if (empty($head))  {
@@ -217,8 +224,14 @@ class lodo_fakturabank_fakturabanksalary {
         $xml_content .= "<employee_number>" . $head->AccountPlanID . "</employee_number>\n";
 		$xml_content .= "<first_name>" . $head->FirstName . "</first_name>\n";
 		$xml_content .= "<last_name>" . $head->LastName . "</last_name>\n";
-        $xml_content .= "<scheme>NO:EMAIL</scheme>\n";
-        $xml_content .= "<identifier>" . "Change to scheme value" . "</identifier>\n";
+
+        foreach ($employee_schemes as $scheme) {
+            $xml_content .= "<scheme>";
+            $xml_content .=   "<identificator>" . $scheme->scheme . "</identificator>\n";
+            $xml_content .=   "<identifier>" . $scheme->value . "</identifier>\n";
+            $xml_content .= "</scheme>";
+        }
+
         $xml_content .= "<official_id_number>" . (empty($head->SocietyNumber) ? $head->IDNumber : $head->SocietyNumber) . "</official_id_number>\n";
         $xml_content .= "<email>" . $head->Email . "</email>\n";
 
