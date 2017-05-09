@@ -39,9 +39,6 @@ if(!$account && $_lib['input']->getProperty('NewAccount'))
     }
 }
 
-$fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $AccountPlanID;
-$fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
-
 $salary_conf_query = "SELECT SalaryConfID FROM salaryconf WHERE AccountPlanID = $AccountPlanID";
 $salary_conf = $_lib['db']->db_query($salary_conf_query);
 
@@ -81,7 +78,6 @@ if(!empty($validation_errors)) {
 <form name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
 <table class="lodo_data">
 <input type="hidden" name="accountplan_AccountPlanID" value="<? print $AccountPlanID ?>">
-<input type="hidden" name="fakturabankemail_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="JournalID" value="<? print $JournalID ?>">
 
   <tr class="result">
@@ -156,14 +152,7 @@ if(!empty($validation_errors)) {
     <td class="menu">E-Post privat</td>
     <td></td>
     <td><input class="lodoreqfelt" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="30"></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="menu">E-Post fakturabank</td>
-    <td></td>
-    <td><input type="text" name="fakturabankemail.Email" value="<? print $fakturabankemail->Email  ?>" size="30"></td>
-    <td></td>
+    <td colspan="2"></td>
     <td></td>
   </tr>
   <tr>

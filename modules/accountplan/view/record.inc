@@ -25,13 +25,6 @@ function validate_employee($employee) {
         $errors[] = "Personnr m&aring; stemme med f&oslash;dselsdag.";
     }
 
-    $fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $employee->AccountPlanID;
-    $fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
-
-    if(!filter_var($fakturabankemail->Email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Ugyldig fakturabank epost.";
-    }
-
     if(empty($employee->SocietyNumber) && empty($employee->IDNumber)) {
         $errors[] = "Enten Personnr eller ID nummer p&aring; v&aelig;re der.";
     } else {
@@ -147,16 +140,6 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             $password_sql = sprintf("INSERT INTO timesheetpasswords (`AccountPlanID`, `Password`)
       		VALUES ('%d', '%s');", $AccountPlanID, mysql_escape_string($_POST['timesheetpasswords_Password']));
             $_lib['db']->db_query($password_sql);
-        }
-
-        if(isset($_POST['fakturabankemail_Email'])) {
-            $fakturabankemail_query = sprintf("DELETE FROM fakturabankemail WHERE AccountPlanID = %d", $AccountPlanID);
-            $_lib['db']->db_query($fakturabankemail_query);
-
-            $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`)
-        						VALUES('%d', '%s');",
-                                              $AccountPlanID, mysql_escape_string($_POST['fakturabankemail_Email']));
-            $_lib['db']->db_query($fakturabankemail_query);
         }
 
         if(isset($_POST['accountplangln_GLN'])) {
