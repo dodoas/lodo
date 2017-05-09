@@ -80,25 +80,10 @@ print $_lib['sess']->doctype ?>
     <meta name="cvs"                content="$Id: reskontro.php,v 1.65 2005/11/03 15:33:11 thomasek Exp $" />
     <? includeinc('head') ?>
     <style type="text/css">
-      .highlighted {
-        background-color: #FFF655;
-      }
       .read-only-input {
         color: gray !important;
       }
     </style>
-    <script type="text/javascript">
-      function hightlightFirmaID() {
-        $("#firma_id_fields").addClass("highlighted");
-        setTimeout(function () {
-          $("#firma_id_fields").removeClass("highlighted");
-        }, 1000);
-      }
-      // this functions makes focus on the input next to the select which has selected value same as provided scheme_type
-      function focusFirmaidSchemeWithSchemetype(scheme_type) {
-        $("#firma_id_fields").find('select option:selected:contains("' + scheme_type + '")').parent("select").next("input").focus();
-      }
-    </script>
 </head>
 <body>
 
@@ -229,9 +214,7 @@ if($JournalID) {
     <td></td>
   </tr>
 
-  <tbody id="firma_id_fields">
   <? include("schemeid.php") ?>
-  </tbody>
 
   <tr class="result">
     <th colspan="6">Bilagsf&oslash;ringsinformasjon</th>

@@ -47,6 +47,11 @@ print $_lib['sess']->doctype ?>
 <head>
     <title>Empatix - kontoplan - ansatte</title>
     <meta name="cvs"                content="$Id: reskontro.php,v 1.65 2005/11/03 15:33:11 thomasek Exp $" />
+    <style type="text/css">
+      .read-only-input {
+        color: gray !important;
+      }
+    </style>
     <? includeinc('head') ?>
 </head>
 <body>
@@ -147,12 +152,12 @@ if(!empty($validation_errors)) {
     <td></td>
     <td><input type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="30"></td>
     <td colspan="2">Mobil</td>
-    <td><input type="text" name="accountplan.Mobile" value="<? print $account->Mobile  ?>" size="20"></td>
+    <td><input class="read-only-input" type="text" name="accountplan.Mobile" value="<? print $account->Mobile  ?>" size="20" onclick="this.blur(); hightlightFirmaID(); focusFirmaidSchemeWithSchemetype('NO:PHONE');"></td>
   </tr>
   <tr>
     <td class="menu">E-Post privat</td>
     <td></td>
-    <td><input class="lodoreqfelt" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="30"></td>
+    <td><input class="lodoreqfelt read-only-input" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="30" onclick="this.blur(); hightlightFirmaID(); focusFirmaidSchemeWithSchemetype('NO:EMAIL');"></td>
     <td colspan="2"></td>
     <td></td>
   </tr>
@@ -161,9 +166,9 @@ if(!empty($validation_errors)) {
     <td></td>
     <td colspan="4"><input type="text" name="accountplan.Description" value="<? print $account->Description  ?>" size="70"></td>
   </tr>
-  <tbody>
-    <? include("schemeid.php") ?>
-  </tbody>
+
+  <? include("schemeid.php") ?>
+
   <tr class="result">
     <th colspan="6">Bilagsf&oslash;ringsinformasjon</th>
   </tr>
