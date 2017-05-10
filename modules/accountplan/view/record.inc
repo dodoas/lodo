@@ -45,6 +45,10 @@ function validate_employee($employee) {
         }
     }
 
+    if(empty($employee->Phone) && !filter_var($employee->Email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Must have email or phone.";
+    }
+
     return $errors;
 }
 
