@@ -70,7 +70,7 @@ class reconciliation {
             ) ap
             ON v.AccountPlanID = ap.AccountPlanID
           WHERE
-            v.KID = $KID AND
+            v.KID = '" . $KID . "' AND
             v.VoucherID != $VoucherID AND
             v.VoucherReconciliationID IS NULL AND
             v.Active = 1
