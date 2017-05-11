@@ -262,15 +262,16 @@ class altinn_report {
     if ($use_loennOgGodtgjoerelse) {
       $virksomhet['arbeidsgiveravgift'] = $loennOgGodtgjoerelse;
     }
-    if (!empty($this->pension[$key_subcompany])) $virksomhet['arbeidsgiveravgift']['tilskuddOgPremieTilPensjon'] = $this->pension[$key_subcompany];
+    if (!empty($this->pension[$key_subcompany])) {
+      $virksomhet['arbeidsgiveravgift']['tilskuddOgPremieTilPensjon'] = $this->pension[$key_subcompany];
+    }
     foreach($loennOgGodtgjoerelse as $zone_tax_array) {
       $zone_tax = $zone_tax_array['loennOgGodtgjoerelse'];
       $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
     }
-    if (!empty($this->pension[$key_subcompany])) {
-      foreach($this->pension[$key_subcompany] as $zone_tax) {
-        $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
-      }
+    if (isset($this->pension[$key_subcompany])) {
+      $zone_tax = $this->pension[$key_subcompany];
+      $sumArbeidsgiveravgift += $zone_tax['avgiftsgrunnlagBeloep'] * $zone_tax['prosentsatsForAvgiftsberegning']/100.0;
     }
     return $virksomhet;
   }
