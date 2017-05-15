@@ -94,12 +94,40 @@ function remove_hanging_firmaids() {
     $_lib['db']->db_query($query);
 }
 
+// Create NO:ORGNR and NO:VAT if they do not already exist for this accountplan
 function create_new_noorgnr_and_vat($AccountPlanID, $OrgNumber = '') {
-    global $_lib;
-    $query = "INSERT INTO accountplanscheme (AccountPlanID, FakturabankSchemeID, SchemeValue, CountryCode) VALUES
-              ('". $AccountPlanID ."', (SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = 'NO:ORGNR'), '". $OrgNumber ."', 'NO'),
-              ('". $AccountPlanID ."', (SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = 'NO:VAT'), '', 'NO');";
-    $_lib['db']->db_query($query);
+  global $_lib;
+  $FirmaIDsToCheck = array('NO:ORGNR', 'NO:VAT');
+  foreach ($FirmaIDsToCheck as $FirmaID) {
+    $FirmaIDSelectQuery = "
+      SELECT
+        *
+      FROM
+        accountplanscheme aps
+        LEFT JOIN
+        fakturabankscheme fbs
+        ON
+          aps.FakturabankSchemeID = fbs.FakturabankSchemeID
+      WHERE
+        fbs.SchemeType = '$FirmaID' AND
+        aps.AccountPlanID = $AccountPlanID
+    ";
+    $FirmaIDRow = $_lib['db']->get_row(array('query' => $FirmaIDSelectQuery));
+    if (!$FirmaIDRow) {
+      $FirmaIDInsertQuery = "
+        INSERT
+        INTO accountplanscheme (AccountPlanID, FakturabankSchemeID, SchemeValue, CountryCode)
+        VALUES
+        (
+          '". $AccountPlanID ."',
+          (SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = '$FirmaID'),
+          '". ($FirmaID == 'NO:ORGNR' ? $OrgNumber : '') ."',
+          'NO'
+        )
+      ";
+      $_lib['db']->db_query($FirmaIDInsertQuery);
+    }
+  }
 }
 
 if(!$AccountPlanID && $AccountPlanType) {
