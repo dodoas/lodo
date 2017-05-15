@@ -1,6 +1,7 @@
 <?
 require_once "record.inc";
-print $_lib['sess']->doctype
+print $_lib['sess']->doctype;
+$_year = isset($_POST['year']) ? $_POST['year'] : substr($_lib['sess']->get_session('LoginFormDate'), 0, 4);
 ?>
 
 <head>
@@ -51,8 +52,20 @@ print $_lib['sess']->doctype
 
 <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.salarylist&action_show_salaries=show">Send en ny rapport</a>
 
+<form name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
+<?php
+print $_lib['form3']->Type_menu3(array('name' => 'year', 'type'=>'PosibleSalaryYears', 'value' => $_year, "access" => $_lib['sess']->get_person('AccessLevel'), 'autosubmit' => true));
+?>
+</form>
+
 <br/><br/>
 
+<?php
+if ($_year != '') {
+  $so1_query = "SELECT * FROM altinnReport1 WHERE Period LIKE '$_year-%' ORDER BY AltinnReport1ID DESC";
+  $so1 = $_lib['db']->db_query($so1_query);
+  if ($_lib['db']->db_numrows($so1) > 0) {
+?>
 <table class="lodo_data">
   <tbody>
     <tr>
@@ -71,7 +84,7 @@ print $_lib['sess']->doctype
       <th class='menu'></th>
     </tr>
   <?
-  $so1_query = "select * from altinnReport1 order by AltinnReport1ID";
+  $so1_query = "SELECT * FROM altinnReport1 WHERE Period LIKE '$_year-%' ORDER BY AltinnReport1ID DESC";
   $so1 = $_lib['db']->db_query($so1_query);
   $report_count = 0;
   while($so1row = $_lib['db']->db_fetch_object($so1)) {
@@ -156,27 +169,6 @@ print $_lib['sess']->doctype
         </form>
       </td>
       <td>
-        <form class="soap_form" style="display: none;" name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
-          <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
-          <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
-          <? foreach($salary_ids as $salary_id) { ?>
-            <input type="hidden" name="use_salary[<? print $salary_id; ?>]" value='1'>
-          <? } ?>
-          <? foreach($work_relation_ids as $work_relation_id) { ?>
-            <input type="hidden" name="use_work_relation[<? print $work_relation_id; ?>]" value='1'>
-          <? } ?>
-          <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
-          <input type="hidden" name="altinnReport1.pensionAmount" value='<?print $so1row->PensionAmount; ?>'>
-        </form>
-
-        <? 
-          $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "pending");
-          print $_lib['form3']->submit(array(
-            'name'=>'action_soap1',
-            'value'=>'Send p&aring; nytt',
-            'disabled' => !$resend_enabled,
-            'OnClick' => "submitSoapForm(this);"
-          )); ?>
         <?
           $so4query = "SELECT ar4.* FROM altinnReport1 ar1 JOIN altinnReport2 ar2 ON ar1.ReceiptId = ar2.res_ReceiptId JOIN altinnReport4 ar4 ON ar2.res_ReceiversReference = ar4.req_CorrespondenceID WHERE ar1.ReceiptId = " . $so1row->ReceiptId . " ORDER BY AltinnReport4ID DESC LIMIT 1";
           $so4 = $_lib['db']->db_query($so4query);
@@ -234,13 +226,34 @@ print $_lib['sess']->doctype
         ?>
       </td>
       <td>
+        <form class="soap_form" style="display: none;" name="altinnsalary_search" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
+          <input type="hidden" name="altinnReport1.periode" value='<?print $so1row->Period; ?>'>
+          <input type="hidden" name="altinnReport1.MeldingsId" value='<?print $so1row->MeldingsId; ?>'>
+          <? foreach($salary_ids as $salary_id) { ?>
+            <input type="hidden" name="use_salary[<? print $salary_id; ?>]" value='1'>
+          <? } ?>
+          <? foreach($work_relation_ids as $work_relation_id) { ?>
+            <input type="hidden" name="use_work_relation[<? print $work_relation_id; ?>]" value='1'>
+          <? } ?>
+          <input type="hidden" name="altinnReport1.ExternalShipmentReference" value='<?print 'LODO' . time(); ?>'>
+          <input type="hidden" name="altinnReport1.pensionAmount" value='<?print $so1row->PensionAmount; ?>'>
+        </form>
+
+        <?
+          $resend_enabled = ($so1row->ReceivedStatus == "received" || ($so2row->res_ReceiversReference && empty($so1row->ReplacedByMeldindsID) && empty($so1row->ReceivedStatus))) && ($so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "pending");
+          print $_lib['form3']->submit(array(
+            'name'=>'action_soap1',
+            'value'=>'Send p&aring; nytt',
+            'disabled' => !$resend_enabled,
+            'OnClick' => "if (confirm('Er du sikker?')) submitSoapForm(this);"
+          )); ?>
         <?
           $cancel_enabled = $so1row->ReceivedStatus == "received" && $so1row->CancellationStatus != "cancelled" && $so1row->CancellationStatus != "is_cancellation" && $so1row->CancellationStatus != "pending";
           print $_lib['form3']->submit(array(
             'name'=>'action_soap1_cancel',
             'value'=>'Kansellere',
             'disabled' => !$cancel_enabled,
-            'OnClick' => "submitSoapForm(this);"
+            'OnClick' => "if (confirm('Er du sikker?')) submitSoapForm(this);"
           )); ?>
       </td>
     </tr>
@@ -309,6 +322,12 @@ print $_lib['sess']->doctype
     }
     ?>
 </table>
+<?php
+  } else {
+    print 'Ingen rapporter funnet<br/>';
+  }
+}
+?>
 <br/>
 <a href="<? print $_lib['sess']->dispatch ?>t=altinnsalary.log">Altinn log</a>
 
