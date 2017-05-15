@@ -255,7 +255,7 @@ class framework_logic_vouchergui
                         $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$voucher->VoucherPeriod&amp;voucher.VoucherDate=$voucher->VoucherDate&amp;voucher.JournalID=$JournalID&amp;voucher.VoucherID=$voucher->VoucherID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_delete=1&amp;view_mvalines=$view_mvalines&amp;view_linedetails=$view_linedetails", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette linjen?'));
                     }
                     if($button == 'update') {
-                        $html .= '<input type="submit" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
+                        $html .= '<input type="submit"  id="save_button_' . $voucher->VoucherID . '" name="action_voucher_update" value="Lagre" class="green" tabindex="' . $tabindex++ . '" accesskey="S" >';
                     }
                 }
             }
@@ -293,7 +293,7 @@ class framework_logic_vouchergui
             if($new)
             {
                 if($button = 'update') {
-                    $html .= '<input type="submit" name="action_voucher_new" value="Lagre" class="green" tabindex="';
+                    $html .= '<input type="submit" id="save_button_' . $voucherHead->VoucherID . '" name="action_voucher_new" value="Lagre" class="green" tabindex="';
                     if($rowCount>1) {
                         $html .= '';
                     } else {
@@ -308,7 +308,7 @@ class framework_logic_vouchergui
                     $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$VoucherPeriod&amp;voucher.VoucherDate=$voucherHead->VoucherDate&amp;voucher.JournalID=$JournalID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_head_delete=1", 'name'=>'<img src="/lib/icons/trash.gif">', 'confirm' => 'Vil du virkelig slette bilaget?'));
                 }
                 if($button == 'update') {
-                    $html .= '<input type="submit" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
+                    $html .= '<input type="submit" id="save_button_' . $voucherHead->VoucherID . '" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
                     if($rowCount>1) {
                         $html .= '';
                     } else {

@@ -66,15 +66,31 @@ $params = "/bank_statements/get_bank_statement_for_lodo?identifier=" . $identifi
             printf("var data = %s", json_encode($_lib['form3']->accountplan_number_menu3($conf)));
 
             echo "
-          color = '';
-          text  = 'Velg konto';
+          if (selected == 0) {
+            color = '';
+            value_found = true;
+            text  = 'Velg konto';
+          } else {
+            color = 'red';
+            value_found = false;
+            text  = 'Konto finnes ikke: ' + selected;;
+          }
 
           for(var i = 0; i < data.length; i++) {
             if(data[i][0] == selected) {
               color = data[i][1];
               text  = data[i][2];
+              value_found = true;
               break;
             }
+          }
+          // if value is not found, uncheck the auto checkbox
+          if (!value_found) {
+            auto_checkbox_id_array = name.split('.');
+            auto_checkbox_id_array[1] = 'AutoResultAccount';
+            auto_checkbox_id = auto_checkbox_id_array.join('.');
+            auto_checkbox = document.getElementById(auto_checkbox_id);
+            auto_checkbox.checked = false;
           }
 
           /* setter inn valgt element */

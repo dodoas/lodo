@@ -1,4 +1,11 @@
 <?
+
+// recieves date as string 'YYYY-MM-DD' and returns bool if date is valid
+function validDate($date) {
+  $d = DateTime::createFromFormat('Y-m-d', $date);
+  return $d && $d->format('Y-m-d') === $date;
+}
+
 $db_table    = "voucher";
 
 /*$VoucherType        = $_REQUEST['VoucherType'];
@@ -10,6 +17,11 @@ $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 // trim spaces on InvoiceID and KID
 $voucher_input->KID = trim($voucher_input->KID);
 $voucher_input->InvoiceID = trim($voucher_input->InvoiceID);
+
+if ((!empty($_REQUEST['voucher_VoucherDate']) && !validDate($_REQUEST['voucher_VoucherDate']))) {
+  $voucher_input->VoucherDate = '';
+  $_lib['message']->add("Ugyldig fakturadato " . $_REQUEST['voucher_VoucherDate'] . "!");
+}
 
 // if the valuta(either currency_id or exchange_rate) has changed for the voucher we are saving, then we update foreign currency for the whole journal
 global $_lib;
