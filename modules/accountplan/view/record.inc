@@ -25,13 +25,6 @@ function validate_employee($employee) {
         $errors[] = "Personnr m&aring; stemme med f&oslash;dselsdag.";
     }
 
-    $fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $employee->AccountPlanID;
-    $fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
-
-    if(!filter_var($fakturabankemail->Email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Ugyldig fakturabank epost.";
-    }
-
     if(empty($employee->SocietyNumber) && empty($employee->IDNumber)) {
         $errors[] = "Enten Personnr eller ID nummer p&aring; v&aelig;re der.";
     } else {
@@ -52,6 +45,10 @@ function validate_employee($employee) {
         }
     }
 
+    if(empty($employee->Phone) && !filter_var($employee->Email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Must have email or phone.";
+    }
+
     return $errors;
 }
 
@@ -59,26 +56,26 @@ function clean_org_number($orgnr) {
     return preg_replace('/\s/', '', $orgnr);
 }
 
+function update_accountplan_field_from_scheme($field, $SchemeType) {
+    global $_lib;
+    $q = "UPDATE accountplan ap
+            LEFT JOIN accountplanscheme aps
+              ON ap.AccountPlanID = aps.AccountPlanID AND
+                 aps.FakturabankSchemeID = (SELECT FakturabankSchemeID from fakturabankscheme WHERE SchemeType = '$SchemeType')
+            SET ap.$field = aps.SchemeValue
+            WHERE ap.AccountPlanID = '". $_POST["accountplan_AccountPlanID"] ."';";
+    $_lib['db']->db_query($q);
+}
+
 // updates OrgNumber and VatNumber from firmaids
 function update_orgnr_vat_from_firmaid() {
-    global $_lib;
+    update_accountplan_field_from_scheme("OrgNumber", "NO:ORGNR");
+    update_accountplan_field_from_scheme("VatNumber", "NO:VAT");
+}
 
-    $q_orgnr = "UPDATE accountplan ap
-                LEFT JOIN accountplanscheme aps
-                  ON ap.AccountPlanID = aps.AccountPlanID AND
-                     aps.FakturabankSchemeID = (SELECT FakturabankSchemeID from fakturabankscheme WHERE SchemeType = 'NO:ORGNR')
-                SET ap.OrgNumber = aps.SchemeValue
-                WHERE ap.AccountPlanID = '". $_POST["accountplan_AccountPlanID"] ."';";
-
-    $q_vat = "UPDATE accountplan ap
-              LEFT JOIN accountplanscheme aps
-                ON ap.AccountPlanID = aps.AccountPlanID AND
-                   aps.FakturabankSchemeID = (SELECT FakturabankSchemeID from fakturabankscheme WHERE SchemeType = 'NO:VAT')
-              SET ap.VatNumber = aps.SchemeValue
-              WHERE ap.AccountPlanID = '". $_POST["accountplan_AccountPlanID"] ."';";
-
-    $_lib['db']->db_query($q_orgnr);
-    $_lib['db']->db_query($q_vat);
+function update_phone_email_from_firmaid() {
+    update_accountplan_field_from_scheme("Phone", "NO:PHONE");
+    update_accountplan_field_from_scheme("Email", "NO:EMAIL");
 }
 
 // Removes all the firmaids whose accountplan is missing. This is useful in cases
@@ -175,16 +172,6 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             $password_sql = sprintf("INSERT INTO timesheetpasswords (`AccountPlanID`, `Password`)
       		VALUES ('%d', '%s');", $AccountPlanID, mysql_escape_string($_POST['timesheetpasswords_Password']));
             $_lib['db']->db_query($password_sql);
-        }
-
-        if(isset($_POST['fakturabankemail_Email'])) {
-            $fakturabankemail_query = sprintf("DELETE FROM fakturabankemail WHERE AccountPlanID = %d", $AccountPlanID);
-            $_lib['db']->db_query($fakturabankemail_query);
-
-            $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`)
-        						VALUES('%d', '%s');",
-                                              $AccountPlanID, mysql_escape_string($_POST['fakturabankemail_Email']));
-            $_lib['db']->db_query($fakturabankemail_query);
         }
 
         if(isset($_POST['accountplangln_GLN'])) {
@@ -425,7 +412,11 @@ elseif($_lib['input']->getProperty('action_del_scheme')) {
         $query = sprintf("delete from accountplanscheme where AccountPlanSchemeID = %d", $id);
         $_lib['db']->db_query($query);
     }
-    update_orgnr_vat_from_firmaid();
+    if ($AccountPlanType == "employee") {
+        update_phone_email_from_firmaid();
+    } else {
+        update_orgnr_vat_from_firmaid();
+    }
 }
 elseif($_lib['input']->getProperty('action_save_scheme')) {
     $no_sup_accnt_scheme = $_lib['db']->db_fetch_assoc($_lib['db']->db_query("SELECT FakturabankSchemeID FROM fakturabankscheme WHERE SchemeType = 'NO:SUP-ACCNT-RE';"));
@@ -440,7 +431,11 @@ elseif($_lib['input']->getProperty('action_save_scheme')) {
       }
     }
     $_lib['storage']->db_update_multi_table($_POST, array('accountplanscheme' => 'AccountPlanSchemeID'));
-    update_orgnr_vat_from_firmaid();
+    if ($AccountPlanType == "employee") {
+        update_phone_email_from_firmaid();
+    } else {
+        update_orgnr_vat_from_firmaid();
+    }
     if(!$accountexist) {
         $fb = new lodo_fakturabank_fakturabank();
         if (in_array($AccountPlanType, array('supplier', 'customer'))) $fb->update_accountplan_from_fakturabank($AccountPlanID);

@@ -1,3 +1,4 @@
+<tbody id="firma_id_fields">
 <?php
 /* Integration against fakturabank scheme ids. Requires that $AccountPlanID is already defined */
 
@@ -51,7 +52,22 @@ function fixNoSupAccntRe(select_element) {
     input.removeAttr("disabled");
   }
 }
+function hightlightFirmaID() {
+  $("#firma_id_fields").addClass("highlighted");
+  setTimeout(function () {
+    $("#firma_id_fields").removeClass("highlighted");
+  }, 1000);
+}
+// this functions makes focus on the input next to the select which has selected value same as provided scheme_type
+function focusFirmaidSchemeWithSchemetype(scheme_type) {
+  $("#firma_id_fields").find('select option:selected:contains("' + scheme_type + '")').parent("select").next("input").focus();
+}
 </script>
+<style type="text/css">
+  .highlighted {
+    background-color: #FFF655;
+  }
+</style>
 <tr class="result">
   <th colspan="6">Fakturabank Firma ID</th>
 </tr>
@@ -92,5 +108,5 @@ function fixNoSupAccntRe(select_element) {
     <? } ?>
   </td>
 </tr>
-
+</tbody>
 

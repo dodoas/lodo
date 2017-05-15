@@ -33,7 +33,6 @@ unset($_SESSION['oauth_paycheck_messages']);
 
 $query_head = sprintf("
 select
-  F.Email as FEmail,
   S.*,
   E.*,
   A.ProsentTrekk as AP_ProsentTrekk,
@@ -43,11 +42,9 @@ from
   salary as S
   left join (salaryextra as E)
     on (S.SalaryID = E.SalaryID),
-  fakturabankemail F,
   accountplan A
 where
   S.SalaryID = '%d'
-  and F.AccountPlanID = S.AccountPlanID
   and A.AccountPlanID = S.AccountPlanID
 ", $SalaryID);
 
@@ -57,7 +54,6 @@ $head = $_lib['storage']->get_row(array('query' => $query_head));
 if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
     $query_head     = "
      select
-       F.Email as FEmail,
        S.*,
        A.AccountName,
        A.Address,
@@ -69,12 +65,10 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        A.ProsentTrekk as AP_ProsentTrekk
      from
        salary as S,
-       fakturabankemail F,
        accountplan as A
      where
        S.SalaryID='$SalaryID'
        and S.AccountPlanID=A.AccountPlanID
-       and F.AccountPlanID = A.AccountPlanID
     ";
     $head = $_lib['storage']->get_row(array('query' => $query_head));
     $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
@@ -631,10 +625,7 @@ $formname = "salaryUpdate";
   <td colspan="6">
       <?
 		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
-                    if($head->FEmail)
-                        print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F', 'disabled' => !$no_altinn_validation_errors));
-                    else
-                        print "Mangler fakturabankepost";
+      print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F', 'disabled' => !$no_altinn_validation_errors));
 		}
 
       ?>
@@ -648,7 +639,7 @@ $formname = "salaryUpdate";
     if($_lib['sess']->get_person('AccessLevel') > 1 && $head->UpdatedBy) echo $head->UpdatedAt . " lagret av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
   ?>
   </td>
-  <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
+  <td colspan = "4"></td>
 </tr>
 <tr>
   <td colspan = "7">
