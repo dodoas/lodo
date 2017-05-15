@@ -79,6 +79,10 @@ class form3
       {
         $element .= " onchange='submit()'";
       }
+      if(isset($args['OnChange']))
+      {
+        $element .= " onchange=\"".$args['OnChange']."\" ";
+      }
       if($args[value]) $element = " $element checked ";
       if($args["class"]) $element = " $element class=\"". $args["class"] ."\" ";
       $element = " $element />\n";

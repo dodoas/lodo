@@ -60,8 +60,13 @@ if (isset($_REQUEST['use_work_relation'])) {
 }
 if (empty($salary_ids) && !empty($work_relation_ids)) $_REQUEST['only_register_employee'] = true;
 
-$pension_amount = $_lib['convert']->Amount($_POST['altinnReport1_pensionAmount']);
-$pension_amount = ($pension_amount == 0) ? null : $pension_amount;
+$pension_amounts = $_POST['altinnReport1_pensionAmount'];
+if (!empty($pension_amounts)) {
+  foreach ($pension_amounts as $virksomhet_id => $pension_amount) {
+    $pension_amount = $_lib['convert']->Amount($pension_amount);
+    $pension_amounts[$virksomhet_id] = ($pension_amount == 0) ? null : $pension_amount;
+  }
+}
 
 $error_msg = "";
 // Make sure user have set AltinnUserSSN
@@ -162,9 +167,13 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
     if (isset($_POST['altinnReport1_MeldingsId'])) {
       $report->addReplacementMessageID($_POST['altinnReport1_MeldingsId']);
     }
-    if (!is_null($pension_amount)) {
-      $pension_amount = ($is_cancellation) ? 0 : $pension_amount;
-      $report->addPensionAmount($pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
+    if (!empty($pension_amounts)) {
+      foreach ($pension_amounts as $virksomhet_id => $pension_amount) {
+        if (!is_null($pension_amount)) {
+          $pension_amount = ($is_cancellation) ? 0 : $pension_amount;
+          $report->addPensionAmount($virksomhet_id, $pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
+        }
+      }
     }
     $xml = $report->generateXML();
     if (!empty($report->errors)) {
@@ -267,7 +276,14 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
       $values['ReceiptStatusCode']  = $result->SubmitFormTaskBasicResult->ReceiptStatusCode;
       $values['ParentReceiptId']  = $result->SubmitFormTaskBasicResult->ParentReceiptId;
       $values['ReceivedStatus'] = 'sent';
-      if (!is_null($pension_amount)) $values['PensionAmount'] = $pension_amount;
+      foreach ($pension_amounts as $virksomhet_id => $pension_amount) {
+        if (!is_null($pension_amount)) {
+          if (!isset($values['PensionAmount'])) {
+            $values['PensionAmount'] = 0;
+          }
+          $values['PensionAmount'] += $pension_amount;
+        }
+      }
       $is_cancellation ? $values['CancellationStatus'] = 'is_cancellation' : NULL;
 
       for ($i=0; $i < count($result->SubmitFormTaskBasicResult->References->ReferenceBE); $i++) {
@@ -594,8 +610,10 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
   }
   // generate the altinn report object for the selected period
   $report = new altinn_report($period, $salary_ids, $work_relation_ids, isset($_REQUEST['only_register_employee']));
-  if (!is_null($pension_amount)) {
-    $report->addPensionAmount($pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
+  foreach ($pension_amounts as $virksomhet_id => $pension_amount) {
+    if (!is_null($pension_amount)) {
+      $report->addPensionAmount($virksomhet_id, $pension_amount, $tax_percent, $tax_zone, $tax_calculation_code);
+    }
   }
   $xml_generated = true;
 } elseif($_lib['input']->getProperty('action_confirm_authentication')) {
@@ -652,7 +670,7 @@ if ($_lib['input']->getProperty('action_soap1') || $_lib['input']->getProperty('
   // save all info for altinn userpassord in the session
   $_SESSION['altinn_password']['expires_at'] = strftime('%F %T', time() + 60*30);
 } elseif ($_lib['input']->getProperty('action_show_salaries')) {
-  $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period
+  $query_salary   = "SELECT s.AmountThisPeriod, s.JournalID, s.ValidFrom as FromDate, s.ValidTo as ToDate, a.AccountPlanID, a.AccountName, s.PayDate, s.DomesticBankAccount, s.TS, s.SalaryID, s.JournalDate, s.Period, s.SubcompanyID
                      FROM salary s, accountplan a
                      WHERE s.AccountPlanID = a.AccountPlanID AND ActualPayDate LIKE  '" . $_periode . "%'
                      ORDER BY s.JournalID DESC";
