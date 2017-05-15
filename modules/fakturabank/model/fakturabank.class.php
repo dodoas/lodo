@@ -1643,7 +1643,7 @@ class lodo_fakturabank_fakturabank {
 
                         #Foreign currency
                         if ($is_foreign) {
-                            $datalineH['UnitCostPrice'] = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $CustPrice);
+                            $datalineH['UnitCustPrice'] = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $CustPrice);
                             $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
                             $datalineH['ForeignAmount']     = (float)$line->LineExtensionAmount + $line->TaxTotal->TaxAmount;
                             $datalineH['ForeignConvRate']   = $conversion_rate;
@@ -1655,8 +1655,6 @@ class lodo_fakturabank_fakturabank {
                             $datalineH['TaxAmount']         = (float)$line->TaxTotal->TaxAmount;
                         }
 
-                        $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
-
                         $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
                         $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
 
@@ -1664,6 +1662,14 @@ class lodo_fakturabank_fakturabank {
                         #$datalineH['VatID']             = $line->Price->PriceAmount; #This must probably be mapped
 
                         $datalineH['TotalWithTax'] = $datalineH['TotalWithoutTax'] + $datalineH['TaxAmount'];
+
+                        // If Quantity not zero, we can devide by it and get the tax amount per unit. If not then set the amount of
+                        // one unit with tax to 100 + Vat percent of the amount of one unit without tax
+                        if ($Quantity != 0) {
+                          $datalineH['UnitCostPrice'] = $datalineH['UnitCustPrice'] + $datalineH['TaxAmount']/$Quantity;
+                        } else {
+                          $datalineH['UnitCostPrice'] = $datalineH['UnitCustPrice'] * (1 + $datalineH['Vat']/100.0);
+                        }
 
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');

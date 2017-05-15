@@ -1,11 +1,5 @@
 <?
 
-// recieves date as string 'YYYY-MM-DD' and returns bool if date is valid
-function validDate($date) {
-  $d = DateTime::createFromFormat('Y-m-d', $date);
-  return $d && $d->format('Y-m-d') === $date;
-}
-
 $CustomerAccountPlanID  = (int) $_POST["invoiceout_CustomerAccountPlanID_$InvoiceID"];
 if ($CustomerAccountPlanID == 0 && $InvoiceID) {
   $CustomerAccountPlanID = $_lib['storage']->get_row(array('query' => 'SELECT CustomerAccountPlanID FROM invoiceout WHERE InvoiceID = ' . $InvoiceID))->CustomerAccountPlanID;
@@ -31,7 +25,7 @@ if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getPr
         }
 
     $invoice_date = $_POST['invoiceout_InvoiceDate_'.$InvoiceID];
-    if (!validDate($invoice_date)) {
+    if (!$_lib['validation']->date($invoice_date)) {
       $_lib['message']->add('Ugyldig fakturadato '.$invoice_date.'!');
     } else {
       $updated = false;
@@ -78,7 +72,7 @@ elseif($_lib['input']->getProperty('action_auto_save')) {
         $message = "";
         $voucher_periode = $_POST['voucher_period'];
     }
-    if (validDate($_POST['voucher_date'])) {
+    if ($_lib['validation']->date($_POST['voucher_date'])) {
       $voucher_date = $_POST['voucher_date'];
     } else {
       $voucher_date = "0000-00-00";

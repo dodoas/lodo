@@ -1,6 +1,17 @@
 <?
+// always send SupplierAccountPlanID, needed for new line and delete line
+// actions, which are links and do not include other fields
+if($_lib['input']->getProperty('action_invoicein_linenew') || $_lib['input']->getProperty('action_invoicein_linedelete')) {
+  $ID = $_REQUEST['ID'];
+  $supplier_accountplan = $_lib['storage']->get_row(array('query' => "SELECT SupplierAccountPlanID FROM invoicein WHERE ID = " . $ID));
+  $_REQUEST['invoicein_SupplierAccountPlanID_' . $ID] = $supplier_accountplan->SupplierAccountPlanID;
+}
+
+if (isset($_POST['invoicein_InvoiceDate_'.$ID]) && !$_lib['validation']->date($_POST['invoicein_InvoiceDate_'.$ID])) {
+  $_lib['message']->add('Ugyldig fakturadato '.$_POST['invoicein_InvoiceDate_'.$ID].'!');
+}
+
 if($_lib['input']->getProperty('action_invoicein_journal')) {
-    print "bilagsf¿r<br>";
     $invoicein->journal();
 
 } elseif($_lib['input']->getProperty('action_invoicein_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
@@ -22,13 +33,22 @@ if($_lib['input']->getProperty('action_invoicein_journal')) {
     }
     $invoicein->update($_POST);
 
-} elseif($_lib['input']->getProperty('action_invoicein_remittance')) {
+} elseif($_lib['input']->getProperty('action_invoicein_linenew')) {
+    $invoicein->linenew($_REQUEST);
 
-    includelogic('remittance/remittance');
+} elseif($_lib['input']->getProperty('action_invoicein_linedelete')) {
+    $invoicein->linedelete($_REQUEST);
 
-    $rem = new logic_remittance_remittance($_POST);
-    print $rem->fill();
-    print $rem->pay();
+} elseif($_lib['input']->getProperty('action_invoicein_add')) {
+    $ID = $invoicein->add();
+    header("Location: " . $_lib['sess']->dispatchs . "t=invoicein.edit&ID=" . $ID . "&inline=edit");
+    die();
+} elseif($_lib['input']->getProperty('action_invoicein_delete')) {
+    $deleted = $invoicein->delete();
+    if ($deleted) {
+      header("Location: " . $_lib['sess']->dispatchs . "t=invoicein.list");
+      die();
+    }
 }
 // Remove an allowance/charge from invoice line
 if($_lib['input']->getProperty('action_invoicein_line_allowance_charge_delete')) {

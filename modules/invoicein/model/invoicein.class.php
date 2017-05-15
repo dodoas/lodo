@@ -90,6 +90,9 @@ class logic_invoicein_invoicein implements Iterator {
         if($this->ToDate) {
             $query .= " i.InvoiceDate <= '$this->ToDate' and ";
         }
+        if($this->ID) {
+            $query .= " i.ID = '$this->ID' and ";
+        }
         if($this->PaymentMeans) {
             $query .= " i.PaymentMeans = '$this->PaymentMeans' and ";
         }
@@ -120,7 +123,6 @@ class logic_invoicein_invoicein implements Iterator {
                 $row->Status .= "Er allerede bilagsf&oslash;rt";
 
             } else {
-                $row->JournalID = $NextAvailableJournalID++;
                 $row->Journal = true;
                 $row->Class   = 'green';
             }
@@ -167,6 +169,12 @@ class logic_invoicein_invoicein implements Iterator {
                 $row->Class   = 'red';
             }
 
+            if ($row->TotalCustPrice == 0) {
+                $row->Status .= "Faktura med bel&oslash;p 0";
+                $row->Journal = false;
+            }
+
+            if (!$row->Journaled && $row->Journal) $row->JournalID = $NextAvailableJournalID++;
             $row->VoucherType  = $this->VoucherType;
             $this->iteratorH[] = $row;
         }
@@ -286,7 +294,12 @@ class logic_invoicein_invoicein implements Iterator {
 
         $ID             = $args['ID'];
         $AccountPlanID  = $args['invoicein_SupplierAccountPlanID_' . $ID];
-        $accountplan    = $accounting->get_accountplan_object($AccountPlanID);
+        if (!is_numeric($AccountPlanID)) {
+          $_lib['message']->add('Leverand&oslash;r ikke valgt!');
+          $accountplan = NULL;
+        } else {
+          $accountplan    = $accounting->get_accountplan_object($AccountPlanID);
+        }
         $invoicein      = $_lib['storage']->get_row(array('query' => "select * from invoicein where ID='$ID'"));
 
         self::addVATPercentToAllowanceCharge($args);
@@ -312,6 +325,53 @@ class logic_invoicein_invoicein implements Iterator {
                 $_lib['message']->add('Sted mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
+        if(!$invoicein->IName) {
+            if($accountplan->AccountName) {
+                $args['invoicein_IName_' . $ID] = $accountplan->AccountName;
+                $_lib['message']->add('Navn kopiert fra leverand&oslash;r kontoplan');
+            } else {
+                $_lib['message']->add('Navn mangler p&aring; leverand&oslash;r kontoplan');
+            }
+        }
+        if(!$invoicein->IAddress) {
+            if($accountplan->Address) {
+                $args['invoicein_IAddress_' . $ID] = $accountplan->Address;
+                $_lib['message']->add('Adresse kopiert fra leverand&oslash;r kontoplan');
+            } else {
+                $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
+            }
+        }
+        $changed_supplier_accountplan = $invoicein->SupplierAccountPlanID != $AccountPlanID;
+
+        // update all supplier related info on the invoice
+        if($changed_supplier_accountplan) {
+          $args['invoicein_IZipCode_' . $ID] = $accountplan->ZipCode;
+          if(!$accountplan->ZipCode) $_lib['message']->add('Postnummer mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_ICity_' . $ID] = $accountplan->City;
+          if(!$accountplan->City) $_lib['message']->add('Sted mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_IName_' . $ID] = $accountplan->AccountName;
+          if(!$accountplan->AccountName) $_lib['message']->add('Navn mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_IAddress_' . $ID] = $accountplan->Address;
+          if(!$accountplan->Address) $_lib['message']->add('Addresse mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
+          if(!$accountplan->DomesticBankAccount) $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
+          $args['invoicein_DZipCode_' . $ID] = $accountplan->ZipCode;
+          $args['invoicein_DName_' . $ID] = $accountplan->AccountName;
+          $args['invoicein_DCity_' . $ID] = $accountplan->City;
+          $args['invoicein_DAddress_' . $ID] = $accountplan->Address;
+        }
+        if(!$invoicein->DZipCode) {
+                $args['invoicein_DZipCode_' . $ID] = $accountplan->ZipCode;
+        }
+        if(!$invoicein->DName) {
+                $args['invoicein_DName_' . $ID] = $accountplan->AccountName;
+        }
+        if(!$invoicein->DCity) {
+                $args['invoicein_DCity_' . $ID] = $accountplan->City;
+        }
+        if(!$invoicein->DAddress) {
+                $args['invoicein_DAddress_' . $ID] = $accountplan->Address;
+        }
         if(!$invoicein->SupplierBankAccount) {
             if($accountplan->DomesticBankAccount) {
                 $args['invoicein_SupplierBankAccount_' . $ID] = $accountplan->DomesticBankAccount;
@@ -322,6 +382,31 @@ class logic_invoicein_invoicein implements Iterator {
                 $_lib['message']->add('Kontonummer mangler p&aring; leverand&oslash;r kontoplan');
             }
         }
+        if(!$invoicein->CustomerAccountPlanID) {
+          $args['invoicein_CustomerAccountPlanID_' . $ID] =  $_lib['sess']->get_companydef('OrgNumber');
+        }
+        $args['invoicein_RemittanceAmount_'.$ID] = $args['invoicein_TotalCustPrice_'.$ID];
+
+        // update UnitCustPrice(unit price without tax) from UnitCostPrice(unit price with tax) if it is set
+        for($i = 1; $i <= $args['field_count']; $i++) {
+          $line_id = $args[$i];
+          if (!isset($args['invoiceinline_UnitCostPrice_'.$line_id])) continue;
+          $UnitCostPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCostPrice_'.$line_id], 'return' => 'value'));
+          $UnitCustPrice = (float)$_lib['convert']->Amount(array('value' => $args['invoiceinline_UnitCustPrice_'.$line_id], 'return' => 'value'));
+          $VATPercent = $_lib['convert']->Amount(array('value' => $args['invoiceinline_Vat_'.$line_id], 'return' => 'value'))/100.0;
+          if ($UnitCostPrice != 0) {
+            $args['invoiceinline_UnitCustPrice_'.$line_id] = $UnitCostPrice/($VATPercent+1);
+          // else update UnitCostPrice from UnitCustPrice
+          } elseif ($UnitCustPrice != 0) {
+            $args['invoiceinline_UnitCostPrice_'.$line_id] = $UnitCustPrice*($VATPercent+1);
+          }
+        }
+        // set the period as the period the invoice date belongs to
+        // and set due date if not set to X days after where X is credit days set for supplier
+        if ($args['invoicein_InvoiceDate_'.$ID] && !empty($args['invoicein_InvoiceDate_'.$ID])) {
+          $args['invoicein_Period_'.$ID] = strftime("%Y-%m", strtotime($args['invoicein_InvoiceDate_'.$ID]));
+          if ($args['invoicein_DueDate_'.$ID] == '0000-00-00' || $args['invoicein_DueDate_'.$ID] == '') $args['invoicein_DueDate_'.$ID] = strftime("%Y-%m-%d", strtotime($args['invoicein_InvoiceDate_'.$ID] . ' + ' . $accountplan->CreditDays . ' days'));
+        }
 
         if(($args['invoicein_DepartmentID_'.$ID] === DB_NULL_PLACEHOLDER) && $accountplan->EnableDepartment == 1 && isset($accountplan->DepartmentID))
             $args['invoicein_DepartmentID_'.$ID] = $accountplan->DepartmentID;
@@ -331,6 +416,11 @@ class logic_invoicein_invoicein implements Iterator {
 
         #print_r($accountplan);
         #print_r($args);
+        for ($i = 1; $i <= $args['field_count']; $i++) {
+          $invoiceinline_id = $args[$i];
+          $invoiceinline_accountplan = $accounting->get_accountplan_object($args['invoiceinline_AccountPlanID_'.$invoiceinline_id]);
+          if (!$invoiceinline_accountplan->EnableCar && !empty($args['invoiceinline_CarID_'.$invoiceinline_id])) $args['invoiceinline_CarID_'.$invoiceinline_id] = 0;
+        }
 
         $tables_to_update = array(
           'invoicein'                        => 'ID',
@@ -339,6 +429,45 @@ class logic_invoicein_invoicein implements Iterator {
           $this->line_allowance_charge_table => 'InvoiceLineAllowanceChargeID');
         $_lib['db']->db_update_multi_table($args, $tables_to_update);
 
+        // if manually created invoice(not imported from Fakturabank)
+        // calculate total cost for invoice
+        if (!$invoicein->Imported) {
+          $TotalCustPrice = self::recalculate_total_cust_price($ID);
+          $_lib['db']->db_update_multi_table(array('invoicein_TotalCustPrice_'.$ID => $TotalCustPrice), array('invoicein' => 'ID'));
+        }
+    }
+
+    // calculate total cost for invoice
+    function recalculate_total_cust_price($id) {
+        global $_lib;
+
+        $total = 0;
+
+        $query_invoicelines = "select * from invoiceinline where ID='$id' and Active <> 0 order by LineID asc";
+        $result_invoicelines = $_lib['db']->db_query($query_invoicelines);
+        while($invoicein_line = $_lib['db']->db_fetch_object($result_invoicelines)) {
+          $unit_cust_price = $invoicein_line->UnitCustPrice;
+          $quantity_delivered = $invoicein_line->QuantityDelivered;
+          $line_cust_price = $unit_cust_price * $quantity_delivered;
+
+          // include line's allowance/charge
+          $query_invoicelines_allowance_charge = "select * from invoicelineallowancecharge where InvoiceLineID='$invoicein_line->LineID' and InvoiceType = 'in'";
+          $result_invoicelines_allowance_charge = $_lib['db']->db_query($query_invoicelines_allowance_charge);
+          while($line_ac = $_lib['db']->db_fetch_object($result_invoicelines_allowance_charge)) {
+            $line_cust_price += (($line_ac->ChargeIndicator == 1) ? 1 : -1) * $line_ac->Amount;
+          }
+          $line_cost_price  = $line_cust_price * (1 + ($invoicein_line->Vat / 100.0));
+          $total += $line_cost_price;
+        }
+
+        // include ivoice's allowance/charge
+        $query_invoice_allowance_charge = "select * from invoiceallowancecharge where InvoiceID='$id' and InvoiceType = 'in'";
+        $result_invoice_allowance_charge = $_lib['db']->db_query($query_invoice_allowance_charge);
+        while($ac = $_lib['db']->db_fetch_object($result_invoice_allowance_charge)) {
+          $ac_amount =(($ac->ChargeIndicator == 1) ? 1 : -1) * $ac->Amount * ( 1 + ($ac->VatPercent / 100.0));
+          $total += $ac_amount;
+        }
+        return $total;
     }
 
     function linenew($args) {
@@ -411,7 +540,19 @@ class logic_invoicein_invoicein implements Iterator {
         $_lib['db']->db_delete($query);
         $invoicelineH['Active']   = 0;
         $invoicelineH['LineID']   = $args['LineID'];
-        return $_lib['storage']->store_record(array('table' => 'invoiceinline', 'data' => $invoicelineH, 'debug' => false));
+
+        $ret = $_lib['storage']->store_record(array('table' => 'invoiceinline', 'data' => $invoicelineH, 'debug' => false));
+
+        $ID = $args['ID'];
+        $invoicein = $_lib['storage']->get_row(array('query' => "select * from invoicein where ID='$ID'"));
+        // if manually created invoice(not imported from Fakturabank)
+        // calculate total cost for invoice
+        if (!$invoicein->Imported) {
+          $TotalCustPrice = self::recalculate_total_cust_price($ID);
+          $_lib['db']->db_update_multi_table(array('invoicein_TotalCustPrice_'.$ID => $TotalCustPrice), array('invoicein' => 'ID'));
+        }
+
+        return $ret;
     }
 
     /***************************************************************************
@@ -420,18 +561,35 @@ class logic_invoicein_invoicein implements Iterator {
      * @return Current iteration
      */
     public function add() {
+        global $_lib;
         $dataH['CustomerBankAccount']       = $_lib['sess']->get_companydef('BankAccount');
         $old_pattern                        = array("/[^0-9]/");
         $new_pattern                        = array("");
         $dataH['CustomerAccountPlanID']     = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
+        $add_invoicein = "INSERT INTO invoicein(ID, VoucherType, InvoiceDate, InsertedByPersonID, InsertedDateTime, Imported) VALUES(NULL, 'U', '" . $_lib['sess']->get_session('LoginFormDate') . "', " . $_lib['sess']->get_person('PersonID') . ", NOW(), 0)";
+        $_lib['db']->db_insert($add_invoicein);
+        return $_lib['db']->db_insert_id();
     }
 
+    /***************************************************************************
+     * Delete incoming invoice
+     */
+    public function delete() {
+        global $_lib;
+        $delete_invoiceinlines = "DELETE FROM invoiceinline WHERE ID = " . $this->ID . " AND ID IN (SELECT DISTINCT(ID) FROM invoicein WHERE JournalID IS NULL)";
+        $_lib['db']->db_delete($delete_invoiceinlines);
+        $delete_invoicein = "DELETE FROM invoicein WHERE ID = " . $this->ID . " AND JournalID IS NULL";
+        $_lib['db']->db_delete($delete_invoicein);
+        return true;
+    }
     ################################################################################################
     #Journal the invoices automatically.
     #Set the invoices as registered in fakturabank
     #update the bankaccount in accountplan.
     public function journal() {
         global $_lib, $accounting;
+
+        $countjournaled = 0;
 
         if(is_array($this->iteratorH)) {
             $this->Journaled = 1; //#So that we immideately list the journaled vouchers
@@ -773,7 +931,7 @@ class logic_invoicein_invoicein implements Iterator {
                 }
                 else {
                     # Invoice is bookkept
-                    print "Fakturaen er bilagsf¿rt<br>";
+                    print "Fakturaen er bilagsf&oslash;rt<br>";
                 }
             }
 

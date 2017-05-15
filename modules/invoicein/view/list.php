@@ -17,6 +17,9 @@ $all_inv = $invoicein->getAllReadyInvoices();
 
 require_once "record.inc";
 
+// get text for each of the payment means codes
+$PaymentMeansCodes = $_lib['db']->get_hashhash(array('query' => "select MenuValue, MenuChoice from confmenues where MenuName='PaymentMeans' and LanguageID='no' order by MenuChoice", 'key' => 'MenuValue', 'value' => 'MenuChoice'));
+foreach($PaymentMeansCodes as &$PaymentMeansCode) $PaymentMeansCode = $PaymentMeansCode['MenuChoice'];
 
 print $_lib['sess']->doctype; ?>
 <head>
@@ -78,11 +81,6 @@ print $_lib['sess']->doctype; ?>
     <td><? print $_lib['form3']->date(array('name' => 'ToDate', 'field' => 'ToDate', 'form_name' => 'invoice_edit1', 'value' => $invoicein->ToDate)) ?></td>
 </tr>
 <tr>
-    <td>Status:</td>
-    <td><? print $_lib['form3']->text(array('name' => 'RemittanceStatus',   'value' => $invoicein->RemittanceStatus)) ?></td>
-    <td></td>
-</tr>
-<tr>
     <td>Fakturanummer:</td>
     <td><? print $_lib['form3']->text(array('name' => 'InvoiceNumber',   'value' => $invoicein->InvoiceNumber)) ?></td>
     <td></td>
@@ -121,11 +119,11 @@ print $_lib['sess']->doctype; ?>
     <th>Avdeling</th>
     <th>&Aring;rsaksinformasjon</th>
     <th class="number">Bankkonto</th>
-    <th class="number">Betaling</th>
+    <th>Betaling</th>
     <th class="number">KID</th>
     <th class="number">Fakturabank</th>
-    <th class="number">Remittering</th>
     <th class="number">Status</th>
+    <th>Opprettet som</th>
 </tr>
 </thead>
 <tbody>
@@ -158,11 +156,11 @@ foreach($invoicein as $InvoiceO) {
     ?>
     <tr class="<? print $InvoiceO->Class ?>">
       <? if ($InvoiceO->TotalCustPrice != 0) {?>
-      <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP['DISPATCH']."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { print $InvoiceO->VoucherType . $InvoiceO->JournalID; }  ?></td>
+      <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP['DISPATCH']."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } elseif ($InvoiceO->Journal) { print $InvoiceO->VoucherType . $InvoiceO->JournalID; }  ?></td>
       <?} else {?>
       <td></td>
       <? } ?>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? print $InvoiceO->InvoiceNumber ?></a></td>
+      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? if ($InvoiceO->InvoiceNumber) print $InvoiceO->InvoiceNumber; else print '-'; ?></a></td>
       <td class="number"><? print $InvoiceO->InvoiceDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
       <td class="number"><? print $InvoiceO->FirmaID ?></td>
@@ -180,8 +178,15 @@ foreach($invoicein as $InvoiceO) {
            print $_lib['format']->Amount($InvoiceO->TotalCustPrice);
         ?>
       </td>
-      <td><? print $InvoiceO->ProjectID ?></td>
-      <td><? print $InvoiceO->DepartmentID ?></td>
+      <?
+        includelogic('department/department');
+        $department = new lodo_department(array('DepartmentID' => $InvoiceO->Department));
+
+        includelogic('project/project');
+        $project = new lodo_project(array('ProjectID' => $InvoiceO->Project));
+      ?>
+      <td><? if ((string)$InvoiceO->Project != '') print $project->getProjectIDAndName(); ?></td>
+      <td><? if ((string)$InvoiceO->Department != '') print $department->getDepartmentIDAndName(); ?></td>
       <td title="<? print $ReasonsInfo ?>"><?
         if (strlen($ReasonsInfo) > 40){
          print substr($ReasonsInfo, 0, 37) . '...';
@@ -189,11 +194,11 @@ foreach($invoicein as $InvoiceO) {
           print $ReasonsInfo;
         } ?></td>
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
-      <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
+      <td><? print $PaymentMeansCodes[$InvoiceO->PaymentMeans]; ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>
       <td class="number"><? if($InvoiceO->ExternalID) { ?><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'] ."://". $_SETUP['FB_SERVER']; ?>/invoices/<? print $InvoiceO->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
-      <td class="number"><? print $InvoiceO->RemittanceStatus ?></td>
       <td class="number"><? print $InvoiceO->Status ?></td>
+      <td><? print ($InvoiceO->Imported) ? 'importert' : 'manuelt'; ?></td>
   </tr>
 <? } ?>
 </tbody>
