@@ -1,8 +1,8 @@
 <?
 includelogic('accounting/accounting');
 $accounting = new accounting();
-$last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', time()));
-if (is_null($last_periode)) $last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', strtotime('last year')));
+$last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', time()), false);
+if (is_null($last_periode)) $last_periode = $accounting->get_last_accountperiod_this_year(strftime('%F', strtotime('last year')), $false);
 if (isset($_REQUEST['periode'])) $_periode = $_REQUEST['periode'];
 else $_periode = $last_periode;
 
@@ -31,7 +31,9 @@ print $_lib['message']->get();
   </p>
 </form>
 
-
+<?
+if ($_periode != '') {
+?>
 <form name="altinnsalary_send_report" action="<? print $_lib['sess']->dispatch ?>t=altinnsalary.list" method="post">
 <table class="lodo_data">
 <thead>
@@ -308,6 +310,7 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
   </table>
 <?
   }
+}
 ?>
 
 </body>
