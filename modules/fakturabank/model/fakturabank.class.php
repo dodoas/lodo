@@ -1955,7 +1955,7 @@ class lodo_fakturabank_fakturabank {
         }
 
         self::createElementIfNotEmpty($doc, $invoice, 'cbc:UBLVersionID', '2.1');
-        self::createElementIfNotEmpty($doc, $invoice, 'cbc:CustomizationID', 'urn:www.cenbii.eu:transaction:biitrns010:ver2.0:extended:urn:www.peppol.eu:bis:peppol5a:ver2.0:extended:urn:www.difi.no:ehf:faktura:ver2.0');
+        self::createElementIfNotEmpty($doc, $invoice, 'cbc:CustomizationID', 'urn:fakturabank.no:ubl-2.0-customizations');
         self::createElementIfNotEmpty($doc, $invoice, 'cbc:ProfileID', 'urn:www.cenbii.eu:profile:bii05:ver2.0');
         self::createElementIfNotEmpty($doc, $invoice, 'cbc:ID', $InvoiceO->ID);
         self::createElementIfNotEmpty($doc, $invoice, 'cbc:IssueDate', $InvoiceO->IssueDate);
